@@ -635,7 +635,7 @@ div.ac > ul > li:before,
 .nav-left {
   width: 120px;
   height: 100%;
-  background: #2a2935;
+  background: #0f848a;
   box-shadow: inset -15px 0 15px -15px #222;
   float: left;
   position: relative;
@@ -1737,7 +1737,8 @@ h1 {
   width: 20px;
   height: 40px;
   border-radius: 0 100px 100px 0;
-  background-color: #42b983;
+  background-color: #45bec3;
+  color: #fff;
   cursor: pointer;
   margin-left: -20px;
   transition: margin-left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
