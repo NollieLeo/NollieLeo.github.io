@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>flex3个属性详解 | NollieLeo&#39;s blog</title>
-  <meta name="keywords" content=" flex ">
-  <meta name="description" content="flex3个属性详解 | NollieLeo&#39;s blog">
+  <title>原型模式和基于原型继承的Javascript对象系统 | NollieLeo&#39;s blog</title>
+  <meta name="keywords" content=" javascript , js设计模式 , 原型链 ">
+  <meta name="description" content="原型模式和基于原型继承的Javascript对象系统 | NollieLeo&#39;s blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="about">
@@ -417,9 +417,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-flex3个属性详解" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-原型模式和基于原型继承的Javascript对象系统" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">flex3个属性详解</h1>
+        <h1 class="article-title">原型模式和基于原型继承的Javascript对象系统</h1>
     
     <div class="article-meta">
         
@@ -427,23 +427,25 @@
         
         <span class="book">
             
-                <a  data-rel="css">css</a>/
-            
-                <a  data-rel="flex布局">flex布局</a>
+                <a  data-rel="JS">JS</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color5">flex</a>
+            <a class="color1">javascript</a>
+            
+            <a class="color2">js设计模式</a>
+            
+            <a class="color4">原型链</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-16 16:26:08'>2020-03-16 13:18</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-16 22:31:05'>2020-03-16 22:28</time>
         
     </div>
     <div class="article-meta">
@@ -465,7 +467,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Flex-3个属性详解"><span class="toc-text">Flex 3个属性详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-flex-none"><span class="toc-text">1. flex: none</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-flex-initial-flex-0-1-auto"><span class="toc-text">2. flex:initial(flex: 0 1 auto )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-flex-auto"><span class="toc-text">3. flex: auto</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-flex-lt-positive-number-gt-lt-意为-正数-gt"><span class="toc-text">4. flex:&lt; positive-number &gt; &lt;意为 正数&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-flex-lt-positive-number-gt-xxpx-xx"><span class="toc-text">5. flex:&lt; positive-number &gt;  xxpx ||%xx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-归纳"><span class="toc-text">6. 归纳</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-使用克隆的原型模式"><span class="toc-text">1. 使用克隆的原型模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-原型编程范型的一些规则"><span class="toc-text">2. 原型编程范型的一些规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-JavaScript中的原型继承-构建对象系统"><span class="toc-text">3. JavaScript中的原型继承(构建对象系统)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-所有的数据都是对象"><span class="toc-text">1. 所有的数据都是对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它"><span class="toc-text">2. 要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-对象会记住它的原型"><span class="toc-text">3. 对象会记住它的原型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-如果对象无法响应某个请求，它会把这个请求委托给它的构造器的原型"><span class="toc-text">4. 如果对象无法响应某个请求，它会把这个请求委托给它的构造器的原型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#常用原型继承代码解析"><span class="toc-text">常用原型继承代码解析</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -481,135 +483,110 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Flex-3个属性详解"><a href="#Flex-3个属性详解" class="headerlink" title="Flex 3个属性详解"></a>Flex 3个属性详解</h1><blockquote>
-<p><strong>flex属性 flex:(flex-grow)(flex-shrink)(flex-basis)</strong></p>
-</blockquote>
-<ul>
-<li><strong>flex-grow</strong> 一个数字，规定项目将相对于其他灵活的项目进行扩展的量（放大属性）</li>
-<li><strong>flex-shrink</strong> 一个数字，规定项目将相对于其他灵活的项目进行收缩的量（缩小属性）</li>
-<li><strong>flex-basis</strong> 项目的长度。合法值：”auto”、”inherit” 或一个后跟 “%”、”px”、”em” 或任何其他长度单位的数字。（基本宽度）</li>
-</ul>
-<h3 id="1-flex-none"><a href="#1-flex-none" class="headerlink" title="1. flex: none"></a>1. flex: none</h3><p>等同于 （<code>flex: 0 0 auto</code>）</p>
-<p>这时候容器完全不再灵活。即不能放大也不能缩小。</p>
-<p>除了它不允许 flex-shrink 属性（不能缩小），即使元素可能会溢出。</p>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1574993498581.png" alt></p>
-<h3 id="2-flex-initial-flex-0-1-auto"><a href="#2-flex-initial-flex-0-1-auto" class="headerlink" title="2. flex:initial(flex: 0 1 auto )"></a>2. flex:initial(flex: 0 1 auto )</h3><p>等同于（<code>0 auto</code>）</p>
-<ul>
-<li><code>flex-grow</code>为0，则存在剩余空间也不放大 </li>
-<li><code>flex-shrink</code>为1，则空间不足该项目缩小 z</li>
-<li><code>flex-basis</code>为auto，则该项目本来的大小 ,长度等于灵活项目的长度。如果该项目未指定长度，则长度将根据内容决定。</li>
-</ul>
-<pre><code class="css">.parent {
-    display: flex;
-    width: 600px;
-    border: 1px solid #000;
+        <p>在<strong>以类为中心的面向对象编程</strong>语言中，类和对象的关系可以想象成铸模和铸件的关系，对象<br>总是<u>从类中创建</u>而来。而在<strong>原型编程</strong>的思想中，类并不是必需的，对象未必需要从类中创建而来，<br>一个对象是通过克隆另外一个对象所得到的。</p>
+<h2 id="1-使用克隆的原型模式"><a href="#1-使用克隆的原型模式" class="headerlink" title="1. 使用克隆的原型模式"></a>1. 使用克隆的原型模式</h2><p>从设计模式的角度讲，原型模式是用于创建对象的一种模式，如果我们想要创建一个对象，<br>一种方法是先指定它的类型，然后通过类来创建这个对象。原型模式选择了另外一种方式，我们<br>不再关心对象的具体类型，而是找到一个对象，然后通过克隆来创建一个一模一样的对象</p>
+<p>既然原型模式是通过克隆来创建对象的，那么很自然地会想到，如果需要一个跟某个对象一<br>模一样的对象，就可以使用原型模式</p>
+<p>原型模式的实现关键，是语言本身是否提供了 clone 方法。ECMAScript 5提供了 Object.create<br>方法</p>
+<pre><code class="javascript">var Plane = function () {
+    this.blood = 100;
+    this.attackLevel = 1;
+    this.defenceLevel = 1;
 }
-.parent&gt;div {
-    height: 100px;
+var myPlane = new Plane();
+myPlane.blood = 500;
+myPlane.attackLevel = 10;
+myPlane.defenceLevel = 7;
+// 在不支持 Object.create 方法的浏览器中，则可以使用以下代码
+Object.create = Object.create || function (obj) {
+    var F = function () { };
+    F.prototype = obj;
+    return new F();
 }
-.item1 {
-    width: 100px;
-    background-color: #666;
-}
-
-.item2 {
-    width: 100px;
-    background: blue;
-}
-
-.item3 {
-    width: 100px;
-    background: lightblue;
-}</code></pre>
-<pre><code class="html">&lt;body&gt;
-    &lt;div class=&quot;parent&quot;&gt;
-        &lt;div class=&quot;item1&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;item2&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;item3&quot;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/body&gt;</code></pre>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1574992712098.png" alt></p>
-<p>此时，<strong>当容器剩余一些空闲空间时</strong>，该属性使灵活的项目变得不灵活，因为其不能自由拉伸放大。</p>
-<p>但是<strong>当容器没有足够的空间时</strong>，该属性允许其缩小到项目的最小值。</p>
-<ol>
-<li>设置前面两个元素为<code>flex: none, width:100px</code></li>
+var clonePlane = Object.create(myPlane);
+console.log(clonePlane);</code></pre>
+<p><img src="/2020/03/16/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF%E7%9A%84Javascript%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/1579487242257.png" alt></p>
+<h2 id="2-原型编程范型的一些规则"><a href="#2-原型编程范型的一些规则" class="headerlink" title="2. 原型编程范型的一些规则"></a>2. 原型编程范型的一些规则</h2><ol>
+<li>所有的数据都是对象</li>
+<li>要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它。</li>
+<li>对象会记住它的原型。</li>
+<li>如果对象无法响应某个请求，它会把这个请求委托给它自己的原型。</li>
 </ol>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1574995110792.png" alt></p>
-<ol start="2">
-<li><p>全是initial，width分别设置为：100px ，100px ，700px，此时已经超出了容器的宽度，这时候里头的3个元素自动收缩</p>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1574995539373.png" alt></p>
-</li>
-</ol>
-<p>   <strong>baseWidth</strong>: flex-basis ? flex-basis : width (flex-basis的优先级比width高);</p>
-<p>   <strong>allWidth</strong>: flex元素的flex-basis和，或者width和其的和，看优先级;</p>
-<p>   <strong>overflowWidth</strong>: allwidth - 父容器width </p>
-<p>   每个flex元素缩小值计算：<br>   $$(baseWidth/allWidth) * overflowWidth$$<br>   所以这次情况是：div1宽度为100px - 100/900 * 300 = 66.66….</p>
-<h3 id="3-flex-auto"><a href="#3-flex-auto" class="headerlink" title="3. flex: auto"></a>3. flex: auto</h3><p>相当于 flex: 1 1 auto</p>
-<p>这个时候，该属性使3个item完全灵活，它们能够吸收主轴上额外的空间。既可以自由放大也可以自由缩小。</p>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1574998175148.png" alt></p>
-<h3 id="4-flex-lt-positive-number-gt-lt-意为-正数-gt"><a href="#4-flex-lt-positive-number-gt-lt-意为-正数-gt" class="headerlink" title="4. flex:&lt; positive-number &gt; &lt;意为 正数&gt;"></a>4. flex:&lt; positive-number &gt; &lt;意为 正数&gt;</h3><p>等同于 <strong>flex: &lt; positive-number &gt;  1  0px</strong> </p>
-<p>当 flex 取值为一个非负数字，则该数字为 <code>flex-grow</code> 的值，<code>flex-shrink</code> 取 1，<code>flex-basis</code> 取 0%。</p>
-<p>这个时候，该属性使弹性项目变得灵活，flex元素在主轴方向上的初始大小flex-basis为零。</p>
-<p>项目将根据容器的大小按照自身的比例自由伸缩。<br><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1575008755738.png" alt></p>
-<p>根据他们<code>flex-grow</code>来计算他们分配到的宽度 :<br>$$flexGrow * flexWidth$$</p>
-<p>$$flexWidth = (600-allFlexBasisWidth)/(1+1+2) = (600 - 0)/4 =150px$$<br>由于flex:1 ,其中的flex-basis是为0px的，所以说,要根据自己div的宽度来决定元素的基础宽度，如果div没设置宽度那就根据内部元素的宽度撑开的宽度，例如：</p>
-<p>如果这时候一个元素的<strong>flex-basis</strong>设置为<strong>auto</strong></p>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1575010449681.png" alt></p>
-<p>这时候就需要根据这个设置了auto元素的宽度来进行计算，因为item2没有设置width所以得根据他的内容宽度来计算分配到的宽度。</p>
-<p>当他没有设置flex属性的时候，内容宽度为99.08px</p>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1575010656266.png" alt></p>
-<p>所以算他在成为flex元素时候分配到的宽度为：</p>
-<p>(600-99.08)/4=125.23</p>
-<h3 id="5-flex-lt-positive-number-gt-xxpx-xx"><a href="#5-flex-lt-positive-number-gt-xxpx-xx" class="headerlink" title="5. flex:&lt; positive-number &gt;  xxpx ||%xx"></a>5. flex:&lt; positive-number &gt;  xxpx ||%xx</h3><p>该属性和上边的CSS案例一致，即 当 flex 取值为一个非负数字和一个长度（px）或百分比（%），</p>
-<p>则分别视为 flex-grow 和 flex-basis 的值，flex-shrink 默认取 1</p>
-<hr>
-<p>例题：</p>
-<pre><code class="css">&lt;style type=&quot;text/css&quot;&gt;
-    .parent {
-        display: flex;
-        width: 600px;
-        border: 1px solid #000;
-    }
+<h2 id="3-JavaScript中的原型继承-构建对象系统"><a href="#3-JavaScript中的原型继承-构建对象系统" class="headerlink" title="3. JavaScript中的原型继承(构建对象系统)"></a>3. JavaScript中的原型继承(构建对象系统)</h2><p>同理，js也同样遵循以上的编程规则</p>
+<h3 id="1-所有的数据都是对象"><a href="#1-所有的数据都是对象" class="headerlink" title="1. 所有的数据都是对象"></a>1. 所有的数据都是对象</h3><p>JavaScript在设计的时候，模仿 Java 引入了两套类型机制：基本类型和对象类型。基本类型包括 undefined 、 number 、 boolean 、 string 、 function 、 object </p>
+<p>除了 undefined 之外，一切都应是对象。为了实现这一目标，number 、 boolean 、 string 这几种基本类型数据也可以通过“包装类”的方式变成对象类型数据来处理</p>
+<p>不能说在 JavaScript中所有的数据都是对象，但可以说绝大部分数据都是对象。那么相信在 JavaScript中也一定会有一个根对象存在，这些对象追根溯源都来源于这个根对象。</p>
+<p>JavaScript 中的根对象是 <code>Object.prototype</code> 对象。 <code>Object.prototype</code> 对象是一个空的对象。我们在JavaScript 遇到的每个对象，实际上都是从 <code>Object.prototype</code> 对象克隆而来的，<code>Object.prototype</code> 对象就是它们的原型。</p>
+<p>可以利用 ECMAScript 5提供的 Object.getPrototypeOf 来查看这两个对象的原型：</p>
+<pre><code class="javascript">var obj1 = new Object();
+var obj2 = {};
+console.log( Object.getPrototypeOf( obj1 ) === Object.prototype ); // 输出：true
+console.log( Object.getPrototypeOf( obj2 ) === Object.prototype ); // 输出：true</code></pre>
+<h3 id="2-要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它"><a href="#2-要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它" class="headerlink" title="2. 要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它"></a>2. 要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它</h3><p>在 JavaScript语言里，我们并不需要关心克隆的细节，因为这是引擎内部负责实现的。我<br>们所需要做的只是显式地调用 <code>var obj1 = new Object()</code> 或者 <code>var obj2 = {}</code> 。此时，引擎内部会从<code>Object.prototype</code> 上面克隆一个对象出来，我们最终得到的就是这个对象.</p>
+<p>用 new 运算符从构造器中得到一个对象</p>
+<pre><code class="javascript">function Person( name ){
+    this.name = name;
+};
+Person.prototype.getName = function(){
+    return this.name;
+};
+var a = new Person( &#39;sven&#39; )
+console.log( a.name ); // 输出：sven
+console.log( a.getName() ); // 输出：sven
+console.log( Object.getPrototypeOf( a ) === Person.prototype ); // 输出：true</code></pre>
+<p>这里 Person 并不是类，而是函数构造器，JavaScript 的函数既可以作为普通函数被调用，也可以作为构造器被调用,当使用 new 运算符来调用函数时，此时的函数就是一个构造器。 用new 运算符来创建对象的过程，实际上也只是先克隆 Object.prototype 对象，再进行一些其他额外操作的过程。</p>
+<p><strong>可以模拟new的过程：</strong></p>
+<pre><code class="javascript">// 模拟new的实现方式
+// 先来一个Person构造器
 
-    .parent&gt;div {
-        height: 100px;
-    }
+function Person(name) {
+    this.name = name;
+}
 
-    .item1 {
-        background-color: #666;
-        flex: 2 1 30%;
-    }
+Person.prototype.getName = function () {
+    return this.name;
+}
 
-    .item2 {
-        width:100px;
-        background: blue;
-        flex: 2 1 auto;
-    }
+var objectFactory = function () {
+    var obj = new Object(), //从Object.prototype上克隆一个空的对象{}
+        Constructor = [].shift.call(arguments); // 取得外部传入的构造器，此例是 Person
+    obj.__proto__ = Constructor.prototype; // 指向正确的原型
+    var ret = Constructor.apply(obj, arguments); // 借用外部传入的构造器给 obj 设置属性
+    return typeof ret === &#39;object&#39; ? ret : obj; // 确保构造器总是会返回一个对象
+}
 
-    .item3 {
-        flex: 1 1 200px;
-        background: lightblue;
-    }
-&lt;/style&gt;</code></pre>
-<pre><code class="html">&lt;body&gt;
-    &lt;div class=&quot;parent&quot;&gt;
-        &lt;div class=&quot;item1&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;item2&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;item3&quot;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/body&gt;</code></pre>
-<p>计算出3个item的宽度</p>
+var a = objectFactory(Person, &#39;weng&#39;);
+console.log(a.getName());</code></pre>
+<h3 id="3-对象会记住它的原型"><a href="#3-对象会记住它的原型" class="headerlink" title="3. 对象会记住它的原型"></a>3. 对象会记住它的原型</h3><p>对象的原型”，就 JavaScript 的真正实现来说，其实并不能说对象有原型，而只能说<strong>对象的构造器有原型</strong>。对于“对象把请求委托给它自己的原型”这句话，更好的说法是<strong>对象把请求委托给它的构造器的原型</strong></p>
+<p>JavaScript 给对象提供了一个名为 <code>__proto__</code> 的隐藏属性，某个对象的 <code>__proto__</code> 属性默认会指向它的构造器的原型对象，即 <code>{Constructor}.prototype</code>。在一些浏览器中， <code>__proto__</code> 被公开出来</p>
+<pre><code class="javascript">var a = new Object();
+console.log ( a.__proto__=== Object.prototype ); // 输出：true </code></pre>
+<p><code>__proto__</code> 就是对象跟“对象构造器的原型”联系起来的纽带。正因为对象要通过<code>_proto__</code> 属性来记住它的构造器的原型，所以我们的 objectFactory 函数来模拟用 new创建对象时， 需要手动给 obj 对象设置正确的 <code>__proto__</code> 指向</p>
+<p><code>obj.__proto__ = Constructor.prototype;</code></p>
+<p>让 obj.<strong>proto</strong> 指向 Person.prototype ，而不是原来的 Object.prototype</p>
+<h3 id="4-如果对象无法响应某个请求，它会把这个请求委托给它的构造器的原型"><a href="#4-如果对象无法响应某个请求，它会把这个请求委托给它的构造器的原型" class="headerlink" title="4. 如果对象无法响应某个请求，它会把这个请求委托给它的构造器的原型"></a>4. 如果对象无法响应某个请求，它会把这个请求委托给它的构造器的原型</h3><p>在 JavaScript 中，每个对象都是从 Object.prototype 对象克隆而来的，如果是这样的话，<br>我们只能得到单一的继承关系，即每个对象都继承自 Object.prototype 对象，这样的对象系统显<br>然是非常受限的。</p>
+<p>实际上，虽然 JavaScript 的对象最初都是由 Object.prototype 对象克隆而来的，但对象构造<br>器的原型并不仅限于 Object.prototype 上，而是可以动态指向其他对象。这样一来，当对象 a 需<br>要借用对象 b 的能力时，可以有选择性地把对象 a 的构造器的原型指向对象 b ，从而达到继承的<br>效果</p>
+<h4 id="常用原型继承代码解析"><a href="#常用原型继承代码解析" class="headerlink" title="常用原型继承代码解析"></a>常用原型继承代码解析</h4><pre><code class="javascript">var obj = { name: &#39;sven&#39; };
+var A = function(){};
+A.prototype = obj;
+var a = new A();
+console.log( a.name ); // 输出：sven</code></pre>
 <ol>
-<li>先判断他们几个的basisWidth和是否超出了容器的宽度: 600*30% +200 + 0 = 380px &lt;600px，故，剩余的宽度用于flex元素的宽度扩展</li>
-<li>计算伸展因子：(600 - 380)/ (2+2+1) = 44 px</li>
-<li>因此他们所分配到的宽度各为：2 * 44+180 ，2 * 44，1 * 44+200 </li>
+<li>首先，尝试遍历对象 a 中的所有属性，但没有找到 name 这个属性</li>
+<li>查找 name 属性的这个请求被委托给对象 a 的构造器的原型，它被 <code>a. __proto__</code> 记录着并且<br>指向 <code>.prototype</code> ，而 <code>A.prototype</code> 被设置为对象 obj</li>
+<li>在对象 obj 中找到了 name 属性，并返回它的值</li>
 </ol>
-<h3 id="6-归纳"><a href="#6-归纳" class="headerlink" title="6. 归纳"></a>6. 归纳</h3><p>每次去计算一个flexbox的元素宽度</p>
+<p>当我们期望得到一个“类”继承自另外一个“类”的效果时，往往会用下面的代码来模拟实现</p>
+<pre><code class="javascript">var A = function(){};
+A.prototype = { name: &#39;sven&#39; };
+var B = function(){};
+B.prototype = new A();
+var b = new B();
+console.log( b.name ); // 输出：sven</code></pre>
 <ol>
-<li><p>flex-grow 不为0 的时候并且flex-basis宽度加起来不超出容器宽，以flex-basis为基准算伸展因子，当flex-grow为0时，flex-basis最大，width第二。</p>
-</li>
-<li><p>flex-grow 不为0的时候并且flex-basis为auto的时候，虽然有width值，但计算收缩因子时候这一块的flex-basis也只能算是0.</p>
-</li>
+<li>首先，尝试遍历对象 b 中的所有属性，但没有找到 name 这个属性</li>
+<li>查找 name 属性的请求被委托给对象 b 的构造器的原型，它被 <code>b. __proto__</code> 记录着并且指向<br><code>B.prototype</code> ，而 <code>B.prototype</code>被设置为一个通过 <code>new A()</code>创建出来的对象</li>
+<li>在该对象中依然没有找到 name 属性，于是请求被继续委托给这个对象构造器的原型<br><code>A.prototype</code></li>
+<li>在 A.prototype 中找到了 name 属性，并返回它的值</li>
 </ol>
 
       
@@ -624,12 +601,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>flex3个属性详解</p>
+    <p><span class="copy-title">文章标题:</span>原型模式和基于原型继承的Javascript对象系统</p>
     
     <p><span class="copy-title">本文作者:</span><a  title="翁恺敏">翁恺敏</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-03-16, 13:18:33</p>
-    <p><span class="copy-title">最后更新:</span>2020-03-16, 16:26:08</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/" title="flex3个属性详解">http://yoursite.com/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/</a>
+    <p><span class="copy-title">发布时间:</span>2020-03-16, 22:28:09</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-16, 22:31:05</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/16/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF%E7%9A%84Javascript%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/" title="原型模式和基于原型继承的Javascript对象系统">http://yoursite.com/2020/03/16/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF%E7%9A%84Javascript%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>

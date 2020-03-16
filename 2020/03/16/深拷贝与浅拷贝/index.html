@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>flex3个属性详解 | NollieLeo&#39;s blog</title>
-  <meta name="keywords" content=" flex ">
-  <meta name="description" content="flex3个属性详解 | NollieLeo&#39;s blog">
+  <title>深拷贝与浅拷贝 | NollieLeo&#39;s blog</title>
+  <meta name="keywords" content=" javascript , ES6 , 深拷贝与浅拷贝 ">
+  <meta name="description" content="深拷贝与浅拷贝 | NollieLeo&#39;s blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="about">
@@ -417,9 +417,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-flex3个属性详解" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-深拷贝与浅拷贝" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">flex3个属性详解</h1>
+        <h1 class="article-title">深拷贝与浅拷贝</h1>
     
     <div class="article-meta">
         
@@ -427,23 +427,25 @@
         
         <span class="book">
             
-                <a  data-rel="css">css</a>/
-            
-                <a  data-rel="flex布局">flex布局</a>
+                <a  data-rel="JS">JS</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color5">flex</a>
+            <a class="color1">javascript</a>
+            
+            <a class="color4">ES6</a>
+            
+            <a class="color3">深拷贝与浅拷贝</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-16 16:26:08'>2020-03-16 13:18</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-16 22:03:53'>2020-03-16 22:02</time>
         
     </div>
     <div class="article-meta">
@@ -465,7 +467,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Flex-3个属性详解"><span class="toc-text">Flex 3个属性详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-flex-none"><span class="toc-text">1. flex: none</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-flex-initial-flex-0-1-auto"><span class="toc-text">2. flex:initial(flex: 0 1 auto )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-flex-auto"><span class="toc-text">3. flex: auto</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-flex-lt-positive-number-gt-lt-意为-正数-gt"><span class="toc-text">4. flex:&lt; positive-number &gt; &lt;意为 正数&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-flex-lt-positive-number-gt-xxpx-xx"><span class="toc-text">5. flex:&lt; positive-number &gt;  xxpx ||%xx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-归纳"><span class="toc-text">6. 归纳</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#深拷贝与浅拷贝"><span class="toc-text">深拷贝与浅拷贝</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#浅拷贝"><span class="toc-text">浅拷贝</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#赋值（-）和浅拷贝的区别"><span class="toc-text">赋值（&#x3D;）和浅拷贝的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#深拷贝"><span class="toc-text">深拷贝</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#利用weakMap实现递归clone"><span class="toc-text">利用weakMap实现递归clone</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -481,136 +483,149 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Flex-3个属性详解"><a href="#Flex-3个属性详解" class="headerlink" title="Flex 3个属性详解"></a>Flex 3个属性详解</h1><blockquote>
-<p><strong>flex属性 flex:(flex-grow)(flex-shrink)(flex-basis)</strong></p>
-</blockquote>
-<ul>
-<li><strong>flex-grow</strong> 一个数字，规定项目将相对于其他灵活的项目进行扩展的量（放大属性）</li>
-<li><strong>flex-shrink</strong> 一个数字，规定项目将相对于其他灵活的项目进行收缩的量（缩小属性）</li>
-<li><strong>flex-basis</strong> 项目的长度。合法值：”auto”、”inherit” 或一个后跟 “%”、”px”、”em” 或任何其他长度单位的数字。（基本宽度）</li>
-</ul>
-<h3 id="1-flex-none"><a href="#1-flex-none" class="headerlink" title="1. flex: none"></a>1. flex: none</h3><p>等同于 （<code>flex: 0 0 auto</code>）</p>
-<p>这时候容器完全不再灵活。即不能放大也不能缩小。</p>
-<p>除了它不允许 flex-shrink 属性（不能缩小），即使元素可能会溢出。</p>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1574993498581.png" alt></p>
-<h3 id="2-flex-initial-flex-0-1-auto"><a href="#2-flex-initial-flex-0-1-auto" class="headerlink" title="2. flex:initial(flex: 0 1 auto )"></a>2. flex:initial(flex: 0 1 auto )</h3><p>等同于（<code>0 auto</code>）</p>
-<ul>
-<li><code>flex-grow</code>为0，则存在剩余空间也不放大 </li>
-<li><code>flex-shrink</code>为1，则空间不足该项目缩小 z</li>
-<li><code>flex-basis</code>为auto，则该项目本来的大小 ,长度等于灵活项目的长度。如果该项目未指定长度，则长度将根据内容决定。</li>
-</ul>
-<pre><code class="css">.parent {
-    display: flex;
-    width: 600px;
-    border: 1px solid #000;
-}
-.parent&gt;div {
-    height: 100px;
-}
-.item1 {
-    width: 100px;
-    background-color: #666;
+        <h1 id="深拷贝与浅拷贝"><a href="#深拷贝与浅拷贝" class="headerlink" title="深拷贝与浅拷贝"></a>深拷贝与浅拷贝</h1><p>一下部分参照知乎中的提问： <a href="https://www.zhihu.com/question/23031215" target="_blank" rel="noopener">javascript中的深拷贝和浅拷贝</a></p>
+<h2 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h2><h3 id="赋值（-）和浅拷贝的区别"><a href="#赋值（-）和浅拷贝的区别" class="headerlink" title="赋值（=）和浅拷贝的区别"></a>赋值（=）和浅拷贝的区别</h3><p>那么赋值和浅拷贝有什么区别呢，我们看下面这个例子：</p>
+<pre><code class="js">var obj1 = {
+    &#39;name&#39; : &#39;zhangsan&#39;,
+    &#39;age&#39; :  &#39;18&#39;,
+    &#39;language&#39; : [1,[2,3],[4,5]],
+};
+
+var obj2 = obj1;
+
+
+var obj3 = shallowCopy(obj1);
+function shallowCopy(src) {
+    var dst = {};
+    for (var prop in src) {
+        if (src.hasOwnProperty(prop)) {
+            dst[prop] = src[prop];
+        }
+    }
+    return dst;
 }
 
-.item2 {
-    width: 100px;
-    background: blue;
+obj2.name = &quot;lisi&quot;;
+obj3.age = &quot;20&quot;;
+
+obj2.language[1] = [&quot;二&quot;,&quot;三&quot;];
+obj3.language[2] = [&quot;四&quot;,&quot;五&quot;];
+
+console.log(obj1);  
+//obj1 = {
+//    &#39;name&#39; : &#39;lisi&#39;,
+//    &#39;age&#39; :  &#39;18&#39;,
+//    &#39;language&#39; : [1,[&quot;二&quot;,&quot;三&quot;],[&quot;四&quot;,&quot;五&quot;]],
+//};
+
+console.log(obj2);
+//obj2 = {
+//    &#39;name&#39; : &#39;lisi&#39;,
+//    &#39;age&#39; :  &#39;18&#39;,
+//    &#39;language&#39; : [1,[&quot;二&quot;,&quot;三&quot;],[&quot;四&quot;,&quot;五&quot;]],
+//};
+
+console.log(obj3);
+//obj3 = {
+//    &#39;name&#39; : &#39;zhangsan&#39;,
+//    &#39;age&#39; :  &#39;20&#39;,
+//    &#39;language&#39; : [1,[&quot;二&quot;,&quot;三&quot;],[&quot;四&quot;,&quot;五&quot;]],
+//};</code></pre>
+<p>先定义个一个原始的对象 <code>obj1</code>，然后使用赋值得到第二个对象 <code>obj2</code>，然后通过浅拷贝，将 <code>obj1</code> 里面的属性都赋值到 <code>obj3</code> 中。也就是说：</p>
+<ul>
+<li><code>obj1</code>：原始数据</li>
+<li><code>obj2</code>：赋值操作得到</li>
+<li><code>obj3</code>：浅拷贝得到</li>
+</ul>
+<p>然后我们改变 <code>obj2</code> 的 <code>name</code> 属性和 <code>obj3</code> 的 <code>name</code> 属性，可以看到，改变赋值得到的对象 <code>obj2</code> 同时也会改变原始值 <code>obj1</code>，而改变浅拷贝得到的的 <code>obj3</code> 则不会改变原始对象 <code>obj1</code>。这就可以说明赋值得到的对象 <code>obj2</code> 只是将指针改变，其引用的仍然是同一个对象，而浅拷贝得到的的 <code>obj3</code> 则是重新创建了新对象。</p>
+<p>然而，我们接下来来看一下改变引用类型会是什么情况呢，我又改变了赋值得到的对象 <code>obj2</code> 和浅拷贝得到的 <code>obj3</code> 中的 <code>language</code> 属性的第二个值和第三个值（<code>language</code> 是一个数组，也就是引用类型）。结果见输出，可以看出来，无论是修改赋值得到的对象 <code>obj2</code> 和浅拷贝得到的 <code>obj3</code> 都会改变原始数据。</p>
+<p>这是因为浅拷贝只复制一层对象的属性，并不包括对象里面的为引用类型的数据。所以就会出现改变浅拷贝得到的 <code>obj3</code> 中的引用类型时，会使原始数据得到改变。</p>
+<p>深拷贝：将 B 对象拷贝到 A 对象中，包括 B 里面的子对象，</p>
+<p>浅拷贝：将 B 对象拷贝到 A 对象中，但不包括 B 里面的子对象</p>
+<table>
+<thead>
+<tr>
+<th>–</th>
+<th>和原数据是否指向同一对象</th>
+<th>第一层数据为基本数据类型</th>
+<th>原数据中包含子对象</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>赋值</td>
+<td>是</td>
+<td>改变会使原数据一同改变</td>
+<td>改变会使原数据一同改变</td>
+</tr>
+<tr>
+<td>浅拷贝</td>
+<td>否</td>
+<td>改变<strong>不</strong>会使原数据一同改变</td>
+<td>改变会使原数据一同改变</td>
+</tr>
+<tr>
+<td>深拷贝</td>
+<td>否</td>
+<td>改变<strong>不</strong>会使原数据一同改变</td>
+<td>改变<strong>不</strong>会使原数据一同改变</td>
+</tr>
+</tbody></table>
+<h2 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h2><p>看了这么半天，你也应该清楚什么是深拷贝了吧，如果还不清楚，我就剖腹自尽(ಥ_ಥ)</p>
+<p>深拷贝是对对象以及对象的所有子对象进行拷贝。</p>
+<p>那么问题来了，怎么进行深拷贝呢？</p>
+<p>思路就是递归调用刚刚的浅拷贝，把所有属于对象的属性类型都遍历赋给另一个对象即可。我们直接来看一下 Zepto 中深拷贝的代码：</p>
+<pre><code class="js">// 内部方法：用户合并一个或多个对象到第一个对象
+// 参数：
+// target 目标对象  对象都合并到target里
+// source 合并对象
+// deep 是否执行深度合并
+function extend(target, source, deep) {
+    for (key in source)
+        if (deep &amp;&amp; (isPlainObject(source[key]) || isArray(source[key]))) {
+            // source[key] 是对象，而 target[key] 不是对象， 则 target[key] = {} 初始化一下，否则递归会出错的
+            if (isPlainObject(source[key]) &amp;&amp; !isPlainObject(target[key]))
+                target[key] = {}
+
+            // source[key] 是数组，而 target[key] 不是数组，则 target[key] = [] 初始化一下，否则递归会出错的
+            if (isArray(source[key]) &amp;&amp; !isArray(target[key]))
+                target[key] = []
+            // 执行递归
+            extend(target[key], source[key], deep)
+        }
+        // 不满足以上条件，说明 source[key] 是一般的值类型，直接赋值给 target 就是了
+        else if (source[key] !== undefined) target[key] = source[key]
 }
 
-.item3 {
-    width: 100px;
-    background: lightblue;
+// Copy all but undefined properties from one or more
+// objects to the `target` object.
+$.extend = function(target){
+    var deep, args = slice.call(arguments, 1);
+
+    //第一个参数为boolean值时，表示是否深度合并
+    if (typeof target == &#39;boolean&#39;) {
+        deep = target;
+        //target取第二个参数
+        target = args.shift()
+    }
+    // 遍历后面的参数，都合并到target上
+    args.forEach(function(arg){ extend(target, arg, deep) })
+    return target
 }</code></pre>
-<pre><code class="html">&lt;body&gt;
-    &lt;div class=&quot;parent&quot;&gt;
-        &lt;div class=&quot;item1&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;item2&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;item3&quot;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/body&gt;</code></pre>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1574992712098.png" alt></p>
-<p>此时，<strong>当容器剩余一些空闲空间时</strong>，该属性使灵活的项目变得不灵活，因为其不能自由拉伸放大。</p>
-<p>但是<strong>当容器没有足够的空间时</strong>，该属性允许其缩小到项目的最小值。</p>
-<ol>
-<li>设置前面两个元素为<code>flex: none, width:100px</code></li>
-</ol>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1574995110792.png" alt></p>
-<ol start="2">
-<li><p>全是initial，width分别设置为：100px ，100px ，700px，此时已经超出了容器的宽度，这时候里头的3个元素自动收缩</p>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1574995539373.png" alt></p>
-</li>
-</ol>
-<p>   <strong>baseWidth</strong>: flex-basis ? flex-basis : width (flex-basis的优先级比width高);</p>
-<p>   <strong>allWidth</strong>: flex元素的flex-basis和，或者width和其的和，看优先级;</p>
-<p>   <strong>overflowWidth</strong>: allwidth - 父容器width </p>
-<p>   每个flex元素缩小值计算：<br>   $$(baseWidth/allWidth) * overflowWidth$$<br>   所以这次情况是：div1宽度为100px - 100/900 * 300 = 66.66….</p>
-<h3 id="3-flex-auto"><a href="#3-flex-auto" class="headerlink" title="3. flex: auto"></a>3. flex: auto</h3><p>相当于 flex: 1 1 auto</p>
-<p>这个时候，该属性使3个item完全灵活，它们能够吸收主轴上额外的空间。既可以自由放大也可以自由缩小。</p>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1574998175148.png" alt></p>
-<h3 id="4-flex-lt-positive-number-gt-lt-意为-正数-gt"><a href="#4-flex-lt-positive-number-gt-lt-意为-正数-gt" class="headerlink" title="4. flex:&lt; positive-number &gt; &lt;意为 正数&gt;"></a>4. flex:&lt; positive-number &gt; &lt;意为 正数&gt;</h3><p>等同于 <strong>flex: &lt; positive-number &gt;  1  0px</strong> </p>
-<p>当 flex 取值为一个非负数字，则该数字为 <code>flex-grow</code> 的值，<code>flex-shrink</code> 取 1，<code>flex-basis</code> 取 0%。</p>
-<p>这个时候，该属性使弹性项目变得灵活，flex元素在主轴方向上的初始大小flex-basis为零。</p>
-<p>项目将根据容器的大小按照自身的比例自由伸缩。<br><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1575008755738.png" alt></p>
-<p>根据他们<code>flex-grow</code>来计算他们分配到的宽度 :<br>$$flexGrow * flexWidth$$</p>
-<p>$$flexWidth = (600-allFlexBasisWidth)/(1+1+2) = (600 - 0)/4 =150px$$<br>由于flex:1 ,其中的flex-basis是为0px的，所以说,要根据自己div的宽度来决定元素的基础宽度，如果div没设置宽度那就根据内部元素的宽度撑开的宽度，例如：</p>
-<p>如果这时候一个元素的<strong>flex-basis</strong>设置为<strong>auto</strong></p>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1575010449681.png" alt></p>
-<p>这时候就需要根据这个设置了auto元素的宽度来进行计算，因为item2没有设置width所以得根据他的内容宽度来计算分配到的宽度。</p>
-<p>当他没有设置flex属性的时候，内容宽度为99.08px</p>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1575010656266.png" alt></p>
-<p>所以算他在成为flex元素时候分配到的宽度为：</p>
-<p>(600-99.08)/4=125.23</p>
-<h3 id="5-flex-lt-positive-number-gt-xxpx-xx"><a href="#5-flex-lt-positive-number-gt-xxpx-xx" class="headerlink" title="5. flex:&lt; positive-number &gt;  xxpx ||%xx"></a>5. flex:&lt; positive-number &gt;  xxpx ||%xx</h3><p>该属性和上边的CSS案例一致，即 当 flex 取值为一个非负数字和一个长度（px）或百分比（%），</p>
-<p>则分别视为 flex-grow 和 flex-basis 的值，flex-shrink 默认取 1</p>
-<hr>
-<p>例题：</p>
-<pre><code class="css">&lt;style type=&quot;text/css&quot;&gt;
-    .parent {
-        display: flex;
-        width: 600px;
-        border: 1px solid #000;
+<h3 id="利用weakMap实现递归clone"><a href="#利用weakMap实现递归clone" class="headerlink" title="利用weakMap实现递归clone"></a>利用weakMap实现递归clone</h3><pre><code class="js">function clone(target, weakMap = new weakMap) {
+    if ((typeof target === &#39;object&#39;)) {
+        let cloneTarget = Array.isArray.call(target) ? [] : {};
+        if (weakMap.get(target)) {
+            return weakMap.get(target);
+        }
+        weakMap.set(target, cloneTarget);
+        for (const key in target) {
+            cloneTarget[key] = clone(target[key], weakMap);
+        }
+        return cloneTarget;
+    } else {
+        return target;
     }
-
-    .parent&gt;div {
-        height: 100px;
-    }
-
-    .item1 {
-        background-color: #666;
-        flex: 2 1 30%;
-    }
-
-    .item2 {
-        width:100px;
-        background: blue;
-        flex: 2 1 auto;
-    }
-
-    .item3 {
-        flex: 1 1 200px;
-        background: lightblue;
-    }
-&lt;/style&gt;</code></pre>
-<pre><code class="html">&lt;body&gt;
-    &lt;div class=&quot;parent&quot;&gt;
-        &lt;div class=&quot;item1&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;item2&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;item3&quot;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/body&gt;</code></pre>
-<p>计算出3个item的宽度</p>
-<ol>
-<li>先判断他们几个的basisWidth和是否超出了容器的宽度: 600*30% +200 + 0 = 380px &lt;600px，故，剩余的宽度用于flex元素的宽度扩展</li>
-<li>计算伸展因子：(600 - 380)/ (2+2+1) = 44 px</li>
-<li>因此他们所分配到的宽度各为：2 * 44+180 ，2 * 44，1 * 44+200 </li>
-</ol>
-<h3 id="6-归纳"><a href="#6-归纳" class="headerlink" title="6. 归纳"></a>6. 归纳</h3><p>每次去计算一个flexbox的元素宽度</p>
-<ol>
-<li><p>flex-grow 不为0 的时候并且flex-basis宽度加起来不超出容器宽，以flex-basis为基准算伸展因子，当flex-grow为0时，flex-basis最大，width第二。</p>
-</li>
-<li><p>flex-grow 不为0的时候并且flex-basis为auto的时候，虽然有width值，但计算收缩因子时候这一块的flex-basis也只能算是0.</p>
-</li>
-</ol>
+}</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 736653759@qq.com </span>
@@ -624,12 +639,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>flex3个属性详解</p>
+    <p><span class="copy-title">文章标题:</span>深拷贝与浅拷贝</p>
     
     <p><span class="copy-title">本文作者:</span><a  title="翁恺敏">翁恺敏</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-03-16, 13:18:33</p>
-    <p><span class="copy-title">最后更新:</span>2020-03-16, 16:26:08</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/" title="flex3个属性详解">http://yoursite.com/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/</a>
+    <p><span class="copy-title">发布时间:</span>2020-03-16, 22:02:38</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-16, 22:03:53</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/16/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" title="深拷贝与浅拷贝">http://yoursite.com/2020/03/16/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
