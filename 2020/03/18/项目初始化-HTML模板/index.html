@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>flex3个属性详解 | NollieLeo&#39;s blog</title>
-  <meta name="keywords" content=" flex ">
-  <meta name="description" content="flex3个属性详解 | NollieLeo&#39;s blog">
+  <title>项目初始化-HTML模板 | NollieLeo&#39;s blog</title>
+  <meta name="keywords" content=" html ">
+  <meta name="description" content="项目初始化-HTML模板 | NollieLeo&#39;s blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="我们在项目初始化的时候，都会有一个html的模板，里面会做各种兼容和声明等工作。PC端如果需要适配IE8需要加入很多垫片，而且还要做好双核浏览器的优先选择配置等；M端更是需要做到不同分辨率屏幕的适配，另外还有300ms延迟问题。这里送上笔者在项目当中整理的两个模板，已经经过了一定项目的考验，供大家参考。 另外，本文中涉及的M端适配并非rem，而是修改viewport的显示比例，这个方案相较rem来">
 <meta property="og:type" content="article">
@@ -420,36 +420,30 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-flex3个属性详解" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-项目初始化-HTML模板" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">flex3个属性详解</h1>
+        <h1 class="article-title">项目初始化-HTML模板</h1>
     
     <div class="article-meta">
         
         
-        
-        <span class="book">
-            
-                <a  data-rel="css">css</a>
-            
-        </span>
         
         
         <span class="tag">
             
-            <a class="color5">flex</a>
+            <a class="color5">html</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-17 14:26:32'>2020-03-16 13:18</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-18 17:06:13'>2020-03-18 22:56</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.2k</span>
+        <span>字数:1.3k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -468,7 +462,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Flex-3个属性详解"><span class="toc-text">Flex 3个属性详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-flex-none"><span class="toc-text">1. flex: none</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-flex-initial-flex-0-1-auto"><span class="toc-text">2. flex:initial(flex: 0 1 auto )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-flex-auto"><span class="toc-text">3. flex: auto</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-flex-lt-positive-number-gt-lt-意为-正数-gt"><span class="toc-text">4. flex:&lt; positive-number &gt; &lt;意为 正数&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-flex-lt-positive-number-gt-xxpx-xx"><span class="toc-text">5. flex:&lt; positive-number &gt;  xxpx ||%xx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-归纳"><span class="toc-text">6. 归纳</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PC模板"><span class="toc-text">PC模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#M模板"><span class="toc-text">M模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公共部分说明"><span class="toc-text">公共部分说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PC部分说明"><span class="toc-text">PC部分说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#M部分说明"><span class="toc-text">M部分说明</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -484,136 +478,70 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Flex-3个属性详解"><a href="#Flex-3个属性详解" class="headerlink" title="Flex 3个属性详解"></a>Flex 3个属性详解</h1><blockquote>
-<p><strong>flex属性 flex:(flex-grow)(flex-shrink)(flex-basis)</strong></p>
-</blockquote>
-<ul>
-<li><strong>flex-grow</strong> 一个数字，规定项目将相对于其他灵活的项目进行扩展的量（放大属性）</li>
-<li><strong>flex-shrink</strong> 一个数字，规定项目将相对于其他灵活的项目进行收缩的量（缩小属性）</li>
-<li><strong>flex-basis</strong> 项目的长度。合法值：”auto”、”inherit” 或一个后跟 “%”、”px”、”em” 或任何其他长度单位的数字。（基本宽度）</li>
-</ul>
-<h3 id="1-flex-none"><a href="#1-flex-none" class="headerlink" title="1. flex: none"></a>1. flex: none</h3><p>等同于 （<code>flex: 0 0 auto</code>）</p>
-<p>这时候容器完全不再灵活。即不能放大也不能缩小。</p>
-<p>除了它不允许 flex-shrink 属性（不能缩小），即使元素可能会溢出。</p>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1574993498581.png" alt></p>
-<h3 id="2-flex-initial-flex-0-1-auto"><a href="#2-flex-initial-flex-0-1-auto" class="headerlink" title="2. flex:initial(flex: 0 1 auto )"></a>2. flex:initial(flex: 0 1 auto )</h3><p>等同于（<code>0 auto</code>）</p>
-<ul>
-<li><code>flex-grow</code>为0，则存在剩余空间也不放大 </li>
-<li><code>flex-shrink</code>为1，则空间不足该项目缩小 z</li>
-<li><code>flex-basis</code>为auto，则该项目本来的大小 ,长度等于灵活项目的长度。如果该项目未指定长度，则长度将根据内容决定。</li>
-</ul>
-<pre><code class="css">.parent {
-    display: flex;
-    width: 600px;
-    border: 1px solid #000;
-}
-.parent&gt;div {
-    height: 100px;
-}
-.item1 {
-    width: 100px;
-    background-color: #666;
-}
-
-.item2 {
-    width: 100px;
-    background: blue;
-}
-
-.item3 {
-    width: 100px;
-    background: lightblue;
-}</code></pre>
-<pre><code class="html">&lt;body&gt;
-    &lt;div class=&quot;parent&quot;&gt;
-        &lt;div class=&quot;item1&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;item2&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;item3&quot;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/body&gt;</code></pre>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1574992712098.png" alt></p>
-<p>此时，<strong>当容器剩余一些空闲空间时</strong>，该属性使灵活的项目变得不灵活，因为其不能自由拉伸放大。</p>
-<p>但是<strong>当容器没有足够的空间时</strong>，该属性允许其缩小到项目的最小值。</p>
-<ol>
-<li>设置前面两个元素为<code>flex: none, width:100px</code></li>
-</ol>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1574995110792.png" alt></p>
-<ol start="2">
-<li><p>全是initial，width分别设置为：100px ，100px ，700px，此时已经超出了容器的宽度，这时候里头的3个元素自动收缩</p>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1574995539373.png" alt></p>
-</li>
-</ol>
-<p>   <strong>baseWidth</strong>: flex-basis ? flex-basis : width (flex-basis的优先级比width高);</p>
-<p>   <strong>allWidth</strong>: flex元素的flex-basis和，或者width和其的和，看优先级;</p>
-<p>   <strong>overflowWidth</strong>: allwidth - 父容器width </p>
-<p>   每个flex元素缩小值计算：<br>   $$(baseWidth/allWidth) * overflowWidth$$<br>   所以这次情况是：div1宽度为100px - 100/900 * 300 = 66.66….</p>
-<h3 id="3-flex-auto"><a href="#3-flex-auto" class="headerlink" title="3. flex: auto"></a>3. flex: auto</h3><p>相当于 flex: 1 1 auto</p>
-<p>这个时候，该属性使3个item完全灵活，它们能够吸收主轴上额外的空间。既可以自由放大也可以自由缩小。</p>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1574998175148.png" alt></p>
-<h3 id="4-flex-lt-positive-number-gt-lt-意为-正数-gt"><a href="#4-flex-lt-positive-number-gt-lt-意为-正数-gt" class="headerlink" title="4. flex:&lt; positive-number &gt; &lt;意为 正数&gt;"></a>4. flex:&lt; positive-number &gt; &lt;意为 正数&gt;</h3><p>等同于 <strong>flex: &lt; positive-number &gt;  1  0px</strong> </p>
-<p>当 flex 取值为一个非负数字，则该数字为 <code>flex-grow</code> 的值，<code>flex-shrink</code> 取 1，<code>flex-basis</code> 取 0%。</p>
-<p>这个时候，该属性使弹性项目变得灵活，flex元素在主轴方向上的初始大小flex-basis为零。</p>
-<p>项目将根据容器的大小按照自身的比例自由伸缩。<br><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1575008755738.png" alt></p>
-<p>根据他们<code>flex-grow</code>来计算他们分配到的宽度 :<br>$$flexGrow * flexWidth$$</p>
-<p>$$flexWidth = (600-allFlexBasisWidth)/(1+1+2) = (600 - 0)/4 =150px$$<br>由于flex:1 ,其中的flex-basis是为0px的，所以说,要根据自己div的宽度来决定元素的基础宽度，如果div没设置宽度那就根据内部元素的宽度撑开的宽度，例如：</p>
-<p>如果这时候一个元素的<strong>flex-basis</strong>设置为<strong>auto</strong></p>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1575010449681.png" alt></p>
-<p>这时候就需要根据这个设置了auto元素的宽度来进行计算，因为item2没有设置width所以得根据他的内容宽度来计算分配到的宽度。</p>
-<p>当他没有设置flex属性的时候，内容宽度为99.08px</p>
-<p><img src="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/1575010656266.png" alt></p>
-<p>所以算他在成为flex元素时候分配到的宽度为：</p>
-<p>(600-99.08)/4=125.23</p>
-<h3 id="5-flex-lt-positive-number-gt-xxpx-xx"><a href="#5-flex-lt-positive-number-gt-xxpx-xx" class="headerlink" title="5. flex:&lt; positive-number &gt;  xxpx ||%xx"></a>5. flex:&lt; positive-number &gt;  xxpx ||%xx</h3><p>该属性和上边的CSS案例一致，即 当 flex 取值为一个非负数字和一个长度（px）或百分比（%），</p>
-<p>则分别视为 flex-grow 和 flex-basis 的值，flex-shrink 默认取 1</p>
-<hr>
-<p>例题：</p>
-<pre><code class="css">&lt;style type=&quot;text/css&quot;&gt;
-    .parent {
-        display: flex;
-        width: 600px;
-        border: 1px solid #000;
-    }
-
-    .parent&gt;div {
-        height: 100px;
-    }
-
-    .item1 {
-        background-color: #666;
-        flex: 2 1 30%;
-    }
-
-    .item2 {
-        width:100px;
-        background: blue;
-        flex: 2 1 auto;
-    }
-
-    .item3 {
-        flex: 1 1 200px;
-        background: lightblue;
-    }
-&lt;/style&gt;</code></pre>
-<pre><code class="html">&lt;body&gt;
-    &lt;div class=&quot;parent&quot;&gt;
-        &lt;div class=&quot;item1&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;item2&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;item3&quot;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/body&gt;</code></pre>
-<p>计算出3个item的宽度</p>
-<ol>
-<li>先判断他们几个的basisWidth和是否超出了容器的宽度: 600*30% +200 + 0 = 380px &lt;600px，故，剩余的宽度用于flex元素的宽度扩展</li>
-<li>计算伸展因子：(600 - 380)/ (2+2+1) = 44 px</li>
-<li>因此他们所分配到的宽度各为：2 * 44+180 ，2 * 44，1 * 44+200 </li>
-</ol>
-<h3 id="6-归纳"><a href="#6-归纳" class="headerlink" title="6. 归纳"></a>6. 归纳</h3><p>每次去计算一个flexbox的元素宽度</p>
-<ol>
-<li><p>flex-grow 不为0 的时候并且flex-basis宽度加起来不超出容器宽，以flex-basis为基准算伸展因子，当flex-grow为0时，flex-basis最大，width第二。</p>
-</li>
-<li><p>flex-grow 不为0的时候并且flex-basis为auto的时候，虽然有width值，但计算收缩因子时候这一块的flex-basis也只能算是0.</p>
-</li>
-</ol>
+        <p>我们在项目初始化的时候，都会有一个html的模板，里面会做各种兼容和声明等工作。PC端如果需要适配IE8需要加入很多垫片，而且还要做好双核浏览器的优先选择配置等；M端更是需要做到不同分辨率屏幕的适配，另外还有300ms延迟问题。这里送上笔者在项目当中整理的两个模板，已经经过了一定项目的考验，供大家参考。</p>
+<p>另外，本文中涉及的M端适配并非rem，而是修改viewport的显示比例，这个方案相较rem来说起码有2个优点：一是省字符，二是不用计算，设计稿是多少就是多少。不过在实践当中，UC浏览器貌似不认user-scalabe=0，还是会被双击放大，不过笔者认为还是可以接受的。如果还遇到了其他bug，请反馈，谢谢。</p>
+<h2 id="PC模板"><a href="#PC模板" class="headerlink" title="PC模板"></a>PC模板</h2><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;zh&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge,chrome=1&quot; /&gt;
+    &lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot; /&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;!--[if lt IE 9]&gt;
+    &lt;script src=&quot;//cdn.staticfile.org/html5shiv/r29/html5.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;//cdn.staticfile.org/respond.js/1.4.2/respond.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;//cdn.staticfile.org/es5-shim/4.5.9/es5-shim.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;//cdn.staticfile.org/es5-shim/4.5.9/es5-sham.min.js&quot;&gt;&lt;/script&gt;
+&lt;![endif]--&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;//cdn.staticfile.org/normalize/6.0.0/normalize.min.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h2 id="M模板"><a href="#M模板" class="headerlink" title="M模板"></a>M模板</h2><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;zh&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta name=&quot;format-detection&quot; content=&quot;telephone=no&quot; /&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;script&gt;
+    (function() {
+        var w = 750; // 设计稿尺寸
+        document.write(&#39;&lt;meta name=&quot;viewport&quot; content=&quot;width=&#39; + w + &#39;, initial-scale=&#39; +           window.screen.width / w + &#39;, user-scalable=0&quot; /&gt;&#39;);
+    })()
+    &lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;//cdn.staticfile.org/normalize/6.0.0/normalize.min.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;script src=&quot;//cdn.staticfile.org/fastclick/1.0.6/fastclick.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+    document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
+        Origami.fastclick(document.body);
+    }, false);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h2 id="公共部分说明"><a href="#公共部分说明" class="headerlink" title="公共部分说明"></a>公共部分说明</h2><p>1、<!DOCTYPE html><br>在 HTML 4.01 中，&lt;!DOCTYPE&gt; 声明引用 DTD，因为 HTML 4.01 基于 SGML。DTD 规定了标记语言的规则，这样浏览器才能正确地呈现内容。HTML5 不基于 SGML，所以不需要引用 DTD。<br>请始终向 HTML 文档添加 &lt;!DOCTYPE&gt; 声明，这样浏览器才能获知文档类型。它不是 HTML 标签，是指示 web 浏览器关于页面使用哪个 HTML 版本进行编写的指令；必须是 HTML 文档的第一行，位于 <html> 标签之前，没有结束标签，对大小写不敏感；<br>参考文献：<a href="http://www.w3school.com.cn/tags/tag_doctype.asp" target="_blank" rel="noopener">http://www.w3school.com.cn/tags/tag_doctype.asp</a> </html></p>
+<p>2、<html lang="zh"><br>HTML 的 lang 属性可用于网页或部分网页的语言。这对搜索引擎和浏览器是有帮助的。根据 W3C 推荐标准，您应该通过 <html> 标签中的 lang 属性对每张页面中的主要语言进行声明。<br>参考文献：<a href="http://www.w3school.com.cn/tags/html_ref_language_codes.asp" target="_blank" rel="noopener">http://www.w3school.com.cn/tags/html_ref_language_codes.asp</a></html></html></p>
+<p>3、<meta charset="UTF-8"><br>当你的 html 文件是以 UTF-8 编码保存的，而且里面有中文，你试试加与不加在 Chrome 的效果你就知道有没有区别了</p>
+<p>4、<meta name="format-detection" content="telephone=no,email=no,adress=no"><br>告诉浏览器是否识别特定格式的文本。根据项目需求修改值。</p>
+<h2 id="PC部分说明"><a href="#PC部分说明" class="headerlink" title="PC部分说明"></a><strong>PC部分说明</strong></h2><p>1、<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><br>控制IE渲染内核的选择。chrome=1针对装了chrome frame插件的IE浏览器起作用，以防万一写上。<br>参考文献：<a href="https://msdn.microsoft.com/en-us/library/ff955275(v=vs.85).aspx" target="_blank" rel="noopener">https://msdn.microsoft.com/en-us/library/ff955275(v=vs.85).aspx</a></p>
+<p>2、<meta name="renderer" content="webkit|ie-comp|ie-stand"><br>控制双核浏览器渲染引擎，content的取值为webkit、ie-comp、ie-stand之一，区分大小写，分别代表用webkit内核，IE兼容内核，IE标准内核。<br>参考文献：<a href="http://se.360.cn/v6/help/meta.html" target="_blank" rel="noopener">http://se.360.cn/v6/help/meta.html</a></p>
+<p>3、&lt;!–[if lt IE 9]&gt; //code here<br>兼容IE9以下（不含）的写法，只有IE认。（例子中js为IE9-的垫片）<br>参考文献：<a href="http://www.weste.net/2013/8-9/93104.html" target="_blank" rel="noopener">http://www.weste.net/2013/8-9/93104.html</a></p>
+<h2 id="M部分说明"><a href="#M部分说明" class="headerlink" title="M部分说明"></a>M部分说明</h2><p>1、js输出viewport缩放屏幕，适配不同大小设备</p>
+<pre><code class="HTML">(function() {
+    var w = 750; //设计稿设备宽度
+    document.write(&#39;&lt;meta name=&quot;viewport&quot; content=&quot;width=&#39; + w + &#39;, initial-scale=&#39; +       window.screen.width / w + &#39;, user-scalable=0&quot; /&gt;&#39;);
+})()</code></pre>
+<p>加入以上代码，需修改变量值为设计稿的设备宽度，样式全部按照设计稿的数值和单位写就可以。详见：移动端常用布局方法<br>参考文献：<a href="http://www.cnblogs.com/2050/p/3877280.html" target="_blank" rel="noopener">http://www.cnblogs.com/2050/p/3877280.html</a></p>
+<p>2、fastclick解决iphone等手机的300ms延迟问题</p>
+<pre><code class="html">&lt;script src=&quot;//st01.chrstatic.com/themes/chr-cdn/fastclick/v1.0.6/fastclick.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+    document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
+        Origami.fastclick(document.body);
+    }, false);
+&lt;/script&gt;</code></pre>
+<p>先加载fastclick.min.js，之后将需要去除300ms的dom挂上，压缩版写Origami.fastclick(document.body);，非压缩版写FastClick.attach(document.body);即可<br>参考文献：<a href="https://github.com/ftlabs/fastclick/" target="_blank" rel="noopener">https://github.com/ftlabs/fastclick/</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 736653759@qq.com </span>
@@ -623,12 +551,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>flex3个属性详解</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
+    <p><span class="copy-title">文章标题:</span>项目初始化-HTML模板</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.3k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="翁恺敏">翁恺敏</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-03-16, 13:18:33</p>
-    <p><span class="copy-title">最后更新:</span>2020-03-17, 14:26:32</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/" title="flex3个属性详解">http://yoursite.com/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/</a>
+    <p><span class="copy-title">发布时间:</span>2020-03-18, 22:56:11</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-18, 17:06:13</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/18/%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%8C%96-HTML%E6%A8%A1%E6%9D%BF/" title="项目初始化-HTML模板">http://yoursite.com/2020/03/18/%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%8C%96-HTML%E6%A8%A1%E6%9D%BF/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
