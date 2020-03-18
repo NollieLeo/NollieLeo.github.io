@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>封装 | NollieLeo&#39;s blog</title>
-  <meta name="keywords" content=" js设计模式 ">
-  <meta name="description" content="封装 | NollieLeo&#39;s blog">
+  <title>配置前端脚手架的时候碰到的问题 | NollieLeo&#39;s blog</title>
+  <meta name="keywords" content=" webpack , npm ">
+  <meta name="description" content="配置前端脚手架的时候碰到的问题 | NollieLeo&#39;s blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="about">
@@ -433,38 +433,32 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-封装" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-配置前端脚手架的时候碰到的问题" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">封装</h1>
+        <h1 class="article-title">配置前端脚手架的时候碰到的问题</h1>
     
     <div class="article-meta">
         
         
-        
-        <span class="book">
-            
-                <a  data-rel="js">js</a>/
-            
-                <a  data-rel="特定名词">特定名词</a>
-            
-        </span>
         
         
         <span class="tag">
             
-            <a class="color2">js设计模式</a>
+            <a class="color3">webpack</a>
+            
+            <a class="color4">npm</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-16 23:01:32'>2020-03-16 17:16</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-18 22:57:24'>2020-03-18 22:42</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:405</span>
+        <span>字数:198</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -483,7 +477,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#封装"><span class="toc-text">封装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-封装数据"><span class="toc-text">1. 封装数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-封装实现"><span class="toc-text">2. 封装实现</span></a></li></ol></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -499,20 +493,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>封装的目的是将信息隐藏。一般而言，我们讨论的封装是封装数据和封装实现。这一节将讨<br>论更广义的封装，不仅包括封装数据和封装实现，还包括封装类型和封装变化。</p>
-<h3 id="1-封装数据"><a href="#1-封装数据" class="headerlink" title="1. 封装数据"></a>1. 封装数据</h3><p>在许多语言的对象系统中，封装数据是由语法解析来实现的，这些语言也许提供了 private 、<br>public 、 protected 等关键字来提供不同的访问权限。</p>
-<p>但 JavaScript并没有提供对这些关键字的支持，我们只能依赖变量的作用域来实现封装特性，<br>而且只能模拟出 public 和 private 这两种封装性。</p>
-<pre><code class="javascript">var myObject = (function () {
-    var _name = &#39;sven&#39;;
-    return {
-        getName: function () {
-            return _name;
-        }
-    }
-})()
-console.log(myObject.getName());        </code></pre>
-<h3 id="2-封装实现"><a href="#2-封装实现" class="headerlink" title="2. 封装实现"></a>2. 封装实现</h3><p>封装的目的是将信息隐藏，封装应该被视为“任何形式的封装”，也就是说，封装不仅仅是<br>隐藏数据，还包括隐藏实现细节、设计细节以及隐藏对象的类型等</p>
-<p>从封装实现细节来讲，封装使得对象内部的变化对其他对象而言是透明的，也就是不可见的。<br>对象对它自己的行为负责。其他对象或者用户都不关心它的内部实现。封装使得对象之间的耦合松散，对象之间只通过暴露的 API接口来通信。当我们修改一个对象时，可以随意地修改它的<br>内部实现，只要对外的接口没有变化，就不会影响到程序的其他功能。</p>
+        <p>这段时间在自己搭建前端的脚手架，配置参照</p>
+<p><a href="https://blog.csdn.net/zhaolandelong/article/details/79620735" target="_blank" rel="noopener"> 从零搭建前端开发环境（零）——基础篇：1.npm、git及项目初始化</a></p>
+<p><a href="https://blog.csdn.net/zhaolandelong/article/details/79658026" target="_blank" rel="noopener">从零搭建前端开发环境（零）——基础篇：2.webpack生产与开发环境配置</a></p>
+<p>配置过程中出现了一些问题，</p>
+<ol>
+<li><p><code>Cannot find module &#39;@babel/core&#39; babel-loader@8 requires Babel 7.x (the package &#39;@babel/c</code></p>
+<p>解决帮助文章：<a href="https://blog.csdn.net/zr15829039341/article/details/86553652" target="_blank" rel="noopener">babel安装问题，Cannot find module ‘@babel/core’ babel-loader@8 requires Babel 7.x (the package ‘@babel/c</a></p>
+</li>
+<li><p><code>Error: Cannot find module &#39;webpack/bin/config-yargs</code></p>
+<p>解决帮助文章：<a href="https://www.cnblogs.com/zixuan00/p/10974970.html" target="_blank" rel="noopener">Error: Cannot find module ‘webpack/bin/config-yargs’ 报错原因, webpack@4.X踩的坑~</a></p>
+</li>
+<li><p><code>Error: Loading PostCSS Plugin failed: Cannot find module &#39;autoprefixer&#39;</code>，解决帮助文章：</p>
+<p><a href="https://blog.csdn.net/weixin_41877243/article/details/101295001" target="_blank" rel="noopener">webpack4 postcss-loader autoprefixer无效问题</a></p>
+<p><a href="https://blog.csdn.net/wang0112233/article/details/90484800" target="_blank" rel="noopener">Error: Loading PostCSS Plugin failed: Cannot find module ‘autoprefixer’</a></p>
+</li>
+<li><p>问题正在发生…</p>
+</li>
+</ol>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 736653759@qq.com </span>
@@ -522,12 +520,12 @@ console.log(myObject.getName());        </code></pre>
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>封装</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">405</span></p>
+    <p><span class="copy-title">文章标题:</span>配置前端脚手架的时候碰到的问题</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">198</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="翁恺敏">翁恺敏</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-03-16, 17:16:30</p>
-    <p><span class="copy-title">最后更新:</span>2020-03-16, 23:01:32</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/16/%E5%B0%81%E8%A3%85/" title="封装">http://yoursite.com/2020/03/16/%E5%B0%81%E8%A3%85/</a>
+    <p><span class="copy-title">发布时间:</span>2020-03-18, 22:42:30</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-18, 22:57:24</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/18/%E9%85%8D%E7%BD%AE%E5%89%8D%E7%AB%AF%E8%84%9A%E6%89%8B%E6%9E%B6%E7%9A%84%E6%97%B6%E5%80%99%E7%A2%B0%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" title="配置前端脚手架的时候碰到的问题">http://yoursite.com/2020/03/18/%E9%85%8D%E7%BD%AE%E5%89%8D%E7%AB%AF%E8%84%9A%E6%89%8B%E6%9E%B6%E7%9A%84%E6%97%B6%E5%80%99%E7%A2%B0%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
