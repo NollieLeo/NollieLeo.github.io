@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>多态 | NollieLeo&#39;s blog</title>
-  <meta name="keywords" content=" js设计模式 , 多态 ">
-  <meta name="description" content="多态 | NollieLeo&#39;s blog">
+  <title>.gitingnore匹配规则以及语法 | NollieLeo&#39;s blog</title>
+  <meta name="keywords" content=" git ">
+  <meta name="description" content=".gitingnore匹配规则以及语法 | NollieLeo&#39;s blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="about">
@@ -485,9 +485,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-多态" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-gitingnore匹配规则以及语法" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">多态</h1>
+        <h1 class="article-title">.gitingnore匹配规则以及语法</h1>
     
     <div class="article-meta">
         
@@ -495,30 +495,26 @@
         
         <span class="book">
             
-                <a  data-rel="js">js</a>/
-            
-                <a  data-rel="特定名词">特定名词</a>
+                <a  data-rel="git">git</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color2">js设计模式</a>
-            
-            <a class="color3">多态</a>
+            <a class="color4">git</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-16 23:01:32'>2020-03-16 17:16</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-19 10:07:22'>2020-03-19 09:17</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.5k</span>
+        <span>字数:776</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -537,7 +533,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-对象的多态性"><span class="toc-text">1. 对象的多态性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-JavaScript的多态"><span class="toc-text">2. JavaScript的多态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-多态在面向对象程序设计中的作用"><span class="toc-text">3. 多态在面向对象程序设计中的作用</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git配置-gitignore文件"><span class="toc-text">Git配置 .gitignore文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-忽略规则匹配语法"><span class="toc-text">一. 忽略规则匹配语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-匹配示例"><span class="toc-text">二. 匹配示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-gitignore文件不生效"><span class="toc-text">三.  .gitignore文件不生效</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四-模板"><span class="toc-text">四. 模板</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#java-开发通用版本模板"><span class="toc-text">java 开发通用版本模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前端项目"><span class="toc-text">前端项目</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -553,55 +549,195 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>多态的实际含义是：同一操作作用于不同的对象上面，可以产生不同的解释和不同的执行结<br>果。换句话说，给不同的对象发送同一个消息的时候，这些对象会根据这个消息分别给出不同的<br>反馈。</p>
-</blockquote>
-<pre><code class="javascript">var makeSound = function (animal) {
-    if(animal instanceof Duck){
-        console.log(&#39;嘎嘎嘎&#39;);
-    }else if(animal instanceof Dog){
-        console.log(&#39;汪汪&#39;);
-    }
-}
-var Duck = function(){};
-var Dog = function(){};
+        <h1 id="Git配置-gitignore文件"><a href="#Git配置-gitignore文件" class="headerlink" title="Git配置 .gitignore文件"></a>Git配置 .gitignore文件</h1><p>git <a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">廖雪峰git教程</a></p>
+<p><a href="https://git-scm.com/docs/gitignore" target="_blank" rel="noopener">git官网</a></p>
+<h2 id="一-忽略规则匹配语法"><a href="#一-忽略规则匹配语法" class="headerlink" title="一. 忽略规则匹配语法"></a>一. 忽略规则匹配语法</h2><table>
+<thead>
+<tr>
+<th>通配符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>空格</td>
+<td>仅作为分隔符</td>
+</tr>
+<tr>
+<td>#</td>
+<td>注释</td>
+</tr>
+<tr>
+<td>!</td>
+<td>不忽略某个文件</td>
+</tr>
+<tr>
+<td>/ 开头</td>
+<td>仅仅匹配根目录</td>
+</tr>
+<tr>
+<td>结束 /</td>
+<td>匹配该文件夹及该文件夹下的所有内容</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配多个字符</td>
+</tr>
+<tr>
+<td>**</td>
+<td>匹配多级目录</td>
+</tr>
+<tr>
+<td>？</td>
+<td>匹配单个字符</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>匹配包含单个字符的列表</td>
+</tr>
+</tbody></table>
+<p>Tips:</p>
+<ul>
+<li>当前目录定义的规则优先级高于父级目录定义的规则</li>
+<li>每行指定一条忽略规则</li>
+<li>如果一行规则不包含“/”，则它匹配当前.gitignore文件所在路径的内容</li>
+</ul>
+<h2 id="二-匹配示例"><a href="#二-匹配示例" class="headerlink" title="二. 匹配示例"></a>二. 匹配示例</h2><table>
+<thead>
+<tr>
+<th align="left">规则</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">abc/</td>
+<td align="left"># 忽略当前路径下的 abc 文件夹</td>
+</tr>
+<tr>
+<td align="left">/abc</td>
+<td align="left"># 忽略根目录下的 abc 文件</td>
+</tr>
+<tr>
+<td align="left">/*.txt</td>
+<td align="left"># 忽略根目录下的 abc.txt，不忽略 app/abc.txt</td>
+</tr>
+<tr>
+<td align="left">abc/*.txt</td>
+<td align="left"># 忽略 abc/abc.txt，不忽略 abc/def/abc.txt 和 app/abc/abc.txt</td>
+</tr>
+<tr>
+<td align="left">**/abc</td>
+<td align="left"># 忽略 /abc、a/abc、a/b/abc</td>
+</tr>
+<tr>
+<td align="left">a/**/b</td>
+<td align="left"># 忽略 a/b、a/x/y/b</td>
+</tr>
+<tr>
+<td align="left">!/app/abc.txt</td>
+<td align="left"># 不忽略 app 目录下的 abc.txt 文件</td>
+</tr>
+<tr>
+<td align="left">*.log</td>
+<td align="left"># 忽略所有 .log 文件</td>
+</tr>
+<tr>
+<td align="left">abc.txt</td>
+<td align="left">#忽略当前路径下的 abc.txt 文件</td>
+</tr>
+<tr>
+<td align="left">*abc/</td>
+<td align="left">#忽略名词中末尾为abc的文件夹</td>
+</tr>
+<tr>
+<td align="left">* abc */</td>
+<td align="left">#忽略名称中间包含abc的文件夹</td>
+</tr>
+</tbody></table>
+<h2 id="三-gitignore文件不生效"><a href="#三-gitignore文件不生效" class="headerlink" title="三.  .gitignore文件不生效"></a>三.  .gitignore文件不生效</h2><p><code>.gitignore</code>只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改<code>.gitignore</code>是无效的。所以一定要养成在项目开始就创建<code>.gitignore</code>文件的习惯。<br> 解决方法就是先把本地缓存删除(改变成未track状态)，然后再提交：</p>
+<ul>
+<li><p>如果远程仓库原来就已经存在现在.gitignore规则中忽略的内容，那么现在那些规则对那些内容是无效的，必须先删除本地缓存</p>
+<p><code>$ git rm -r --cached</code></p>
+</li>
+<li><p>不过，这样做虽然可以删除远程仓库里被 .gitignore 规则忽略的内容，但是这些内容的 git 压缩版本依然被保存在可回滚记录中以备以后回滚，这会导致 git 仓库过大。虽然有一些办法可以给 git 仓库进行瘦身，但是操作比较繁琐，非常的不推荐。因此，个人觉得还是应该有良好的 git 使用习惯，对于不用提交到仓库的内容，要第一时间用 .gitignore 进行过滤。对于占用空间小的内容，可以不予理会，但如果有较多、较大文件，不光是占了太多的远程仓库空间和本地空间，并且在 clone、push 的时候，也会因为仓库过大，而影响 clone 速度。</p>
+</li>
+</ul>
+<h2 id="四-模板"><a href="#四-模板" class="headerlink" title="四. 模板"></a>四. 模板</h2><h3 id="java-开发通用版本模板"><a href="#java-开发通用版本模板" class="headerlink" title="java 开发通用版本模板"></a>java 开发通用版本模板</h3><pre><code class=".gitignore">#java
+*.class
 
-makeSound(new Duck());
-makeSound(new Dog());</code></pre>
-<p>​    这段代码确实体现了“多态性”，当我们分别向鸭和鸡发出“叫唤”的消息时，它们根据此<br>消息作出了各自不同的反应。但这样的“多态性”是无法令人满意的，如果后来又增加了一只动<br>物，比如狗，显然狗的叫声是“汪汪汪”，此时我们必须得改动 makeSound 函数，才能让狗也发出<br>叫声。修改代码总是危险的，修改的地方越多，程序出错的可能性就越大，而且当动物的种类越<br>来越多时， makeSound 有可能变成一个巨大的函数。</p>
-<p>​    多态背后的思想是将“做什么”和“谁去做以及怎样去做”分离开来，也就是将“不变的事<br>物”与 “可能改变的事物”分离开来。在这个故事中，动物都会叫，这是不变的，但是不同类<br>型的动物具体怎么叫是可变的。把不变的部分隔离出来，把可变的部分封装起来，这给予了我们<br>扩展程序的能力，程序看起来是可生长的，也是符合<strong>开放 — 封闭原则</strong>的，相对于修改代码来说，<br>仅仅增加代码就能完成同样的功能，这显然优雅和安全得多</p>
-<h3 id="1-对象的多态性"><a href="#1-对象的多态性" class="headerlink" title="1. 对象的多态性"></a>1. 对象的多态性</h3><pre><code class="javascript">var makeSound = function (animal) {
-    if (typeof animal === &#39;object&#39; &amp;&amp; animal.sound) {
-        animal.sound();
-    } else {
-        console.log(&#39;我不是动物我不能叫&#39;)
-    }
-}
-var Duck = function () { };
-var Dog = function () { };
+#package file
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+#maven ignore
+target/
+build/
 
-Duck.prototype.sound = function () {
-    console.log(&#39;嘎嘎嘎嘎&#39;);
-}
+#eclipse ignore
+.settings/
+.project
+.classpatch
 
-makeSound(new Duck());
-makeSound(new Dog());</code></pre>
-<h3 id="2-JavaScript的多态"><a href="#2-JavaScript的多态" class="headerlink" title="2. JavaScript的多态"></a>2. JavaScript的多态</h3><p>多态的思想实际上是把“做什么”和“谁去做”分离开来，要实现这一点，归根结底先要消除类型之间的耦合关系。如果类型之间的耦合关系没有被消除，那么我们在 makeSound 方法中指定了发出叫声的对象是某个类型，它就不可能再被替换为另外一个类型。</p>
-<p>在 Java中，可以通过向上转型来实现多态。</p>
-<p>而 JavaScript的变量类型在运行期是可变的。一个 JavaScript对象，既可以表示 Duck 类型的<br>对象，又可以表示 Chicken 类型的对象，这意味着 JavaScript对象的多态性是与生俱来的</p>
-<p>这种与生俱来的多态性并不难解释。JavaScript作为一门动态类型语言，它在编译时没有类型<br>检查的过程，既没有检查创建的对象类型，又没有检查传递的参数类型。</p>
-<p>由此可见，某一种动物能否发出叫声，只取决于它有没有 makeSound 方法，而不取决于它是<br>否是某种类型的对象，这里不存在任何程度上的“类型耦合”。在 JavaScript中，并不需要诸如向上转型之类的技术来取得多态的效果。</p>
-<h3 id="3-多态在面向对象程序设计中的作用"><a href="#3-多态在面向对象程序设计中的作用" class="headerlink" title="3. 多态在面向对象程序设计中的作用"></a>3. 多态在面向对象程序设计中的作用</h3><p>有许多人认为，多态是面向对象编程语言中最重要的技术。但我们目前还很难看出这一点，<br>毕竟大部分人都不关心鸡是怎么叫的，也不想知道鸭是怎么叫的。让鸡和鸭在同一个消息之下发<br>出不同的叫声，这跟程序员有什么关系呢？</p>
-<blockquote>
-<p>Martin Fowler在《重构：改善既有代码的设计》里写到：<br>多态的最根本好处在于，你不必再向对象询问“你是什么类型”而后根据得到的答<br>案调用对象的某个行为——你只管调用该行为就是了，其他的一切多态机制都会为你安<br>排妥当。</p>
-</blockquote>
-<p>换句话说，<strong>多态最根本的作用就是通过把过程化的条件分支语句转化为对象的多态性，从而</strong><br><strong>消除这些条件分支语句。</strong></p>
-<p>Martin Fowler的话可以用下面这个例子很好地诠释：</p>
-<blockquote>
-<p>在电影的拍摄现场，当导演喊出“action”时，主角开始背台词，照明师负责打灯<br>光，后面的群众演员假装中枪倒地，道具师往镜头里撒上雪花。在得到同一个消息时，<br>每个对象都知道自己应该做什么。如果不利用对象的多态性，而是用面向过程的方式来<br>编写这一段代码，那么相当于在电影开始拍摄之后，导演每次都要走到每个人的面前，<br>确认它们的职业分工（类型），然后告诉他们要做什么。如果映射到程序中，那么程序<br>中将充斥着条件分支语句。</p>
-</blockquote>
-<p>利用对象的多态性，导演在发布消息时，就不必考虑各个对象接到消息后应该做什么。对象<br>应该做什么并不是临时决定的，而是已经事先约定和排练完毕的。每个对象应该做什么，已经成<br>为了该对象的一个方法，被安装在对象的内部，每个对象负责它们自己的行为。所以这些对象可<br>以根据同一个消息，有条不紊地分别进行各自的工作。</p>
-<p><strong>将行为分布在各个对象中，并让这些对象各自负责自己的行为，这正是面向对象设计的优点。</strong></p>
+#Intellij idea
+.idea/
+/idea/
+*.ipr
+*.iml
+*.iws
+
+# temp file
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+
+# system ignore
+.DS_Store
+Thumbs.db</code></pre>
+<h3 id="前端项目"><a href="#前端项目" class="headerlink" title="前端项目"></a>前端项目</h3><pre><code class=".gitignore"># Numerous always-ignore extensions
+*.bak
+*.patch
+*.diff
+*.err
+
+# temp file for git conflict merging
+*.orig
+*.log
+*.rej
+*.swo
+*.swp
+*.zip
+*.vi
+*~
+*.sass-cache
+*.tmp.html
+*.dump
+
+# OS or Editor folders
+.DS_Store
+._*
+.cache
+.project
+.settings
+.tmproj
+*.esproj
+*.sublime-project
+*.sublime-workspace
+nbproject
+thumbs.db
+*.iml
+
+# Folders to ignore
+.hg
+.svn
+.CVS
+.idea
+node_modules/
+jscoverage_lib/
+bower_components/
+dist/</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 736653759@qq.com </span>
@@ -611,12 +747,12 @@ makeSound(new Dog());</code></pre>
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>多态</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.5k</span></p>
+    <p><span class="copy-title">文章标题:</span>.gitingnore匹配规则以及语法</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">776</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="翁恺敏">翁恺敏</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-03-16, 17:16:30</p>
-    <p><span class="copy-title">最后更新:</span>2020-03-16, 23:01:32</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/16/%E5%A4%9A%E6%80%81/" title="多态">http://yoursite.com/2020/03/16/%E5%A4%9A%E6%80%81/</a>
+    <p><span class="copy-title">发布时间:</span>2020-03-19, 09:17:13</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-19, 10:07:22</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/19/gitingnore%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99%E4%BB%A5%E5%8F%8A%E8%AF%AD%E6%B3%95/" title=".gitingnore匹配规则以及语法">http://yoursite.com/2020/03/19/gitingnore%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99%E4%BB%A5%E5%8F%8A%E8%AF%AD%E6%B3%95/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
