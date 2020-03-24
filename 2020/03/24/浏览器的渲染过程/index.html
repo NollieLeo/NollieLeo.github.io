@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>this,call和apply | NollieLeo&#39;s blog</title>
-  <meta name="keywords" content=" javascript , js this指向 , call,apply ">
-  <meta name="description" content="this,call和apply | NollieLeo&#39;s blog">
+  <title>浏览器的渲染过程 | NollieLeo&#39;s blog</title>
+  <meta name="keywords" content=" 回流重绘 , 浏览器渲染机制 ">
+  <meta name="description" content="浏览器的渲染过程 | NollieLeo&#39;s blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="about">
@@ -573,9 +573,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-this-call和apply" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-浏览器的渲染过程" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">this,call和apply</h1>
+        <h1 class="article-title">浏览器的渲染过程</h1>
     
     <div class="article-meta">
         
@@ -583,30 +583,28 @@
         
         <span class="book">
             
-                <a  data-rel="js">js</a>
+                <a  data-rel="浏览器相关">浏览器相关</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color1">javascript</a>
+            <a class="color5">回流重绘</a>
             
-            <a class="color5">js this指向</a>
-            
-            <a class="color1">call,apply</a>
+            <a class="color3">浏览器渲染机制</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-16 23:01:32'>2020-03-16 17:16</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-24 14:05:38'>2020-03-24 09:39</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.5k</span>
+        <span>字数:2.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -625,7 +623,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#this-call-和apply"><span class="toc-text">this, call 和apply</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-this"><span class="toc-text">1. this</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-this指向"><span class="toc-text">1.1 this指向</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-1-作为对象方法调用"><span class="toc-text">1.1.1 作为对象方法调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-2-作为普通函数调用"><span class="toc-text">1.1.2 作为普通函数调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-3-构造器调用"><span class="toc-text">1.1.3 构造器调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-4-Function-prototype-call-或-Function-prototype-apply-调用"><span class="toc-text">1.1.4  Function.prototype.call 或 Function.prototype.apply 调用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-丢失的this"><span class="toc-text">1.2 丢失的this</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-call-和apply"><span class="toc-text">2. call 和apply</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-区别"><span class="toc-text">2.1 区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-call-和-apply-的用途"><span class="toc-text">2.2 call 和 apply 的用途</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-改变-this-指向"><span class="toc-text">2.2.1 改变 this 指向</span></a></li></ol></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#浏览器的渲染过程"><span class="toc-text">浏览器的渲染过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-页面加载的过程"><span class="toc-text">1. 页面加载的过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-浏览器的渲染过程"><span class="toc-text">2. 浏览器的渲染过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建DOM树"><span class="toc-text">构建DOM树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建CSSOM"><span class="toc-text">构建CSSOM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建渲染树"><span class="toc-text">构建渲染树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回流和重绘"><span class="toc-text">回流和重绘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些疑问"><span class="toc-text">一些疑问</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#渲染过程中碰到JS文件应该如何处理？"><span class="toc-text">渲染过程中碰到JS文件应该如何处理？</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -641,150 +639,68 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="this-call-和apply"><a href="#this-call-和apply" class="headerlink" title="this, call 和apply"></a>this, call 和apply</h1><h2 id="1-this"><a href="#1-this" class="headerlink" title="1. this"></a>1. this</h2><blockquote>
-<p>JavaScript的 this 总是指向一个对象，而具体指向哪个对象是<strong>在运行时基于函数的执行环境动态绑定</strong>的，而非函数被声明时的环境</p>
+        <h1 id="浏览器的渲染过程"><a href="#浏览器的渲染过程" class="headerlink" title="浏览器的渲染过程"></a>浏览器的渲染过程</h1><p>*面试题：在浏览器地址栏里输入一个URL,到这个页面呈现出来，中间会发生什么？</p>
+<blockquote>
+<p>目前市面上常见的浏览器内核可以分为这四种：Trident（IE）、Gecko（火狐）、Blink（Chrome、Opera）、Webkit（Safari）。这里面大家最耳熟能详的可能就是 Webkit 内核了，Webkit 内核是当下浏览器世界真正的霸主。<br>本文我们就以 Webkit 为例，对现代浏览器的渲染过程进行一个深度的剖析。 </p>
 </blockquote>
-<h3 id="1-1-this指向"><a href="#1-1-this指向" class="headerlink" title="1.1 this指向"></a>1.1 this指向</h3><ul>
-<li>作为对象方法调用</li>
-<li>作为普通函数调用</li>
-<li>构造器调用</li>
-<li><code>Function.prototype.apply</code>或``Function.prototype.call`</li>
+<h2 id="1-页面加载的过程"><a href="#1-页面加载的过程" class="headerlink" title="1. 页面加载的过程"></a>1. 页面加载的过程</h2><p>首先需要找到这个URL域名的服务器IP</p>
+<ul>
+<li>寻找缓存， 查看缓存中是否有记录（浏览器缓存 -&gt; 系统缓存 -&gt; 路由器缓存 ），缓存中没则去查找系统的hosts文件记录，如果再没有就去查询DNS服务器。 </li>
+<li>浏览器会根据DNS服务器得到域名的IP地址</li>
+<li>根据这个IP 以及相应的端口号  构建一个HTTP请求，并将这个HTTP请求封装在一个TCP包中，发送给服务器（依次经过传输层，网络层，数据链路层，物理层，服务器） </li>
+<li>服务器收到这个包并且解析这个http请求返回相应的HTML给浏览器 </li>
 </ul>
-<h4 id="1-1-1-作为对象方法调用"><a href="#1-1-1-作为对象方法调用" class="headerlink" title="1.1.1 作为对象方法调用"></a>1.1.1 作为对象方法调用</h4><pre><code class="javascript">var obj = {
-    a:1,
-    getA:function(){
-        alert(this === obj);
-        alert(this.a);
-    }
-}
-obj.getA();</code></pre>
-<h4 id="1-1-2-作为普通函数调用"><a href="#1-1-2-作为普通函数调用" class="headerlink" title="1.1.2 作为普通函数调用"></a>1.1.2 作为普通函数调用</h4><p>当函数<u>不作为对象的属性</u>被调用时，也就是我们常说的普通函数方式，此时的 <strong>this 总是指向全局</strong>对象。在浏览器的 JavaScript里，这个全局对象是 window 对象</p>
-<pre><code class="javascript">window.name = &#39;globalName&#39;;
-var myObject = {
-    name: &#39;sven&#39;,
-    getName: function () {
-        return this.name;
-    }
-};
-var getName = myObject.getName; //作为普通函数，这时候this指向全局，因为它不是以对象的属性调用的，可以看1.2
-console.log(getName()); // globalName</code></pre>
-<h4 id="1-1-3-构造器调用"><a href="#1-1-3-构造器调用" class="headerlink" title="1.1.3 构造器调用"></a>1.1.3 构造器调用</h4><blockquote>
-<p>JavaScript 中没有类，但是可以从构造器中创建对象，同时也提供了 new 运算符，使得构造器看起来更像一个类</p>
-<p>除了宿主提供的一些内置函数，大部分 JavaScript函数都可以当作构造器使用。构造器的外表跟普通函数一模一样，它们的区别在于被调用的方式。当用 new 运算符调用函数时，该函数总会返回一个对象，通常情况下，构造器里的 this 就指向返回的这个对象</p>
-</blockquote>
-<pre><code class="javascript">var MyClass = function(){
-this.name = &#39;sven&#39;;
-};
-var obj = new MyClass();
-alert ( obj.name ); // 输出：sven</code></pre>
-<p>但用 new 调用构造器时，还要注意一个问题，如果构造器显式地返回了一个 object 类型的对象，那么此次运算结果最终会返回这个对象，而不是我们之前期待的 this</p>
-<pre><code class="javascript">var MyClass = function(){
-this.name = &#39;sven&#39;;
-return { // 显式地返回一个对象
-name: &#39;anne&#39;
-}
-};
-var obj = new MyClass();
-alert ( obj.name ); // 输出：anne</code></pre>
-<p>如果构造器不显式地返回任何数据，或者是返回一个非对象类型的数据，就不会造成上述<br>问题：</p>
-<pre><code class="javas">var MyClass = function(){
-this.name = &#39;sven&#39;
-return &#39;anne&#39;; // 返回 string 类型
-};
-var obj = new MyClass();
-alert ( obj.name ); // 输出：sven</code></pre>
-<h4 id="1-1-4-Function-prototype-call-或-Function-prototype-apply-调用"><a href="#1-1-4-Function-prototype-call-或-Function-prototype-apply-调用" class="headerlink" title="1.1.4  Function.prototype.call 或 Function.prototype.apply 调用"></a>1.1.4  Function.prototype.call 或 Function.prototype.apply 调用</h4><p>跟普通的函数调用相比，用 Function.prototype.call 或 Function.prototype.apply 可以动态地<br>改变传入函数的 this ：</p>
-<pre><code class="javascript">var obj1 = {
-    name: &#39;sven&#39;,
-    getName: function(){
-        return this.name;
-    }
-};
-var obj2 = {
-    name: &#39;anne&#39;
-};
-console.log( obj1.getName() ); // 输出: sven
-console.log( obj1.getName.call( obj2 ) ); // 输出：anne</code></pre>
-<h3 id="1-2-丢失的this"><a href="#1-2-丢失的this" class="headerlink" title="1.2 丢失的this"></a>1.2 丢失的this</h3><pre><code class="javascript">var obj = {
-myName: &#39;sven&#39;,
-    getName: function(){
-    return this.myName;
-    }
-};
-console.log( obj.getName() ); // 输出：&#39;sven&#39;
-var getName2 = obj.getName;
-console.log( getName2() ); // 输出：undefined</code></pre>
-<p>当调用 obj.getName 时， getName 方法是作为 obj 对象的属性被调用的，当用<strong>另外一个变量</strong> getName2 来引用 obj.getName ，并且调用getName2 时，此时是以普通函数的形式来调用的， this 是指向全局 window 的</p>
-<p>再来个栗子</p>
-<pre><code class="javascript">document.getElementById = (function( func ){
-    return function(){
-        return func.apply( document, arguments );
-}
-})( document.getElementById );
-var getId = document.getElementById;
-var div = getId( &#39;div1&#39; );
-alert (div.id); // 输出： div1</code></pre>
-<p>利用 apply 把 document 当作 this 传入 getId 函数，帮助“修正” this</p>
-<p>否则如果想要简化document.getElementById单纯的是不可取的</p>
-<pre><code class="javascript"> var getId = document.getElementById;
-        console.log(getId(&#39;hello&#39;));</code></pre>
-<h2 id="2-call-和apply"><a href="#2-call-和apply" class="headerlink" title="2. call 和apply"></a>2. call 和apply</h2><h3 id="2-1-区别"><a href="#2-1-区别" class="headerlink" title="2.1 区别"></a>2.1 区别</h3><p><code>Function.prototype.call</code>和 <code>Function.prototype.apply</code>都是非常常用的方法。它们的作用一模一样，区别仅在于传入参数形式的不同</p>
-<p><strong>apply</strong> 接受两个参数，<strong>第一个参数</strong>指定了函数体内 this 对象的指向，<strong>第二个参数</strong>为一个带下标的集合，这个集合可以为<u>数组</u>，也可以为<u>类数组</u>,apply 方法把这个集合中的元素作为参数传递给被调用的函数</p>
-<p><strong>call</strong> 传入的参数数量不固定，跟 apply 相同的是，第一个参数也是代表函数体内的 this 指向，从<strong>第二个参数</strong>开始往后，每个参数被依次传入函数</p>
-<pre><code class="javascript">var func = function (a, b, c) {
-    alert([a, b, c]); // 输出 [ 1, 2, 3 ]
-};
-func.call(null, 1, 2, 3);
-
-func.apply(null, [1, 2, 3]);</code></pre>
-<p>当调用一个函数时，JavaScript 的解释器并不会计较形参和实参在数量、类型以及顺序上的区别，JavaScript的参数在内部就是用一个数组来表示的。从这个意义上说， apply 比 call 的使用率更高，我们不必关心具体有多少参数被传入函数，只要用 apply 一股脑地推过去就可以了</p>
-<p><u>当使用 call 或者 apply 的时候，如果我们传入的第一个参数为 null ，函数体内的 this 会指向默认的宿主对象，在浏览器中则是 window</u></p>
-<p>有时候我们使用 call 或者 apply 的目的不在于指定 this 指向，而是另有用途，比如借用其<br>他对象的方法。那么我们可以传入 null 来代替某个具体的对象：</p>
-<pre><code class="javascript">Math.max.apply( null, [ 1, 2, 5, 3, 4 ] ) // 输出：5</code></pre>
-<h3 id="2-2-call-和-apply-的用途"><a href="#2-2-call-和-apply-的用途" class="headerlink" title="2.2 call 和 apply 的用途"></a>2.2 call 和 apply 的用途</h3><h4 id="2-2-1-改变-this-指向"><a href="#2-2-1-改变-this-指向" class="headerlink" title="2.2.1 改变 this 指向"></a>2.2.1 改变 this 指向</h4><pre><code class="javascript">window.name = &#39;motherfucker&#39;;
-obj1 = {
-    name: &#39;helloobj1&#39;,
-}
-obj2 = {
-    name: &#39;hellowobj2&#39;,
-}
-var getName = function () {
-    console.log(this.name);
-}
-getName();
-getName.apply(obj1);
-getName.apply(obj2);</code></pre>
-<p><img src="/2020/03/16/this-call%E5%92%8Capply/1579747558506.png" alt></p>
-<p>实际开发过程中会遇到this指向被不经意改变</p>
-<p>例如：</p>
-<pre><code class="javascript">document.getElementById( &#39;div1&#39; ).onclick = function(){
-    alert( this.id ); // 输出：div1
-};</code></pre>
-<p>假如该事件函数中有一个内部函数 func ，在事件内部调用 func 函数时， func 函数体内的 this就指向了 window ，而不是我们预期的 div </p>
-<pre><code class="javascript">document.getElementById( &#39;div1&#39; ).onclick = function(){
-    alert( this.id ); // 输出：div1
-    var func = function(){
-        alert ( this.id ); // 输出：undefined
-    }
-    func();
-};</code></pre>
-<p>解决方法有两种，一种是之前提到的</p>
-<pre><code class="javascript">document.getElementById(&#39;hello&#39;).onclick = function () {
-    var that = this;
-    console.log(that.id); // 输出：hello
-    var func = function () {
-        console.log(that.id); // 输出：undefined
-    }
-    func();
-};</code></pre>
-<p>第二种就是call和apply</p>
-<pre><code class="javascript">document.getElementById( &#39;div1&#39; ).onclick = function(){
-    var func = function(){
-        alert ( this.id ); // 输出：div1
-    }
-    func.call( this );
-};</code></pre>
-
+<p>其实就是一堆 HMTL 格式的字符串，因为只有 HTML 格式浏览器才能正确解析，这是 W3C 标准的要求。接下来就是浏览器的<strong>渲染过程。</strong> </p>
+<h2 id="2-浏览器的渲染过程"><a href="#2-浏览器的渲染过程" class="headerlink" title="2. 浏览器的渲染过程"></a>2. 浏览器的渲染过程</h2><p> <img src="https://segmentfault.com/img/remote/1460000017329983?w=624&h=289" alt="webkit渲染过程"> </p>
+<p><strong>1） 浏览器会解析三个东西</strong></p>
+<ul>
+<li>HTML/SVG/XHML，HTML字符串描述了一个页面的结构，浏览器会把HTML结构字符串解析转换DOM树形结构（DOM的构建）（在dom树的构建过程中如果遇到JS脚本和外部JS连接，则会停止构建DOM树来执行和下载相应的代码，造成阻塞，后面会说到）。 </li>
+<li>CSS，解析CSS产生CSS rule tree，和他DOM树的结构比较像</li>
+<li>JS脚本，等到JS脚本文件加载完成之后，通过DOM API和CSSOM API来操作DOM tree和CSS rule tree</li>
+</ul>
+<p><strong>2）解析完成，浏览器引擎会通过DOM tree和css Rule Tree来构造Rendering Tree。</strong></p>
+<ul>
+<li>Rendering Tree 渲染树并不等同于DOM树，渲染树只会包括需要显示的节点和这些节点的样式信息 （这里主要做的是排除非视觉节点，比如script，meta标签和排除display为none的节点）</li>
+<li>CSS的rule tree主要是为了完成匹配并且把CSS rule附加上Rendering tree上的每一个Element（也就是每一个Frame）</li>
+<li>然后计算每个Frame的位置，得到节点的几何信息（位置，大小），这个又叫做<strong>回流（layout）</strong></li>
+<li>根据渲染树以及回流得到的几何信息，得到节点的绝对像素，这个过程叫做<strong>重绘（painting）</strong></li>
+<li>display:将像素发送给GPU，展示在页面上。（这一步其实还有很多内容，比如会在GPU将多个合成层合并为同一个层，并展示在页面中。而css3硬件加速的原理则是新建合成层 </li>
+</ul>
+<p><strong>3）最后通过调用操作系统Native GUI的api绘制</strong></p>
+<hr>
+<p>接下来叙述一些详细步骤</p>
+<h2 id="构建DOM树"><a href="#构建DOM树" class="headerlink" title="构建DOM树"></a>构建DOM树</h2><p> 浏览器会遵守一套步骤将HTML 文件转换为 DOM 树。宏观上，可以分为几个步骤： </p>
+<p><img src="https://camo.githubusercontent.com/e822a98473c50727f4f2ef46ed2dc1f79d9113b8/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031382f31322f32382f313637663532363266356430616164643f773d36323326683d383826663d706e6726733d3330383134" alt="构建DOM的具体步骤"> </p>
+<ol>
+<li>浏览器从磁盘或网络读取HTML的原始字节，并且根据文件的指定编码（例：UTF-8）来将他们转换成字符串。（网络中传输的内容其实都是0 1这些字节数据。当浏览器收到这些字节数据以后，会将他们转成字符串，也就是我们写的代码）</li>
+<li>将字符串转换成TOKEN，例如：<code>&lt; html &gt;</code>,<code>&lt; body &gt;</code>等。Token中会自动标识出当前Token是“开始标签”还是“结束标签”或者是“文本”等信息。</li>
+<li>生成节点对象并且构建DOM。（ 构建DOM的过程中，不是等所有Token都转换完成后再去生成节点对象，而是一边生成Token一边消耗Token来生成节点对象。换句话说，每个Token被生成后，会立刻消耗这个Token创建出节点对象。<strong>注意：带有结束标签标识的Token不会创建节点对象。</strong> ）</li>
+</ol>
+<h2 id="构建CSSOM"><a href="#构建CSSOM" class="headerlink" title="构建CSSOM"></a>构建CSSOM</h2><p>DOM会捕获页面的内容，但浏览器还需要知道页面如何展示，所以需要构建CSSOM。</p>
+<p>构建CSSOM的过程与构建DOM的过程非常相似，当浏览器接收到一段CSS，浏览器首先要做的是识别出Token，然后构建节点并生成CSSOM。<br> <img src="/2020/03/24/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%B8%B2%E6%9F%93%E8%BF%87%E7%A8%8B/11123.png" alt><br>在这一过程中，浏览器会确定下每一个节点的样式到底是什么，并且这一过程其实是很消耗资源的。因为样式你可以自行设置给某个节点，也可以通过继承获得。在这一过程中，浏览器得递归 CSSOM 树，然后确定具体的元素到底是什么样式。</p>
+<p><strong>注意：CSS匹配HTML元素是一个相当复杂和有性能问题的事情。所以，DOM树要小，CSS尽量用id和class，千万不要过渡层叠下去</strong>。</p>
+<h2 id="构建渲染树"><a href="#构建渲染树" class="headerlink" title="构建渲染树"></a>构建渲染树</h2><p> 当我们生成 DOM 树和 CSSOM 树以后，就需要将这两棵树组合为渲染树。 </p>
+<p> <img src="https://segmentfault.com/img/remote/1460000017329984?w=1150&h=537" alt="生成渲染树"> </p>
+<p> 在这一过程中，不是简单的将两者合并就行了。为了构建渲染树，浏览器主要完成了以下工作：</p>
+<ol>
+<li>从DOM树的根节点开始遍历每个可见节点。</li>
+<li>对于每个可见的节点，找到CSSOM树中对应的规则，并应用它们。</li>
+<li>根据每个可见节点以及其对应的样式，组合生成渲染树。</li>
+</ol>
+<p>第一步中，既然说到了要遍历可见的节点，那么我们得先知道，什么节点是不可见的。不可见的节点包括：</p>
+<ul>
+<li>一些不会渲染输出的节点，比如script、meta、link等。</li>
+<li>一些通过css进行隐藏的节点。比如display:none。注意，利用visibility和opacity隐藏的节点，还是会显示在渲染树上的。只有display:none的节点才不会显示在渲染树上。</li>
+</ul>
+<p><strong>注意：渲染树只包含可见的节点</strong></p>
+<h2 id="回流和重绘"><a href="#回流和重绘" class="headerlink" title="回流和重绘"></a>回流和重绘</h2><p>在另一篇文章（包含了渲染性能的优化策略等）</p>
+<h2 id="一些疑问"><a href="#一些疑问" class="headerlink" title="一些疑问"></a>一些疑问</h2><h3 id="渲染过程中碰到JS文件应该如何处理？"><a href="#渲染过程中碰到JS文件应该如何处理？" class="headerlink" title="渲染过程中碰到JS文件应该如何处理？"></a>渲染过程中碰到JS文件应该如何处理？</h3><p>渲染过程中如果遇到了<script>标签就停止渲染，执行JS代码。因为浏览器有GUI渲染线程和JS引擎线程，为了防止渲染出现不可预期的结果，这两个线程是互斥的关系，JS的加载，解析和执行会阻塞DOM的构建，也就是说，在构建DOM的时候,HTML解析器遇到了JS，那么会暂停构建DOM，将控制权移交给JS引擎，等JS引擎运行完毕，浏览器再从中断的地方恢复DOM构建。</p>
+<p> 也就是说，如果你想首屏渲染的越快，就越不应该在首屏就加载 JS 文件，这也是都建议将 script 标签放在 body 标签底部的原因。当然在当下，并不是说 script 标签必须放在底部，因为你可以给 script 标签添加 defer 或者 async 属性（下文会介绍这两者的区别） </p>
+<p><strong>JS文件不只是阻塞DOM的构建，它会导致CSSOM也阻塞DOM的构建</strong>。</p>
+<p>原本DOM和CSSOM的构建是互不影响，井水不犯河水，但是一旦引入了JavaScript，CSSOM也开始阻塞DOM的构建，只有CSSOM构建完毕后，DOM再恢复DOM构建。</p>
+<p>这是什么情况？</p>
+<p>这是因为JavaScript不只是可以改DOM，它还可以更改样式，也就是它可以更改CSSOM。因为不完整的CSSOM是无法使用的，如果JavaScript想访问CSSOM并更改它，那么在执行JavaScript时，必须要能拿到完整的CSSOM。所以就导致了一个现象，如果浏览器尚未完成CSSOM的下载和构建，而我们却想在此时运行脚本，那么浏览器将延迟脚本执行和DOM构建，直至其完成CSSOM的下载和构建。也就是说，<strong>在这种情况下，浏览器会先下载和构建CSSOM，然后再执行JavaScript，最后在继续构建DOM</strong>。</p>
+</script></p>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 736653759@qq.com </span>
     </div>
@@ -793,12 +709,12 @@ getName.apply(obj2);</code></pre>
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>this,call和apply</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.5k</span></p>
+    <p><span class="copy-title">文章标题:</span>浏览器的渲染过程</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">2.1k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="翁恺敏">翁恺敏</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-03-16, 17:16:30</p>
-    <p><span class="copy-title">最后更新:</span>2020-03-16, 23:01:32</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/16/this-call%E5%92%8Capply/" title="this,call和apply">http://yoursite.com/2020/03/16/this-call%E5%92%8Capply/</a>
+    <p><span class="copy-title">发布时间:</span>2020-03-24, 09:39:04</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-24, 14:05:38</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/24/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%B8%B2%E6%9F%93%E8%BF%87%E7%A8%8B/" title="浏览器的渲染过程">http://yoursite.com/2020/03/24/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%B8%B2%E6%9F%93%E8%BF%87%E7%A8%8B/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
