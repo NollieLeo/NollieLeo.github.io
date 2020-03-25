@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>NollieLeo&#39;s blog</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="NollieLeo&#39;s blog">
+  <title>CSS盒子模型 | NollieLeo&#39;s blog</title>
+  <meta name="keywords" content=" css , 盒子模型 ">
+  <meta name="description" content="CSS盒子模型 | NollieLeo&#39;s blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="about">
@@ -50,7 +50,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.png" />
@@ -583,12 +583,59 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-CSS盒子模型" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#对博客的理解"><span class="toc-text">对博客的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
+        <h1 class="article-title">CSS盒子模型</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="css">css</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">css</a>
+            
+            <a class="color5">盒子模型</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-03-25 10:12:47'>2020-03-25 09:22</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:460</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#css盒子模型"><span class="toc-text">css盒子模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#css的两种盒子模型"><span class="toc-text">css的两种盒子模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#W3C的标准盒模型"><span class="toc-text">W3C的标准盒模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IE的盒模型"><span class="toc-text">IE的盒模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#盒子模型类型的切换"><span class="toc-text">盒子模型类型的切换</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -601,23 +648,79 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h2 id="对博客的理解"><a href="#对博客的理解" class="headerlink" title="对博客的理解"></a>对博客的理解</h2><p>喜欢写Blog的人，会经历三个阶段。</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="css盒子模型"><a href="#css盒子模型" class="headerlink" title="css盒子模型"></a>css盒子模型</h1><p>先看例子：</p>
+<pre><code class="html">  &lt;style&gt;
+    div {
+      width: 300px;
+      height: 400px;
+      border: 5px solid #ccc;
+      background-color: aqua;
+      padding: 20px;
+    }
+  &lt;/style&gt;
+  &lt;div&gt;&lt;/div&gt;</code></pre>
+<p><img src="/2020/03/25/CSS%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B/image-20200325100338772.png" alt></p>
+<p>如图所示：设置一个宽300px,高400px的div，border为5px，padding值设为20px.</p>
+<p>这里我们会发现明明我们设置了<code>300*400</code>长宽比，为什么呈现出来的是一个<code>350*450</code>的盒子呢？ </p>
+<p>我们可以看一下这个图：</p>
+<p><img src="/2020/03/25/CSS%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B/image-20200325100748520.png" alt></p>
+<p>在这张图中，我们发现我们设置的<code>300*400</code>出现在了最里面的那个蓝框中，与此同时我们可以发现在这个盒模型中除了我们设置的内容（<code>content</code>），还有<code>margin</code>（外边距）、<code>border</code>（边框）、<code>padding</code>（内边框）</p>
 <blockquote>
-<p>第一阶段，刚接触Blog，觉得很新鲜，试着选择一个免费空间来写。</p>
+<p><code>margin(外边距)</code> - 清除边框外的区域，外边距是透明的。<br><code>border(边框)</code> - 围绕在内边距和内容外的边框。<br><code>padding(内边距)</code> - 清除内容周围的区域，内边距是透明的。<br><code>content(内容)</code> - 盒子的内容，显示文本和图像。 </p>
 </blockquote>
+<p>为了正确设置元素在所有浏览器中的宽度和高度，你需要知道盒模型是如何工作的。</p>
+<p>而我们在测试效果图看到的350*450盒子，</p>
+<p>350（width） = 300（content） + 20（padding）* 2 + 5（border）* 2<br>450（height）= 400 （content）+ 20（padding）* 2 + 5（border）* 2</p>
+<h2 id="css的两种盒子模型"><a href="#css的两种盒子模型" class="headerlink" title="css的两种盒子模型"></a>css的两种盒子模型</h2><p>css的两种盒子模型不同</p>
+<h3 id="W3C的标准盒模型"><a href="#W3C的标准盒模型" class="headerlink" title="W3C的标准盒模型"></a>W3C的标准盒模型</h3><p><img src="/2020/03/25/CSS%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B/20180324150509906.jpg" alt></p>
 <blockquote>
-<p>第二阶段，发现免费空间限制太多，就自己购买域名和空间，搭建独立博客。</p>
+<p><strong>在标准的盒子模型中，width指content部分的宽度</strong> </p>
 </blockquote>
+<h3 id="IE的盒模型"><a href="#IE的盒模型" class="headerlink" title="IE的盒模型"></a>IE的盒模型</h3><p><img src="/2020/03/25/CSS%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B/20180324150533356.jpg" alt></p>
 <blockquote>
-<p>第三阶段，觉得独立博客的管理太麻烦，最好在保留控制权的前提下，让别人来管，自己只负责写文章。</p>
+<p><strong>在IE盒子模型中，width表示content+padding+border这三个部分的宽度</strong></p>
 </blockquote>
-<p>我们每个人的在网络上产生的数据越来越多，这些信息是我们在互联网上存在过的痕迹，值得我们认真对待。但是它们被分散分布在各个网站上。很多时候我们很难将它们聚合在一起，而且各个网站的信息排布方式也没有办法自由控制，所以我们需要一个可以由自己主宰的空间——博客。</p>
-<p>通过博客，我们可以记录自己的生活和成长的轨迹。它不像 Twitter 那样碎片化，也不像 Facebook 那样关系化，它是私人的空间。</p>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+<p> 我们可以看出我们上面的使用的默认正是<code>W3C标准盒模型</code> </p>
+<h2 id="盒子模型类型的切换"><a href="#盒子模型类型的切换" class="headerlink" title="盒子模型类型的切换"></a>盒子模型类型的切换</h2><p>如果想要切换盒模型也很简单，这里需要借助css3的<code>box-sizing</code>属性</p>
+<blockquote>
+<ul>
+<li><code>box-sizing: content-box</code> 是W3C盒子模型</li>
+<li><code>box-sizing: border-box</code> 是IE盒子模型</li>
+</ul>
+</blockquote>
+<p><strong>box-sizing的默认属性是content-box</strong></p>
 
-        </article>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 736653759@qq.com </span>
+    </div>
+</article>
+
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>CSS盒子模型</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">460</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="翁恺敏">翁恺敏</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-03-25, 09:22:07</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-25, 10:12:47</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/25/CSS%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B/" title="CSS盒子模型">http://yoursite.com/2020/03/25/CSS%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">©2020 - now</p>
