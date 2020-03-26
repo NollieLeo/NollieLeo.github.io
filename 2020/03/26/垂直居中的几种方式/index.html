@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>nodejs学习记录 | NollieLeo&#39;s blog</title>
-  <meta name="keywords" content=" nodeJS ">
-  <meta name="description" content="nodejs学习记录 | NollieLeo&#39;s blog">
+  <title>垂直居中的几种方式 | NollieLeo&#39;s blog</title>
+  <meta name="keywords" content=" css , 垂直居中 ">
+  <meta name="description" content="垂直居中的几种方式 | NollieLeo&#39;s blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="about">
@@ -617,9 +617,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-nodejs学习记录" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-垂直居中的几种方式" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">nodejs学习记录</h1>
+        <h1 class="article-title">垂直居中的几种方式</h1>
     
     <div class="article-meta">
         
@@ -627,28 +627,28 @@
         
         <span class="book">
             
-                <a  data-rel="后端">后端</a>/
-            
-                <a  data-rel="nodeJS">nodeJS</a>
+                <a  data-rel="css">css</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color2">nodeJS</a>
+            <a class="color4">css</a>
+            
+            <a class="color5">垂直居中</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-16 15:21:29'>2020-03-16 15:17</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-26 15:20:13'>2020-03-26 10:09</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:2.1k</span>
+        <span>字数:2.3k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -667,7 +667,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-node自带模块fs文件管理"><span class="toc-text">1.node自带模块fs文件管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-readdir和readdirSync的区别"><span class="toc-text">1.1 readdir和readdirSync的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-mkdir和mkdirSync-创建文件"><span class="toc-text">1.2 mkdir和mkdirSync 创建文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-rename-重命名-和-rmdir删除文件"><span class="toc-text">1.3 rename 重命名 和 rmdir删除文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-writeFile-覆盖写入-和appendFile添加写入文件"><span class="toc-text">1.4 writeFile 覆盖写入 和appendFile添加写入文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-readFile-读取文件内容-二进制数据流"><span class="toc-text">1.5 readFile 读取文件内容(二进制数据流)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-6-fs-stat-path-options-callback"><span class="toc-text">1.6 fs.stat(path[, options], callback)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-url内置模块"><span class="toc-text">2. url内置模块</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-url-parse-和url-format"><span class="toc-text">2.1 url.parse()和url.format()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-querystring内置模块"><span class="toc-text">3. querystring内置模块</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-stringfy-对象转成字符串，parse-根据符号解析querystring"><span class="toc-text">3.1 stringfy()对象转成字符串，parse()根据符号解析querystring</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-escape-和unescape-编码与解码"><span class="toc-text">3.2 escape()和unescape()编码与解码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-nodemailer-第三方模块"><span class="toc-text">4. nodemailer 第三方模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-error对象"><span class="toc-text">5. error对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-爬虫案例-（方法2待补充）"><span class="toc-text">6. 爬虫案例 （方法2待补充）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#方法1："><span class="toc-text">方法1：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法2："><span class="toc-text">方法2：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-express框架（写api）"><span class="toc-text">7. express框架（写api）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#7-1-简要用法"><span class="toc-text">7.1.简要用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-2-中间件-middlewear"><span class="toc-text">7.2 中间件 middlewear</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-3-静态资源目录-static"><span class="toc-text">7.3 静态资源目录 static</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-4-路由"><span class="toc-text">7.4 路由</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-MongoDB-非关系型数据库"><span class="toc-text">8. MongoDB 非关系型数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#8-1-指令基本"><span class="toc-text">8.1 指令基本</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#行内元素垂直居中"><span class="toc-text">行内元素垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-设置外层块元素的height，line-height为相同的值"><span class="toc-text">1. 设置外层块元素的height，line-height为相同的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-vertical-align"><span class="toc-text">2.  vertical-align</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-外层父元素display-table-cell-vertical-align-middle"><span class="toc-text">3.  外层父元素display: table-cell;vertical-align: middle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-display-flex-align-items-center"><span class="toc-text">4. display:flex; align-items:center</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-绝对定位-负外边距；"><span class="toc-text">5.  绝对定位+负外边距；</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多行文本垂直居中"><span class="toc-text">多行文本垂直居中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#未知元素的宽高情况"><span class="toc-text">未知元素的宽高情况</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-组合使用display：table-cell和vertical-align、text-align，"><span class="toc-text">1. 组合使用display：table-cell和vertical-align、text-align，</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-display-flex的方法"><span class="toc-text">2. display:flex的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-display-inline-block-伪元素生成content内容"><span class="toc-text">3.  display:inline-block +伪元素生成content内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-绝对定位-transform反向偏移。"><span class="toc-text">4. 绝对定位+transform反向偏移。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#知道元素宽高的情况下"><span class="toc-text">知道元素宽高的情况下</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-绝对定位相对定位（-绝对定位-margin：auto；position-absolute-left-0-top-0-right-0-bottom-0-margin-auto）"><span class="toc-text">1.绝对定位相对定位（ 绝对定位+margin：auto；position:absolute; left:0; top:0; right:0; bottom:0; margin:auto）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-绝对定位-margin反向偏移"><span class="toc-text">2. 绝对定位+margin反向偏移</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -683,364 +683,367 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-node自带模块fs文件管理"><a href="#1-node自带模块fs文件管理" class="headerlink" title="1.node自带模块fs文件管理"></a>1.node自带模块fs文件管理</h3><p><a href="http://nodejs.cn/api/fs.html" target="_blank" rel="noopener">nodejs官方文档</a></p>
-<h4 id="1-1-readdir和readdirSync的区别"><a href="#1-1-readdir和readdirSync的区别" class="headerlink" title="1.1 readdir和readdirSync的区别"></a>1.1 readdir和readdirSync的区别</h4><blockquote>
-<p>两者都用与读取文件或者文件夹里的文件有啥</p>
-</blockquote>
-<hr>
-<p><code>fs.readdir(path[, options], callback)</code>异步函数，需要传入一个回调</p>
+        <p>在阅读此文章之前要搞明白行内元素和块级元素的区别，和其常用的标签</p>
+<h2 id="行内元素垂直居中"><a href="#行内元素垂直居中" class="headerlink" title="行内元素垂直居中"></a>行内元素垂直居中</h2><h3 id="1-设置外层块元素的height，line-height为相同的值"><a href="#1-设置外层块元素的height，line-height为相同的值" class="headerlink" title="1. 设置外层块元素的height，line-height为相同的值"></a>1. 设置外层块元素的<code>height</code>，<code>line-height</code>为相同的值</h3><p>适用范围：作用于单行为文字，使文字垂直居中显示</p>
+<p>原理：<code>line-height</code>与<code>font-size</code>的计算之差（在css中成为“行间距”）分为两半，分别加到一个文本行内容的顶部和底部。（可以包含这些内容的最小框就是行框）实现了单行文字居中，代码如下：</p>
+<pre><code class="html">&lt;body&gt;
+  &lt;style&gt;
+    .container {
+      height: 50px;
+      line-height: 50px;
+      background:aqua;
+    }
+
+    .content {
+      background-color: bisque;
+    }
+  &lt;/style&gt;
+
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;span class=&quot;content&quot;&gt;垂直居中&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/body&gt;</code></pre>
+<p><img src="/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/C:%5CUsers%5C%E5%A4%9F%E9%92%9F%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200326102804196.png" alt="image-20200326102804196"></p>
+<h3 id="2-vertical-align"><a href="#2-vertical-align" class="headerlink" title="2.  vertical-align"></a>2.  vertical-align</h3><p>适用范围：外层块元素包含<strong>大于一个行内元素</strong>需要垂直居中时 （如图片和文字需要垂直居中显示时），可以通过对图片的标签或文字的标签（行内元素）设置<code>vertical-align</code>，可以达到效果； </p>
+<p>特点：</p>
 <ul>
-<li><code>path</code> <string> <buffer><url></url></buffer></string></li>
-<li><code>options</code><ul>
-<li><code>encoding</code> <strong>默认值:</strong> <code>&#39;utf8&#39;</code>。</li>
-<li><code>withFileTypes</code>  <strong>默认值:</strong> <code>false</code>。</li>
+<li>父级块元素不需要设置宽高</li>
+<li>只需将基线较高的行内元素设置<code>vertial-align</code>就行</li>
 </ul>
-</li>
-<li><code>callback</code>(两个参数，错误回调优先)<ul>
-<li><code>err</code>  默认值为null</li>
-<li><code>files</code></li>
-</ul>
-</li>
-</ul>
-<p>错误处理代码：</p>
-<pre><code class="javascript">let dirs = fs.readdir(&#39;./hello.txt&#39;, (err, files) =&gt; {
-    if(err){
-        console.log(err);
-    }else{
-        console.log(files);
-    }
-})</code></pre>
-<hr>
-<p><code>fs.readdirSync(path[, options])</code> 同步函数</p>
-<ul>
-<li><code>path</code> </li>
-<li><code>options</code><ul>
-<li><code>encoding</code><strong>默认值:</strong> <code>&#39;utf8&#39;</code>。</li>
-<li><code>withFileTypes</code><strong>默认值:</strong> <code>false</code>。</li>
-</ul>
-</li>
-<li>返回:</li>
-</ul>
-<p>错误处理代码：</p>
-<pre><code class="javascript">try {
-    let dirs = fs.readdirSync(&#39;./node.js&#39;); //异步
-}
-catch (err) {
-    console.log(&#39;粗ucol&#39;);
-    console.log(err)
-}</code></pre>
-<p>因为同步函数没有异步那样的处理错误机制，因此需要配合<code>try catch</code>才能捕获错误的同时又不暂停下面的代码运行。</p>
-<h4 id="1-2-mkdir和mkdirSync-创建文件"><a href="#1-2-mkdir和mkdirSync-创建文件" class="headerlink" title="1.2 mkdir和mkdirSync 创建文件"></a>1.2 mkdir和mkdirSync 创建文件</h4><p><a href="http://nodejs.cn/api/fs.html#fs_fs_mkdir_path_options_callback" target="_blank" rel="noopener">mkdir文档</a></p>
-<h4 id="1-3-rename-重命名-和-rmdir删除文件"><a href="#1-3-rename-重命名-和-rmdir删除文件" class="headerlink" title="1.3 rename 重命名 和 rmdir删除文件"></a>1.3 rename 重命名 和 rmdir删除文件</h4><p><a href="http://nodejs.cn/api/fs.html#fs_fs_rename_oldpath_newpath_callback" target="_blank" rel="noopener">rename</a></p>
-<p><a href="http://nodejs.cn/api/fs.html#fs_fs_rmdir_path_options_callback" target="_blank" rel="noopener">rmdir</a></p>
-<h4 id="1-4-writeFile-覆盖写入-和appendFile添加写入文件"><a href="#1-4-writeFile-覆盖写入-和appendFile添加写入文件" class="headerlink" title="1.4 writeFile 覆盖写入 和appendFile添加写入文件"></a>1.4 writeFile 覆盖写入 和appendFile添加写入文件</h4><h4 id="1-5-readFile-读取文件内容-二进制数据流"><a href="#1-5-readFile-读取文件内容-二进制数据流" class="headerlink" title="1.5 readFile 读取文件内容(二进制数据流)"></a>1.5 readFile 读取文件内容(二进制数据流)</h4><pre><code class="javascript">fs.readFile(&#39;name.txt&#39;,(err,data)=&gt;{
-    console.log(data.toString(&#39;UTF-8&#39;))
-})</code></pre>
-<p>可以用toString(‘UTF-8’)的方法将文字提取出来；</p>
-<p>或者直接在配置项中</p>
-<pre><code class="javascript">fs.readFile(&#39;name.txt&#39;, &#39;UTF-8&#39;, (err, data) =&gt; {
-    console.log(data)
-})</code></pre>
-<h4 id="1-6-fs-stat-path-options-callback"><a href="#1-6-fs-stat-path-options-callback" class="headerlink" title="1.6 fs.stat(path[, options], callback)"></a>1.6 fs.stat(path[, options], callback)</h4><p><a href="http://nodejs.cn/api/fs.html#fs_fs_stat_path_options_callback" target="_blank" rel="noopener">fs.stat</a></p>
-<hr>
-<h3 id="2-url内置模块"><a href="#2-url内置模块" class="headerlink" title="2. url内置模块"></a>2. url内置模块</h3><p><img src="/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1570860020599.png" alt></p>
-<h4 id="2-1-url-parse-和url-format"><a href="#2-1-url-parse-和url-format" class="headerlink" title="2.1 url.parse()和url.format()"></a>2.1 url.parse()和url.format()</h4><p><a href="http://nodejs.cn/api/url.html#url_url_parse_urlstring_parsequerystring_slashesdenotehost" target="_blank" rel="noopener">url.parse()</a>将其解析成一个url对象，从而可以从url中获取href中的各种值</p>
-<p><img src="/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1570865560878.png" alt="1570865560878"></p>
-<p><a href="http://nodejs.cn/api/url.html#url_url_format_url_options" target="_blank" rel="noopener">url.format()</a>将对象再拼起来</p>
-<pre><code class="javascript">let url = require(&quot;url&quot;);
-let urlStirng = &#39;https://code.choerodon.com.cn/choerodon-framework?page=2&#39;
-let urlObj = url.parse(urlStirng);
-console.log(urlObj);
-let string = url.format(urlObj);
-console.log(string)</code></pre>
-<p><img src="/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571021112249.png" alt></p>
-<hr>
-<h3 id="3-querystring内置模块"><a href="#3-querystring内置模块" class="headerlink" title="3. querystring内置模块"></a>3. querystring内置模块</h3><p><a href="http://nodejs.cn/api/querystring.html#querystring_query_string" target="_blank" rel="noopener">querystring</a></p>
-<h4 id="3-1-stringfy-对象转成字符串，parse-根据符号解析querystring"><a href="#3-1-stringfy-对象转成字符串，parse-根据符号解析querystring" class="headerlink" title="3.1 stringfy()对象转成字符串，parse()根据符号解析querystring"></a>3.1 stringfy()对象转成字符串，parse()根据符号解析querystring</h4><h4 id="3-2-escape-和unescape-编码与解码"><a href="#3-2-escape-和unescape-编码与解码" class="headerlink" title="3.2 escape()和unescape()编码与解码"></a>3.2 escape()和unescape()编码与解码</h4><pre><code class="javascript">let qs = require(&#39;querystring&#39;)
-// let string = &#39;name=weng&amp;pass=12121&amp;sex=0&amp;hello=111&#39;
-// let obj = qs.parse(string);
-// console.log(obj)
-let string = &#39;w=你好&amp;boo=21&#39;;
-let code = qs.escape(string);
-console.log(code);
-let parseCode = qs.unescape(code);
-console.log(parseCode);</code></pre>
-<p><img src="/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571021180480.png" alt></p>
-<hr>
-<h3 id="4-nodemailer-第三方模块"><a href="#4-nodemailer-第三方模块" class="headerlink" title="4. nodemailer 第三方模块"></a>4. nodemailer 第三方模块</h3><p>基本的发送邮箱代码：</p>
-<pre><code class="javascript">&#39;use strict&#39;;
-const nodemailer = require(&#39;nodemailer&#39;);
-
-// 创建发送邮件的请求对象
-let transporter = nodemailer.createTransport({
-    host: &#39;smtp.qq.com&#39;, //发送方用的邮箱
-    port: 465, //端口号
-    secure: true, // true for 465, false for other ports
-    auth: {
-        user: &#39;736653759@qq.com&#39;, // 发生方邮箱地址
-        pass: &#39;hebnhkaruvzlbfdg&#39; // mtp验证码
-    }
-});
-
-// send mail with defined transport object
-let mailObj = {
-    from: &#39;&quot;Fred Foo 👻&quot; &lt;736653759@qq.com&gt;&#39;,
-    to: &#39;736653759@qq.com&#39;,
-    subject: &#39;Hello test nodemailer ✔&#39;, // Subject line
-    text: &#39;Hello world of node.js?&#39;, // plain text body
-    html: &#39;&lt;b&gt;Hello world?&lt;/b&gt;&#39; // html body
-};
-
-
-// main().catch(console.error);
-setTimeout(() =&gt; {
-    transporter.sendMail(mailObj, (err, data) =&gt; {
-        console.log(data)
-    })
-}, 2000)</code></pre>
-<h3 id="5-error对象"><a href="#5-error对象" class="headerlink" title="5. error对象"></a>5. error对象</h3><p>错误对象本身没有终止代码执行，所以你需要throw抛出异常</p>
-<pre><code class="javascript">let err = new Error(&#39;发生错误&#39;);
-throw err;</code></pre>
-<h3 id="6-爬虫案例-（方法2待补充）"><a href="#6-爬虫案例-（方法2待补充）" class="headerlink" title="6. 爬虫案例 （方法2待补充）"></a>6. 爬虫案例 （方法2待补充）</h3><ul>
-<li><p>获取目标网站</p>
-</li>
-<li><p>分析网站内容  <a href="https://cheerio.js.org/" target="_blank" rel="noopener">cheerio</a> 可以用<code>jquery</code>中的选择器进行网页内容分析</p>
-<p><a href="https://www.jianshu.com/p/629a81b4e013" target="_blank" rel="noopener">cheerio中文文档</a></p>
-<pre><code class="javascript">const cheerio = require(&#39;cheerio&#39;);
-let $ = cheerio.load(&#39;&lt;div&gt;&lt;p&gt;hello&lt;/p&gt;&lt;img src = &quot;http://www.baidu.com&quot;/&gt;&#39;);
-const img = $(&#39;div img&#39;).attr(&#39;src&#39;);
-console.log(img)</code></pre>
-<p>将一组html转化为类dom,可以通过cheerio实现jq中的$选择器，从而实现一些dom获取的操作。</p>
-</li>
-<li><p>获取有效信息，下载或者其他操作 </p>
-</li>
-</ul>
-<p><a href="http://nodejs.cn/api/http.html#http_http_get_url_options_callback" target="_blank" rel="noopener">http</a></p>
-<p><a href="http://nodejs.cn/api/https.html" target="_blank" rel="noopener">https</a></p>
-<p>根据不同的请求选择不同的协议。</p>
-<p><span style="color:red">*爬图片的代码</span></p>
-<h5 id="方法1："><a href="#方法1：" class="headerlink" title="方法1："></a>方法1：</h5><p><strong>downLoad.js文件</strong></p>
-<pre><code class="javascript">const fs = require(&#39;fs&#39;);
-const path = require(&#39;path&#39;);
-const request = require(&#39;request&#39;);
-var dirPath = path.join(__dirname, &quot;MarvelImages&quot;); //__dirname当前路径，加上要创建的文件名
-function downloadfile(downloadUrl, index) {
-    // 创建文件夹
-    if (!fs.existsSync(dirPath)) { // 同步查询文件夹是否存在
-        fs.mkdirSync(dirPath); // 同步创建文件夹
-        console.log(dirPath + &#39;文件创建成功&#39;);
-    }
-    let imgUrlArray = downloadUrl.split(&#39;/&#39;);  //分割Url
-    let imgUrl = imgUrlArray[imgUrlArray.length - 1]; //获取文件名
-    let filename = imgUrl;
-    let stream = fs.createWriteStream(path.join(dirPath, filename));
-    if (downloadUrl.indexOf(&#39;http&#39;) !== -1) {
-        request(downloadUrl).pipe(stream).on(&#39;error&#39;, (err) =&gt; {
-            console.log(err);
-        }).on(&#39;close&#39;, () =&gt; {
-            console.log(`文件【${filename}】下载完`);
-            // callback(null, dest);
-        })
-    } else {
-        console.log(`${downloadUrl}文件找不到`);
-    }
-}
-module.exports = downloadfile;</code></pre>
-<p><strong>splider.js</strong></p>
-<pre><code class="javascript">const http = require(&#39;http&#39;);
-const cheerio = require(&#39;cheerio&#39;);
-let downLoad = require(&#39;./downLoad&#39;);
-let mavelUrl = &#39;http://marvel.mtime.com/&#39;
-http.get(mavelUrl, (res) =&gt; {
-    const { statusCode } = res; //状态码
-    const contentType = res.headers[&#39;content-type&#39;]; //请求到的文件类型
-    console.log(`请求到的文件类型` + contentType);
-    // 做安全判断
-    let error;
-    if (statusCode !== 200) {
-        error = new Error(&#39;请求失败.&#39; + `Status Code: ${statusCode}错误`);
-    } else if (!/^text\/html/.test(contentType)) {
-        error = new Error(&#39;Invalid content-type.\n&#39; + `Expected text/html but received ${contentType}`)
-    }
-    if (error) { //如果出错的话直接来到这一行
-        console.error(error.message);
-        res.resume(); //重置缓存
-        return false;
-    }
-    // 数据是分段的,每一次接受到一段数据都会触发data事件，chunk就是数据片段
-    // 所以必须用一个string来当总chunk，每一次请求一个拼接一个
-    let rawData = &#39;&#39;;
-    res.on(&#39;data&#39;, (chunk) =&gt; {
-        rawData += chunk.toString(&#39;UTF-8&#39;);
-    });
-    res.on(&#39;end&#39;, () =&gt; {
-        let $ = cheerio.load(rawData);
-        $(&#39;img&#39;).each((index, ele) =&gt; {
-            let imgSrc = $(ele).attr(&#39;src&#39;);
-            downLoad(&#39;http://marvel.mtime.com/&#39; + imgSrc, index);
-        })
-    })
-}).on(&#39;error&#39;, (err) =&gt; {
-    console.log(&#39;请求错误&#39;);
-})</code></pre>
-<h5 id="方法2："><a href="#方法2：" class="headerlink" title="方法2："></a>方法2：</h5><h3 id="7-express框架（写api）"><a href="#7-express框架（写api）" class="headerlink" title="7. express框架（写api）"></a>7. express框架（写api）</h3><p><a href="http://www.expressjs.com.cn/4x/api.html" target="_blank" rel="noopener">express中文文档</a></p>
-<h4 id="7-1-简要用法"><a href="#7-1-简要用法" class="headerlink" title="7.1.简要用法"></a>7.1.简要用法</h4><p>先明确一点，接口的构成要素有啥</p>
-<ul>
-<li>ip</li>
-<li>port</li>
-<li>pathname</li>
-<li>method (get post put delete)</li>
-</ul>
-<p><strong>写一个get接口</strong></p>
-<pre><code class="javascript">const express = require(&#39;express&#39;);
-const app = express() //express实例化
-// 监听3000端口
-app.listen(3000, () =&gt; {
-    console.log(&#39;server start at localhost://3000&#39;);
-})
-
-// 写一个get接口
-app.get(&#39;/user/login&#39;, (req, res) =&gt; {
-    console.log(req.query); //接受到的值
-    console.log(&#39;你好&#39;);
-    res.send({ status: &#39;success&#39; });
-})
-
-// 协议 http https</code></pre>
-<p>地址栏中输入<a href="http://localhost:3000/user/login?username=wengkaimin&amp;ps=123456" target="_blank" rel="noopener">http://localhost:3000/user/login?username=wengkaimin&amp;ps=123456</a></p>
-<p><img src="/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571145900643.png" alt></p>
-<p>控制台中就能接受到传过来的数据，通过req.query接受get方法传过来的参数</p>
-<p><strong>写一个post接口</strong></p>
 <blockquote>
-<p><code>express</code>不提供解析消息体的功能，所以req.body是拿不到主体的，这边提供了一个第三方插件</p>
-<p><code>body-parser</code></p>
+<p>vertical-align属性的定义：该属性定义行内元素的基线相对于该元素所在行的基线的垂直对齐。允许指定负长度值和百分比值。这会使元素降低而不是升高。在表单元格中，这个属性会设置单元格框中的单元格内容的对齐方式。 </p>
 </blockquote>
-<p><a href="https://www.npmjs.com/package/body-parser" target="_blank" rel="noopener">body-parser npm</a></p>
-<p><img src="/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571152056613.png" alt></p>
-<pre><code class="javascript">const express = require(&#39;express&#39;);
-const app = express() //express实例化
-const bp = require(&#39;body-parser&#39;);
-// express中app.use表示使用一个中间件
-// parse application/x-www-form-urlencoded解析表单格式数据
-app.use(bp.urlencoded({ extended: false }))
-// parse application/json
-app.use(bp.json());
-// 监听3000端口
-app.listen(3000, () =&gt; {
-    console.log(&#39;server start at localhost://3000&#39;);
-})
-
-// 写一个get接口
-app.get(&#39;/user/login&#39;, (request, res) =&gt; {
-    console.log(request.query);
-    console.log(&#39;你好&#39;);
-    let { username, ps } = request.query;
-    if (username === &#39;weng&#39; &amp;&amp; ps === &#39;1234&#39;) {
-        res.send({ status: &#39;success&#39; });
-    } else {
-        res.send(&#39;登陆失败&#39;)
-    }
-});
-
-// 写一个post接口
-app.post(&#39;/user/reg&#39;, (request, result) =&gt; {
-    // request.body获取数据，消息体，请求体
-    // let { us, ps } = request.body;
-    console.log(request.body);
-    // express不能直接解析消息体
-    // 需要第三方插件 body-parser
-    result.send({ status: 1 })
-})
-// 协议 http https</code></pre>
-<p><img src="/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571152747028.png" alt></p>
-<p><img src="/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571152776993.png" alt></p>
-<h4 id="7-2-中间件-middlewear"><a href="#7-2-中间件-middlewear" class="headerlink" title="7.2 中间件 middlewear"></a>7.2 中间件 middlewear</h4><ul>
-<li>内置中间件 static</li>
-<li>自定义中间件（全局）（局部）</li>
-<li>第三方中间件（body-parse) (拦截器)</li>
-</ul>
-<!--一定要在合适的地方next()-->
-
-<pre><code class="javascript">const express = require(&#39;express&#39;);
-
-const app = express();
-
-// 中间件
-// 全局中间件,所有请求发送之前都要走这一步
-app.use(&#39;/&#39;, (req, res, next) =&gt; {
-    let { token } = req.query;
-    if (token) {
-        res.send(&quot;OK&quot;);
-        next(); //是否继续往下执行
-    } else {
-        res.send(&#39;缺少token&#39;);
+<pre><code class="html">&lt;body&gt;
+  &lt;style&gt;
+    .container {
+      background: aqua;
     }
 
-})
+    .content {
+      background-color: bisque;
+    }
 
-app.get(&#39;/test1&#39;, (requst, result) =&gt; {
-    console.log(&#39;test1&#39;)
-    console.log(requst.query)
-})
+    img {
+      vertical-align: middle;
+    }
+  &lt;/style&gt;
 
-app.get(&#39;/test2&#39;, (requst, result) =&gt; {
-    console.log(&#39;test2&#39;)
-})
-
-app.listen(3000, () =&gt; {
-    console.log(&#39;server start at localhost://3000&#39;)
-})</code></pre>
-<h4 id="7-3-静态资源目录-static"><a href="#7-3-静态资源目录-static" class="headerlink" title="7.3 静态资源目录 static"></a>7.3 静态资源目录 static</h4><blockquote>
-<p>指定一个目录，可以被访问 像apache的www一样</p>
-</blockquote>
-<p>部署静态资源文件</p>
-<pre><code class="javascript">const express = require(&#39;express&#39;);
-const path = require(&#39;path&#39;);
-const app = express();
-const dirPath = path.join(__dirname, &#39;/static&#39;);
-console.log(dirPath);
-
-app.use(express.static(dirPath)); //可以从这个路径直接获取到资源
-
-app.listen(3000, () =&gt; {
-    console.log(&#39;server start at localhost://3000&#39;)
-})</code></pre>
-<h4 id="7-4-路由"><a href="#7-4-路由" class="headerlink" title="7.4 路由"></a>7.4 路由</h4><p><img src="/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571385182120.png" alt></p>
-<p>server.js</p>
-<pre><code class="javascript">const express = require(&#39;express&#39;);
-const app = express();
-
-let userRouter = require(&#39;./router/userRouter&#39;);
-let foodRouter = require(&#39;./router/foodRouter&#39;);
-
-app.use(&#39;/user&#39;, userRouter);
-app.use(&#39;/food&#39;, foodRouter)
-
-
-app.listen(3000, () =&gt; {
-    console.log(&quot;server start localhost:3000&quot;);
-})</code></pre>
-<p>userRouter.js</p>
-<pre><code class="javascript">const express = require(&#39;express&#39;);
-const router = express.Router();
-
-router.get(&#39;/add&#39;, (req, res) =&gt; {
-    res.send(&#39;user add&#39;)
-})
-
-router.get(&#39;/del&#39;, () =&gt; {
-    console.log(&#39;user delete&#39;)
-})
-
-module.exports = router</code></pre>
-<h3 id="8-MongoDB-非关系型数据库"><a href="#8-MongoDB-非关系型数据库" class="headerlink" title="8. MongoDB 非关系型数据库"></a>8. MongoDB <strong>非关系型数据库</strong></h3><h4 id="8-1-指令基本"><a href="#8-1-指令基本" class="headerlink" title="8.1 指令基本"></a>8.1 指令基本</h4><ul>
-<li>mongodb 数据库名</li>
-<li>mongod 命令行启动数据库命令</li>
-<li>mongo 命令行操作数据库指令</li>
-<li>mongoose node 操作数据库插件    <a href="http://www.mongoosejs.net/docs/cnhome.html" target="_blank" rel="noopener">中文文档</a></li>
-<li>show dbs</li>
-<li>show collections</li>
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;span class=&quot;content&quot;&gt;垂直居中&lt;/span&gt;
+    &lt;img src=&quot;https://www.baidu.com/img/bd_logo1.png&quot; /&gt;
+  &lt;/div&gt;
+&lt;/body&gt;</code></pre>
+<p><img src="/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/C:%5CUsers%5C%E5%A4%9F%E9%92%9F%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200326103805967.png" alt="image-20200326103805967"></p>
+<h3 id="3-外层父元素display-table-cell-vertical-align-middle"><a href="#3-外层父元素display-table-cell-vertical-align-middle" class="headerlink" title="3.  外层父元素display: table-cell;vertical-align: middle"></a>3.  外层父元素display: table-cell;vertical-align: middle</h3><p>特点：</p>
+<ul>
+<li>外层元素需要设置高度</li>
 </ul>
+<p>适用范围： 适用于在块元素内存在单个行内块元素，将它垂直居中； </p>
+<pre><code class="html">&lt;body&gt;
+  &lt;style&gt;
+    .container {
+      background: aqua;
+      height: 300px;
+      display: table-cell;
+      vertical-align: middle;
+    }
+  &lt;/style&gt;
+
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;img src=&quot;https://www.baidu.com/img/bd_logo1.png&quot; /&gt;
+  &lt;/div&gt;
+&lt;/body&gt;</code></pre>
+<p><img src="/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/C:%5CUsers%5C%E5%A4%9F%E9%92%9F%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200326110227357.png" alt="image-20200326110227357"></p>
+<h3 id="4-display-flex-align-items-center"><a href="#4-display-flex-align-items-center" class="headerlink" title="4. display:flex; align-items:center"></a>4. <code>display:flex;</code> <code>align-items:center</code></h3><p>特点：</p>
+<ul>
+<li>flex布局</li>
+<li>父元素可以不设置高度，宽度由内部行内元素撑起（这里设置高度是为了看的更清楚）</li>
+</ul>
+<pre><code class="html">&lt;body&gt;
+  &lt;style&gt;
+    .container {
+      height: 300px;
+      background: aqua;
+      display: flex;
+      align-items: center;
+    }
+
+    img {
+      max-width: 300px;
+    }
+  &lt;/style&gt;
+
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;span&gt;12111111111111111111111111111111111111111111111111eeeeeeeeeeee1111111dwaedwqqqqqqqqqqqqqqqqq&lt;/span&gt;
+    &lt;img src=&quot;https://www.baidu.com/img/bd_logo1.png&quot; /&gt;
+  &lt;/div&gt;
+
+&lt;/body&gt;</code></pre>
+<p><img src="/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/C:%5CUsers%5C%E5%A4%9F%E9%92%9F%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200326113535458.png" alt="image-20200326113535458"></p>
+<h3 id="5-绝对定位-负外边距；"><a href="#5-绝对定位-负外边距；" class="headerlink" title="5.  绝对定位+负外边距；"></a>5.  绝对定位+负外边距；</h3><p>适用范围：包裹的行内元素必须是可以设置高度的，但是像文本元素是不建议使用这个的，因为文本的内容不确定，除非定高且设置超出溢出</p>
+<pre><code class="html">&lt;body&gt;
+  &lt;style&gt;
+    .container {
+      height: 300px;
+      background: aqua;
+      position: relative;
+    }
+
+    img {
+      height: 200px;
+      margin-top: -100px;
+      top: 50%;
+      position: absolute;
+    }
+  &lt;/style&gt;
+
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;img src=&quot;https://www.baidu.com/img/bd_logo1.png&quot; /&gt;
+  &lt;/div&gt;
+
+&lt;/body&gt;</code></pre>
+<h2 id="多行文本垂直居中"><a href="#多行文本垂直居中" class="headerlink" title="多行文本垂直居中"></a>多行文本垂直居中</h2><p>利用 <code>display：table；</code>和<code>display:table-cell;</code> 来实现多行文本的垂直居中</p>
+<pre><code class="html">&lt;body&gt;
+  &lt;style&gt;
+    .container {
+      height: 300px;
+      background: aqua;
+      display: table;
+    }
+
+    p {
+      display: table-cell;
+      vertical-align: middle;
+      background-color: bisque;
+    }
+  &lt;/style&gt;
+
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;p&gt;
+      dsadwqdssacadseqdsfcdsfsasddsa
+      dwqdssacadseqdsfcdsfsasddsadwqd
+      ssacadseqdsfcdsfsasddsadwqdssaca
+      dseqdsfcdsfsasddsadwqdssacadseqds
+      fcdsfsasddsadwqdssacadseqdsfcdsfsasd
+    &lt;/p&gt;
+  &lt;/div&gt;
+
+&lt;/body&gt;</code></pre>
+<h2 id="未知元素的宽高情况"><a href="#未知元素的宽高情况" class="headerlink" title="未知元素的宽高情况"></a>未知元素的宽高情况</h2><p>在前面的实现行内元素的垂直居中中有提到几种方法</p>
+<h3 id="1-组合使用display：table-cell和vertical-align、text-align，"><a href="#1-组合使用display：table-cell和vertical-align、text-align，" class="headerlink" title="1. 组合使用display：table-cell和vertical-align、text-align，"></a>1. 组合使用<code>display：table-cell</code>和<code>vertical-align</code>、<code>text-align</code>，</h3><p>使父元素内的所有行内元素水平垂直居中（内部div设置display：inline-block即可）这在子元素不确定宽度和高度时</p>
+<p>与其他一些display属性类似，table-cell同样会被其他一些css属性破坏，例如float，position：absolute，所以在使用display：table-cell时，尽量不要使用float或者position:absolute（可以考虑为之增加一个父div定义float等属性。）；设置了table-cell的元素对宽度和高度敏感（在父元素上设置table-row等属性，也会使其不感知height。），对margin值无反应，响应padding属性</p>
+<pre><code class="html">&lt;body&gt;
+  &lt;style&gt;
+    .father {
+      width: 400px;
+      height: 200px;
+      border: 1px solid #000;
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .son {
+      width: 200px;
+      height: 100px;
+      background: red;
+      display: inline-block;
+    }
+  &lt;/style&gt;
+
+  &lt;div class=&quot;father&quot;&gt;
+    &lt;div class=&quot;son&quot;&gt;
+      display:table-cell;&lt;/br&gt;text-align:center;&lt;/br&gt; vertical-align:middle
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/body&gt;</code></pre>
+<p><img src="/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/C:%5CUsers%5C%E5%A4%9F%E9%92%9F%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200326142740669.png" alt="image-20200326142740669"></p>
+<p>对table-cell元素设置百分比（如100%）的宽高值是无效的，但是可以将元素设置display:table，再将父元素设置百分比跨高，子元素table-cell会自动撑满父元素。这就可以做相对于整个页面的水平垂直居中。嗯，看下面的代码 </p>
+<pre><code class="html">&lt;body&gt;
+  &lt;style&gt;
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #box {
+      display: table;
+      width: 100%;
+      height: 100%;
+    }
+
+    .father {
+      width: 400px;
+      height: 200px;
+      border: 1px solid #000;
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .son {
+      width: 200px;
+      height: 100px;
+      background: red;
+      display: inline-block;
+    }
+  &lt;/style&gt;
+  &lt;div id=&quot;box&quot;&gt;
+    &lt;div class=&quot;father&quot;&gt;
+      &lt;div class=&quot;son&quot;&gt;
+        display:table-cell;&lt;/br&gt;text-align:center;&lt;/br&gt; vertical-align:middle
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/body&gt;</code></pre>
+<p><img src="/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/C:%5CUsers%5C%E5%A4%9F%E9%92%9F%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200326143016605.png" alt="image-20200326143016605"></p>
+<h3 id="2-display-flex的方法"><a href="#2-display-flex的方法" class="headerlink" title="2. display:flex的方法"></a>2. display:flex的方法</h3><p>参考上面所说的行内元素的方法</p>
+<ol>
+<li><p>设置container的display的类型为flex，激活为flexbox模式。</p>
+</li>
+<li><p>justify-content定义水平方向的元素位置</p>
+</li>
+<li><p>align-items定义垂直方向的元素位置</p>
+</li>
+</ol>
+<h3 id="3-display-inline-block-伪元素生成content内容"><a href="#3-display-inline-block-伪元素生成content内容" class="headerlink" title="3.  display:inline-block +伪元素生成content内容"></a>3.  display:inline-block +伪元素生成content内容</h3><p>实现原理：原理：利用<code>inline-block</code>的<code>vertical-align: middle</code>去对齐before伪元素，before伪元素的高度与父对象一样，就实现了高度方向的对齐。居中块的尺寸可以做包裹性、自适应内容，兼容性也相当好。缺点是水平居中需要考虑inline-block间隔中的留白（代码换行符遗留问题。）。（宽度是已知的，高度可以是未知的）</p>
+<p>(这里子元素加了宽高是为了方便看，去掉也无所谓)</p>
+<pre><code class="html">&lt;body&gt;
+  &lt;style&gt;
+    .father {
+      width: 400px;
+      height: 200px;
+      border: 1px solid #000;
+      text-align: center;
+    }
+
+    .father:before {
+      content: &quot; &quot;;
+      display: inline-block;
+      vertical-align: middle;
+      height: 100%;
+    }
+
+    .son {
+      width: 200px;
+      height: 100px;
+      background: red;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  &lt;/style&gt;
+
+
+  &lt;div class=&quot;father&quot;&gt;
+    &lt;div class=&quot;son&quot;&gt;
+      display:inline-block;&lt;/br&gt;伪元素生成content内容&lt;/br&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/body&gt;</code></pre>
+<h3 id="4-绝对定位-transform反向偏移。"><a href="#4-绝对定位-transform反向偏移。" class="headerlink" title="4. 绝对定位+transform反向偏移。"></a>4. 绝对定位+transform反向偏移。</h3><p>position:absolute; transform:translate(-50%,-50%); </p>
+<p>原理很简单：由于top、left偏移了父对象的50%宽度高度，所以需要利用transform反向偏移居中块的50%宽高</p>
+<p><strong>transform的计算基准是元素本身，所以这里可以用50%来做反向偏移</strong></p>
+<p>(这里子元素加了宽高是为了方便看，去掉也无所谓)</p>
+<pre><code class="html">&lt;body&gt;
+  &lt;style&gt;
+    .father {
+      width: 400px;
+      height: 200px;
+      border: 1px solid #000;
+      position: relative;
+    }
+
+    .son {
+      width: 200px;
+      height: 100px;
+      background: red;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  &lt;/style&gt;
+
+  &lt;div class=&quot;father&quot;&gt;
+    &lt;div class=&quot;son&quot;&gt;
+      position:absolute;&lt;/br&gt;left:50%;top:50%;&lt;/br&gt;transform
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/body&gt;</code></pre>
+<p><img src="/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/C:%5CUsers%5C%E5%A4%9F%E9%92%9F%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200326145604077.png" alt="image-20200326145604077"></p>
+<h2 id="知道元素宽高的情况下"><a href="#知道元素宽高的情况下" class="headerlink" title="知道元素宽高的情况下"></a>知道元素宽高的情况下</h2><h3 id="1-绝对定位相对定位（-绝对定位-margin：auto；position-absolute-left-0-top-0-right-0-bottom-0-margin-auto）"><a href="#1-绝对定位相对定位（-绝对定位-margin：auto；position-absolute-left-0-top-0-right-0-bottom-0-margin-auto）" class="headerlink" title="1.绝对定位相对定位（ 绝对定位+margin：auto；position:absolute; left:0; top:0; right:0; bottom:0; margin:auto）"></a>1.绝对定位相对定位（ 绝对定位+margin：auto；position:absolute; left:0; top:0; right:0; bottom:0; margin:auto）</h3><p>一个条件都不能少</p>
+<pre><code class="html">&lt;body&gt;
+  &lt;style&gt;
+    .father {
+      width: 400px;
+      height: 200px;
+      position: relative;
+      border: 1px solid #000;
+    }
+
+    .son {
+      width: 200px;
+      height: 100px;
+      background: red;
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+    }
+  &lt;/style&gt;
+
+  &lt;div class=&quot;father&quot;&gt;
+    &lt;div class=&quot;son&quot;&gt;
+      position:absolute;&lt;/br&gt; left:0; top:0;&lt;/br&gt; right:0; bottom:0; &lt;/br&gt;margin:auto
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;</code></pre>
+<p><img src="/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/C:%5CUsers%5C%E5%A4%9F%E9%92%9F%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200326145824002.png" alt="image-20200326145824002"></p>
+<p>原理：</p>
+<p>当一个绝对定位元素，其对立定位方向属性同时有具体定位数值的时候，流体特性就发生了。</p>
+<p>具有流体特性绝对定位元素的margin:auto的填充规则和普通流体元素一模一样：</p>
+<p>如果一侧定值，一侧auto，auto为剩余空间大小；<br>如果两侧均是auto, 则平分剩余空间；<br>例如，下面的CSS代码：</p>
+<pre><code class="css">.father {
+    width: 300px; height:150px;
+    position: relative;
+}
+.son { 
+    position: absolute; 
+    top: 0; right: 0; bottom: 0; left: 0;
+}</code></pre>
+<p>如图所示流体元素会布满整个父元素，此时<code>.son</code>这个元素的尺寸表现为“格式化宽度和格式化高度”，和的“正常流宽度”一样，同属于外部尺寸，也就是尺寸自动填充父级元素的可用尺寸的</p>
+<p><img src="/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/C:%5CUsers%5C%E5%A4%9F%E9%92%9F%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200326150745436.png" alt="image-20200326150745436"></p>
+<p>然后，此时我们给.son设置尺寸，例如</p>
+<pre><code class="css">.son { 
+    position: absolute; 
+    top: 0; right: 0; bottom: 0; left: 0;
+    width: 200px; height: 100px;
+}</code></pre>
+<p><img src="/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/C:%5CUsers%5C%E5%A4%9F%E9%92%9F%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200326151049822.png" alt="image-20200326151049822"></p>
+<p>此时宽高被限制，原本应该填充的空间就被多余了出来，这多余的空间就是<code>margin:auto</code>计算的空间，因此，如果这时候，我们再设置一个<code>margin:auto</code>，那么：</p>
+<pre><code class="css">.son { 
+    position: absolute; 
+    top: 0; right: 0; bottom: 0; left: 0;
+    width: 200px; height: 100px;
+    margin: auto;
+}</code></pre>
+<p> 我们这个<code>.son</code>元素就水平和垂直方向同时居中了 </p>
+<h3 id="2-绝对定位-margin反向偏移"><a href="#2-绝对定位-margin反向偏移" class="headerlink" title="2. 绝对定位+margin反向偏移"></a>2. 绝对定位+margin反向偏移</h3><p>在上面的行内块元素种有提及到</p>
+<pre><code class="css"> position：absolute; 
+ top:50%; 
+ left:50%; 
+ margin-left:-(width+padding)/2+&#39;px&#39;; 
+ margin-top:-(height+padding)/2+&#39;px&#39;; </code></pre>
+<p>margin值的设置不能使用百分比，因为margin是基于父元素的宽度来计算百分比的</p>
+<p>这个原理和上面的方案4很相似，由于top、left偏移了父对象的50%宽度高度，所以需要利用margin反向偏移居中块的50%宽高</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 736653759@qq.com </span>
@@ -1050,12 +1053,12 @@ module.exports = router</code></pre>
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>nodejs学习记录</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">2.1k</span></p>
+    <p><span class="copy-title">文章标题:</span>垂直居中的几种方式</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">2.3k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="翁恺敏">翁恺敏</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-03-16, 15:17:47</p>
-    <p><span class="copy-title">最后更新:</span>2020-03-16, 15:21:29</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="nodejs学习记录">http://yoursite.com/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</a>
+    <p><span class="copy-title">发布时间:</span>2020-03-26, 10:09:04</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-26, 15:20:13</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/" title="垂直居中的几种方式">http://yoursite.com/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
