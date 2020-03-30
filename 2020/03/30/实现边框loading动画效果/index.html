@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>布局详解 | NollieLeo&#39;s blog</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="布局详解 | NollieLeo&#39;s blog">
+  <title>实现边框loading动画效果 | NollieLeo&#39;s blog</title>
+  <meta name="keywords" content=" css , loading动画 ">
+  <meta name="description" content="实现边框loading动画效果 | NollieLeo&#39;s blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="效果图如下  代码如下： &lt;body&gt;   &lt;style&gt;     .box {       display: inline-block;       position: relative;       width: 220px;       height: 100px;       box-sizing: border-box;     }      .box::befo">
 <meta property="og:type" content="article">
@@ -635,24 +635,38 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-flex布局详解" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-实现边框loading动画效果" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">布局详解</h1>
+        <h1 class="article-title">实现边框loading动画效果</h1>
     
     <div class="article-meta">
         
         
         
+        <span class="book">
+            
+                <a  data-rel="css">css</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">css</a>
+            
+            <a class="color5">loading动画</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-16 17:25:02'>2020-03-16 17:05</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-30 13:46:38'>2020-03-30 13:44</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.4k</span>
+        <span>字数:186</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -671,7 +685,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#flex布局深入了解"><span class="toc-text">flex布局深入了解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-flex布局"><span class="toc-text">1. flex布局</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#flex容器的属性"><span class="toc-text">flex容器的属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#flex容器下面项目的属性"><span class="toc-text">*flex容器下面项目的属性 *</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-常用的垂直居中"><span class="toc-text">2.1 常用的垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#css"><span class="toc-text">css</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Html"><span class="toc-text">Html</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-常用的ul-li布局横向等宽排列"><span class="toc-text">2.2 常用的ul,li布局横向等宽排列</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Html-1"><span class="toc-text">Html</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#css-1"><span class="toc-text">css</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-骰子布局详解"><span class="toc-text">2.3 骰子布局详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-1-单项目"><span class="toc-text">2.3.1 单项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-2-双项目"><span class="toc-text">2.3.2 双项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-3-三项目"><span class="toc-text">2.3.3 三项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-3-四项目"><span class="toc-text">2.3.3 四项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-4-六项目"><span class="toc-text">2.3.4  六项目</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-圣杯布局（常见）"><span class="toc-text">2.4 圣杯布局（常见）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#html"><span class="toc-text">html</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#css-2"><span class="toc-text">css</span></a></li></ol></li></ol></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -687,344 +701,94 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="flex布局深入了解"><a href="#flex布局深入了解" class="headerlink" title="flex布局深入了解"></a>flex布局深入了解</h2><h3 id="1-flex布局"><a href="#1-flex布局" class="headerlink" title="1. flex布局"></a>1. flex布局</h3><h4 id="flex容器的属性"><a href="#flex容器的属性" class="headerlink" title="flex容器的属性"></a><strong>flex容器的属性</strong></h4><table>
-<thead>
-<tr>
-<th>属性名称</th>
-<th>属性含义</th>
-<th>属性可能的值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>flex-direction</code></td>
-<td>决定主轴的方向</td>
-<td><code>row</code>(默认) 水平，起点在左端<br><code>row-reverse</code>水平，起点在右端<br><code>column</code>:垂直，起点在上沿<code>column-reverse</code>:垂直，起点在下沿</td>
-</tr>
-<tr>
-<td><code>flex-wrap</code></td>
-<td>决定一条轴线放不下，如何换行</td>
-<td><code>Nowrap</code>(默认) 不换行<br><code>Wrap</code>:换行，第一行在上面<br><code>Wrap-reverse</code>:换行，第一行在下面</td>
-</tr>
-<tr>
-<td><code>flex-flow</code></td>
-<td>是上面两个属性的简写</td>
-<td>默认值是 <code>row nowrap</code></td>
-</tr>
-<tr>
-<td><code>justify-content</code></td>
-<td>定义项目在主轴上的对齐方式</td>
-<td><code>Flex-start</code>(默认值）左对齐<br><code>Flex-end</code> 右对齐<br><code>Center</code>居中<br><code>Space-between</code>:两端对齐，项目之间的间隔都相等<br><code>Space-around</code>:每个项目之间的间隔相等，所以项目之间的间隔比项目与边框之间的间隔大一倍</td>
-</tr>
-<tr>
-<td><code>align-items</code></td>
-<td>定义项目在交叉轴上如何对齐</td>
-<td><code>Flex-start</code>交叉轴的起点对齐<br><code>Flex-end</code>交叉轴的终点对齐<br><code>Center</code>:交叉轴的中点对齐<br><code>Baseline</code>：项目的第一行文字的基线对齐<br><code>Stretch</code> （默认值）如果项目未设置高度或者设为auto，将占满整个容器的高度</td>
-</tr>
-<tr>
-<td><code>align-content</code></td>
-<td>定义多跟轴线对齐方式，一条轴线该属性不起作用</td>
-<td><code>Flex-start</code>: 与交叉轴的起点对齐<br><code>Flex-end</code> 与交叉轴的终点对齐<br><code>Center</code>:与交叉轴的中点对齐<br><code>Space-between</code>:与交叉轴的两端对齐，轴线之间的间隔平均分布<br><code>Space-around</code>：每根轴线之间的间隔都相等，所以轴线之间的间隔比轴线与边框之间的间隔大一倍</td>
-</tr>
-</tbody></table>
-<h4 id="flex容器下面项目的属性"><a href="#flex容器下面项目的属性" class="headerlink" title="*flex容器下面项目的属性 *"></a>*<em>flex容器下面项目的属性 *</em></h4><table>
-<thead>
-<tr>
-<th>属性名称</th>
-<th align="left">属性含义</th>
-<th>属性可能的值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>order</code></td>
-<td align="left">定义项目的排列顺序，数值越小，排列越靠前</td>
-<td>默认0</td>
-</tr>
-<tr>
-<td><code>flex-grow</code></td>
-<td align="left">定义项目的放大比例，如果存在剩余空间，不放大</td>
-<td>默认0（如果所有项目的<code>flex-grow</code>属性为1，则等分剩余空间）</td>
-</tr>
-<tr>
-<td><code>flex-shrink</code></td>
-<td align="left">定义项目的缩小比例</td>
-<td>默认1 负值对该属性无效</td>
-</tr>
-<tr>
-<td><code>flex-basis</code></td>
-<td align="left">定义在分配多余空间之前，项目占据的主轴空间，浏览器根据这个属性来计算主轴是否有多余空间</td>
-<td>默认<code>auto</code>,即项目本来大小</td>
-</tr>
-<tr>
-<td><code>flex</code></td>
-<td align="left">是上面三个的简写</td>
-<td>默认值 0 1 auto 后两个值可选</td>
-</tr>
-<tr>
-<td><code>align-self</code></td>
-<td align="left">允许单个项目与其他项目不一样的对齐方式，可覆盖<code>align-items</code>属性</td>
-<td>默认值auto 表示继承父元素的<code>align-items</code>属性，如果没有父元素，则等同于<code>stretch</code></td>
-</tr>
-</tbody></table>
-<h3 id="2-1-常用的垂直居中"><a href="#2-1-常用的垂直居中" class="headerlink" title="2.1 常用的垂直居中"></a>2.1 常用的垂直居中</h3><h4 id="css"><a href="#css" class="headerlink" title="css"></a>css</h4><pre><code class="css">.container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 500px;
-            background: #666;
-        }
+        <p>效果图如下</p>
+<p><img src="/2020/03/30/%E5%AE%9E%E7%8E%B0%E8%BE%B9%E6%A1%86loading%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/image-20200330134546508.png" alt></p>
+<p>代码如下：</p>
+<pre><code class="html">&lt;body&gt;
+  &lt;style&gt;
+    .box {
+      display: inline-block;
+      position: relative;
+      width: 220px;
+      height: 100px;
+      box-sizing: border-box;
+    }
 
-.box {
-            width: 200px;
-            height: 200px;
-            background: #ff0;
-        }</code></pre>
-<h4 id="Html"><a href="#Html" class="headerlink" title="Html"></a>Html</h4><pre><code class="html">&lt;div class=&quot;container&quot;&gt;
-       &lt;div class=&quot;box&quot;&gt;hello 翁恺敏&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-<p>效果图：<br><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_ecda5fce38594ff7b893af8dd5cb68c4_blob.png" alt></p>
-<h3 id="2-2-常用的ul-li布局横向等宽排列"><a href="#2-2-常用的ul-li布局横向等宽排列" class="headerlink" title="2.2 常用的ul,li布局横向等宽排列"></a>2.2 常用的ul,li布局横向等宽排列</h3><p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_cfc8e57740604e10bd9378889fde1e68_blob.png" alt></p>
-<h4 id="Html-1"><a href="#Html-1" class="headerlink" title="Html"></a>Html</h4><pre><code class="html">&lt;ul class=&quot;container&quot;&gt;
-        &lt;li&gt;翁&lt;/li&gt;
-        &lt;li&gt;恺&lt;/li&gt;
-        &lt;li&gt;敏&lt;/li&gt;
-        &lt;li&gt;你&lt;/li&gt;
-        &lt;li&gt;好&lt;/li&gt;
-    &lt;/ul&gt;</code></pre>
-<h4 id="css-1"><a href="#css-1" class="headerlink" title="css"></a>css</h4><pre><code class="css">.container {
-            width: 500px;
-            display: flex;
-            list-style: none;
-            padding: 0;
-        }
-        .container &gt;li{
-            flex: 1;
-            height: 50px;
-        }
-        .container &gt;li:nth-of-type(2n){
-            background: red
-        }
-        .container &gt;li:nth-of-type(2n-1){
-            background: green
-        }</code></pre>
-<h3 id="2-3-骰子布局详解"><a href="#2-3-骰子布局详解" class="headerlink" title="2.3 骰子布局详解"></a>2.3 骰子布局详解</h3><p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_f6079317a2e3445796478176bc306d7c_blob.png" alt><br><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_7a65571cbb25432a9de4a6557c40b141_blob.png" alt></p>
-<h4 id="2-3-1-单项目"><a href="#2-3-1-单项目" class="headerlink" title="2.3.1 单项目"></a>2.3.1 单项目</h4><blockquote>
-<p>首先，只有左上角1个点的情况。Flex布局默认就是首行左对齐，所以一行代码就够了。</p>
-</blockquote>
-<p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_45c389ba290f42c3af741f50942f5a88_blob.png" alt></p>
-<pre><code class="css">.box {
-  display: flex;
-}</code></pre>
-<hr>
-<blockquote>
-<p>设置项目的对齐方式，就能实现居中对齐和右对齐。</p>
-</blockquote>
-<p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_05b27b46c345437797abed62d73b959a_blob.png" alt></p>
-<pre><code class="css">.box {
-  display: flex;
-  justify-content: center;
-}</code></pre>
-<hr>
-<p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_a845891f97f6458fa000d0e1ad7d79ee_blob.png" alt></p>
-<pre><code class="css">.box {
-  display: flex;
-  justify-content: flex-end;
-}</code></pre>
-<hr>
-<blockquote>
-<p>设置交叉轴对齐方式，可以垂直移动主轴。垂直居中</p>
-</blockquote>
-<p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_8b036161a4df4824b1063f829207a698_blob.png" alt></p>
-<pre><code class="css">.box {
-  display: flex;
-  align-items: center;
-}</code></pre>
-<hr>
-<p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_5434f7b72e9b4aa5a28859941622ff2d_blob.png" alt></p>
-<pre><code class="css">.box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}</code></pre>
-<hr>
-<p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_be4232dfd726459b92a1ae3e80ce4342_blob.png" alt></p>
-<pre><code class="css">.box {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-}</code></pre>
-<p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_37247d42221d40babf93bc802e10f617_blob.png" alt></p>
-<pre><code class="css">.box {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-}</code></pre>
-<hr>
-<h4 id="2-3-2-双项目"><a href="#2-3-2-双项目" class="headerlink" title="2.3.2 双项目"></a>2.3.2 双项目</h4><p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_4843452462524a108303291045b5cdf4_blob.png" alt></p>
-<pre><code class="css">.box {
-  display: flex;
-  justify-content: space-between;
-}</code></pre>
-<hr>
-<p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_e8b334c7d27d437e95c9c60e560c333f_blob.png" alt></p>
-<pre><code class="css">.box {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}</code></pre>
-<hr>
-<p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_7007b1fd8de2451184e637542da7043c_blob.png" alt></p>
-<pre><code class="css">.box {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}</code></pre>
-<hr>
-<p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_5a55fd7f8e564cc987637c07375ec35b_blob.png" alt></p>
-<pre><code class="css">.box {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}</code></pre>
-<hr>
-<p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_dd0c4cb6c6294864b5ee55eaf70999b7_blob.png" alt></p>
-<pre><code class="css">.box {
-  display: flex;
-}
+    .box::before {
+      content: &#39;&#39;;
+      position: absolute;
+      left: -4px;
+      top: -4px;
+      right: 0;
+      width: 228px;
+      height: 108px;
+      bottom: 0;
+      z-index: -1;
+      box-sizing: border-box;
+      border-radius: 5px;
+      background: linear-gradient(to right, #0638a8, #0ab7f9, #06a892);
+      box-sizing: border-box;
+      animation: borderAround 1.5s infinite linear;
+    }
 
-.item:nth-child(2) {
-  align-self: center;
-}</code></pre>
-<hr>
-<p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_6c83dbcb80c247909bf08fec24431e69_blob.png" alt></p>
-<pre><code class="css">.box {
-  display: flex;
-  justify-content: space-between;
-}
+    @keyframes borderAround {
 
-.item:nth-child(2) {
-  align-self: flex-end;
-}</code></pre>
-<hr>
-<h4 id="2-3-3-三项目"><a href="#2-3-3-三项目" class="headerlink" title="2.3.3 三项目"></a>2.3.3 三项目</h4><p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_c807a61bd2ea4fa08d2ddb89f490da88_blob.png" alt></p>
-<pre><code class="css">.box {
-  display: flex;
-}
+      0%,
+      100% {
+        clip: rect(0 228px 4px 76px);
+      }
 
-.item:nth-child(2) {
-  align-self: center;
-}
+      10% {
+        clip: rect(0, 152px, 4px, 0);
+      }
 
-.item:nth-child(3) {
-  align-self: flex-end;
-}</code></pre>
-<hr>
-<h4 id="2-3-3-四项目"><a href="#2-3-3-四项目" class="headerlink" title="2.3.3 四项目"></a>2.3.3 四项目</h4><p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_679f1c5cec374c8da5a46484ff8b4e8e_blob.png" alt></p>
-<pre><code class="css">.box {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  align-content: space-between;
-}</code></pre>
-<hr>
-<p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_d9295ac403c24c11926e9a69875e00fb_blob.png" alt><br>HTML</p>
-<pre><code class="html">&lt;div class=&quot;box&quot;&gt;
-  &lt;div class=&quot;column&quot;&gt;
-    &lt;span class=&quot;item&quot;&gt;&lt;/span&gt;
-    &lt;span class=&quot;item&quot;&gt;&lt;/span&gt;
+      20% {
+        clip: rect(0, 76px, 54px, 0);
+      }
+
+      30% {
+        clip: rect(0, 4px, 112px, 0);
+      }
+
+      40% {
+        clip: rect(54px, 76px, 112px, 0);
+      }
+
+      50% {
+        clip: rect(104px, 152px, 112px, 0);
+      }
+
+      60% {
+        clip: rect(104px, 228px, 112px, 76px);
+      }
+
+      70% {
+        clip: rect(54px, 228px, 112px, 152px);
+      }
+
+      80% {
+        clip: rect(0, 228px, 112px, 224px);
+      }
+
+      90% {
+        clip: rect(0, 228px, 54px, 152px);
+      }
+    }
+
+    .child {
+      width: 100%;
+      height: 100%;
+      background: #FFF;
+      z-index: 999;
+    }
+  &lt;/style&gt;
+
+  &lt;div class=&quot;box&quot;&gt;
+    &lt;div class=&quot;child&quot;&gt;
+      dsadasd
+    &lt;/div&gt;
   &lt;/div&gt;
-  &lt;div class=&quot;column&quot;&gt;
-    &lt;span class=&quot;item&quot;&gt;&lt;/span&gt;
-    &lt;span class=&quot;item&quot;&gt;&lt;/span&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-<p>css</p>
-<pre><code class="css">.box {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: space-between;
-}
-
-.column {
-  flex-basis: 100%;
-  display: flex;
-  justify-content: space-between;
-}</code></pre>
-<h4 id="2-3-4-六项目"><a href="#2-3-4-六项目" class="headerlink" title="2.3.4  六项目"></a>2.3.4  六项目</h4><p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_1ad2ee2075364173bc1464044f04395d_blob.png" alt></p>
-<pre><code class="css">
-.box {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: space-between;
-}</code></pre>
-<hr>
-<p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_c5505f05517e4619bcd2f768936da6e9_blob.png" alt></p>
-<pre><code class="css">.box {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-content: space-between;
-}</code></pre>
-<h3 id="2-4-圣杯布局（常见）"><a href="#2-4-圣杯布局（常见）" class="headerlink" title="2.4 圣杯布局（常见）"></a>2.4 圣杯布局（常见）</h3><p><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_6843bc851bbd4a6aa3477ca0286cce47_blob.png" alt></p>
-<h4 id="html"><a href="#html" class="headerlink" title="html"></a>html</h4><pre><code class="html">&lt;div class=&quot;container&quot;&gt;
-        &lt;header&gt;Header&lt;/header&gt;
-        &lt;div class=&quot;content&quot;&gt;
-            &lt;main&gt;Main&lt;/main&gt;
-            &lt;nav&gt;Nav&lt;/nav&gt;
-            &lt;aside&gt;Aside&lt;/aside&gt;
-        &lt;/div&gt;
-        &lt;footer&gt;Footer&lt;/footer&gt;
-    &lt;/div&gt;</code></pre>
-<h4 id="css-2"><a href="#css-2" class="headerlink" title="css"></a>css</h4><pre><code class="css">* {
-            margin: 0;
-            padding: 0;
-        }
-
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-        }
-
-        .container {
-            display: flex;
-            /* 垂直*/
-            flex-direction: column;
-            width: 100%;
-            /*视口被均分为100单位的vh 占据整个窗口*/
-            min-height: 100vh;
-        }
-
-        header,
-        footer {
-            background: #999;
-            /*放大缩小比例为0 占据垂直方向80px*/
-            flex: 0 0 80px;
-        }
-
-        .content {
-            display: flex;
-            /*1 1 auto 后两个值省略*/
-            flex: 1;
-        }
-
-        nav {
-            /*默认 0 数值越小 排列越靠前*/
-            order: -1;
-            flex: 0 0 80px;
-            background: royalblue;
-        }
-
-        aside {
-            flex: 0 0 80px;
-            background: aqua;
-        }
-
-        main {
-            flex: 1;
-            background: green;
-        }</code></pre>
+&lt;/body&gt;</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 736653759@qq.com </span>
@@ -1034,12 +798,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>布局详解</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.4k</span></p>
+    <p><span class="copy-title">文章标题:</span>实现边框loading动画效果</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">186</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="翁恺敏">翁恺敏</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-03-16, 17:05:18</p>
-    <p><span class="copy-title">最后更新:</span>2020-03-16, 17:25:02</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/16/flex%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3/" title="布局详解">http://yoursite.com/2020/03/16/flex%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3/</a>
+    <p><span class="copy-title">发布时间:</span>2020-03-30, 13:44:04</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-30, 13:46:38</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/30/%E5%AE%9E%E7%8E%B0%E8%BE%B9%E6%A1%86loading%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/" title="实现边框loading动画效果">http://yoursite.com/2020/03/30/%E5%AE%9E%E7%8E%B0%E8%BE%B9%E6%A1%86loading%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
