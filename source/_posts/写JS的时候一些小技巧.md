@@ -30,6 +30,17 @@ const arr = [1,2,3];
 const arrCopy = [ ...arr ] // 直接用拓展运算符
 ```
 
+### - 多个数组合并
+
+```javascript
+const arr1 = [1,2,3,4];
+const arr2 = [5,6,7,8];
+arr3 = [...arr1,...arr2];
+// [1,2,3,4,5,6,7,8];
+```
+
+
+
 ### - 类数组转成数组
 
 ```javascript
@@ -54,6 +65,50 @@ const second = arr[1]
 // good
 const [first, second] = arr; // 注意不像对象那样是{}符号，而是[]
 ```
+
+### - 替换数组中的特定值
+
+```javascript
+const arr = [1,2,3,4,5];
+arr.splice(0,2,"hello","world"); // 0~2 开始 2除外开始按顺序替换值
+// ['hello','world',3,4,5]
+
+```
+
+### - Array.from 替换map效果
+
+```javascript
+const arr = [
+	{
+		name:'weng',
+		age:21,
+	},
+	{
+		name:'wang',
+		age:11,
+	},
+	{
+		name:'sange',
+		age:41
+	},
+];
+Array.from(arr,({name})=>name); // ['weng','wang','sange'];
+```
+
+
+
+### - 数组去重
+
+```javascript
+const arr = [1,2,3,4,5,5,6,6,7,7,10,10];
+
+const uniqueArr = Array.from(new Set(arr));
+const uniqueArr = [ ...new Set(arr) ]; // good
+```
+
+
+
+
 
 ### - 二维数组转一维数组
 
@@ -108,6 +163,16 @@ eval(arr.join('*')); // eval会将传进去的string用作js代码执行
 arr.reduce((t,v)=>t+v,0);
 eval(arr.join('+')); // eval会将传进去的string用作js代码执行
 
+```
+
+
+
+### - 将数组转换为对象
+
+```javascript
+const arr = ['weng','wang','zhang','li'];
+objArr = {...arr};
+// {0:'weng',1:'wang',2:'zhang',3:'li'}
 ```
 
 
@@ -293,6 +358,31 @@ function concatenateAll() {
 function concatenateAll(...args) {
   return args.join('')
 }
+
+```
+
+### - 函数返回值是多个的情况下
+
+```javascript
+// 当我们调用函数并将值分配给 a,b,c,d 时，我们需要注意返回数据的顺序。这里的一个小错误可能会成为调试的噩梦,而且倘若只需要c,d值，那么就无法确切获取
+const func =()=>{
+ 	const a = 1;
+ 	const b = 2;
+	const c = 3;
+    const d = 4;
+ 	return [a,b,c,d]; // very bad
+}
+const [a,b,c,d] = func();
+
+// 使用对象结构
+const func =()=>{
+ 	const a = 1;
+ 	const b = 2;
+	const c = 3;
+    const d = 4;
+ 	return {a,b,c,d}; // good
+}
+const {c,d} = func();
 
 ```
 

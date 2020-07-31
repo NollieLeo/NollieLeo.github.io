@@ -47,6 +47,31 @@ o[0] = 3; // not allowed
 o[1][0] = 4; // not allowed as well
 ```
 
+## - 获取当前url（不带任何参数）
+
+返回没有任何参数的当前URL。
+
+使用String.prototype.indexOf（）检查给定的url是否具有参数，使用String.prototype.slice（）删除它们（如有必要）。
+
+```javascript
+const getBaseURL = url =>
+  url.indexOf('?') > 0 ? url.slice(0, url.indexOf('?')) : url;
+```
+
+## - 获取当前URL下的值
+
+返回一个包含当前URL参数的对象。
+
+使用带有适当正则表达式的String.prototype.match（）来获取所有键值对，使用Array.prototype.reduce（）来映射它们并将它们组合成一个对象。 传递location.search作为参数以应用于当前网址。
+
+```javascript
+const getURLParameters = url =>
+    (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce(
+    (a, v) => ((a[v.slice(0, v.indexOf('='))] = v.slice(v.indexOf('=') + 1)), a),
+    {}
+);
+```
+
 
 
 # JavaScript api
