@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>静态类型语言与动态类型语言区别 | NollieLeo&#39;s blog</title>
-  <meta name="keywords" content=" js设计模式 ">
-  <meta name="description" content="静态类型语言与动态类型语言区别 | NollieLeo&#39;s blog">
+  <title>30-seconds-of-js | NollieLeo&#39;s blog</title>
+  <meta name="keywords" content=" js ">
+  <meta name="description" content="30-seconds-of-js | NollieLeo&#39;s blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="about">
@@ -737,9 +737,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-静态类型语言与动态类型语言区别" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-30-seconds-of-js" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">静态类型语言与动态类型语言区别</h1>
+        <h1 class="article-title">30-seconds-of-js</h1>
     
     <div class="article-meta">
         
@@ -747,28 +747,26 @@
         
         <span class="book">
             
-                <a  data-rel="js">js</a>/
-            
-                <a  data-rel="特定名词">特定名词</a>
+                <a  data-rel="js">js</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color2">js设计模式</a>
+            <a class="color3">js</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-16 23:01:32'>2020-03-16 17:46</time>
+        创建时间:<time class="date" title='更新时间: 2020-08-01 01:22:27'>2020-07-24 14:07</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:572</span>
+        <span>字数:750</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -787,7 +785,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#区别"><span class="toc-text">区别</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#对象转queryStrings"><span class="toc-text">- 对象转queryStrings</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#深度冻结一个对象"><span class="toc-text">- 深度冻结一个对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取当前url（不带任何参数）"><span class="toc-text">- 获取当前url（不带任何参数）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取当前URL下的值"><span class="toc-text">- 获取当前URL下的值</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript-api"><span class="toc-text">JavaScript api</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#for-in-for-of-和-forEach"><span class="toc-text">-for in , for of 和 forEach</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#for-in"><span class="toc-text">for in</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for-of"><span class="toc-text">for of</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#forEach"><span class="toc-text">forEach</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -803,15 +801,75 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>编程语言按照数据类型大体可以分为两类，一类是静态类型语言，另一类是动态类型语言</p>
-</blockquote>
-<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p><strong>静态类型语言</strong>在编译时便<u>已确定变量的类型</u>，而<strong>动态类型语言</strong>的变量类型要到程序运行的时<br>候，待变量被赋予某个值之后，才会具有某种类型。</p>
-<p><strong>静态类型语言</strong>的<em>优点</em>首先是在编译时就能发现类型不匹配的错误，编辑器可以帮助我们提前<br>避免程序在运行期间有可能发生的一些错误。其次，如果在程序中明确地规定了数据类型，编译<br>器还可以针对这些信息对程序进行一些优化工作，提高程序执行速度</p>
-<p><strong>静态类型语言</strong>的<em>缺点</em>首先是迫使程序员依照强契约来编写程序，为每个变量规定数据类型，<br>归根结底只是辅助我们编写可靠性高程序的一种手段，而不是编写程序的目的，毕竟大部分人编<br>写程序的目的是为了完成需求交付生产。其次，类型的声明也会增加更多的代码，在程序编写过<br>程中，这些细节会让程序员的精力从思考业务逻辑上分散开来。</p>
-<p><strong>动态类型语言</strong>的<em>优点</em>是编写的代码数量更少，看起来也更加简洁，程序员可以把精力更多地<br>放在业务逻辑上面。虽然不区分类型在某些情况下会让程序变得难以理解，但整体而言，代码量<br>越少，越专注于逻辑表达，对阅读程序是越有帮助的。</p>
-<p><strong>动态类型语言</strong>的<em>缺点</em>是无法保证变量的类型，从而在程序的运行期有可能发生跟类型相关的<br>错误。</p>
-<p>javascript是一门动态类型语言，动态类型语言对变量类型的宽容给实际编码带来了很大的灵活性。由于无需进行类型检测，我们可以尝试调用任何对象的任意方法，而无需去考虑它原本是否被设计为拥有该方法。</p>
+        <h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><h2 id="对象转queryStrings"><a href="#对象转queryStrings" class="headerlink" title="- 对象转queryStrings"></a>- 对象转queryStrings</h2><p>通过Object.entries以及reduce进行queryString的累加，只能将对象中值为string的转进去，可以改进</p>
+<pre><code class="javascript">const objectToQuerystring = (queryParams) =&gt; {
+    return Object.entries(queryParams).reduce((queryString, [key, value], index) =&gt; {
+        const symbol = queryString.length === 0 ? &#39;?&#39; : &#39;&amp;&#39;;
+        queryString += typeof value === &#39;string&#39; ? `${symbol}${key}=${value}` : &#39;&#39;;
+        return queryString;
+    }, &#39;&#39;);
+}
+
+// ?name=weng&amp;address=11111</code></pre>
+<h2 id="深度冻结一个对象"><a href="#深度冻结一个对象" class="headerlink" title="- 深度冻结一个对象"></a>- 深度冻结一个对象</h2><p>使用Object.keys（）获取所传递对象的所有属性，使用Array.prototype.forEach（）遍历它们。 在所有属性上递归调用Object.freeze（obj），检查是否使用Object.isFrozen（）冻结了每个属性，并根据需要应用deepFreeze（）。 最后，使用Object.freeze（）冻结给定的对象。</p>
+<pre><code class="javascript">const deepFreeze = obj =&gt; {
+  Object.keys(obj).forEach(prop =&gt; {
+    if (typeof(obj[prop]) === &#39;object&#39; &amp;&amp; !Object.isFrozen(obj[prop]))   deepFreeze(obj[prop]);
+  });
+  return Object.freeze(obj);
+};
+
+
+EXAMPLES
+&#39;use strict&#39;;
+
+const o = deepFreeze([1, [2, 3]]);
+
+o[0] = 3; // not allowed
+o[1][0] = 4; // not allowed as well</code></pre>
+<h2 id="获取当前url（不带任何参数）"><a href="#获取当前url（不带任何参数）" class="headerlink" title="- 获取当前url（不带任何参数）"></a>- 获取当前url（不带任何参数）</h2><p>返回没有任何参数的当前URL。</p>
+<p>使用String.prototype.indexOf（）检查给定的url是否具有参数，使用String.prototype.slice（）删除它们（如有必要）。</p>
+<pre><code class="javascript">const getBaseURL = url =&gt;
+  url.indexOf(&#39;?&#39;) &gt; 0 ? url.slice(0, url.indexOf(&#39;?&#39;)) : url;</code></pre>
+<h2 id="获取当前URL下的值"><a href="#获取当前URL下的值" class="headerlink" title="- 获取当前URL下的值"></a>- 获取当前URL下的值</h2><p>返回一个包含当前URL参数的对象。</p>
+<p>使用带有适当正则表达式的String.prototype.match（）来获取所有键值对，使用Array.prototype.reduce（）来映射它们并将它们组合成一个对象。 传递location.search作为参数以应用于当前网址。</p>
+<pre><code class="javascript">const getURLParameters = url =&gt;
+    (url.match(/([^?=&amp;]+)(=([^&amp;]*))/g) || []).reduce(
+    (a, v) =&gt; ((a[v.slice(0, v.indexOf(&#39;=&#39;))] = v.slice(v.indexOf(&#39;=&#39;) + 1)), a),
+    {}
+);</code></pre>
+<h1 id="JavaScript-api"><a href="#JavaScript-api" class="headerlink" title="JavaScript api"></a>JavaScript api</h1><h2 id="for-in-for-of-和-forEach"><a href="#for-in-for-of-和-forEach" class="headerlink" title="-for in , for of 和 forEach"></a>-for in , for of 和 forEach</h2><h3 id="for-in"><a href="#for-in" class="headerlink" title="for in"></a>for in</h3><p>for … in用于迭代对象的所有可枚举属性，包括继承的可枚举属性。 该迭代语句可用于数组字符串或普通对象，但不能用于Map或Set对象。</p>
+<pre><code class="javascript">for (let prop in [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]) 
+  console.log(prop);            // 0, 1, 2 (array indexes)
+
+for (let prop in &#39;str&#39;) 
+  console.log(prop);            // 0, 1, 2 (string indexes)
+
+for (let prop in {a: 1, b: 2, c: 3}) 
+  console.log(prop);            // a, b, c (object property names)
+
+for (let prop in new Set([&#39;a&#39;, &#39;b&#39;, &#39;a&#39;, &#39;d&#39;])) 
+  console.log(prop);            // undefined (no enumerable properties)</code></pre>
+<h3 id="for-of"><a href="#for-of" class="headerlink" title="for of"></a>for of</h3><p>for … of用于迭代可迭代对象，迭代其值而不是其属性。 该迭代语句可用于数组，字符串，Map或Set对象，但不能用于普通对象。</p>
+<pre><code class="javascript">for (let val of [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]) 
+  console.log(val);            // a, b, c (array values)
+
+for (let val of &#39;str&#39;) 
+  console.log(val);            // s, t, r (string characters)
+
+for (let val of {a: 1, b: 2, c: 3}) 
+  console.log(prop);           // TypeError (not iterable)
+
+for (let val of new Set([&#39;a&#39;, &#39;b&#39;, &#39;a&#39;, &#39;d&#39;])) 
+  console.log(val);            // a, b, d (Set values)</code></pre>
+<h3 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h3><p>forEach（）是Array原型的一种方法，它允许您遍历数组的元素。 尽管forEach（）仅迭代数组，但它可以在迭代时访问每个元素的值和索引。</p>
+<pre><code class="javascript">[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;].forEach(
+  val =&gt; console.log(val)     // a, b, c (array values)
+);
+
+[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;].forEach(
+  (val, i) =&gt; console.log(i)  // 0, 1, 2 (array indexes)
+);    </code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 736653759@qq.com </span>
@@ -821,12 +879,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>静态类型语言与动态类型语言区别</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">572</span></p>
+    <p><span class="copy-title">文章标题:</span>30-seconds-of-js</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">750</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="翁恺敏">翁恺敏</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-03-16, 17:46:53</p>
-    <p><span class="copy-title">最后更新:</span>2020-03-16, 23:01:32</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/16/%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E8%AF%AD%E8%A8%80%E4%B8%8E%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E8%AF%AD%E8%A8%80%E5%8C%BA%E5%88%AB/" title="静态类型语言与动态类型语言区别">http://yoursite.com/2020/03/16/%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E8%AF%AD%E8%A8%80%E4%B8%8E%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E8%AF%AD%E8%A8%80%E5%8C%BA%E5%88%AB/</a>
+    <p><span class="copy-title">发布时间:</span>2020-07-24, 14:07:43</p>
+    <p><span class="copy-title">最后更新:</span>2020-08-01, 01:22:27</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/07/24/30-seconds-of-js/" title="30-seconds-of-js">http://yoursite.com/2020/07/24/30-seconds-of-js/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
