@@ -19,6 +19,21 @@ const array = new Array();  // 一般不这样搞一个数组
 const array = [];  // 这样搞才棒
 ```
 
+
+
+### - 数组排序
+
+> sort是浏览器内置方法 
+
+```javascript
+const arr = [1,2,3,4,5];
+arr.sort((a,b)=>a-b);
+arr.sort((a,b)=>b-a);
+```
+
+
+
+
 ### - 数组浅拷贝
 
 一般不用一个循环将数组复制一个
@@ -135,6 +150,38 @@ while(arr.some(Array.isArray)){
 } // 一招搞定
 ```
 
+### - 去除数组中的空对象
+
+```javascript
+const arr = [{name:1,age:2},{},{}];
+const deleteObj=(arr)=>{
+	if(Array.isArray(arr) && arr.length>1){
+		arr.filter(item => {
+			return Object.keys(item).length>0
+		})
+	}
+	return [];
+}
+```
+
+### - 数组中的所有值是否都满足条件
+
+> 如果提供的谓词函数对集合中的所有元素返回true，则返回true，否则返回false。
+
+```javascript
+const all = (arr, fn = Boolean) => arr.every(fn);
+all([4,2,3],x=> x>1) // true
+all([1,2,3],x=>x>1) // false;
+```
+
+
+
+### - 数组中是否有一项满足
+
+```javascript
+[1,2,3].some(item => item >2);
+```
+
 
 
 ### - 判断数组中是否存在某个值
@@ -147,6 +194,17 @@ arr.includes(1) // true  方法2
 
 arr.find(item => item === 1); // 返回数组中满足条件的第一个元素的值，如果没有，返回undefined
 
+```
+
+### - 返回两个数组不一样的值
+
+```javascript
+const difference = (a,b)=> {
+	const s = new Set(b);
+	return a.filter(x=>!s.has(x));
+}
+
+difference([1,2,3],[3]) // [1,2];
 ```
 
 
@@ -299,7 +357,33 @@ import has from 'has'; // https://www.npmjs.com/package/has
 console.log(has(object, name));
 ```
 
-### - 
+### - 浅拷贝
+
+```javascript
+const shallowClone = obj => Object.assign({},obj);// 上面说了不推荐这样写法
+
+const shallowClone = obj => {...obj};
+
+```
+
+### - 深拷贝
+
+```javascript
+const deepMapKeys = (obj, fn) =>
+  Array.isArray(obj)
+    ? obj.map(val => deepMapKeys(val, fn))
+    : typeof obj === 'object'
+    ? Object.keys(obj).reduce((acc, current) => {
+        const key = fn(current);
+        const val = obj[current];
+        acc[key] =
+          val !== null && typeof val === 'object' ? deepMapKeys(val, fn) : val;
+        return acc;
+      }, {})
+    : obj;
+```
+
+
 
 
 
@@ -388,3 +472,158 @@ const {c,d} = func();
 
 
 
+
+
+## 关于字符串
+
+### - 字符串翻转
+
+```javascript
+function reverseStr(str = "") {
+  return str.split("").reduceRight((t, v) => t + v);
+}
+
+const str = "reduce123";
+console.log(reverseStr(str)); // "321recuder"
+
+```
+
+
+
+## 关于数字
+
+### - 判断奇偶数
+
+```javascript
+const num=5;
+!!(num & 1) // true
+!!(num % 2) // true
+```
+
+### - 数字千分位
+
+```javascript
+// 方法一
+function thousandNum(num = 0) {
+  const str = (+num).toString().split(".");
+  const int = nums => nums.split("").reverse().reduceRight((t, v, i) => t + (i % 3 ? v : `${v},`), "").replace(/^,|,$/g, "");
+  const dec = nums => nums.split("").reduce((t, v, i) => t + ((i + 1) % 3 ? v : `${v},`), "").replace(/^,|,$/g, "");
+  return str.length > 1 ? `${int(str[0])}.${dec(str[1])}` : int(str[0]);
+}
+
+thousandNum(1234); // "1,234"
+thousandNum(1234.00); // "1,234"
+thousandNum(0.1234); // "0.123,4"
+console.log(thousandNum(1234.5678)); // "1,234.567,8"
+
+// 方法二
+(121314).toLocaleString();
+```
+
+
+
+### - 字符串转数字
+
+#### 方法一
+
+> 实际就是用 *1来转化为数字，实际上是调用了`.valueOf`的方法
+
+```javascript
+'32' * 1 // 32
+'ds' * 1 // NaN
+null * 1 // 0
+undefine * 1 // NaN
+1 * { valueOf:()=>'3'};
+```
+
+#### 方法二
+
+```javascript
++ '123' // 123
++ 'ds' // NaN
++ '' // 0
++ null // 0
++ undefine // NaN
++ {valueOf: ()=>'3'} // 3 
+```
+
+### - 判断小数是否相等
+
+#### 方法1：
+
+```javascript
+Number.EPSILON=(function(){   //解决兼容性问题
+    return Number.EPSILON?Number.EPSILON:Math.pow(2,-52);
+})();
+//上面是一个自调用函数，当JS文件刚加载到内存中，就会去判断并返回一个结果
+function numbersequal(a,b){ 
+    return Math.abs(a-b)<Number.EPSILON;
+  }
+//接下来再判断   
+const a=0.1+0.2, b=0.3;
+console.log(numbersequal(a,b)); //这里就为true了
+
+```
+
+#### 方法2：
+
+```javascript
+(0.1*100+0.2*100)/100===0.3
+```
+
+
+
+### - 双位运算符
+
+> 双位运算符比`Math.floor()`和`Math.ceil()`速度快
+
+```javascript
+~~7.5                // 7
+Math.ceil(7.5)       // 8
+Math.floor(7.5)      // 7
+
+
+~~-7.5        		// -7
+Math.floor(-7.5)     // -8
+Math.ceil(-7.5)      // -7
+
+```
+
+所以负数时，双位运算符和Math.ceil结果一致，正数时和Math.floor结果一致
+
+### - 取整和奇偶性判断
+
+取整
+
+```javascript
+3.3 | 0         // 3
+-3.9 | 0        // -3
+
+parseInt(3.3)  // 3
+parseInt(-3.3) // -3
+
+// 四舍五入取整
+Math.round(3.3) // 3
+Math.round(-3.3) // -3
+
+// 向上取整
+Math.ceil(3.3) // 4
+Math.ceil(-3.3) // -3
+
+// 向下取整
+Math.floor(3.3) // 3
+Math.floor(-3.3) // -4
+
+```
+
+判断奇偶
+
+```javascript
+const num=5;
+!!(num & 1) // true
+!!(num % 2) // true
+```
+
+
+
+## 布尔型
