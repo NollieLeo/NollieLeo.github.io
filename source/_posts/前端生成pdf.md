@@ -2,10 +2,10 @@
 title: 前端生成pdf
 date: 2020-12-26 15:52:39
 tags:
--js
--pdf
+- js
+- pdf
 categories:
--js
+- js
 ---
 
 项目上要求，能够根据页面上所展示的测试报告，生成一份pdf。

@@ -3,17 +3,18 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: NollieLeo's blog
+title: 随便建了个博客
 subtitle: ''
 description: ''
-keywords:
-author: 翁恺敏
+keywords: '程序猿'
+author: Mr.Weng
 language: zh-CN
 timezone: ''
+email: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: 'https://github.com/NollieLeo'
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -93,7 +94,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: 3-hexo
+theme: indigo
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -103,3 +104,30 @@ deploy:
     github: https://github.com/NollieLeo/NollieLeo.github.io.git
     coding: git@e.coding.net:nollieleo/NollieLeo.git
   branch: master
+
+# hexo-generator-feed
+## Docs: https://github.com/hexojs/hexo-generator-feed
+feed:
+  type: atom
+  path: atom.xml
+  limit: 0
+
+# https://github.com/alexbruno/hexo-generator-json-content
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: true
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true
