@@ -223,10 +223,6 @@ descYear值如下：
 
 ![image-20210527213001469](image-20210527213001469.png)
 
-
-
-
-
 ## 2. Object.getOwnPropertyDescriptors()
 
 es2017新增的静态方法，这个方法会在每个自有属性上调用Object.defineProperties
@@ -238,3 +234,7 @@ console.log(Object.getOwnPropertyDescriptors(book));
 打印出来的如下
 
 ![image-20210527214742659](image-20210527214742659.png)
+
+
+
+> 注意：这两个方法只对实例属性有效果，是不能取得原型属性上的描述符，如果需要取得原型属性上的描述符，就得直接再原型对象上面直接调用这两个方法
