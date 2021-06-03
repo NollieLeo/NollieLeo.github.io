@@ -21,3 +21,10 @@ categories:
 `instanceof` 运算符用来检测 `constructor.prototype `是否存在于参数 `object` 的原型链上。
 
 就是找对象原型链上是否有某个构造函数的原型
+
+```js
+function _instanceof(object, fn){
+    
+}
+```
+
