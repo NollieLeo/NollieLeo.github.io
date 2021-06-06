@@ -37,7 +37,7 @@ function _instanceof(obj, fn){
       if(proto === prototype){
         return true;
       }
-      prototype = prototype.__proto__;
+      proto = prototype.__proto__;
     }
 }
 ```
@@ -49,3 +49,23 @@ function _instanceof(obj, fn){
 之后不断的循环，将原型的原型付给prototype，一层层向上查找，直到等于proto或者为null的情况下退出循环
 
 因为`Object.prototype.__proto__`是指向null的，所以到这里还找不到，那就说明目标构造函数不在原型链上面
+
+
+
+
+
+## 测试
+
+```js
+function BasePerson(){}
+function Person(){}
+
+Person.prototype = new BasePerson(); // 这里使用继承
+
+const a = new Person();
+
+console.log(_instanceof(a, Person)) // true
+
+console.log(_instanceof(a, BasePerson)) // true
+```
+
