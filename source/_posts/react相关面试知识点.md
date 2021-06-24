@@ -10,12 +10,35 @@ categories:
 
 
 
-- react 的生命周期，分别在哪个时候被执行
-- setState，哪些生命周期可以setState
-- 函数组件和普通组件区别
-- 什么是render props组件
-- fiber是什么
-- diff算法
-- VDom
-- React中的controlled component 和 uncontrolled component区别 （受控组件和不受控组件）
--  react-router内部实现机制 
+### react 的生命周期，分别在哪个时候被执行
+
+### setState，哪些生命周期可以setState
+
+### 函数组件和普通组件区别
+
+### 什么是render props组件
+
+### fiber是什么
+
+### diff算法
+
+### VDom虚拟dom
+
+这里，小编的理解是：虚拟`DOM`是真实`DOM`的内存表示，是一种编程概念，一种模式。它的作用是判断`DOM`是否改变、哪些部分需要被重新渲染。这样，不需要操纵真实的`DOM`,同时极大的提高了`React`的性能。
+
+虚拟`DOM`使用`diff`算法，当我们多次修改某一部分的内容时，首先在虚拟`DOM`树从上至下进行同层比对（不影响真实`DOM`），上层发生变化，下层重新渲染，直到最后修改完成，再在真实`DOM`中渲染。
+
+使用虚拟`DOM`的原因是，可以极大程度上减少`DOM`节点的回流和重绘问题，节约资源，提升运行效率。
+
+#### 区别
+
+- 虚拟`DOM`不会进行重排和重绘；
+- 虚拟`DOM`进行频繁的修改，然后一次性比较并修改真实`DOM`中需要修改的部分，最后进行回流和重绘，有效的减少了过多`DOM`节点回流和重绘资源消耗的问题；
+- 虚拟`DOM`有效降低大面积（真实`DOM`节点）的回流和重绘，因为最终与真实`DOM`比较差异，可以局部渲染。
+
+### React中的controlled component 和 uncontrolled component区别 （受控组件和不受控组件）
+
+### react-router内部实现机制 
+
+
+-  
