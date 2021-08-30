@@ -14,7 +14,7 @@ categories:
 
 猪齿鱼平台是个相对复杂的多表格多表单数据处理平台，有些模块的数据量庞大，并且有些喜欢嵌入在tab页面当中，如果频繁的去访问这些页面就会频繁的请求，如果数据量庞大，每次访问都会去请求数据，等待时间就变长了，例如下面这个界面：
 
-![7](D:\Blogs\NollieLeo.github.io\source\_posts\基于猪齿鱼平台的axios缓存封装\7.gif)
+![7](7.gif)
 
 这个页面相当于是历史的执行记录，因为数据量庞大，我们可以看到这个页面请求过后响应速度较慢，假设我在短时间内切到别的记录又切回来要看，那还得重新再去请求这1000多条的数据，这个是没有必要的，用户等待时间就变长了
 
@@ -22,7 +22,7 @@ categories:
 
 在一个页面渲染的过程中，或者在某些不正当的交互操作中，用户可能频繁的向后台去发送同一个请求（参数url等待都一样），或又是再渲染页面的一瞬间触发了多次同一请求，这样就很浪费带宽，多次请求前端还需要进行多次的响应处理，例如以下情况
 
-![image-20210624155243688](D:\Blogs\NollieLeo.github.io\source\_posts\基于猪齿鱼平台的axios缓存封装\image-20210624155243688.png)
+![image-20210624155243688](image-20210624155243688.png)
 
 在渲染页面时，同时发送了多个相同请求，大多时候是页面逻辑处理的有问题，多次向后台获取数据了，或者是我频繁的去点击一个没有做防抖的按钮或者没有节流的一些频繁请求
 
@@ -30,7 +30,7 @@ categories:
 
 假设我错误的点击了一个菜单的同时又去切到了另外一个菜单，这时候虽然说已经切换到了想要的菜单路由下对应的界面，但是由于你错误的操作，虽然上个页面在切路由瞬间被销毁，但是初始化页面的一些获取后台数据的请求已经发出去了，你访问的当前页面是不需要这些请求的。例如：
 
-![test](D:\Blogs\NollieLeo.github.io\source\_posts\基于猪齿鱼平台的axios缓存封装\test.gif)
+![test](test.gif)
 
 这个例子就是，我先点击了代码管理的菜单，代码管理模块组件瞬间被加载出来，并且发送页面请求，这时候一瞬间切换到应用流水线的菜单，这时候我们会看见，代码管理模块的请求很多没必要的都发送出去了，这些请求并不是我们应用流水线模块需要用的到的。
 
@@ -51,9 +51,9 @@ categories:
 
 参考猪齿鱼lookup的缓存原理，以下放出lookup缓存的部分源码；
 
-![image-20210625112724872](D:\Blogs\NollieLeo.github.io\source\_posts\基于猪齿鱼平台的axios缓存封装\image-20210625112724872.png)
+![image-20210625112724872](image-20210625112724872.png)
 
-![image-20210625113745262](D:\Blogs\NollieLeo.github.io\source\_posts\基于猪齿鱼平台的axios缓存封装\image-20210625113745262.png)
+![image-20210625113745262](image-20210625113745262.png)
 
 lookup通过标识确定是否缓存，之后将适配器返回的期约直接给一个新得期约，之后存储这个新得期约，在下次发送相同请求时候直接将这个期约抛给它，从而实现请求的复用
 
@@ -61,7 +61,7 @@ lookup通过标识确定是否缓存，之后将适配器返回的期约直接�
 
 源码是这样的
 
-![image-20210625160815760](D:\Blogs\NollieLeo.github.io\source\_posts\基于猪齿鱼平台的axios缓存封装\image-20210625160815760.png)
+![image-20210625160815760](image-20210625160815760.png)
 
 可以知道的是，axios 的 transformRequest以及他的各个请求拦截器是在return这个期约之前发生的，之后请求完成，adapter将请求后的结果传递给期约，之后期约落定，后面才触发响应数据转换（transformReponse）以及响应拦截器（这个顺序非常的重要）。
 
@@ -81,9 +81,9 @@ lookup通过标识确定是否缓存，之后将适配器返回的期约直接�
 
 例如：
 
-![image-20210625173040963](D:\Blogs\NollieLeo.github.io\source\_posts\基于猪齿鱼平台的axios缓存封装\image-20210625173040963.png)
+![image-20210625173040963](image-20210625173040963.png)
 
-![image-20210625173136449](D:\Blogs\NollieLeo.github.io\source\_posts\基于猪齿鱼平台的axios缓存封装\image-20210625173136449.png)
+![image-20210625173136449](image-20210625173136449.png)
 
 
 
@@ -91,7 +91,7 @@ lookup通过标识确定是否缓存，之后将适配器返回的期约直接�
 
 这里必须用到axios的CancelToken。上面说到CancelToken的其实就是对`XMLhttpRequest`的abort方法进行封装， `XMLHttpRequest` 对象是我们发起一个网络请求的根本，在它底下有怎么一个方法 `.abort()`，就是中断一个已被发出的请求。 
 
-![image-20210625211727335](D:\Blogs\NollieLeo.github.io\source\_posts\基于猪齿鱼平台的axios缓存封装\image-20210625211727335.png)
+![image-20210625211727335](image-20210625211727335.png)
 
  简单理解就是通过 `new axios.CancelToken()`给每个请求带上一个专属的CancelToken，之后会接收到一个`cancel()` 取消方法，用于后续的取消动作。 
 
@@ -181,9 +181,9 @@ export default function getMark(config:AxiosRequestConfig) {
 
 例如下面这个请求
 
-![image-20210625210606969](D:\Blogs\NollieLeo.github.io\source\_posts\基于猪齿鱼平台的axios缓存封装\image-20210625210606969.png)
+![image-20210625210606969](image-20210625210606969.png)
 
-![image-20210625210632981](D:\Blogs\NollieLeo.github.io\source\_posts\基于猪齿鱼平台的axios缓存封装\image-20210625210632981.png)
+![image-20210625210632981](image-20210625210632981.png)
 
 最终拼接出来的是
 
@@ -197,11 +197,11 @@ export default function getMark(config:AxiosRequestConfig) {
 
 这里我们采用拦截器的形式去添加缓存逻辑，以下是添加了请求拦截器
 
-![image-20210626094315248](D:\Blogs\NollieLeo.github.io\source\_posts\基于猪齿鱼平台的axios缓存封装\image-20210626094315248.png)
+![image-20210626094315248](image-20210626094315248.png)
 
 下面标红的是添加响应拦截器
 
-![image-20210626094721131](D:\Blogs\NollieLeo.github.io\source\_posts\基于猪齿鱼平台的axios缓存封装\image-20210626094721131.png)
+![image-20210626094721131](image-20210626094721131.png)
 
 至于这里拦截器的顺序为什么是这样的，后续再说
 
@@ -217,7 +217,7 @@ export default function getMark(config:AxiosRequestConfig) {
 
 最后明确需要存储在缓存实例中的数据格式
 
-![image-20210626101834505](D:\Blogs\NollieLeo.github.io\source\_posts\基于猪齿鱼平台的axios缓存封装\image-20210626101834505.png)
+![image-20210626101834505](image-20210626101834505.png)
 
 #### 存储数据
 
@@ -319,9 +319,9 @@ const axiosCache = new AxiosCache();
    
    如果不好理解的这里有流程图
    
-   ​	![image-20210626111840112](D:\Blogs\NollieLeo.github.io\source\_posts\基于猪齿鱼平台的axios缓存封装\image-20210626111840112.png)
+   ​	![image-20210626111840112](image-20210626111840112.png)
 
-   ![image-20210626111852379](D:\Blogs\NollieLeo.github.io\source\_posts\基于猪齿鱼平台的axios缓存封装\image-20210626111852379.png)
+   ![image-20210626111852379](image-20210626111852379.png)
    
     ```ts
     // 说明找到了请求但是找到的这个缓存的请求还在pending，这时候订阅一个期约待会要用
@@ -723,7 +723,7 @@ export default PermissionRoute;
 
 abort会导致浏览器中的network中一堆报红，看上去比较不美观。
 
-![image-20210627124622241](D:\Blogs\NollieLeo.github.io\source\_posts\基于猪齿鱼平台的axios缓存封装\image-20210627124622241.png)
+![image-20210627124622241](image-20210627124622241.png)
 
 
 
