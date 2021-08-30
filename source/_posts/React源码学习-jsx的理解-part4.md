@@ -24,7 +24,7 @@ JSX在babel中会被编译成React.createElement（这也就是为什么需要�
 
 如下图：
 
-![image-20210822155213907](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-jsx的理解-part4\image-20210822155213907.png)
+![image-20210822155213907](image-20210822155213907.png)
 
 > `JSX`并不是只能被编译为`React.createElement`方法，你可以通过[@babel/plugin-transform-react-jsx (opens new window)](https://babeljs.io/docs/en/babel-plugin-transform-react-jsx)插件显式告诉`Babel`编译时需要将`JSX`编译为什么函数的调用（默认为`React.createElement`）。
 
@@ -48,14 +48,14 @@ createElement(type, config, children)
 
 1. 进来createElement我们会发现它定义了一些字段，这些字段都是我们比较常用的
 
-![image-20210822155830376](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-jsx的理解-part4\image-20210822155830376.png)
+![image-20210822155830376](image-20210822155830376.png)
 
 2. 之后我们对传进来的config进行校验，我们会发现他做了几个合法性的校验，并且对相对应的变量进行赋值
 
    - [hasValidRef](https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L31)：对config中的ref做合法性校验
    - [hasValidKey](https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L43)：对config中的key做合法性校验
 
-   ![image-20210822160045714](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-jsx的理解-part4\image-20210822160045714.png)
+   ![image-20210822160045714](image-20210822160045714.png)
 
 3. 遍历config中的属性，将除了保留属性之外的其他属性赋值给[Props](https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L241)（就是内部的一个中间对象）
 
@@ -65,7 +65,7 @@ createElement(type, config, children)
 
 4. 接下来处理type中的`defaultProps`，这里也能明白，因为我们经常需要给class的组件的一些参数设置默认的属性值
 
-   ![image-20210822160957936](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-jsx的理解-part4\image-20210822160957936.png)
+   ![image-20210822160957936](image-20210822160957936.png)
 
 5. 接下来我们走入`ReactElement`[函数](https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L146)
 
@@ -88,6 +88,7 @@ createElement(type, config, children)
    
      return element;
    };
+   ```
 ```
    
 这里要注意，其中` $$typeof`这个参数很重要，主要是用来[isValidElement](https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L547)函数来判断这个element是不是合法的react element
@@ -103,7 +104,7 @@ createElement(type, config, children)
    
    
    
-   ```
+```
 
 > 可以看到，`$$typeof === REACT_ELEMENT_TYPE`的非`null`对象就是一个合法的`React Element`。换言之，在`React`中，所有`JSX`在运行时的返回结果（即`React.createElement()`的返回值）都是`React Element`。
 

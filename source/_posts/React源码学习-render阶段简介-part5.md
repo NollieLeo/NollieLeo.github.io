@@ -14,13 +14,13 @@ categories:
 
 这时候也肯定是没有一个workInProgress的fiber tree的，所以从根节点出发，去触发更新（第一次构建tree）操作
 
-![image-20210822213436338](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-part5\image-20210822213436338.png)
+![image-20210822213436338](image-20210822213436338.png)
 
 协调器工作主要是入口是 workSyncLoop，递阶段开始于某个fiber其beginWork，归阶段则是调用completeWork
 
 这里我们说一下协调器的工作，渲染器后面讲（渲染器这里我们只要知道它是将变化的节点渲染到视图上，所以分为渲染到**视图-之前-中-之后**）
 
-![image-20210822215752746](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-part5\image-20210822215752746.png)
+![image-20210822215752746](image-20210822215752746.png)
 
 > 因此协调器工作开始到结束，我们称呼为 **`render`阶段，**
 >
@@ -34,7 +34,7 @@ categories:
 
 首先我们先看调用栈里头render阶段是从哪里开始的呢？
 
-![image-20210822181130206](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-part5\React源码学习-render阶段-part5.md)
+![image-20210822181130206](React源码学习-render阶段-part5.md)
 
 `render阶段`开始于`performSyncWorkOnRoot`或`performConcurrentWorkOnRoot`方法的调用。这取决于本次更新是同步更新还是异步更新。
 

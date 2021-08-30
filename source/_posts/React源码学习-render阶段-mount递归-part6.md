@@ -18,13 +18,13 @@ categories:
 
 render阶段的递阶段起点是beginWork，归阶段的起点是completeWork，那我们就在源码上打断点。
 
-![image-20210823220759254](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210823220759254.png)
+![image-20210823220759254](image-20210823220759254.png)
 
-![image-20210823220834921](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210823220834921.png)
+![image-20210823220834921](image-20210823220834921.png)
 
 应用demo如下
 
-![image-20210823223552306](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210823223552306.png)
+![image-20210823223552306](image-20210823223552306.png)
 
 刷新页面正式进入调试。
 
@@ -32,11 +32,11 @@ render阶段的递阶段起点是beginWork，归阶段的起点是completeWork�
 
 1.发现第一次进入页面`beginWork`中，current有值，并且此时的tag是等于3的，之前说的我们在createFiberRoot的那个阶段这个tag也等于三，我们不妨猜测这个tag为3指的是 fiberRootNode
 
-![image-20210823221225561](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210823221225561.png)
+![image-20210823221225561](image-20210823221225561.png)
 
 找到react-reconciler包下的ReactWorkTag，可以看到tag = 3对应的是叫 `HostRoot`的tag
 
-![image-20210823222916683](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210823222916683.png)
+![image-20210823222916683](image-20210823222916683.png)
 
 
 
@@ -44,11 +44,11 @@ render阶段的递阶段起点是beginWork，归阶段的起点是completeWork�
 
 我们发现**current**的值为null（之前说过，只有根节点才存在current值，而其他节点只存在**workInProgress**）
 
-![image-20210823223122090](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210823223122090.png)
+![image-20210823223122090](image-20210823223122090.png)
 
 且当前节点的elementType为function App()，也就是写的一个app函数
 
-![image-20210823223335090](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210823223335090.png)
+![image-20210823223335090](image-20210823223335090.png)
 
 之后就是div了，然后是div的子节点header
 
@@ -56,7 +56,7 @@ render阶段的递阶段起点是beginWork，归阶段的起点是completeWork�
 
 因为header的文本节点不算，所以直接进入了header节点的completeWork的阶段
 
-![image-20210823224738688](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210823224738688.png)
+![image-20210823224738688](image-20210823224738688.png)
 
 之后header 归阶段结束，会去找header的sibling，也就是兄弟节点，兄弟节点进入beginWork（递阶段）
 
@@ -72,7 +72,7 @@ render阶段的递阶段起点是beginWork，归阶段的起点是completeWork�
 
 这里我们以 走到第二步的div节点举例子
 
-![image-20210823233545095](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210823233545095.png)
+![image-20210823233545095](image-20210823233545095.png)
 
 
 
@@ -82,13 +82,13 @@ render阶段的递阶段起点是beginWork，归阶段的起点是completeWork�
 
 这里的div节点，tag为5，进入的是 HostComponent的处理逻辑
 
-![image-20210823234419849](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210823234419849.png)
+![image-20210823234419849](image-20210823234419849.png)
 
 ### 2. updateHostComponents$1
 
 首先会对一些参数做赋值操作，之后用isDirectTextChild字段判断当前节点是否只有一个文本节点（上面提到了），如果是，则不会去创建这个文本节点的fiber，算是react的一个优化手段
 
-![image-20210823235701602](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210823235701602.png)
+![image-20210823235701602](image-20210823235701602.png)
 
 ### 3. reconcileChildren
 
@@ -97,7 +97,7 @@ render阶段的递阶段起点是beginWork，归阶段的起点是completeWork�
 - 对于`mount`的组件，他会创建新的`子Fiber节点`
 - 对于`update`的组件，他会将当前组件与该组件在上次更新时对应的`Fiber节点`比较（也就是俗称的`Diff`算法），将比较的结果生成新`Fiber节点`
 
-![image-20210824000029762](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210824000029762.png)
+![image-20210824000029762](image-20210824000029762.png)
 
 如果当前不存在current就走`mountChildFibers`，否者就走`reconcileChildFibers`
 
@@ -107,7 +107,7 @@ render阶段的递阶段起点是beginWork，归阶段的起点是completeWork�
 
 找到`reconcileChildFibers`和 `mountChildFibers`
 
-![image-20210826215700516](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210826215700516.png)
+![image-20210826215700516](image-20210826215700516.png)
 
 > 从代码可以看出，和`beginWork`一样，他也是通过`current === null ?`区分`mount`与`update`。
 
@@ -193,21 +193,21 @@ effectTag |= Placement;
 
 那他就会去调用 `reconcileSingleElement`的方法
 
-![image-20210829105504513](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210829105504513.png)
+![image-20210829105504513](image-20210829105504513.png)
 
 最终这个方法会走到createFiberFromElement
 
 也就是通过reactElement的数据创建一个fiber节点
 
-![image-20210829110028352](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210829110028352.png)
+![image-20210829110028352](image-20210829110028352.png)
 
 并且这个方法内部会调用一个方法叫做``createFiberFromTypeAndProps`
 
-![image-20210829110240512](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210829110240512.png)
+![image-20210829110240512](image-20210829110240512.png)
 
 在这个方法的内部会根据当前的component type去走不同的逻辑
 
-![image-20210829110319749](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210829110319749.png)
+![image-20210829110319749](image-20210829110319749.png)
 
 这里呢直接将fibertag 赋值为了HostComponent
 
@@ -215,7 +215,7 @@ effectTag |= Placement;
 
 new了一个 FiberNode，这里头的属性在Fiber那篇讲了一下。
 
-![image-20210829110436790](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210829110436790.png)
+![image-20210829110436790](image-20210829110436790.png)
 
 ### 总结
 
@@ -249,23 +249,23 @@ function App() {
 
 
 
-![image-20210829152223028](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210829152223028.png)
+![image-20210829152223028](image-20210829152223028.png)
 
 这里是span 标签所以先进入 HostComponent的case逻辑
 
-![image-20210829152900269](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210829152900269.png)
+![image-20210829152900269](image-20210829152900269.png)
 
 事先判断current是否是空，首次渲染非fiberRoot不存current
 
 接下来比较重要的是创建一个dom叫做createInstance
 
-![image-20210829153657555](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210829153657555.png)
+![image-20210829153657555](image-20210829153657555.png)
 
 
 
 ### 2. createInstance
 
-![image-20210829160429387](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210829160429387.png)
+![image-20210829160429387](image-20210829160429387.png)
 
 createInstance会去 通过 `createElement`创建一个dom元素
 
@@ -273,7 +273,7 @@ createInstance会去 通过 `createElement`创建一个dom元素
 
 之后返回一个instance去执行appendAllChidren函数，由于span是我们第一个创建的元素，所以append会被跳过
 
-![image-20210829161632571](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210829161632571.png)
+![image-20210829161632571](image-20210829161632571.png)
 
 
 
@@ -289,9 +289,9 @@ workInProgress.stateNode = instance;
 
 执行finalizerInitialChildren, 将所有的属性绑到我们新创建的dom元素上面，到这里一个节点span的completework就大致完成了
 
-![image-20210829161958750](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210829161958750.png)
+![image-20210829161958750](image-20210829161958750.png)
 
-![image-20210829162021263](D:\Blogs\NollieLeo.github.io\source\_posts\React源码学习-render阶段-mount递归-part6\image-20210829162021263.png)
+![image-20210829162021263](image-20210829162021263.png)
 
 ### ⭐appendAllChildren逻辑
 
