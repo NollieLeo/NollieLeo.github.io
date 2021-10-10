@@ -12,6 +12,10 @@ categories:
 
 ## CSS
 
+### css-minimizer-webpack-plugin
+
+压缩css文件，webpack5以上
+
 ### mini-css-extract-plugin
 
 [mini-csss-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)
@@ -93,6 +97,16 @@ https://www.npmjs.com/package/html-webpack-plugin
 如果你使用的是 webpack v5 或以上版本，你不需要安装这个插件。webpack v5 自带最新的 `terser-webpack-plugin`。如果使用 webpack v4，则必须安装 `terser-webpack-plugin` v4 的版本。
 
 
+
+
+
+## 静态资源
+
+### 复制静态资源
+
+有些时候有些第三方的 js 插件没有提供 npm 包，只提供了一个 cdn 地址或者一份文件需要自己下载下来。通常我们下载下来之后放在我们的 `public/js` 目录下面，然后 `public/index.html` 文件里直接用 `script` 标签引入。这个时候不管是 `npm run dev` 开发时，还是 `npm run build:pro` 构建后，这个 js 文件都是找不到的
+
+ copy-webpack-plugin 
 
 
 

@@ -3,6 +3,7 @@ title: 常用loader
 date: 2021-08-05 20:50:16
 tags:
 - webpack
+- loader
 categories:
 - loader
 ---
@@ -92,6 +93,24 @@ https://www.npmjs.com/package/svg-sprite-loader#why-its-cool
 svg-sprite-loader 将加载的 svg 图片拼接成 雪碧图，放到页面中，其它地方通过 <use> 复用
 
 > 一般用在菜单的Icon显示以及搭建一些UI的字体库的时候需要用的到
+
+
+
+###  raw-loader
+
+https://www.npmjs.com/package/raw-loader
+
+可以将文本文件的内容读取出来注入js或者css中
+
+
+
+## Source Map
+
+### source-map-loader
+
+https://www.npmjs.com/package/source-map-loader
+
+使用这个loader去加载别的包的sourcemap方便自己的调试
 
 
 
