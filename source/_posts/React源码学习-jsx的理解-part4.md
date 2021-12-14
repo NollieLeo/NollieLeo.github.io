@@ -48,7 +48,7 @@ createElement(type, config, children)
 
 1. 进来createElement我们会发现它定义了一些字段，这些字段都是我们比较常用的
 
-![image-20210822155830376](image-20210822155830376.png)
+    ![image-20210822155830376](image-20210822155830376.png)
 
 2. 之后我们对传进来的config进行校验，我们会发现他做了几个合法性的校验，并且对相对应的变量进行赋值
 
@@ -89,6 +89,7 @@ createElement(type, config, children)
      return element;
    };
    ```
+
 ```
    
 这里要注意，其中` $$typeof`这个参数很重要，主要是用来[isValidElement](https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L547)函数来判断这个element是不是合法的react element

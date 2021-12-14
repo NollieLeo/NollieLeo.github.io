@@ -69,3 +69,4 @@ categories:
 59. react-sortable react-anything-sortable 拖动排序
 60. [react-autosuggest](https://github.com/moroshko/react-autosuggest) 自动提示
 61. [react-image-crop](https://github.com/DominicTobias/react-image-crop) 图片裁剪
+62. react-device-detect 检测浏览器版本的
