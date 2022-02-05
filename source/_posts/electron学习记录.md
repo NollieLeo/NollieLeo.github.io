@@ -90,7 +90,25 @@ npm run electron:serve
 
 > 基于vscode通过ws协议进行调试，之后通过端口就可进入调试的页面，就形容调试node  [vscode调试官方文档](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations)
 
-### 使用electron-vue
+### 使用electron自带的
+
+> 插件 electron-debug
+
+1. 在dev文件中引入
+
+   ![image-20220115143454095](E:\Weng-Codes\NollieLeo.github.io\source\_posts\electron学习记录\image-20220115143454095.png)
+
+ 2. 在主进程中引入
+
+    ![image-20220115143536900](E:\Weng-Codes\NollieLeo.github.io\source\_posts\electron学习记录\image-20220115143536900.png)
+
+启动之后呢就能看到终端打印了这句话
+
+![image-20220115143611685](E:\Weng-Codes\NollieLeo.github.io\source\_posts\electron学习记录\image-20220115143611685.png)
+
+打开chrome://devices就ok了
+
+### 使用electron-vue + vscode
 
 #### 配置vscode	
 
@@ -104,7 +122,7 @@ npm run electron:serve
 
  3. vscode会自动创建一个文件 .vscode/路径下的launch.json文件。
 
-    lauch.json
+    launch.json
 
     > 基于electron-vue的配置（以下配置再用electron-vue的时候复制进去吧）
 
@@ -190,6 +208,14 @@ npm run electron:serve
 倘若第一次调试，则需要点击上方的添加文件按钮将目录添加到调试工具当中
 
 ![image-20220115122506756](E:\Weng-Codes\NollieLeo.github.io\source\_posts\electron学习记录\image-20220115122506756.png)
+
+
+
+### vue-cli + vue-cli-plugin-electron-builder 调试
+
+[官方文档](https://nklayman.github.io/vue-cli-plugin-electron-builder/guide/recipes.html#multiple-pages)
+
+调试demo[地址](https://github.com/nklayman/electron-vscode-debug-example/blob/master/.vscode/tasks.json)
 
 
 
@@ -347,6 +373,24 @@ document.querySelector('#quitButton').addEventListener('click', handleQuit)
 
 
 ## 一些使用记录
+
+### 判断操作系统类型
+
+> process.platform [文档](http://nodejs.cn/api/process/process_platform.html)
+
+```js
+import { platform } from 'process';
+
+console.log(`This platform is ${platform}`);
+```
+
+- 'aix'
+- 'darwin'
+- 'linux'
+- 'freebsd'
+- 'openbsd'
+- 'sunos'
+- 'win32'
 
 ### BrowserWindow
 
