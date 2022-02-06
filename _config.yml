@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 随便建了个博客
+title: 翁老师的博客
 subtitle: ''
 description: ''
 keywords: '程序猿'
@@ -102,7 +102,6 @@ deploy:
   type: git
   repository: 
     github: https://github.com/NollieLeo/NollieLeo.github.io.git
-    coding: git@e.coding.net:nollieleo/NollieLeo.git
   branch: master
 
 # hexo-generator-feed
