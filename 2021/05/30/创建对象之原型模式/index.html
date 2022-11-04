@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>创建对象之原型模式 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="js,面试题,原型模式">
+    <meta name="description" content="原型模式每一个函数都会创建一个prototype的属性 原型方式 function Person(){}  Person.prototype.name &#x3D; &#39;weng&#39;; Person.prototype.age &#x3D; 23; Person.sayName &#x3D; function(){     console.log(this.name); } let per1 &#x3D; new Perso">
+<meta property="og:type" content="article">
+<meta property="og:title" content="创建对象之原型模式">
+<meta property="og:url" content="https://github.com/NollieLeo/2021/05/30/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="原型模式每一个函数都会创建一个prototype的属性 原型方式 function Person(){}  Person.prototype.name &#x3D; &#39;weng&#39;; Person.prototype.age &#x3D; 23; Person.sayName &#x3D; function(){     console.log(this.name); } let per1 &#x3D; new Perso">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/05/30/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/image-20210530153200440.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/05/30/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/image-20210530163634192.png">
+<meta property="article:published_time" content="2021-05-30T05:42:33.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.083Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="面试题">
+<meta property="article:tag" content="原型模式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/05/30/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/image-20210530153200440.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">创建对象之原型模式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">创建对象之原型模式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-05-30T05:42:33.000Z" itemprop="datePublished" class="page-time">
+  2021-05-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#原型模式"><span class="post-toc-number">1.</span> <span class="post-toc-text">原型模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-与构造函数的不同"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.与构造函数的不同</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-理解原型"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2. 理解原型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-检查实例原型"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3. 检查实例原型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-instanceof"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">1. instanceof</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-isPrototypeOf"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">2. isPrototypeOf</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-Object-getPrototypeOf"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">3. Object.getPrototypeOf()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-Object-setPrototypeOf"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">4. *Object.setPrototypeOf()</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-原型的层级"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">4.原型的层级</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-删除实例中的属性"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">1.删除实例中的属性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-判断属性在原型上还是在实例上"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">2. 判断属性在原型上还是在实例上</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-hasOwnProperty"><span class="post-toc-number">1.4.2.1.</span> <span class="post-toc-text">1. hasOwnProperty()</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-in"><span class="post-toc-number">1.4.2.2.</span> <span class="post-toc-text">2. in</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-确定实例的某个属性不在实例上，只在原型上"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">3. 确定实例的某个属性不在实例上，只在原型上</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-获取实例的属性"><span class="post-toc-number">1.4.4.</span> <span class="post-toc-text">4. 获取实例的属性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-Object-keys-获取实例上的属性（仅仅是实例上可枚举属性）"><span class="post-toc-number">1.4.4.1.</span> <span class="post-toc-text">1. Object.keys()获取实例上的属性（仅仅是实例上可枚举属性）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-for-in遍历实例以及其原型上的所有属性（仅仅是可枚举属性）"><span class="post-toc-number">1.4.4.2.</span> <span class="post-toc-text">2. for-in遍历实例以及其原型上的所有属性（仅仅是可枚举属性）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-Object-getOwnPropertyNames-获取仅仅是实例上的属性（是否可枚举都能获取）"><span class="post-toc-number">1.4.4.3.</span> <span class="post-toc-text">3.Object.getOwnPropertyNames()获取仅仅是实例上的属性（是否可枚举都能获取）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-Object-getOwnPropertySymbols-仅仅针对符号针对实例属性（是否枚举都可以）"><span class="post-toc-number">1.4.4.4.</span> <span class="post-toc-text">4. Object.getOwnPropertySymbols() 仅仅针对符号针对实例属性（是否枚举都可以）</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-属性的枚举顺序"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">5. 属性的枚举顺序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-原型中存在的问题"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">6. 原型中存在的问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#本篇文章中留下来的疑问"><span class="post-toc-number">2.</span> <span class="post-toc-text">本篇文章中留下来的疑问</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-constructor手动赋值的情况"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1. constructor手动赋值的情况</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-创建对象之原型模式"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">创建对象之原型模式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-05-30 13:42:33" datetime="2021-05-30T05:42:33.000Z"  itemprop="datePublished">2021-05-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h1><p><strong>每一个函数都会创建一个prototype的属性</strong></p>
+<p>原型方式</p>
+<pre><code class="js">function Person(){}
+
+Person.prototype.name = &#39;weng&#39;;
+Person.prototype.age = 23;
+Person.sayName = function(){
+    console.log(this.name);
+}
+let per1 = new Person();
+ler per2 = new Person();
+
+per1.sayName(); // weng
+
+</code></pre>
+<h2 id="1-与构造函数的不同"><a href="#1-与构造函数的不同" class="headerlink" title="1.与构造函数的不同"></a>1.与构造函数的不同</h2><p>原型模式是直接再构造函数的prototype属性上加对象和相应的属性（也就是再构造函数的原型对象上面加属性）</p>
+<p>与构造函数不同的是，使用这种原型模式定义的属性和方法，之后创建出来的实例，都是一起共享这些属性的，因此</p>
+<p>上述的per1和per2的sayName()函数指向的是同一个指针, 他们的原型也同样都是Person构造函数指向的原型对象</p>
+<pre><code class="js">console.log(per1.sayName = per2.sayName);</code></pre>
+<h2 id="2-理解原型"><a href="#2-理解原型" class="headerlink" title="2. 理解原型"></a>2. 理解原型</h2><p>自定义构造函数的时候，原型对象，也就是构造函数的原型对象（prototype指向的对象），会自动获得一个constructor的属性，这个属性是重新指向自定义的构造函数，如果没有父类的话，其他的所有方法都是继承于js内部的Object对象的所有方法。</p>
+<pre><code class="js">console.log(Person.prototype.constructor === Person; // true;</code></pre>
+<p>例如，根据上述的Person自定义构造函数创建一个实例</p>
+<pre><code class="js">let per1 = new Person()</code></pre>
+<p>这个过程是这样的</p>
+<ol>
+<li>per1实例（对象）内部的[[Prototype]]指针就会被赋值为Person构造函数的原型对象（也就是Person.prototype）</li>
+<li>per1可以访问Person的原型上所有属性</li>
+</ol>
+<blockquote>
+<p>js脚本中是没有访问[[Prototype]]特性的标准方式，但是谷歌浏览器火狐还有safari会在每一个对象上暴露<code>__proto__</code>属性，这个属性可以直接访问构造函数的原型也就是这个实例的原型</p>
+</blockquote>
+<blockquote>
+<p>但是，实例是和构造函数没有直接的联系的，只和构造函数的原型又关联</p>
+</blockquote>
+<pre><code class="js">console.log(Person.prototype === per1.__proto__); // true;</code></pre>
+<p><strong>Object的原型的原型是null</strong></p>
+<pre><code class="js">console.log(Person.prototype.__proto__ === Object.prototype) // true
+console.log(Person.prototype.__proto__.constructor === Object); //true
+console.log(Person.prototype.__proto__.__proto__ === null);</code></pre>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="image-20210530153200440.png" alt="1" title>
+                </div>
+                <div class="image-caption">1</div>
+            </figure>
+
+
+
+<p>如图可以看出实例，构造函数，构造函数的原型之间的关系</p>
+<p>这里比较<strong>重要</strong>的点在于</p>
+<ol>
+<li>构造函数的原型（Person.prototype）的constructor属性是指回Person构造函数的</li>
+<li>实例和构造函数之间没有直接联系</li>
+<li>所有通过同一个构造函数构建出来的实例，其中<code>[[Prototype]]</code>指针是指向构造函数的原型。</li>
+</ol>
+<h2 id="3-检查实例原型"><a href="#3-检查实例原型" class="headerlink" title="3. 检查实例原型"></a>3. 检查实例原型</h2><h3 id="1-instanceof"><a href="#1-instanceof" class="headerlink" title="1. instanceof"></a>1. instanceof</h3><p>由实例直接调用，去判断实例的原型链中是否有<strong>某个构造函数的原型</strong></p>
+<blockquote>
+<p>这里一定要注意，是判断某个构造函数的原型</p>
+</blockquote>
+<pre><code class="js">console.log(per1 instanceof Person); // true
+console.log(per1 instanceof Object); // true;
+console.log(Person.prototype instanceof Object); // true;</code></pre>
+<p>如第二大点的图1可以看清这样的继承关系，继承关系另一篇文章再说</p>
+<h3 id="2-isPrototypeOf"><a href="#2-isPrototypeOf" class="headerlink" title="2. isPrototypeOf"></a>2. isPrototypeOf</h3><p>这个方法是为了确定两个对象之间原型的关系</p>
+<p>因为如第2大点所说，不是所有的实现都对外暴露的<code>[[Prototype]]</code>的指针</p>
+<p>所以可以直接在原型上去调用这个方法检测某个对象是否的<code>[[Prototype]]</code>的指针是否指向它，因此也能够检测出两个对象之间的关系</p>
+<pre><code class="js">console.log(Person.prototype.isPrototypeOf(per1)); // true;</code></pre>
+<h3 id="3-Object-getPrototypeOf"><a href="#3-Object-getPrototypeOf" class="headerlink" title="3. Object.getPrototypeOf()"></a>3. Object.getPrototypeOf()</h3><p>这个方法会返回参数的内部<code>[[Prototype]]</code>的指针（这个<code>[[Prototype]]</code>也其实就是参数的特性，可以去一篇叫做对象的属性特性详解的文章查看）</p>
+<p>这个函数传入一个 实例， 返回这个实例的原型对象，也就是它的构造函数的原型对象</p>
+<pre><code class="js">console.log(Object.getPrototypeOf(per1)===Person.prototype);
+Object.getPrototypeOf(per1).name; // weng</code></pre>
+<h3 id="4-Object-setPrototypeOf"><a href="#4-Object-setPrototypeOf" class="headerlink" title="4. *Object.setPrototypeOf()"></a>4. *Object.setPrototypeOf()</h3><p>这个方法可以给实例的<code>[[Prototype]]</code>指针写入一个新的值，这样可以重写一个实例的原型继承关系</p>
+<pre><code class="js">let a = {
+    name: &#39;weng&#39;;
+    age:23
+};
+let b = {
+    name: &#39;kaimin&#39;
+}
+
+Object.setPrototypeof(b, a);
+
+console.log(b.name) // kaimin
+console.log(b.age) // 23
+console.log(Object.getPrototypeOf(b) === a); // true;</code></pre>
+<blockquote>
+<p>这里不推荐使用这种覆盖实例原型指向的方式改变原型继承的关系，会严重的影响代码的性能。</p>
+<p>Mozilla文档中说的“在所有浏览器和js的引擎中，修改继承关系的影响都是微妙而且深远的。这种影响并不是执行以上这个代码那么简单，而是会涉及到所有访问了那些修改过 [[Prototype]]指向的实例的代码”</p>
+</blockquote>
+<p>因为有上述的弊端，可以看另外一篇文章，继承之原型式继承 中讲到的创建新对象的形式，也就是类似于<code>Object.create()</code>来创建一个新对象，同时给他指定一个原型，这块继承会在继承文章中详细解释</p>
+<pre><code class="js">let a = {
+    name: &#39;weng&#39;;
+    age:23
+};
+
+let b = Object.create(a);
+b.name = &#39;kaimin&#39;;
+console.log(b.name) // kaimin
+console.log(b.age) // 23
+console.log(Object.getPrototypeOf(b)) // a</code></pre>
+<p>Object.create这种形式其实是以匿名构造函数的形式，指定这个匿名函数的原型为你想要的那个实例，因为这里咱们只是在乎这个新创建的实例（这里指的是b）他的<code>[[Prototype]]</code>的指向是否是指向所需对象（这里指的是a）的，完全可以跳过显示创建构造函数的形式，使用这个方法不仅仅不会改变原来实例（这里指的是a）的<code>[[Prototype]]</code>指向，而且又让新实例的原型指向了a，就很棒，这里具体还是去继承那边文章看</p>
+<h2 id="4-原型的层级"><a href="#4-原型的层级" class="headerlink" title="4.原型的层级"></a>4.原型的层级</h2><p>例如以下代码</p>
+<pre><code class="js">function BasePerson(){
+    this.country = &#39;China&#39;;
+    this.age = 23;
+}
+
+function Person(){
+    this.name = &#39;weng&#39;;
+}
+
+Person.prototype = new BasePersn();
+
+const per1 = new Person();
+per1.address = &#39;fujian&#39;;
+
+console.log(per1.age) // 23</code></pre>
+<p>以上代码的各个关系如下图所示；</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="image-20210530163634192.png" alt="image-20210530163634192" title>
+                </div>
+                <div class="image-caption">image-20210530163634192</div>
+            </figure>
+
+
+
+<p>这里比较重要的是<code>Person.prototype</code>，这里手动给他赋值给了new BasePerson()构造出来的实例，后面又手动的给把他的constructor属性赋值给了Person，这里为什么呢？本文最后会说明</p>
+<p>之后呢，Person的原型对象中有了BasePerson构造函数内部初始化的时候的一些参数</p>
+<p>按照这上面的层级关系</p>
+<pre><code class="js">per1.name; // weng
+per1.address; // fujian
+per1.age; // 23</code></pre>
+<p>这里其实都是可以访问到的</p>
+<p>在通过实例访问属性的时候，会按这个属性的名称开始搜索，一层层往上走，一开始搜索实例本身是否有这些属性</p>
+<p>，如果有就返回，如果没有继续通过 <code>[[Prototype]]</code>的指针向上搜索原型。</p>
+<blockquote>
+<p>constructor只存在于原型对象上面，其实也可以通过访问实例的原型指针来访问这个constructor</p>
+</blockquote>
+<p>如果有存在同名属性的话，实力上创建的会覆盖原型上的，但不至于改变原型上的同名属性，只是给他盖住看不见了</p>
+<h3 id="1-删除实例中的属性"><a href="#1-删除实例中的属性" class="headerlink" title="1.删除实例中的属性"></a>1.删除实例中的属性</h3><p>delete操作符号可以删除实例上面定义的属性值，调用时候，这个实例的原型上的值不会被删除</p>
+<p>要删除的话得直接在原型上做操作</p>
+<p>例如上面的代码构建的实例per1</p>
+<pre><code class="js">delete per1.address;
+console.log(per1.address) // undefined</code></pre>
+<p>通过删除实例上的属性，可能会暴露出原型上的同名属性，这里的话具体而论，那怎么判断这个属性是在原型上还是在实例上的呢？</p>
+<h3 id="2-判断属性在原型上还是在实例上"><a href="#2-判断属性在原型上还是在实例上" class="headerlink" title="2. 判断属性在原型上还是在实例上"></a>2. 判断属性在原型上还是在实例上</h3><h4 id="1-hasOwnProperty"><a href="#1-hasOwnProperty" class="headerlink" title="1. hasOwnProperty()"></a>1. hasOwnProperty()</h4><p>这个方法可以用来判断某个属性是否在实例上面（这个函数不进入实例的原型中去搜索指定属性）</p>
+<p>这个方法直接在实例上调用，继承至Object构造函数的原型对象，如果害怕实例的中有同名方法的话可以使用Object.prototype.hasOwnProperty.call(this)来调用</p>
+<p>比如上面的per1实例在没有删除addrss的情况下</p>
+<pre><code class="js">per1.hasOwnProperty(&#39;address&#39;); // true;
+per1.hasOwnProperty(&#39;name&#39;); // true;
+
+per1.hasOwnProperty(&#39;age&#39;); // false;</code></pre>
+<p>per1.age实际上返回的是这个实例原型上的age，hasOwnProperty是访问不到的</p>
+<p>那如果要确定是否原型上有这个值呢？不用per1[‘….’]来判断</p>
+<h4 id="2-in"><a href="#2-in" class="headerlink" title="2. in"></a>2. in</h4><p>in操作符有两种使用方式</p>
+<ol>
+<li>在for-in中使用</li>
+<li>单独使用</li>
+</ol>
+<p>这里先说说单独使用in，下面得第5点说for-in</p>
+<p>in操作符号可以通过对象访问指定属性时候返回true，<strong>无论是在原型上还是在实例上面，都可以访问的到</strong></p>
+<p>例如上面的per1对象</p>
+<pre><code class="js">console.log(&#39;name&#39; in per1); // true
+console.log(&#39;address&#39; in per1); // true
+console.log(&#39;age&#39; in per1); // true</code></pre>
+<h3 id="3-确定实例的某个属性不在实例上，只在原型上"><a href="#3-确定实例的某个属性不在实例上，只在原型上" class="headerlink" title="3. 确定实例的某个属性不在实例上，只在原型上"></a>3. 确定实例的某个属性不在实例上，只在原型上</h3><p>结合第4大点的第二小点的两个操作符，可以确定一个函数</p>
+<pre><code class="js">function hasPrototypeProperty(object,name){
+    return !object.hasOwnProperty(name) &amp;&amp; (name in object);
+}</code></pre>
+<h3 id="4-获取实例的属性"><a href="#4-获取实例的属性" class="headerlink" title="4. 获取实例的属性"></a>4. 获取实例的属性</h3><h4 id="1-Object-keys-获取实例上的属性（仅仅是实例上可枚举属性）"><a href="#1-Object-keys-获取实例上的属性（仅仅是实例上可枚举属性）" class="headerlink" title="1. Object.keys()获取实例上的属性（仅仅是实例上可枚举属性）"></a>1. Object.keys()获取实例上的属性（仅仅是实例上可枚举属性）</h4><h4 id="2-for-in遍历实例以及其原型上的所有属性（仅仅是可枚举属性）"><a href="#2-for-in遍历实例以及其原型上的所有属性（仅仅是可枚举属性）" class="headerlink" title="2. for-in遍历实例以及其原型上的所有属性（仅仅是可枚举属性）"></a>2. for-in遍历实例以及其原型上的所有属性（仅仅是可枚举属性）</h4><h4 id="3-Object-getOwnPropertyNames-获取仅仅是实例上的属性（是否可枚举都能获取）"><a href="#3-Object-getOwnPropertyNames-获取仅仅是实例上的属性（是否可枚举都能获取）" class="headerlink" title="3.Object.getOwnPropertyNames()获取仅仅是实例上的属性（是否可枚举都能获取）"></a>3.Object.getOwnPropertyNames()获取仅仅是实例上的属性（是否可枚举都能获取）</h4><p>例如：</p>
+<p>正常来说，一个实例的原型对象上的constructor属性都是不可以枚举的，是不能够通过1，2两个方法获取的</p>
+<pre><code class="js">let keys = Object.getOwnPropertyNames(Person.prototype);
+console.log(keys); // [...., &#39;constructor&#39;]</code></pre>
+<h4 id="4-Object-getOwnPropertySymbols-仅仅针对符号针对实例属性（是否枚举都可以）"><a href="#4-Object-getOwnPropertySymbols-仅仅针对符号针对实例属性（是否枚举都可以）" class="headerlink" title="4. Object.getOwnPropertySymbols() 仅仅针对符号针对实例属性（是否枚举都可以）"></a>4. Object.getOwnPropertySymbols() 仅仅针对符号针对实例属性（是否枚举都可以）</h4><pre><code class="js">let k1 = Symbol(&#39;k1&#39;);
+let o = {
+    [k1]: &#39;helloworld&#39;
+}
+console.log(o);
+// [Symbol(k1)]</code></pre>
+<h2 id="5-属性的枚举顺序"><a href="#5-属性的枚举顺序" class="headerlink" title="5. 属性的枚举顺序"></a>5. 属性的枚举顺序</h2><p>以上可以总结几种获取实例或者实例原型上的一些属性的方法</p>
+<ol>
+<li>for-in</li>
+<li>Object.keys()</li>
+<li>Object.getOwnPropertyNames()</li>
+<li>Object.getOwnPropertySymbols();</li>
+</ol>
+<p>这里涉及到获取属性的顺序，还有一个Object.assign这类浅层复制对象的方式</p>
+<p><strong>for-in以及Object.keys()获取到的属性值的顺序是确定的</strong>，取决于js的引擎</p>
+<p>Object.getOwnPropertyNames()，Object.getOwnPropertySymbols(); 以及Object.assign得出来的属性的枚举顺序都是确定的。</p>
+<p>按照以下规则：</p>
+<ol>
+<li>先升序枚举数值键</li>
+<li>以插入顺序枚举字符串和符号键</li>
+<li>对象字面量中定义的键，以逗号分隔的顺序插入</li>
+</ol>
+<p>例如：</p>
+<pre><code class="js">let k1 = Symbol(&#39;k1&#39;), k2 = Symbol(&#39;k2&#39;);
+let o = {
+    1: 1,
+    first:&#39;first&#39;,
+    [k1]:&#39;hello&#39;,
+    second:&#39;second&#39;,
+    0:0
+}
+o[k2] = &#39;world&#39;;
+o[3] = 3;
+o.third = &#39;third&#39;;
+o[2] = 2;
+
+console.log(Object.getOwnPropertyNames(0));
+// [&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;first&quot;,&quot;second&quot;,&quot;third&quot;];
+
+console.log(Object.getOwnPropertySymbols(o));
+// [Symbol(k1),Symbol(k2)];</code></pre>
+<h2 id="6-原型中存在的问题"><a href="#6-原型中存在的问题" class="headerlink" title="6. 原型中存在的问题"></a>6. 原型中存在的问题</h2><ol>
+<li>弱化了向构造函数传递初始化参数的能力，会导致所有实例默认都取得相同的属性值</li>
+<li>原型上引用值属性的问题</li>
+</ol>
+<p>第一点是显而易见的</p>
+<p>第二点中举个例子</p>
+<pre><code class="js">function Person(){}
+Person.prototype.arr = [1,2,3,4];
+let per1 = new Person();
+let per2 = new Person();
+per1.arr.push(5);
+
+console.log(per2.arr) // [1,2,3,4, 5];</code></pre>
+<p>引用类型的arr定义在原型上，这时候对per1上的arr属性进行修改，因为per1实例上不存在arr的属性，那么会找到原型中的arr，这时候通过arr.push是直接作用在原型中的arr的，所以，引用类型属性之间的共享特性导致per2.arr访问的也是原型上的arr，意思就是引用类型访问的都是一个指针，就特么和对象一样。</p>
+<h1 id="本篇文章中留下来的疑问"><a href="#本篇文章中留下来的疑问" class="headerlink" title="本篇文章中留下来的疑问"></a>本篇文章中留下来的疑问</h1><h2 id="1-constructor手动赋值的情况"><a href="#1-constructor手动赋值的情况" class="headerlink" title="1. constructor手动赋值的情况"></a>1. constructor手动赋值的情况</h2><p>以上第4大点中的层级关系代码中，手动将原型中的constructor赋值给了Person</p>
+<pre><code class="js">function BasePerson(){
+    this.country = &#39;China&#39;;
+    this.age = 23;
+}
+
+function Person(){
+    this.name = &#39;weng&#39;;
+}
+
+Person.prototype = new BasePersn();
+Person.prototype.constructor = Person;
+
+const per1 = new Person();
+per1.address = &#39;fujian&#39;;
+
+console.log(per1.age) // 23</code></pre>
+<p>因为在这个例子中，Person.prototype被手动设置为一个BasePerson构建函数构建出来的新实例，这个过程相当于重写了Person构造函数的原型，这样重写之后，Person.prototype就不再指向自身的Person，由本文开头说的一样，函数构建的时候会默认创建原型，也就是prototype对象，也会自动给原型的contructor赋值，这个写法完全覆盖了默认的prototype，造成了constructor不再指向自身的构造函数，而是指向了Object构造函数Object(){}</p>
+<p>这个时候就不在能够通过constructor属性来识别是什么类型了，还是得用instanceof</p>
+<p>再比如下面的代码</p>
+<pre><code class="js">function Person(){
+
+}
+let f = new Person();
+Person.prototype = {
+    name:&#39;weng&#39;,
+    sayName(){
+        console.log(this.name);
+    }
+}
+
+f.sayName(); // 报错，sayName is not a function
+</code></pre>
+<p>这是为什么呢？</p>
+<p>由于f实例是在重写Person原型之前就已经构建出来了的，它的[[Prototype]]指针指向的原型对象是一开始Person构造函数所指向的，那本身就不存在sayName这个方法，这时候Person的原型被覆盖了，和f一点关系都没有；</p>
+<p>这就解释了为什么不能用实例访问constructor来判断类型标识了得用intanceof</p>
+<p>那这时候来解决上面手动赋值constructor的问题</p>
+<p>如果constructor的值很重要，可以在上述代码中加入</p>
+<pre><code class="js">function Person(){
+
+}
+let f = new Person();
+Person.prototype = {
+    constructor: Person,
+    name:&#39;weng&#39;,
+    sayName(){
+        console.log(this.name);
+    }
+}</code></pre>
+<p>这样就可</p>
+<p>但是又存在个问题</p>
+<p>咱们知道原型上的constructor的属性是不可枚举的，也就是constructor本身这个属性的特性<code>[[Enumberable]]</code>特性是false，但是这样定义的constructor属性是可以枚举的，那这个时候可以看看 那篇 对象属性特性的文章，然后定义这个属性</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.083Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">原型模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/05/30/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/&title=《创建对象之原型模式》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/05/30/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/&title=《创建对象之原型模式》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/05/30/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《创建对象之原型模式》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/05/30/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/05/30/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/05/30/%E7%AE%97%E6%B3%95%E4%B9%8B%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">算法之滑动窗口</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/05/28/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E6%A8%A1%E5%BC%8F/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">创建对象之构造函数模式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/05/30/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/&title=《创建对象之原型模式》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/05/30/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/&title=《创建对象之原型模式》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/05/30/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《创建对象之原型模式》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/05/30/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/05/30/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2021/05/30/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

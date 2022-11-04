@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>宏任务和微任务 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="Event Loop,浏览器,js引擎,宏任务和微任务,事件循环">
+    <meta name="description" content="宏任务(macrotask)在ECMAScript中，macrotask也被称为task 我们可以将每次执行栈执行的代码当做是一个宏任务(包括每次从事件队列中获取一个事件回调并放到执行栈中执行)， 每一个宏任务会从头到尾执行完毕，不会执行其他 由于JS引擎线程和GUI渲染线程是互斥的关系，浏览器为了能够使宏任务和DOM任务有序的进行，会在一个宏任务执行结果后，在下一个宏任务执行前，GUI渲染线程开">
+<meta property="og:type" content="article">
+<meta property="og:title" content="宏任务和微任务">
+<meta property="og:url" content="https://github.com/NollieLeo/2021/06/10/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="宏任务(macrotask)在ECMAScript中，macrotask也被称为task 我们可以将每次执行栈执行的代码当做是一个宏任务(包括每次从事件队列中获取一个事件回调并放到执行栈中执行)， 每一个宏任务会从头到尾执行完毕，不会执行其他 由于JS引擎线程和GUI渲染线程是互斥的关系，浏览器为了能够使宏任务和DOM任务有序的进行，会在一个宏任务执行结果后，在下一个宏任务执行前，GUI渲染线程开">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/10/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/1.gif">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/10/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/2.gif">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/10/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/3.gif">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/10/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/4.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/10/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/6.png">
+<meta property="article:published_time" content="2021-06-10T08:28:30.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.284Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="Event Loop">
+<meta property="article:tag" content="浏览器">
+<meta property="article:tag" content="js引擎">
+<meta property="article:tag" content="宏任务和微任务">
+<meta property="article:tag" content="事件循环">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/06/10/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/1.gif">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">宏任务和微任务</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">宏任务和微任务</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-06-10T08:28:30.000Z" itemprop="datePublished" class="page-time">
+  2021-06-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#宏任务-macrotask"><span class="post-toc-number">1.</span> <span class="post-toc-text">宏任务(macrotask)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#微任务-microtask"><span class="post-toc-number">2.</span> <span class="post-toc-text">微任务(microtask)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简单区分宏任务与微任务"><span class="post-toc-number">3.</span> <span class="post-toc-text">简单区分宏任务与微任务</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#微任务宏任务注意点"><span class="post-toc-number">4.</span> <span class="post-toc-text">微任务宏任务注意点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#图解宏任务和微任务"><span class="post-toc-number">5.</span> <span class="post-toc-text">图解宏任务和微任务</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#完整的Event-loop"><span class="post-toc-number">6.</span> <span class="post-toc-text">完整的Event loop</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-宏任务和微任务"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">宏任务和微任务</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-06-10 16:28:30" datetime="2021-06-10T08:28:30.000Z"  itemprop="datePublished">2021-06-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="宏任务-macrotask"><a href="#宏任务-macrotask" class="headerlink" title="宏任务(macrotask)"></a>宏任务(macrotask)</h3><p>在ECMAScript中，<code>macrotask</code>也被称为<code>task</code></p>
+<p>我们可以将每次执行栈执行的代码当做是一个宏任务(包括每次从事件队列中获取一个事件回调并放到执行栈中执行)， 每一个宏任务会从头到尾执行完毕，不会执行其他</p>
+<p>由于<code>JS引擎线程</code>和<code>GUI渲染线程</code>是互斥的关系，浏览器为了能够使<code>宏任务</code>和<code>DOM任务</code>有序的进行，会在一个<code>宏任务</code>执行结果后，在下一个<code>宏任务</code>执行前，<code>GUI渲染线程</code>开始工作，对页面进行渲染</p>
+<pre><code>宏任务 -&gt; GUI渲染 -&gt; 宏任务 -&gt; ...
+复制代码</code></pre><p>常见的宏任务</p>
+<ul>
+<li>主代码块</li>
+<li>setTimeout</li>
+<li>setInterval</li>
+<li>setImmediate ()-Node</li>
+<li>requestAnimationFrame ()-浏览器</li>
+</ul>
+<h3 id="微任务-microtask"><a href="#微任务-microtask" class="headerlink" title="微任务(microtask)"></a>微任务(microtask)</h3><p>ES6新引入了Promise标准，同时浏览器实现上多了一个<code>microtask</code>微任务概念，在ECMAScript中，<code>microtask</code>也被称为<code>jobs</code></p>
+<p>我们已经知道<code>宏任务</code>结束后，会执行渲染，然后执行下一个<code>宏任务</code>， 而微任务可以理解成在当前<code>宏任务</code>执行后立即执行的任务</p>
+<p>当一个<code>宏任务</code>执行完，会在渲染前，将执行期间所产生的所有<code>微任务</code>都执行完</p>
+<pre><code>宏任务 -&gt; 微任务 -&gt; GUI渲染 -&gt; 宏任务 -&gt; ...
+</code></pre><p>常见微任务</p>
+<ul>
+<li>process.nextTick ()-Node</li>
+<li>Promise.then()</li>
+<li>catch</li>
+<li>finally</li>
+<li>Object.observe</li>
+<li>MutationObserver</li>
+</ul>
+<h3 id="简单区分宏任务与微任务"><a href="#简单区分宏任务与微任务" class="headerlink" title="简单区分宏任务与微任务"></a>简单区分宏任务与微任务</h3><p>看了上述宏任务微任务的解释你可能还不太清楚，没关系，往下看，先记住那些常见的宏微任务即可</p>
+<p>我们通过几个例子来看，这几个例子思路来自掘金<code>云中君</code>的文章参考链接【14】，通过渲染背景颜色来区分宏任务和微任务，很直观，我觉得很有意思，所以这里也用这种例子</p>
+<p>找一个空白的页面，在console中输入以下代码</p>
+<pre><code>document.body.style = &#39;background:black&#39;;
+document.body.style = &#39;background:red&#39;;
+document.body.style = &#39;background:blue&#39;;
+document.body.style = &#39;background:pink&#39;;
+</code></pre><p><img src="1.gif" alt="img"></p>
+<p>我们看到上面动图背景直接渲染了粉红色，根据上文里讲浏览器会先执行完一个宏任务，再执行当前执行栈的所有微任务，然后移交GUI渲染，上面四行代码均属于同一次宏任务，全部执行完才会执行渲染，渲染时<code>GUI线程</code>会将所有UI改动优化合并，所以视觉上，只会看到页面变成粉红色</p>
+<p>再接着看</p>
+<pre><code>document.body.style = &#39;background:blue&#39;;
+setTimeout(()=&gt;{
+    document.body.style = &#39;background:black&#39;
+},200)
+</code></pre><p><img src="2.gif" alt="img"></p>
+<p>上述代码中，页面会先卡一下蓝色，再变成黑色背景，页面上写的是200毫秒，大家可以把它当成0毫秒，因为0毫秒的话由于浏览器渲染太快，录屏不好捕捉，我又没啥录屏慢放的工具，大家可以自行测试的，结果也是一样，最安全的方法是写一个<code>index.html</code>文件，在这个文件中插入上面的js脚本，然后浏览器打开，谷歌下使用控制台中<code>performance</code>功能查看一帧一帧的加载最为恰当，不过这样录屏不好录所以。。。</p>
+<p>回归正题，之所以会卡一下蓝色，是因为以上代码属于两次<code>宏任务</code>，第一次<code>宏任务</code>执行的代码是将背景变成蓝色，然后触发渲染，将页面变成蓝色，再触发第二次宏任务将背景变成黑色</p>
+<p>再来看</p>
+<pre><code>document.body.style = &#39;background:blue&#39;
+console.log(1);
+Promise.resolve().then(()=&gt;{
+    console.log(2);
+    document.body.style = &#39;background:pink&#39;
+});
+console.log(3);
+</code></pre><p><img src="3.gif" alt="img"></p>
+<p>控制台输出 1 3 2 , 是因为 promise 对象的 then 方法的回调函数是异步执行，所以 2 最后输出</p>
+<p>页面的背景色直接变成粉色，没有经过蓝色的阶段，是因为，我们在宏任务中将背景设置为蓝色，但在进行渲染前执行了微任务， 在微任务中将背景变成了粉色，然后才执行的渲染</p>
+<h3 id="微任务宏任务注意点"><a href="#微任务宏任务注意点" class="headerlink" title="微任务宏任务注意点"></a>微任务宏任务注意点</h3><ul>
+<li>浏览器会先执行一个宏任务，紧接着执行当前执行栈产生的微任务，再进行渲染，然后再执行下一个宏任务</li>
+<li>微任务和宏任务不在一个任务队列，不在一个任务队列 <ul>
+<li>例如<code>setTimeout</code>是一个宏任务，它的事件回调在宏任务队列，<code>Promise.then()</code>是一个微任务，它的事件回调在微任务队列，二者并不是一个任务队列</li>
+<li>以Chrome 为例，有关渲染的都是在渲染进程中执行，渲染进程中的任务（DOM树构建，js解析…等等）需要主线程执行的任务都会在主线程中执行，而浏览器维护了一套事件循环机制，主线程上的任务都会放到消息队列中执行，主线程会循环消息队列，并从头部取出任务进行执行，如果执行过程中产生其他任务需要主线程执行的，渲染进程中的其他线程会把该任务塞入到消息队列的尾部，消息队列中的任务都是宏任务</li>
+<li>微任务是如何产生的呢？当执行到script脚本的时候，js引擎会为全局创建一个执行上下文，在该执行上下文中维护了一个微任务队列，当遇到微任务，就会把微任务回调放在微队列中，当所有的js代码执行完毕，在退出全局上下文之前引擎会去检查该队列，有回调就执行，没有就退出执行上下文，这也就是为什么微任务要早于宏任务，也是大家常说的，每个宏任务都有一个微任务队列（由于定时器是浏览器的API，所以定时器是宏任务，在js中遇到定时器会也是放入到浏览器的队列中）</li>
+</ul>
+</li>
+</ul>
+<h3 id="图解宏任务和微任务"><a href="#图解宏任务和微任务" class="headerlink" title="图解宏任务和微任务"></a>图解宏任务和微任务</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="4.png" alt="img" title>
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+
+<p>首先执行一个宏任务，执行结束后判断是否存在微任务</p>
+<p>有微任务先执行所有的微任务，再渲染，没有微任务则直接渲染</p>
+<p>然后再接着执行下一个宏任务</p>
+<h3 id="完整的Event-loop"><a href="#完整的Event-loop" class="headerlink" title="完整的Event loop"></a>完整的Event loop</h3><p> <img src="6.png" alt="img"> </p>
+<p>首先，整体的script(作为第一个宏任务)开始执行的时候，会把所有代码分为<code>同步任务</code>、<code>异步任务</code>两部分</p>
+<p>同步任务会直接进入主线程依次执行</p>
+<p>异步任务会再分为宏任务和微任务</p>
+<p>宏任务进入到Event Table中，并在里面注册回调函数，每当指定的事件完成时，Event Table会将这个函数移到Event Queue中</p>
+<p>微任务也会进入到另一个Event Table中，并在里面注册回调函数，每当指定的事件完成时，Event Table会将这个函数移到Event Queue中</p>
+<p>当主线程内的任务执行完毕，主线程为空时，会检查微任务的Event Queue，如果有任务，就全部执行，如果没有就执行下一个宏任务</p>
+<p>上述过程会不断重复，这就是Event Loop，比较完整的事件循环</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.284Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Event-Loop/" rel="tag">Event Loop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js%E5%BC%95%E6%93%8E/" rel="tag">js引擎</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" rel="tag">事件循环</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/" rel="tag">宏任务和微任务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/06/10/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/&title=《宏任务和微任务》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/06/10/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/&title=《宏任务和微任务》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/06/10/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《宏任务和微任务》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/06/10/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/06/10/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/06/13/%E6%89%8B%E5%86%99Promise/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">手写Promise</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/06/10/Event-Loop%E8%BD%AE%E8%AF%A2%E5%A4%84%E7%90%86%E7%BA%BF%E7%A8%8B/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Event Loop轮询处理线程</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/06/10/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/&title=《宏任务和微任务》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/06/10/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/&title=《宏任务和微任务》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/06/10/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《宏任务和微任务》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/06/10/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/06/10/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2021/06/10/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

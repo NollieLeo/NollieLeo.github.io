@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>单例模式 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="js设计模式,单例模式">
+    <meta name="description" content="单例模式 保证一个类仅有一个实例，并提供给一个访问它的全局访问点。  1. 实现简单的单例模式var Singleton &#x3D; function(name){     this.name &#x3D; name; } Singleton.instance &#x3D; null; Singleton.prototype.getName &#x3D; function(){     alert(this.name); } Sing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单例模式">
+<meta property="og:url" content="https://github.com/NollieLeo/2020/08/23/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="单例模式 保证一个类仅有一个实例，并提供给一个访问它的全局访问点。  1. 实现简单的单例模式var Singleton &#x3D; function(name){     this.name &#x3D; name; } Singleton.instance &#x3D; null; Singleton.prototype.getName &#x3D; function(){     alert(this.name); } Sing">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-23T05:28:14.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.165Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="js设计模式">
+<meta property="article:tag" content="单例模式">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">单例模式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">单例模式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-08-23T05:28:14.000Z" itemprop="datePublished" class="page-time">
+  2020-08-23
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">js设计模式</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#单例模式"><span class="post-toc-number">1.</span> <span class="post-toc-text">单例模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-实现简单的单例模式"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1. 实现简单的单例模式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-透明的单例模式"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2.透明的单例模式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-用代理实现"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3.用代理实现</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-js中的单例模式"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">4. js中的单例模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-1-使用命名空间"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">4.1 使用命名空间</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2-使用闭包封装私有变量"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">4.2 使用闭包封装私有变量</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-惰性单例"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">5.惰性单例</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-单例模式"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">单例模式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-08-23 13:28:14" datetime="2020-08-23T05:28:14.000Z"  itemprop="datePublished">2020-08-23</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">js设计模式</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><blockquote>
+<p>保证<strong>一个类仅有一个实例</strong>，并提供给一个访问它的全局访问点。</p>
+</blockquote>
+<h2 id="1-实现简单的单例模式"><a href="#1-实现简单的单例模式" class="headerlink" title="1. 实现简单的单例模式"></a>1. 实现简单的单例模式</h2><pre><code class="javascript">var Singleton = function(name){
+    this.name = name;
+}
+Singleton.instance = null;
+Singleton.prototype.getName = function(){
+    alert(this.name);
+}
+Singleton.getInstance = function(name){
+       if(!this.instance){
+        this.instance = new Singleton(name);
+    }
+    return this.instance
+}
+
+var a1 = Singleton.getInstance(&#39;a1&#39;);
+var a2 = Singleton.getInstance(&#39;a2&#39;);
+
+a1 === a2 // true;
+</code></pre>
+<p>或者直接用闭包</p>
+<pre><code class="javascript">var Singleton = function(name){
+    this.name = name;
+}
+Singleton.prototype.getName = function(){
+    altert(this.name);
+}
+Singleton.getInstance = (function(){
+    var instance = null;
+    return function(name){
+        if(!instance){
+            instance = new Singleton(name);
+        }
+        return this.instance;
+    }
+})();</code></pre>
+<p>这种方式相对简单，但是增加了这个类的“不透明性”，这个类的使用者必须知道这个是一个单例，与之前的new一个类不同，使用者要用getinstance来获取对象</p>
+<h2 id="2-透明的单例模式"><a href="#2-透明的单例模式" class="headerlink" title="2.透明的单例模式"></a>2.透明的单例模式</h2><blockquote>
+<p>目标：实现一个“透明的单例类”，用户从这个类中创建对象的时候，可以像使用其他任何普通类一样。</p>
+</blockquote>
+<p>下面例子用CreateDiv单例类，负责在页面中创建唯一的div节点</p>
+<pre><code class="javascript">var CreateDiv = (function{
+    var instance;
+    var CreateDiv = function(html){
+        if(instance){
+            return instance;
+        }
+        this.html = html;
+        this.init();
+        return instance = this;
+    }
+    CreateDiv.prototype.init = function(){
+        var div = document.createElement(&#39;div&#39;);
+        div.innerHtml = this.html;
+        document.body.appendChild(div);
+    }
+    return CreateDiv;
+})();
+var a1 = new CreateDiv(&#39;a1&#39;);
+var a2 = new CreateDiv(&#39;a2&#39;);
+a1 === a2  // true;</code></pre>
+<p>虽然透明了，但有缺点，为了把instance封起来，我们使用了自执行的匿名函数和闭包，并且让这个匿名函数返回真正的Singleton构造方法，增加了复杂度。</p>
+<p>假如某天我们需要利用这个类，再页面中创建许多div，则就要让这个单例类变成一个普通的可产生多个实例的类，那我们必须得改写CreateDiv构造函数，把控制创建唯一对象的那段去掉。</p>
+<h2 id="3-用代理实现"><a href="#3-用代理实现" class="headerlink" title="3.用代理实现"></a>3.用代理实现</h2><p>由上可以知道，要想使得这个单例类变成一个普通的可以产生多个实例的类，那我们必须得改。</p>
+<p>这时候我们把负责管理单例的代码移除出去，使他成为一个普通的创建div的类：</p>
+<pre><code class="javascript">var CreateDiv = function(html){
+    this.html = html;
+    this.init();
+}
+CreateDiv.prototype.init = function(){
+    var div = document.createElement(&#39;div&#39;);
+    div.innerHTML = this.html;
+    document.body.appendChild(div);
+}</code></pre>
+<p>接下来引入代理类ProxySingletonCreateDiv</p>
+<pre><code class="javascript">var ProxySingletonCreateDiv = (function(){
+    var instance;
+    return function(html){
+        if(!instance){
+            instance = new CreateDiv(html);
+        }
+        return instance;
+    }
+})();
+var a1 = new ProxySingletonCreateDiv(&#39;a1&#39;);
+var a2 = new ProxySingletonCreateDiv(&#39;a2&#39;);
+a1 === a2; // true;</code></pre>
+<p>这两个连起来就就可以就可以实现单例模式的实现，通过代理类加上一个CreateDiv普通类，组合</p>
+<h2 id="4-js中的单例模式"><a href="#4-js中的单例模式" class="headerlink" title="4. js中的单例模式"></a>4. js中的单例模式</h2><p>js是一门无类语言。传统的单例模式实现再js中并不适用</p>
+<blockquote>
+<p>单例模式的核心是确保只有一个实例，并提供全局访问</p>
+</blockquote>
+<p>全局变量不是单例模式，单再js开发中，我们经常会把全局变量当成单例来使用</p>
+<pre><code class="javascript">var a ={};</code></pre>
+<p>但是这样变量容易被覆盖。</p>
+<p>因此需要降低全局变量命名的污染。</p>
+<h3 id="4-1-使用命名空间"><a href="#4-1-使用命名空间" class="headerlink" title="4.1 使用命名空间"></a>4.1 使用命名空间</h3><pre><code class="javascript">var namespace = {
+    a:function(){
+        ...
+    },
+    b:function(){
+        ...
+    }
+}</code></pre>
+<h3 id="4-2-使用闭包封装私有变量"><a href="#4-2-使用闭包封装私有变量" class="headerlink" title="4.2 使用闭包封装私有变量"></a>4.2 使用闭包封装私有变量</h3><p>这种方法把一些变量封装再闭包内部，只暴露接口与外界通信</p>
+<pre><code class="javascript">var user = (function(){
+    var _name = &#39;seven&#39;,_age = 29;
+    return {
+        getUserInfo:function(){
+            return _name + &#39;-&#39; + _age;
+        }
+    }
+})();</code></pre>
+<p>我们用下划线约定_name 和 _age。</p>
+<h2 id="5-惰性单例"><a href="#5-惰性单例" class="headerlink" title="5.惰性单例"></a>5.惰性单例</h2><p>惰性单例指的是需要的时候才去创建的对象实例。</p>
+<p>例如：我们需要点击一个按钮显示一个弹窗，这个浮窗再这个页面里头是唯一的，不可能同时出现两个</p>
+<p><strong>方法一：</strong>在页面加载之后就去创建，然后点击btn把他显示出来</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;body&gt;
+        &lt;button id=&quot;loginBtn&quot;&gt;
+            登录
+        &lt;/button&gt;
+    &lt;/body&gt;
+    &lt;script&gt;
+        var loginLayer = (function(){
+            var div = document.createElement(&#39;div&#39;);
+            div.innerHTML = &#39;我是登录浮窗&#39;;
+            div.style.display = &#39;none&#39;;
+            document.body.appendChild(div);
+            return div;
+        })();
+        document.getElementById(&#39;loginBtn&#39;).onclick = function(){
+            loginLayer.style.display = &#39;block&#39;
+        }
+    &lt;/script&gt;
+&lt;/html&gt;</code></pre>
+<p>，但是如果有时候不需要就不需要浪费空间去创建节点，需要改进</p>
+<p>现在是点击的时候才会去创建节点</p>
+<pre><code class="javascript">&lt;html&gt;
+    &lt;body&gt;
+        &lt;button id=&quot;loginBtn&quot;&gt;
+            登录
+        &lt;/button&gt;
+    &lt;/body&gt;
+    &lt;script&gt;
+        var loginLayer = function(){
+            var div = document.createElement(&#39;div&#39;);
+            div.innerHTML = &#39;我是登录浮窗&#39;;
+            div.style.display = &#39;none&#39;;
+            document.body.appendChild(div);
+            return div;
+        };
+        document.getElementById(&#39;loginBtn&#39;).onclick = function(){
+            var loginLayer = createLoginLayer();
+            loginLayer.style.display = &#39;block&#39;
+        }
+    &lt;/script&gt;
+&lt;/html&gt;</code></pre>
+<p>但是虽然实现了惰性，这样就失去了单例的效果，频繁的增删不太合适。</p>
+<p>此时可以用一个变量判断是否已经创建过浮窗了。</p>
+<pre><code class="javascript">var createLoginLayer = (function(){
+    var div;
+    return function(){
+        if(!div){
+            var div = document.createElement(&#39;div&#39;);
+            div.innerHTML = &#39;我是登录浮窗&#39;;
+            div.style.display = &#39;none&#39;;
+            document.body.appendChild(div);
+        }
+        return div;
+    }
+})()
+document.getElementById(&#39;loginBtn&#39;).onclick = function(){
+    var loginLayer = createLoginLayer();
+    loginLayer.style.display = &#39;block&#39;
+}</code></pre>
+<p>但是这个却违反了单一职责原则，这里创建和管理单例的逻辑全部都放在了一个func里头，但下次如果要创建iframe或者其他的东西，那就只能照抄代码了</p>
+<p>因此把不变的部分分出来，把管理单例的逻辑抽出来，之后传创建的逻辑就行了。</p>
+<pre><code class="javascript">var getSingle = function(fn){
+    var result ;
+    return function(){
+        return result || result = fn.apply(this,arguments);
+    }
+}</code></pre>
+<p>接下来就可以用于创建弹窗的方法用于参数fn的形式传入getSingle，创建啥都行，用result保存fn的己算结果。result身在闭包中，永远不会销毁，之后如果result有值，直接返回</p>
+<pre><code class="javascript">var createLoginLayer = function(){
+    var div = document.createElement(&#39;div&#39;);
+    div.innerHTML = &#39;我是登录浮窗&#39;;
+    div.style.display = &#39;none&#39;;
+    document.body.appendChild(div);
+    return div;
+}
+
+var createSingleLoginLayer = getSingle(createLoginLayer);
+document.getElementById(&#39;loginBtn&#39;).onclick = function(){
+    var loginLayer = createSingleLoginLayer();
+    loginLayer.style.display = &#39;block&#39;
+}
+// 创建ifame啥的也是一样</code></pre>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.165Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">js设计模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" rel="tag">单例模式</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/08/23/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/&title=《单例模式》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/08/23/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/&title=《单例模式》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/08/23/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《单例模式》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/08/23/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/08/23/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/08/24/%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">函数柯里化</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/08/02/typeScript%E6%80%BB%E7%BB%93/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">typeScript总结</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/08/23/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/&title=《单例模式》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/08/23/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/&title=《单例模式》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/08/23/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《单例模式》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/08/23/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/08/23/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2020/08/23/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>js的类型转换 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="类型转换,==,===">
+    <meta name="description" content="自我检测[] &#x3D;&#x3D; ![] &#x2F;&#x2F; -&gt; true D部分有答案 显式类型转换和隐式类型转换强制转换经常发生在动态类型语言运行时。我们经常会写类型转换，如： var a&#x3D;1  var b&#x3D;a+&#39;&#39; &#x2F;&#x2F; 隐式 &#39;1&#39; var c&#x3D;String(a) &#x2F;&#x2F; 显式 &#39;1&#39; 这里的隐式和显式是相对于开发者而言的。可以从代码中看出来类型转换的是显式，反则">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js的类型转换">
+<meta property="og:url" content="https://github.com/NollieLeo/2021/05/28/js%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="自我检测[] &#x3D;&#x3D; ![] &#x2F;&#x2F; -&gt; true D部分有答案 显式类型转换和隐式类型转换强制转换经常发生在动态类型语言运行时。我们经常会写类型转换，如： var a&#x3D;1  var b&#x3D;a+&#39;&#39; &#x2F;&#x2F; 隐式 &#39;1&#39; var c&#x3D;String(a) &#x2F;&#x2F; 显式 &#39;1&#39; 这里的隐式和显式是相对于开发者而言的。可以从代码中看出来类型转换的是显式，反则">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-28T02:55:50.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.078Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="类型转换">
+<meta property="article:tag" content="&#x3D;&#x3D;">
+<meta property="article:tag" content="&#x3D;&#x3D;&#x3D;">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">js的类型转换</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">js的类型转换</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-05-28T02:55:50.000Z" itemprop="datePublished" class="page-time">
+  2021-05-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自我检测"><span class="post-toc-number">1.</span> <span class="post-toc-text">自我检测</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#显式类型转换和隐式类型转换"><span class="post-toc-number">2.</span> <span class="post-toc-text">显式类型转换和隐式类型转换</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#A-抽象值操作"><span class="post-toc-number">3.</span> <span class="post-toc-text">A.抽象值操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-ToString"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">1.ToString</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#基本类型"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">基本类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#复杂类型"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">复杂类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#JSON字符串化"><span class="post-toc-number">3.1.3.</span> <span class="post-toc-text">JSON字符串化</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-ToNumber"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2.ToNumber</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#基本类型-1"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">基本类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#复杂类型-1"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">复杂类型</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-ToBoolean"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3.ToBoolean</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#假值（falsy-value）"><span class="post-toc-number">3.3.0.1.</span> <span class="post-toc-text">假值（falsy value）</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#B-显式强制类型转换"><span class="post-toc-number">4.</span> <span class="post-toc-text">B.显式强制类型转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字符串和数字之间的显式转换"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">字符串和数字之间的显式转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#日期显示转换为数字"><span class="post-toc-number">4.1.1.</span> <span class="post-toc-text">日期显示转换为数字</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#位操作符"><span class="post-toc-number">4.1.2.</span> <span class="post-toc-text">位操作符~</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#显式解析数字字符串"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">显式解析数字字符串</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#解析和转换的区别"><span class="post-toc-number">4.2.1.</span> <span class="post-toc-text">解析和转换的区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#显式转换为布尔值"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">显式转换为布尔值</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C-隐式强制类型转换"><span class="post-toc-number">5.</span> <span class="post-toc-text">C.隐式强制类型转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-字符串和数字之间的隐式转换"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">1.字符串和数字之间的隐式转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#操作符"><span class="post-toc-number">5.1.1.</span> <span class="post-toc-text">+&#x2F;-操作符</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-隐式类型转换为布尔值"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">2.隐式类型转换为布尔值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-Symbol的强制类型转换"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">3.Symbol的强制类型转换</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#D-宽松相等（-）和严格相等（-）"><span class="post-toc-number">6.</span> <span class="post-toc-text">D.宽松相等（ &#x3D;&#x3D; ）和严格相等（ &#x3D;&#x3D;&#x3D; ）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#宽松相等的转换规则（-）"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">宽松相等的转换规则（&#x3D;&#x3D;）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#字符串和数字之间的相等比较"><span class="post-toc-number">6.1.1.</span> <span class="post-toc-text">字符串和数字之间的相等比较</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#其它类型和布尔类型之间的相等比较"><span class="post-toc-number">6.1.2.</span> <span class="post-toc-text">其它类型和布尔类型之间的相等比较</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#null和undefined之间的相等比较"><span class="post-toc-number">6.1.3.</span> <span class="post-toc-text">null和undefined之间的相等比较</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#对象和非对象之间的相等比较"><span class="post-toc-number">6.1.4.</span> <span class="post-toc-text">对象和非对象之间的相等比较</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#几个典型的坑"><span class="post-toc-number">6.1.5.</span> <span class="post-toc-text">几个典型的坑</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#E-抽象关系比较"><span class="post-toc-number">7.</span> <span class="post-toc-text">E.抽象关系比较</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-js的类型转换"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">js的类型转换</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-05-28 10:55:50" datetime="2021-05-28T02:55:50.000Z"  itemprop="datePublished">2021-05-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="自我检测"><a href="#自我检测" class="headerlink" title="自我检测"></a>自我检测</h2><pre><code class="js">[] == ![] // -&gt; true</code></pre>
+<p>D部分有答案</p>
+<h2 id="显式类型转换和隐式类型转换"><a href="#显式类型转换和隐式类型转换" class="headerlink" title="显式类型转换和隐式类型转换"></a>显式类型转换和隐式类型转换</h2><p>强制转换经常发生在动态类型语言运行时。我们经常会写类型转换，如：</p>
+<pre><code class="js">var a=1 
+var b=a+&#39;&#39; // 隐式 &#39;1&#39;
+var c=String(a) // 显式 &#39;1&#39;</code></pre>
+<p>这里的隐式和显式是相对于开发者而言的。可以从代码中看出来类型转换的是显式，反则为隐式。</p>
+<h2 id="A-抽象值操作"><a href="#A-抽象值操作" class="headerlink" title="A.抽象值操作"></a>A.抽象值操作</h2><h3 id="1-ToString"><a href="#1-ToString" class="headerlink" title="1.ToString"></a>1.ToString</h3><p>非字符串-&gt;字符串。</p>
+<h4 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h4><pre><code class="rust">null -&gt; &#39;null&#39;
+undefined -&gt; &#39;undefined&#39;
+true -&gt; &#39;true&#39;
+1 -&gt; &#39;1&#39;
+1 * 1 000 000 000 000 000 000 000 -&gt; &#39;1e+21&#39;</code></pre>
+<h4 id="复杂类型"><a href="#复杂类型" class="headerlink" title="复杂类型"></a>复杂类型</h4><p>当对象有自己的<code>toString()</code>方法，字符串化时就会调用该方法，使用其返回值。</p>
+<pre><code class="js">const obj={
+    a:&#39;test&#39;,
+    toString(){
+        return &#39;yeah~~&#39;
+    }
+}
+//没有自定义的toString()方法应该返回[object Object]111，
+console.log(obj+&#39;111&#39;) // yeah~~111</code></pre>
+<h4 id="JSON字符串化"><a href="#JSON字符串化" class="headerlink" title="JSON字符串化"></a>JSON字符串化</h4><p>对于大多数简单值来说，<code>JSON.stringify()</code>和<code>toString()</code>的效果基本相同，序列化的结果总是字符串。有一个比较特殊的情况：</p>
+<pre><code class="js">JSON.stringify(&#39;hello&#39;) // &quot;&quot;hello&quot;&quot;  含有双引号的字符串</code></pre>
+<p>对于undefined、function、symbol来说会返回undefined，在数组中返回null、在对象中自动忽略。</p>
+<pre><code class="js">JSON.stringify(undefined) // undefined
+JSON.stringify(function(){}) // undefined
+JSON.stringify([function(){},2]) // &quot;[null,2]&quot;
+JSON.stringify({a:function(){},b:2}) // &quot;{&quot;b&quot;:2}&quot;</code></pre>
+<pre><code class="js">const obj={
+    a:&#39;test&#39;,
+    toJSON(){
+        return &#39;yeah~~&#39;
+    }
+}
+console.log(JSON.stringify(obj))</code></pre>
+<p>答案：</p>
+<pre><code class="js">&quot;yeah~~&quot;</code></pre>
+<h3 id="2-ToNumber"><a href="#2-ToNumber" class="headerlink" title="2.ToNumber"></a>2.ToNumber</h3><h4 id="基本类型-1"><a href="#基本类型-1" class="headerlink" title="基本类型"></a>基本类型</h4><pre><code class="rust">true -&gt; 1
+false -&gt; 0
+undefined -&gt; NaN
+null -&gt; 0</code></pre>
+<p>处理字符串失败时返回NaN。</p>
+<h4 id="复杂类型-1"><a href="#复杂类型-1" class="headerlink" title="复杂类型"></a>复杂类型</h4><p>对象（包括数组），先被转换为相应的基本类型值，如果返回的是非数字的基本类型值，则按照上面的规则强制转换为数字。</p>
+<blockquote>
+<p>将值转换为相应的基本类型值，先检查该值是否有valueOf()方法，有并且返回基本类型值，则使用该值进行强制类型转换；没有就使用toString()的返回值进行强制转换。如果以上都不返回基类型值，产生TypeError错误。</p>
+</blockquote>
+<pre><code class="js">const obj={
+    toString(){
+        return &#39;1&#39;
+    }
+}
+console.log({}) // NaN
+console.log(Number(obj)) // 1</code></pre>
+<p><strong>注意</strong>使用<code>Object.create(null)</code>创建的对象，无法进行强制转换！是因为其<code>[[Prototype]]</code>为空，没有<code>valueOf()</code>和<code>toString()</code>方法。</p>
+<h3 id="3-ToBoolean"><a href="#3-ToBoolean" class="headerlink" title="3.ToBoolean"></a>3.ToBoolean</h3><h5 id="假值（falsy-value）"><a href="#假值（falsy-value）" class="headerlink" title="假值（falsy value）"></a>假值（falsy value）</h5><p>js中的值可被分为两类：可被强制转换为false的值，和其他（可以被强制转换为true的值）。</p>
+<p>以下这些为假值：</p>
+<pre><code class="js">undefined
+null
+fasle
++0 -0 NaN
+&quot;&quot;</code></pre>
+<p>虽然没有明确规定，我们可以默认除了这些值以外的所有值为真值。</p>
+<h2 id="B-显式强制类型转换"><a href="#B-显式强制类型转换" class="headerlink" title="B.显式强制类型转换"></a>B.显式强制类型转换</h2><h3 id="字符串和数字之间的显式转换"><a href="#字符串和数字之间的显式转换" class="headerlink" title="字符串和数字之间的显式转换"></a>字符串和数字之间的显式转换</h3><p>一般通过<code>String()</code>和<code>Number()</code>这两个内建函数实现的。如：</p>
+<pre><code class="js">String(1) // &quot;1&quot;
+Number(&#39;1.25&#39;) // 1.25</code></pre>
+<p>通过一元运算符以及<code>toString()</code>也被认为是显示强制类型转换。</p>
+<pre><code class="js">+&#39;25&#39; // 25</code></pre>
+<h4 id="日期显示转换为数字"><a href="#日期显示转换为数字" class="headerlink" title="日期显示转换为数字"></a>日期显示转换为数字</h4><p>一元运算符有一个常用的用途是，将Date对象强制转换为Unix时间戳，如：</p>
+<pre><code class="js">+new Date() // 1516625381333</code></pre>
+<p>我们也可以使用更显式的方法：</p>
+<pre><code class="js">new Date().getTime() // 1516625518125</code></pre>
+<p>最好还是使用<code>Date.now()</code>来获得当前的时间戳。</p>
+<h4 id="位操作符"><a href="#位操作符" class="headerlink" title="位操作符~"></a>位操作符~</h4><p>~运算符，按位非，反转操作符的比特位。位操作符会强制操作数使用32位格式，通过ToInt32实现（ToInt32先执行ToNUmber强制转换，之后再执行ToInt32）。如果你不太明白他的运算机制，请记住一个公式：</p>
+<pre><code class="jsx">~4 -&gt; -5
+~x  =&gt;  -(x+1)</code></pre>
+<p>~在日常开发中很少会用到，但在我们处理<code>indexOf()</code>时，可以将结果强制转换为真/假值。</p>
+<pre><code class="js">const str=&#39;hello&#39;
+str.indexOf(&#39;a&#39;) // -1
+~str.indexOf(&#39;a&#39;) //0  -&gt; 假值</code></pre>
+<p>~~x还可以用来截除小数部分，如：</p>
+<pre><code class="js">~~-22.8 -&gt; -22</code></pre>
+<h3 id="显式解析数字字符串"><a href="#显式解析数字字符串" class="headerlink" title="显式解析数字字符串"></a>显式解析数字字符串</h3><h4 id="解析和转换的区别"><a href="#解析和转换的区别" class="headerlink" title="解析和转换的区别"></a>解析和转换的区别</h4><p>使用<code>parseInt()</code>将字符串解析为数字，它与<code>Number</code>的作用并不一样：</p>
+<ol>
+<li>parseInt只能解析字符串，传入其他类型参数，如true、function(){}等，返回NaN。</li>
+<li>parseInt可以解析含有非数字字符的字符串，如<code>parseInt(&#39;2px&#39;)</code>将会解析为2，Number则会返回NaN。</li>
+</ol>
+<p>对于parseInt有一个经典的例子，</p>
+<pre><code class="jsx">parseInt(1/0,19) -&gt; 18</code></pre>
+<p>这是因为1/0为Infinity，先被转化为字符串<code>&#39;Infinity&#39;</code>，第一个字符为i，在js中有效数字为09和0i，所以之后的n不会被解析，只解析到i为止，i为第18位，所以输出为18.</p>
+<h3 id="显式转换为布尔值"><a href="#显式转换为布尔值" class="headerlink" title="显式转换为布尔值"></a>显式转换为布尔值</h3><p>和上面的Number(),String()一样，Boolean()为显式的ToBoolean强制类型转换。但这个在开发中并不常用，通常使用<code>!!</code>来进行强制类型转换。</p>
+<p>在<code>if()...</code>上下文中，如没有使用<code>Boolean()</code>或<code>!!</code>转成布尔值，则会进行隐式转换。但还是建议使用显式转换，让代码可读性更高。</p>
+<h2 id="C-隐式强制类型转换"><a href="#C-隐式强制类型转换" class="headerlink" title="C.隐式强制类型转换"></a>C.隐式强制类型转换</h2><h3 id="1-字符串和数字之间的隐式转换"><a href="#1-字符串和数字之间的隐式转换" class="headerlink" title="1.字符串和数字之间的隐式转换"></a>1.字符串和数字之间的隐式转换</h3><h4 id="操作符"><a href="#操作符" class="headerlink" title="+/-操作符"></a>+/-操作符</h4><p>+如何判断是进行字符串拼接，还是数值加法呢？</p>
+<blockquote>
+<p>+的其中一个操作符为字符串（或是通过ToPrimitive抽象操作后转换为字符串的值）则进行字符串拼接，否则执行数字加法。</p>
+</blockquote>
+<p>所以，通常上我们将空字符串与数值进行拼接，将其转换为字符串。</p>
+<pre><code class="js">const a=&#39;2&#39;
+const b=a-0
+b // -&gt; 2</code></pre>
+<p>通过<code>-</code>也可将a强制转换为数字，或者使用<code>a*1</code>或<code>a/1</code>，因为这两个运算符只适用于数字，所以比较少见。</p>
+<pre><code class="js">const a=[1]
+const b=[3]
+a-b // -&gt; -2</code></pre>
+<h3 id="2-隐式类型转换为布尔值"><a href="#2-隐式类型转换为布尔值" class="headerlink" title="2.隐式类型转换为布尔值"></a>2.隐式类型转换为布尔值</h3><p>在以下情况中，非布尔值会被隐式转换为布尔值。</p>
+<ol>
+<li>if()中的判断表达式</li>
+<li>for(;;)中的条件判断表达式</li>
+<li>while(…)和do..while(..)循环中的条件表达式</li>
+<li>? : 中的条件判断表达式</li>
+<li>逻辑运算符 || 和 &amp;&amp; 左边的操作数。</li>
+</ol>
+<p>但&amp;&amp;和||返回的值并不一定是布尔值，而是两个操作书中其中的一个。如：</p>
+<pre><code class="js">123||&#39;hello&#39; // 123
+42&amp;&amp;&#39;abc&#39; // &#39;abc&#39;
+null || &#39;hello&#39; // -&gt;&#39;hello&#39;
+null &amp;&amp; &#39;hello&#39; // -&gt;null</code></pre>
+<h3 id="3-Symbol的强制类型转换"><a href="#3-Symbol的强制类型转换" class="headerlink" title="3.Symbol的强制类型转换"></a>3.Symbol的强制类型转换</h3><p>ES6允许从符号到字符串得显示类型转换，但使用隐式转换会报错。</p>
+<pre><code class="js">const s1=Symbol(&#39;test&#39;)
+String(s1) -&gt; &quot;Symbol(test)&quot;
+&#39;&#39;+s1 -&gt; Uncaught TypeError: Cannot convert a Symbol value to a string</code></pre>
+<p>同时，Symbol类型也不能被转换为数字（无论是显式还是隐式），但可以被转换为布尔值。</p>
+<h2 id="D-宽松相等（-）和严格相等（-）"><a href="#D-宽松相等（-）和严格相等（-）" class="headerlink" title="D.宽松相等（ == ）和严格相等（ === ）"></a>D.宽松相等（ == ）和严格相等（ === ）</h2><p><code>==</code>允许在相等比较中进行强制类型转换，但<code>===</code>则不允许。</p>
+<h3 id="宽松相等的转换规则（-）"><a href="#宽松相等的转换规则（-）" class="headerlink" title="宽松相等的转换规则（==）"></a>宽松相等的转换规则（==）</h3><ol>
+<li>对于基本类型：两个值的类型相同，则比较是否相等。<br> 除了NaN（NaN是js中唯一不等于自身的值）和+0/-0（+0 === -0）。类型不同的两个值参考第三条。</li>
+<li>对于对象（包括函数和数组）：他们指向同一引用时，即视为相等，不发生强制转换。</li>
+<li>在比较两个不同类型的值时，会发生隐式类型转换，将其转为相同的类型后再比较。</li>
+</ol>
+<h4 id="字符串和数字之间的相等比较"><a href="#字符串和数字之间的相等比较" class="headerlink" title="字符串和数字之间的相等比较"></a>字符串和数字之间的相等比较</h4><pre><code class="js">const a=&#39;12&#39;
+const b=12
+a==b //true
+a===b //false</code></pre>
+<p>规则为：<code>==</code>两边，哪边为数值类型，则另一边转为数值类型。</p>
+<h4 id="其它类型和布尔类型之间的相等比较"><a href="#其它类型和布尔类型之间的相等比较" class="headerlink" title="其它类型和布尔类型之间的相等比较"></a>其它类型和布尔类型之间的相等比较</h4><pre><code class="js">const a=&#39;12&#39;
+const b=true
+a==b // false  a为真值，为什么返回false</code></pre>
+<p>因为在<code>==</code>两边，哪边为布尔类型，哪边转为数值类型！！<br> 同样，<code>a==false</code>也会返回<code>false</code>，因为这里的布尔值会被强制转换为数字0.</p>
+<h4 id="null和undefined之间的相等比较"><a href="#null和undefined之间的相等比较" class="headerlink" title="null和undefined之间的相等比较"></a>null和undefined之间的相等比较</h4><p>只要记住：</p>
+<pre><code class="js">null == undefined //true
+null === undefined //false</code></pre>
+<h4 id="对象和非对象之间的相等比较"><a href="#对象和非对象之间的相等比较" class="headerlink" title="对象和非对象之间的相等比较"></a>对象和非对象之间的相等比较</h4><p>对于布尔值和对象之间的比较，先把布尔值转换为数值类型。<br> 数值或字符串与对象之间的比较，对象先会调用<code>ToPromitive</code>抽象操作，之后再转为数值进行比较。</p>
+<pre><code class="js">const a=12
+const b=[12]
+a==b //true
+b-&gt;&#39;12&#39;-&gt;12
+
+const c=Object(null)
+c==null //fasle 这里c被转换为空对象{}
+
+const d=Object(undefined)
+d==undefined // fasle 这里d被转换为空对象{}
+
+const e=Object(NaN)
+e==NaN // fasle 这里e被转换为Number(NaN) -&gt; NaN 但NaN不等于自身，所以为false</code></pre>
+<h4 id="几个典型的坑"><a href="#几个典型的坑" class="headerlink" title="几个典型的坑"></a>几个典型的坑</h4><pre><code class="js">// 小坑
+&quot;0&quot; == false // -&gt; true  这里false先被转为0，&quot;0&quot;也会转为0，所以为true
+&quot;0&quot; == &quot;&quot; // -&gt; false 两个都是字符串类型，直接比较
+0 == &#39;&#39; // -&gt; true 空字符串直接转为0
+false == [] // -&gt; true false先转为0；[]空数组转为&#39;&#39;，之后ToNumber操作转为0
+
+// 大坑
+[] == ![] // -&gt; true []  这里![]先被强制转换为false，变成[]与fasle的比较，之后fasle-&gt;0；[]-&gt;&#39;&#39;-&gt;0，所以为true。
+2=[2] // -&gt; true [2]-&gt;&#39;2&#39;-&gt;2 所以为true
+&#39;&#39;==[null] // true [null]-&gt;&#39;&#39;
+0==&#39;\n&#39; // -&gt; true &#39;\n&#39;-&gt;&#39;&#39;-&gt;0
+&#39;true&#39;==true // -&gt; false true-&gt;0;&#39;true&#39;-&gt;NaN，所以为false</code></pre>
+<p>如果你还是一头雾水的话，请仔细阅读D部分这几种相互比较的规则和C部分的隐式类型转换。只要记住，遇到两个不同类型的值，转换优先顺序为布尔值&gt;对象&gt;字符串&gt;数字；每一步的转换到相同类型的值即停止转换，进行比较判断。</p>
+<h2 id="E-抽象关系比较"><a href="#E-抽象关系比较" class="headerlink" title="E.抽象关系比较"></a>E.抽象关系比较</h2><p>出现非字符串就先转为数字类型；如果两者都为字符串，按照字母顺序来比较，如：</p>
+<pre><code class="js">[&#39;22&#39;]&lt;[&#39;023&#39;] // -&gt; false 这里并不转为数字，0在字母顺序上小于2，所以为false
+22&lt;[&#39;023&#39;] // -&gt; true</code></pre>
+<p>对于对象来说，也同样是转换成字符串，再进行比较，如:</p>
+<pre><code class="js">const a={a:1}
+const b={a:2}
+a&gt;b // -&gt; false
+a&lt;b // -&gt; false
+a==b // -&gt; false
+a&lt;=b // -&gt; true
+a&gt;=b // -&gt; true</code></pre>
+<p>这个例子比较奇怪，虽然他们转成字符串都为<code>[Object Object]</code>，但两个对象的比较并不是转为字符串，而是看他们的引用是否指向同一值。这里<code>&lt;=</code>被处理为<code>!&gt;</code>，所以为<code>true</code>； <code>&gt;=</code>同理。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.078Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/" rel="tag">==</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/" rel="tag">===</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" rel="tag">类型转换</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/05/28/js%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/&title=《js的类型转换》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/05/28/js%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/&title=《js的类型转换》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/05/28/js%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《js的类型转换》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/05/28/js%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/05/28/js%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/05/28/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E6%A8%A1%E5%BC%8F/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">创建对象之构造函数模式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/05/28/%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%82%B9/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">面试需要知道点</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/05/28/js%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/&title=《js的类型转换》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/05/28/js%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/&title=《js的类型转换》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/05/28/js%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《js的类型转换》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/05/28/js%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/05/28/js%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2021/05/28/js%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

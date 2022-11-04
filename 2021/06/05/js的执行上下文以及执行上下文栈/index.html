@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>js的执行上下文以及执行上下文栈 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="js,面试题,作用域,执行上下文,执行上下文栈">
+    <meta name="description" content="js的执行上下文以及执行上下文栈可执行代码js的可执行代码（executable code）有哪些？只有可执行代码会创建执行上下文  全局代码 函数代码 eval代码  执行上下文只有可执行代码会创建执行上下文 当执行到一个函数的时候这里会进行准备工作， 这个准备工作用专业点的话讲就是 执行上下文（execution context） 这里一定是！函数执行的时候才会去创建执行上下文！ 对于每一个执">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js的执行上下文以及执行上下文栈">
+<meta property="og:url" content="https://github.com/NollieLeo/2021/06/05/js%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BB%A5%E5%8F%8A%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="js的执行上下文以及执行上下文栈可执行代码js的可执行代码（executable code）有哪些？只有可执行代码会创建执行上下文  全局代码 函数代码 eval代码  执行上下文只有可执行代码会创建执行上下文 当执行到一个函数的时候这里会进行准备工作， 这个准备工作用专业点的话讲就是 执行上下文（execution context） 这里一定是！函数执行的时候才会去创建执行上下文！ 对于每一个执">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-05T07:37:38.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.078Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="面试题">
+<meta property="article:tag" content="作用域">
+<meta property="article:tag" content="执行上下文">
+<meta property="article:tag" content="执行上下文栈">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">js的执行上下文以及执行上下文栈</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">js的执行上下文以及执行上下文栈</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-06-05T07:37:38.000Z" itemprop="datePublished" class="page-time">
+  2021-06-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#js的执行上下文以及执行上下文栈"><span class="post-toc-number">1.</span> <span class="post-toc-text">js的执行上下文以及执行上下文栈</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#可执行代码"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">可执行代码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#执行上下文"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">执行上下文</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#执行上下文栈"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">执行上下文栈</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#按题分析"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">按题分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解释执行上下文栈"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">解释执行上下文栈</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#根据上下文栈以及作用域链以及VO或者AO分析"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">根据上下文栈以及作用域链以及VO或者AO分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#分析第一道"><span class="post-toc-number">1.4.2.1.</span> <span class="post-toc-text">分析第一道</span></a></li></ol></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-js的执行上下文以及执行上下文栈"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">js的执行上下文以及执行上下文栈</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-06-05 15:37:38" datetime="2021-06-05T07:37:38.000Z"  itemprop="datePublished">2021-06-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="js的执行上下文以及执行上下文栈"><a href="#js的执行上下文以及执行上下文栈" class="headerlink" title="js的执行上下文以及执行上下文栈"></a>js的执行上下文以及执行上下文栈</h1><h2 id="可执行代码"><a href="#可执行代码" class="headerlink" title="可执行代码"></a>可执行代码</h2><p>js的可执行代码（executable code）有哪些？只有可执行代码会创建执行上下文</p>
+<ol>
+<li>全局代码</li>
+<li>函数代码</li>
+<li>eval代码</li>
+</ol>
+<h2 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h2><p>只有可执行代码会创建执行上下文</p>
+<p>当执行到一个函数的时候这里会进行准备工作，</p>
+<p>这个准备工作用专业点的话讲就是 <strong>执行上下文</strong>（execution context）</p>
+<p><strong>这里一定是！函数执行的时候才会去创建执行上下文！</strong></p>
+<p>对于每一个执行上下文，都有三个重要属性</p>
+<ul>
+<li>变量对象（Variable object） 俗称VO</li>
+<li>作用域链（Scope chain）</li>
+<li>this</li>
+</ul>
+<p>这些属性可以去对应的文章中看</p>
+<h2 id="执行上下文栈"><a href="#执行上下文栈" class="headerlink" title="执行上下文栈"></a>执行上下文栈</h2><p>js以执行上下文栈的方式去创建一个执行上下文栈，来进行各个上下文之间的管理</p>
+<p>在所有的情况下，执行js的代码，首先遇到的是全局代码这是毋庸置疑的</p>
+<p>这个时候相当于这个<strong>全局的执行上下文</strong>就是在<strong>栈底</strong>了</p>
+<p>首先我们先模拟一下，创建一个栈表示执行上下文栈</p>
+<pre><code class="js">ECStack = [];</code></pre>
+<p>按照上面所说的，执行上下文栈底永远都有一个全局的执行上下文，这里用globalContext表示</p>
+<pre><code class="js">ECStack=[
+    globalContext
+]</code></pre>
+<h2 id="按题分析"><a href="#按题分析" class="headerlink" title="按题分析"></a>按题分析</h2><h3 id="解释执行上下文栈"><a href="#解释执行上下文栈" class="headerlink" title="解释执行上下文栈"></a>解释执行上下文栈</h3><pre><code class="js">function fn3(){
+    console.log(&#39;fn3&#39;)
+}
+
+function fn2(){
+    console.log(&#39;fn2&#39;);
+    fn3();
+}
+
+function fn1(){
+    console.log(&#39;fn1&#39;);
+    fn2();
+}
+
+fun1();</code></pre>
+<p>当执行一个函数的时候，就会创建一个执行上下文，并且压入执行上下文栈，当函数执行完毕的时候，就会将函数的执行上下文从栈中弹出。</p>
+<p>因此以上的代码执行原理是这样的</p>
+<pre><code class="js">//fn1()
+ECStack.push(&lt;fn1&gt; function1Context);
+// 这时候发现fun1中调用了fn2
+ECStack.push(&lt;fn2&gt; function2Context);
+// fn2中又调用了fn3
+ECStack.puhs(&lt;fn3&gt; function3Context);
+// 此时的ECStack为
+// ECStack = [
+//     globalContext
+//  function1Context
+//    function2Context
+//  function3Context
+// ]
+
+//fn3执行完了
+ECStack.pop(); // function3Context
+// fn2执行完了
+ECStack.pop(); // function3Context
+// fn1执行完了
+ECStack.pop(); // function1Context
+
+// javascript接着执行下面的代码，但是ECStack底层永远有个globalContext
+</code></pre>
+<h3 id="根据上下文栈以及作用域链以及VO或者AO分析"><a href="#根据上下文栈以及作用域链以及VO或者AO分析" class="headerlink" title="根据上下文栈以及作用域链以及VO或者AO分析"></a>根据上下文栈以及作用域链以及VO或者AO分析</h3><p>例如</p>
+<pre><code class="js">var scope = &quot;global scope&quot;;
+function checkscope(){
+    var scope = &quot;local scope&quot;;
+    function f(){
+        return scope;
+    }
+    return f();
+}
+checkscope();</code></pre>
+<pre><code class="js">var scope = &quot;global scope&quot;;
+function checkscope(){
+    var scope = &quot;local scope&quot;;
+    function f(){
+        return scope;
+    }
+    return f;
+}
+checkscope()();</code></pre>
+<p>分别输出什么？</p>
+<p>对，都是local scope</p>
+<p>具体分析一下</p>
+<p>先分析第一道</p>
+<h4 id="分析第一道"><a href="#分析第一道" class="headerlink" title="分析第一道"></a>分析第一道</h4><p>执行过程如下</p>
+<p>1.无论如何先执行全局代码，创建全局执行上下文，全局上下文压入栈底</p>
+<pre><code class="js">ECStack = [
+    globalContext
+]</code></pre>
+<p>2.初始化全局上下文</p>
+<pre><code class="js">globalContext = {
+    VO: [global],
+    Scope: [globalContext.VO],
+    this: globalContext.VO
+}</code></pre>
+<p>3.在第2步初始化的过程发现全局的作用域中定义了一个 checkscrope函数，这个函数的作用域链上就会先推入一个全局上下文对象中的Scope</p>
+<pre><code class="js">checkscope.[[scope]]=[
+    globalContext.VO
+]</code></pre>
+<p>4.执行 checkscope 函数，创建 checkscope 函数执行上下文，checkscope 函数执行上下文被压入执行上下文栈 </p>
+<pre><code class="js">ECStack = [
+    globalContext,
+    checkscopeContext,
+]</code></pre>
+<p>5.checkscope函数执行上下文的初始化</p>
+<ol>
+<li><p>复制函数的[[scope]]属性创建作用域链，放到checkscopeContext的[[scope]]中</p>
+</li>
+<li><p>用arguments创建活动对象</p>
+</li>
+<li><p>初始化活动对象，加入形参，内部函数声明，变量声明</p>
+</li>
+<li><p>将活动对象压入 checkscope 作用域链顶端，也就是checkscope.VO</p>
+</li>
+<li><p>函数f被声明，保存checkscope的作用域链到fn函数的[[scope]]当中</p>
+<pre><code class="js">checkscopeContext = {
+AO:{
+    arguments: {
+        length: 0,
+    },
+    scope: undefined,
+    f: refrence to function f(){}
+},
+Scope: [checkscopeContext.AO, globalContext.VO],
+this: undefined
+}</code></pre>
+</li>
+</ol>
+<p>​    6. 执行函数f，创建f的执行上下文，f函数的执行上下文被压入栈中</p>
+<pre><code>ECStack= [ 
+    globalContext,
+    checkscopeContext,
+    fnContext
+]</code></pre><ol start="7">
+<li><p>f函数执行上下文初始化，和第5步一样</p>
+<pre><code class="js">fnContext = {
+    AO = {
+        arguments:{
+            length: 0
+        }
+    },
+    Scope: [fnContext.AO, checkscopeContext.AO, globalContext.VO],
+    this: undefined
+}</code></pre>
+</li>
+<li><p>f函数执行之后，沿着<strong>作用域链</strong>查找到scope的值，返回scope值</p>
+</li>
+<li><p>f函数执行完，栈中pop出上下文</p>
+<pre><code class="js">ECStack.pop()</code></pre>
+<pre><code class="js">ECStack = [
+       globalContext,
+    checkscopeContext, 
+]</code></pre>
+</li>
+<li><p>checkscope函数执行完毕，checkscope执行上下文pop出栈</p>
+<pre><code class="js">ECStack.pop()
+ECStack = [
+       globalContext,
+]</code></pre>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.078Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BD%9C%E7%94%A8%E5%9F%9F/" rel="tag">作用域</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/" rel="tag">执行上下文</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88/" rel="tag">执行上下文栈</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/06/05/js%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BB%A5%E5%8F%8A%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88/&title=《js的执行上下文以及执行上下文栈》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/06/05/js%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BB%A5%E5%8F%8A%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88/&title=《js的执行上下文以及执行上下文栈》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/06/05/js%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BB%A5%E5%8F%8A%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《js的执行上下文以及执行上下文栈》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/06/05/js%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BB%A5%E5%8F%8A%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/06/05/js%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BB%A5%E5%8F%8A%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/06/06/js%E7%9A%84%E9%97%AD%E5%8C%85/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">js的闭包</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/06/05/js%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">js的作用域链</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/06/05/js%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BB%A5%E5%8F%8A%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88/&title=《js的执行上下文以及执行上下文栈》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/06/05/js%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BB%A5%E5%8F%8A%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88/&title=《js的执行上下文以及执行上下文栈》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/06/05/js%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BB%A5%E5%8F%8A%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《js的执行上下文以及执行上下文栈》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/06/05/js%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BB%A5%E5%8F%8A%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/06/05/js%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BB%A5%E5%8F%8A%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2021/06/05/js%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BB%A5%E5%8F%8A%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

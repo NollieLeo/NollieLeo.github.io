@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>electron学习记录 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="electron,vue">
+    <meta name="description" content="electron核心模块                                                                                             code&#x2F;wengblog&#x2F;NollieLeo.github.io&#x2F;source&#x2F;_posts&#x2F;electron学习记录&#x2F;WeChat2314efdd8331a8e89163bc315a1a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="electron学习记录">
+<meta property="og:url" content="https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="electron核心模块                                                                                             code&#x2F;wengblog&#x2F;NollieLeo.github.io&#x2F;source&#x2F;_posts&#x2F;electron学习记录&#x2F;WeChat2314efdd8331a8e89163bc315a1a">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/leo/Desktop/weng">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/Users/Weng/AppData/Roaming/Typora/typora-user-images/image-20220112153725964.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/leo/Desktop/weng">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/leo/Desktop/weng">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/leo/Desktop/weng">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/leo/Desktop/weng">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/leo/Desktop/weng">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/leo/Desktop/weng">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/leo/Desktop/weng">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/leo/Desktop/weng">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/leo/Desktop/weng">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/leo/Desktop/weng">
+<meta property="og:image" content="https://github.com/Users/leo/Library/Application%20Support/typora-user-images/image-20220327110355234.png">
+<meta property="og:image" content="https://github.com/Users/leo/Library/Application%20Support/typora-user-images/image-20220327111337555.png">
+<meta property="og:image" content="https://github.com/Users/leo/Library/Application%20Support/typora-user-images/image-20220327111912387.png">
+<meta property="og:image" content="https://github.com/Users/leo/Library/Application%20Support/typora-user-images/image-20220327114327050.png">
+<meta property="og:image" content="https://github.com/Users/leo/Library/Application%20Support/typora-user-images/image-20220326183153864.png">
+<meta property="og:image" content="https://github.com/Users/leo/Library/Application%20Support/typora-user-images/image-20220301000309311.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/leo/Desktop/weng">
+<meta property="article:published_time" content="2022-01-12T06:58:10.000Z">
+<meta property="article:modified_time" content="2022-03-31T02:26:32.327Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="electron">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/leo/Desktop/weng">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">electron学习记录</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">electron学习记录</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2022-01-12T06:58:10.000Z" itemprop="datePublished" class="page-time">
+  2022-01-12
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#electron"><span class="post-toc-number">1.</span> <span class="post-toc-text">electron</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#核心模块"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">核心模块</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#快速搭建demo"><span class="post-toc-number">2.</span> <span class="post-toc-text">快速搭建demo</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#官方demo快速搭建（electron-quick-template）"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">官方demo快速搭建（electron-quick-template）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#搭建vue-electron"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">搭建vue + electron</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#使用electron-vue"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">使用electron-vue</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#使用vue-cli自带的可视化创建项目"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">使用vue cli自带的可视化创建项目</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#如何调试主进程"><span class="post-toc-number">3.</span> <span class="post-toc-text">如何调试主进程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用electron自带的"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">使用electron自带的</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用electron-vue-vscode"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">使用electron-vue + vscode</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#配置vscode"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">配置vscode</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#修改electron-vue相关配置文件"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">修改electron-vue相关配置文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#webpack-main-config-js"><span class="post-toc-number">3.2.2.1.</span> <span class="post-toc-text">webpack.main.config.js</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#dev-runner-js"><span class="post-toc-number">3.2.2.2.</span> <span class="post-toc-text">dev-runner.js</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#开始调试"><span class="post-toc-number">3.2.3.</span> <span class="post-toc-text">开始调试</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#vue-cli-vue-cli-plugin-electron-builder-调试"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">vue-cli + vue-cli-plugin-electron-builder 调试</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其他调试的launch-json配置"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">其他调试的launch.json配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程之间的通信"><span class="post-toc-number">4.</span> <span class="post-toc-text">进程之间的通信</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#原理"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">原理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#渲染进程和主进程异步通信"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">渲染进程和主进程异步通信</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ipcRenderer-send-ipcMain-on-once"><span class="post-toc-number">4.2.1.</span> <span class="post-toc-text">ipcRenderer.send + ipcMain.on&#x2F;once</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ipcMain-handle-handleOnce-ipcRenderer-invoke"><span class="post-toc-number">4.2.2.</span> <span class="post-toc-text">ipcMain.handle&#x2F;handleOnce + ipcRenderer.invoke</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#window-webContents-send"><span class="post-toc-number">4.2.3.</span> <span class="post-toc-text">window.webContents.send</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#渲染进程和主进程的同步通信"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">渲染进程和主进程的同步通信</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ipcRenderer-sendSync-ipcMain-on-once"><span class="post-toc-number">4.3.1.</span> <span class="post-toc-text">ipcRenderer.sendSync + ipcMain.on&#x2F;once</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#渲染进程与渲染进程-窗口与窗口-的通讯"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">渲染进程与渲染进程(窗口与窗口)的通讯</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ipcRenderer-sendTo-ipcRenderer-on"><span class="post-toc-number">4.4.1.</span> <span class="post-toc-text">ipcRenderer.sendTo + ipcRenderer.on</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#渲染进程和webview的通讯"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">渲染进程和webview的通讯</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ipcRenderer-sendToHost-webview-addEventListener-“ipc-message”"><span class="post-toc-number">4.5.1.</span> <span class="post-toc-text">ipcRenderer.sendToHost + webview.addEventListener(“ipc-message”)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#webview-preload协议-提供桥接方法"><span class="post-toc-number">4.5.2.</span> <span class="post-toc-text">webview + preload协议 提供桥接方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进程统一实现方案（暂未完善）"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">进程统一实现方案（暂未完善）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一些使用记录"><span class="post-toc-number">5.</span> <span class="post-toc-text">一些使用记录</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#按键配置"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">按键配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#渲染进程和webview的通信"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">渲染进程和webview的通信</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#menu（应用菜单）"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">menu（应用菜单）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#cookie"><span class="post-toc-number">5.4.</span> <span class="post-toc-text">cookie</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#基本使用"><span class="post-toc-number">5.4.1.</span> <span class="post-toc-text">基本使用</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#删除浏览器缓存"><span class="post-toc-number">5.5.</span> <span class="post-toc-text">删除浏览器缓存</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#判断操作系统类型"><span class="post-toc-number">5.6.</span> <span class="post-toc-text">判断操作系统类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#BrowserWindow"><span class="post-toc-number">5.7.</span> <span class="post-toc-text">BrowserWindow</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#webSecurity"><span class="post-toc-number">5.7.1.</span> <span class="post-toc-text">webSecurity</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#net请求库（原生）"><span class="post-toc-number">5.8.</span> <span class="post-toc-text">net请求库（原生）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#dialog（系统对话框）"><span class="post-toc-number">5.9.</span> <span class="post-toc-text">dialog（系统对话框）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用webview（不稳定）"><span class="post-toc-number">5.10.</span> <span class="post-toc-text">*使用webview（不稳定）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#electron项目中常用的库"><span class="post-toc-number">6.</span> <span class="post-toc-text">electron项目中常用的库</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mousetrap"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">mousetrap</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SQLite持久化数据"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">SQLite持久化数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#lowdb和electron-store"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">lowdb和electron-store</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#离谱的坑"><span class="post-toc-number">7.</span> <span class="post-toc-text">离谱的坑</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#控制台打印乱码"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">控制台打印乱码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#electron的包装不上"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">electron的包装不上</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-electron学习记录"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">electron学习记录</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2022-01-12 14:58:10" datetime="2022-01-12T06:58:10.000Z"  itemprop="datePublished">2022-01-12</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="electron"><a href="#electron" class="headerlink" title="electron"></a>electron</h2><h3 id="核心模块"><a href="#核心模块" class="headerlink" title="核心模块"></a>核心模块</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="leo/Desktop/weng's" alt="WeChat2314efdd8331a8e89163bc315a1a25a4" title="code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录/WeChat2314efdd8331a8e89163bc315a1a25a4.png">
+                </div>
+                <div class="image-caption">code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录/WeChat2314efdd8331a8e89163bc315a1a25a4.png</div>
+            </figure>
+
+
+
+<h2 id="快速搭建demo"><a href="#快速搭建demo" class="headerlink" title="快速搭建demo"></a>快速搭建demo</h2><h3 id="官方demo快速搭建（electron-quick-template）"><a href="#官方demo快速搭建（electron-quick-template）" class="headerlink" title="官方demo快速搭建（electron-quick-template）"></a>官方demo快速搭建（electron-quick-template）</h3><p><a href="https://github.com/electron/electron-quick-start">git地址</a></p>
+<pre><code class="shell"># Clone this repository
+git clone https://github.com/electron/electron-quick-start
+# Go into the repository
+cd electron-quick-start
+# Install dependencies
+npm install
+# Run the app
+npm start</code></pre>
+<h3 id="搭建vue-electron"><a href="#搭建vue-electron" class="headerlink" title="搭建vue + electron"></a>搭建vue + electron</h3><h4 id="使用electron-vue"><a href="#使用electron-vue" class="headerlink" title="使用electron-vue"></a>使用electron-vue</h4><blockquote>
+<p><a href="https://simulatedgreg.gitbooks.io/electron-vue/content/cn/" target="_blank" rel="noopener">中文文档</a></p>
+</blockquote>
+<pre><code class="shell"># 安装 vue-cli 和 脚手架样板代码
+npm install -g vue-cli
+vue init simulatedgreg/electron-vue my-project
+
+# 安装依赖并运行你的程序
+cd my-project
+yarn # 或者 npm install
+yarn run dev # 或者 npm run dev</code></pre>
+<h4 id="使用vue-cli自带的可视化创建项目"><a href="#使用vue-cli自带的可视化创建项目" class="headerlink" title="使用vue cli自带的可视化创建项目"></a>使用vue cli自带的可视化创建项目</h4><blockquote>
+<p>vue cli有很多插件化的东西可以用</p>
+</blockquote>
+<pre><code class="shell"># 打开可视化界面
+vue ui</code></pre>
+<p>如图：</p>
+<img src="Users\Weng\AppData\Roaming\Typora\typora-user-images\image-20220112153725964.png" alt="image-20220112153725964" style="zoom: 50%;">
+
+<blockquote>
+<p>然后点新增一个</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="leo/Desktop/weng's" alt="image-20220112153922959" title="code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220112153922959.png">
+                </div>
+                <div class="image-caption">code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220112153922959.png</div>
+            </figure>
+
+<blockquote>
+<p>嗯对，继续，想选啥选啥</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="leo/Desktop/weng's" alt="image-20220112154019140" title="code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220112154019140.png">
+                </div>
+                <div class="image-caption">code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220112154019140.png</div>
+            </figure>
+
+<blockquote>
+<p>然后就在下载了</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="leo/Desktop/weng's" alt="image-20220112154214278" title="code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220112154214278.png">
+                </div>
+                <div class="image-caption">code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220112154214278.png</div>
+            </figure>
+
+
+
+<blockquote>
+<p>然后插件中搜索 <code>vue-cli-plugin-electron-builder</code>, 安装他</p>
+</blockquote>
+<p>或者使用 <code>vue add electron-builder</code>安装</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="leo/Desktop/weng's" alt="image-20220112154326504" title="code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220112154326504.png">
+                </div>
+                <div class="image-caption">code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220112154326504.png</div>
+            </figure>
+
+<p>接下来直接就：就ok了</p>
+<pre><code class="shell">npm run electron:serve</code></pre>
+{% image /Users/leo/Desktop/weng's 'image-20220112154639191' 'code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录\image-20220112154639191.png' %}
+
+
+
+<h2 id="如何调试主进程"><a href="#如何调试主进程" class="headerlink" title="如何调试主进程"></a>如何调试主进程</h2><blockquote>
+<p>基于vscode通过ws协议进行调试，之后通过端口就可进入调试的页面，就形容调试node  <a href="https://code.visualstudio.com/docs/editor/debugging#_launch-configurations" target="_blank" rel="noopener">vscode调试官方文档</a></p>
+</blockquote>
+<h3 id="使用electron自带的"><a href="#使用electron自带的" class="headerlink" title="使用electron自带的"></a>使用electron自带的</h3><blockquote>
+<p>插件 electron-debug</p>
+</blockquote>
+<ol>
+<li><p>在dev文件中引入</p>
+<p>![image-20220115143454095](/Users/leo/Desktop/weng’s code/weng’blog/NollieLeo.github.io/source/_posts/electron学习记录\image-20220115143454095.png)</p>
+<ol start="2">
+<li><p>在主进程中引入</p>
+<p>![image-20220115143536900](/Users/leo/Desktop/weng’s code/weng’blog/NollieLeo.github.io/source/_posts/electron学习记录\image-20220115143536900.png)</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>启动之后呢就能看到终端打印了这句话</p>
+{% image /Users/leo/Desktop/weng's 'image-20220115143611685' 'code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录\image-20220115143611685.png' %}
+
+<p>打开chrome://devices就ok了</p>
+<h3 id="使用electron-vue-vscode"><a href="#使用electron-vue-vscode" class="headerlink" title="使用electron-vue + vscode"></a>使用electron-vue + vscode</h3><h4 id="配置vscode"><a href="#配置vscode" class="headerlink" title="配置vscode"></a>配置vscode</h4><ol>
+<li><p>找到左侧一个虫子一样的图标</p>
+<p>![image-20220115112806086](/Users/leo/Desktop/weng’s code/weng’blog/NollieLeo.github.io/source/_posts/electron学习记录\image-20220115112806086.png)</p>
+</li>
+<li><p>选择上面的下拉面板，添加配置（这里是node，就选择nodejs）</p>
+<p>![image-20220115112904875](/Users/leo/Desktop/weng’s code/weng’blog/NollieLeo.github.io/source/_posts/electron学习记录\image-20220115112904875.png)</p>
+<ol start="3">
+<li><p>vscode会自动创建一个文件 .vscode/路径下的launch.json文件。</p>
+<p>launch.json</p>
+<blockquote>
+<p>基于electron-vue的配置（以下配置再用electron-vue的时候复制进去吧）</p>
+</blockquote>
+<pre><code class="json">{
+&quot;version&quot;: &quot;0.2.0&quot;,
+&quot;configurations&quot;: [
+  {
+    &quot;name&quot;: &quot;Electron Main&quot;,
+    &quot;program&quot;: &quot;${workspaceFolder}/.electron-vue/dev-runner.js&quot;,
+    &quot;request&quot;: &quot;launch&quot;,
+    &quot;skipFiles&quot;: [
+      &quot;&lt;node_internals&gt;/**&quot;
+    ],
+    &quot;type&quot;: &quot;node&quot;,
+    &quot;autoAttachChildProcesses&quot;: true,
+    &quot;protocol&quot;: &quot;inspector&quot;
+  }
+  ]
+}</code></pre>
+<p>这里的program指的是调试的入口文件，如果是用 官方的快速 模板搭建的话，就是main.js，而electron-vue则得是<code>.electron-vue/dev-runner.js</code>文件</p>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="修改electron-vue相关配置文件"><a href="#修改electron-vue相关配置文件" class="headerlink" title="修改electron-vue相关配置文件"></a>修改electron-vue相关配置文件</h4><h5 id="webpack-main-config-js"><a href="#webpack-main-config-js" class="headerlink" title="webpack.main.config.js"></a>webpack.main.config.js</h5><blockquote>
+<p>再electron-vue搭建的目录.electron-vue下的webpack.main.config.js</p>
+</blockquote>
+<p>添加配置</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="leo/Desktop/weng's" alt="image-20220115121624744" title="code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220115121624744.png">
+                </div>
+                <div class="image-caption">code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220115121624744.png</div>
+            </figure>
+
+
+
+<h5 id="dev-runner-js"><a href="#dev-runner-js" class="headerlink" title="dev-runner.js"></a>dev-runner.js</h5><blockquote>
+<p>再electron-vue搭建的目录.electron-vue下的dev-runner.js</p>
+</blockquote>
+<p>把 .electron-vue/dev-runner.js 里以下报错代码注释掉。</p>
+<pre><code class="js">// // detect yarn or npm and process commandline args accordingly
+// if (process.env.npm_execpath.endsWith(&#39;yarn.js&#39;)) {
+//   args = args.concat(process.argv.slice(3))
+// } else if (process.env.npm_execpath.endsWith(&#39;npm-cli.js&#39;)) {
+//   args = args.concat(process.argv.slice(2))
+// }
+</code></pre>
+<p>这样是为了避免控制台报错</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="leo/Desktop/weng's" alt="image-20220115121919211" title="code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220115121919211.png">
+                </div>
+                <div class="image-caption">code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220115121919211.png</div>
+            </figure>
+
+
+
+<h4 id="开始调试"><a href="#开始调试" class="headerlink" title="开始调试"></a>开始调试</h4><p>打开vscode </p>
+<p>通过快捷方式<code>F5</code>或者手动点击头部菜单 的 运行中的调试就可以开始了</p>
+<p>这时候就能在调试控制台看到这句话</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="leo/Desktop/weng's" alt="image-20220115122235932" title="code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220115122235932.png">
+                </div>
+                <div class="image-caption">code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220115122235932.png</div>
+            </figure>
+
+
+
+<p>我们打开浏览器输入<code>chrome://inspect/#devices</code></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="leo/Desktop/weng's" alt="image-20220115122309093" title="code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220115122309093.png">
+                </div>
+                <div class="image-caption">code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220115122309093.png</div>
+            </figure>
+
+<p>点击inspect就能看到文件了，这时候直接打断点就OK</p>
+<p>（正在调试的文件是有绿色的小点点）</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="leo/Desktop/weng's" alt="image-20220115122412302" title="code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220115122412302.png">
+                </div>
+                <div class="image-caption">code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220115122412302.png</div>
+            </figure>
+
+
+
+<p>倘若第一次调试，则需要点击上方的添加文件按钮将目录添加到调试工具当中</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="leo/Desktop/weng's" alt="image-20220115122506756" title="code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220115122506756.png">
+                </div>
+                <div class="image-caption">code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220115122506756.png</div>
+            </figure>
+
+
+
+<h3 id="vue-cli-vue-cli-plugin-electron-builder-调试"><a href="#vue-cli-vue-cli-plugin-electron-builder-调试" class="headerlink" title="vue-cli + vue-cli-plugin-electron-builder 调试"></a>vue-cli + vue-cli-plugin-electron-builder 调试</h3><p><a href="https://nklayman.github.io/vue-cli-plugin-electron-builder/guide/recipes.html#multiple-pages" target="_blank" rel="noopener">官方文档</a></p>
+<p>调试demo<a href="https://github.com/nklayman/electron-vscode-debug-example/blob/master/.vscode/tasks.json">地址</a></p>
+<h3 id="其他调试的launch-json配置"><a href="#其他调试的launch-json配置" class="headerlink" title="其他调试的launch.json配置"></a>其他调试的launch.json配置</h3><pre><code class="json">{
+  &quot;version&quot;: &quot;0.2.0&quot;,
+  &quot;configurations&quot;: [
+    {
+      //方式一
+      &quot;name&quot;: &quot;Debug Main Process&quot;,
+      &quot;type&quot;: &quot;node&quot;,
+      &quot;request&quot;: &quot;launch&quot;,
+      &quot;cwd&quot;: &quot;${workspaceFolder}&quot;,
+      &quot;timeout&quot;: 60000, //避免出现can not connect to the target错误
+      &quot;runtimeExecutable&quot;: &quot;${workspaceFolder}/node_modules/.bin/electron&quot;,
+      &quot;windows&quot;: {
+        &quot;runtimeExecutable&quot;: &quot;${workspaceFolder}/node_modules/.bin/electron.cmd&quot;
+      },
+      &quot;args&quot; : [&quot;.&quot;],
+      &quot;env&quot;: {
+        &quot;NODE_ENV&quot;: &quot;development&quot;
+      },
+      &quot;protocol&quot;: &quot;inspector&quot;
+    },
+    {
+      //方式二
+      &quot;name&quot;: &quot;Attach&quot;,
+      &quot;type&quot;: &quot;node&quot;,
+      &quot;request&quot;: &quot;attach&quot;,
+      &quot;port&quot;: 5858,
+      &quot;sourceMaps&quot;: true,
+      &quot;address&quot;: &quot;localhost&quot;,
+      &quot;timeout&quot;: 60000 //避免出现can not connect to the target错误
+    }
+  ]
+}</code></pre>
+<h2 id="进程之间的通信"><a href="#进程之间的通信" class="headerlink" title="进程之间的通信"></a>进程之间的通信</h2><blockquote>
+<p>官方文档：</p>
+<p><a href="https://link.juejin.cn/?target=https%3A%2F%2Fwww.electronjs.org%2Fdocs%2Fapi%2Fipc-main">ipcMain</a></p>
+<p><a href="https://link.juejin.cn/?target=https%3A%2F%2Fwww.electronjs.org%2Fdocs%2Fapi%2Fipc-renderer">ipcRenderer</a></p>
+<p><a href="https://link.juejin.cn/?target=https%3A%2F%2Fwww.electronjs.org%2Fdocs%2Fapi%2Fweb-contents%23contentssendchannel-args">webContents</a></p>
+</blockquote>
+<p><strong>主线程</strong> 到 <strong>渲染线程</strong> 通过 <code>mainWin.webContents.send</code> 来发送 —&gt;<code>ipcRenderer.on</code> 来监听</p>
+<p><strong>渲染线程</strong> 到 <strong>主线程</strong> 需要通过 <code>ipcRenderer.send</code>发送 —&gt; <code>ipcMain.on</code>来监听</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>electron使用<code>mojo</code>的框架完成进程间通信的工作</p>
+<p>mojo框架提供了一套地层的ipc实现，包括 消息管道，数据管道，共享缓存缓冲区等等。</p>
+<p>electron在api.mojom文件中定义了相关的通信接口描述文件 <a href="https://github.com/electron/electron/blob/main/shell/common/api/api.mojom">源码</a></p>
+<img src="/Users/leo/Library/Application Support/typora-user-images/image-20220327110355234.png" alt="image-20220327110355234" style="zoom:67%;">
+
+<p>其中比较重要的就是 <code>ElectronRenderer</code> 和 <code>ElectronApiIPC</code> 这两个定义，与主进程和渲染进程通信有关</p>
+<p>在编译Electron源码的过程，mojo框架会把这些通信描述文件转义为具体的实现代码</p>
+<p>之后shell\renderer\api\electron_api_ipc_renderer.cc和shell\browser\api\electron_api_web_contents.cc这两个c++文件都会去引用这个编译之后的文件（shell\common\api\api.mojom.h）头文件。</p>
+<p>在我们js代码中使用</p>
+<pre><code class="js">await ipcRenderer.invoke(&#39;event&#39;,&#39;message&#39;);</code></pre>
+<p>其实地层走的就是<a href="https://github.com/electron/electron/blob/main/shell/renderer/api/electron_api_ipc_renderer.cc">shell\renderer\api\electron_api_ipc_renderer.cc</a></p>
+<img src="/Users/leo/Library/Application Support/typora-user-images/image-20220327111337555.png" alt="image-20220327111337555" style="zoom:67%;">
+
+<p>这段代码除了创建一个 Promise 对象之外，还执行了 electron_brower_remote对象（Mojo的通信对象）的invoke的方法</p>
+<p>之后mojo会组织消息，把这个消息发给主进程，并执行了 <a href="https://github.com/electron/electron/blob/main/shell/browser/api/electron_api_web_contents.cc">electron_api_web_contents.cc</a> 中WebContents::Invoke的方法</p>
+<img src="/Users/leo/Library/Application Support/typora-user-images/image-20220327111912387.png" alt="image-20220327111912387" style="zoom:67%;">
+
+<p>这个方法会发射一个名字为-ipc-invoke的事件，把渲染进程传递过来的数据都发射出去，之后和这个事件会触发位于</p>
+<p>lib/browser/api/web-contents/ts的ts代码中</p>
+{% image /Users/leo/Desktop/weng's 'image-20220327113128169' 'code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录/image-20220327113128169.png' %}
+
+<p>这个逻辑当中，electron会去查找一个map对象 是否注册了当前的处理逻辑，有的话执行用户代码，否则异常</p>
+<p>invoke之后会把处理的结果返回渲染进程（基于mojo的进程通信，实现代码<a href="https://github.com/electron/electron/blob/main/shell/browser/api/event.cc">shell/brower/api/event.cc</a>）</p>
+<p>我们在调用<code>ipcMain.handle</code> 方法为主进程注册某事件的处理逻辑时候，实际上执行了 <a href="https://github.com/electron/electron/blob/main/lib/browser/ipc-main-impl.ts">/lib/brower/ipc-main-tmpl.ts</a></p>
+<img src="/Users/leo/Library/Application Support/typora-user-images/image-20220327114327050.png" alt="image-20220327114327050" style="zoom:67%;">
+
+<p>就是将用户的处理逻辑包装起来存放到map对象当中，这就对应了上述的invoke触发的时候，做的事情了。</p>
+<p>大致是通信的基本逻辑</p>
+<h3 id="渲染进程和主进程异步通信"><a href="#渲染进程和主进程异步通信" class="headerlink" title="渲染进程和主进程异步通信"></a>渲染进程和主进程异步通信</h3><h4 id="ipcRenderer-send-ipcMain-on-once"><a href="#ipcRenderer-send-ipcMain-on-once" class="headerlink" title="ipcRenderer.send + ipcMain.on/once"></a>ipcRenderer.send + ipcMain.on/once</h4><p>renderer.js (渲染进程文件)</p>
+<pre><code class="js">import { ipcRenderer } from &#39;electron&#39;;
+
+function handleMessage(){
+  ipcRenderer.send(&#39;renderer-to-main&#39;, &#39;this is weng&#39;)
+}</code></pre>
+<p>main.js (主进程)</p>
+<pre><code class="js">import { ipcMain } from &#39;electron&#39;;
+
+ipcMain.on(&#39;renderer-to-main&#39;, (event, message)=&gt;{
+  console.log(&#39;this is a message from weng&#39;, message)
+})</code></pre>
+<p>假如主进程需要回复渲染进程的消息</p>
+<p>主进程可以通过 <code>event.reply</code> 回复<strong>异步消息</strong>，然后前提是渲染进程也需要监听这个事件</p>
+<p>renderer.js</p>
+<pre><code class="js">import { ipcRenderer } from &#39;electron&#39;;
+
+function handleMessage(){
+  ipcRenderer.send(&#39;renderer-to-main&#39;, &#39;this is weng&#39;)
+}
+ipcRenderer.on(&#39;main-to-renderer&#39;,(event, message)=&gt;{
+  console.log(&#39;reply to weng&#39;, message); // 给翁恺敏发消息
+})</code></pre>
+<p>Main.js</p>
+<pre><code class="js">import { ipcMain } from &#39;electron&#39;;
+
+ipcMain.on(&#39;renderer-to-main&#39;, (event, message)=&gt;{
+  console.log(&#39;this is a message from weng&#39;, message)
+  event.reply(&#39;main-to-renderer&#39;, &quot;给翁恺敏发消息&quot;);
+})</code></pre>
+<p>1、主进程通过 <code>ipcMain.on</code> 来监听渲染进程的消息；</p>
+<p>2、主进程接收到消息后，可以回复消息，也可以不回复。如果回复的话，通过 <code>event.reply</code> 发送另一个事件，渲染进程监听这个事件得到回复结果。如果不回复消息的话，渲染进程将接着执行 <code>ipcRenderer.send</code> 之后的代码。</p>
+<p>上面提到过了, <code>send</code> 这样的方式，主进程可以给回复，也可以不给回复，但是得通过 <code>event.replay</code>。如果此时你试图用 <code>return</code> 的方式传递返回值的话，结果并不能达到你的预期。</p>
+<h4 id="ipcMain-handle-handleOnce-ipcRenderer-invoke"><a href="#ipcMain-handle-handleOnce-ipcRenderer-invoke" class="headerlink" title="ipcMain.handle/handleOnce + ipcRenderer.invoke"></a>ipcMain.handle/handleOnce + ipcRenderer.invoke</h4><blockquote>
+<p>这是另外一种通信手段</p>
+</blockquote>
+<p>main.js</p>
+<pre><code class="js">// main.js
+const { ipcMain } = require(&#39;electron&#39;);
+
+// 返回的数据将会被promise包裹
+ipcMain.handle(&#39;render-invoke-to-main&#39;, async (event, message) =&gt; {
+  console.log(`receive message from render: ${message}`)
+  const result = await asyncWork();
+  return result; // 假如需要回复渲染进程直接return就行
+})
+
+const asyncWork = async () =&gt; {
+  return new Promise(resolve =&gt; {
+    setTimeout(() =&gt; {
+      resolve(&#39;延迟 2 秒获取到主进程的返回结果&#39;)
+    }, 2000)
+  })
+}</code></pre>
+<p>renderer.js</p>
+<pre><code class="js">// render.js
+const { ipcRenderer } = require(&#39;electron&#39;);
+
+async function invokeMessageToMain() {
+  const replyMessage = await ipcRenderer.invoke(&#39;render-invoke-to-main&#39;, &#39;我是渲染进程通过 invoke 发送的消息&#39;);
+  console.log(&#39;replyMessage&#39;, replyMessage);
+}
+</code></pre>
+<p>1、主进程通过 <code>ipcMain.handle</code> 来处理渲染进程发送的消息；</p>
+<p>2、主进程接收到消息后，可以回复消息，也可以不回复。如果回复消息的话，可以通过 <code>return</code> 给渲染进程回复消息；如果不回复消息的话，渲染进程将接着执行 <code>ipcRenderer.invoke</code> 之后的代码。</p>
+<p>3、渲染进程异步等待主进程的回应， <code>invoke</code> 的返回值是一个 <code>Promise&lt;pending&gt;</code> 。</p>
+<h4 id="window-webContents-send"><a href="#window-webContents-send" class="headerlink" title="window.webContents.send"></a><strong>window.webContents.send</strong></h4><blockquote>
+<p>这种方式依赖于 <code>webContents</code> 对象，它是我们在项目中新建窗口时，产生的窗口对象上的一个属性。</p>
+</blockquote>
+<pre><code class="js">// 窗口在完成加载时，通过 webContents.send 给渲染进程发送消息
+window.webContents.on(&#39;did-finish-load&#39;, () =&gt; {
+  window.webContents.send(&#39;main-send-to-render&#39;, &#39;启动完成了&#39;)
+})</code></pre>
+<p>之前我们通过渲染进程监听主进程的事件</p>
+<pre><code class="js">// render.js
+const { ipcRenderer } = require(&#39;electron&#39;);
+
+ipcRenderer.on(&#39;main-send-to-render&#39;, (event, message) =&gt; {
+  console.log(`receive message from main: ${message}`)
+})
+</code></pre>
+<h3 id="渲染进程和主进程的同步通信"><a href="#渲染进程和主进程的同步通信" class="headerlink" title="渲染进程和主进程的同步通信"></a>渲染进程和主进程的同步通信</h3><h4 id="ipcRenderer-sendSync-ipcMain-on-once"><a href="#ipcRenderer-sendSync-ipcMain-on-once" class="headerlink" title="ipcRenderer.sendSync + ipcMain.on/once"></a>ipcRenderer.sendSync + ipcMain.on/once</h4><p>renderer.js</p>
+<pre><code class="js">// render.js
+const { ipcRenderer } = require(&#39;electron&#39;);
+
+function sendSyncMessageToMain() {
+  const replyMessage = ipcRenderer.sendSync(&#39;render-send-sync-to-main&#39;, &#39;我是渲染进程通过 syncSend 发送给主进程的消息&#39;);
+  console.log(&#39;replyMessage&#39;, replyMessage); // &#39;主进程回复的消息&#39;
+}
+</code></pre>
+<p>Main.js</p>
+<pre><code class="js">// main.js
+const { ipcMain } = require(&#39;electron&#39;);
+
+ipcMain.on(&#39;render-send-sync-to-main&#39;, (event, message) =&gt; {
+  console.log(`receive message from render: ${message}`)
+  event.returnValue = &#39;主进程回复的消息&#39;; 
+})
+</code></pre>
+<p>1、主进程通过 <code>ipcMain.on</code> 来处理渲染进程发送的消息；</p>
+<p>2、主进程通过 <code>event.returnValue</code> 回复渲染进程消息；</p>
+<p>3、如果 <code>event.returnValue</code> 不为 <code>undefined</code> 的话，渲染进程会等待 <code>sendSync</code> 的返回值才执行后面的代码；</p>
+<p>4、请保证 <code>event.returnValue</code>是有值的，否则会造成非预期的影响。</p>
+<p>上面的案例，主进程绑定的处理函数是一个同步的，我们将它换为异步的来看看：</p>
+<pre><code class="javascript">// main.js
+const { ipcMain } = require(&#39;electron&#39;);
+
+ipcMain.on(&#39;render-send-sync-to-main&#39;, async (event, message) =&gt; {
+  console.log(`receive message from render: ${message}`)
+  const result = await asyncWork();
+  event.returnValue = result;
+})
+
+const asyncWork = async () =&gt; {
+  return new Promise(resolve =&gt; {
+    setTimeout(() =&gt; {
+      resolve(&#39;延迟 2 秒获取到主进程的返回结果&#39;)
+    }, 2000)
+  })
+}
+</code></pre>
+<p>这次我们在执行完一个异步函数 <code>asyncWork</code> 之后再给 <code>event.returnValue</code> 赋值。</p>
+<p>结果发现渲染进程那边会在 2 秒之后才打印：</p>
+<pre><code>&quot;replyMessage 延迟 2 秒获取到主进程的返回结果&quot;
+</code></pre><p>而且对于渲染进程，以下两种写法，结果都是一样的：</p>
+<pre><code class="javascript">// render.js
+const { ipcRenderer } = require(&#39;electron&#39;);
+
+function sendSyncMessageToMain() {
+  const replyMessage = ipcRenderer.sendSync(&#39;render-send-sync-to-main&#39;, &#39;我是渲染进程通过 syncSend 发送给主进程的消息&#39;);
+  console.log(&#39;replyMessage&#39;, replyMessage); // &#39;replyMessage 延迟 2 秒获取到主进程的返回结果&#39;&#39;
+}
+
+// 或者改用 async 函数
+async function sendSyncMessageToMain() {
+  const replyMessage = await ipcRenderer.sendSync(&#39;render-send-sync-to-main&#39;, &#39;我是渲染进程发送给主进程的同步消息&#39;);
+  console.log(&#39;replyMessage&#39;, replyMessage); // &#39;replyMessage 延迟 2 秒获取到主进程的返回结果&#39;
+}
+</code></pre>
+<p>也就是说，不论渲染进程在接收 <code>sendSync</code> 结果的时候，是不是用 <code>await</code> 等待，都会等待结果返回后才向下执行。但如果你已经确定你的请求是一个异步的话，建议还是使用 <code>invoke</code> 去发送消息，这里出于两点原因考虑：</p>
+<p>1、方法名 <code>sendSync</code> 就很符合语义，发送同步消息；</p>
+<p>2、请求执行的明明是异步代码，但是如果你用 <code>const replyMessage = ipcRenderer.sendSync(&#39;xxx&#39;)</code> 方式来获取响应信息，会很奇怪。</p>
+<p>OKK，上面的第四点谈到了，请保证 <code>event.returnValue</code> 是有值的，否则会照成非预期的影响。让我们也来写个例子：</p>
+<pre><code class="javascript">// render.js
+const { ipcRenderer } = require(&#39;electron&#39;);
+
+function sendSyncMessageToMain() {
+  const replyMessage = ipcRenderer.sendSync(&#39;render-send-sync-to-main&#39;, &#39;我是渲染进程通过 syncSend 发送给主进程的消息&#39;);
+  console.log(&#39;replyMessage&#39;, replyMessage); // replyMessage {error: &quot;reply was never sent&quot;}
+  console.log(&#39;next&#39;); // 这里也会执行
+}
+
+// main.js
+ipcMain.on(&#39;render-send-sync-to-main&#39;, async (event, message) =&gt; {
+  console.log(`receive message from render: ${message}`)
+})
+</code></pre>
+<p>在上面的例子中，主进程那边不对 <code>event.returnValue</code> 做处理，在渲染进程这边将会得到一个错误：</p>
+<pre><code class="javascript">{error: &quot;reply was never sent&quot;}
+</code></pre>
+<p>虽然 <code>next</code> 也会打印，但是如果你再想去发送一次 <code>render-send-sync-to-main</code> 你会发现页面已经卡了…</p>
+<h3 id="渲染进程与渲染进程-窗口与窗口-的通讯"><a href="#渲染进程与渲染进程-窗口与窗口-的通讯" class="headerlink" title="渲染进程与渲染进程(窗口与窗口)的通讯"></a>渲染进程与渲染进程(窗口与窗口)的通讯</h3><h4 id="ipcRenderer-sendTo-ipcRenderer-on"><a href="#ipcRenderer-sendTo-ipcRenderer-on" class="headerlink" title="ipcRenderer.sendTo + ipcRenderer.on"></a>ipcRenderer.sendTo + ipcRenderer.on</h4><blockquote>
+<p>举个例子：B窗口给你A窗口发送消息</p>
+</blockquote>
+<p>窗口A</p>
+<pre><code class="js">ipcRenderer.on(&#39;B-to-A&#39;,(event,message)=&gt;{
+  console.log(message)
+})</code></pre>
+<p>窗口B</p>
+<pre><code class="js">const A_ID = ipcRenderer.sendSync(&#39;getWinId&#39;, &#39;A&#39;)
+ipcRenderer.sendTo(A_ID,&#39;B-to-A&#39;,&#39;我是来自B窗口的消息&#39;)</code></pre>
+<h3 id="渲染进程和webview的通讯"><a href="#渲染进程和webview的通讯" class="headerlink" title="渲染进程和webview的通讯"></a>渲染进程和webview的通讯</h3><h4 id="ipcRenderer-sendToHost-webview-addEventListener-“ipc-message”"><a href="#ipcRenderer-sendToHost-webview-addEventListener-“ipc-message”" class="headerlink" title="ipcRenderer.sendToHost + webview.addEventListener(“ipc-message”)"></a>ipcRenderer.sendToHost + webview.addEventListener(“ipc-message”)</h4><p>渲染进程</p>
+<pre><code class="js">const webview = document.querySelector(&#39;webview&#39;);
+webview.addEventListener(&#39;ipc-message&#39;,(event, message)=&gt;{
+  console.log(message)
+})
+
+webview.send(&#39;rende-to-webview&#39;,&#39;发给webview里头的界面&#39;); // 给webview发消息</code></pre>
+<p>webview内嵌的页面</p>
+<pre><code class="js">import { ipcRenderer } from &#39;electron&#39;;
+
+ipcRenderer.on(&#39;send-to&#39;,(event,args)=&gt;{
+    console.log(&#39;收到渲染进程发来的消息&#39;,args);
+  ipcRenderer.sendToHost(&#39;message&#39;, &#39;我是webview发过来的消息&#39;)
+})</code></pre>
+<h4 id="webview-preload协议-提供桥接方法"><a href="#webview-preload协议-提供桥接方法" class="headerlink" title="webview + preload协议 提供桥接方法"></a>webview + preload协议 提供桥接方法</h4><p>通过利用webview的preload属性 <a href="https://www.electronjs.org/zh/docs/latest/api/webview-tag#preload" target="_blank" rel="noopener">preload</a></p>
+<blockquote>
+<p>preload其实是相当于一个页面运行其他脚本之前，先加载的指定脚本</p>
+</blockquote>
+<p>有一点需要注意的是，webview的preload属性接受的是asar和file协议，注入js脚本</p>
+<p>preload.js</p>
+<pre><code class="js">import { ipcRenderer } from &#39;electron&#39;;
+const Bridge = {
+  ...各种方法或者什么参数
+  sayHi(data){
+    ipcRenderer.send(&#39;some-event&#39;, dataÏ)
+  }
+}
+
+global.Bridge = Bridge; // 将Bridge的对象注入到全局对象上，webview打开的时候指的就是window</code></pre>
+<p>webview内嵌的页面</p>
+<pre><code class="js">const myBridge = window.Bridge;
+
+myBridge.sayHi(&#39;我是webview&#39;)</code></pre>
+<p>处理地址</p>
+<pre><code class="js">const localPreloadFile = `file://${require(&#39;path&#39;).resolve(&#39;./preload.js&#39;)}`
+webview.setAtrribute(&#39;preload&#39;,preloadFileÏ)</code></pre>
+<img src="/Users/leo/Library/Application Support/typora-user-images/image-20220326183153864.png" alt="image-20220326183153864" style="zoom: 67%;">
+
+<p>通过桥接的方法，实现electron的通信机制的转发，进而实现webview和渲染进程之间的沟通</p>
+<h3 id="进程统一实现方案（暂未完善）"><a href="#进程统一实现方案（暂未完善）" class="headerlink" title="进程统一实现方案（暂未完善）"></a>进程统一实现方案（暂未完善）</h3><pre><code class="js">import events from &quot;events&quot;;
+import { ipcRenderer, ipcMain, webContents } from &quot;electron&quot;;
+
+const PIPE_EVENT = &quot;__eventPipe&quot;;
+
+class Eventer {
+  constructor() {
+    this.instance = new events.EventEmitter();
+    this.instance.setMaxListeners(20);
+    this.initEventPipe();
+  }
+
+  /**
+   * @description: 初始化管道配置
+   */
+  initEventPipe() {
+    if (ipcRenderer) {
+      ipcRenderer.on(PIPE_EVENT, (e, { eventName, eventArgs }) =&gt; {
+        this.instance.emit(eventName, eventArgs);
+      });
+    }
+    if (ipcMain) {
+      ipcMain.handle(PIPE_EVENT, (e, { eventName, eventArgs }) =&gt; {
+        this.instance.emit(eventName, eventArgs);
+        webContents.getAllWebContents().forEach((wc) =&gt; {
+          if (wc.id !== e.sender.id) {
+            wc.send(PIPE_EVENT, { eventName, eventArgs });
+          }
+        });
+      });
+    }
+  }
+
+  /**
+   * @description: 监听事件
+   * @param {*} eventName 事件名称
+   * @param {*} callBack 回调
+   * @return {*}
+   */
+  on(eventName, callBack) {
+    this.instance.on(eventName, callBack);
+  }
+
+  /**
+   * @description: 事件触发
+   * @param {*} eventName
+   * @param {*} eventArgs
+   */
+  emit(eventName, eventArgs) {
+    this.instance.emit(eventName, eventArgs);
+    if (ipcMain) {
+      webContents.getAllWebContents().forEach((wc) =&gt; {
+        wc.send(PIPE_EVENT, { eventName, eventArgs });
+      });
+    }
+    if (ipcRenderer) {
+      ipcRenderer.invoke(PIPE_EVENT, { eventName, eventArgs });
+    }
+  }
+}
+
+const event = new Eventer();
+
+export default event;</code></pre>
+<p>主进程</p>
+<pre><code class="js">import eventer from &#39;@/common/eventer&#39;;
+
+eventer.on(&#39;my-event&#39;, (args)=&gt;{
+  console.log(args)
+})</code></pre>
+<p>渲染进程</p>
+<pre><code class="js">import eventer from &#39;@/common/eventer&#39;;
+eventer.emit(&#39;my-event&#39;,(args)=&gt;{
+  console.log(args);
+})</code></pre>
+<h2 id="一些使用记录"><a href="#一些使用记录" class="headerlink" title="一些使用记录"></a>一些使用记录</h2><h3 id="按键配置"><a href="#按键配置" class="headerlink" title="按键配置"></a>按键配置</h3><p><a href="https://www.electronjs.org/zh/docs/latest/api/accelerator" target="_blank" rel="noopener">https://www.electronjs.org/zh/docs/latest/api/accelerator</a></p>
+<h3 id="渲染进程和webview的通信"><a href="#渲染进程和webview的通信" class="headerlink" title="渲染进程和webview的通信"></a>渲染进程和webview的通信</h3><pre><code class="js">const webview = document.querySelector(&#39;webview&#39;);
+webview.addEventListener(&#39;dom-ready&#39;,()=&gt;{});
+webview.addEventListener(&#39;ipc-message&#39;, ()=&gt;{
+  webview.send(&#39;sth&#39;)
+})
+
+
+ipcRenderer.sendToHost(&#39;sth&#39;)
+
+
+// preload
+const preloadFile = &#39;file://&#39; + require(&#39;path&#39;).resolve(&#39;./preload.js&#39;);
+webview.setAttribute(&#39;preload&#39;, preloadFile);</code></pre>
+<pre><code class="js">// 客户端
+const clientSocket = io(&#39;http://127.0.0.1:3000/&#39;)</code></pre>
+<h3 id="menu（应用菜单）"><a href="#menu（应用菜单）" class="headerlink" title="menu（应用菜单）"></a>menu（应用菜单）</h3><pre><code class="js">const menuTemplate = [
+  IS_MAC &amp;&amp; { label: &quot;ismac&quot; }, //  macOS下第一个标签是应用程序名字,所以这里是为了兼容mac的
+  {
+    label: &quot;选项&quot;,
+    submenu: [
+      {
+        label: &quot;退出&quot;,
+        role: &quot;quit&quot;,
+      },
+      {
+        label: &quot;我的博客&quot;,
+        click: createBlogWin,
+      },
+      isDevelopment &amp;&amp; {
+        label: &quot;打开devTool&quot;,
+        click: createDevTool,
+        accelerator: &quot;CommandOrControl + shift + i&quot;,
+      },
+    ].filter(Boolean),
+  },
+  { type: &quot;separator&quot; }, // mac下无效
+  {
+    label: &quot;文件&quot;,
+    submenu: [
+      {
+        label: &quot;子菜单&quot;,
+        click: () =&gt; {
+          // 调用了dialog（弹窗模块），演示效果
+          dialog.showMessageBoxSync({
+            type: &quot;info&quot;,
+            title: &quot;提示&quot;,
+            message: &quot;点击了子菜单&quot;,
+          });
+        },
+      },
+    ],
+  },
+].filter(Boolean);
+
+const menu = Menu.buildFromTemplate(menuTemplate);
+Menu.setApplicationMenu(menu);</code></pre>
+<p>比较要注意的就是mac的第一个菜单被系统设置为了应用的名称等等</p>
+<p>所以最上面的数组加了一行<strong>mac</strong>相关的是配</p>
+<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><pre><code class="js">const { remote } from &#39;electron&#39;;
+
+const getCookie = async (name)=&gt; {
+  let cookie = await remote.session.defautlSession.cookies.get({name});
+  if(cookie.length) return cookies[0].value;
+  else return &#39;&#39;
+}
+const setCookie = async (cookie) =&gt; {
+  await remote.session.defautlSession.cookies.set(cookie)
+}</code></pre>
+<ul>
+<li>defaultSession是当前浏览器会话的对象实例，也可以通过<code>window.webContents.session</code>获取session对象</li>
+</ul>
+<h3 id="删除浏览器缓存"><a href="#删除浏览器缓存" class="headerlink" title="删除浏览器缓存"></a>删除浏览器缓存</h3><pre><code class="js">await remote.session.defaultSession.cookie.clearStorageData({
+  storages: &#39;localstorage, cookie&#39; // 删除localStroage中和cookie的缓存数据
+})</code></pre>
+<p>storages的参数可以查看 <a href="https://www.electronjs.org/zh/docs/latest/api/session#sesclearstoragedataoptions" target="_blank" rel="noopener">官方文档</a></p>
+<h3 id="判断操作系统类型"><a href="#判断操作系统类型" class="headerlink" title="判断操作系统类型"></a>判断操作系统类型</h3><blockquote>
+<p>process.platform <a href="http://nodejs.cn/api/process/process_platform.html" target="_blank" rel="noopener">文档</a></p>
+</blockquote>
+<pre><code class="js">import { platform } from &#39;process&#39;;
+
+console.log(`This platform is ${platform}`);</code></pre>
+<ul>
+<li>‘aix’</li>
+<li>‘darwin’</li>
+<li>‘linux’</li>
+<li>‘freebsd’</li>
+<li>‘openbsd’</li>
+<li>‘sunos’</li>
+<li>‘win32’</li>
+</ul>
+<h3 id="BrowserWindow"><a href="#BrowserWindow" class="headerlink" title="BrowserWindow"></a>BrowserWindow</h3><h4 id="webSecurity"><a href="#webSecurity" class="headerlink" title="webSecurity"></a>webSecurity</h4><p><a href="https://www.electronjs.org/zh/docs/latest/tutorial/security#6-%E4%B8%8D%E8%A6%81%E7%A6%81%E7%94%A8websecurity" target="_blank" rel="noopener">官方</a></p>
+<p>禁用同源策略 (通常用来测试网站)，设置false禁用网站的同源政策</p>
+<blockquote>
+<p>禁用 <code>webSecurity</code> 将会禁止同源策略并且将 <code>allowRunningInsecureContent</code> 属性置 <code>true</code>。 换句话说，这将使得来自其他站点的非安全代码被执行。</p>
+</blockquote>
+<h3 id="net请求库（原生）"><a href="#net请求库（原生）" class="headerlink" title="net请求库（原生）"></a>net请求库（原生）</h3><blockquote>
+<p>主进程</p>
+<p><a href="https://www.electronjs.org/zh/docs/latest/api/net" target="_blank" rel="noopener">官方使用文档</a></p>
+</blockquote>
+<h3 id="dialog（系统对话框）"><a href="#dialog（系统对话框）" class="headerlink" title="dialog（系统对话框）"></a>dialog（系统对话框）</h3><blockquote>
+<p>主进程使用</p>
+<p><a href="https://www.electronjs.org/zh/docs/latest/api/dialog" target="_blank" rel="noopener">官方使用文档</a></p>
+</blockquote>
+<h3 id="使用webview（不稳定）"><a href="#使用webview（不稳定）" class="headerlink" title="*使用webview（不稳定）"></a>*使用webview（不稳定）</h3><blockquote>
+<p>假如要在页面中使用webview的话，需要设置BrowserWindow 初始化的时候的配置 <code>webviewTag: true</code> </p>
+<p><a href="https://www.electronjs.org/zh/docs/latest/tutorial/web-embeds#webview" target="_blank" rel="noopener">官方建议文档</a></p>
+<p><a href="https://www.electronjs.org/zh/docs/latest/api/webview-tag#src" target="_blank" rel="noopener">官方使用文档</a></p>
+</blockquote>
+<p>main.js</p>
+<pre><code class="js">const win = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+        nodeIntegration: true,
+        contextIsolation: false,
+        webviewTag: true
+    }
+})
+
+</code></pre>
+<h2 id="electron项目中常用的库"><a href="#electron项目中常用的库" class="headerlink" title="electron项目中常用的库"></a>electron项目中常用的库</h2><h3 id="mousetrap"><a href="#mousetrap" class="headerlink" title="mousetrap"></a>mousetrap</h3><p>按键事件的监听库，监听网页的按键事件</p>
+<h3 id="SQLite持久化数据"><a href="#SQLite持久化数据" class="headerlink" title="SQLite持久化数据"></a>SQLite持久化数据</h3><p>推荐二次封装库 <code>node-sqlite3</code></p>
+<p>三次封装库 <code>knextjs</code></p>
+<img src="/Users/leo/Library/Application Support/typora-user-images/image-20220301000309311.png" alt="image-20220301000309311" style="zoom:50%;">
+
+
+
+<h3 id="lowdb和electron-store"><a href="#lowdb和electron-store" class="headerlink" title="lowdb和electron-store"></a>lowdb和electron-store</h3><p>小型的数据存储工具</p>
+<h2 id="离谱的坑"><a href="#离谱的坑" class="headerlink" title="离谱的坑"></a>离谱的坑</h2><h3 id="控制台打印乱码"><a href="#控制台打印乱码" class="headerlink" title="控制台打印乱码"></a>控制台打印乱码</h3><blockquote>
+<p>这种情况是由于控制台输出的不是UTF-8的编码格式</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="leo/Desktop/weng's" alt="image-20220112210828647" title="code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220112210828647.png">
+                </div>
+                <div class="image-caption">code/wengblog/NollieLeo.github.io/source/_posts/electron学习记录image-20220112210828647.png</div>
+            </figure>
+
+<p><strong>解决：</strong></p>
+<p>执行start的脚本中加入</p>
+<pre><code class="json">&quot;start&quot;: &quot;chcp 65001 &amp;&amp; ....&quot;    </code></pre>
+<h3 id="electron的包装不上"><a href="#electron的包装不上" class="headerlink" title="electron的包装不上"></a>electron的包装不上</h3><p><strong>解决：</strong>将electron包的源改为国内的源：</p>
+<p>.npmrc文件中强制指定源</p>
+<pre><code>electron_mirror=&quot;https://npm.taobao.org/mirrors/electron/&quot;</code></pre>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-03-31T02:26:32.327Z" itemprop="dateUpdated">2022-03-31 10:26:32</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&title=《electron学习记录》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&title=《electron学习记录》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《electron学习记录》 — 翁老师的博客&url=https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2022/02/27/eslint-rules%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">eslint rules常用配置项</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/12/13/%E6%89%8B%E5%86%99promise-allSettled/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">手写promise allSettled</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&title=《electron学习记录》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&title=《electron学习记录》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《electron学习记录》 — 翁老师的博客&url=https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

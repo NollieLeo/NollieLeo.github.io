@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>30-seconds-of-js | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="js">
+    <meta name="description" content="方法- 对象转queryStrings通过Object.entries以及reduce进行queryString的累加，只能将对象中值为string的转进去，可以改进 const objectToQuerystring &#x3D; (queryParams) &#x3D;&gt; {     return Object.entries(queryParams).reduce((queryString, [key,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="30-seconds-of-js">
+<meta property="og:url" content="https://github.com/NollieLeo/2020/07/24/30-seconds-of-js/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="方法- 对象转queryStrings通过Object.entries以及reduce进行queryString的累加，只能将对象中值为string的转进去，可以改进 const objectToQuerystring &#x3D; (queryParams) &#x3D;&gt; {     return Object.entries(queryParams).reduce((queryString, [key,">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-24T06:07:43.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.047Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="js">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">30-seconds-of-js</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">30-seconds-of-js</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-07-24T06:07:43.000Z" itemprop="datePublished" class="page-time">
+  2020-07-24
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#方法"><span class="post-toc-number">1.</span> <span class="post-toc-text">方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对象转queryStrings"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">- 对象转queryStrings</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深度冻结一个对象"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">- 深度冻结一个对象</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获取当前url（不带任何参数）"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">- 获取当前url（不带任何参数）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获取当前URL下的值"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">- 获取当前URL下的值</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#JavaScript-api"><span class="post-toc-number">2.</span> <span class="post-toc-text">JavaScript api</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#for-in-for-of-和-forEach"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">-for in , for of 和 forEach</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#for-in"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">for in</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#for-of"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">for of</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#forEach"><span class="post-toc-number">2.1.3.</span> <span class="post-toc-text">forEach</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-30-seconds-of-js"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">30-seconds-of-js</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-07-24 14:07:43" datetime="2020-07-24T06:07:43.000Z"  itemprop="datePublished">2020-07-24</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><h2 id="对象转queryStrings"><a href="#对象转queryStrings" class="headerlink" title="- 对象转queryStrings"></a>- 对象转queryStrings</h2><p>通过Object.entries以及reduce进行queryString的累加，只能将对象中值为string的转进去，可以改进</p>
+<pre><code class="javascript">const objectToQuerystring = (queryParams) =&gt; {
+    return Object.entries(queryParams).reduce((queryString, [key, value], index) =&gt; {
+        const symbol = queryString.length === 0 ? &#39;?&#39; : &#39;&amp;&#39;;
+        queryString += typeof value === &#39;string&#39; ? `${symbol}${key}=${value}` : &#39;&#39;;
+        return queryString;
+    }, &#39;&#39;);
+}
+
+// ?name=weng&amp;address=11111</code></pre>
+<h2 id="深度冻结一个对象"><a href="#深度冻结一个对象" class="headerlink" title="- 深度冻结一个对象"></a>- 深度冻结一个对象</h2><p>使用Object.keys（）获取所传递对象的所有属性，使用Array.prototype.forEach（）遍历它们。 在所有属性上递归调用Object.freeze（obj），检查是否使用Object.isFrozen（）冻结了每个属性，并根据需要应用deepFreeze（）。 最后，使用Object.freeze（）冻结给定的对象。</p>
+<pre><code class="javascript">const deepFreeze = obj =&gt; {
+  Object.keys(obj).forEach(prop =&gt; {
+    if (typeof(obj[prop]) === &#39;object&#39; &amp;&amp; !Object.isFrozen(obj[prop]))   deepFreeze(obj[prop]);
+  });
+  return Object.freeze(obj);
+};
+
+
+EXAMPLES
+&#39;use strict&#39;;
+
+const o = deepFreeze([1, [2, 3]]);
+
+o[0] = 3; // not allowed
+o[1][0] = 4; // not allowed as well</code></pre>
+<h2 id="获取当前url（不带任何参数）"><a href="#获取当前url（不带任何参数）" class="headerlink" title="- 获取当前url（不带任何参数）"></a>- 获取当前url（不带任何参数）</h2><p>返回没有任何参数的当前URL。</p>
+<p>使用String.prototype.indexOf（）检查给定的url是否具有参数，使用String.prototype.slice（）删除它们（如有必要）。</p>
+<pre><code class="javascript">const getBaseURL = url =&gt;
+  url.indexOf(&#39;?&#39;) &gt; 0 ? url.slice(0, url.indexOf(&#39;?&#39;)) : url;</code></pre>
+<h2 id="获取当前URL下的值"><a href="#获取当前URL下的值" class="headerlink" title="- 获取当前URL下的值"></a>- 获取当前URL下的值</h2><p>返回一个包含当前URL参数的对象。</p>
+<p>使用带有适当正则表达式的String.prototype.match（）来获取所有键值对，使用Array.prototype.reduce（）来映射它们并将它们组合成一个对象。 传递location.search作为参数以应用于当前网址。</p>
+<pre><code class="javascript">const getURLParameters = url =&gt;
+    (url.match(/([^?=&amp;]+)(=([^&amp;]*))/g) || []).reduce(
+    (a, v) =&gt; ((a[v.slice(0, v.indexOf(&#39;=&#39;))] = v.slice(v.indexOf(&#39;=&#39;) + 1)), a),
+    {}
+);</code></pre>
+<h1 id="JavaScript-api"><a href="#JavaScript-api" class="headerlink" title="JavaScript api"></a>JavaScript api</h1><h2 id="for-in-for-of-和-forEach"><a href="#for-in-for-of-和-forEach" class="headerlink" title="-for in , for of 和 forEach"></a>-for in , for of 和 forEach</h2><h3 id="for-in"><a href="#for-in" class="headerlink" title="for in"></a>for in</h3><p>for … in用于迭代对象的所有可枚举属性，包括继承的可枚举属性。 该迭代语句可用于数组字符串或普通对象，但不能用于Map或Set对象。</p>
+<pre><code class="javascript">for (let prop in [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]) 
+  console.log(prop);            // 0, 1, 2 (array indexes)
+
+for (let prop in &#39;str&#39;) 
+  console.log(prop);            // 0, 1, 2 (string indexes)
+
+for (let prop in {a: 1, b: 2, c: 3}) 
+  console.log(prop);            // a, b, c (object property names)
+
+for (let prop in new Set([&#39;a&#39;, &#39;b&#39;, &#39;a&#39;, &#39;d&#39;])) 
+  console.log(prop);            // undefined (no enumerable properties)</code></pre>
+<h3 id="for-of"><a href="#for-of" class="headerlink" title="for of"></a>for of</h3><p>for … of用于迭代可迭代对象，迭代其值而不是其属性。 该迭代语句可用于数组，字符串，Map或Set对象，但不能用于普通对象。</p>
+<pre><code class="javascript">for (let val of [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]) 
+  console.log(val);            // a, b, c (array values)
+
+for (let val of &#39;str&#39;) 
+  console.log(val);            // s, t, r (string characters)
+
+for (let val of {a: 1, b: 2, c: 3}) 
+  console.log(prop);           // TypeError (not iterable)
+
+for (let val of new Set([&#39;a&#39;, &#39;b&#39;, &#39;a&#39;, &#39;d&#39;])) 
+  console.log(val);            // a, b, d (Set values)</code></pre>
+<h3 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h3><p>forEach（）是Array原型的一种方法，它允许您遍历数组的元素。 尽管forEach（）仅迭代数组，但它可以在迭代时访问每个元素的值和索引。</p>
+<pre><code class="javascript">[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;].forEach(
+  val =&gt; console.log(val)     // a, b, c (array values)
+);
+
+[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;].forEach(
+  (val, i) =&gt; console.log(i)  // 0, 1, 2 (array indexes)
+);    </code></pre>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.047Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/07/24/30-seconds-of-js/&title=《30-seconds-of-js》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/07/24/30-seconds-of-js/&title=《30-seconds-of-js》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/07/24/30-seconds-of-js/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《30-seconds-of-js》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/07/24/30-seconds-of-js/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/07/24/30-seconds-of-js/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/08/02/typeScript%E6%80%BB%E7%BB%93/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">typeScript总结</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/07/19/react%E5%B8%B8%E7%94%A8%E5%BA%93/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">react常用库</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/07/24/30-seconds-of-js/&title=《30-seconds-of-js》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/07/24/30-seconds-of-js/&title=《30-seconds-of-js》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/07/24/30-seconds-of-js/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《30-seconds-of-js》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/07/24/30-seconds-of-js/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/07/24/30-seconds-of-js/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2020/07/24/30-seconds-of-js/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>react何时render呢？ | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="react">
+    <meta name="description" content="对于如下Demo，点击Parent组件的div，触发更新，Son组件会打印child render!么？ function Son() {       console.log(&#39;child render!&#39;);       return &lt;div&gt;Son&lt;&#x2F;div&gt;; } function Parent(props) {       const [count">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react何时render呢？">
+<meta property="og:url" content="https://github.com/NollieLeo/2020/12/24/react%E4%BD%95%E6%97%B6render%E5%91%A2%EF%BC%9F/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="对于如下Demo，点击Parent组件的div，触发更新，Son组件会打印child render!么？ function Son() {       console.log(&#39;child render!&#39;);       return &lt;div&gt;Son&lt;&#x2F;div&gt;; } function Parent(props) {       const [count">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-24T01:50:41.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.081Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="react">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">react何时render呢？</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">react何时render呢？</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-12-24T01:50:41.000Z" itemprop="datePublished" class="page-time">
+  2020-12-24
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/react/">react</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#render需要满足的条件"><span class="post-toc-number">1.</span> <span class="post-toc-text">render需要满足的条件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#bailout需要满足的条件"><span class="post-toc-number">2.</span> <span class="post-toc-text">bailout需要满足的条件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-oldProps-newProps-？"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1. oldProps &#x3D;&#x3D;&#x3D; newProps ？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-context没有变化"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2. context没有变化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-workInProgress-type-current-type-？"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">3. workInProgress.type &#x3D;&#x3D;&#x3D; current.type ？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-includesSomeLane-renderLanes-updateLanes-？"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">4. !includesSomeLane(renderLanes, updateLanes) ？</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Demo的详细执行逻辑"><span class="post-toc-number">3.</span> <span class="post-toc-text">Demo的详细执行逻辑</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-react何时render呢？"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">react何时render呢？</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-12-24 09:50:41" datetime="2020-12-24T01:50:41.000Z"  itemprop="datePublished">2020-12-24</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/react/">react</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>对于如下Demo，点击<code>Parent</code>组件的<code>div</code>，触发更新，<code>Son</code>组件会打印<code>child render!</code>么？</p>
+<pre><code class="tsx">function Son() {  
+    console.log(&#39;child render!&#39;);  
+    return &lt;div&gt;Son&lt;/div&gt;;
+}
+function Parent(props) {  
+    const [count, setCount] = React.useState(0);  
+    return (    
+        &lt;div onClick={() =&gt; {setCount(count + 1)}}&gt;      
+            count:{count}      
+            {props.children}    
+        &lt;/div&gt;  
+    );
+}
+function App() {  
+    return (    
+        &lt;Parent&gt;      
+            &lt;Son/&gt;    
+        &lt;/Parent&gt;  
+    );
+}
+const rootEl = document.querySelector(&quot;#root&quot;);
+ReactDOM.render(&lt;App/&gt;, rootEl);</code></pre>
+<pre><code>                                                不会    </code></pre><h2 id="render需要满足的条件"><a href="#render需要满足的条件" class="headerlink" title="render需要满足的条件"></a>render需要满足的条件</h2><p><code>React</code>创建<code>Fiber树</code>时，每个组件对应的<code>fiber</code>都是通过如下两个逻辑之一创建的：</p>
+<ul>
+<li>render。即调用<code>render</code>函数，根据返回的<code>JSX</code>创建新的<code>fiber</code>。</li>
+<li>bailout。即满足一定条件时，<code>React</code>判断该组件在更新前后没有发生变化，则复用该组件在上一次更新的<code>fiber</code>作为本次更新的<code>fiber</code>。</li>
+</ul>
+<p>可以看到，当命中<code>bailout</code>逻辑时，是不会调用<code>render</code>函数的。</p>
+<p>所以，<code>Son</code>组件不会打印<code>child render!</code>是因为命中了<code>bailout</code>逻辑。</p>
+<h2 id="bailout需要满足的条件"><a href="#bailout需要满足的条件" class="headerlink" title="bailout需要满足的条件"></a>bailout需要满足的条件</h2><p>什么情况下会进入<code>bailout</code>逻辑？当同时满足如下4个条件时：</p>
+<h3 id="1-oldProps-newProps-？"><a href="#1-oldProps-newProps-？" class="headerlink" title="1. oldProps === newProps ？"></a>1. oldProps === newProps ？</h3><p>即本次更新的<code>props</code>（newProps）不等于上次更新的<code>props</code>（oldProps）。</p>
+<p>注意这里是<strong>全等比较</strong>。</p>
+<p>我们知道组件<code>render</code>会返回<code>JSX</code>，<code>JSX</code>是<code>React.createElement</code>的语法糖。</p>
+<p>所以<code>render</code>的返回结果实际上是<code>React.createElement</code>的执行结果，即一个包含<code>props</code>属性的对象。</p>
+<p>即使本次更新与上次更新<code>props</code>中每一项参数都没有变化，但是本次更新是<code>React.createElement</code>的执行结果，是一个全新的<code>props</code>引用，所以<code>oldProps !== newProps</code>。</p>
+<p>如果我们使用了<code>PureComponent</code>或<code>Memo</code>，那么在判断是进入<code>render</code>还是<code>bailout</code>时，不会判断<code>oldProps</code>与<code>newProps</code>是否全等，而是会对<code>props</code>内每个属性进行浅比较。</p>
+<h3 id="2-context没有变化"><a href="#2-context没有变化" class="headerlink" title="2. context没有变化"></a>2. context没有变化</h3><p>即<code>context</code>的<code>value</code>没有变化。</p>
+<h3 id="3-workInProgress-type-current-type-？"><a href="#3-workInProgress-type-current-type-？" class="headerlink" title="3. workInProgress.type === current.type ？"></a>3. workInProgress.type === current.type ？</h3><p>更新前后<code>fiber.type</code>是否变化，比如<code>div</code>是否变为<code>p</code>。</p>
+<h3 id="4-includesSomeLane-renderLanes-updateLanes-？"><a href="#4-includesSomeLane-renderLanes-updateLanes-？" class="headerlink" title="4. !includesSomeLane(renderLanes, updateLanes) ？"></a>4. !includesSomeLane(renderLanes, updateLanes) ？</h3><p>当前<code>fiber</code>上是否存在<code>更新</code>，如果存在那么<code>更新</code>的<code>优先级</code>是否和本次整棵<code>fiber树</code>调度的<code>优先级</code>一致？</p>
+<p>如果一致则进入<code>render</code>逻辑。</p>
+<p>就我们的Demo来说，<code>Parent</code>是整棵树中唯一能触发<code>更新</code>的组件（通过调用<code>setCount</code>）。</p>
+<p>所以<code>Parent</code>对应的<code>fiber</code>是唯一满足条件4的<code>fiber</code>。</p>
+<h2 id="Demo的详细执行逻辑"><a href="#Demo的详细执行逻辑" class="headerlink" title="Demo的详细执行逻辑"></a>Demo的详细执行逻辑</h2><p>所以，Demo中<code>Son</code>进入<code>bailout</code>逻辑，一定是同时满足以上4个条件。我们一个个来看。</p>
+<p>条件2，Demo中没有用到<code>context</code>，满足。</p>
+<p>条件3，更新前后<code>type</code>都为<code>Son</code>对应的函数组件，满足。</p>
+<p>条件4，<code>Son</code>本身无法触发更新，满足。</p>
+<p>所以，重点是条件1。让我们详细来看下。</p>
+<p>本次更新开始时，<code>Fiber树</code>存在如下2个<code>fiber</code>：</p>
+<pre><code>FiberRootNode      
+    |  
+RootFiber      </code></pre><p>其中<code>FiberRootNode</code>是整个应用的根节点，<code>RootFiber</code>是调用<code>ReactDOM.render</code>创建的<code>fiber</code>。</p>
+<p>首先，<code>RootFiber</code>会进入<code>bailout</code>的逻辑，所以返回的<code>App fiber</code>和更新前是一致的。</p>
+<pre><code>FiberRootNode      
+    |  
+RootFiber           
+    | 
+App fiber</code></pre><p>由于<code>App fiber</code>是<code>RootFiber</code>走<code>bailout</code>逻辑返回的，所以对于<code>App fiber</code>，<code>oldProps === newProps</code>。并且<code>bailout</code>剩下3个条件也满足。</p>
+<p>所以<code>App fiber</code>也会走<code>bailout</code>逻辑，返回<code>Parent fiber</code>。</p>
+<pre><code>FiberRootNode      
+    |  
+RootFiber           
+    |   
+App fiber      
+    | 
+Parent fiber</code></pre><p>由于更新是<code>Parent fiber</code>触发的，所以他不满足条件4，会走<code>render</code>的逻辑。</p>
+<p><strong>接下来是关键</strong></p>
+<p>如果<code>render</code>返回的<code>Son</code>是如下形式：</p>
+<pre><code>&lt;Son/&gt;</code></pre><p>会编译为</p>
+<pre><code>React.createElement(Son, null)</code></pre><p>执行后返回<code>JSX</code>。</p>
+<p>由于<code>props</code>的引用改变，<code>oldProps !== newProps</code>。会走<code>render</code>逻辑。</p>
+<p>但是在Demo中<code>Son</code>是如下形式：</p>
+<pre><code>{props.children}</code></pre><p>其中，<code>props.children</code>是<code>Son</code>对应的<code>JSX</code>，而这里的<code>props</code>是<code>App fiber</code>走<code>bailout</code>逻辑后返回的。</p>
+<p>所以<code>Son</code>对应的<code>JSX</code>与上次更新时一致，<code>JSX</code>中保存的<code>props</code>也就一致，满足条件1。</p>
+<p>可以看到，<code>Son</code>满足<code>bailout</code>的所有条件，所以不会<code>render</code>。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.081Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/" rel="tag">react</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/12/24/react%E4%BD%95%E6%97%B6render%E5%91%A2%EF%BC%9F/&title=《react何时render呢？》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/12/24/react%E4%BD%95%E6%97%B6render%E5%91%A2%EF%BC%9F/&title=《react何时render呢？》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/12/24/react%E4%BD%95%E6%97%B6render%E5%91%A2%EF%BC%9F/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《react何时render呢？》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/12/24/react%E4%BD%95%E6%97%B6render%E5%91%A2%EF%BC%9F/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/12/24/react%E4%BD%95%E6%97%B6render%E5%91%A2%EF%BC%9F/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/12/25/undefine%E5%92%8Cvoid-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">undefine和void()有什么区别？</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/11/08/%E4%BC%98%E9%9B%85%E7%9A%84%E5%A4%84%E7%90%86asnyc-await/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">优雅的处理asnyc await</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/12/24/react%E4%BD%95%E6%97%B6render%E5%91%A2%EF%BC%9F/&title=《react何时render呢？》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/12/24/react%E4%BD%95%E6%97%B6render%E5%91%A2%EF%BC%9F/&title=《react何时render呢？》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/12/24/react%E4%BD%95%E6%97%B6render%E5%91%A2%EF%BC%9F/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《react何时render呢？》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/12/24/react%E4%BD%95%E6%97%B6render%E5%91%A2%EF%BC%9F/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/12/24/react%E4%BD%95%E6%97%B6render%E5%91%A2%EF%BC%9F/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2020/12/24/react%E4%BD%95%E6%97%B6render%E5%91%A2%EF%BC%9F/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

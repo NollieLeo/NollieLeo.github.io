@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>HTTP常用请求头 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="http">
+    <meta name="description" content="常用请求头   协议头 说明    Accept 可接受的响应内容类型（Content-Types）。   Accept-Charset 可接受的字符集   Accept-Encoding 可接受的响应内容的编码方式。   Accept-Language 可接受的响应内容语言列表。   Accept-Datetime 可接受的按照时间来表示的响应内容版本   Authorization 用于表示H">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP常用请求头">
+<meta property="og:url" content="https://github.com/NollieLeo/2020/03/23/HTTP%E5%B8%B8%E7%94%A8%E8%AF%B7%E6%B1%82%E5%A4%B4/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="常用请求头   协议头 说明    Accept 可接受的响应内容类型（Content-Types）。   Accept-Charset 可接受的字符集   Accept-Encoding 可接受的响应内容的编码方式。   Accept-Language 可接受的响应内容语言列表。   Accept-Datetime 可接受的按照时间来表示的响应内容版本   Authorization 用于表示H">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-23T02:50:27.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.050Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="http">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">HTTP常用请求头</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">HTTP常用请求头</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-03-23T02:50:27.000Z" itemprop="datePublished" class="page-time">
+  2020-03-23
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF/">服务器端</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常用请求头"><span class="post-toc-number">1.</span> <span class="post-toc-text">常用请求头</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-HTTP常用请求头"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">HTTP常用请求头</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-03-23 10:50:27" datetime="2020-03-23T02:50:27.000Z"  itemprop="datePublished">2020-03-23</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF/">服务器端</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="常用请求头"><a href="#常用请求头" class="headerlink" title="常用请求头"></a>常用请求头</h2><table>
+<thead>
+<tr>
+<th>协议头</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Accept</td>
+<td>可接受的响应内容类型（Content-Types）。</td>
+</tr>
+<tr>
+<td>Accept-Charset</td>
+<td>可接受的字符集</td>
+</tr>
+<tr>
+<td>Accept-Encoding</td>
+<td>可接受的响应内容的编码方式。</td>
+</tr>
+<tr>
+<td>Accept-Language</td>
+<td>可接受的响应内容语言列表。</td>
+</tr>
+<tr>
+<td>Accept-Datetime</td>
+<td>可接受的按照时间来表示的响应内容版本</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>用于表示HTTP协议中需要认证资源的认证信息</td>
+</tr>
+<tr>
+<td>Cache-Control</td>
+<td>用来指定当前的请求/回复中的，是否使用缓存机制。</td>
+</tr>
+<tr>
+<td>Connection</td>
+<td>客户端（浏览器）想要优先使用的连接类型</td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>由之前服务器通过Set-Cookie（见下文）设置的一个HTTP协议Cookie</td>
+</tr>
+<tr>
+<td>Content-Length</td>
+<td>以8进制表示的请求体的长度</td>
+</tr>
+<tr>
+<td>Content-MD5</td>
+<td>请求体的内容的二进制 MD5 散列值（数字签名），以 Base64 编码的结果</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>请求体的MIME类型 （用于POST和PUT请求中）</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>发送该消息的日期和时间（以<a href="https://www.nowcoder.com/tutorial/96/24304825a0c04ea9a53cdb09cb664834#section-7.1.1.1" target="_blank" rel="noopener">RFC 7231</a>中定义的”HTTP日期”格式来发送）</td>
+</tr>
+<tr>
+<td>Expect</td>
+<td>表示客户端要求服务器做出特定的行为</td>
+</tr>
+<tr>
+<td>From</td>
+<td>发起此请求的用户的邮件地址</td>
+</tr>
+<tr>
+<td>Host</td>
+<td>表示服务器的域名以及服务器所监听的端口号。如果所请求的端口是对应的服务的标准端口（80），则端口号可以省略。</td>
+</tr>
+<tr>
+<td>If-Match</td>
+<td>仅当客户端提供的实体与服务器上对应的实体相匹配时，才进行对应的操作。主要用于像 PUT 这样的方法中，仅当从用户上次更新某个资源后，该资源未被修改的情况下，才更新该资源。</td>
+</tr>
+<tr>
+<td>If-Modified-Since</td>
+<td>允许在对应的资源未被修改的情况下返回304未修改</td>
+</tr>
+<tr>
+<td>If-None-Match</td>
+<td>允许在对应的内容未被修改的情况下返回304未修改（ 304 Not Modified ），参考 超文本传输协议 的实体标记</td>
+</tr>
+<tr>
+<td>If-Range</td>
+<td>如果该实体未被修改过，则向返回所缺少的那一个或多个部分。否则，返回整个新的实体</td>
+</tr>
+<tr>
+<td>If-Unmodified-Since</td>
+<td>仅当该实体自某个特定时间以来未被修改的情况下，才发送回应。</td>
+</tr>
+<tr>
+<td>Max-Forwards</td>
+<td>限制该消息可被代理及网关转发的次数。</td>
+</tr>
+<tr>
+<td>Origin</td>
+<td>发起一个针对<a href="http://itbilu.com/javascript/js/VkiXuUcC.html" target="_blank" rel="noopener">跨域资源共享</a>的请求（该请求要求服务器在响应中加入一个Access-Control-Allow-Origin的消息头，表示访问控制所允许的来源）。</td>
+</tr>
+<tr>
+<td>Pragma</td>
+<td>与具体的实现相关，这些字段可能在请求/回应链中的任何时候产生。</td>
+</tr>
+<tr>
+<td>Proxy-Authorization</td>
+<td>用于向代理进行认证的认证信息。</td>
+</tr>
+<tr>
+<td>Range</td>
+<td>表示请求某个实体的一部分，字节偏移以0开始。</td>
+</tr>
+<tr>
+<td>Referer</td>
+<td>表示浏览器所访问的前一个页面，可以认为是之前访问页面的链接将浏览器带到了当前页面。Referer其实是Referrer这个单词，但RFC制作标准时给拼错了，后来也就将错就错使用Referer了。</td>
+</tr>
+<tr>
+<td>TE</td>
+<td>浏览器预期接受的传输时的编码方式：可使用回应协议头Transfer-Encoding中的值（还可以使用”trailers”表示数据传输时的分块方式）用来表示浏览器希望在最后一个大小为0的块之后还接收到一些额外的字段。</td>
+</tr>
+<tr>
+<td>User-Agent</td>
+<td>浏览器的身份标识字符串</td>
+</tr>
+<tr>
+<td>Upgrade</td>
+<td>要求服务器升级到一个高版本协议。</td>
+</tr>
+<tr>
+<td>Via</td>
+<td>告诉服务器，这个请求是由哪些代理发出的。</td>
+</tr>
+<tr>
+<td>Warning</td>
+<td>一个一般性的警告，表示在实体内容体中可能存在错误。</td>
+</tr>
+</tbody></table>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.050Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/" rel="tag">http</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/03/23/HTTP%E5%B8%B8%E7%94%A8%E8%AF%B7%E6%B1%82%E5%A4%B4/&title=《HTTP常用请求头》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/03/23/HTTP%E5%B8%B8%E7%94%A8%E8%AF%B7%E6%B1%82%E5%A4%B4/&title=《HTTP常用请求头》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/03/23/HTTP%E5%B8%B8%E7%94%A8%E8%AF%B7%E6%B1%82%E5%A4%B4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《HTTP常用请求头》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/03/23/HTTP%E5%B8%B8%E7%94%A8%E8%AF%B7%E6%B1%82%E5%A4%B4/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/03/23/HTTP%E5%B8%B8%E7%94%A8%E8%AF%B7%E6%B1%82%E5%A4%B4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/03/23/%E5%A6%82%E4%BD%95%E7%94%BB%E4%B8%80%E4%B8%AA%E4%B8%89%E8%A7%92%E5%BD%A2/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">如何画一个三角形</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/03/23/HTTP%E8%BF%94%E5%9B%9E%E7%8A%B6%E6%80%81%E7%A0%81/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">HTTP返回状态码</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/03/23/HTTP%E5%B8%B8%E7%94%A8%E8%AF%B7%E6%B1%82%E5%A4%B4/&title=《HTTP常用请求头》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/03/23/HTTP%E5%B8%B8%E7%94%A8%E8%AF%B7%E6%B1%82%E5%A4%B4/&title=《HTTP常用请求头》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/03/23/HTTP%E5%B8%B8%E7%94%A8%E8%AF%B7%E6%B1%82%E5%A4%B4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《HTTP常用请求头》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/03/23/HTTP%E5%B8%B8%E7%94%A8%E8%AF%B7%E6%B1%82%E5%A4%B4/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/03/23/HTTP%E5%B8%B8%E7%94%A8%E8%AF%B7%E6%B1%82%E5%A4%B4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2020/03/23/HTTP%E5%B8%B8%E7%94%A8%E8%AF%B7%E6%B1%82%E5%A4%B4/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

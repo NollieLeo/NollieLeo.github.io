@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>常用plugins | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="webpack">
+    <meta name="description" content="CSScss-minimizer-webpack-plugin压缩css文件，webpack5以上 mini-css-extract-pluginmini-csss-extract-plugin 这个插件将 CSS 提取到单独的文件中。它为每个包含 CSS 的 JS 文件创建一个 CSS 文件。它支持按需加载 CSS 和 SourceMaps。 它建立在新的 webpack v5 功能之上，并且需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用plugins">
+<meta property="og:url" content="https://github.com/NollieLeo/2021/08/05/%E5%B8%B8%E7%94%A8plugins/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="CSScss-minimizer-webpack-plugin压缩css文件，webpack5以上 mini-css-extract-pluginmini-csss-extract-plugin 这个插件将 CSS 提取到单独的文件中。它为每个包含 CSS 的 JS 文件创建一个 CSS 文件。它支持按需加载 CSS 和 SourceMaps。 它建立在新的 webpack v5 功能之上，并且需">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-05T13:40:40.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.312Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="webpack">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">常用plugins</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">常用plugins</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-08-05T13:40:40.000Z" itemprop="datePublished" class="page-time">
+  2021-08-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/plugins/">plugins</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CSS"><span class="post-toc-number">1.</span> <span class="post-toc-text">CSS</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#css-minimizer-webpack-plugin"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">css-minimizer-webpack-plugin</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mini-css-extract-plugin"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">mini-css-extract-plugin</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#postcss-preset-env"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">postcss-preset-env</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#autoprefixer"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">autoprefixer</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#html"><span class="post-toc-number">2.</span> <span class="post-toc-text">html</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#HtmlWebpackPlugin"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">HtmlWebpackPlugin</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#js"><span class="post-toc-number">3.</span> <span class="post-toc-text">js</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#terser-webpack-plugin"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">terser-webpack-plugin</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#静态资源"><span class="post-toc-number">4.</span> <span class="post-toc-text">静态资源</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#复制静态资源"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">复制静态资源</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#打包分析相关"><span class="post-toc-number">5.</span> <span class="post-toc-text">打包分析相关</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#webpack-bundle-analyzer"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">webpack-bundle-analyzer</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#speed-measure-webpack-plugin"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">speed-measure-webpack-plugin</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码检查"><span class="post-toc-number">6.</span> <span class="post-toc-text">代码检查</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#eslint-webpack-plugin"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">eslint-webpack-plugin</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#stylelint"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">stylelint</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-常用plugins"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">常用plugins</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-08-05 21:40:40" datetime="2021-08-05T13:40:40.000Z"  itemprop="datePublished">2021-08-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/plugins/">plugins</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><h3 id="css-minimizer-webpack-plugin"><a href="#css-minimizer-webpack-plugin" class="headerlink" title="css-minimizer-webpack-plugin"></a>css-minimizer-webpack-plugin</h3><p>压缩css文件，webpack5以上</p>
+<h3 id="mini-css-extract-plugin"><a href="#mini-css-extract-plugin" class="headerlink" title="mini-css-extract-plugin"></a>mini-css-extract-plugin</h3><p><a href="https://github.com/webpack-contrib/mini-css-extract-plugin">mini-csss-extract-plugin</a></p>
+<p>这个插件将 CSS 提取到单独的文件中。它为每个包含 CSS 的 JS 文件创建一个 CSS 文件。它支持按需加载 CSS 和 SourceMaps。</p>
+<p>它建立在新的 webpack v5 功能之上，并且需要 webpack 5 才能工作。</p>
+<p>提供了一个loader，通过<code>MiniCsseExtractPlugin.loader</code>配置loader使用</p>
+<blockquote>
+<p>有时候我们会摒弃style-loader的代码去发布线上代码，直接用这个插件的原因是因为 <a href="https://survivejs.com/webpack/styling/separating-css/" target="_blank" rel="noopener">css-separating</a></p>
+<p>css抽离成文件可以，让js和css并行加载，提前解析css</p>
+</blockquote>
+<h3 id="postcss-preset-env"><a href="#postcss-preset-env" class="headerlink" title="postcss-preset-env"></a>postcss-preset-env</h3><p><a href="https://www.npmjs.com/package/postcss-preset-env" target="_blank" rel="noopener">postcss-preset-env</a></p>
+<p>PostCSS Preset Env 允许您将现代 CSS 转换为大多数浏览器可以理解的内容，根据您的目标浏览器或运行时环境确定您需要的 polyfill。</p>
+<h3 id="autoprefixer"><a href="#autoprefixer" class="headerlink" title="autoprefixer"></a>autoprefixer</h3><p>PostCSS 插件，用于解析 CSS 并使用 Can I Use 中的值向 CSS 规则添加供应商前缀。它由 Google 推荐并用于 Twitter 和阿里巴巴。</p>
+<p>Autoprefixer 将使用基于当前浏览器流行度和属性支持的数据为您应用前缀</p>
+<p>列如：在<code>postcss.config.js</code>中</p>
+<pre><code class="js">module.exports = {
+  plugins: [
+    [
+      require(&quot;autoprefixer&quot;)({
+        overrideBrowserslist: [
+          &quot;last 2 versions&quot;,
+          &quot;Firefox ESR&quot;,
+          &quot;&gt; 1%&quot;,
+          &quot;ie &gt;= 8&quot;,
+          &quot;iOS &gt;= 8&quot;,
+          &quot;Android &gt;= 4&quot;,
+        ],
+      })
+    ],
+  ],
+};
+</code></pre>
+<p>当然在webpack中也需要配置postcss-loader这个loader是执行所有postcss的插件的关键loader</p>
+<h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><h3 id="HtmlWebpackPlugin"><a href="#HtmlWebpackPlugin" class="headerlink" title="HtmlWebpackPlugin"></a>HtmlWebpackPlugin</h3><p><a href="https://www.npmjs.com/package/html-webpack-plugin" target="_blank" rel="noopener">https://www.npmjs.com/package/html-webpack-plugin</a></p>
+<p>这是一个 webpack 插件，它简化了 HTML 文件的创建以服务于你的 webpack 包。这对于在文件名中包含哈希值的 webpack 包特别有用，该哈希值会更改每次编译。</p>
+<p>您可以让插件为您生成 HTML 文件，使用 lodash 模板提供您自己的模板或使用您自己的加载器。</p>
+<h2 id="js"><a href="#js" class="headerlink" title="js"></a>js</h2><h3 id="terser-webpack-plugin"><a href="#terser-webpack-plugin" class="headerlink" title="terser-webpack-plugin"></a>terser-webpack-plugin</h3><p>使用该插件来压缩js的代码</p>
+<p>如果你使用的是 webpack v5 或以上版本，你不需要安装这个插件。webpack v5 自带最新的 <code>terser-webpack-plugin</code>。如果使用 webpack v4，则必须安装 <code>terser-webpack-plugin</code> v4 的版本。</p>
+<h2 id="静态资源"><a href="#静态资源" class="headerlink" title="静态资源"></a>静态资源</h2><h3 id="复制静态资源"><a href="#复制静态资源" class="headerlink" title="复制静态资源"></a>复制静态资源</h3><p>有些时候有些第三方的 js 插件没有提供 npm 包，只提供了一个 cdn 地址或者一份文件需要自己下载下来。通常我们下载下来之后放在我们的 <code>public/js</code> 目录下面，然后 <code>public/index.html</code> 文件里直接用 <code>script</code> 标签引入。这个时候不管是 <code>npm run dev</code> 开发时，还是 <code>npm run build:pro</code> 构建后，这个 js 文件都是找不到的</p>
+<p> copy-webpack-plugin </p>
+<h2 id="打包分析相关"><a href="#打包分析相关" class="headerlink" title="打包分析相关"></a>打包分析相关</h2><h3 id="webpack-bundle-analyzer"><a href="#webpack-bundle-analyzer" class="headerlink" title="webpack-bundle-analyzer"></a>webpack-bundle-analyzer</h3><p><a href="https://www.npmjs.com/package/webpack-bundle-analyzer" target="_blank" rel="noopener">https://www.npmjs.com/package/webpack-bundle-analyzer</a></p>
+<p>webpack-bundle-analyzer 是打包分析神器，可以看到每个包的大小，以及是否有包被重复打包。</p>
+<h3 id="speed-measure-webpack-plugin"><a href="#speed-measure-webpack-plugin" class="headerlink" title="speed-measure-webpack-plugin"></a>speed-measure-webpack-plugin</h3><p><a href="https://www.npmjs.com/package/speed-measure-webpack-plugin" target="_blank" rel="noopener">https://www.npmjs.com/package/speed-measure-webpack-plugin</a></p>
+<p> 这个插件帮助我们分析整个打包的总耗时，以及每一个loader 和每一个 plugins 构建所耗费的时间，从而帮助我们快速定位到可以优化 Webpack 的配置。 </p>
+<h2 id="代码检查"><a href="#代码检查" class="headerlink" title="代码检查"></a>代码检查</h2><p>代码检测肯定不当当针对于代码的，我们可以在装了如下的几个plugin之后可以基于git为项目接入git hook，这里推荐使用husky来进行提交前的代码检测 <a href="https://typicode.github.io/husky/#/" target="_blank" rel="noopener">husky</a></p>
+<h3 id="eslint-webpack-plugin"><a href="#eslint-webpack-plugin" class="headerlink" title="eslint-webpack-plugin"></a>eslint-webpack-plugin</h3><p><a href="https://www.npmjs.com/package/eslint-webpack-plugin" target="_blank" rel="noopener">https://www.npmjs.com/package/eslint-webpack-plugin</a></p>
+<p>针对于js的代码进行代码检测，使用 eslint 来查找和修复 JavaScript 代码中的问题    </p>
+<p>当然用这个之前肯定是要装eslint的</p>
+<blockquote>
+<p>通常react的项目需要结合<code>eslint-config-airbnb</code>， <code>eslint-plugin-import</code>,  <code>eslint-plugin-react</code>, <code>eslint-plugin-react-hooks</code>, <code>eslint-plugin-jsx-a11y</code>,</p>
+</blockquote>
+<blockquote>
+<p>当然你可以结合husky为commit之前提供lint指令hooks，然后使用lint-staged提供运行时候的lint</p>
+</blockquote>
+<h3 id="stylelint"><a href="#stylelint" class="headerlink" title="stylelint"></a>stylelint</h3><p><a href="https://github.com/stylelint/stylelint/blob/HEAD/docs/user-guide/get-started.md">https://github.com/stylelint/stylelint/blob/HEAD/docs/user-guide/get-started.md</a></p>
+<p>这玩意基于postCss, 能检查任何PostCss能解析的代码</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.312Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/08/05/%E5%B8%B8%E7%94%A8plugins/&title=《常用plugins》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/08/05/%E5%B8%B8%E7%94%A8plugins/&title=《常用plugins》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/08/05/%E5%B8%B8%E7%94%A8plugins/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《常用plugins》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/08/05/%E5%B8%B8%E7%94%A8plugins/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/08/05/%E5%B8%B8%E7%94%A8plugins/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/08/07/babel/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">babel</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/08/05/%E5%B8%B8%E7%94%A8loader/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">常用loader</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/08/05/%E5%B8%B8%E7%94%A8plugins/&title=《常用plugins》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/08/05/%E5%B8%B8%E7%94%A8plugins/&title=《常用plugins》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/08/05/%E5%B8%B8%E7%94%A8plugins/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《常用plugins》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/08/05/%E5%B8%B8%E7%94%A8plugins/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/08/05/%E5%B8%B8%E7%94%A8plugins/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2021/08/05/%E5%B8%B8%E7%94%A8plugins/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>JS中typeof和instanceof的区别 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="ES6,基本数据类型和引用类型">
+    <meta name="description" content="undefined, number, string, boolean属于简单的值类型，不是对象。剩下的几种情况——函数、数组、对象、null、new Number(10)都是对象。他们都是引用类型。  基本数据类型和引用类型 typeofconsole.log(typeof (x)); &#x2F;&#x2F; &#39;undefined&#39; console.log(typeof (10)); &#x2F;&#x2F; &amp;#3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS中typeof和instanceof的区别">
+<meta property="og:url" content="https://github.com/NollieLeo/2020/03/31/JS%E4%B8%ADtypeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="undefined, number, string, boolean属于简单的值类型，不是对象。剩下的几种情况——函数、数组、对象、null、new Number(10)都是对象。他们都是引用类型。  基本数据类型和引用类型 typeofconsole.log(typeof (x)); &#x2F;&#x2F; &#39;undefined&#39; console.log(typeof (10)); &#x2F;&#x2F; &amp;#3">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/31/JS%E4%B8%ADtypeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/20180203152226402.png">
+<meta property="article:published_time" content="2020-03-31T01:29:49.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.051Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="ES6">
+<meta property="article:tag" content="基本数据类型和引用类型">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2020/03/31/JS%E4%B8%ADtypeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/20180203152226402.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">JS中typeof和instanceof的区别</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">JS中typeof和instanceof的区别</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-03-31T01:29:49.000Z" itemprop="datePublished" class="page-time">
+  2020-03-31
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#typeof"><span class="post-toc-number">1.</span> <span class="post-toc-text">typeof</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#instanceof"><span class="post-toc-number">2.</span> <span class="post-toc-text">instanceof</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#可以用于判断一个变量是否是某个对象的实例"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">可以用于判断一个变量是否是某个对象的实例</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#可以在继承关系中用来判断一个实例是否属于它的父类型"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">可以在继承关系中用来判断一个实例是否属于它的父类型</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-JS中typeof和instanceof的区别"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">JS中typeof和instanceof的区别</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-03-31 09:29:49" datetime="2020-03-31T01:29:49.000Z"  itemprop="datePublished">2020-03-31</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p> <code>undefined</code>, <code>number</code>, <code>string</code>, <code>boolean</code>属于简单的<strong>值类型</strong>，不是对象。剩下的几种情况——函数、数组、对象、<code>null</code>、<code>new Number(10)</code>都是对象。他们都是引用类型。 </p>
+<p><a href="http://pxc3lp.coding-pages.com/2020/03/16/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" target="_blank" rel="noopener">基本数据类型和引用类型</a></p>
+<h2 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h2><pre><code class="javascript">console.log(typeof (x)); // &#39;undefined&#39;
+console.log(typeof (10)); // &#39;number&#39;
+console.log(typeof (&#39;abc&#39;)); // &#39;string&#39;
+console.log(typeof (true)); // &#39;boolean&#39;
+console.log(typeof (function () { })); // &#39;function&#39;
+console.log(typeof ([1, &#39;dsa&#39;, true])); // &#39;object&#39;
+console.log(typeof ({ a: 123, b: true })); // &#39;object&#39;
+console.log(typeof (null)); // &#39;object&#39;
+console.log(typeof (new Number(0))); // &#39;object&#39;
+console.log(typeof(new Date())); // &#39;object&#39;
+console.log(typeof(/a/g)); // &#39;object&#39;</code></pre>
+<p><strong>我们可以用typeof判断一个变量是否存在</strong></p>
+<pre><code class="javascript">if(typeof a !==&#39;undefined&#39;){
+    alert(&#39;OK&#39;)
+}</code></pre>
+<p>而不是<code>if(a)</code>这样的用法，因为如果这样a为定义就会报错。</p>
+<p>简单的<strong>值类型</strong>直接用<code>typeof</code>就能够判断出来</p>
+<p>但是引用类型使用 <code>typeof</code> 判断就不太准确。如上代码所示，例如数组，正则表达式，日期，对象等<code>typeof</code>返回值都是为 <code>object</code> 函数的返回值则是<code>function</code></p>
+<p><strong>在 JavaScript 中，判断一个变量的类型尝尝会用 <code>typeof</code> 运算符，在使用 <code>typeof</code> 运算符时采用引用类型存储值会出现一个问题，无论引用的是什么类型的对象，它都返回 “object”。这就需要用到<code>instanceof</code>来检测某个对象是不是另一个对象的实例。</strong></p>
+<h2 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h2><pre><code class="javascript">语法：object instanceof constructor</code></pre>
+<p>参数：<code>object</code>（要检测的对象.）<code>constructor</code>（某个构造函数）</p>
+<p>描述：<code>instanceof</code>运算符用来检测<code>constructor.prototype</code>是否存在于参数object的原型链上</p>
+<p><strong>对象与函数的关系</strong>： 函数是一种对象，但函数不像数组正则日期这些对象。其他的对象（函数除外）都是对象的一个子集，但是函数却可以创造出对象来</p>
+<pre><code class="javascript">function People(){
+    this.name = &#39;hello world&#39;;
+    this.birth - 1998;
+}
+var people = new People();</code></pre>
+<p>people这个对象是由People的构造函数创建出来的，</p>
+<p><code>instanceof</code>的使用规则：<code>A instanceof B</code></p>
+<p> A沿着<strong>proto</strong>这条线来找，同时B沿着prototype这条线来找，如果两条线能找到同一个引用，即同一个对象，那么就返回true。如果找到终点还未重合，则返回false。 </p>
+<p><img src="20180203152226402.png" alt></p>
+<p>例如：</p>
+<h3 id="可以用于判断一个变量是否是某个对象的实例"><a href="#可以用于判断一个变量是否是某个对象的实例" class="headerlink" title="可以用于判断一个变量是否是某个对象的实例"></a>可以用于判断一个变量是否是某个对象的实例</h3><pre><code class="javascript">console.log(people instanceof People); // true</code></pre>
+<pre><code class="javascript">console.log(people instanceof Object); // true</code></pre>
+<p>因为people是由 People构造函数搞出来的，而People又是object的子类</p>
+<h3 id="可以在继承关系中用来判断一个实例是否属于它的父类型"><a href="#可以在继承关系中用来判断一个实例是否属于它的父类型" class="headerlink" title="可以在继承关系中用来判断一个实例是否属于它的父类型"></a>可以在继承关系中用来判断一个实例是否属于它的父类型</h3><p>例如：</p>
+<pre><code class="javascript">function People() {
+  this.name = &#39;hello world&#39;;
+  this.birth = 1998;
+}
+function Male(){}
+Male.prototype = new People();
+const man = new Male();
+console.log(man instanceof Male); // true 
+console.log(man instanceof People); // true</code></pre>
+<p>又如：</p>
+<pre><code class="javascript">// 定义构造函数
+function C(){} 
+function D(){} 
+
+var o = new C();
+
+// true，因为 Object.getPrototypeOf(o) === C.prototype
+o instanceof C; 
+
+// false，因为 D.prototype不在o的原型链上
+o instanceof D; 
+
+o instanceof Object; // true,因为Object.prototype.isPrototypeOf(o)返回true
+C.prototype instanceof Object // true,同上
+
+C.prototype = {};
+var o2 = new C();
+
+o2 instanceof C; // true
+
+o instanceof C; // false,C.prototype指向了一个空对象,这个空对象不在o的原型链上.
+
+D.prototype = new C(); // 继承
+var o3 = new D();
+o3 instanceof D; // true
+o3 instanceof C; // true</code></pre>
+<p>需要注意的是，如果表达式 <code>obj instanceof Foo</code> 返回true，则并不意味着该表达式会永远返回true，因为<code>Foo.prototype</code>属性的值有可能会改变，改变之后的值很有可能不存在于<code>obj</code>的原型链上，这时原表达式的值就会成为<code>false</code>。另外一种情况下，原表达式的值也会改变，就是改变对象<code>obj</code>的原型链的情况，虽然在目前的ES规范中，我们只能读取对象的原型而不能改变它，但借助于非标准的<code>__proto__</code>魔法属性，是可以实现的。比如执行<code>obj.__proto__ = {}</code>之后，<code>obj instanceof Foo</code>就会返回<code>false</code>了。</p>
+<pre><code class="javascript">function People(){
+  this.name = &#39;hello&#39;
+}
+const a = new People();
+console.log(a instanceof People); // true
+a.__proto__ = {};
+console.log(a instanceof People); // false</code></pre>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.051Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/" rel="tag">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/" rel="tag">基本数据类型和引用类型</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/03/31/JS%E4%B8%ADtypeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/&title=《JS中typeof和instanceof的区别》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/03/31/JS%E4%B8%ADtypeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/&title=《JS中typeof和instanceof的区别》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/03/31/JS%E4%B8%ADtypeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JS中typeof和instanceof的区别》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/03/31/JS%E4%B8%ADtypeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/03/31/JS%E4%B8%ADtypeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/04/07/%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E6%96%87%E6%9C%AC%E5%9F%9F%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%96%87%E6%9C%AC%E6%98%AF%E5%90%A6%E8%B6%85%E5%87%BA%E6%89%80%E5%9C%A8%E5%AE%B9%E5%99%A8/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">动态创建文本域如何判断文本是否超出所在容器</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/03/30/%E5%AE%9E%E7%8E%B0%E8%BE%B9%E6%A1%86loading%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">实现边框loading动画效果</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/03/31/JS%E4%B8%ADtypeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/&title=《JS中typeof和instanceof的区别》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/03/31/JS%E4%B8%ADtypeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/&title=《JS中typeof和instanceof的区别》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/03/31/JS%E4%B8%ADtypeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JS中typeof和instanceof的区别》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/03/31/JS%E4%B8%ADtypeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/03/31/JS%E4%B8%ADtypeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2020/03/31/JS%E4%B8%ADtypeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

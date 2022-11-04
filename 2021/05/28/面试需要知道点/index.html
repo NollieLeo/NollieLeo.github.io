@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>面试需要知道点 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="js,面试">
+    <meta name="description" content="1.JS 类型有哪些？2.TCP,HTTP,CDN3.大数相加、相乘算法题，可以直接使用 bigint，当然再加上字符串的处理会更好。4.NaN如何判断5.instanceof&#96; 原理 ✔6.手写 instanceof ✔7.类型转换隐式转换和强制转换 ✔8.this, 箭头函数9.闭包 ✔10.new, 手写new，new做了哪些事？new 返回不同类型的时候是什么表现 ✔11.作用域，作用域链">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试需要知道点">
+<meta property="og:url" content="https://github.com/NollieLeo/2021/05/28/%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%82%B9/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="1.JS 类型有哪些？2.TCP,HTTP,CDN3.大数相加、相乘算法题，可以直接使用 bigint，当然再加上字符串的处理会更好。4.NaN如何判断5.instanceof&#96; 原理 ✔6.手写 instanceof ✔7.类型转换隐式转换和强制转换 ✔8.this, 箭头函数9.闭包 ✔10.new, 手写new，new做了哪些事？new 返回不同类型的时候是什么表现 ✔11.作用域，作用域链">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/6/9/1729712af898c1c3?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/6/9/1729712d216c4dee?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="article:published_time" content="2021-05-28T02:28:41.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.577Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="面试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2020/6/9/1729712af898c1c3?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">面试需要知道点</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">面试需要知道点</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-05-28T02:28:41.000Z" itemprop="datePublished" class="page-time">
+  2021-05-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-JS-类型有哪些？"><span class="post-toc-number">1.</span> <span class="post-toc-text">1.JS 类型有哪些？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-TCP-HTTP-CDN"><span class="post-toc-number">2.</span> <span class="post-toc-text">2.TCP,HTTP,CDN</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-大数相加、相乘算法题，可以直接使用-bigint，当然再加上字符串的处理会更好。"><span class="post-toc-number">3.</span> <span class="post-toc-text">3.大数相加、相乘算法题，可以直接使用 bigint，当然再加上字符串的处理会更好。</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-NaN如何判断"><span class="post-toc-number">4.</span> <span class="post-toc-text">4.NaN如何判断</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-instanceof-原理-✔"><span class="post-toc-number">5.</span> <span class="post-toc-text">5.instanceof&#96; 原理 ✔</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-手写-instanceof-✔"><span class="post-toc-number">6.</span> <span class="post-toc-text">6.手写 instanceof ✔</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-类型转换隐式转换和强制转换-✔"><span class="post-toc-number">7.</span> <span class="post-toc-text">7.类型转换隐式转换和强制转换 ✔</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-this-箭头函数"><span class="post-toc-number">8.</span> <span class="post-toc-text">8.this, 箭头函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-闭包-✔"><span class="post-toc-number">9.</span> <span class="post-toc-text">9.闭包 ✔</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10-new-手写new，new做了哪些事？new-返回不同类型的时候是什么表现-✔"><span class="post-toc-number">10.</span> <span class="post-toc-text">10.new, 手写new，new做了哪些事？new 返回不同类型的时候是什么表现 ✔</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#11-作用域，作用域链，全局作用域，函数作用域，块级作用域-✔"><span class="post-toc-number">11.</span> <span class="post-toc-text">11.作用域，作用域链，全局作用域，函数作用域，块级作用域 ✔</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#12-原型，原型链，原型继承，-js中是如何实现继承的，通过原型实现的继承和class有什么区别，手写任意一种原型继承-✔"><span class="post-toc-number">12.</span> <span class="post-toc-text">12.原型，原型链，原型继承， js中是如何实现继承的，通过原型实现的继承和class有什么区别，手写任意一种原型继承 ✔</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#13-深拷贝，浅拷贝✔"><span class="post-toc-number">13.</span> <span class="post-toc-text">13.深拷贝，浅拷贝✔</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#14-Promise-all、race-，-使用all实现并行需求，-手写all的实现"><span class="post-toc-number">14.</span> <span class="post-toc-text">14.Promise**  all、race ， 使用all实现并行需求， 手写all的实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#15-async-await"><span class="post-toc-number">15.</span> <span class="post-toc-text">15.async, await</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#16-浏览器渲染也页面过程"><span class="post-toc-number">16.</span> <span class="post-toc-text">16.浏览器渲染也页面过程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#含义"><span class="post-toc-number">16.1.</span> <span class="post-toc-text">含义</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#cache的作用"><span class="post-toc-number">16.2.</span> <span class="post-toc-text">cache的作用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实现手段"><span class="post-toc-number">16.3.</span> <span class="post-toc-text">实现手段</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#拓展"><span class="post-toc-number">16.4.</span> <span class="post-toc-text">拓展</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#17-如何性能优化"><span class="post-toc-number">17.</span> <span class="post-toc-text">17.如何性能优化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#18-CDN-优化有哪些，-CDN是什么"><span class="post-toc-number">18.</span> <span class="post-toc-text">18.CDN 优化有哪些， CDN是什么</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#19-webpack-插件原理，如何写一个插件"><span class="post-toc-number">19.</span> <span class="post-toc-text">19.webpack 插件原理，如何写一个插件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#20-手写-bind-✔、reduce"><span class="post-toc-number">20.</span> <span class="post-toc-text">20.手写 bind ✔、reduce</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#21-防抖截流-✔"><span class="post-toc-number">21.</span> <span class="post-toc-text">21.防抖截流 ✔</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#22-遍历树，求树的最大层数。求某层最多的节点数"><span class="post-toc-number">22.</span> <span class="post-toc-text">22.遍历树，求树的最大层数。求某层最多的节点数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#23-前端模块化的理解"><span class="post-toc-number">23.</span> <span class="post-toc-text">23.前端模块化的理解</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#24-隐式转换"><span class="post-toc-number">24.</span> <span class="post-toc-text">24.隐式转换</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#25-数字在计算机怎么储存的"><span class="post-toc-number">25.</span> <span class="post-toc-text">25.数字在计算机怎么储存的</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#26-知道什么是事件委托吗？"><span class="post-toc-number">26.</span> <span class="post-toc-text">26.知道什么是事件委托吗？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#27-window的onload事件和domcontentloaded谁先谁后？"><span class="post-toc-number">27.</span> <span class="post-toc-text">27.window的onload事件和domcontentloaded谁先谁后？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#28-macrotask-和-microtask"><span class="post-toc-number">28.</span> <span class="post-toc-text">28.macrotask 和 microtask</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#29-浏览器缓存-HTTP缓存-对比缓存？强缓存？对应请求头"><span class="post-toc-number">29.</span> <span class="post-toc-text">29.浏览器缓存,HTTP缓存  对比缓存？强缓存？对应请求头</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#30-commonjs和esmodule"><span class="post-toc-number">30.</span> <span class="post-toc-text">30.commonjs和esmodule</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#31-xss攻击和csrf攻击"><span class="post-toc-number">31.</span> <span class="post-toc-text">31.xss攻击和csrf攻击</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#32-时针和分针的夹角"><span class="post-toc-number">32.</span> <span class="post-toc-text">32.时针和分针的夹角</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#33-Javascript的事件流模型都有什么"><span class="post-toc-number">33.</span> <span class="post-toc-text">33.Javascript的事件流模型都有什么</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#34-js延迟加载的方式有哪些？"><span class="post-toc-number">34.</span> <span class="post-toc-text">34.js延迟加载的方式有哪些？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#35-Cookie在客户机上是如何存储的"><span class="post-toc-number">35.</span> <span class="post-toc-text">35.Cookie在客户机上是如何存储的</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#36-DOM和BOM是什么"><span class="post-toc-number">36.</span> <span class="post-toc-text">36.DOM和BOM是什么</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#37-如何实现多个标签之间的通信"><span class="post-toc-number">37.</span> <span class="post-toc-text">37.如何实现多个标签之间的通信</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#38-js垃圾回收的几种方式"><span class="post-toc-number">38.</span> <span class="post-toc-text">38. js垃圾回收的几种方式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#标记清除"><span class="post-toc-number">38.1.</span> <span class="post-toc-text">标记清除</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#引用计数"><span class="post-toc-number">38.2.</span> <span class="post-toc-text">引用计数</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#39-在浏览器中输入URL到整个页面显示在用户面前时这个过程中到底发生了什么"><span class="post-toc-number">39.</span> <span class="post-toc-text">39.在浏览器中输入URL到整个页面显示在用户面前时这个过程中到底发生了什么</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-面试需要知道点"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">面试需要知道点</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-05-28 10:28:41" datetime="2021-05-28T02:28:41.000Z"  itemprop="datePublished">2021-05-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="1-JS-类型有哪些？"><a href="#1-JS-类型有哪些？" class="headerlink" title="1.JS 类型有哪些？"></a>1.JS 类型有哪些？</h3><h3 id="2-TCP-HTTP-CDN"><a href="#2-TCP-HTTP-CDN" class="headerlink" title="2.TCP,HTTP,CDN"></a>2.TCP,HTTP,CDN</h3><h3 id="3-大数相加、相乘算法题，可以直接使用-bigint，当然再加上字符串的处理会更好。"><a href="#3-大数相加、相乘算法题，可以直接使用-bigint，当然再加上字符串的处理会更好。" class="headerlink" title="3.大数相加、相乘算法题，可以直接使用 bigint，当然再加上字符串的处理会更好。"></a>3.大数相加、相乘算法题，可以直接使用 <code>bigint</code>，当然再加上字符串的处理会更好。</h3><h3 id="4-NaN如何判断"><a href="#4-NaN如何判断" class="headerlink" title="4.NaN如何判断"></a>4.NaN<code>如何判断</code></h3><h3 id="5-instanceof-原理-✔"><a href="#5-instanceof-原理-✔" class="headerlink" title="5.instanceof` 原理 ✔"></a>5.instanceof` 原理 ✔</h3><h3 id="6-手写-instanceof-✔"><a href="#6-手写-instanceof-✔" class="headerlink" title="6.手写 instanceof ✔"></a>6.手写 <code>instanceof</code> ✔</h3><h3 id="7-类型转换隐式转换和强制转换-✔"><a href="#7-类型转换隐式转换和强制转换-✔" class="headerlink" title="7.类型转换隐式转换和强制转换 ✔"></a>7.类型转换隐式转换和强制转换 ✔</h3><h3 id="8-this-箭头函数"><a href="#8-this-箭头函数" class="headerlink" title="8.this, 箭头函数"></a>8.this, 箭头函数</h3><h3 id="9-闭包-✔"><a href="#9-闭包-✔" class="headerlink" title="9.闭包 ✔"></a>9.闭包 ✔</h3><h3 id="10-new-手写new，new做了哪些事？new-返回不同类型的时候是什么表现-✔"><a href="#10-new-手写new，new做了哪些事？new-返回不同类型的时候是什么表现-✔" class="headerlink" title="10.new, 手写new，new做了哪些事？new 返回不同类型的时候是什么表现 ✔"></a>10.new, 手写new，new做了哪些事？new 返回不同类型的时候是什么表现 ✔</h3><h3 id="11-作用域，作用域链，全局作用域，函数作用域，块级作用域-✔"><a href="#11-作用域，作用域链，全局作用域，函数作用域，块级作用域-✔" class="headerlink" title="11.作用域，作用域链，全局作用域，函数作用域，块级作用域 ✔"></a>11.作用域，作用域链，全局作用域，函数作用域，块级作用域 ✔</h3><h3 id="12-原型，原型链，原型继承，-js中是如何实现继承的，通过原型实现的继承和class有什么区别，手写任意一种原型继承-✔"><a href="#12-原型，原型链，原型继承，-js中是如何实现继承的，通过原型实现的继承和class有什么区别，手写任意一种原型继承-✔" class="headerlink" title="12.原型，原型链，原型继承， js中是如何实现继承的，通过原型实现的继承和class有什么区别，手写任意一种原型继承 ✔"></a>12.<strong>原型，原型链，原型继承</strong>， js中是如何实现继承的，通过原型实现的继承和class有什么区别，手写任意一种原型继承 ✔</h3><h3 id="13-深拷贝，浅拷贝✔"><a href="#13-深拷贝，浅拷贝✔" class="headerlink" title="13.深拷贝，浅拷贝✔"></a>13.深拷贝，浅拷贝✔</h3><h3 id="14-Promise-all、race-，-使用all实现并行需求，-手写all的实现"><a href="#14-Promise-all、race-，-使用all实现并行需求，-手写all的实现" class="headerlink" title="14.Promise**  all、race ， 使用all实现并行需求， 手写all的实现"></a>14.Promise**  <code>all</code>、<code>race</code> ， 使用all实现并行需求， 手写all的实现</h3><blockquote>
+<p>页面上有三个按钮，分别为 A、B、C，点击各个按钮都会发送异步请求且互不影响，每次请求回来的数据都为按钮的名字。 请实现当用户依次点击 A、B、C、A、C、B 的时候，最终获取的数据为 ABCACB。</p>
+</blockquote>
+<h3 id="15-async-await"><a href="#15-async-await" class="headerlink" title="15.async, await"></a>15.async, await</h3><h3 id="16-浏览器渲染也页面过程"><a href="#16-浏览器渲染也页面过程" class="headerlink" title="16.浏览器渲染也页面过程"></a>16.浏览器渲染也页面过程</h3><h4 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h4><p>浏览器缓存（Browser Caching）是为了加速浏览，浏览器在用户磁盘上岁最近请求过的文档进行存储，当用户再次访问这个文档时，浏览器会从本地磁盘显示此文档，从而提升页面加载速率。</p>
+<h4 id="cache的作用"><a href="#cache的作用" class="headerlink" title="cache的作用"></a>cache的作用</h4><ul>
+<li>减少延迟，让网站的运行速度更快，带来更好的用户体验；</li>
+<li>避免网络拥塞，减少请求量，减少输出带宽；</li>
+</ul>
+<h4 id="实现手段"><a href="#实现手段" class="headerlink" title="实现手段"></a>实现手段</h4><p><code>cache-control</code>中的<code>max-age</code>是实现内容<code>cache</code>的重要手段，常用的策略有以下三种：</p>
+<ul>
+<li><code>max-age</code>和<code>ETag</code>的组合；</li>
+<li>仅<code>max-age</code>；</li>
+<li><code>max-age</code>和<code>Last-Modified</code>（If-Modified-Since）的组合；</li>
+</ul>
+<h4 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h4><p>在此，拓展一下有关<strong>强制缓存</strong>（200）和<strong>协商缓存</strong>（304）部分的内容。</p>
+<ul>
+<li><strong>强制缓存（也称强缓存）</strong>，指当浏览器去请求某个文件的时候，服务端就在<code>respone header</code>里面对该文件做了缓存配置。强制缓存不会向服务器发送请求，直接从缓存中读取资源，在<code>chrome</code>控制台的<code>network</code>选项中可以看到该请求返回<code>200</code>的状态码;</li>
+<li><strong>协商缓存</strong>：强制缓存给资源设置了过期时间，在未过期时，可以说是给用户自给自足用的。但是当资源过期时，就需要去请求服务器，这时候请求服务器的过程就可以设置成协商缓存。协商缓存就是需要客户端和服务端进行交互的。协商缓存将缓存信息中的<code>Etag</code>和<code>Last-Modified</code>通过请求发给服务器，由服务器校验，返回状态码<code>304</code>时，浏览器就可以直接使用缓存。</li>
+</ul>
+<p><strong>共同点</strong>： 都是从客户端中读取数据；</p>
+<p><strong>区别</strong>： 强缓存不会发出请求，协商缓存会发出请求。</p>
+<p><strong>缓存中header（头部）的参数：</strong></p>
+<p>（1）、强制缓存：</p>
+<ul>
+<li><strong>Expires</strong>（常用）：<code>response header</code>里的过期时间，浏览器再次加载资源时，如果在这个过期时间内，则命中强缓存。</li>
+<li><strong>Cache-Control</strong>（常用）：当值设为<code>max-age=120</code>时，则代表在这个请求正确返回时间（浏览器也会记录下来）的<code>2</code>分钟内再次加载资源，就会命中强缓存。</li>
+<li><strong>no-cache</strong>：不使用本地缓存。需要使用缓存协商，来验证是否过期；</li>
+<li><strong>no-store</strong>：不可缓存；</li>
+<li><strong>public</strong>：客户端和代理服务器都可缓存；</li>
+<li><strong>private</strong>：只能有客户端缓存；</li>
+</ul>
+<p>（2）、协商缓存</p>
+<ul>
+<li><strong>Etag</strong>：即文件<code>hash</code>，每个文件唯一。<code>web</code>服务器响应请求时，告诉浏览器当前资源在服务器的唯一标识（生成规则由服务器决定）；</li>
+<li><strong>If-None-Match</strong>：当资源过期时（使用<code>Cache-Control</code>标识的<code>max-age</code>），发现资源具有<code>Etag</code>声明，则再次向<code>web</code>服务器请求时带上头<code>If-None-Match</code> （Etag的值）。<code>web</code>服务器收到请求后发现有头<code>If-None-Match</code> 则与被请求资源的相应校验串进行比对，决定是否命中协商缓存；</li>
+<li><strong>Last-Modify/If-Modify-Since</strong>：文件的修改时间，精确到秒。浏览器第一次请求一个资源的时候，服务器返回的<code>header</code>中会加上<code>Last-Modify</code>，<code>Last-modify</code>是一个时间标识该资源的最后修改时间；当浏览器再次请求该资源时，<code>request</code>的请求头中会包含<code>If-Modify-Since</code>，该值为缓存之前返回的<code>Last-Modify</code>。服务器收到<code>If-Modify-Since</code>后，根据资源的最后修改时间判断是否命中缓存；</li>
+</ul>
+<p>🌈🌈<strong>注意</strong>：</p>
+<ul>
+<li><code>Etag</code>要优于<code>Last-Modified</code>；</li>
+<li>在优先级上，服务器校验优先考虑<code>Etag</code>；</li>
+<li>在性能上，<code>Etag</code>要逊于<code>Last-Modified</code>。</li>
+</ul>
+<h3 id="17-如何性能优化"><a href="#17-如何性能优化" class="headerlink" title="17.如何性能优化"></a>17.如何性能优化</h3><h3 id="18-CDN-优化有哪些，-CDN是什么"><a href="#18-CDN-优化有哪些，-CDN是什么" class="headerlink" title="18.CDN 优化有哪些， CDN是什么"></a>18.CDN 优化有哪些， CDN是什么</h3><h3 id="19-webpack-插件原理，如何写一个插件"><a href="#19-webpack-插件原理，如何写一个插件" class="headerlink" title="19.webpack 插件原理，如何写一个插件"></a>19.webpack 插件原理，如何写一个插件</h3><h3 id="20-手写-bind-✔、reduce"><a href="#20-手写-bind-✔、reduce" class="headerlink" title="20.手写 bind ✔、reduce"></a>20.手写 bind ✔、reduce</h3><h3 id="21-防抖截流-✔"><a href="#21-防抖截流-✔" class="headerlink" title="21.防抖截流 ✔"></a>21.防抖截流 ✔</h3><h3 id="22-遍历树，求树的最大层数。求某层最多的节点数"><a href="#22-遍历树，求树的最大层数。求某层最多的节点数" class="headerlink" title="22.遍历树，求树的最大层数。求某层最多的节点数"></a>22.遍历树，求树的最大层数。求某层最多的节点数</h3><h3 id="23-前端模块化的理解"><a href="#23-前端模块化的理解" class="headerlink" title="23.前端模块化的理解"></a>23.前端模块化的理解</h3><h3 id="24-隐式转换"><a href="#24-隐式转换" class="headerlink" title="24.隐式转换"></a>24.隐式转换</h3><h3 id="25-数字在计算机怎么储存的"><a href="#25-数字在计算机怎么储存的" class="headerlink" title="25.数字在计算机怎么储存的"></a>25.数字在计算机怎么储存的</h3><h3 id="26-知道什么是事件委托吗？"><a href="#26-知道什么是事件委托吗？" class="headerlink" title="26.知道什么是事件委托吗？"></a>26.<strong>知道什么是事件委托吗？</strong></h3><p><strong>概念</strong>： <strong>事件冒泡</strong>是指嵌套最深的元素触发一个事件，然后这个事件顺着嵌套顺序在父元素上触发。而<strong>事件委托</strong>，是利用事件冒泡原理，让自己所触发的事件，让其父元素代替执行。</p>
+<p><strong>冒泡阻止方式</strong>：使用<code>event.cancelBubble = true</code>或者<code>event.stopPropgation()</code>（低于IE9）。</p>
+<p><strong>默认事件阻止方式</strong>： <code>e.preventDefault();</code>或<code>return false;</code>。</p>
+<h3 id="27-window的onload事件和domcontentloaded谁先谁后？"><a href="#27-window的onload事件和domcontentloaded谁先谁后？" class="headerlink" title="27.window的onload事件和domcontentloaded谁先谁后？"></a>27.window的onload事件和domcontentloaded谁先谁后？</h3><h3 id="28-macrotask-和-microtask"><a href="#28-macrotask-和-microtask" class="headerlink" title="28.macrotask 和 microtask"></a>28.macrotask 和 microtask</h3><h3 id="29-浏览器缓存-HTTP缓存-对比缓存？强缓存？对应请求头"><a href="#29-浏览器缓存-HTTP缓存-对比缓存？强缓存？对应请求头" class="headerlink" title="29.浏览器缓存,HTTP缓存  对比缓存？强缓存？对应请求头"></a>29.浏览器缓存,HTTP缓存  对比缓存？强缓存？对应请求头</h3><h3 id="30-commonjs和esmodule"><a href="#30-commonjs和esmodule" class="headerlink" title="30.commonjs和esmodule"></a>30.commonjs和esmodule</h3><h3 id="31-xss攻击和csrf攻击"><a href="#31-xss攻击和csrf攻击" class="headerlink" title="31.xss攻击和csrf攻击"></a>31.xss攻击和csrf攻击</h3><h3 id="32-时针和分针的夹角"><a href="#32-时针和分针的夹角" class="headerlink" title="32.时针和分针的夹角"></a>32.时针和分针的夹角</h3><h3 id="33-Javascript的事件流模型都有什么"><a href="#33-Javascript的事件流模型都有什么" class="headerlink" title="33.Javascript的事件流模型都有什么"></a>33.Javascript的事件流模型都有什么</h3><p><strong>“事件冒泡”</strong>： 当触发一个节点的事件时，会从当前节点开始，依次触发其祖先节点的同类型事件，直到<code>DOM</code>根节点。（逐级向上）</p>
+<p><strong>“事件捕获”</strong>： 当触发一个节点的事件时，会从<code>DOM</code>根节点开始，依次触发其祖先节点的同类型事件，直到当前节点自身。（逐级向下）</p>
+<p><strong>“DOM事件流”</strong>： <code>dom</code>同时支持两种事件模型，但捕获性事件先开始，从<code>document</code>开始也结束于<code>document</code>，<code>dom</code>模型的独特之处在于文本也可以触发事件。简单的说分为三个阶段：<strong>事件捕捉</strong>， <strong>目标阶段</strong>， <strong>事件冒泡</strong></p>
+<h3 id="34-js延迟加载的方式有哪些？"><a href="#34-js延迟加载的方式有哪些？" class="headerlink" title="34.js延迟加载的方式有哪些？"></a>34.js延迟加载的方式有哪些？</h3><p><code>defer</code>属性（页面<code>load</code>后执行）：脚本会被延迟到整个页面都解析完毕之后再执行。若是设置了<code>defer</code>属性，就等于告诉浏览器立即下载，但是会延迟执行。注意<code>defer</code>属性只适用于外部脚本文件。</p>
+<p><code>async</code> 属性（页面<code>load</code>前执行）：为了不让页面等待脚本下载和执行，异步加载页面和其他内容。<code>async</code>同样也只适用于外部文件（不会影响页面加载，但是不能控制加载的顺序）。</p>
+<p>动态创建<code>DOM</code>方式；</p>
+<p>使用<code>jQuery</code>的<code>getScript()</code>方法；</p>
+<p>使用<code>setTimeout</code>延迟方法；</p>
+<p>让<code>js</code>文件最后加载。</p>
+<h3 id="35-Cookie在客户机上是如何存储的"><a href="#35-Cookie在客户机上是如何存储的" class="headerlink" title="35.Cookie在客户机上是如何存储的"></a>35.Cookie在客户机上是如何存储的</h3><p><code>cookies</code>是服务器暂时放在我们电脑里的文本文件，好让服务器来辨认我们的计算机。</p>
+<p>当我们在浏览网站的时候，<code>web</code>服务器会先发送小部分资料放在我们的计算机中，<code>cookies</code>会帮助我们，将我们在网站上打印的文字或一些选择记录下来，当我们再次访问同一个网站，<code>web</code>服务器会先检查有没有它上次留下的<code>cookies</code>资料。</p>
+<p>若有，会依据<code>cookies</code>里面的内容来判断使用者，从而给我们推出相应的网页内容。</p>
+<h3 id="36-DOM和BOM是什么"><a href="#36-DOM和BOM是什么" class="headerlink" title="36.DOM和BOM是什么"></a>36.DOM和BOM是什么</h3><p>首先我们需要知道：<strong>javascript是由ECMAScript，DOM，BOM三部分构成的</strong>。</p>
+<ul>
+<li><code>ECMAScript</code>是一种语言，是对规定的语法，操作，关键字，语句的一个描述，<code>javascript</code>实现了<code>ECMAScript</code>;</li>
+<li><code>DOM</code>是文档对象模型，包括了获取元素，修改样式以及操作元素等三方面的内容，也是通常我们用的最多的操作，其提供了很多兼容性的写法；</li>
+<li><code>BOM</code>是浏览器对象模型，包括浏览器的一些操作，<code>window.onload</code>, <code>window.open</code>等还有浏览器时间，监听窗口的改变<code>onresize</code>，监听滚动事件<code>onscroll</code>等；</li>
+</ul>
+<h3 id="37-如何实现多个标签之间的通信"><a href="#37-如何实现多个标签之间的通信" class="headerlink" title="37.如何实现多个标签之间的通信"></a>37.如何实现多个标签之间的通信</h3><ul>
+<li><strong>调用 localStorage</strong>；</li>
+</ul>
+<p>（1）、在一个标签内使用<code>localStorage</code>。<code>setItem(key, value)</code>添加（删除或修改）内容；</p>
+<p>（2）、在另一个标签页面监听<code>storage</code>事件；</p>
+<p>（3）、得到<code>localStorage</code>存储的值，即可实现不用页面之间的通信。</p>
+<ul>
+<li><strong>调用 cookie+setInterval()</strong>；</li>
+</ul>
+<p>（1）、将要传递的信息存储在<code>cookie</code>中，可以设置定时读取<code>cookie</code>的信息，即可随时获取想要传递的信息。</p>
+<ul>
+<li><strong>使用 Webworker</strong>；</li>
+</ul>
+<p>（1）、<code>webworker</code>作为浏览器的一个新特性，可以提供一个额外的线程来执行一些js代码，并且对浏览器用户界面不影响；</p>
+<p>（2）、普通的<code>Webworker</code>用 <code>new worker()</code>即可创建，这种<code>webworker</code>是当前页面专有的。然后还有种共<code>享worker(SharedWorker)</code>，这种是可以多个标签页、<code>iframe</code>共同使用；</p>
+<ul>
+<li><strong>使用 SharedWorker</strong>；</li>
+</ul>
+<p>（1）、<code>SharedWorker</code>可以被多个<code>window</code>共同使用，但必须保证这些标签页都是同源的(相同的协议，主机和端口号)；</p>
+<h3 id="38-js垃圾回收的几种方式"><a href="#38-js垃圾回收的几种方式" class="headerlink" title="38. js垃圾回收的几种方式"></a>38. js垃圾回收的几种方式</h3><p><code>javascript</code>具有自动垃圾回收机制，垃圾器回收会按照固定的时间间隔周期性的执行。</p>
+<p>常见的垃圾回收机制有两种： <strong>标记清除</strong>，<strong>引用计数</strong>。</p>
+<h4 id="标记清除"><a href="#标记清除" class="headerlink" title="标记清除"></a>标记清除</h4><p><strong>原理</strong>： 当变量进入环境时，将这个变量标记为“进入环境”。当变量离开时，则将其标记为“离开环境”。标记“离开环境”的就回收内存。</p>
+<p><strong>工作流程</strong>：</p>
+<ul>
+<li>垃圾回收器，在运行的时候会给存储在内存中的所有变量都加上标记；</li>
+<li>去掉环境中的变量以及被环境中的变量引用的变量的标记；</li>
+<li>再被加上标记的会被视为准备删除的变量；</li>
+<li>垃圾回收器完成内存清除工作，销毁那些带标记的值并回收他们所占用的内存空间；</li>
+</ul>
+<h4 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h4><p><strong>原理</strong>：  跟踪记录每个值被引用的次数，声明一个变量，并将引用 类型赋值给这个变量，则这个值的引用次数<code>+1</code>，当变量的值变成了另一个，则这个值的引用次数<code>-1</code>，当值的引用次数为<code>0</code>的时候，就回收。</p>
+<p><strong>工作流程</strong>：</p>
+<ul>
+<li>声明了一个变量并将一个引用类型的值赋值给这个变量，这个引用值的引用次数就是<code>1</code>；</li>
+<li>同一个值又被<strong>赋值给</strong>另一个变量，这个引用类型值此时的引用次数<code>+1</code>；</li>
+<li>当包含这个引用类型值的变量又被<strong>赋值成</strong>另一个值，那么这个引用呢性值的引用次数<code>-1</code>；</li>
+<li>当引用次数变成0时，说明目前无法访问此值；</li>
+<li>当垃圾收集器下一次运行时，它会释放引用次数是<code>0</code>的值所占的内存；</li>
+</ul>
+<h3 id="39-在浏览器中输入URL到整个页面显示在用户面前时这个过程中到底发生了什么"><a href="#39-在浏览器中输入URL到整个页面显示在用户面前时这个过程中到底发生了什么" class="headerlink" title="39.在浏览器中输入URL到整个页面显示在用户面前时这个过程中到底发生了什么"></a>39.在浏览器中输入URL到整个页面显示在用户面前时这个过程中到底发生了什么</h3><p>（1）、<strong>DNS解析</strong></p>
+<ul>
+<li>检查浏览器自身的<code>DNS</code>缓存；</li>
+<li>若没有，搜索操作系统自身的<code>DNS</code>缓存；</li>
+<li>若没有，尝试读取<code>hosts</code>文件；</li>
+<li>若没有，可向本地配置的首选<code>DNS</code>服务器发起请求；</li>
+<li><code>.win</code>系统若没有好到，可以操作系统查找<code>NetBIOS name cache</code>或查询<code>wins</code>服务器或广播查找或读取LMHOSTS文件；</li>
+</ul>
+<p>（若以上都没有，则解析失败）</p>
+<p>（2）、<strong>TCP三次握手</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://user-gold-cdn.xitu.io/2020/6/9/1729712af898c1c3?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img" title>
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+
+<p>（3）、<strong>浏览器向服务器发送http请求</strong></p>
+<p>一旦建立了<code>TCP</code>链接，<code>web</code>浏览器就会向<code>web</code>服务器发送请求命令。</p>
+<p>（4）、<strong>浏览器发送请求头信息</strong></p>
+<p>浏览器发送其请求命令之后，还要以头信息的形式想<code>web</code>服务器发送一些别的信息，之后浏览器发送了一空白行开通知服务器，它已经结束了该头信息的发送。</p>
+<p>（5）、<strong>服务器处理请求</strong></p>
+<p>服务器收到<code>http</code>请求之后，确定用相应的一眼来处理请求。读取参数并进行逻辑操作后，生成指定的数据。</p>
+<p>（6）、<strong>服务器做出响应</strong></p>
+<p>客户端向服务器发送请求后，服务端向客户端做出应答。</p>
+<p>（7）、<strong>服务器发送应答头信息</strong></p>
+<p>正如客户端会随同请求发送关于自身的信息一样，服务器也会随同应答向用户发送关于它自己的数据以及被请求的文档。</p>
+<p>（8）、<strong>服务器发送数据</strong></p>
+<p><code>web</code>服务器向浏览器发送信息后，它会发送一个空白行来表示头信息的发送到此结束。接着，它会以<code>Content-Type</code>应答头信息所描述的格式发送用户所请求的实际数据。</p>
+<p>（9）、 <strong>TCP关闭（四次挥手）</strong></p>
+<p>一般情况下，一旦<code>web</code>服务器向浏览器发送了请求数据，它就要关闭<code>tcp</code>链接。如果浏览器或服务器在其头信息加入了<code>Connection:keep-alive</code>,则会保持长连接状态，也就是TCP链接在发送后仍保持打开状态，浏览器可以继续通过仙童的链接发送请求。</p>
+<p>（优点：保持链接节省了为每个请求建立新链接所属的时间，还节约了网络宽带 ）</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://user-gold-cdn.xitu.io/2020/6/9/1729712d216c4dee?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img" title>
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+
+
+
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.577Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/05/28/%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%82%B9/&title=《面试需要知道点》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/05/28/%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%82%B9/&title=《面试需要知道点》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/05/28/%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%82%B9/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《面试需要知道点》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/05/28/%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%82%B9/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/05/28/%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%82%B9/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/05/28/js%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">js的类型转换</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/05/27/js%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">js对象属性详解</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/05/28/%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%82%B9/&title=《面试需要知道点》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/05/28/%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%82%B9/&title=《面试需要知道点》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/05/28/%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%82%B9/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《面试需要知道点》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/05/28/%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%82%B9/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/05/28/%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%82%B9/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2021/05/28/%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%82%B9/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

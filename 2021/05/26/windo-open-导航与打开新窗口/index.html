@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>windo.open(导航与打开新窗口) | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="js,window.open,导航">
+    <meta name="description" content="导航与打开新窗口window.open()  用于导航到指定的URL 打开新浏览器窗口  接受4个参数，指定URL，目标窗口（名字），特性字符串，表示新窗口在浏览器历史记录中是否替代当前加载页面的布尔值（一般在不打开新窗口的时候使用） window.open(&quot;https:&#x2F;&#x2F;www.baidu.com&#x2F;&quot;, &quot;baidu&quot;); &#x2F;&#x2F; 与&lt;a href">
+<meta property="og:type" content="article">
+<meta property="og:title" content="windo.open(导航与打开新窗口)">
+<meta property="og:url" content="https://github.com/NollieLeo/2021/05/26/windo-open-%E5%AF%BC%E8%88%AA%E4%B8%8E%E6%89%93%E5%BC%80%E6%96%B0%E7%AA%97%E5%8F%A3/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="导航与打开新窗口window.open()  用于导航到指定的URL 打开新浏览器窗口  接受4个参数，指定URL，目标窗口（名字），特性字符串，表示新窗口在浏览器历史记录中是否替代当前加载页面的布尔值（一般在不打开新窗口的时候使用） window.open(&quot;https:&#x2F;&#x2F;www.baidu.com&#x2F;&quot;, &quot;baidu&quot;); &#x2F;&#x2F; 与&lt;a href">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-26T07:59:48.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.082Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="window.open">
+<meta property="article:tag" content="导航">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">windo.open(导航与打开新窗口)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">windo.open(导航与打开新窗口)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-05-26T07:59:48.000Z" itemprop="datePublished" class="page-time">
+  2021-05-26
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#导航与打开新窗口"><span class="post-toc-number">1.</span> <span class="post-toc-text">导航与打开新窗口</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-弹出窗口"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1. 弹出窗口</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-判断弹窗是否被屏蔽了"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2.判断弹窗是否被屏蔽了</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-windo-open-导航与打开新窗口"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">windo.open(导航与打开新窗口)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-05-26 15:59:48" datetime="2021-05-26T07:59:48.000Z"  itemprop="datePublished">2021-05-26</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="导航与打开新窗口"><a href="#导航与打开新窗口" class="headerlink" title="导航与打开新窗口"></a>导航与打开新窗口</h1><p>window.open()</p>
+<ol>
+<li>用于导航到指定的URL</li>
+<li>打开新浏览器窗口</li>
+</ol>
+<p>接受4个参数，<strong>指定URL</strong>，<strong>目标窗口</strong>（名字），<strong>特性字符串</strong>，表示新窗口在浏览器历史记录中<strong>是否替代当前加载页面</strong>的布尔值（一般在不打开新窗口的时候使用）</p>
+<pre><code class="js">window.open(&quot;https://www.baidu.com/&quot;, &quot;baidu&quot;);
+// 与&lt;a href=&quot;https://www.baidu.com/&quot; target=&quot;baidu&quot; /&gt;</code></pre>
+<p>如果有一个窗口名叫baidu，则这个窗口就会打开这URL；否者就会打开一个新窗口并将其命名为baidu</p>
+<p>第二个参数也可以是如下几个</p>
+<ul>
+<li>_self</li>
+<li>_parent</li>
+<li>_top</li>
+<li>_blank</li>
+</ul>
+<h2 id="1-弹出窗口"><a href="#1-弹出窗口" class="headerlink" title="1. 弹出窗口"></a>1. 弹出窗口</h2><p>window.open会返回一个对象，可以通过调用他的api去操作打开的这个新窗口</p>
+<pre><code class="js">const openWindow = window.open(&#39;https://www.baidu.com/&#39;,&#39;baidu&#39;,&#39;height=400,width=500,top=10,left=10,resizable=yes&#39;);
+
+// 移动打开的窗口
+openWindow.moveTo(100, 100);
+// 关闭打开的窗口
+openWindow.close();
+
+//关闭之后这个对象仍然存在,可以判断它closed属性
+window.closed // true;</code></pre>
+<p>弹出的窗口可以关闭自己</p>
+<pre><code class="js">top.close();</code></pre>
+<p>新建的窗口window对象上有个属性<code>opener</code>,指向他打开的窗口</p>
+<p>这个属性只在弹出窗口的最上层window对象有定义,就是指针</p>
+<pre><code class="js">opendWidon.opener === window // true</code></pre>
+<p>因为有了这个指针,表示的新开的窗口不能独立运行在进程当中,如果需要则需要把opener属性设置为null,与主页面切断链接之后,这个链接是不可以在恢复的</p>
+<h2 id="2-判断弹窗是否被屏蔽了"><a href="#2-判断弹窗是否被屏蔽了" class="headerlink" title="2.判断弹窗是否被屏蔽了"></a>2.判断弹窗是否被屏蔽了</h2><p>浏览器可能存在弹窗屏蔽程序,所以可以通过检测window.open()返回的值是否为null就能确定弹窗是否被屏蔽了</p>
+<p>但是有时候window.open都会报错</p>
+<p>所以用一层trycatch包裹会好一点</p>
+<pre><code class="js">let blocked = false;
+try{
+    let openWindow = window.open(&#39;https://baidu.com&#39;,&quot;_blank&quot;);
+    if(openWindow === null){
+        blocked = true;
+    }
+} catch(e){
+    blocked = true
+}</code></pre>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.082Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/window-open/" rel="tag">window.open</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AF%BC%E8%88%AA/" rel="tag">导航</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/05/26/windo-open-%E5%AF%BC%E8%88%AA%E4%B8%8E%E6%89%93%E5%BC%80%E6%96%B0%E7%AA%97%E5%8F%A3/&title=《windo.open(导航与打开新窗口)》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/05/26/windo-open-%E5%AF%BC%E8%88%AA%E4%B8%8E%E6%89%93%E5%BC%80%E6%96%B0%E7%AA%97%E5%8F%A3/&title=《windo.open(导航与打开新窗口)》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/05/26/windo-open-%E5%AF%BC%E8%88%AA%E4%B8%8E%E6%89%93%E5%BC%80%E6%96%B0%E7%AA%97%E5%8F%A3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《windo.open(导航与打开新窗口)》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/05/26/windo-open-%E5%AF%BC%E8%88%AA%E4%B8%8E%E6%89%93%E5%BC%80%E6%96%B0%E7%AA%97%E5%8F%A3/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/05/26/windo-open-%E5%AF%BC%E8%88%AA%E4%B8%8E%E6%89%93%E5%BC%80%E6%96%B0%E7%AA%97%E5%8F%A3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/05/26/%E9%A1%B5%E9%9D%A2%E9%80%9A%E4%BF%A1%EF%BC%88%E4%BB%8E%E9%A1%B5%E9%9D%A2%20A%20%E6%89%93%E5%BC%80%E4%B8%80%E4%B8%AA%E6%96%B0%E9%A1%B5%E9%9D%A2%20B%EF%BC%8CB%20%E9%A1%B5%E9%9D%A2%E5%85%B3%E9%97%AD%EF%BC%88%E5%8C%85%E6%8B%AC%E6%84%8F%E5%A4%96%E5%B4%A9%E6%BA%83%EF%BC%89%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%9A%E7%9F%A5%20A%20%E9%A1%B5%E9%9D%A2%EF%BC%9F%EF%BC%89/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃），如何通知 A 页面？</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/04/14/fetch%E9%85%8D%E7%BD%AE%E8%AF%B7%E6%B1%82%E5%A4%B4%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%EF%BC%88%E6%96%87%E4%BB%B6%E6%B5%81%E6%98%BE%E7%A4%BA%E8%BF%9B%E5%BA%A6%EF%BC%89/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">fetch配置请求头下载文件（文件流显示进度）</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/05/26/windo-open-%E5%AF%BC%E8%88%AA%E4%B8%8E%E6%89%93%E5%BC%80%E6%96%B0%E7%AA%97%E5%8F%A3/&title=《windo.open(导航与打开新窗口)》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/05/26/windo-open-%E5%AF%BC%E8%88%AA%E4%B8%8E%E6%89%93%E5%BC%80%E6%96%B0%E7%AA%97%E5%8F%A3/&title=《windo.open(导航与打开新窗口)》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/05/26/windo-open-%E5%AF%BC%E8%88%AA%E4%B8%8E%E6%89%93%E5%BC%80%E6%96%B0%E7%AA%97%E5%8F%A3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《windo.open(导航与打开新窗口)》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/05/26/windo-open-%E5%AF%BC%E8%88%AA%E4%B8%8E%E6%89%93%E5%BC%80%E6%96%B0%E7%AA%97%E5%8F%A3/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/05/26/windo-open-%E5%AF%BC%E8%88%AA%E4%B8%8E%E6%89%93%E5%BC%80%E6%96%B0%E7%AA%97%E5%8F%A3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2021/05/26/windo-open-%E5%AF%BC%E8%88%AA%E4%B8%8E%E6%89%93%E5%BC%80%E6%96%B0%E7%AA%97%E5%8F%A3/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

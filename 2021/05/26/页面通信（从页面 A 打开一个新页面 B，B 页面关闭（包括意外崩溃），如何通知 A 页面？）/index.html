@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃），如何通知 A 页面？ | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="js,面试题,onbeforeunload,onunload">
+    <meta name="description" content="从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃），如何通知 A 页面？首先能够拆解一下这个题意  B手动关闭，如何通知A页面 B意外关闭，被线程杀死奔溃的时候如何通知A页面  1. B页面正常关闭的时候1. 首先要回答出页面关闭时会触发的事件是什么？ 页面关闭时先执行window.onbeforeunload，然后执行window.onunload 我们可以在 window.onbef">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃），如何通知 A 页面？">
+<meta property="og:url" content="https://github.com/NollieLeo/2021/05/26/%E9%A1%B5%E9%9D%A2%E9%80%9A%E4%BF%A1%EF%BC%88%E4%BB%8E%E9%A1%B5%E9%9D%A2%20A%20%E6%89%93%E5%BC%80%E4%B8%80%E4%B8%AA%E6%96%B0%E9%A1%B5%E9%9D%A2%20B%EF%BC%8CB%20%E9%A1%B5%E9%9D%A2%E5%85%B3%E9%97%AD%EF%BC%88%E5%8C%85%E6%8B%AC%E6%84%8F%E5%A4%96%E5%B4%A9%E6%BA%83%EF%BC%89%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%9A%E7%9F%A5%20A%20%E9%A1%B5%E9%9D%A2%EF%BC%9F%EF%BC%89/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃），如何通知 A 页面？首先能够拆解一下这个题意  B手动关闭，如何通知A页面 B意外关闭，被线程杀死奔溃的时候如何通知A页面  1. B页面正常关闭的时候1. 首先要回答出页面关闭时会触发的事件是什么？ 页面关闭时先执行window.onbeforeunload，然后执行window.onunload 我们可以在 window.onbef">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-26T08:23:49.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.577Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="面试题">
+<meta property="article:tag" content="onbeforeunload">
+<meta property="article:tag" content="onunload">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃），如何通知 A 页面？</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃），如何通知 A 页面？</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-05-26T08:23:49.000Z" itemprop="datePublished" class="page-time">
+  2021-05-26
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#从页面-A-打开一个新页面-B，B-页面关闭（包括意外崩溃），如何通知-A-页面？"><span class="post-toc-number">1.</span> <span class="post-toc-text">从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃），如何通知 A 页面？</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-B页面正常关闭的时候"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1. B页面正常关闭的时候</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-奔溃的情况下"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2. 奔溃的情况下</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-页面通信（从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃），如何通知 A 页面？）"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃），如何通知 A 页面？</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-05-26 16:23:49" datetime="2021-05-26T08:23:49.000Z"  itemprop="datePublished">2021-05-26</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="从页面-A-打开一个新页面-B，B-页面关闭（包括意外崩溃），如何通知-A-页面？"><a href="#从页面-A-打开一个新页面-B，B-页面关闭（包括意外崩溃），如何通知-A-页面？" class="headerlink" title="从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃），如何通知 A 页面？"></a>从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃），如何通知 A 页面？</h1><p>首先能够拆解一下这个题意</p>
+<ol>
+<li>B手动关闭，如何通知A页面</li>
+<li>B意外关闭，被线程杀死奔溃的时候如何通知A页面</li>
+</ol>
+<h2 id="1-B页面正常关闭的时候"><a href="#1-B页面正常关闭的时候" class="headerlink" title="1. B页面正常关闭的时候"></a>1. B页面正常关闭的时候</h2><p><strong>1.</strong> 首先要回答出页面关闭时会触发的事件是什么？</p>
+<p>页面关闭时先执行<code>window.onbeforeunload</code>，然后执行<code>window.onunload</code></p>
+<p>我们可以在 <code>window.onbeforeunload</code> 或 <code>window.onunload</code> 里面设置回调。</p>
+<p><strong>2.</strong> 然后回答如何传参？</p>
+<p>最先想到的是：用 <code>window.open</code> 方法跳转到一个已经打开的页面（A页面），url 上可以挂参传递信息。</p>
+<p><strong>在 chrome 浏览器下会报错</strong><code>“Blocked popup during beforeunload.”</code></p>
+<p>在 MDN 里找到了解释：HTML规范指出在此事件中调用window.alert()，window.confirm()以及window.prompt()方法，可能会失效。<a href="https://developer.mozilla.org/zh-CN/docs/Web/Events/beforeunload" target="_blank" rel="noopener">Window: beforeunload event</a></p>
+<p><strong>在火狐浏览器下不会报错</strong>，可以正常打开 A 页面。</p>
+<p><strong>3.</strong> 成功传参后，A 页面是如何监听 URL 的？</p>
+<p>onhashchange 是为您排忧解难。<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/hashchange_event" target="_blank" rel="noopener">Window: hashchange event</a>：当URL的片段标识符更改时，将触发hashchange事件 (跟在＃符号后面的URL部分，包括＃符号)</p>
+<p>如果你传参是以 A.html?xxx 的形式，那就需要监听 window.location.href。</p>
+<p>// 页面A</p>
+<pre><code class="html">&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div&gt;这是 A 页面&lt;/div&gt;
+    &lt;button onclick=&quot;toB()&quot;&gt;点击打开 B 页面&lt;/button&gt;
+    &lt;script&gt;
+        window.name = &#39;A&#39; // 设置页面名
+        function toB() {
+            window.open(&quot;B.html&quot;, &quot;B&quot;) // 打开新页面并设置页面名
+        }
+        window.addEventListener(&#39;hashchange&#39;, function () {// 监听 hash
+            alert(window.location.hash)
+        }, false);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>// 页面B</p>
+<pre><code class="html">&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div&gt;这是 B 页面&lt;/div&gt;
+    &lt;script&gt;
+        window.onbeforeunload = function (e) {
+            window.open(&#39;A.html#close&#39;, &quot;A&quot;) // url 挂参 跳回到已打开的 A 页面
+            return &#39;确定离开此页吗？&#39;;
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>其实传参也可以通过<strong>本地缓存传参</strong>，A 页面设置监听,在 B 页面设置 loacalStorage</p>
+<pre><code class="js">// A.html
+window.addEventListener(&quot;storage&quot;, function (e) {// 监听 storage
+    alert(e.newValue);
+});
+// B.html
+window.onbeforeunload = function (e) {
+    localStorage.setItem(&quot;name&quot;,&quot;close&quot;);
+    return &#39;确定离开此页吗？&#39;;
+}</code></pre>
+<h2 id="2-奔溃的情况下"><a href="#2-奔溃的情况下" class="headerlink" title="2. 奔溃的情况下"></a>2. 奔溃的情况下</h2><p>这个好鸡儿恼火</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.577Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/onbeforeunload/" rel="tag">onbeforeunload</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/onunload/" rel="tag">onunload</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/05/26/%E9%A1%B5%E9%9D%A2%E9%80%9A%E4%BF%A1%EF%BC%88%E4%BB%8E%E9%A1%B5%E9%9D%A2%20A%20%E6%89%93%E5%BC%80%E4%B8%80%E4%B8%AA%E6%96%B0%E9%A1%B5%E9%9D%A2%20B%EF%BC%8CB%20%E9%A1%B5%E9%9D%A2%E5%85%B3%E9%97%AD%EF%BC%88%E5%8C%85%E6%8B%AC%E6%84%8F%E5%A4%96%E5%B4%A9%E6%BA%83%EF%BC%89%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%9A%E7%9F%A5%20A%20%E9%A1%B5%E9%9D%A2%EF%BC%9F%EF%BC%89/&title=《从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃），如何通知 A 页面？》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/05/26/%E9%A1%B5%E9%9D%A2%E9%80%9A%E4%BF%A1%EF%BC%88%E4%BB%8E%E9%A1%B5%E9%9D%A2%20A%20%E6%89%93%E5%BC%80%E4%B8%80%E4%B8%AA%E6%96%B0%E9%A1%B5%E9%9D%A2%20B%EF%BC%8CB%20%E9%A1%B5%E9%9D%A2%E5%85%B3%E9%97%AD%EF%BC%88%E5%8C%85%E6%8B%AC%E6%84%8F%E5%A4%96%E5%B4%A9%E6%BA%83%EF%BC%89%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%9A%E7%9F%A5%20A%20%E9%A1%B5%E9%9D%A2%EF%BC%9F%EF%BC%89/&title=《从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃），如何通知 A 页面？》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/05/26/%E9%A1%B5%E9%9D%A2%E9%80%9A%E4%BF%A1%EF%BC%88%E4%BB%8E%E9%A1%B5%E9%9D%A2%20A%20%E6%89%93%E5%BC%80%E4%B8%80%E4%B8%AA%E6%96%B0%E9%A1%B5%E9%9D%A2%20B%EF%BC%8CB%20%E9%A1%B5%E9%9D%A2%E5%85%B3%E9%97%AD%EF%BC%88%E5%8C%85%E6%8B%AC%E6%84%8F%E5%A4%96%E5%B4%A9%E6%BA%83%EF%BC%89%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%9A%E7%9F%A5%20A%20%E9%A1%B5%E9%9D%A2%EF%BC%9F%EF%BC%89/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃），如何通知 A 页面？》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/05/26/%E9%A1%B5%E9%9D%A2%E9%80%9A%E4%BF%A1%EF%BC%88%E4%BB%8E%E9%A1%B5%E9%9D%A2%20A%20%E6%89%93%E5%BC%80%E4%B8%80%E4%B8%AA%E6%96%B0%E9%A1%B5%E9%9D%A2%20B%EF%BC%8CB%20%E9%A1%B5%E9%9D%A2%E5%85%B3%E9%97%AD%EF%BC%88%E5%8C%85%E6%8B%AC%E6%84%8F%E5%A4%96%E5%B4%A9%E6%BA%83%EF%BC%89%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%9A%E7%9F%A5%20A%20%E9%A1%B5%E9%9D%A2%EF%BC%9F%EF%BC%89/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/05/26/%E9%A1%B5%E9%9D%A2%E9%80%9A%E4%BF%A1%EF%BC%88%E4%BB%8E%E9%A1%B5%E9%9D%A2%20A%20%E6%89%93%E5%BC%80%E4%B8%80%E4%B8%AA%E6%96%B0%E9%A1%B5%E9%9D%A2%20B%EF%BC%8CB%20%E9%A1%B5%E9%9D%A2%E5%85%B3%E9%97%AD%EF%BC%88%E5%8C%85%E6%8B%AC%E6%84%8F%E5%A4%96%E5%B4%A9%E6%BA%83%EF%BC%89%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%9A%E7%9F%A5%20A%20%E9%A1%B5%E9%9D%A2%EF%BC%9F%EF%BC%89/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/05/26/%E5%A6%82%E4%BD%95%E5%AF%B9%E4%B8%A4%E4%B8%AA%E8%B6%85%E5%A4%A7%E6%95%B0%E5%AD%97%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%81%9A%E7%9B%B8%E5%8A%A0%E6%93%8D%E4%BD%9C/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">如何对两个超大数字字符串做相加操作</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/05/26/windo-open-%E5%AF%BC%E8%88%AA%E4%B8%8E%E6%89%93%E5%BC%80%E6%96%B0%E7%AA%97%E5%8F%A3/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">windo.open(导航与打开新窗口)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/05/26/%E9%A1%B5%E9%9D%A2%E9%80%9A%E4%BF%A1%EF%BC%88%E4%BB%8E%E9%A1%B5%E9%9D%A2%20A%20%E6%89%93%E5%BC%80%E4%B8%80%E4%B8%AA%E6%96%B0%E9%A1%B5%E9%9D%A2%20B%EF%BC%8CB%20%E9%A1%B5%E9%9D%A2%E5%85%B3%E9%97%AD%EF%BC%88%E5%8C%85%E6%8B%AC%E6%84%8F%E5%A4%96%E5%B4%A9%E6%BA%83%EF%BC%89%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%9A%E7%9F%A5%20A%20%E9%A1%B5%E9%9D%A2%EF%BC%9F%EF%BC%89/&title=《从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃），如何通知 A 页面？》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/05/26/%E9%A1%B5%E9%9D%A2%E9%80%9A%E4%BF%A1%EF%BC%88%E4%BB%8E%E9%A1%B5%E9%9D%A2%20A%20%E6%89%93%E5%BC%80%E4%B8%80%E4%B8%AA%E6%96%B0%E9%A1%B5%E9%9D%A2%20B%EF%BC%8CB%20%E9%A1%B5%E9%9D%A2%E5%85%B3%E9%97%AD%EF%BC%88%E5%8C%85%E6%8B%AC%E6%84%8F%E5%A4%96%E5%B4%A9%E6%BA%83%EF%BC%89%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%9A%E7%9F%A5%20A%20%E9%A1%B5%E9%9D%A2%EF%BC%9F%EF%BC%89/&title=《从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃），如何通知 A 页面？》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/05/26/%E9%A1%B5%E9%9D%A2%E9%80%9A%E4%BF%A1%EF%BC%88%E4%BB%8E%E9%A1%B5%E9%9D%A2%20A%20%E6%89%93%E5%BC%80%E4%B8%80%E4%B8%AA%E6%96%B0%E9%A1%B5%E9%9D%A2%20B%EF%BC%8CB%20%E9%A1%B5%E9%9D%A2%E5%85%B3%E9%97%AD%EF%BC%88%E5%8C%85%E6%8B%AC%E6%84%8F%E5%A4%96%E5%B4%A9%E6%BA%83%EF%BC%89%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%9A%E7%9F%A5%20A%20%E9%A1%B5%E9%9D%A2%EF%BC%9F%EF%BC%89/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃），如何通知 A 页面？》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/05/26/%E9%A1%B5%E9%9D%A2%E9%80%9A%E4%BF%A1%EF%BC%88%E4%BB%8E%E9%A1%B5%E9%9D%A2%20A%20%E6%89%93%E5%BC%80%E4%B8%80%E4%B8%AA%E6%96%B0%E9%A1%B5%E9%9D%A2%20B%EF%BC%8CB%20%E9%A1%B5%E9%9D%A2%E5%85%B3%E9%97%AD%EF%BC%88%E5%8C%85%E6%8B%AC%E6%84%8F%E5%A4%96%E5%B4%A9%E6%BA%83%EF%BC%89%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%9A%E7%9F%A5%20A%20%E9%A1%B5%E9%9D%A2%EF%BC%9F%EF%BC%89/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/05/26/%E9%A1%B5%E9%9D%A2%E9%80%9A%E4%BF%A1%EF%BC%88%E4%BB%8E%E9%A1%B5%E9%9D%A2%20A%20%E6%89%93%E5%BC%80%E4%B8%80%E4%B8%AA%E6%96%B0%E9%A1%B5%E9%9D%A2%20B%EF%BC%8CB%20%E9%A1%B5%E9%9D%A2%E5%85%B3%E9%97%AD%EF%BC%88%E5%8C%85%E6%8B%AC%E6%84%8F%E5%A4%96%E5%B4%A9%E6%BA%83%EF%BC%89%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%9A%E7%9F%A5%20A%20%E9%A1%B5%E9%9D%A2%EF%BC%9F%EF%BC%89/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2021/05/26/%E9%A1%B5%E9%9D%A2%E9%80%9A%E4%BF%A1%EF%BC%88%E4%BB%8E%E9%A1%B5%E9%9D%A2%20A%20%E6%89%93%E5%BC%80%E4%B8%80%E4%B8%AA%E6%96%B0%E9%A1%B5%E9%9D%A2%20B%EF%BC%8CB%20%E9%A1%B5%E9%9D%A2%E5%85%B3%E9%97%AD%EF%BC%88%E5%8C%85%E6%8B%AC%E6%84%8F%E5%A4%96%E5%B4%A9%E6%BA%83%EF%BC%89%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%9A%E7%9F%A5%20A%20%E9%A1%B5%E9%9D%A2%EF%BC%9F%EF%BC%89/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

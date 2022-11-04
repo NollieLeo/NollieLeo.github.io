@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>js数据类型以及typeOf操作符号 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="js,typeOf">
+    <meta name="description" content="ES6有6中 简单数据类型（原始类型）和一种复杂数据类型 简单：Undifined, Null, Boolean, Number, String, Symbol 复杂：object  所有的值都可以用以上7种来表示 typeof操作符ES的类型系统是松散的，typeof可以确定任意变量的数据类型。 typeof对一个值使用会返回的字符串之一  “undefined” 表示值未定义 “boolea">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js数据类型以及typeOf操作符号">
+<meta property="og:url" content="https://github.com/NollieLeo/2021/03/14/js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8AtypeOf%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%8F%B7/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="ES6有6中 简单数据类型（原始类型）和一种复杂数据类型 简单：Undifined, Null, Boolean, Number, String, Symbol 复杂：object  所有的值都可以用以上7种来表示 typeof操作符ES的类型系统是松散的，typeof可以确定任意变量的数据类型。 typeof对一个值使用会返回的字符串之一  “undefined” 表示值未定义 “boolea">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-14T08:23:49.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.078Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="typeOf">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">js数据类型以及typeOf操作符号</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">js数据类型以及typeOf操作符号</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-03-14T08:23:49.000Z" itemprop="datePublished" class="page-time">
+  2021-03-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#typeof操作符"><span class="post-toc-number">1.</span> <span class="post-toc-text">typeof操作符</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#类型"><span class="post-toc-number">2.</span> <span class="post-toc-text">类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">undefined</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#NULL"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">NULL</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Boolean"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">Boolean</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-Boolean-转型"><span class="post-toc-number">2.3.1.</span> <span class="post-toc-text">1.Boolean()转型</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Number"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">*Number</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-浮点数"><span class="post-toc-number">2.4.1.</span> <span class="post-toc-text">1. 浮点数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-值得范围"><span class="post-toc-number">2.4.2.</span> <span class="post-toc-text">2. 值得范围</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-NaN"><span class="post-toc-number">2.4.3.</span> <span class="post-toc-text">3. NaN</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1）涉及任何NaN得操作都会返回NaN"><span class="post-toc-number">2.4.3.1.</span> <span class="post-toc-text">1）涉及任何NaN得操作都会返回NaN</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2）console-NaN-NaN"><span class="post-toc-number">2.4.3.2.</span> <span class="post-toc-text">2）console(NaN &#x3D;&#x3D; NaN)</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3）isNaN-函数"><span class="post-toc-number">2.4.3.3.</span> <span class="post-toc-text">3）isNaN()函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-数值转换"><span class="post-toc-number">2.4.4.</span> <span class="post-toc-text">4. 数值转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-Number"><span class="post-toc-number">2.4.4.1.</span> <span class="post-toc-text">1) Number()</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-ParseInt"><span class="post-toc-number">2.4.4.2.</span> <span class="post-toc-text">2) ParseInt()</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-ParseFloat"><span class="post-toc-number">2.4.4.3.</span> <span class="post-toc-text">3) ParseFloat()</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#String"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">String</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-字符字面量"><span class="post-toc-number">2.5.0.1.</span> <span class="post-toc-text">1. 字符字面量</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-字符串特点"><span class="post-toc-number">2.5.0.2.</span> <span class="post-toc-text">2. 字符串特点</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-转换为字符串（toString-amp-String-）"><span class="post-toc-number">2.5.0.3.</span> <span class="post-toc-text">3. 转换为字符串（toString &amp; String()）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#1）toString"><span class="post-toc-number">2.5.0.3.1.</span> <span class="post-toc-text">1）toString()</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#2-String"><span class="post-toc-number">2.5.0.3.2.</span> <span class="post-toc-text">2)   String()</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-模板字面量"><span class="post-toc-number">2.5.0.4.</span> <span class="post-toc-text">4. 模板字面量</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Symbol"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">Symbol</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-基本用法"><span class="post-toc-number">2.6.1.</span> <span class="post-toc-text">1.基本用法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-创建全局符号注册表"><span class="post-toc-number">2.6.2.</span> <span class="post-toc-text">2.创建全局符号注册表</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-使用符号作为属性"><span class="post-toc-number">2.6.3.</span> <span class="post-toc-text">3. 使用符号作为属性</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-常用的内置符号"><span class="post-toc-number">2.6.4.</span> <span class="post-toc-text">4.常用的内置符号</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1）-Symbol-asyncIterator-（异步迭代器符号）-ES2018"><span class="post-toc-number">2.6.4.1.</span> <span class="post-toc-text">1） Symbol.asyncIterator （异步迭代器符号）(ES2018)</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-Symbol-hasInstance"><span class="post-toc-number">2.6.4.2.</span> <span class="post-toc-text">2) Symbol.hasInstance</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-Symbol-isConcatSpreadable"><span class="post-toc-number">2.6.4.3.</span> <span class="post-toc-text">3) Symbol.isConcatSpreadable</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-Symbol-iterator"><span class="post-toc-number">2.6.4.4.</span> <span class="post-toc-text">4) Symbol.iterator</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#5-Symbol-match"><span class="post-toc-number">2.6.4.5.</span> <span class="post-toc-text">5) Symbol.match</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#6-Symbol-replace"><span class="post-toc-number">2.6.4.6.</span> <span class="post-toc-text">6) Symbol.replace</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#7）Symbol-search"><span class="post-toc-number">2.6.4.7.</span> <span class="post-toc-text">7）Symbol.search</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#8-Symbol-species"><span class="post-toc-number">2.6.4.8.</span> <span class="post-toc-text">8) Symbol.species</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#9-Symbol-toPrimitive"><span class="post-toc-number">2.6.4.9.</span> <span class="post-toc-text">9) Symbol.toPrimitive</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#10）Symbol-toStringTag"><span class="post-toc-number">2.6.4.10.</span> <span class="post-toc-text">10）Symbol.toStringTag</span></a></li></ol></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-js数据类型以及typeOf操作符号"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">js数据类型以及typeOf操作符号</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-03-14 16:23:49" datetime="2021-03-14T08:23:49.000Z"  itemprop="datePublished">2021-03-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>ES6有6中 <strong>简单数据类型</strong>（<strong>原始类型</strong>）和一种复杂数据类型</p>
+<p>简单：Undifined, Null, Boolean, Number, String, Symbol</p>
+<p>复杂：object</p>
+</blockquote>
+<p>所有的值都可以用以上7种来表示</p>
+<h2 id="typeof操作符"><a href="#typeof操作符" class="headerlink" title="typeof操作符"></a>typeof操作符</h2><p>ES的类型系统是松散的，typeof可以确定任意变量的数据类型。</p>
+<p>typeof对一个值使用会返回的字符串之一</p>
+<ul>
+<li>“undefined” 表示值未定义</li>
+<li>“boolean” 布尔值</li>
+<li>“string” 字符串</li>
+<li>“number” 数值</li>
+<li>“object” 表示为对象（而不是函数）或者null</li>
+<li>“function”表示函数</li>
+<li>“symbol”表示符号</li>
+</ul>
+<blockquote>
+<p>函数在es中被认为是对象，但是不代表一种数据类型</p>
+<p>因此typeof可以很好的区别它和其他对象的区别</p>
+</blockquote>
+<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><h3 id="undefined"><a href="#undefined" class="headerlink" title="undefined"></a>undefined</h3><p>只有一个值，就是特殊值<code>undefined</code></p>
+<p>当用let或者var 声明了变量但是没有初始化（给一个初始值）的时候，这个变量就相当于赋予了undefined值</p>
+<pre><code class="js">let msg;
+console.log(msg);// undefined</code></pre>
+<p>我们不需要显式的去给值赋值一个undefined，因为系统自动都会给未初始化的值赋值undefined</p>
+<p>*注意:</p>
+<p>使用typeof，未声明的变量和未初始化的变量返回都是<code>undefined</code></p>
+<pre><code>typeof a; // undefined
+let b;
+typeof b; // undefined</code></pre><h3 id="NULL"><a href="#NULL" class="headerlink" title="NULL"></a>NULL</h3><p>null类型也是同样只有一个值，特殊值Null；</p>
+<p>null逻辑上讲，表示的是一个<strong>空对象指针</strong>，毕竟typeof null的时候是‘object’;</p>
+<p>因此在定义将来要保存对象值得变量得时候，建议使用null初始化</p>
+<p>undefined值是由null值派生而来的，因此ECMA-262将他们定义为表面上相等。</p>
+<pre><code class="js">console.log(null == undefined)</code></pre>
+<p>*==操作符会对数据两头得数据类型进行转换，这个单独写一篇讲</p>
+<h3 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h3><p>boolean就两值，<code>true</code> or <code>false</code>；</p>
+<p>虽然只有两个值，但是可以通过特定得<strong>Boolean()</strong>转型函数将其他类型得值转换为布尔值</p>
+<h4 id="1-Boolean-转型"><a href="#1-Boolean-转型" class="headerlink" title="1.Boolean()转型"></a>1.Boolean()转型</h4><p>不同类型值转换为布尔值得转换规则如下</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>转为true</th>
+<th>转为false</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Boolean</td>
+<td>true</td>
+<td>false</td>
+</tr>
+<tr>
+<td>String</td>
+<td>非空字符串</td>
+<td>“”</td>
+</tr>
+<tr>
+<td>Undefined</td>
+<td>N/A(不存在)</td>
+<td>undefined</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>非0得数值（Infinity）</td>
+<td>0, NaN</td>
+</tr>
+<tr>
+<td>Object</td>
+<td>任何对象</td>
+<td>null</td>
+</tr>
+</tbody></table>
+<p>*像一些if等流控制语句会自动得将其他类型值转换为boolean类型值</p>
+<pre><code class="js">const a = &#39;2121&#39;;
+if(a){
+    console.log(hello);
+}
+// hello;</code></pre>
+<h3 id="Number"><a href="#Number" class="headerlink" title="*Number"></a>*Number</h3><p>最有意思得数据类型了</p>
+<p>Number类型使用得是<strong>IEEE 754</strong>格式表示整数和浮点值</p>
+<ol>
+<li>十进制</li>
+<li>八进制(0开头，数字0~7)</li>
+<li>十六进制（0x开头，数字0<del>9，字母A</del>F）</li>
+</ol>
+<pre><code class="js">let a1 = 55; // 55
+let a2 = 070; // 八进制的 56
+let a3 = 098; // 无效八进制,自动转为十进制98</code></pre>
+<h4 id="1-浮点数"><a href="#1-浮点数" class="headerlink" title="1. 浮点数"></a>1. 浮点数</h4><p>表示：1.1， 1.2 ， 3.125e7， 3.125e-8</p>
+<p>*浮点数精确度问题</p>
+<pre><code class="js">if(0.1 + 0.2==0.3){
+    console.log(&#39;hello&#39;) 
+}
+// 这里的0.1 + 0.2 是不等于0.3的</code></pre>
+<h4 id="2-值得范围"><a href="#2-值得范围" class="headerlink" title="2. 值得范围"></a>2. 值得范围</h4><p>内存限制，ES不能表示这世界上所有得</p>
+<p>最小值存在：<code>Number.MIN_VALUE</code>中</p>
+<p>最大值存在：<code>Number.MAX_VALUE</code>中</p>
+<p>如果两个值得运算超过这两个极限值，则会是Infinity表示</p>
+<h4 id="3-NaN"><a href="#3-NaN" class="headerlink" title="3. NaN"></a>3. NaN</h4><p>特殊得数值：NaN，意思就是不是一个数值；</p>
+<p>用于本来是要返回数值得操作失败了（不抛错）</p>
+<h5 id="1）涉及任何NaN得操作都会返回NaN"><a href="#1）涉及任何NaN得操作都会返回NaN" class="headerlink" title="1）涉及任何NaN得操作都会返回NaN"></a>1）涉及任何NaN得操作都会返回NaN</h5><h5 id="2）console-NaN-NaN"><a href="#2）console-NaN-NaN" class="headerlink" title="2）console(NaN == NaN)"></a>2）console(NaN == NaN)</h5><p>为false</p>
+<h5 id="3）isNaN-函数"><a href="#3）isNaN-函数" class="headerlink" title="3）isNaN()函数"></a>3）isNaN()函数</h5><p>判断传入得值是否 ”不是数值“</p>
+<p>该函数会将传入得值尝试去转换为数值，任何不能转换为数值得值都会导致这个函数返回true</p>
+<pre><code class="JS">isNaN(NaN) // true
+isNaN(10) // false
+isNaN(&#39;10&#39;) // false
+isNaN(&#39;blue&#39;) //true
+isNaN(true) // false</code></pre>
+<blockquote>
+<p>isNaN可以用于测试对象，首先会去调用对象得valueOf()方法，确定返回得值是否可以转换为数值，如果不行再调用toString()方法并测试返回值；</p>
+</blockquote>
+<h4 id="4-数值转换"><a href="#4-数值转换" class="headerlink" title="4. 数值转换"></a>4. 数值转换</h4><p>有3个函数可以将非数值型数据转为数值</p>
+<p>Number(), parseInt(), parseFloat()</p>
+<h5 id="1-Number"><a href="#1-Number" class="headerlink" title="1) Number()"></a>1) Number()</h5><p>转型函数可以用于任意类型得数据</p>
+<p>转型规则如下</p>
+<ol>
+<li><p>布尔值，true为1，false为0</p>
+</li>
+<li><p>数值，直接返回数值</p>
+</li>
+<li><p>null，返回0</p>
+</li>
+<li><p><strong>undefined</strong>，返回<strong>NaN</strong></p>
+</li>
+<li><p>字符串</p>
+<ul>
+<li><p>包含数值字符串，包括前面带着+，- 号得情况，则转换为一个十进制数值</p>
+<pre><code class="js">Number(&quot;1&quot;) // 1
+Number(&quot;123abc&quot;) // 123
+Number(&quot;0111&quot;) // 111</code></pre>
+<ul>
+<li><p>字符串包含浮点值字符串</p>
+<pre><code class="js">Number(&quot;1.1&quot;) // 1.1</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<pre><code>- 字符串包含有效得十六进制格式，则转换为该十六进制对应得十进制数
+
+  ```js
+  Number(&quot;0xA&quot;) // 10
+  ```
+
+
+
+- 空字符串，则返回0
+
+- 除了以上情况外，返回NaN</code></pre><ol start="6">
+<li><p>对象</p>
+<p>调用对象得valueOf()方法，并且按照上述规则转换返回得值。如果转换结果是NaN，则再调用对象得toString()方法，再按规则去转换</p>
+<pre><code>Number(&quot;hello world&quot;) // NaN</code></pre><blockquote>
+<p>一元加操作符也遵循Number()转换规则</p>
+</blockquote>
+</li>
+</ol>
+<h5 id="2-ParseInt"><a href="#2-ParseInt" class="headerlink" title="2) ParseInt()"></a>2) ParseInt()</h5><p>此函数更加专注于字符串是否包含数值模式</p>
+<p>如果第一个字符不是数值字符， + -符号，则立即返回NaN</p>
+<p>空字符串也立即返回NaN</p>
+<pre><code class="js">parseInt(&quot;123&quot;) //123
+parseInt(&quot;123abc&quot;) // 123
+parseInt(&quot;&quot;) // NaN
+parseInt(&quot;0xf&quot;) // 15
+parseInt(&quot;07&quot;) // 7</code></pre>
+<p>也接受第二个参数</p>
+<pre><code>parseInt(&quot;0xAF&quot;,16) // 175
+parseInt(&quot;AF&quot;,16) // 175
+parseInt(&quot;AF&quot;) //NaN</code></pre><h5 id="3-ParseFloat"><a href="#3-ParseFloat" class="headerlink" title="3) ParseFloat()"></a>3) ParseFloat()</h5><p>和parseInt相似</p>
+<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><p>字符串数据类型表示零或者多个16位得Unicode字符序列</p>
+<h5 id="1-字符字面量"><a href="#1-字符字面量" class="headerlink" title="1. 字符字面量"></a>1. 字符字面量</h5><p>用于表示非打印字符或者其他用途字符</p>
+<pre><code class="js">\t 
+\n
+\b
+\r
+\f
+\\
+\&#39;
+\&quot;
+\`
+\xnn
+\unnn</code></pre>
+<blockquote>
+<p>如果字符串包含双字节字符，length就不好确定了</p>
+</blockquote>
+<h5 id="2-字符串特点"><a href="#2-字符串特点" class="headerlink" title="2. 字符串特点"></a>2. 字符串特点</h5><p>es中得字符串是不可变的，一旦创建，值就不能再变化，要修改其中一个字符串值，必须先销毁原来得字符串再将包含新值的另一个字符串保存到该变量</p>
+<h5 id="3-转换为字符串（toString-amp-String-）"><a href="#3-转换为字符串（toString-amp-String-）" class="headerlink" title="3. 转换为字符串（toString &amp; String()）"></a>3. 转换为字符串（toString &amp; String()）</h5><p>适用于 数值，字符串，布尔值，对象（字符串的toString只是简单的返回自身的一个副本），<strong>null和undefined没有这个方法</strong></p>
+<h6 id="1）toString"><a href="#1）toString" class="headerlink" title="1）toString()"></a>1）toString()</h6><p>toString再对数值类型进行转换的时候可以传入参数，其他的类型不允许</p>
+<pre><code class="js">let num = 10;
+num.toString(); // &quot;10&quot;
+num.toString(2); // &quot;1010&quot;
+num.toString(8); // &quot;12&quot;
+num.toString(16); // &quot;a&quot;</code></pre>
+<h6 id="2-String"><a href="#2-String" class="headerlink" title="2)   String()"></a>2)   String()</h6><p>如果不确定一个值是否为null或者undefined可以使用String()转型函数</p>
+<p>转换规则↓</p>
+<ul>
+<li>如果值有toString()的方法，则调用该方法返回结果</li>
+<li>如果只是null返回”null”，undefined返回”undefined”</li>
+</ul>
+<blockquote>
+<p>用加号给一值加上一个空字符串””也可以将其转换为字符串</p>
+</blockquote>
+<h5 id="4-模板字面量"><a href="#4-模板字面量" class="headerlink" title="4. 模板字面量"></a>4. 模板字面量</h5><pre><code class="js">const name = &#39;lihua&#39;;
+console.log(`hello ${name}`); // hello lihua</code></pre>
+<ul>
+<li>模板字面量保留换行符号,  空格</li>
+</ul>
+<pre><code class="js">const one = &#39;first line \nsecond line&#39;; 
+// first line
+// second line
+const two = `first line
+second line`;
+// first line
+// second line</code></pre>
+<ul>
+<li><p>模板字面量不是字符串而是一种特殊的js句法表达式，只不过求值之后是字符串</p>
+<p>所有的插入值最后都会使用<code>toString()</code>强制转型维字符串，适用与任何的js表达式</p>
+<pre><code class="js">let foo =  {
+    toString: ()=&gt; &#39;world&#39;
+};
+console.log(`hello ${foo}`);</code></pre>
+</li>
+<li><p>模板字面量标签函数</p>
+<pre><code class="js">let a = 6;
+let b = 5;
+function simpleTag(strings, aValExpression, bValExpression, sum){
+    console.log(strings);
+    console.log(aValExpression);
+    console.log(bValExpression);
+    console.log(sum);
+    return &#39;motherfucker&#39;;
+}
+
+let resUntagged = `${a} + ${b} = ${a + b}`;
+let resTagged = simpleTag`${a} + ${b} = ${a + b}`;
+// [&quot;&quot;, &quot;+&quot;, &quot;=&quot;, &quot;&quot;]
+// 6 
+// 5
+// 11
+
+console.log(resUntagged); // 6 + 9 = 15
+console.log(resTagged); // motherfucker</code></pre>
+<p>表达式的参数一般可变，所以用…rest 传入</p>
+<pre><code class="js">let a = 6;
+let b = 5;
+function simpleTag(strings, ...rest){
+    console.log(strings);
+    for(const express of rest){
+        console.log(express);
+    }
+    return &#39;motherfucker&#39;;
+}
+
+let resTagged = simpleTag`${a} + ${b} = ${a + b}`;
+// [&quot;&quot;, &quot;+&quot;, &quot;=&quot;, &quot;&quot;]
+// 6 
+// 5
+// 11
+
+console.log(resTagged); // motherfucker</code></pre>
+<p>如果需要通过一个标签函数得到原始字符串的话</p>
+<pre><code class="js">let a = 6;
+let b = 9;
+
+function zipTag(strings, ...rest){
+    return strings[0] + rest.map((e, i)=&gt;`${e}${strings[i+1]}`).join(&#39;&#39;);
+}
+
+console.log(zipTag`${a} + ${b} = ${a + b}`); // 6 + 9 = 15</code></pre>
+</li>
+<li><p>原始字符串获取, 可以使用String.raw标签函数，从而获取到不是被转换后的字符</p>
+<pre><code class="js">console.log(`hello\nworld`);
+// hello
+// world
+
+console.log(String.raw`hello\nworld`) // &quot;hello\nworld&quot;</code></pre>
+<blockquote>
+<p>但是对于实际的换行符号是不可以的</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h3><p>符号属性是对内存中符号的一个引用</p>
+<h4 id="1-基本用法"><a href="#1-基本用法" class="headerlink" title="1.基本用法"></a>1.基本用法</h4><pre><code class="js">let sym = Symbol();
+let symV = Symbol(&#39;V&#39;);
+typeof sym; // symbol</code></pre>
+<blockquote>
+<p>这里不可以使用像Boolean, String, Number那样使用构造函数初始化包装对象</p>
+</blockquote>
+<pre><code class="js">let sym = new Symbol(); // TypeError: Symbol is not a constructor</code></pre>
+<h4 id="2-创建全局符号注册表"><a href="#2-创建全局符号注册表" class="headerlink" title="2.创建全局符号注册表"></a>2.创建全局符号注册表</h4><p><code>Symbol.for()</code>全局创建符号实现 共享 重用</p>
+<pre><code class="js">let globleSym = Symbol.for(&quot;mine&quot;);</code></pre>
+<p>第一次调用Symbol.for()会去全局注册一个符号，如果再次调用则直接从注册表中检查，并且返回该符号实例；</p>
+<p>全局注册和使用普通方式定义的符号实例不等</p>
+<pre><code class="js">let a = Symbol.for(&#39;hello&#39;);
+
+let b = Symbol.for(&#39;hello&#39;);
+
+let c= Symbol(&#39;hello&#39;);
+
+a === b // true
+a === c // false</code></pre>
+<blockquote>
+<p>传给Symbol.for()函数的任何值都会被转换为字符串</p>
+<p>let empty = Symbol.for();</p>
+<p>empty // Symbol(undefined);</p>
+</blockquote>
+<p>可以使用 <code>Symbol.keyFor()</code>来查询<strong>全局注册表</strong>，这个方法接受符号，返回该全局符号对应的字符串键（如果没有则返回undefined, 如果传入的不是符号则会报错</p>
+<pre><code class="js">let s = Symbol.for(&#39;foo&#39;);
+console.log(Symbol.keyFor(s)); // foo    
+
+let a = Symbol(&#39;bar&#39;);
+console.log(Symbol.keyFor(a)); // undefined</code></pre>
+<h4 id="3-使用符号作为属性"><a href="#3-使用符号作为属性" class="headerlink" title="3. 使用符号作为属性"></a>3. 使用符号作为属性</h4><p>凡是可以使用字符串或数值作属性的地方都可以使用符号，包扩了<code>Object.defineProperty()</code> / <code>Object.defineProperties()</code>定义属性</p>
+<pre><code class="js">let s1 = Symbol(&#39;hello&#39;), s2 = Symbol(&#39;world&#39;), s3 = Symbol(&#39;beauty&#39;);
+let o = {
+    [s1]: &#39;1212&#39;
+};
+console.log(o); // {Symbol(hello): 1212}
+
+Object.defineProperties(o, {
+    [s2]: &#39;ssss&#39;,
+    [s3]: &#39;2121&#39;
+})</code></pre>
+<ul>
+<li>Object.getOwnPropertyNames()返回对象实例的常规属性数组</li>
+<li>Object.getOwnPropertySymbols()返回对象实例的符号属性数组</li>
+<li>Object.getOwnPropertyDescriptors()返回同时包含常规和符号属性描述符的对象</li>
+<li>Reflect.ownKeys()会返回两种类型的键</li>
+</ul>
+<h4 id="4-常用的内置符号"><a href="#4-常用的内置符号" class="headerlink" title="4.常用的内置符号"></a>4.常用的内置符号</h4><p>ES6引入了一些常用的内置符号，用于暴露语言内部的行为，开发者可以直接访问，重写或者模拟这些行为</p>
+<blockquote>
+<p>改变原生行为。比如for-of循环会在相关对象上使用Symbol.iterator属性，那么就可以通过在自定义的对象上面重新定义这个[Symbol.iterator]从而改变for-of遍历对象时候的行为</p>
+</blockquote>
+<h5 id="1）-Symbol-asyncIterator-（异步迭代器符号）-ES2018"><a href="#1）-Symbol-asyncIterator-（异步迭代器符号）-ES2018" class="headerlink" title="1） Symbol.asyncIterator （异步迭代器符号）(ES2018)"></a>1） Symbol.asyncIterator （异步迭代器符号）(ES2018)</h5><p>这个符号作为一个属性，标识一个方法，该方法返回对象默认的AsyncIterator，由for-await-of语句使用，也就是异步迭代API函数</p>
+<pre><code class="js">class Foo{
+    async *[Symbol.asyncIterator](){}
+}
+let f = new Foo();
+console.log(f[Symbol.asyncIterator()]);
+
+// AsyncGenerator(&lt;suspended&gt;)</code></pre>
+<p>由此符号函数生成的对象应该显式通过next()方法陆续返回Promise实例，也可以隐式通过异步生成器函数返回</p>
+<pre><code class="js">class Emitter { 
+    constructor(max){
+        this.max = max;
+        this.index = 0;
+    }
+    async *[Symbol.asyncIterator](){
+        while(this.index&lt; this.max){
+            yield new Promise((resolve)=&gt;resolve (this.index++));
+        }
+    }
+}
+
+async function count(number){
+    let emitter = new Emitter(number);
+    for await(const x of emitter){
+        console.log(x)
+    }
+}
+
+count(5);
+// 0
+// 1
+// 2
+// 3
+// 4
+// </code></pre>
+<h5 id="2-Symbol-hasInstance"><a href="#2-Symbol-hasInstance" class="headerlink" title="2) Symbol.hasInstance"></a>2) Symbol.hasInstance</h5><p>标识一个方法，决定一个构造器对象是否认可一个对象式它的实例。由<code>instanceof</code> 操作符使用</p>
+<pre><code class="js">function Foo(){}
+let f = new Foo();
+console.log(f instanceof Foo); // true
+console.log(Foo[Symbol.hasInstance](f)) // true;
+
+class FlaseInstance(){
+    static [Symbol.hasInstance](){
+        return false
+    }
+}
+
+let a = new FalseInstance();
+console.log(a intanceof FalseInstance) //false</code></pre>
+<h5 id="3-Symbol-isConcatSpreadable"><a href="#3-Symbol-isConcatSpreadable" class="headerlink" title="3) Symbol.isConcatSpreadable"></a>3) Symbol.isConcatSpreadable</h5><p>标识一个布尔值，如果是true以为着对象改用Array.prototype.concat()打平其数组元素。</p>
+<p>ES6中的<code>Array.prototype.concat()</code>方法会根据接收到的对象类型选择如何将一个类数组对象拼接成数组实例。</p>
+<p>如值为false，则会导致整个对象被追加到数组末尾，其他不是类数组对象的对象在true情况下会被忽略</p>
+<pre><code class="js">let init = [&#39;foo&#39;];
+
+let arr = [&#39;bar&#39;];
+console.log(arr[Symbol.isConcatSpreadable]) // undefined
+console.log(init,concat(arr)) // [&#39;foo&#39;, &#39;bar&#39;]
+arr[Symbol.isConcatSpreadable] = false;
+console.log(init.concat(arr)) // [&#39;foo&#39;, Array(1)];
+
+let likeObj = { length:1, 0: &#39;bar&#39;};
+console.log(likeObj[Symbol.isConcatSpreadable]); //undefined
+console.log(init.cancat(likeObj)) // [&#39;foo&#39;, {...}];
+likeObj[Symbol.isConcatSpreadable] = true;
+console.log(init.concat(likeObj)) // [&#39;foo&#39;, &#39;bar&#39;]</code></pre>
+<h5 id="4-Symbol-iterator"><a href="#4-Symbol-iterator" class="headerlink" title="4) Symbol.iterator"></a>4) Symbol.iterator</h5><p>标识一个方法，返回对象默认迭代器，由<code>for-of</code>语句使用</p>
+<p>这与上面的Symbol.asyncIterator相类似</p>
+<pre><code class="js">class Bar {
+    constructor(max){
+        this.max = max;
+        this.index = 0;
+    }
+    *[Symbol.iterator](){
+        while(this.index &lt; this.max){
+            yield this.index++;
+        }
+    }
+}
+
+function count(){
+    let bar = new Bar(5);
+    for(const x of bar){
+        console.log(x)
+    }
+}
+// 0
+// 1
+// 2
+// 3
+// 4</code></pre>
+<h5 id="5-Symbol-match"><a href="#5-Symbol-match" class="headerlink" title="5) Symbol.match"></a>5) Symbol.match</h5><p>标识一个正则表达式的方法，该方法用正则表达式去匹配字符串；</p>
+<p>由<code>String.prototype.match()</code>方法使用，使用以Symbol.match为键的函数来对这个正则表达式求值。正则表达式的原型上默认有这个函数的定义</p>
+<pre><code class="js">console.log(RegExp.prototype[Symbol.match]);
+// f [Symbol.match]() { [native code] }
+console.log(&#39;foobar&#39;.match(/bar/));
+// [&quot;bar&quot;, index: 3, input: &quot;foobar&quot;, groups: undefined]</code></pre>
+<p>给这个方法传入非正则的表达式值会导致该值呗转换为RegExp对象，如果想要改变这行为，允许方法直接使用参数，则重新定义Symbol.match</p>
+<pre><code class="js">class FooMatcher {
+     static [Symbol.match](target){
+         return target.includes(&#39;foo&#39;)
+     }
+}
+
+console.log(&#39;foobar&#39;.match(FooMacther)) // true;
+
+class StringMatcher{
+    constructor(str){
+        this.str = str;
+    }
+    [Symbol.match](target){
+        return target.includes(this.str);
+    }
+}
+
+console.log(&#39;foobar&#39;.match(new StringMacther(&#39;foo&#39;))) // true</code></pre>
+<h5 id="6-Symbol-replace"><a href="#6-Symbol-replace" class="headerlink" title="6) Symbol.replace"></a>6) Symbol.replace</h5><p>标识一个正则表达式的方法，替换一个字符串中匹配的子串；</p>
+<p>由<code>String.prototype.replace()</code>方法会使用以Symbol.replace为键的函数来对正则表达式求值, 和上面的match一样，为了阻止默认的非正则表达式值被强行转换为RegExp对象，可以覆盖默认行为</p>
+<pre><code class="js">class FooReplacer {
+    static [Symbol.replace](target, replacememt) {
+        return target,split(&#39;foo&#39;).join(replacement);
+    }
+}
+console.log(&#39;barfoobaz&#39;.replace(FooReplacer, &#39;quz&#39;));
+// barquxbaz
+
+class StringReplacer {
+    constructor(str){
+        this.str = str;
+    }
+    [Symbol.replace](target, replacement){
+        return target.split(this.str).join(replacement);
+    }
+}
+console.log(&#39;barfoobaz&#39;.replace(new StringReplacer(&#39;foo&#39;), &#39;quz&#39;));
+// barfoobaz</code></pre>
+<h5 id="7）Symbol-search"><a href="#7）Symbol-search" class="headerlink" title="7）Symbol.search"></a>7）Symbol.search</h5><p>标识一个正则的方法，返回字符串中匹配正则表达式的索以。</p>
+<p>由<code>String.prototype.search()</code>方法使用。String.prototype.search()方法会使用以Symbol.search为键的函数来对正则表达式进行求值, 同样和上述两个方法一样，为了阻止默认的行为，可以覆盖</p>
+<pre><code class="js">console.log(&#39;foobar&#39;.search(/bar/)); //3
+
+class StringSearcher {
+    constructor(str){
+        this.str = str;
+    }
+    [Symbol.search](target){
+        return target.indexOf(this.str);
+    }
+}
+
+console.log(&#39;foobar&#39;.search(new StringSeacher(&#39;foo&#39;))); // 0</code></pre>
+<h5 id="8-Symbol-species"><a href="#8-Symbol-species" class="headerlink" title="8) Symbol.species"></a>8) Symbol.species</h5><p>标识一个属性。表示一个函数值，该函数作为创建派生对象的构造函数。</p>
+<p>用Symbol.specied定义静态的获取器（getter）方法，可覆盖</p>
+<pre><code class="js">class Bar extends Array {}
+class Baz extends Array {
+    static get [Symbol.species](){
+        return Array;
+    }
+}
+
+let bar = new Bar();
+console.log(bar instanceof Array) // true;
+console.log(bar instanceof Bar) // true;
+
+let baz = new Baz()
+console.log(baz instanceof Array) // true
+console.log(baz instanceof Baz) // true
+baz = baz.concat(&#39;baz&#39;);
+console.log(baz instanceof Array) // true
+console.log(baz instanceof Baz) // false</code></pre>
+<h5 id="9-Symbol-toPrimitive"><a href="#9-Symbol-toPrimitive" class="headerlink" title="9) Symbol.toPrimitive"></a>9) Symbol.toPrimitive</h5><p>标识一个属性标识一个方法，该方法将对象转换为相应的原始值。有ToPrimitive抽象操作使用</p>
+<p>很多内置操作都会尝试强制将对象转换为原始的值，包括字符串数值和未指定的原始类型。对于一个自定义对象实例，通过这个实例的Symbol.toPrimitive属性覆盖默认行为</p>
+<pre><code class="js">class Foo{}
+let foo = new Foo();
+console.log(3 + foo); // 3[object Object]
+console.log(3 - foo); // NaN
+console.log(String(foo)); // [object Object]
+
+class Baz{
+    constructor(){
+        this[Symbol.toPrimitive] = function(hint){
+            switch(hint){
+                case &#39;number&#39;:
+                    return 3;
+                case &#39;string&#39;:
+                    return &#39;string bar&#39;;
+                case &#39;default&#39;:
+                default:
+                    return &#39;default bar&#39;;
+            }
+        }
+    }
+}
+
+let bar = new Bar();
+
+console.log(3 + bar) // 3default bar
+console.log(3 - bar) // 0
+console.log(String(3)) // string bar</code></pre>
+<h5 id="10）Symbol-toStringTag"><a href="#10）Symbol-toStringTag" class="headerlink" title="10）Symbol.toStringTag"></a>10）Symbol.toStringTag</h5><p>标识一个属性表示一个字符串，该字符串用再创建对象的默认字符串描述。由内置方法Object.prototype.toString()使用</p>
+<p>通过toString()方法获取对象标识时候，会自动检索由Symbol.toStringTag指定的实例表示符号，默认为”Object”。</p>
+<p>内置类型以及指定了这个值，自定义类实力还是需要明确定义的</p>
+<pre><code class="js">let s = new Set();
+
+console.log(s) // Set(0){}
+console.log(s.toString()); // [object Set];
+console.log(s[Symbol.toStringTag]); // Set
+
+class Baz{
+    constructor(){
+        this[Symbol.toStringTag] = &quot;Bar&quot;;
+    }
+}
+
+let baz = new Baz(); // Baz {}
+console.log(baz.toString()) // [object Baz]
+console.log(baz[Symbol.toStringTag]) // Baz
+
+</code></pre>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.078Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typeOf/" rel="tag">typeOf</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/03/14/js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8AtypeOf%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%8F%B7/&title=《js数据类型以及typeOf操作符号》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/03/14/js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8AtypeOf%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%8F%B7/&title=《js数据类型以及typeOf操作符号》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/03/14/js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8AtypeOf%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%8F%B7/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《js数据类型以及typeOf操作符号》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/03/14/js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8AtypeOf%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%8F%B7/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/03/14/js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8AtypeOf%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%8F%B7/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/04/14/fetch%E9%85%8D%E7%BD%AE%E8%AF%B7%E6%B1%82%E5%A4%B4%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%EF%BC%88%E6%96%87%E4%BB%B6%E6%B5%81%E6%98%BE%E7%A4%BA%E8%BF%9B%E5%BA%A6%EF%BC%89/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">fetch配置请求头下载文件（文件流显示进度）</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/03/14/var-let-const%E5%A3%B0%E6%98%8E%E5%8F%98%E9%87%8F/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">var, let, const声明变量</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/03/14/js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8AtypeOf%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%8F%B7/&title=《js数据类型以及typeOf操作符号》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/03/14/js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8AtypeOf%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%8F%B7/&title=《js数据类型以及typeOf操作符号》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/03/14/js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8AtypeOf%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%8F%B7/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《js数据类型以及typeOf操作符号》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/03/14/js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8AtypeOf%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%8F%B7/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/03/14/js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8AtypeOf%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%8F%B7/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2021/03/14/js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8AtypeOf%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%8F%B7/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

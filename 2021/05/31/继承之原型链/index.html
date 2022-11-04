@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>继承之原型链 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="原型链,原型,继承">
+    <meta name="description" content="继承之原型链首先再明确一下构造函数，原型，实例之间关系  每一个构造函数都有一个原型对象 原型对象有个属性叫做constructor指回构造函数 实例是用构造函数创建出来的，它有一个指针[[Prototype]]指向其构造函数的原型，也可以说是实例的原型  按照上面的说法，假设，如果一个原型是另一个类型的实例，那就意味着这个原型本身有一个内部指针指向他的构造函数的原型，也就是它的原型，相应的另外一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="继承之原型链">
+<meta property="og:url" content="https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="继承之原型链首先再明确一下构造函数，原型，实例之间关系  每一个构造函数都有一个原型对象 原型对象有个属性叫做constructor指回构造函数 实例是用构造函数创建出来的，它有一个指针[[Prototype]]指向其构造函数的原型，也可以说是实例的原型  按照上面的说法，假设，如果一个原型是另一个类型的实例，那就意味着这个原型本身有一个内部指针指向他的构造函数的原型，也就是它的原型，相应的另外一">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/image-20210531100430978.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/image-20210531101503489.png">
+<meta property="article:published_time" content="2021-05-31T01:53:23.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.438Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="原型链">
+<meta property="article:tag" content="原型">
+<meta property="article:tag" content="继承">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/image-20210531100430978.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">继承之原型链</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">继承之原型链</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-05-31T01:53:23.000Z" itemprop="datePublished" class="page-time">
+  2021-05-31
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#继承之原型链"><span class="post-toc-number">1.</span> <span class="post-toc-text">继承之原型链</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#原型链存在的问题"><span class="post-toc-number">2.</span> <span class="post-toc-text">原型链存在的问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题一"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">问题一</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题二"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">问题二</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-继承之原型链"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">继承之原型链</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-05-31 09:53:23" datetime="2021-05-31T01:53:23.000Z"  itemprop="datePublished">2021-05-31</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="继承之原型链"><a href="#继承之原型链" class="headerlink" title="继承之原型链"></a>继承之原型链</h1><p>首先再明确一下构造函数，原型，实例之间关系</p>
+<ol>
+<li>每一个构造函数都有一个原型对象</li>
+<li>原型对象有个属性叫做constructor指回构造函数</li>
+<li>实例是用构造函数创建出来的，它有一个指针<code>[[Prototype]]</code>指向其构造函数的原型，也可以说是实例的原型</li>
+</ol>
+<p>按照上面的说法，假设，如果一个原型是另一个类型的实例，那就意味着这个原型本身有一个内部指针指向他的构造函数的原型，也就是它的原型，相应的另外一个原型也有一个指针指向另外一个构造函数。所以 在实例和原型之间构造了一条原型链</p>
+<p>实现一条原型链的代码如下：</p>
+<pre><code class="js">function SuperType(){
+    this.property = true;
+}
+
+SuperType.prototype.getSuperValue = function(){
+    return this.property;
+}
+
+function SubType(){
+    this.subproperty = false;
+}
+
+// 这里直接继承SuperType，将原型指向SuperType的实例
+SubType.prototype = new SuperType();
+
+SubType.prototype.getSubValue = function(){
+    return this.subproperty;
+}
+let instance = new SubType();
+console.log(instance.getSuperValue()); // true;</code></pre>
+<p>以下是他们的原型链图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="image-20210531100430978.png" alt="image-20210531100430978" title>
+                </div>
+                <div class="image-caption">image-20210531100430978</div>
+            </figure>
+
+
+
+<p>这个例子继承的关键就是在于，将SubType的默认原型设置为了SubType的实例，这样SubType的实例不仅能从superType的实例中继承属性方法，而且还和SuperType挂钩了</p>
+<p>这个时候</p>
+<ul>
+<li>instance内部的<code>[[Prototype]]</code>指向SubType.prototype</li>
+<li>SubType.prototype通过内部的<code>[[Prototype]]</code>指向了SuperType.prototype</li>
+</ul>
+<p>调用或者访问实例的一个属性，这个搜索过程是逐级向上的，如果实例上没有找到属性或者方法就回去原型上找，如果还没有，就去原型的原型上找，直到一直找到<code>Object.prototype.__proto__</code>为null的时候，就是一直找到原生对象的原型指向的原型（原型链末端）</p>
+<p>上面的例子实际的原型链是如下图所示的</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="image-20210531101503489.png" alt="image-20210531101503489" title>
+                </div>
+                <div class="image-caption">image-20210531101503489</div>
+            </figure>
+
+
+
+<h1 id="原型链存在的问题"><a href="#原型链存在的问题" class="headerlink" title="原型链存在的问题"></a>原型链存在的问题</h1><p>原型链毕竟也是由原型搭起来的，这个时候就包含了原型存在的问题</p>
+<p>在原型那篇文章说过</p>
+<h2 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h2><p>原型中包含引用值的时候，会在实例间共享</p>
+<p>所以为什么通常一些属性是定义在构造函数中，而不是直接存在原型上</p>
+<h2 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h2><p>子类型在实例化的时候不能够给父类型的构造函数传参数。</p>
+<p>实际上我们还无法在不影响所有对象实例的情况下把参数传给父类的构造函数。</p>
+<p>所以原型链基本不会被单独使用</p>
+<p>这个时候就衍生出了解决原型链存在问题的几种继承方案</p>
+<p>例如 盗用构造函数 组合继承 原型式继承 寄生式继承 寄生组合式继承</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.438Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8E%9F%E5%9E%8B/" rel="tag">原型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/" rel="tag">原型链</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%A7%E6%89%BF/" rel="tag">继承</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/&title=《继承之原型链》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/&title=《继承之原型链》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《继承之原型链》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E7%9B%97%E7%94%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">继承之盗用构造函数</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/05/30/%E7%AE%97%E6%B3%95%E4%B9%8B%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">算法之滑动窗口</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/&title=《继承之原型链》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/&title=《继承之原型链》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《继承之原型链》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

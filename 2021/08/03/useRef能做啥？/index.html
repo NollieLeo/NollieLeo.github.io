@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>useRef能做啥？ | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="react">
+    <meta name="description" content="useRefuseRef主要的功能就是。  帮助我们获取到DOM元素或者组件实例 保存在组件生命周期内不会变化的值  如下： function TextInputWithFocusButton() {   const inputEl &#x3D; useRef(null);   const onButtonClick &#x3D; () &#x3D;&gt; {     &#x2F;&#x2F; &#96;current&#96; 指向已挂载到 DOM 上的文本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="useRef能做啥？">
+<meta property="og:url" content="https://github.com/NollieLeo/2021/08/03/useRef%E8%83%BD%E5%81%9A%E5%95%A5%EF%BC%9F/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="useRefuseRef主要的功能就是。  帮助我们获取到DOM元素或者组件实例 保存在组件生命周期内不会变化的值  如下： function TextInputWithFocusButton() {   const inputEl &#x3D; useRef(null);   const onButtonClick &#x3D; () &#x3D;&gt; {     &#x2F;&#x2F; &#96;current&#96; 指向已挂载到 DOM 上的文本">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-03T07:29:45.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.082Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="react">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">useRef能做啥？</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">useRef能做啥？</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-08-03T07:29:45.000Z" itemprop="datePublished" class="page-time">
+  2021-08-03
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/useRef/">useRef</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/useRef/forwardRef/">forwardRef</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/useRef/forwardRef/useImperativeHandle/">useImperativeHandle</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/useRef/forwardRef/useImperativeHandle/hooks/">hooks</a></li></ul></li></ul></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#useRef"><span class="post-toc-number">1.</span> <span class="post-toc-text">useRef</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#两个特点"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">两个特点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-不要单独拿ref作为依赖项"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">1.不要单独拿ref作为依赖项</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-手动调用自己的ref挂载函数"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">2.手动调用自己的ref挂载函数</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#forwardRef"><span class="post-toc-number">2.</span> <span class="post-toc-text">forwardRef</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#useImperativeHandle"><span class="post-toc-number">3.</span> <span class="post-toc-text">useImperativeHandle</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#应用"><span class="post-toc-number">4.</span> <span class="post-toc-text">应用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#获取上一次的值"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">获取上一次的值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用useRef来保存不需要变化的值"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">使用useRef来保存不需要变化的值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现深度比较useEffect"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">实现深度比较useEffect</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-useRef能做啥？"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">useRef能做啥？</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-08-03 15:29:45" datetime="2021-08-03T07:29:45.000Z"  itemprop="datePublished">2021-08-03</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/useRef/">useRef</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/useRef/forwardRef/">forwardRef</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/useRef/forwardRef/useImperativeHandle/">useImperativeHandle</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/useRef/forwardRef/useImperativeHandle/hooks/">hooks</a></li></ul></li></ul></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="useRef"><a href="#useRef" class="headerlink" title="useRef"></a>useRef</h2><p><u><strong><code>useRef</code>主要的功能就是。</strong></u></p>
+<ol>
+<li>帮助我们获取到<strong>DOM元素或者组件实例</strong></li>
+<li>保存在组件<strong>生命周期内不会变化</strong>的值</li>
+</ol>
+<p>如下：</p>
+<pre><code class="jsx">function TextInputWithFocusButton() {
+  const inputEl = useRef(null);
+  const onButtonClick = () =&gt; {
+    // `current` 指向已挂载到 DOM 上的文本输入元素
+    inputEl.current.focus();
+  };
+  return (
+    &lt;&gt;
+      &lt;input ref={inputEl} type=&quot;text&quot; /&gt;
+      &lt;button onClick={onButtonClick}&gt;Focus the input&lt;/button&gt;
+    &lt;/&gt;
+  );
+}
+</code></pre>
+<p>这个创建ref的过程是这样的</p>
+<ol>
+<li>组件初始化，执行到useRef，初始化了一个参数null</li>
+<li>这时候触发render了，这个过程实现了一个ref的挂载，从<code>null</code>到相对应的组件实例或者DOM挂载，相当于对<code>ref.current</code>的赋值了，这个过程会有一个ref的数据变化</li>
+</ol>
+<h3 id="两个特点"><a href="#两个特点" class="headerlink" title="两个特点"></a>两个特点</h3><ul>
+<li>每次组件重新渲染useRef的返回值都是同一个（引用不变）</li>
+<li><code>ref.current</code>发生变化的时候，不会触发组件的重新渲染，区别于其他的hooks</li>
+</ul>
+<p>因此引出两个场景</p>
+<h4 id="1-不要单独拿ref作为依赖项"><a href="#1-不要单独拿ref作为依赖项" class="headerlink" title="1.不要单独拿ref作为依赖项"></a>1.不要单独拿ref作为依赖项</h4><pre><code class="jsx">useEffect(()=&gt;{
+    ....
+},[ref]);
+
+useEffect(()=&gt;{
+  ...  
+}, []);</code></pre>
+<p>上面两者相当于是一样的了，因为ref始终是同一个引用。</p>
+<h4 id="2-手动调用自己的ref挂载函数"><a href="#2-手动调用自己的ref挂载函数" class="headerlink" title="2.手动调用自己的ref挂载函数"></a>2.手动调用自己的ref挂载函数</h4><p>这里我们需要通过<code>callback ref</code>的形式去挂载</p>
+<pre><code class="tsx">function MeasureExample() {
+  const [height, setHeight] = useState(0);
+
+  const measuredRef = useCallback(node =&gt; {
+    if (node !== null) {
+      setHeight(node.getBoundingClientRect().height);
+    }
+  }, []);
+
+  return (
+    &lt;&gt;
+      &lt;h1 ref={measuredRef}&gt;Hello, world&lt;/h1&gt;
+      &lt;h2&gt;The above header is {Math.round(height)}px tall&lt;/h2&gt;
+    &lt;/&gt;
+  );
+}
+</code></pre>
+<blockquote>
+<p>注意：这里的ref挂载针对的是DOM元素，如果是要拿组件的ref，则往下看</p>
+</blockquote>
+<h2 id="forwardRef"><a href="#forwardRef" class="headerlink" title="forwardRef"></a>forwardRef</h2><p>我们用<code>forwardRef</code>包裹函数式组件，见下例</p>
+<pre><code class="tsx">const Parent = () =&gt; {
+  const childRef = useRef(null);
+
+  useEffect(() =&gt; {
+    ref.current.focus();
+  }, []);
+
+  return (
+    &lt;&gt;
+      &lt;Child ref={ref} /&gt;
+    &lt;/&gt;
+  );
+};
+const Child = forwardRef((props, ref) =&gt; {
+  return &lt;input type=&quot;text&quot; name=&quot;child&quot; ref={ref} /&gt;;
+});
+</code></pre>
+<p>使用<code>forwardRef</code>包裹之后，函数式组件会获得被分配给自己的ref（作为第二个参数）。如果你没有使用<code>forwardRef</code>而直接去<code>ref</code>的话，<code>React</code>会报错。</p>
+<h2 id="useImperativeHandle"><a href="#useImperativeHandle" class="headerlink" title="useImperativeHandle"></a>useImperativeHandle</h2><p>上面<code>forwardRef</code>的例子中，<code>Parent</code>中的<code>ref</code>拿到了<code>Child</code>组件的完整实例，它不但可以使用<code>focus</code>方法，还可以使用其它所有的DOM方法，比如<code>blur</code>,<code>style</code>。这种方式是不推荐的，我们需要严格的控制<code>ref</code>的权力，控制它所能调用到的方法。</p>
+<p>所以我们要使用<code>useImperativeHandle</code>来限制暴露给父组件的方法。</p>
+<pre><code class="jsx">const Parent = () =&gt; {
+  const childRef = useRef(null);
+
+  useEffect(() =&gt; {
+    // 这里只能调用到focus方法
+    ref.current.focus();
+  }, []);
+
+  return (
+    &lt;&gt;
+      &lt;Child ref={ref} /&gt;
+    &lt;/&gt;
+  );
+};
+const Child = forwardRef((props, ref) =&gt; {
+  const inputRef = useRef(null);
+  useImperativeHandle(ref, () =&gt; ({
+    focus: () =&gt; {
+      inputRef.current.focus();
+    }
+  }));
+  return &lt;input type=&quot;text&quot; name=&quot;child&quot; ref={inputRef} /&gt;;
+});
+</code></pre>
+<p>这样子，我们就可以手动控制需要暴露给父组件的方法。</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="获取上一次的值"><a href="#获取上一次的值" class="headerlink" title="获取上一次的值"></a>获取上一次的值</h3><pre><code class="tsx">function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() =&gt; {
+    ref.current = value;
+  });
+  return ref.current;
+}
+</code></pre>
+<p>这个hooks返回出来的值，在渲染的过程中，总是会显示上一次的值。我们来解析一下这个函数的运行步骤。 假设上例中<code>ref</code>的初始值传入的<code>value</code>是0,每次数据更新传入的都是递增的数据，比如1，2，3。</p>
+<ul>
+<li>初始化，ref.current = 0，渲染出来 </li>
+<li>数据变化，<code>value</code>传入1, 因为<code>useEffect</code>会在渲染完毕之后才执行，所以这次的渲染过程中，这个为1的<code>value</code>值不会赋值给<code>ref.current</code>。渲染出来的还是上一个值0，渲染完毕了，<code>ref.current</code>变为1。但是<code>ref.current</code>变化不会触发组件的重新渲染，所以需要等到下次的渲染才能显示到页面上。</li>
+<li>如此往复，渲染的就总是上一次的值。</li>
+</ul>
+<h3 id="使用useRef来保存不需要变化的值"><a href="#使用useRef来保存不需要变化的值" class="headerlink" title="使用useRef来保存不需要变化的值"></a>使用useRef来保存不需要变化的值</h3><p> 因为<code>useRef</code>的返回值在组件的每次<code>redner</code>之后都是同一个，所以它可以用来保存一些在组件整个生命周期都不需要变化的值。最常见的就是定时器的清除场景。 </p>
+<p>刚开始在<code>React</code>里写定时器，你可能会这样写</p>
+<pre><code class="jsx">const App = () =&gt; {
+  let timer;
+
+  useEffect(() =&gt; {
+    timer = setInterval(() =&gt; {
+      console.log(&#39;触发了&#39;);
+    }, 1000);
+  },[]);
+
+  const clearTimer = () =&gt; {
+    clearInterval(timer);
+  }
+
+  return (
+    &lt;&gt;
+      &lt;Button onClick={clearTimer}&gt;停止&lt;/Button&gt;
+    &lt;/&gt;)
+}
+</code></pre>
+<p>但是上面这个写法有个巨大的问题，如果这个<code>App</code>组件里有<code>state</code>变化或者他的父组件重新<code>render</code>等原因导致这个<code>App</code>组件重新<code>render</code>的时候，我们会发现，点击按钮停止，定时器依然会不断的在控制台打印，定时器清除事件无效了。</p>
+<p>为什么呢？因为组件重新渲染之后，这里的<code>timer</code>以及<code>clearTimer</code>方法都会<strong>重新创建</strong>，<code>timer</code>已经不是定时器的变量了。</p>
+<p>所以对于定时器，我们都会使用<code>useRef</code>来定义变量。</p>
+<pre><code class="jsx">const App = () =&gt; {
+  const timer = useRef();
+
+  useEffect(() =&gt; {
+    timer.current = setInterval(() =&gt; {
+      console.log(&#39;触发了&#39;);
+    }, 1000);
+  },[]);
+
+  const clearTimer = () =&gt; {
+    clearInterval(timer.current);
+  }
+
+  return (
+    &lt;&gt;
+      &lt;Button onClick={clearTimer}&gt;停止&lt;/Button&gt;
+    &lt;/&gt;)
+}
+</code></pre>
+<h3 id="实现深度比较useEffect"><a href="#实现深度比较useEffect" class="headerlink" title="实现深度比较useEffect"></a>实现深度比较useEffect</h3><p>普通的<code>useEffect</code>只是一个浅比较的方法，如果我们依赖的<code>state</code>是一个对象，组件重新渲染，这个<code>state</code>对象的值没变，但是内存引用地址变化了，一样会触发<code>useEffect</code>的重新渲染。</p>
+<pre><code class="tsx">const createObj = () =&gt; ({
+    name: &#39;zouwowo&#39;
+});
+useEffect(() =&gt; {
+  // 这个方法会无限循环
+}, [createObj()]);
+</code></pre>
+<p>我们来使用<code>useRef</code>实现一个深度依赖对比的<code>useDeepEffect</code></p>
+<pre><code class="jsx">import equal from &#39;fast-deep-equal&#39;;
+export useDeepEffect = (callback, deps) =&gt; {
+  const emitEffect = useRef(0);
+  const prevDeps = useRef(deps);
+  if (!equal(prevDeps.current, deps)) {
+    // 当深比较不相等的时候，修改emitEffect.current的值，触发下面的useEffect更新
+    emitEffect.current++;
+  }
+  prevDeps.current = deps;
+  return useEffect(callback, [emitEffect.current]);
+}
+</code></pre>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.082Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/" rel="tag">react</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/08/03/useRef%E8%83%BD%E5%81%9A%E5%95%A5%EF%BC%9F/&title=《useRef能做啥？》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/08/03/useRef%E8%83%BD%E5%81%9A%E5%95%A5%EF%BC%9F/&title=《useRef能做啥？》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/08/03/useRef%E8%83%BD%E5%81%9A%E5%95%A5%EF%BC%9F/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《useRef能做啥？》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/08/03/useRef%E8%83%BD%E5%81%9A%E5%95%A5%EF%BC%9F/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/08/03/useRef%E8%83%BD%E5%81%9A%E5%95%A5%EF%BC%9F/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/08/04/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E6%95%B4%E7%90%86/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">学习资料整理</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/08/01/%E5%9C%A8%E7%BA%BF%E7%BC%96%E8%BE%91%E7%BD%91%E7%AB%99/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">在线编辑网站</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/08/03/useRef%E8%83%BD%E5%81%9A%E5%95%A5%EF%BC%9F/&title=《useRef能做啥？》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/08/03/useRef%E8%83%BD%E5%81%9A%E5%95%A5%EF%BC%9F/&title=《useRef能做啥？》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/08/03/useRef%E8%83%BD%E5%81%9A%E5%95%A5%EF%BC%9F/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《useRef能做啥？》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/08/03/useRef%E8%83%BD%E5%81%9A%E5%95%A5%EF%BC%9F/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/08/03/useRef%E8%83%BD%E5%81%9A%E5%95%A5%EF%BC%9F/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2021/08/03/useRef%E8%83%BD%E5%81%9A%E5%95%A5%EF%BC%9F/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

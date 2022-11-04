@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>工作中常用的Git命令 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="git">
+    <meta name="description" content="常用的基本操作git init这个git init不用多说，大家都知道这个命令是初始化当前目录变成可以使用git管理的仓库，并且是空的。                                                                                              git init               git clone 远程地址[">
+<meta property="og:type" content="article">
+<meta property="og:title" content="工作中常用的Git命令">
+<meta property="og:url" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="常用的基本操作git init这个git init不用多说，大家都知道这个命令是初始化当前目录变成可以使用git管理的仓库，并且是空的。                                                                                              git init               git clone 远程地址[">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/1.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/2.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/3.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/4.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/5.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/6.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/7.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/8.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/9.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/10.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/11.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/12.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/13.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/14.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/15.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/16.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/17.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/18.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/19.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/20.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/21.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/22.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/23.image">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/25.image">
+<meta property="article:published_time" content="2021-03-04T07:37:00.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.307Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/1.image">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">工作中常用的Git命令</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">工作中常用的Git命令</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-03-04T07:37:00.000Z" itemprop="datePublished" class="page-time">
+  2021-03-04
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git/">git</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常用的基本操作"><span class="post-toc-number">1.</span> <span class="post-toc-text">常用的基本操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-init"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">git init</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-clone-远程地址-url"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">git clone 远程地址[url]</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-status"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">git status</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-log"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">git log</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-diff"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">git diff</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-checkout"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">git checkout .</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-add"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">git add .</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-commit-m-“你的要提交的注释”"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">git commit -m “你的要提交的注释”</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-tag"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">git tag</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-tag-tagName-你的tag名称"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">git tag tagName(你的tag名称)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-tag-a-tagName-m-“tag备注”"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">git tag -a tagName -m “tag备注”</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-show-tagName-你的tag标签名"><span class="post-toc-number">1.12.</span> <span class="post-toc-text">git show tagName(你的tag标签名)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-push-origin-tagName-你的tag名称"><span class="post-toc-number">1.13.</span> <span class="post-toc-text">git push origin tagName(你的tag名称)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-push-origin-branch-你的分支"><span class="post-toc-number">1.14.</span> <span class="post-toc-text">git push origin branch(你的分支)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-pull-origin-branch-你的分支"><span class="post-toc-number">1.15.</span> <span class="post-toc-text">git pull origin branch(你的分支)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-checkout-branch-你的分支"><span class="post-toc-number">1.16.</span> <span class="post-toc-text">git checkout branch(你的分支)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-checkout-b-branch-你的分支"><span class="post-toc-number">1.17.</span> <span class="post-toc-text">git checkout -b branch(你的分支)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-branch-v"><span class="post-toc-number">1.18.</span> <span class="post-toc-text">git branch -v</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-branch-a"><span class="post-toc-number">1.19.</span> <span class="post-toc-text">git branch -a</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-branch-branch-你的分支"><span class="post-toc-number">1.20.</span> <span class="post-toc-text">git branch branch(你的分支)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-branch-D-name-分支名"><span class="post-toc-number">1.21.</span> <span class="post-toc-text">git branch -D name(分支名)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-remote-v"><span class="post-toc-number">1.22.</span> <span class="post-toc-text">git remote -v</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-remove-remote-name-源地址名字"><span class="post-toc-number">1.23.</span> <span class="post-toc-text">git remove remote name(源地址名字)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-remote-add-name-源地址名字-远程地址-url"><span class="post-toc-number">1.24.</span> <span class="post-toc-text">git remote add name(源地址名字) 远程地址[url]</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-fetch-origin-name-远程分支名称"><span class="post-toc-number">1.25.</span> <span class="post-toc-text">git fetch origin name(远程分支名称)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-merge-name-要合并的分支名称"><span class="post-toc-number">1.26.</span> <span class="post-toc-text">git merge name(要合并的分支名称)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#特殊问题场景怎么解决"><span class="post-toc-number">2.</span> <span class="post-toc-text">特殊问题场景怎么解决</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#只想把一个提交合并到其它分支上"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">只想把一个提交合并到其它分支上</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#如果commit时注释写错了怎么办？"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">如果commit时注释写错了怎么办？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#远程强制覆盖到本地"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">远程强制覆盖到本地</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#commit提交完怎么撤回"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">commit提交完怎么撤回</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Git开发错分支了"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">Git开发错分支了</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-工作中常用的Git命令"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">工作中常用的Git命令</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-03-04 15:37:00" datetime="2021-03-04T07:37:00.000Z"  itemprop="datePublished">2021-03-04</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git/">git</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="常用的基本操作"><a href="#常用的基本操作" class="headerlink" title="常用的基本操作"></a>常用的基本操作</h2><h3 id="git-init"><a href="#git-init" class="headerlink" title="git init"></a>git init</h3><p>这个<code>git init</code>不用多说，大家都知道这个命令是初始化当前目录变成可以使用<code>git</code>管理的仓库，并且是空的。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="1.image" alt="git init" title>
+                </div>
+                <div class="image-caption">git init</div>
+            </figure>
+
+<h3 id="git-clone-远程地址-url"><a href="#git-clone-远程地址-url" class="headerlink" title="git clone 远程地址[url]"></a>git clone 远程地址[url]</h3><p>通过<code>git clone</code>命令从远程地址下载出来，这个也不用过多描述。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="2.image" alt="git clone" title>
+                </div>
+                <div class="image-caption">git clone</div>
+            </figure>
+
+<h3 id="git-status"><a href="#git-status" class="headerlink" title="git status"></a>git status</h3><p><code>git status</code>查看本次本地有多少个文件发生变更。可以看到<code>index.css</code>d和<code>index.html</code>发生变更</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="3.image" alt="git status" title>
+                </div>
+                <div class="image-caption">git status</div>
+            </figure>
+
+<h3 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a>git log</h3><p><code>git log</code>查看当前提交的日志。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="4.image" alt="git log" title>
+                </div>
+                <div class="image-caption">git log</div>
+            </figure>
+
+<h3 id="git-diff"><a href="#git-diff" class="headerlink" title="git diff"></a>git diff</h3><p><code>git diff</code>是查看当前改动的文件具体代码内容比对。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="5.image" alt="git diff" title>
+                </div>
+                <div class="image-caption">git diff</div>
+            </figure>
+
+<h3 id="git-checkout"><a href="#git-checkout" class="headerlink" title="git checkout ."></a>git checkout .</h3><p><code>git checkout .</code>就是所有有改动的全部恢复到原来的样子, 当然也可以恢复指定的如：<code>git checkout index.css</code>只恢复这个文件当前的修改。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="6.image" alt="git checkout" title>
+                </div>
+                <div class="image-caption">git checkout</div>
+            </figure>
+
+<h3 id="git-add"><a href="#git-add" class="headerlink" title="git add ."></a>git add .</h3><p><code>git add .</code>是将修改的内容新增到暂存区，也可以提交指定的的文件。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="7.image" alt="git add" title>
+                </div>
+                <div class="image-caption">git add</div>
+            </figure>
+
+<h3 id="git-commit-m-“你的要提交的注释”"><a href="#git-commit-m-“你的要提交的注释”" class="headerlink" title="git commit -m “你的要提交的注释”"></a>git commit -m “你的要提交的注释”</h3><p><code>git commit -m</code>这里的内容从暂存区写入到对象库中, <strong>注意注释必须写</strong>。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="8.image" alt="git commit" title>
+                </div>
+                <div class="image-caption">git commit</div>
+            </figure>
+
+<h3 id="git-tag"><a href="#git-tag" class="headerlink" title="git tag"></a>git tag</h3><p>查看当前tag标签</p>
+<h3 id="git-tag-tagName-你的tag名称"><a href="#git-tag-tagName-你的tag名称" class="headerlink" title="git tag tagName(你的tag名称)"></a>git tag tagName(你的tag名称)</h3><p>新建一个Tag标签</p>
+<h3 id="git-tag-a-tagName-m-“tag备注”"><a href="#git-tag-a-tagName-m-“tag备注”" class="headerlink" title="git tag -a tagName -m “tag备注”"></a>git tag -a tagName -m “tag备注”</h3><p>新建一个tag标签带有备注信息</p>
+<h3 id="git-show-tagName-你的tag标签名"><a href="#git-show-tagName-你的tag标签名" class="headerlink" title="git show tagName(你的tag标签名)"></a>git show tagName(你的tag标签名)</h3><p>查看当前tag备注信息</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="9.image" alt="git show tag" title>
+                </div>
+                <div class="image-caption">git show tag</div>
+            </figure>
+
+<h3 id="git-push-origin-tagName-你的tag名称"><a href="#git-push-origin-tagName-你的tag名称" class="headerlink" title="git push origin tagName(你的tag名称)"></a>git push origin tagName(你的tag名称)</h3><p><code>git push origin v1.0</code>推送到远程</p>
+<h3 id="git-push-origin-branch-你的分支"><a href="#git-push-origin-branch-你的分支" class="headerlink" title="git push origin branch(你的分支)"></a>git push origin branch(你的分支)</h3><p><code>git push origin branch</code>推送到远程仓库。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="10.image" alt="git push origin branch" title>
+                </div>
+                <div class="image-caption">git push origin branch</div>
+            </figure>
+
+<h3 id="git-pull-origin-branch-你的分支"><a href="#git-pull-origin-branch-你的分支" class="headerlink" title="git pull origin branch(你的分支)"></a>git pull origin branch(你的分支)</h3><p><code>git pull origin branch</code>从远程拉取到本地。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="11.image" alt="git pull origin branch" title>
+                </div>
+                <div class="image-caption">git pull origin branch</div>
+            </figure>
+
+<h3 id="git-checkout-branch-你的分支"><a href="#git-checkout-branch-你的分支" class="headerlink" title="git checkout branch(你的分支)"></a>git checkout branch(你的分支)</h3><p><code>git checkout branch</code>切换到别的分支上。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="12.image" alt="git checkout branch" title>
+                </div>
+                <div class="image-caption">git checkout branch</div>
+            </figure>
+
+<h3 id="git-checkout-b-branch-你的分支"><a href="#git-checkout-b-branch-你的分支" class="headerlink" title="git checkout -b branch(你的分支)"></a>git checkout -b branch(你的分支)</h3><p><code>git checkout -b branch(分支名称)</code>新建一个分支并切换到该分支上。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="13.image" alt="git checkout -b" title>
+                </div>
+                <div class="image-caption">git checkout -b</div>
+            </figure>
+
+<h3 id="git-branch-v"><a href="#git-branch-v" class="headerlink" title="git branch -v"></a>git branch -v</h3><p><code>git branch -v</code>查看当前的分支并且后面带有最后一次提交的信息</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="14.image" alt="git branch -v" title>
+                </div>
+                <div class="image-caption">git branch -v</div>
+            </figure>
+
+<h3 id="git-branch-a"><a href="#git-branch-a" class="headerlink" title="git branch -a"></a>git branch -a</h3><p><code>git branch -a</code>查看当前所有的分支包括远程分支</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="15.image" alt="git branch -a" title>
+                </div>
+                <div class="image-caption">git branch -a</div>
+            </figure>
+
+<h3 id="git-branch-branch-你的分支"><a href="#git-branch-branch-你的分支" class="headerlink" title="git branch branch(你的分支)"></a>git branch branch(你的分支)</h3><p><code>git branch barnch(你的分支名称)</code>新建一个本地分支。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="16.image" alt="git branch" title>
+                </div>
+                <div class="image-caption">git branch</div>
+            </figure>
+
+<h3 id="git-branch-D-name-分支名"><a href="#git-branch-D-name-分支名" class="headerlink" title="git branch -D name(分支名)"></a>git branch -D name(分支名)</h3><p><code>git branch -D name(分支名)</code> 删除本地分支，但是不能在当前的分支上删除当前分支，必须切换到别的分支上，删除其它分支。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="17.image" alt="img" title>
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+
+<h3 id="git-remote-v"><a href="#git-remote-v" class="headerlink" title="git remote -v"></a>git remote -v</h3><p><code>git remote -v</code>查看源地址</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="18.image" alt="git remote -v" title>
+                </div>
+                <div class="image-caption">git remote -v</div>
+            </figure>
+
+<h3 id="git-remove-remote-name-源地址名字"><a href="#git-remove-remote-name-源地址名字" class="headerlink" title="git remove remote name(源地址名字)"></a>git remove remote name(源地址名字)</h3><p><code>git remove remote name</code>删除源地址。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="19.image" alt="git remove remote name" title>
+                </div>
+                <div class="image-caption">git remove remote name</div>
+            </figure>
+
+<h3 id="git-remote-add-name-源地址名字-远程地址-url"><a href="#git-remote-add-name-源地址名字-远程地址-url" class="headerlink" title="git remote add name(源地址名字) 远程地址[url]"></a>git remote add name(源地址名字) 远程地址[url]</h3><p><code>git remote add name url</code>添加一个源地址为要提交仓库的地址。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="20.image" alt="git remote add name" title>
+                </div>
+                <div class="image-caption">git remote add name</div>
+            </figure>
+
+<h3 id="git-fetch-origin-name-远程分支名称"><a href="#git-fetch-origin-name-远程分支名称" class="headerlink" title="git fetch origin name(远程分支名称)"></a>git fetch origin name(远程分支名称)</h3><p><code>git fetch origin name</code>如果我们本地没有该分支，远程有该分支，我们先拉下来远程分支，并且新建本地分支和远程分支关联上就可以了。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="21.image" alt="git fetch" title>
+                </div>
+                <div class="image-caption">git fetch</div>
+            </figure>
+
+<h3 id="git-merge-name-要合并的分支名称"><a href="#git-merge-name-要合并的分支名称" class="headerlink" title="git merge name(要合并的分支名称)"></a>git merge name(要合并的分支名称)</h3><p><code>git merge name(要合并的分支名称)</code>将要合并的分支合并到其它分支上。将<code>test</code>分支上的代码合并到<code>develop</code>上。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="22.image" alt="git merge" title>
+                </div>
+                <div class="image-caption">git merge</div>
+            </figure>
+
+<h2 id="特殊问题场景怎么解决"><a href="#特殊问题场景怎么解决" class="headerlink" title="特殊问题场景怎么解决"></a>特殊问题场景怎么解决</h2><h3 id="只想把一个提交合并到其它分支上"><a href="#只想把一个提交合并到其它分支上" class="headerlink" title="只想把一个提交合并到其它分支上"></a>只想把一个提交合并到其它分支上</h3><p>比如一个场景<code>develop</code>分支上有一些特殊的代码，所以不能把这个分支上的代码合并到<code>test</code>分支上，我们只想合并当前修改的代码，该怎么办呢<code>git cherry-pick</code>就是用来解决这问题的，来看下面例子。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="23.image" alt="git cherry-pick" title>
+                </div>
+                <div class="image-caption">git cherry-pick</div>
+            </figure>
+
+<p>上面example中，<code>git cherry-pick</code>后面跟着一个<code>id</code>这个<code>id</code>就是别的分支提交记录的<code>id</code>，查看这个<code>id</code>的话上面说过了使用<code>git log</code>查看日志。我这个案例代码是没有发生冲突情况的，那么有的小伙伴发生冲突的话，先解决冲突然后<code>git add .</code>在<code>git cherry-pick --continue</code>这个参数是继续执行当前的<code>git cherry-pick</code>过程。下面来查看几个参数</p>
+<ul>
+<li><code>--continue</code> 用户解决代码冲突后，第一步将修改的文件重新加入暂存区（git add .），第二步使用下面的命令，让 Cherry pick 过程继续执行。</li>
+<li><code>--abort</code> 发生代码冲突后，放弃合并，回到操作前的样子.</li>
+<li><code>--quit</code>  发生代码冲突后，退出 Cherry pick，但是不回到操作前的样子</li>
+</ul>
+<h3 id="如果commit时注释写错了怎么办？"><a href="#如果commit时注释写错了怎么办？" class="headerlink" title="如果commit时注释写错了怎么办？"></a>如果commit时注释写错了怎么办？</h3><pre><code>git commit --amend -m &quot;重新提交注释&quot;</code></pre>{% image 24.image 'git commit --amend' '' %}
+
+<h3 id="远程强制覆盖到本地"><a href="#远程强制覆盖到本地" class="headerlink" title="远程强制覆盖到本地"></a>远程强制覆盖到本地</h3><pre><code>$ git fetch --all(下载远程库的所有内容)
+$ git reset --hard origin/master(远程的分支名称)
+$ git pull
+复制代码</code></pre><h3 id="commit提交完怎么撤回"><a href="#commit提交完怎么撤回" class="headerlink" title="commit提交完怎么撤回"></a>commit提交完怎么撤回</h3><p><code>git reset HEAD~1</code>撤回刚才的注释，如果提交了2次<code>commit</code>那么就撤回2次<code>git reset HEAD~2</code>。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="25.image" alt="git reset HEAD~1" title>
+                </div>
+                <div class="image-caption">git reset HEAD~1</div>
+            </figure>
+
+<h3 id="Git开发错分支了"><a href="#Git开发错分支了" class="headerlink" title="Git开发错分支了"></a>Git开发错分支了</h3><p><strong>没提交代码时</strong></p>
+<pre><code>git add .
+git stash (把暂存区的代码放入到git暂存栈)
+git checkout name(切换到正确的分支)
+git stash pop(把git暂存栈的代码放出来)
+复制代码</code></pre><p><strong>提交代码后</strong></p>
+<pre><code>git reset HEAD~1  （最近一次提交放回暂存区, 并取消此次提交）
+git stash (暂存区的代码放入到git暂存栈)
+git checkout (应该提交代码的分支)
+git stash pop (把git暂存栈的代码放出来)
+git checkout  (切换到刚才提交错的分支上)
+git push origin 错误的分支 -f  (把文件回退掉)</code></pre>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.307Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/&title=《工作中常用的Git命令》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/&title=《工作中常用的Git命令》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《工作中常用的Git命令》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/03/08/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%90%86%E8%A7%A3/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">箭头函数理解</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/02/21/%E8%AF%BB%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAwebpack%E5%81%9A%E7%9A%84%E7%AC%94%E8%AE%B0/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">读深入浅出webpack做的笔记</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/&title=《工作中常用的Git命令》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/&title=《工作中常用的Git命令》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《工作中常用的Git命令》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

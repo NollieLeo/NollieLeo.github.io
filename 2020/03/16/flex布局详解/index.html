@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>布局详解 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="flex布局深入了解1. flex布局flex容器的属性   属性名称 属性含义 属性可能的值    flex-direction 决定主轴的方向 row(默认) 水平，起点在左端row-reverse水平，起点在右端column:垂直，起点在上沿column-reverse:垂直，起点在下沿   flex-wrap 决定一条轴线放不下，如何换行 Nowrap(默认) 不换行Wrap:换行，第一行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="布局详解">
+<meta property="og:url" content="https://github.com/NollieLeo/2020/03/16/flex%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="flex布局深入了解1. flex布局flex容器的属性   属性名称 属性含义 属性可能的值    flex-direction 决定主轴的方向 row(默认) 水平，起点在左端row-reverse水平，起点在右端column:垂直，起点在上沿column-reverse:垂直，起点在下沿   flex-wrap 决定一条轴线放不下，如何换行 Nowrap(默认) 不换行Wrap:换行，第一行">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_ecda5fce38594ff7b893af8dd5cb68c4_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_cfc8e57740604e10bd9378889fde1e68_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_f6079317a2e3445796478176bc306d7c_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_7a65571cbb25432a9de4a6557c40b141_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_45c389ba290f42c3af741f50942f5a88_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_05b27b46c345437797abed62d73b959a_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_a845891f97f6458fa000d0e1ad7d79ee_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_8b036161a4df4824b1063f829207a698_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_5434f7b72e9b4aa5a28859941622ff2d_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_be4232dfd726459b92a1ae3e80ce4342_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_37247d42221d40babf93bc802e10f617_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_4843452462524a108303291045b5cdf4_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_e8b334c7d27d437e95c9c60e560c333f_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_7007b1fd8de2451184e637542da7043c_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_5a55fd7f8e564cc987637c07375ec35b_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_dd0c4cb6c6294864b5ee55eaf70999b7_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_6c83dbcb80c247909bf08fec24431e69_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_c807a61bd2ea4fa08d2ddb89f490da88_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_679f1c5cec374c8da5a46484ff8b4e8e_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_d9295ac403c24c11926e9a69875e00fb_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_1ad2ee2075364173bc1464044f04395d_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_c5505f05517e4619bcd2f768936da6e9_blob.png">
+<meta property="og:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_6843bc851bbd4a6aa3477ca0286cce47_blob.png">
+<meta property="article:published_time" content="2020-03-16T09:05:18.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.076Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="程序猿">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://minio.choerodon.com.cn/knowledgebase-service/file_ecda5fce38594ff7b893af8dd5cb68c4_blob.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">布局详解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">布局详解</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-03-16T09:05:18.000Z" itemprop="datePublished" class="page-time">
+  2020-03-16
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#flex布局深入了解"><span class="post-toc-number">1.</span> <span class="post-toc-text">flex布局深入了解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-flex布局"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1. flex布局</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#flex容器的属性"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">flex容器的属性</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#flex容器下面项目的属性"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">*flex容器下面项目的属性 *</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-常用的垂直居中"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2.1 常用的垂直居中</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#css"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">css</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Html"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">Html</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2-常用的ul-li布局横向等宽排列"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">2.2 常用的ul,li布局横向等宽排列</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Html-1"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">Html</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#css-1"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">css</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-骰子布局详解"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">2.3 骰子布局详解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-3-1-单项目"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">2.3.1 单项目</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-3-2-双项目"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">2.3.2 双项目</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-3-3-三项目"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">2.3.3 三项目</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-3-3-四项目"><span class="post-toc-number">1.4.4.</span> <span class="post-toc-text">2.3.3 四项目</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-3-4-六项目"><span class="post-toc-number">1.4.5.</span> <span class="post-toc-text">2.3.4  六项目</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-4-圣杯布局（常见）"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">2.4 圣杯布局（常见）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#html"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">html</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#css-2"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">css</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-flex布局详解"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">布局详解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-03-16 17:05:18" datetime="2020-03-16T09:05:18.000Z"  itemprop="datePublished">2020-03-16</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="flex布局深入了解"><a href="#flex布局深入了解" class="headerlink" title="flex布局深入了解"></a>flex布局深入了解</h2><h3 id="1-flex布局"><a href="#1-flex布局" class="headerlink" title="1. flex布局"></a>1. flex布局</h3><h4 id="flex容器的属性"><a href="#flex容器的属性" class="headerlink" title="flex容器的属性"></a><strong>flex容器的属性</strong></h4><table>
+<thead>
+<tr>
+<th>属性名称</th>
+<th>属性含义</th>
+<th>属性可能的值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>flex-direction</code></td>
+<td>决定主轴的方向</td>
+<td><code>row</code>(默认) 水平，起点在左端<br><code>row-reverse</code>水平，起点在右端<br><code>column</code>:垂直，起点在上沿<code>column-reverse</code>:垂直，起点在下沿</td>
+</tr>
+<tr>
+<td><code>flex-wrap</code></td>
+<td>决定一条轴线放不下，如何换行</td>
+<td><code>Nowrap</code>(默认) 不换行<br><code>Wrap</code>:换行，第一行在上面<br><code>Wrap-reverse</code>:换行，第一行在下面</td>
+</tr>
+<tr>
+<td><code>flex-flow</code></td>
+<td>是上面两个属性的简写</td>
+<td>默认值是 <code>row nowrap</code></td>
+</tr>
+<tr>
+<td><code>justify-content</code></td>
+<td>定义项目在主轴上的对齐方式</td>
+<td><code>Flex-start</code>(默认值）左对齐<br><code>Flex-end</code> 右对齐<br><code>Center</code>居中<br><code>Space-between</code>:两端对齐，项目之间的间隔都相等<br><code>Space-around</code>:每个项目之间的间隔相等，所以项目之间的间隔比项目与边框之间的间隔大一倍</td>
+</tr>
+<tr>
+<td><code>align-items</code></td>
+<td>定义项目在交叉轴上如何对齐</td>
+<td><code>Flex-start</code>交叉轴的起点对齐<br><code>Flex-end</code>交叉轴的终点对齐<br><code>Center</code>:交叉轴的中点对齐<br><code>Baseline</code>：项目的第一行文字的基线对齐<br><code>Stretch</code> （默认值）如果项目未设置高度或者设为auto，将占满整个容器的高度</td>
+</tr>
+<tr>
+<td><code>align-content</code></td>
+<td>定义多跟轴线对齐方式，一条轴线该属性不起作用</td>
+<td><code>Flex-start</code>: 与交叉轴的起点对齐<br><code>Flex-end</code> 与交叉轴的终点对齐<br><code>Center</code>:与交叉轴的中点对齐<br><code>Space-between</code>:与交叉轴的两端对齐，轴线之间的间隔平均分布<br><code>Space-around</code>：每根轴线之间的间隔都相等，所以轴线之间的间隔比轴线与边框之间的间隔大一倍</td>
+</tr>
+</tbody></table>
+<h4 id="flex容器下面项目的属性"><a href="#flex容器下面项目的属性" class="headerlink" title="*flex容器下面项目的属性 *"></a>*<em>flex容器下面项目的属性 *</em></h4><table>
+<thead>
+<tr>
+<th>属性名称</th>
+<th align="left">属性含义</th>
+<th>属性可能的值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>order</code></td>
+<td align="left">定义项目的排列顺序，数值越小，排列越靠前</td>
+<td>默认0</td>
+</tr>
+<tr>
+<td><code>flex-grow</code></td>
+<td align="left">定义项目的放大比例，如果存在剩余空间，不放大</td>
+<td>默认0（如果所有项目的<code>flex-grow</code>属性为1，则等分剩余空间）</td>
+</tr>
+<tr>
+<td><code>flex-shrink</code></td>
+<td align="left">定义项目的缩小比例</td>
+<td>默认1 负值对该属性无效</td>
+</tr>
+<tr>
+<td><code>flex-basis</code></td>
+<td align="left">定义在分配多余空间之前，项目占据的主轴空间，浏览器根据这个属性来计算主轴是否有多余空间</td>
+<td>默认<code>auto</code>,即项目本来大小</td>
+</tr>
+<tr>
+<td><code>flex</code></td>
+<td align="left">是上面三个的简写</td>
+<td>默认值 0 1 auto 后两个值可选</td>
+</tr>
+<tr>
+<td><code>align-self</code></td>
+<td align="left">允许单个项目与其他项目不一样的对齐方式，可覆盖<code>align-items</code>属性</td>
+<td>默认值auto 表示继承父元素的<code>align-items</code>属性，如果没有父元素，则等同于<code>stretch</code></td>
+</tr>
+</tbody></table>
+<h3 id="2-1-常用的垂直居中"><a href="#2-1-常用的垂直居中" class="headerlink" title="2.1 常用的垂直居中"></a>2.1 常用的垂直居中</h3><h4 id="css"><a href="#css" class="headerlink" title="css"></a>css</h4><pre><code class="css">.container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 500px;
+            background: #666;
+        }
+
+.box {
+            width: 200px;
+            height: 200px;
+            background: #ff0;
+        }</code></pre>
+<h4 id="Html"><a href="#Html" class="headerlink" title="Html"></a>Html</h4><pre><code class="html">&lt;div class=&quot;container&quot;&gt;
+       &lt;div class=&quot;box&quot;&gt;hello 翁恺敏&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<p>效果图：<br><img src="https://minio.choerodon.com.cn/knowledgebase-service/file_ecda5fce38594ff7b893af8dd5cb68c4_blob.png" alt></p>
+<h3 id="2-2-常用的ul-li布局横向等宽排列"><a href="#2-2-常用的ul-li布局横向等宽排列" class="headerlink" title="2.2 常用的ul,li布局横向等宽排列"></a>2.2 常用的ul,li布局横向等宽排列</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_cfc8e57740604e10bd9378889fde1e68_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h4 id="Html-1"><a href="#Html-1" class="headerlink" title="Html"></a>Html</h4><pre><code class="html">&lt;ul class=&quot;container&quot;&gt;
+        &lt;li&gt;翁&lt;/li&gt;
+        &lt;li&gt;恺&lt;/li&gt;
+        &lt;li&gt;敏&lt;/li&gt;
+        &lt;li&gt;你&lt;/li&gt;
+        &lt;li&gt;好&lt;/li&gt;
+    &lt;/ul&gt;</code></pre>
+<h4 id="css-1"><a href="#css-1" class="headerlink" title="css"></a>css</h4><pre><code class="css">.container {
+            width: 500px;
+            display: flex;
+            list-style: none;
+            padding: 0;
+        }
+        .container &gt;li{
+            flex: 1;
+            height: 50px;
+        }
+        .container &gt;li:nth-of-type(2n){
+            background: red
+        }
+        .container &gt;li:nth-of-type(2n-1){
+            background: green
+        }</code></pre>
+<h3 id="2-3-骰子布局详解"><a href="#2-3-骰子布局详解" class="headerlink" title="2.3 骰子布局详解"></a>2.3 骰子布局详解</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_f6079317a2e3445796478176bc306d7c_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>  
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_7a65571cbb25432a9de4a6557c40b141_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h4 id="2-3-1-单项目"><a href="#2-3-1-单项目" class="headerlink" title="2.3.1 单项目"></a>2.3.1 单项目</h4><blockquote>
+<p>首先，只有左上角1个点的情况。Flex布局默认就是首行左对齐，所以一行代码就够了。</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_45c389ba290f42c3af741f50942f5a88_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<pre><code class="css">.box {
+  display: flex;
+}</code></pre>
+<hr>
+<blockquote>
+<p>设置项目的对齐方式，就能实现居中对齐和右对齐。</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_05b27b46c345437797abed62d73b959a_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<pre><code class="css">.box {
+  display: flex;
+  justify-content: center;
+}</code></pre>
+<hr>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_a845891f97f6458fa000d0e1ad7d79ee_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<pre><code class="css">.box {
+  display: flex;
+  justify-content: flex-end;
+}</code></pre>
+<hr>
+<blockquote>
+<p>设置交叉轴对齐方式，可以垂直移动主轴。垂直居中</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_8b036161a4df4824b1063f829207a698_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<pre><code class="css">.box {
+  display: flex;
+  align-items: center;
+}</code></pre>
+<hr>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_5434f7b72e9b4aa5a28859941622ff2d_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<pre><code class="css">.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}</code></pre>
+<hr>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_be4232dfd726459b92a1ae3e80ce4342_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<pre><code class="css">.box {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}</code></pre>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_37247d42221d40babf93bc802e10f617_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<pre><code class="css">.box {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}</code></pre>
+<hr>
+<h4 id="2-3-2-双项目"><a href="#2-3-2-双项目" class="headerlink" title="2.3.2 双项目"></a>2.3.2 双项目</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_4843452462524a108303291045b5cdf4_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<pre><code class="css">.box {
+  display: flex;
+  justify-content: space-between;
+}</code></pre>
+<hr>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_e8b334c7d27d437e95c9c60e560c333f_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<pre><code class="css">.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}</code></pre>
+<hr>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_7007b1fd8de2451184e637542da7043c_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<pre><code class="css">.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}</code></pre>
+<hr>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_5a55fd7f8e564cc987637c07375ec35b_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<pre><code class="css">.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}</code></pre>
+<hr>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_dd0c4cb6c6294864b5ee55eaf70999b7_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<pre><code class="css">.box {
+  display: flex;
+}
+
+.item:nth-child(2) {
+  align-self: center;
+}</code></pre>
+<hr>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_6c83dbcb80c247909bf08fec24431e69_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<pre><code class="css">.box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item:nth-child(2) {
+  align-self: flex-end;
+}</code></pre>
+<hr>
+<h4 id="2-3-3-三项目"><a href="#2-3-3-三项目" class="headerlink" title="2.3.3 三项目"></a>2.3.3 三项目</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_c807a61bd2ea4fa08d2ddb89f490da88_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<pre><code class="css">.box {
+  display: flex;
+}
+
+.item:nth-child(2) {
+  align-self: center;
+}
+
+.item:nth-child(3) {
+  align-self: flex-end;
+}</code></pre>
+<hr>
+<h4 id="2-3-3-四项目"><a href="#2-3-3-四项目" class="headerlink" title="2.3.3 四项目"></a>2.3.3 四项目</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_679f1c5cec374c8da5a46484ff8b4e8e_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<pre><code class="css">.box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-content: space-between;
+}</code></pre>
+<hr>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_d9295ac403c24c11926e9a69875e00fb_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>  
+<p>HTML</p>
+<pre><code class="html">&lt;div class=&quot;box&quot;&gt;
+  &lt;div class=&quot;column&quot;&gt;
+    &lt;span class=&quot;item&quot;&gt;&lt;/span&gt;
+    &lt;span class=&quot;item&quot;&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;column&quot;&gt;
+    &lt;span class=&quot;item&quot;&gt;&lt;/span&gt;
+    &lt;span class=&quot;item&quot;&gt;&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<p>css</p>
+<pre><code class="css">.box {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+
+.column {
+  flex-basis: 100%;
+  display: flex;
+  justify-content: space-between;
+}</code></pre>
+<h4 id="2-3-4-六项目"><a href="#2-3-4-六项目" class="headerlink" title="2.3.4  六项目"></a>2.3.4  六项目</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_1ad2ee2075364173bc1464044f04395d_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<pre><code class="css">
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+}</code></pre>
+<hr>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_c5505f05517e4619bcd2f768936da6e9_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<pre><code class="css">.box {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-between;
+}</code></pre>
+<h3 id="2-4-圣杯布局（常见）"><a href="#2-4-圣杯布局（常见）" class="headerlink" title="2.4 圣杯布局（常见）"></a>2.4 圣杯布局（常见）</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://minio.choerodon.com.cn/knowledgebase-service/file_6843bc851bbd4a6aa3477ca0286cce47_blob.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h4 id="html"><a href="#html" class="headerlink" title="html"></a>html</h4><pre><code class="html">&lt;div class=&quot;container&quot;&gt;
+        &lt;header&gt;Header&lt;/header&gt;
+        &lt;div class=&quot;content&quot;&gt;
+            &lt;main&gt;Main&lt;/main&gt;
+            &lt;nav&gt;Nav&lt;/nav&gt;
+            &lt;aside&gt;Aside&lt;/aside&gt;
+        &lt;/div&gt;
+        &lt;footer&gt;Footer&lt;/footer&gt;
+    &lt;/div&gt;</code></pre>
+<h4 id="css-2"><a href="#css-2" class="headerlink" title="css"></a>css</h4><pre><code class="css">* {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .container {
+            display: flex;
+            /* 垂直*/
+            flex-direction: column;
+            width: 100%;
+            /*视口被均分为100单位的vh 占据整个窗口*/
+            min-height: 100vh;
+        }
+
+        header,
+        footer {
+            background: #999;
+            /*放大缩小比例为0 占据垂直方向80px*/
+            flex: 0 0 80px;
+        }
+
+        .content {
+            display: flex;
+            /*1 1 auto 后两个值省略*/
+            flex: 1;
+        }
+
+        nav {
+            /*默认 0 数值越小 排列越靠前*/
+            order: -1;
+            flex: 0 0 80px;
+            background: royalblue;
+        }
+
+        aside {
+            flex: 0 0 80px;
+            background: aqua;
+        }
+
+        main {
+            flex: 1;
+            background: green;
+        }</code></pre>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.076Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/03/16/flex%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3/&title=《布局详解》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/03/16/flex%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3/&title=《布局详解》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/03/16/flex%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《布局详解》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/03/16/flex%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/03/16/flex%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/03/16/%E5%B0%81%E8%A3%85/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">封装</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/03/16/==%E4%B8%8E===%E5%8C%BA%E5%88%AB/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">==与===区别</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/03/16/flex%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3/&title=《布局详解》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/03/16/flex%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3/&title=《布局详解》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/03/16/flex%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《布局详解》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/03/16/flex%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/03/16/flex%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2020/03/16/flex%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

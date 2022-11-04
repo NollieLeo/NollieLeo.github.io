@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>js的精度运算 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="js,面试题,浮点数,精度运算">
+    <meta name="description" content="前言0.1 + 0.2 是否等于 0.3 作为一道经典的面试题，已经广外熟知，说起原因，大家能回答出这是浮点数精度问题导致，也能辩证的看待这并非是 ECMAScript 这门语言的问题，今天就是具体看一下背后的原因。 数字类型ECMAScript 中的 Number 类型使用 IEEE754 标准来表示整数和浮点数值。所谓 IEEE754 标准，全称 IEEE 二进制浮点数算术标准，这个标准定义了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js的精度运算">
+<meta property="og:url" content="https://github.com/NollieLeo/2021/06/06/js%E7%9A%84%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="前言0.1 + 0.2 是否等于 0.3 作为一道经典的面试题，已经广外熟知，说起原因，大家能回答出这是浮点数精度问题导致，也能辩证的看待这并非是 ECMAScript 这门语言的问题，今天就是具体看一下背后的原因。 数字类型ECMAScript 中的 Number 类型使用 IEEE754 标准来表示整数和浮点数值。所谓 IEEE754 标准，全称 IEEE 二进制浮点数算术标准，这个标准定义了">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/06/js%E7%9A%84%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/1.png">
+<meta property="article:published_time" content="2021-06-06T02:17:48.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.078Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="面试题">
+<meta property="article:tag" content="浮点数">
+<meta property="article:tag" content="精度运算">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/06/06/js%E7%9A%84%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">js的精度运算</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">js的精度运算</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-06-06T02:17:48.000Z" itemprop="datePublished" class="page-time">
+  2021-06-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数字类型"><span class="post-toc-number">2.</span> <span class="post-toc-text">数字类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#浮点数转二进制"><span class="post-toc-number">3.</span> <span class="post-toc-text">浮点数转二进制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#浮点数的存储"><span class="post-toc-number">4.</span> <span class="post-toc-text">浮点数的存储</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#浮点数的运算"><span class="post-toc-number">5.</span> <span class="post-toc-text">浮点数的运算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他"><span class="post-toc-number">6.</span> <span class="post-toc-text">其他</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-js的精度运算"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">js的精度运算</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-06-06 10:17:48" datetime="2021-06-06T02:17:48.000Z"  itemprop="datePublished">2021-06-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>0.1 + 0.2 是否等于 0.3 作为一道经典的面试题，已经广外熟知，说起原因，大家能回答出这是浮点数精度问题导致，也能辩证的看待这并非是 ECMAScript 这门语言的问题，今天就是具体看一下背后的原因。</p>
+<h2 id="数字类型"><a href="#数字类型" class="headerlink" title="数字类型"></a>数字类型</h2><p>ECMAScript 中的 Number 类型使用 IEEE754 标准来表示整数和浮点数值。所谓 IEEE754 标准，全称 IEEE 二进制浮点数算术标准，这个标准定义了表示浮点数的格式等内容。</p>
+<p>在 IEEE754 中，规定了四种表示浮点数值的方式：单精确度（32位）、双精确度（64位）、延伸单精确度、与延伸双精确度。像 ECMAScript 采用的就是双精确度，也就是说，会用 64 位字节来储存一个浮点数。</p>
+<h2 id="浮点数转二进制"><a href="#浮点数转二进制" class="headerlink" title="浮点数转二进制"></a>浮点数转二进制</h2><p>我们来看下 1020 用十进制的表示：</p>
+<blockquote>
+<p>1020 = <strong>1</strong> * 10^3 + <strong>0</strong> * 10^2 + <strong>2</strong> * 10^1 + <strong>0</strong> * 10^0</p>
+</blockquote>
+<p>所以 1020 用十进制表示就是 1020……(哈哈)</p>
+<p>如果 1020 用二进制来表示呢？</p>
+<blockquote>
+<p>1020 = <strong>1</strong> * 2^9 + <strong>1</strong> * 2^8 + <strong>1</strong> * 2^7 + <strong>1</strong> * 2^6 + <strong>1</strong> * 2^5 + <strong>1</strong> * 2^4 + <strong>1</strong> * 2^3 + <strong>1</strong> * 2^2 + <strong>0</strong> * 2^1 + <strong>0</strong> * 2^0</p>
+</blockquote>
+<p>所以 1020 的二进制为 <code>1111111100</code></p>
+<p>那如果是 0.75 用二进制表示呢？同理应该是：</p>
+<blockquote>
+<p>0.75 = a * 2^-1 + b * 2^-2 + c * 2^-3 + d * 2^-4 + …</p>
+</blockquote>
+<p>因为使用的是二进制，这里的 abcd……的值的要么是 0 要么是 1。</p>
+<p>那怎么算出 abcd…… 的值呢，我们可以两边不停的乘以 2 算出来，解法如下：</p>
+<blockquote>
+<p>0.75 = a * 2^-1 + b * 2^-2 + c * 2^-3 + d * 2^-4…</p>
+</blockquote>
+<p>两边同时乘以 2</p>
+<blockquote>
+<p>1 + 0.5 = a * 2^0 + b * 2^-1 + c * 2^-2 + d * 2^-3… (所以 a = 1)</p>
+</blockquote>
+<p>剩下的：</p>
+<blockquote>
+<p>0.5 = b * 2^-1 + c * 2^-2 + d * 2^-3…</p>
+</blockquote>
+<p>再同时乘以 2</p>
+<blockquote>
+<p>1 + 0 = b * 2^0 + c * 2^-2 + d * 2^-3… (所以 b = 1)</p>
+</blockquote>
+<p>所以 0.75 用二进制表示就是 0.ab，也就是 0.11</p>
+<p>然而不是所有的数都像 0.75 这么好算，我们来算下 0.1：</p>
+<pre><code>0.1 = a * 2^-1 + b * 2^-2 + c * 2^-3 + d * 2^-4 + ...
+
+0 + 0.2 = a * 2^0 + b * 2^-1 + c * 2^-2 + ...   (a = 0)
+0 + 0.4 = b * 2^0 + c * 2^-1 + d * 2^-2 + ...   (b = 0)
+0 + 0.8 = c * 2^0 + d * 2^-1 + e * 2^-2 + ...   (c = 0)
+1 + 0.6 = d * 2^0 + e * 2^-1 + f * 2^-2 + ...   (d = 1)
+1 + 0.2 = e * 2^0 + f * 2^-1 + g * 2^-2 + ...   (e = 1)
+0 + 0.4 = f * 2^0 + g * 2^-1 + h * 2^-2 + ...   (f = 0)
+0 + 0.8 = g * 2^0 + h * 2^-1 + i * 2^-2 + ...   (g = 0)
+1 + 0.6 = h * 2^0 + i * 2^-1 + j * 2^-2 + ...   (h = 1)
+....</code></pre><p>然后你就会发现，这个计算在不停的循环，所以 0.1 用二进制表示就是 0.00011001100110011……</p>
+<h2 id="浮点数的存储"><a href="#浮点数的存储" class="headerlink" title="浮点数的存储"></a>浮点数的存储</h2><p>虽然 0.1 转成二进制时是一个无限循环的数，但计算机总要储存吧，我们知道 ECMAScript 使用 64 位字节来储存一个浮点数，那具体是怎么储存的呢？这就要说回 IEEE754 这个标准了，毕竟是这个标准规定了存储的方式。</p>
+<p>这个标准认为，一个浮点数 (Value) 可以这样表示：</p>
+<blockquote>
+<p>Value = sign * exponent * fraction</p>
+</blockquote>
+<p>看起来很抽象的样子，简单理解就是科学计数法……</p>
+<p>比如 -1020，用科学计数法表示就是:</p>
+<blockquote>
+<p>-1 * 10^3 * 1.02</p>
+</blockquote>
+<p>sign 就是 -1，exponent 就是 10^3，fraction 就是 1.02</p>
+<p>对于二进制也是一样，以 0.1 的二进制 0.00011001100110011…… 这个数来说：</p>
+<p>可以表示为：</p>
+<blockquote>
+<p>1 * 2^-4 * 1.1001100110011……</p>
+</blockquote>
+<p>其中 sign 就是 1，exponent 就是 2^-4，fraction 就是 1.1001100110011……</p>
+<p>而当只做二进制科学计数法的表示时，这个 Value 的表示可以再具体一点变成：</p>
+<blockquote>
+<p>V = (-1)^S * (1 + Fraction) * 2^E</p>
+</blockquote>
+<p>(如果所有的浮点数都可以这样表示，那么我们存储的时候就把这其中会变化的一些值存储起来就好了)</p>
+<p>我们来一点点看：</p>
+<p><code>(-1)^S</code> 表示符号位，当 S = 0，V 为正数；当 S = 1，V 为负数。</p>
+<p>再看 <code>(1 + Fraction)</code>，这是因为所有的浮点数都可以表示为 1.xxxx * 2^xxx 的形式，前面的一定是 1.xxx，那干脆我们就不存储这个 1 了，直接存后面的 xxxxx 好了，这也就是 Fraction 的部分。</p>
+<p>最后再看 <code>2^E</code></p>
+<p>如果是 1020.75，对应二进制数就是 1111111100.11，对应二进制科学计数法就是 1 * 1.11111110011 * 2^9，E 的值就是 9，而如果是 0.1 ，对应二进制是 1 * 1.1001100110011…… * 2^-4， E 的值就是 -4，也就是说，E 既可能是负数，又可能是正数，那问题就来了，那我们该怎么储存这个 E 呢？</p>
+<p>我们这样解决，假如我们用 8 位字节来存储 E 这个数，如果只有正数的话，储存的值的范围是 0 ~ 254，而如果要储存正负数的话，值的范围就是 -127~127，我们在存储的时候，把要存储的数字加上 127，这样当我们存 -127 的时候，我们存 0，当存 127 的时候，存 254，这样就解决了存负数的问题。对应的，当取值的时候，我们再减去 127。</p>
+<p>所以呢，真到实际存储的时候，我们并不会直接存储 E，而是会存储 E + bias，当用 8 个字节的时候，这个 bias 就是 127。</p>
+<p>所以，如果要存储一个浮点数，我们存 S 和 Fraction 和 E + bias 这三个值就好了，那具体要分配多少个字节位来存储这些数呢？IEEE754 给出了标准：</p>
+<p>[<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="1.png" alt="IEEE754" title>
+                </div>
+                <div class="image-caption">IEEE754</div>
+            </figure>]</p>
+<p>在这个标准下：</p>
+<p>我们会用 1 位存储 S，0 表示正数，1 表示负数。</p>
+<p>用 11 位存储 E + bias，对于 11 位来说，bias 的值是 2^(11-1) - 1，也就是 1023。</p>
+<p>用 52 位存储 Fraction。</p>
+<p>举个例子，就拿 0.1 来看，对应二进制是 1 * 1.1001100110011…… * 2^-4， Sign 是 0，E + bias 是 -4 + 1023 = 1019，1019 用二进制表示是 1111111011，Fraction 是 1001100110011……</p>
+<p>对应 64 个字节位的完整表示就是：</p>
+<blockquote>
+<p>0 01111111011 1001100110011001100110011001100110011001100110011010</p>
+</blockquote>
+<p>同理, 0.2 表示的完整表示是：</p>
+<blockquote>
+<p>0 01111111100 1001100110011001100110011001100110011001100110011010</p>
+</blockquote>
+<p>所以当 0.1 存下来的时候，就已经发生了精度丢失，当我们用浮点数进行运算的时候，使用的其实是精度丢失后的数。</p>
+<h2 id="浮点数的运算"><a href="#浮点数的运算" class="headerlink" title="浮点数的运算"></a>浮点数的运算</h2><p>关于浮点数的运算，一般由以下五个步骤完成：对阶、尾数运算、规格化、舍入处理、溢出判断。我们来简单看一下 0.1 和 0.2 的计算。</p>
+<p>首先是对阶，所谓对阶，就是把阶码调整为相同，比如 0.1 是 <code>1.1001100110011…… * 2^-4</code>，阶码是 -4，而 0.2 就是 <code>1.10011001100110...* 2^-3</code>，阶码是 -3，两个阶码不同，所以先调整为相同的阶码再进行计算，调整原则是小阶对大阶，也就是 0.1 的 -4 调整为 -3，对应变成 <code>0.11001100110011…… * 2^-3</code></p>
+<p>接下来是尾数计算:</p>
+<pre><code>  0.1100110011001100110011001100110011001100110011001101
++ 1.1001100110011001100110011001100110011001100110011010
+————————————————————————————————————————————————————————
+ 10.0110011001100110011001100110011001100110011001100111</code></pre><p>我们得到结果为 <code>10.0110011001100110011001100110011001100110011001100111 * 2^-3</code></p>
+<p>将这个结果处理一下，即结果规格化，变成 <code>1.0011001100110011001100110011001100110011001100110011(1) * 2^-2</code></p>
+<p>括号里的 1 意思是说计算后这个 1 超出了范围，所以要被舍弃了。</p>
+<p>再然后是舍入，四舍五入对应到二进制中，就是 0 舍 1 入，因为我们要把括号里的 1 丢了，所以这里会进一，结果变成</p>
+<pre><code>1.0011001100110011001100110011001100110011001100110100 * 2^-2</code></pre><p>本来还有一个溢出判断，因为这里不涉及，就不讲了。</p>
+<p>所以最终的结果存成 64 位就是</p>
+<blockquote>
+<p>0 01111111101 0011001100110011001100110011001100110011001100110100</p>
+</blockquote>
+<p>将它转换为10进制数就得到 <code>0.30000000000000004440892098500626</code></p>
+<p>因为两次存储时的精度丢失加上一次运算时的精度丢失，最终导致了 0.1 + 0.2 !== 0.3</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><pre><code>// 十进制转二进制
+parseFloat(0.1).toString(2);
+=&gt; &quot;0.0001100110011001100110011001100110011001100110011001101&quot;
+
+// 二进制转十进制
+parseInt(1100100,2)
+=&gt; 100
+
+// 以指定的精度返回该数值对象的字符串表示
+(0.1 + 0.2).toPrecision(21)
+=&gt; &quot;0.300000000000000044409&quot;
+(0.3).toPrecision(21)
+=&gt; &quot;0.299999999999999988898&quot;</code></pre>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.078Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B5%AE%E7%82%B9%E6%95%B0/" rel="tag">浮点数</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/" rel="tag">精度运算</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/06/06/js%E7%9A%84%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/&title=《js的精度运算》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/06/06/js%E7%9A%84%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/&title=《js的精度运算》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/06/06/js%E7%9A%84%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《js的精度运算》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/06/06/js%E7%9A%84%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/06/06/js%E7%9A%84%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/06/06/react%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">react相关面试知识点</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/06/06/js%E7%9A%84%E9%97%AD%E5%8C%85/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">js的闭包</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/06/06/js%E7%9A%84%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/&title=《js的精度运算》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/06/06/js%E7%9A%84%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/&title=《js的精度运算》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/06/06/js%E7%9A%84%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《js的精度运算》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/06/06/js%E7%9A%84%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/06/06/js%E7%9A%84%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2021/06/06/js%E7%9A%84%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

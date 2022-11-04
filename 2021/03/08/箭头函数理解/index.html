@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>箭头函数理解 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="es6,js">
+    <meta name="description" content="箭头函数es6语法 &#x2F;&#x2F; ES6语法 const fn &#x3D; v &#x3D;&gt; v; 一. 特点1. 语法简介箭头函数省去了function关键字，用&#x3D;&gt;代替function，圆括号代表参数部分，当只有一个参数时，圆括号可省略，当只有一行返回语句时，return和花括号{}都可以省略。 &#x2F;&#x2F; 求两数之和 const fn &#x3D; (a, b) &#x3D;&gt; {return a + b;}; &#x2F;&#x2F; 等价">
+<meta property="og:type" content="article">
+<meta property="og:title" content="箭头函数理解">
+<meta property="og:url" content="https://github.com/NollieLeo/2021/03/08/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%90%86%E8%A7%A3/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="箭头函数es6语法 &#x2F;&#x2F; ES6语法 const fn &#x3D; v &#x3D;&gt; v; 一. 特点1. 语法简介箭头函数省去了function关键字，用&#x3D;&gt;代替function，圆括号代表参数部分，当只有一个参数时，圆括号可省略，当只有一行返回语句时，return和花括号{}都可以省略。 &#x2F;&#x2F; 求两数之和 const fn &#x3D; (a, b) &#x3D;&gt; {return a + b;}; &#x2F;&#x2F; 等价">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-08T02:19:44.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.437Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="es6">
+<meta property="article:tag" content="js">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">箭头函数理解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">箭头函数理解</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-03-08T02:19:44.000Z" itemprop="datePublished" class="page-time">
+  2021-03-08
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#箭头函数"><span class="post-toc-number">1.</span> <span class="post-toc-text">箭头函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一-特点"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">一. 特点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-语法简介"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">1. 语法简介</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-不绑定this"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">2. 不绑定this</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-不支持-call-、-apply-、bind-函数的特性"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">3. 不支持 call()、 apply()、bind() 函数的特性</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-不绑定-arguments"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">4. 不绑定 arguments</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-支持嵌套"><span class="post-toc-number">1.1.5.</span> <span class="post-toc-text">5.支持嵌套</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二-箭头函数不适用场景"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">二.箭头函数不适用场景</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#（1）定义对象的方法且该方法内部包括this"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">（1）定义对象的方法且该方法内部包括this</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#（2）不能作为构造函数，不能使用-new-操作符"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">（2）不能作为构造函数，不能使用 new 操作符</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#（3）没有-prototype-属性"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">（3）没有 prototype 属性</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#（4）不适合将原型函数定义成箭头函数"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">（4）不适合将原型函数定义成箭头函数</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-箭头函数理解"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">箭头函数理解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-03-08 10:19:44" datetime="2021-03-08T02:19:44.000Z"  itemprop="datePublished">2021-03-08</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><p>es6语法</p>
+<pre><code class="js">// ES6语法
+const fn = v =&gt; v;</code></pre>
+<h3 id="一-特点"><a href="#一-特点" class="headerlink" title="一. 特点"></a>一. 特点</h3><h4 id="1-语法简介"><a href="#1-语法简介" class="headerlink" title="1. 语法简介"></a>1. 语法简介</h4><p>箭头函数省去了<code>function</code>关键字，用<code>=&gt;</code>代替function，圆括号代表参数部分，当只有一个参数时，圆括号可省略，当只有一行返回语句时，<code>return</code>和花括号<code>{}</code>都可以省略。</p>
+<pre><code class="js">// 求两数之和
+const fn = (a, b) =&gt; {return a + b;}; // 等价于 const fn = (a, b) =&gt; a + b;
+
+// 求一个数组各项之和
+const sum = [1, 2, 3, 4, 5].reduce((x, y) =&gt; x + y, 0); // 15
+
+// 将数组中的元素按从小到大顺序排序
+const array = [2, 4, 1, 5, 9, 7].sort((x, y) =&gt; x - y); //  [1, 2, 4, 5, 7, 9]
+
+// 过滤数组中为偶数的数字
+const array = [0, 1, 2, 3, 4, 5, 6].filter(x =&gt; x % 2 === 0); // [0, 2, 4, 6]</code></pre>
+<h4 id="2-不绑定this"><a href="#2-不绑定this" class="headerlink" title="2. 不绑定this"></a>2. 不绑定this</h4><p> 箭头函数体内的<code>this</code>永远指向的是定义时所在的对象，而不是调用时所在的对象。 </p>
+<pre><code class="js">function Fn() {
+  this.s1 = 0;
+  this.s2 = 0;
+
+  // 箭头函数
+  setInterval(() =&gt; this.s1++, 1000);
+
+  // 普通函数
+  setInterval(function() {
+    this.s2++;
+  }, 1000);
+}
+
+var fn = new Fn();
+setTimeout(() =&gt; console.log(&#39;s1= &#39;, fn.s1), 3100); // 3.1秒后输出s1= 3
+setTimeout(() =&gt; console.log(&#39;s2= &#39;, fn.s2), 3100); // 3.1秒后输出s2= 0
+</code></pre>
+<p>上面代码中，Fn函数内部设置了两个定时器，分别使用了箭头函数和普通函数。</p>
+<p>箭头函数中的<code>this</code>指向定义时所在的作用域（即Fn函数），this.s1++是处在箭头函数中，这里的this就是<code>fn</code>，所以fn.s1的值为3。 </p>
+<p>而普通函数中的<code>this</code>指向运行时所在的作用域（即全局对象window），this.s2++实际等于window.s2++，fn.s2一次都没有更新，因而得到的是0。 </p>
+<p>所以，从严格意义上讲，箭头函数中不会创建自己的<code>this</code>，而是会从自己作用域链的上一层继承。</p>
+<pre><code class="js">const Person = {
+  name: &#39;Kimmy&#39;,
+  age: 20,
+  doSomething: function() {
+    setTimeout(() =&gt; console.log(`name: ${this.name}, age: ${this.age}`), 1000);
+  }
+};
+
+Person.doSomething(); // name: Kimmy, age: 20
+
+const Person2 = {
+  name: &#39;Kimmy&#39;,
+  age: 20,
+  doSomething: () =&gt; {
+    setTimeout(() =&gt; console.log(`name: ${this.name}, age: ${this.age}`), 1000);
+  }
+};
+
+Person2.doSomething(); // name: , age: undefined</code></pre>
+<p>上面两段代码的唯一区别在于doSomething()函数的写法，Person中使用了普通函数定义，Person2中使用了箭头函数定义。 </p>
+<p>在第一段代码中，Person.doSomeThing()中的<code>this</code>指向函数的调用体，即<code>Person</code>本身，在调用<code>setTimeout()</code>函数时，由于其函数体部分是通过箭头函数定义的，内部的<code>this</code>会继承父作用域的<code>this</code>（即<code>Person</code>），从而输出<code>name: Kimmy, age: 20</code>。</p>
+<p> 在第二段代码中，Person2.doSomething()中的<code>this</code>指向外层作用域，而Person2的父作用域是全局作用域window，在调用<code>setTimeout()</code>函数时，由于其函数体部分是通过箭头函数定义的，内部的<code>this</code>会继承<code>doSomething()</code>函数所在的作用域<code>this</code>（即window），而window上name属性是<code>&#39;&#39;</code>，age属性不存在，所以<code>Person2.doSomething()</code>输出<code>name: , age: undefined</code>。 </p>
+<p>综上所述，箭头函数根本没有自己的<code>this</code>，导致内部的<code>this</code>就是外层代码块的<code>this</code>。正因为它没有<code>this</code>，所以也就<code>不能用作构造函数</code>。</p>
+<h4 id="3-不支持-call-、-apply-、bind-函数的特性"><a href="#3-不支持-call-、-apply-、bind-函数的特性" class="headerlink" title="3. 不支持 call()、 apply()、bind() 函数的特性"></a>3. 不支持 call()、 apply()、bind() 函数的特性</h4><p>通过调用 <code>call()</code> 、<code>apply()</code>、<code>bind()</code> 函数可以改变一个函数的执行主体，即改变被调用函数中 <code>this</code> 的指向</p>
+<p>但箭头函数中不支持 <code>call()</code> 、<code>apply()</code>、<code>bind()</code>等，因为箭头函数中没有自己的 <code>this</code> ，而是继承父作用域中的 <code>this</code>。</p>
+<pre><code class="js">function fn() {
+  return () =&gt; {
+    console.log(`id= ${this.id}`);
+  }
+}
+
+let f = fn.call({id: 1}); // id= 1
+let f2 = f.call({id: 2})()(); // id = 1
+let f3 = f().call({id: 3})(); // id= 1
+let f4 = f()().call({id: 4}); // id= 1</code></pre>
+<p> 上面代码中只有一个<code>this</code>，即函数<code>fn</code>的<code>this</code>，所以<code>f2</code>、<code>f3</code>、<code>f4</code>都输出同样的结果。因为内层函数时箭头函数，没有自己的<code>this</code>，它们的<code>this</code>都是最外层<code>fn</code>函数是<code>this</code>。 </p>
+<h4 id="4-不绑定-arguments"><a href="#4-不绑定-arguments" class="headerlink" title="4. 不绑定 arguments"></a>4. 不绑定 arguments</h4><p> 在普通函数<code>function</code>中，我们可以通过<code>arguments</code>对象来获取到实际传入的参数值，但在箭头函数中是不存在的。 </p>
+<pre><code class="js">const fn = () =&gt; {
+  console.log(arguments);
+}
+fn(1, 2); // Uncaught ReferenceError: arguments is not defined
+
+function fn() {
+  setTimeout(() =&gt; {
+    console.log(arguments);
+  }, 0);
+}
+
+fn(1, 2); // [1, 2]</code></pre>
+<h4 id="5-支持嵌套"><a href="#5-支持嵌套" class="headerlink" title="5.支持嵌套"></a>5.支持嵌套</h4><pre><code class="js">const pipeline = (...funcs) =&gt; val =&gt; funcs.reduce((a, b =&gt; b(a)), val);
+const plus1 = a =&gt; a + 1;
+const mult2 = a =&gt; a * 2;
+const addThenMult = pipeline(plus1, mult2);
+addThenMult(5); // 12</code></pre>
+<h3 id="二-箭头函数不适用场景"><a href="#二-箭头函数不适用场景" class="headerlink" title="二.箭头函数不适用场景"></a>二.箭头函数不适用场景</h3><h4 id="（1）定义对象的方法且该方法内部包括this"><a href="#（1）定义对象的方法且该方法内部包括this" class="headerlink" title="（1）定义对象的方法且该方法内部包括this"></a>（1）定义对象的方法且该方法内部包括<code>this</code></h4><pre><code class="js">const Person = {
+  name: &#39;Kimmy&#39;,
+  age: 20,
+  doSomething: () =&gt; {
+    this.age++;
+  }
+};</code></pre>
+<p>Person.doSomething()方法是一个箭头函数，调用Person.doSomething()时，如果是普通函数，该方法内部的<code>this</code>指向Person，如果写成上面那样的箭头函数，使得<code>this</code>指向全局对象。</p>
+<h4 id="（2）不能作为构造函数，不能使用-new-操作符"><a href="#（2）不能作为构造函数，不能使用-new-操作符" class="headerlink" title="（2）不能作为构造函数，不能使用 new 操作符"></a>（2）不能作为构造函数，不能使用 new 操作符</h4><p>构造函数时通过<code>new</code>操作符生成对象实例的，生成实例的过程也是通过构造函数给实例绑定<code>this</code>的过程，而箭头函数没有自己的<code>this</code>，因此不能使用箭头函数作为构造函数，也不能通过<code>new</code>操作符来调用箭头函数。</p>
+<pre><code class="js">// 普通函数
+function Person(name) {
+  this.name = name;
+}
+let p = new Person(&#39;Kimmy&#39;); // 正常
+
+// 箭头函数
+let Person = (name) =&gt; {
+  this.name = name;
+}
+let p = new Person(&#39;Kimmy&#39;); // Uncaught TypeError: Person is not a constructor</code></pre>
+<h4 id="（3）没有-prototype-属性"><a href="#（3）没有-prototype-属性" class="headerlink" title="（3）没有 prototype 属性"></a>（3）没有 prototype 属性</h4><pre><code class="js">let a = () =&gt; 1;
+
+function b() {
+  return 2;
+}
+
+a.prototype // undefined
+b.prototype // {constructor: ƒ}</code></pre>
+<h4 id="（4）不适合将原型函数定义成箭头函数"><a href="#（4）不适合将原型函数定义成箭头函数" class="headerlink" title="（4）不适合将原型函数定义成箭头函数"></a>（4）不适合将原型函数定义成箭头函数</h4><p>在给构造函数添加原型函数时，如果使用箭头函数，其中的<code>this</code>会指向全局作用域<code>window</code>，而并不会指向构造函数，因此并不会访问到构造函数本身，也就无法访问到实例属性，这就失去了作为原型函数的意义。 </p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.437Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/03/08/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%90%86%E8%A7%A3/&title=《箭头函数理解》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/03/08/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%90%86%E8%A7%A3/&title=《箭头函数理解》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/03/08/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%90%86%E8%A7%A3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《箭头函数理解》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/03/08/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%90%86%E8%A7%A3/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/03/08/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%90%86%E8%A7%A3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/03/12/fr%E5%8D%95%E4%BD%8D%E9%85%8D%E5%90%88grid%E5%B8%83%E5%B1%80/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">fr单位配合grid布局</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/03/04/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84Git%E5%91%BD%E4%BB%A4/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">工作中常用的Git命令</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/03/08/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%90%86%E8%A7%A3/&title=《箭头函数理解》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/03/08/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%90%86%E8%A7%A3/&title=《箭头函数理解》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/03/08/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%90%86%E8%A7%A3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《箭头函数理解》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/03/08/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%90%86%E8%A7%A3/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/03/08/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%90%86%E8%A7%A3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2021/03/08/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%90%86%E8%A7%A3/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

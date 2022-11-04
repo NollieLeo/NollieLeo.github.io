@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>算法之二叉树的3种遍历 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="面试题,算法,二叉树,前序遍历,中序遍历,后序遍历,迭代">
+    <meta name="description" content="一. 前序遍历（中左右）144.二叉树前序遍历                                                                                              image-20210614161741801               1. 递归实现按照中间节点先遍历，在遍历左右节点 &#x2F;**  * Definition fo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法之二叉树的3种遍历">
+<meta property="og:url" content="https://github.com/NollieLeo/2021/06/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="一. 前序遍历（中左右）144.二叉树前序遍历                                                                                              image-20210614161741801               1. 递归实现按照中间节点先遍历，在遍历左右节点 &#x2F;**  * Definition fo">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/Users/%E5%A4%9F%E9%92%9F/AppData/Roaming/Typora/typora-user-images/image-20210614161741801.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/Blogs/NollieLeo.github.io/source/_posts/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/image-20210614165726412.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/Blogs/NollieLeo.github.io/source/_posts/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/image-20210614165746953.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/Blogs/NollieLeo.github.io/source/_posts/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/image-20210614165812531.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/Blogs/NollieLeo.github.io/source/_posts/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/image-20210614173144699.png">
+<meta property="article:published_time" content="2021-06-14T08:15:16.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.406Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="面试题">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="二叉树">
+<meta property="article:tag" content="前序遍历">
+<meta property="article:tag" content="中序遍历">
+<meta property="article:tag" content="后序遍历">
+<meta property="article:tag" content="迭代">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/06/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/Users/%E5%A4%9F%E9%92%9F/AppData/Roaming/Typora/typora-user-images/image-20210614161741801.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">算法之二叉树的3种遍历</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">算法之二叉树的3种遍历</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-06-14T08:15:16.000Z" itemprop="datePublished" class="page-time">
+  2021-06-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一-前序遍历（中左右）"><span class="post-toc-number">1.</span> <span class="post-toc-text">一. 前序遍历（中左右）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-递归实现"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1. 递归实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-迭代实现"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2. 迭代实现</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二-中序遍历（左中右）"><span class="post-toc-number">2.</span> <span class="post-toc-text">二. 中序遍历（左中右）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-递归实现-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1. 递归实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-迭代实现-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2. 迭代实现</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三-后序遍历"><span class="post-toc-number">3.</span> <span class="post-toc-text">三. 后序遍历</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-递归方式"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">1. 递归方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-迭代方式"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2. 迭代方式</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-算法之二叉树的3种遍历"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">算法之二叉树的3种遍历</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-06-14 16:15:16" datetime="2021-06-14T08:15:16.000Z"  itemprop="datePublished">2021-06-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="一-前序遍历（中左右）"><a href="#一-前序遍历（中左右）" class="headerlink" title="一. 前序遍历（中左右）"></a>一. 前序遍历（中左右）</h2><p>144.二叉树前序遍历</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="Users\够钟\AppData\Roaming\Typora\typora-user-images\image-20210614161741801.png" alt="image-20210614161741801" title>
+                </div>
+                <div class="image-caption">image-20210614161741801</div>
+            </figure>
+
+<h3 id="1-递归实现"><a href="#1-递归实现" class="headerlink" title="1. 递归实现"></a>1. 递归实现</h3><p>按照中间节点先遍历，在遍历左右节点</p>
+<pre><code class="js">/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+
+
+var preorderTraversal = function (root) {
+    let number = [];
+    getNode(root, number);
+    return number;
+};
+
+const getNode = (node, number) =&gt; {
+    if (node) {
+        number.push(node.val);
+        if (node.left) {
+            getNode(node.left, number)
+        }
+        if (node.right) {
+            getNode(node.right, number);
+        }
+    }
+}</code></pre>
+<h3 id="2-迭代实现"><a href="#2-迭代实现" class="headerlink" title="2. 迭代实现"></a>2. 迭代实现</h3><p>以显示栈的方式模仿递归。</p>
+<ul>
+<li>初始化栈，并将根节点入栈；</li>
+<li>当栈不为空时：<ul>
+<li>弹出栈顶元素 n，并将值添加到结果中</li>
+<li>如果 n 的右节点存在，入栈</li>
+<li>如果 n 的左节点存在，入栈</li>
+</ul>
+</li>
+</ul>
+<pre><code class="js">/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+
+
+var preorderTraversal = function (root) {
+    let number = [];
+    let stack = [root];
+    while (stack.length) {
+        const current = stack.shift();
+        if(current){
+            number.push(current.val);
+            if(current.right){
+                stack.unshift(current.right)
+            }
+            if(current.left){
+                stack.unshift(current.left);
+            }
+        }
+    }
+
+    return number;
+};</code></pre>
+<h2 id="二-中序遍历（左中右）"><a href="#二-中序遍历（左中右）" class="headerlink" title="二. 中序遍历（左中右）"></a>二. 中序遍历（左中右）</h2><h3 id="1-递归实现-1"><a href="#1-递归实现-1" class="headerlink" title="1. 递归实现"></a>1. 递归实现</h3><p>先左节点，然后中间节点，之后右节点</p>
+<pre><code class="js">/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var inorderTraversal = function (root) {
+    const number = [];
+    getNode(root, number);
+    return number
+};
+
+const getNode = (node, number) =&gt; {
+    if (node &amp;&amp; node.left) {
+        getNode(node.left, number)
+    }
+    node &amp;&amp; number.push(node.val);
+    if (node &amp;&amp; node.right) {
+        getNode(node.right, number)
+    }
+}</code></pre>
+<h3 id="2-迭代实现-1"><a href="#2-迭代实现-1" class="headerlink" title="2. 迭代实现"></a>2. 迭代实现</h3><p>原理：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="Blogs\NollieLeo.github.io\source\_posts\算法之二叉树的3种遍历\image-20210614165726412.png" alt="image-20210614165726412" title>
+                </div>
+                <div class="image-caption">image-20210614165726412</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="Blogs\NollieLeo.github.io\source\_posts\算法之二叉树的3种遍历\image-20210614165746953.png" alt="image-20210614165746953" title>
+                </div>
+                <div class="image-caption">image-20210614165746953</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="Blogs\NollieLeo.github.io\source\_posts\算法之二叉树的3种遍历\image-20210614165812531.png" alt="image-20210614165812531" title>
+                </div>
+                <div class="image-caption">image-20210614165812531</div>
+            </figure>
+
+<p>代码一：</p>
+<pre><code class="js">const inorderTraversal = (root) =&gt; {
+  const res = [];
+  const stack = [];
+
+  while (root) {        // 能压入栈的左子节点都压进来
+    stack.push(root);
+    root = root.left;
+  }
+  while (stack.length) {
+    let node = stack.pop(); // 栈顶的节点出栈
+    res.push(node.val);     // 在压入右子树之前，处理它的数值部分（因为中序遍历）
+    node = node.right;      // 获取它的右子树
+    while (node) {          // 右子树存在，执行while循环    
+      stack.push(node);     // 压入当前root
+      node = node.left;     // 不断压入左子节点
+    }
+  }
+  return res;
+};
+</code></pre>
+<p>代码二：</p>
+<pre><code class="js">/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var inorderTraversal = function (root) {
+    const number = [];
+    let stack = [];
+    let tempNode = root;
+    while(tempNode || stack.length){
+        if(tempNode){
+            stack.unshift(tempNode);
+            tempNode = tempNode.left;
+        }else{
+            tempNode = stack.shift();
+            number.push(tempNode.val);
+            tempNode = tempNode.right
+        }
+    }
+    return number;
+};</code></pre>
+<h2 id="三-后序遍历"><a href="#三-后序遍历" class="headerlink" title="三. 后序遍历"></a>三. 后序遍历</h2><h3 id="1-递归方式"><a href="#1-递归方式" class="headerlink" title="1. 递归方式"></a>1. 递归方式</h3><p>左右中</p>
+<pre><code class="js">/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var postorderTraversal = function(root) {
+    let number = [];
+    getNode(root,number);
+    return number;
+};
+
+const getNode = (node, number)=&gt;{
+    if(node &amp;&amp; node.left){
+        getNode(node.left, number);
+    }
+    if(node &amp;&amp; node.right){
+        getNode(node.right, number)
+    }
+    node &amp;&amp; number.push(node.val);
+}</code></pre>
+<h3 id="2-迭代方式"><a href="#2-迭代方式" class="headerlink" title="2. 迭代方式"></a>2. 迭代方式</h3><p>先序遍历是中左右，后续遍历是左右中，那么我们只需要调整一下先序遍历的代码顺序，就变成中右左的遍历顺序，然后在反转result数组，输出的结果顺序就是左右中了，如下图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="Blogs\NollieLeo.github.io\source\_posts\算法之二叉树的3种遍历\image-20210614173144699.png" alt="image-20210614173144699" title>
+                </div>
+                <div class="image-caption">image-20210614173144699</div>
+            </figure>
+
+<pre><code class="js">/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+const postorderTraversal = (root) =&gt; {
+    const res = [];
+    const stack = [root];
+
+    while(stack.length &gt; 0) {
+        const node = stack.pop()
+        node &amp;&amp; res.unshift(node.val)
+        if(node?.left) {
+            stack.push(node.left)
+        }
+        if(node?.right) {
+            stack.push(node.right)
+        }
+    }
+    return res
+}</code></pre>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.406Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86/" rel="tag">中序遍历</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">二叉树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86/" rel="tag">前序遍历</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/" rel="tag">后序遍历</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%AD%E4%BB%A3/" rel="tag">迭代</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/06/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/&title=《算法之二叉树的3种遍历》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/06/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/&title=《算法之二叉树的3种遍历》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/06/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《算法之二叉树的3种遍历》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/06/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/06/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/06/15/setInterval%E5%92%8CsetTimeout%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">setInterval和setTimeout优化策略</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/06/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">算法之三数之和</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/06/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/&title=《算法之二叉树的3种遍历》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/06/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/&title=《算法之二叉树的3种遍历》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/06/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《算法之二叉树的3种遍历》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/06/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/06/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2021/06/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%843%E7%A7%8D%E9%81%8D%E5%8E%86/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

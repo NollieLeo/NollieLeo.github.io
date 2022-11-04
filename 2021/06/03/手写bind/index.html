@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>手写bind | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="js,面试题,原型链,bind,原型">
+    <meta name="description" content="手写bind原理 bind() 方法会创建一个新函数。当这个新函数被调用时，bind() 的第一个参数将作为它运行时的 this，之后的一序列参数将会在传递的实参前传入作为它的参数。(来自于 MDN )  由此我们可以首先得出 bind 函数的两个特点：  返回一个函数 可以传入参数  实现首先先在Function的原型上挂载一个自定义bind函数 Function.prototype._bind">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手写bind">
+<meta property="og:url" content="https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="手写bind原理 bind() 方法会创建一个新函数。当这个新函数被调用时，bind() 的第一个参数将作为它运行时的 this，之后的一序列参数将会在传递的实参前传入作为它的参数。(来自于 MDN )  由此我们可以首先得出 bind 函数的两个特点：  返回一个函数 可以传入参数  实现首先先在Function的原型上挂载一个自定义bind函数 Function.prototype._bind">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/image-20210604110748385.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/image-20210604150133583.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/image-20210604150802371.png">
+<meta property="article:published_time" content="2021-06-03T08:58:33.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.312Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="面试题">
+<meta property="article:tag" content="原型链">
+<meta property="article:tag" content="bind">
+<meta property="article:tag" content="原型">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/image-20210604110748385.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">手写bind</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">手写bind</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-06-03T08:58:33.000Z" itemprop="datePublished" class="page-time">
+  2021-06-03
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#手写bind"><span class="post-toc-number">1.</span> <span class="post-toc-text">手写bind</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原理"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">原理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-模拟实现返回一个函数"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">1. 模拟实现返回一个函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-传参数"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">2. 传参数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-构造函数的模拟实现"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">3. 构造函数的模拟实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-构造函数效果的优化实现"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">4. 构造函数效果的优化实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-最后做一个日常判定this是否为函数"><span class="post-toc-number">1.2.5.</span> <span class="post-toc-text">5. 最后做一个日常判定this是否为函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-最终代码"><span class="post-toc-number">1.2.6.</span> <span class="post-toc-text">6.最终代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">测试</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-手写bind"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">手写bind</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-06-03 16:58:33" datetime="2021-06-03T08:58:33.000Z"  itemprop="datePublished">2021-06-03</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="手写bind"><a href="#手写bind" class="headerlink" title="手写bind"></a>手写bind</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><blockquote>
+<p>bind() 方法会创建一个新函数。当这个新函数被调用时，bind() 的第一个参数将作为它运行时的 this，之后的一序列参数将会在传递的实参前传入作为它的参数。(来自于 MDN )</p>
+</blockquote>
+<p>由此我们可以首先得出 bind 函数的两个特点：</p>
+<ol>
+<li>返回一个函数</li>
+<li>可以传入参数</li>
+</ol>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>首先先在Function的原型上挂载一个自定义bind函数</p>
+<pre><code class="js">Function.prototype._bind = function(){}</code></pre>
+<h3 id="1-模拟实现返回一个函数"><a href="#1-模拟实现返回一个函数" class="headerlink" title="1. 模拟实现返回一个函数"></a>1. 模拟实现返回一个函数</h3><p>正常的使用bind的时候是返回一个函数，这里返回的函数的引用(this)依旧指向的是调用bind的函数，而不是新得返回函数, 而且 考虑到绑定函数可能是有返回值 ，所以这块还是要处理下</p>
+<pre><code class="js">const obj ={
+    name: &#39;weng&#39;,
+};
+
+function sayName(){
+    return this.name;
+}
+
+const a = sayName._bind(obj);
+console.log(a()); //weng</code></pre>
+<p>所以这块的this指向需要做处理。</p>
+<pre><code class="js">Function.prototype._bind = function(context){
+    const that = this;
+    return function(){
+      return that.call(context);
+    }
+}</code></pre>
+<p>这里用that存储this，之后返回一个闭包函数</p>
+<h3 id="2-传参数"><a href="#2-传参数" class="headerlink" title="2. 传参数"></a>2. 传参数</h3><p>在执行bind的时候，bind可以传参数，而且bind返回之后的函数也可以传参数</p>
+<pre><code class="js">const obj ={
+    name: &#39;weng&#39;,
+};
+
+function sayName(age, address){
+    return `${this.name}: ${age} : ${address}`;
+}
+
+const a = sayName.bind(obj, 23);
+
+console.log(a(&#39;fujian&#39;)); // weng : 23 : fujian</code></pre>
+<p>这里就相当于内部实现一个函数柯里化用来存储每次传进来的数据，但是没有柯里化那么牛逼，具体可以看实现函数柯里化那那篇文章</p>
+<p>具体实现如下</p>
+<pre><code class="js">Function.prototype._bind = function(context){
+    const that = this;
+    const outerArgs = Array.prototype.slice.call(arguments, 1); // 存下第一次传的参数， 截掉第一个
+    return function(){
+      const innerArgs = Array.prototype.slice.call(arguments);
+      return that.call(context, ...outerArgs.concat(innerArgs)); // 把外层参数拼接到内层的参数类数组里头
+    }
+}</code></pre>
+<h3 id="3-构造函数的模拟实现"><a href="#3-构造函数的模拟实现" class="headerlink" title="3. 构造函数的模拟实现"></a>3. 构造函数的模拟实现</h3><blockquote>
+<p>一个绑定函数也能使用new操作符创建对象：这种行为就像把原函数当成构造器。提供的 this 值被忽略，同时调用时的参数被提供给模拟函数。</p>
+</blockquote>
+<p>也就是说当 bind 返回的函数作为构造函数的时候，bind 时指定的 this 值会失效，但传入的参数依然生效。举个例子：</p>
+<pre><code class="js">const obj = {
+    preName: &quot;weng&quot;,
+};
+
+function Bar(name, age) {
+    this.name = name;
+    this.age = age;
+}
+
+Bar.prototype.sayName = function(){
+    console.log(this.name)
+}
+
+const MyBar = Bar.bind(obj, &quot;kaimin&quot;);
+
+const o = new MyBar(12);
+
+console.log(o);</code></pre>
+<p>结果如下</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="image-20210604110748385.png" alt="image-20210604110748385" title>
+                </div>
+                <div class="image-caption">image-20210604110748385</div>
+            </figure>
+
+<p>可以得知此时Bar函数的this指向的是o对象，就是相当于以new的形式调用了构造函数，这块的原理可以去 手写new那篇文章看看</p>
+<pre><code class="js">Function.prototype._bind = function (context) {
+    const that = this;
+    const outerArgs = Array.prototype.slice.call(arguments, 1);
+
+    const returnFn = function () {
+      const innerArgs = Array.prototype.slice.call(arguments);
+      return that.call(
+        this instanceof returnFn ? this : context,
+        ...outerArgs.concat(innerArgs)
+      );
+    };
+    returnFn.prototype = this.prototype;
+    return returnFn;
+};</code></pre>
+<p>以這行代碼来说</p>
+<pre><code class="js">  return that.call(
+    this instanceof returnFn ? this : context,
+    ...outerArgs.concat(innerArgs)
+  );</code></pre>
+<p>当作为构造函数时，this 指向实例，此时<code>this instanceof returnFn</code>结果为 true，将绑定函数的 this 指向该实例，可以让实例获得来自绑定函数的值<br>以上面的是 demo 为例，如果改成 <code>this instanceof returnFn? null : context</code>，实例只是一个空对象，将 null 改成 this<br>当作为普通函数时，this 指向 window，此时结果为 false，将绑定函数的 this 指向 context</p>
+<h3 id="4-构造函数效果的优化实现"><a href="#4-构造函数效果的优化实现" class="headerlink" title="4. 构造函数效果的优化实现"></a>4. 构造函数效果的优化实现</h3><blockquote>
+<p>但是在这个写法中，我们直接将 fBound.prototype = this.prototype，我们直接修改 fBound.prototype 的时候，也会直接修改绑定函数的 prototype。这个时候，我们可以通过一个空函数来进行中转：</p>
+</blockquote>
+<pre><code class="js">Function.prototype._bind = function (context) {
+    const that = this;
+    const outerArgs = Array.prototype.slice.call(arguments, 1);
+
+    const _Transit = function(){};
+
+    const returnFn = function () {
+      const innerArgs = Array.prototype.slice.call(arguments);
+      return that.call(
+        this instanceof returnFn ? this : context,
+        ...outerArgs.concat(innerArgs)
+      );
+    };
+    _Transit.prototype = this.prototype;
+    returnFn.prototype = new _Transit();
+    return returnFn;
+};</code></pre>
+<p>这里相当做了个私有变量（匿名构造函数类似的），外部是不能访问到的，所以如果后续做returnFn的原型修改，也只是改在了这个私有构造函数new出来的实例上的，这个实例的<code>[[Prototype]]</code>指向的是真正的this原型。</p>
+<h3 id="5-最后做一个日常判定this是否为函数"><a href="#5-最后做一个日常判定this是否为函数" class="headerlink" title="5. 最后做一个日常判定this是否为函数"></a>5. 最后做一个日常判定this是否为函数</h3><pre><code class="js">if (typeof this !== &quot;function&quot;) {
+  throw new Error(&quot;Function.prototype.bind - what is trying to be bound is not callable&quot;);
+}</code></pre>
+<h3 id="6-最终代码"><a href="#6-最终代码" class="headerlink" title="6.最终代码"></a>6.最终代码</h3><pre><code class="js">Function.prototype._bind = function (context) {
+    if(typeof this !== &#39;function&#39;){
+      // MDN上的
+      throw new Error(&#39;Function.prototype.bind - what is trying to be bound is not callable&quot;&#39;)
+    }
+    const that = this;
+    const outerArgs = Array.prototype.slice.call(arguments, 1);
+
+    const _Transit = function(){};
+
+    const returnFn = function () {
+      const innerArgs = Array.prototype.slice.call(arguments);
+      return that.call(
+        this instanceof returnFn ? this : context,
+        ...outerArgs.concat(innerArgs)
+      );
+    };
+    _Transit.prototype = this.prototype;
+    returnFn.prototype = new _Transit();
+    return returnFn;
+};</code></pre>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><pre><code class="js">let o = {
+    address: &#39;fujian&#39;
+}
+
+function Person(name, age){
+    this.name = name;
+    this.age = age;
+}
+
+const NewPerson = Person._bind(o, &#39;weng&#39;);
+
+const per1 = new NewPerson(23);
+
+console.log(per1);</code></pre>
+<p>最终打印的是这样的</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="image-20210604150133583.png" alt="image-20210604150133583" title>
+                </div>
+                <div class="image-caption">image-20210604150133583</div>
+            </figure>
+
+<p>正常打印出来是这样的，差了一个标识的问题， 这个无所谓了</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="image-20210604150802371.png" alt="image-20210604150802371" title>
+                </div>
+                <div class="image-caption">image-20210604150802371</div>
+            </figure>
+
+<pre><code class="js">let o = {
+    address: &#39;fujian&#39;
+}
+
+function sayHi(name, age){
+    console.log(this.name = name, this.age = age, this.address);
+}
+
+const hi = sayHi.bind(o, &#39;weng&#39;);
+
+hi(23); // weng 23 fujian</code></pre>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.312Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bind/" rel="tag">bind</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8E%9F%E5%9E%8B/" rel="tag">原型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/" rel="tag">原型链</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/&title=《手写bind》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/&title=《手写bind》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《手写bind》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/06/05/js%E7%9A%84%E9%9D%99%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">js的静态作用域理解</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/06/02/%E6%89%8B%E5%86%99instanceof/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">手写instanceof</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/&title=《手写bind》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/&title=《手写bind》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《手写bind》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

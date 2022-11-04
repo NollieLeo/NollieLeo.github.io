@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>React源码学习-fiber原理-part3 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="React,React fiber">
+    <meta name="description" content="Fiber架构官方回答什么是fiber Fiber并不是计算机术语中的新名词，他的中文翻译叫做纤程，与进程（Process）、线程（Thread）、协程（Coroutine）同为程序执行过程。 在很多文章中将纤程理解为协程的一种实现。在JS中，协程的实现便是Generator。 所以，我们可以将纤程(Fiber)、协程(Generator)理解为代数效应思想在JS中的体现。 React Fiber">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React源码学习-fiber原理-part3">
+<meta property="og:url" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="Fiber架构官方回答什么是fiber Fiber并不是计算机术语中的新名词，他的中文翻译叫做纤程，与进程（Process）、线程（Thread）、协程（Coroutine）同为程序执行过程。 在很多文章中将纤程理解为协程的一种实现。在JS中，协程的实现便是Generator。 所以，我们可以将纤程(Fiber)、协程(Generator)理解为代数效应思想在JS中的体现。 React Fiber">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/image-20210821213628488.png">
+<meta property="og:image" content="https://react.iamkasong.com/img/rootfiber.png">
+<meta property="og:image" content="https://react.iamkasong.com/img/workInProgressFiber.png">
+<meta property="og:image" content="https://react.iamkasong.com/img/wipTreeFinish.png">
+<meta property="og:image" content="https://react.iamkasong.com/img/wipTreeUpdate.png">
+<meta property="og:image" content="https://react.iamkasong.com/img/currentTreeUpdate.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/image-20210821223750870.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/image-20210821224000472.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/image-20210822153431608.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/image-20210822153527527.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/image-20210822153638347.png">
+<meta property="article:published_time" content="2021-08-21T09:17:17.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.052Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="React fiber">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/image-20210821213628488.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">React源码学习-fiber原理-part3</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">React源码学习-fiber原理-part3</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-08-21T09:17:17.000Z" itemprop="datePublished" class="page-time">
+  2021-08-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/React/">React</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Fiber架构"><span class="post-toc-number">1.</span> <span class="post-toc-text">Fiber架构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Fiber架构心智模型"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Fiber架构心智模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代数效应"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">代数效应</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代数效应-in-React"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">代数效应 in React</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么不用Generator"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">为什么不用Generator</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Fiber实现原理"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Fiber实现原理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Fiber含义"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">Fiber含义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Fiber数据结构"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">Fiber数据结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Fiber节点之间关系"><span class="post-toc-number">1.2.2.1.</span> <span class="post-toc-text">Fiber节点之间关系</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#作为静态的数据结构"><span class="post-toc-number">1.2.2.2.</span> <span class="post-toc-text">作为静态的数据结构</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#作为动态的工作单元"><span class="post-toc-number">1.2.2.3.</span> <span class="post-toc-text">作为动态的工作单元</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Fiber工作原理"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Fiber工作原理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#what-is-双缓存？"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">what is 双缓存？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Fiber树和双缓存"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">Fiber树和双缓存</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#mount时候"><span class="post-toc-number">1.3.2.1.</span> <span class="post-toc-text">mount时候</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#update时"><span class="post-toc-number">1.3.2.2.</span> <span class="post-toc-text">update时</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#查看源码中的FiberRootNode"><span class="post-toc-number">2.</span> <span class="post-toc-text">查看源码中的FiberRootNode</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-React源码学习-fiber原理-part3"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">React源码学习-fiber原理-part3</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-08-21 17:17:17" datetime="2021-08-21T09:17:17.000Z"  itemprop="datePublished">2021-08-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/React/">React</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Fiber架构"><a href="#Fiber架构" class="headerlink" title="Fiber架构"></a>Fiber架构</h1><p><a href="https://github.com/acdlite/react-fiber-architecture">官方回答什么是fiber</a></p>
+<p><code>Fiber</code>并不是计算机术语中的新名词，他的中文翻译叫做<code>纤程</code>，与进程（Process）、线程（Thread）、协程（Coroutine）同为程序执行过程。</p>
+<p>在很多文章中将<code>纤程</code>理解为<code>协程</code>的一种实现。在<code>JS</code>中，<code>协程</code>的实现便是<code>Generator</code>。</p>
+<p>所以，我们可以将<code>纤程</code>(Fiber)、<code>协程</code>(Generator)理解为<code>代数效应</code>思想在<code>JS</code>中的体现。</p>
+<p><strong><code>React Fiber</code>可以理解为</strong>：</p>
+<p><code>React</code>内部实现的一套状态更新机制。支持任务不同<code>优先级</code>，可中断与恢复，并且恢复后可以复用之前的<code>中间状态</code>。</p>
+<p>其中每个任务<strong>更新单元</strong>为<code>React Element</code>对应的<code>Fiber节点</code>。</p>
+<h2 id="Fiber架构心智模型"><a href="#Fiber架构心智模型" class="headerlink" title="Fiber架构心智模型"></a>Fiber架构心智模型</h2><p> React核心团队成员<a href="https://github.com/sebmarkbage/">Sebastian Markbåge (opens new window)</a>（<code>React Hooks</code>的发明者）曾说：我们在<code>React</code>中做的就是践行<code>代数效应</code>（Algebraic Effects）。 </p>
+<h3 id="代数效应"><a href="#代数效应" class="headerlink" title="代数效应"></a>代数效应</h3><p><a href="https://blog.csdn.net/qq_36968599/article/details/114851241" target="_blank" rel="noopener">这篇文章可以好好看看</a></p>
+<p> <code>代数效应</code>能够将<code>副作用</code>从函数逻辑中分离，使函数关注点保持纯粹。 </p>
+<p>就比如我们平时用await来等待一个值的返回</p>
+<pre><code class="js">async function getData(){
+    const res = await loadData();
+    return res;
+}</code></pre>
+<p>代数效应相当于，我关注的是 await loadData()能给我什么东西，而不是关注他里头是异步还是同步，怎么处理这个数据的；</p>
+<h3 id="代数效应-in-React"><a href="#代数效应-in-React" class="headerlink" title="代数效应 in React"></a>代数效应 in React</h3><p>在react中有个结合Suspense的例子</p>
+<p><a href="https://codesandbox.io/s/frosty-hermann-bztrp?file=/src/index.js:152-160" target="_blank" rel="noopener">Suspense Demo</a></p>
+<p>而我们日常用hooks，例如useState什么的，我们不需要关注函数组件的这个state状态是怎么处理的，我们只要知道这个东西能干嘛就行。</p>
+<h3 id="为什么不用Generator"><a href="#为什么不用Generator" class="headerlink" title="为什么不用Generator"></a>为什么不用Generator</h3><p>新老架构那片说过，React16之后引入了一个 <strong>scheduler（调度器）</strong>，并且重构了<strong>Reconciler</strong>（协调器），就是为了将react的老一套同步更新 的架构变成 *<em>异步可中断 *</em>的</p>
+<p><code>异步可中断更新</code>可以理解为：<code>更新</code>在执行过程中可能会被打断（浏览器时间分片用尽或有<strong>更高优任务插队</strong>），当可以继续执行时恢复之前执行的中间状态。</p>
+<p><strong>缺点：</strong></p>
+<ul>
+<li><code>generator</code>它具有传染性和async await一样，就像你用async的函数那东西，你需要写await一样</li>
+<li>中间状态上下文相关，可以看看这个 <a href="https://github.com/facebook/react/issues/7942#issuecomment-254987818">解释</a></li>
+</ul>
+<h2 id="Fiber实现原理"><a href="#Fiber实现原理" class="headerlink" title="Fiber实现原理"></a>Fiber实现原理</h2><h3 id="Fiber含义"><a href="#Fiber含义" class="headerlink" title="Fiber含义"></a>Fiber含义</h3><p>首先我们要明白：</p>
+<ol>
+<li>react15的时候采用递归方式去执行，数据保存在递归调用栈中，故被称为<code>stack reconciler</code></li>
+<li>react16 的reconciler 基于 <code>fiber节点</code>实现的，故称为 <code>fiber reconciler</code></li>
+<li>一个 <code>React Element</code> 对应一个<code>Fiber</code>节点<ul>
+<li>作为静态结构理解 — 保存了该组件类型（原生/类组件/函数组件/…），以及对应dom节点信息</li>
+<li>作为动态结构理解 — 每个<code>Fiber</code>保存了本次更新中该组件改变的状态，要执行的工作（插入/删除/更新…）</li>
+</ul>
+</li>
+</ol>
+<h3 id="Fiber数据结构"><a href="#Fiber数据结构" class="headerlink" title="Fiber数据结构"></a>Fiber数据结构</h3><p><a href="https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react-reconciler/src/ReactFiber.new.js#L117">Fiber数据结构</a></p>
+<pre><code class="js">function FiberNode(
+  tag: WorkTag,
+  pendingProps: mixed,
+  key: null | string,
+  mode: TypeOfMode,
+) {
+  // 作为静态数据结构的属性
+  this.tag = tag;
+  this.key = key;
+  this.elementType = null;
+  this.type = null;
+  this.stateNode = null;
+
+  // 用于连接其他Fiber节点形成Fiber树
+  this.return = null;
+  this.child = null;
+  this.sibling = null;
+  this.index = 0;
+
+  this.ref = null;
+
+  this.pendingProps = pendingProps;
+  this.memoizedProps = null;
+  this.updateQueue = null;
+  this.memoizedState = null;
+  this.dependencies = null;
+
+  this.mode = mode;
+
+  // 作为动态的工作单元的属性
+  this.effectTag = NoEffect;
+  this.subtreeTag = NoSubtreeEffect;
+  this.deletions = null;
+  this.nextEffect = null;
+
+  this.firstEffect = null;
+  this.lastEffect = null;
+
+  // 调度优先级相关
+  this.lanes = NoLanes;
+  this.childLanes = NoLanes;
+
+  // 指向该fiber在另一次更新时对应的fiber， current tree中的fiber节点和workinprogress tree的fiber节点连接
+  this.alternate = null;
+  }</code></pre>
+<h4 id="Fiber节点之间关系"><a href="#Fiber节点之间关系" class="headerlink" title="Fiber节点之间关系"></a>Fiber节点之间关系</h4><p><code>Fiber</code>节点之间是通过以下三个属性建立起连接的</p>
+<pre><code class="js">// 指向父级Fiber节点
+this.return = null;
+// 指向子Fiber节点
+this.child = null;
+// 指向右边第一个兄弟Fiber节点
+this.sibling = null;</code></pre>
+<p>比如下面的代码和对应的Fiber树如下：</p>
+<pre><code class="jsx">function App(){
+    return (
+        &lt;div&gt;
+            &lt;span&gt;hello world&lt;/span&gt;
+            &lt;a&gt;
+                weng
+                &lt;span/&gt;
+            &lt;/a&gt;
+        &lt;/div&gt;
+    )
+}
+</code></pre>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="image-20210821213628488.png" alt="image-20210821213628488" title>
+                </div>
+                <div class="image-caption">image-20210821213628488</div>
+            </figure>
+
+<blockquote>
+<p>这里需要提一下，为什么父级指针叫做<code>return</code>而不是<code>parent</code>或者<code>father</code>呢？因为作为一个工作单元，<code>return</code>指节点执行完<code>completeWork</code>（后面会说）后会返回的下一个节点。子<code>Fiber节点</code>及其兄弟节点完成工作后会返回其父级节点，所以用<code>return</code>指代父级节点。</p>
+</blockquote>
+<h4 id="作为静态的数据结构"><a href="#作为静态的数据结构" class="headerlink" title="作为静态的数据结构"></a>作为静态的数据结构</h4><p>作为一种静态的数据结构，保存了组件相关的信息：</p>
+<pre><code class="js">// Fiber对应组件的类型 Function/Class/Host...
+this.tag = tag;
+// key属性
+this.key = key;
+// 大部分情况同type，某些情况不同，比如FunctionComponent使用React.memo包裹
+this.elementType = null;
+// 对于 FunctionComponent，指函数本身，对于ClassComponent，指class，对于HostComponent，指DOM节点tagName
+this.type = null;
+// Fiber对应的真实DOM节点
+this.stateNode = null;</code></pre>
+<h4 id="作为动态的工作单元"><a href="#作为动态的工作单元" class="headerlink" title="作为动态的工作单元"></a>作为动态的工作单元</h4><p>作为动态的工作单元，<code>Fiber</code>中如下参数保存了本次更新相关的信息，我们会在后续的更新流程中使用到具体属性时再详细介绍</p>
+<pre><code class="js">// 保存本次更新造成的状态改变相关信息
+this.pendingProps = pendingProps;
+this.memoizedProps = null;
+this.updateQueue = null;
+this.memoizedState = null;
+this.dependencies = null;
+
+this.mode = mode;
+
+// 保存本次更新会造成的DOM操作
+this.effectTag = NoEffect;
+this.nextEffect = null;
+
+this.firstEffect = null;
+this.lastEffect = null;</code></pre>
+<p>如下两个字段保存调度优先级相关的信息，会在学习<code>Scheduler</code>时说</p>
+<pre><code class="js">// 调度优先级相关
+this.lanes = NoLanes;
+this.childLanes = NoLanes;</code></pre>
+<h2 id="Fiber工作原理"><a href="#Fiber工作原理" class="headerlink" title="Fiber工作原理"></a>Fiber工作原理</h2><p>首先，上面说了，Fiber节点直接会构成一棵Fiber树，并且存有节点以及各种信息每个Fiber。</p>
+<p>所以一个Fiber是根据一个dom或者说React Element的出来的，那么树的结构也和dom或者组件树相同。</p>
+<p>主要 <strong>更新</strong> 工作原理，这里用到了一个叫做 <strong>双缓存</strong>的技术</p>
+<h3 id="what-is-双缓存？"><a href="#what-is-双缓存？" class="headerlink" title="what is 双缓存？"></a>what is 双缓存？</h3><p>当我们用<code>canvas</code>绘制动画，每一帧绘制前都会调用<code>ctx.clearRect</code>清除上一帧的画面。</p>
+<p>如果当前帧画面计算量比较大，导致清除上一帧画面到绘制当前帧画面之间有较长间隙，就会出现白屏。</p>
+<p>为了解决这个问题，我们可以在内存中绘制当前帧动画，绘制完毕后<strong>直接用当前帧替换</strong>上一帧画面，由于省去了两帧替换间的计算时间，不会出现从白屏到出现画面的闪烁情况。</p>
+<p>这种<strong>在内存中构建并直接替换</strong>的技术叫做<a href="https://baike.baidu.com/item/双缓冲" target="_blank" rel="noopener">双缓存 </a>。</p>
+<p><code>React</code>使用“双缓存”来完成<code>Fiber树</code>的构建与替换——对应着<code>DOM树</code>的创建与更新。</p>
+<h3 id="Fiber树和双缓存"><a href="#Fiber树和双缓存" class="headerlink" title="Fiber树和双缓存"></a>Fiber树和双缓存</h3><blockquote>
+<p>React中最多会同时存在两棵Fiber树</p>
+</blockquote>
+<ol>
+<li><code>Current Fiber</code> 树：当前显示在屏幕面前的树</li>
+<li><code>workInProgress Fiber</code> 树：正在内存中构建的树</li>
+</ol>
+<p> <code>current Fiber树</code>中的<code>Fiber节点</code>被称为<code>current fiber</code>，<code>workInProgress Fiber树</code>中的<code>Fiber节点</code>被称为<code>workInProgress fiber</code>，他们通过<code>alternate</code>属性连接。 </p>
+<pre><code class="js">currentFiber.alternate === workInProgressFiber;
+workInProgressFiber.alternate === currentFiber;</code></pre>
+<p><code>React</code>应用的根节点通过使<code>current</code>指针在不同<code>Fiber树</code>的<code>rootFiber</code>间切换来完成<code>current Fiber</code>树指向的切换。 </p>
+<p>即当<code>workInProgress Fiber树</code>构建完成交给<code>Renderer</code>渲染在页面上后，应用根节点的<code>current</code>指针指向<code>workInProgress Fiber树</code>，此时<code>workInProgress Fiber树</code>就变为<code>current Fiber树</code>。</p>
+<p>每次状态更新都会产生新的<code>workInProgress Fiber树</code>，通过<code>current</code>与<code>workInProgress</code>的替换，完成<code>DOM</code>更新。</p>
+<h4 id="mount时候"><a href="#mount时候" class="headerlink" title="mount时候"></a>mount时候</h4><p>考虑如下例子：</p>
+<pre><code class="js">function App() {
+  const [num, add] = useState(0);
+  return (
+    &lt;p onClick={() =&gt; add(num + 1)}&gt;{num}&lt;/p&gt;
+  )
+}
+
+ReactDOM.render(&lt;App/&gt;, document.getElementById(&#39;root&#39;));</code></pre>
+<ol>
+<li>首次执行<code>ReactDOM.render</code>会创建<code>fiberRootNode</code>（源码中叫<code>fiberRoot</code>）和<code>rootFiber</code>。其中<code>fiberRootNode</code>是整个应用的根节点，<code>rootFiber</code>是``所在组件树的根节点。</li>
+</ol>
+<p>之所以要区分<code>fiberRootNode</code>与<code>rootFiber</code>，是因为在应用中我们可以多次调用<code>ReactDOM.render</code>渲染不同的组件树，他们会拥有不同的<code>rootFiber</code>。但是整个应用的根节点只有一个，那就是<code>fiberRootNode</code>。</p>
+<p><code>fiberRootNode</code>的<code>current</code>会指向当前页面上已渲染内容对应<code>Fiber树</code>，即<code>current Fiber树</code>。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://react.iamkasong.com/img/rootfiber.png" alt="rootFiber" title>
+                </div>
+                <div class="image-caption">rootFiber</div>
+            </figure>
+
+<p>由于是<strong>首屏渲染</strong>，页面中还没有挂载任何<code>DOM</code>，所以<code>fiberRootNode.current</code>指向的<code>rootFiber</code>没有任何<code>子Fiber节点</code>（即<code>current Fiber树</code>为空）。</p>
+<ol>
+<li>接下来进入<code>render阶段</code>，根据组件返回的<code>JSX</code>在内存中依次创建<code>Fiber节点</code>并连接在一起构建<code>Fiber树</code>，被称为<code>workInProgress Fiber树</code>。（下图中右侧为内存中构建的树，左侧为页面显示的树）</li>
+</ol>
+<p>在构建<code>workInProgress Fiber树</code>时会尝试复用<code>current Fiber树</code>中已有的<code>Fiber节点</code>内的属性，在<code>首屏渲染</code>时只有<code>rootFiber</code>存在对应的<code>current fiber</code>（即<code>rootFiber.alternate</code>）。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://react.iamkasong.com/img/workInProgressFiber.png" alt="workInProgressFiber" title>
+                </div>
+                <div class="image-caption">workInProgressFiber</div>
+            </figure>
+
+ <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://react.iamkasong.com/img/wipTreeFinish.png" alt="workInProgressFiberFinish" title>
+                </div>
+                <div class="image-caption">workInProgressFiberFinish</div>
+            </figure>
+
+<h4 id="update时"><a href="#update时" class="headerlink" title="update时"></a>update时</h4><ol>
+<li>接下来我们点击<code>p节点</code>触发状态改变，这会开启一次新的<code>render阶段</code>并构建一棵新的<code>workInProgress Fiber 树</code>。</li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://react.iamkasong.com/img/wipTreeUpdate.png" alt="wipTreeUpdate" title>
+                </div>
+                <div class="image-caption">wipTreeUpdate</div>
+            </figure>
+
+<blockquote>
+<p>这个决定是否复用的过程就是Diff算法，后面会说</p>
+</blockquote>
+<ol>
+<li><code>workInProgress Fiber 树</code>在<code>render阶段</code>完成构建后进入<code>commit阶段</code>渲染到页面上。<strong>渲染完毕后</strong>，<code>workInProgress Fiber 树</code>变为<code>current Fiber 树</code>。</li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://react.iamkasong.com/img/currentTreeUpdate.png" alt="currentTreeUpdate" title>
+                </div>
+                <div class="image-caption">currentTreeUpdate</div>
+            </figure>
+
+<h1 id="查看源码中的FiberRootNode"><a href="#查看源码中的FiberRootNode" class="headerlink" title="查看源码中的FiberRootNode"></a>查看源码中的FiberRootNode</h1><p>上面曾说到，我们首次创建react的应用的时候会创建整个应用的一个根节点 叫做 <code>FiberRootNode</code></p>
+<p>然后每次调用render方法都会创建当前组件的一个根节点叫做 <code>rootFiber</code></p>
+<p>这里我们验证以下这个 <code>FiberRootNode</code></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="image-20210821223750870.png" alt="image-20210821223750870" title>
+                </div>
+                <div class="image-caption">image-20210821223750870</div>
+            </figure>
+
+<p>图中圈出的部分就是react应用首次运行时候，创建一个<strong>应用根节点<code>FiberRootNode</code></strong>的过程</p>
+<p>我们顺着调用栈找到这个创建的调用方法 creatFiberRoot — createFiber（创建应用根的方法）</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="image-20210821224000472.png" alt="image-20210821224000472" title>
+                </div>
+                <div class="image-caption">image-20210821224000472</div>
+            </figure>
+
+
+
+<p>找到源码，打个断点</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="image-20210822153431608.png" alt="image-20210822153431608" title>
+                </div>
+                <div class="image-caption">image-20210822153431608</div>
+            </figure>
+
+<p>刷新页面之后</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="image-20210822153527527.png" alt="image-20210822153527527" title>
+                </div>
+                <div class="image-caption">image-20210822153527527</div>
+            </figure>
+
+<p>发现首次渲染，创建fiberRoot节点，这个tag为3，那么代表什么意思呢？</p>
+<p>我们可以在它右边的调用栈中找到上层函数<code>createHostRootFiber</code></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="image-20210822153638347.png" alt="image-20210822153638347" title>
+                </div>
+                <div class="image-caption">image-20210822153638347</div>
+            </figure>
+
+<p>其实发现这个tag，也就是这里的HostRoot值为3</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.052Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-fiber/" rel="tag">React fiber</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/&title=《React源码学习-fiber原理-part3》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/&title=《React源码学习-fiber原理-part3》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《React源码学习-fiber原理-part3》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">React源码学习-jsx的理解-part4</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/08/16/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-%E5%85%A5%E5%8F%A3-part1/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">React源码学习</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/&title=《React源码学习-fiber原理-part3》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/&title=《React源码学习-fiber原理-part3》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《React源码学习-fiber原理-part3》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

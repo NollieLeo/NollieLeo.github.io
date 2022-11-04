@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>防抖动和节流 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="js,防抖动,节流">
+    <meta name="description" content="场景： 在页面中很多的事件是会频繁执行的、如：  window的resize，scroll事件 拖拽过程中的 mousemove事件 文字输入过程中的keyup等事件  这些事件一旦触发会频繁执行、但是实际上我们可能只需要在特定的时候去执行绑定了这些事件的函数 例如：我需要检测一次拖拉浏览器，移动过程中都算是一次，知道最后鼠标抬起来了，才算是完成了一次拉伸窗口；有比如，我们输入搜索框内的文字的时候">
+<meta property="og:type" content="article">
+<meta property="og:title" content="防抖动和节流">
+<meta property="og:url" content="https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="场景： 在页面中很多的事件是会频繁执行的、如：  window的resize，scroll事件 拖拽过程中的 mousemove事件 文字输入过程中的keyup等事件  这些事件一旦触发会频繁执行、但是实际上我们可能只需要在特定的时候去执行绑定了这些事件的函数 例如：我需要检测一次拖拉浏览器，移动过程中都算是一次，知道最后鼠标抬起来了，才算是完成了一次拉伸窗口；有比如，我们输入搜索框内的文字的时候">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/debounce.gif">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/debounce-1.gif">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/image-20200503153245577.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/debounce-4.gif">
+<meta property="article:published_time" content="2020-05-03T06:27:27.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.576Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="防抖动">
+<meta property="article:tag" content="节流">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/debounce.gif">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">防抖动和节流</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">防抖动和节流</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-05-03T06:27:27.000Z" itemprop="datePublished" class="page-time">
+  2020-05-03
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#防抖（debounce）"><span class="post-toc-number">1.</span> <span class="post-toc-text">防抖（debounce）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#this指向优化"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">this指向优化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第一次立刻执行"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">第一次立刻执行</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#节流"><span class="post-toc-number">2.</span> <span class="post-toc-text">节流</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-防抖动和节流"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">防抖动和节流</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-05-03 14:27:27" datetime="2020-05-03T06:27:27.000Z"  itemprop="datePublished">2020-05-03</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><strong>场景：</strong></p>
+<p>在页面中很多的事件是会频繁执行的、如：</p>
+<ol>
+<li>window的resize，scroll事件</li>
+<li>拖拽过程中的 mousemove事件</li>
+<li>文字输入过程中的keyup等事件</li>
+</ol>
+<p>这些事件一旦触发会频繁执行、但是实际上我们可能只需要在特定的时候去执行绑定了这些事件的函数</p>
+<p>例如：我需要检测一次拖拉浏览器，移动过程中都算是一次，知道最后鼠标抬起来了，才算是完成了一次拉伸窗口；有比如，我们输入搜索框内的文字的时候，需要发ajax 到后台去请求数据，实际上我们并不需要每一次的输入都发送一个请求，而是在用户已经输完了一整段话或者是几个文字之后再去发送一个ajax，这样会节省很多的资源开销 。等等的这些问题都需要函数防抖动或者函数节流来解决</p>
+<h2 id="防抖（debounce）"><a href="#防抖（debounce）" class="headerlink" title="防抖（debounce）"></a>防抖（debounce）</h2><p>原理： 当我们调用一个动作的时候，会设置在n毫秒后才执行，而在这n毫秒内，如果这个动作再次被调用的话则将重新在计算n毫秒，采取执行这个东西。 </p>
+<blockquote>
+<p>当一次事件发生后，事件处理器要等一定阈值的时间，如果这段时间过去后 再也没有 事件发生，就处理最后一次发生的事件。假设还差 <code>0.01</code> 秒就到达指定时间，这时又来了一个事件，那么之前的等待作废，需要重新再等待指定时间。</p>
+</blockquote>
+<p>例如：</p>
+<pre><code class="html">&lt;body&gt;
+  &lt;style&gt;
+    #container {
+      width: 200px;
+      height: 300px;
+      background-color: aquamarine;
+    }
+  &lt;/style&gt;
+  &lt;div id=&quot;container&quot;&gt;
+
+  &lt;/div&gt;
+  &lt;script&gt;
+    var count = 1;
+    var containerDom = document.getElementById(&#39;container&#39;);
+    function addNumber() {
+      containerDom.innerHTML = count++;
+    }
+    containerDom.onmousemove = addNumber;
+
+  &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<p>鼠标只要移动那么就会频繁的去触发addNumber的函数</p>
+<p> <img src="debounce.gif" alt="debounce"> </p>
+<p>这个时候我们对他进行防抖动</p>
+<p>先写我们的第一版函数</p>
+<pre><code class="javascript">function debounce(fun, wait) {
+  var time;
+  return function () {
+    clearTimeout(time);
+    time = setTimeout(fun, wait);
+  }
+}</code></pre>
+<p>之后包裹住这个addnumber的函数</p>
+<p>现在随你怎么移动，反正你移动完 1000ms 内不再触发，我才执行事件。看看使用效果：</p>
+<p> <img src="debounce-1.gif" alt="debounce 第一版"> </p>
+<p> 顿时就从 165 次降低成了 1 次! </p>
+<p>之后我们对他优化</p>
+<h3 id="this指向优化"><a href="#this指向优化" class="headerlink" title="this指向优化"></a>this指向优化</h3><p>如果我们再addNumber函数中加入<code>console.log(this)</code>，没有再addNumber外层包裹debounce的时候this指向是</p>
+<pre><code class="html">&lt;div id=&quot;container&quot;&gt;&lt;/div&gt;</code></pre>
+<p>但是包裹了debounce之后this就会指向windows对象</p>
+<p>所以需要对它进行修改</p>
+<pre><code class="javascript">var count = 0;
+var containerDom = document.getElementById(&#39;container&#39;);
+function addNumber() {
+  containerDom.innerHTML = `&lt;div&gt;
+  值为${++count}
+  &lt;/div&gt;`;
+  console.log(this);
+}
+function debounce(fun, wait) {
+  var time;
+  return function () {
+    var that = this;
+    clearTimeout(time);
+    time = setTimeout(fun.bind(that), wait);
+  }
+}
+containerDom.onmousemove = debounce(addNumber, 1000);</code></pre>
+<p>但是这里又有一个问题，就是这样包裹debounce的时候，onmousemove自带的事件对象event就会丢失，没有将参数传进去，故我们需要修改一哈，这样再我们需要用到event对象的时候就能拿得到</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="image-20200503153245577.png" alt="image-20200503153245577" title>
+                </div>
+                <div class="image-caption">image-20200503153245577</div>
+            </figure>
+
+<pre><code class="javascript">var count = 0;
+var containerDom = document.getElementById(&#39;container&#39;);
+function addNumber(e) {
+  containerDom.innerHTML = `&lt;div&gt;
+  值为${++count}
+  &lt;/div&gt;`;
+  console.log(this);
+  console.log(e);
+}
+function debounce(fun, wait) {
+  var time;
+  return function () {
+    var that = this, args = arguments;
+    clearTimeout(time);
+    time = setTimeout(fn.bind(that, ...args), wait);
+  }
+}
+containerDom.onmousemove = debounce(addNumber, 1000);</code></pre>
+<p>这个时候我们函数就非常的完善了。</p>
+<h3 id="第一次立刻执行"><a href="#第一次立刻执行" class="headerlink" title="第一次立刻执行"></a>第一次立刻执行</h3><p>假设我需要立即触发这个函数，但是又想防抖，就是相当于先执行函数再N秒内如果再此触发这个函数，就给他重新计算等待值。</p>
+<pre><code class="javascript">function debounce(fun, wait, immediate) {
+  var time;
+  return function () {
+    var that = this, args = arguments;
+    if (time) clearTimeout(time);
+    if (immediate) {
+      // 如果已经执行过，不再执行
+      var callNow = !time;
+      time = setTimeout(function () {
+        time = null
+      }, wait);
+      if (callNow) fun.apply(that, args);
+    } else {
+      time = setTimeout(function () {
+        fun.apply(that, args);
+      }, wait);
+    }
+  }
+}</code></pre>
+<p> <img src="debounce-4.gif" alt="debounce 第四版"> </p>
+<p>完~</p>
+<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><blockquote>
+<p>可以理解为事件在一个管道中传输，加上这个节流阀以后，事件的流速就会减慢。实际上这个函数的作用就是如此，它可以将一个函数的调用频率限制在一定阈值内，例如 1s，那么 1s 内这个函数一定不会被调用两次</p>
+</blockquote>
+<p>以下是一个简版的节流,这里的this和argument处理方式和上面的防抖是一样的处理方式</p>
+<pre><code class="js">function throttle(fn, wait) {
+    let prev = new Date();
+    return function() { 
+        const args = arguments;
+        const now = new Date();
+        if (now - prev &gt; wait) {
+            fn.apply(this, args);
+            prev = new Date();
+        }
+    }
+}</code></pre>
+<p>按照以上的实现，第一次进入的时候就立马执行事件，但是如果最后一次的时间和pre的时间插值小于我们的wait时间，这时候的函数是不执行的，但是我们想要让它执行，这时候加入定时器，让他在最后一次调用执行函数的时候，算出它距离wait的时间还剩多少，然后让他在剩余时间内再执行；</p>
+<p>最终的代码是这样</p>
+<pre><code class="js">function throttle(fn, wait) {
+    let prev = new Date();
+    let time;
+    return function () {
+      const args = arguments;
+      const now = new Date();
+      clearTimeout(time);
+      if (now - prev &gt;= wait) {
+        fn.apply(this, args);
+        prev = new Date();
+      } else {
+        time = setTimeout(fn.bind(this, args), wait - (prev - now));
+      }
+    };
+}</code></pre>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.576Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%8A%82%E6%B5%81/" rel="tag">节流</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%98%B2%E6%8A%96%E5%8A%A8/" rel="tag">防抖动</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/&title=《防抖动和节流》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/&title=《防抖动和节流》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《防抖动和节流》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/07/11/%E5%86%99JS%E7%9A%84%E6%97%B6%E5%80%99%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">写JS的时候一些小技巧或者常用操作</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/04/07/%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E6%96%87%E6%9C%AC%E5%9F%9F%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%96%87%E6%9C%AC%E6%98%AF%E5%90%A6%E8%B6%85%E5%87%BA%E6%89%80%E5%9C%A8%E5%AE%B9%E5%99%A8/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">动态创建文本域如何判断文本是否超出所在容器</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/&title=《防抖动和节流》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/&title=《防抖动和节流》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《防抖动和节流》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

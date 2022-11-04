@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>原型模式和基于原型继承的Javascript对象系统 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="javascript,js设计模式,原型链">
+    <meta name="description" content="在以类为中心的面向对象编程语言中，类和对象的关系可以想象成铸模和铸件的关系，对象总是从类中创建而来。而在原型编程的思想中，类并不是必需的，对象未必需要从类中创建而来，一个对象是通过克隆另外一个对象所得到的。 1. 使用克隆的原型模式从设计模式的角度讲，原型模式是用于创建对象的一种模式，如果我们想要创建一个对象，一种方法是先指定它的类型，然后通过类来创建这个对象。原型模式选择了另外一种方式，我们不再">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原型模式和基于原型继承的Javascript对象系统">
+<meta property="og:url" content="https://github.com/NollieLeo/2020/03/16/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF%E7%9A%84Javascript%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="在以类为中心的面向对象编程语言中，类和对象的关系可以想象成铸模和铸件的关系，对象总是从类中创建而来。而在原型编程的思想中，类并不是必需的，对象未必需要从类中创建而来，一个对象是通过克隆另外一个对象所得到的。 1. 使用克隆的原型模式从设计模式的角度讲，原型模式是用于创建对象的一种模式，如果我们想要创建一个对象，一种方法是先指定它的类型，然后通过类来创建这个对象。原型模式选择了另外一种方式，我们不再">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF%E7%9A%84Javascript%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/1579487242257.png">
+<meta property="article:published_time" content="2020-03-16T14:28:09.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.165Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="js设计模式">
+<meta property="article:tag" content="原型链">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2020/03/16/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF%E7%9A%84Javascript%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/1579487242257.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">原型模式和基于原型继承的Javascript对象系统</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">原型模式和基于原型继承的Javascript对象系统</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-03-16T14:28:09.000Z" itemprop="datePublished" class="page-time">
+  2020-03-16
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-使用克隆的原型模式"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. 使用克隆的原型模式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-原型编程范型的一些规则"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. 原型编程范型的一些规则</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-JavaScript中的原型继承-构建对象系统"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. JavaScript中的原型继承(构建对象系统)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-所有的数据都是对象"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">1. 所有的数据都是对象</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2. 要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-对象会记住它的原型"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3. 对象会记住它的原型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-如果对象无法响应某个请求，它会把这个请求委托给它的构造器的原型"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">4. 如果对象无法响应某个请求，它会把这个请求委托给它的构造器的原型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#常用原型继承代码解析"><span class="post-toc-number">3.4.1.</span> <span class="post-toc-text">常用原型继承代码解析</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-原型模式和基于原型继承的Javascript对象系统"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">原型模式和基于原型继承的Javascript对象系统</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-03-16 22:28:09" datetime="2020-03-16T14:28:09.000Z"  itemprop="datePublished">2020-03-16</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>在<strong>以类为中心的面向对象编程</strong>语言中，类和对象的关系可以想象成铸模和铸件的关系，对象<br>总是<u>从类中创建</u>而来。而在<strong>原型编程</strong>的思想中，类并不是必需的，对象未必需要从类中创建而来，<br>一个对象是通过克隆另外一个对象所得到的。</p>
+<h2 id="1-使用克隆的原型模式"><a href="#1-使用克隆的原型模式" class="headerlink" title="1. 使用克隆的原型模式"></a>1. 使用克隆的原型模式</h2><p>从设计模式的角度讲，原型模式是用于创建对象的一种模式，如果我们想要创建一个对象，<br>一种方法是先指定它的类型，然后通过类来创建这个对象。原型模式选择了另外一种方式，我们<br>不再关心对象的具体类型，而是找到一个对象，然后通过克隆来创建一个一模一样的对象</p>
+<p>既然原型模式是通过克隆来创建对象的，那么很自然地会想到，如果需要一个跟某个对象一<br>模一样的对象，就可以使用原型模式</p>
+<p>原型模式的实现关键，是语言本身是否提供了 clone 方法。ECMAScript 5提供了 Object.create<br>方法</p>
+<pre><code class="javascript">var Plane = function () {
+    this.blood = 100;
+    this.attackLevel = 1;
+    this.defenceLevel = 1;
+}
+var myPlane = new Plane();
+myPlane.blood = 500;
+myPlane.attackLevel = 10;
+myPlane.defenceLevel = 7;
+// 在不支持 Object.create 方法的浏览器中，则可以使用以下代码
+Object.create = Object.create || function (obj) {
+    var F = function () { };
+    F.prototype = obj;
+    return new F();
+}
+var clonePlane = Object.create(myPlane);
+console.log(clonePlane);</code></pre>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="1579487242257.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h2 id="2-原型编程范型的一些规则"><a href="#2-原型编程范型的一些规则" class="headerlink" title="2. 原型编程范型的一些规则"></a>2. 原型编程范型的一些规则</h2><ol>
+<li>所有的数据都是对象</li>
+<li>要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它。</li>
+<li>对象会记住它的原型。</li>
+<li>如果对象无法响应某个请求，它会把这个请求委托给它自己的原型。</li>
+</ol>
+<h2 id="3-JavaScript中的原型继承-构建对象系统"><a href="#3-JavaScript中的原型继承-构建对象系统" class="headerlink" title="3. JavaScript中的原型继承(构建对象系统)"></a>3. JavaScript中的原型继承(构建对象系统)</h2><p>同理，js也同样遵循以上的编程规则</p>
+<h3 id="1-所有的数据都是对象"><a href="#1-所有的数据都是对象" class="headerlink" title="1. 所有的数据都是对象"></a>1. 所有的数据都是对象</h3><p>JavaScript在设计的时候，模仿 Java 引入了两套类型机制：基本类型和对象类型。基本类型包括 undefined 、 number 、 boolean 、 string 、 function 、 object </p>
+<p>除了 undefined 之外，一切都应是对象。为了实现这一目标，number 、 boolean 、 string 这几种基本类型数据也可以通过“包装类”的方式变成对象类型数据来处理</p>
+<p>不能说在 JavaScript中所有的数据都是对象，但可以说绝大部分数据都是对象。那么相信在 JavaScript中也一定会有一个根对象存在，这些对象追根溯源都来源于这个根对象。</p>
+<p>JavaScript 中的根对象是 <code>Object.prototype</code> 对象。 <code>Object.prototype</code> 对象是一个空的对象。我们在JavaScript 遇到的每个对象，实际上都是从 <code>Object.prototype</code> 对象克隆而来的，<code>Object.prototype</code> 对象就是它们的原型。</p>
+<p>可以利用 ECMAScript 5提供的 Object.getPrototypeOf 来查看这两个对象的原型：</p>
+<pre><code class="javascript">var obj1 = new Object();
+var obj2 = {};
+console.log( Object.getPrototypeOf( obj1 ) === Object.prototype ); // 输出：true
+console.log( Object.getPrototypeOf( obj2 ) === Object.prototype ); // 输出：true</code></pre>
+<h3 id="2-要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它"><a href="#2-要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它" class="headerlink" title="2. 要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它"></a>2. 要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它</h3><p>在 JavaScript语言里，我们并不需要关心克隆的细节，因为这是引擎内部负责实现的。我<br>们所需要做的只是显式地调用 <code>var obj1 = new Object()</code> 或者 <code>var obj2 = {}</code> 。此时，引擎内部会从<code>Object.prototype</code> 上面克隆一个对象出来，我们最终得到的就是这个对象.</p>
+<p>用 new 运算符从构造器中得到一个对象</p>
+<pre><code class="javascript">function Person( name ){
+    this.name = name;
+};
+Person.prototype.getName = function(){
+    return this.name;
+};
+var a = new Person( &#39;sven&#39; )
+console.log( a.name ); // 输出：sven
+console.log( a.getName() ); // 输出：sven
+console.log( Object.getPrototypeOf( a ) === Person.prototype ); // 输出：true</code></pre>
+<p>这里 Person 并不是类，而是函数构造器，JavaScript 的函数既可以作为普通函数被调用，也可以作为构造器被调用,当使用 new 运算符来调用函数时，此时的函数就是一个构造器。 用new 运算符来创建对象的过程，实际上也只是先克隆 Object.prototype 对象，再进行一些其他额外操作的过程。</p>
+<p><strong>可以模拟new的过程：</strong></p>
+<pre><code class="javascript">// 模拟new的实现方式
+// 先来一个Person构造器
+
+function Person(name) {
+    this.name = name;
+}
+
+Person.prototype.getName = function () {
+    return this.name;
+}
+
+var objectFactory = function () {
+    var obj = new Object(), //从Object.prototype上克隆一个空的对象{}
+        Constructor = [].shift.call(arguments); // 取得外部传入的构造器，此例是 Person
+    obj.__proto__ = Constructor.prototype; // 指向正确的原型
+    var ret = Constructor.apply(obj, arguments); // 借用外部传入的构造器给 obj 设置属性
+    return typeof ret === &#39;object&#39; ? ret : obj; // 确保构造器总是会返回一个对象
+}
+
+var a = objectFactory(Person, &#39;weng&#39;);
+console.log(a.getName());</code></pre>
+<h3 id="3-对象会记住它的原型"><a href="#3-对象会记住它的原型" class="headerlink" title="3. 对象会记住它的原型"></a>3. 对象会记住它的原型</h3><p>对象的原型”，就 JavaScript 的真正实现来说，其实并不能说对象有原型，而只能说<strong>对象的构造器有原型</strong>。对于“对象把请求委托给它自己的原型”这句话，更好的说法是<strong>对象把请求委托给它的构造器的原型</strong></p>
+<p>JavaScript 给对象提供了一个名为 <code>__proto__</code> 的隐藏属性，某个对象的 <code>__proto__</code> 属性默认会指向它的构造器的原型对象，即 <code>{Constructor}.prototype</code>。在一些浏览器中， <code>__proto__</code> 被公开出来</p>
+<pre><code class="javascript">var a = new Object();
+console.log ( a.__proto__=== Object.prototype ); // 输出：true </code></pre>
+<p><code>__proto__</code> 就是对象跟“对象构造器的原型”联系起来的纽带。正因为对象要通过<code>_proto__</code> 属性来记住它的构造器的原型，所以我们的 objectFactory 函数来模拟用 new创建对象时， 需要手动给 obj 对象设置正确的 <code>__proto__</code> 指向</p>
+<p><code>obj.__proto__ = Constructor.prototype;</code></p>
+<p>让 obj.<strong>proto</strong> 指向 Person.prototype ，而不是原来的 Object.prototype</p>
+<h3 id="4-如果对象无法响应某个请求，它会把这个请求委托给它的构造器的原型"><a href="#4-如果对象无法响应某个请求，它会把这个请求委托给它的构造器的原型" class="headerlink" title="4. 如果对象无法响应某个请求，它会把这个请求委托给它的构造器的原型"></a>4. 如果对象无法响应某个请求，它会把这个请求委托给它的构造器的原型</h3><p>在 JavaScript 中，每个对象都是从 Object.prototype 对象克隆而来的，如果是这样的话，<br>我们只能得到单一的继承关系，即每个对象都继承自 Object.prototype 对象，这样的对象系统显<br>然是非常受限的。</p>
+<p>实际上，虽然 JavaScript 的对象最初都是由 Object.prototype 对象克隆而来的，但对象构造<br>器的原型并不仅限于 Object.prototype 上，而是可以动态指向其他对象。这样一来，当对象 a 需<br>要借用对象 b 的能力时，可以有选择性地把对象 a 的构造器的原型指向对象 b ，从而达到继承的<br>效果</p>
+<h4 id="常用原型继承代码解析"><a href="#常用原型继承代码解析" class="headerlink" title="常用原型继承代码解析"></a>常用原型继承代码解析</h4><pre><code class="javascript">var obj = { name: &#39;sven&#39; };
+var A = function(){};
+A.prototype = obj;
+var a = new A();
+console.log( a.name ); // 输出：sven</code></pre>
+<ol>
+<li>首先，尝试遍历对象 a 中的所有属性，但没有找到 name 这个属性</li>
+<li>查找 name 属性的这个请求被委托给对象 a 的构造器的原型，它被 <code>a. __proto__</code> 记录着并且<br>指向 <code>.prototype</code> ，而 <code>A.prototype</code> 被设置为对象 obj</li>
+<li>在对象 obj 中找到了 name 属性，并返回它的值</li>
+</ol>
+<p>当我们期望得到一个“类”继承自另外一个“类”的效果时，往往会用下面的代码来模拟实现</p>
+<pre><code class="javascript">var A = function(){};
+A.prototype = { name: &#39;sven&#39; };
+var B = function(){};
+B.prototype = new A();
+var b = new B();
+console.log( b.name ); // 输出：sven</code></pre>
+<ol>
+<li>首先，尝试遍历对象 b 中的所有属性，但没有找到 name 这个属性</li>
+<li>查找 name 属性的请求被委托给对象 b 的构造器的原型，它被 <code>b. __proto__</code> 记录着并且指向<br><code>B.prototype</code> ，而 <code>B.prototype</code>被设置为一个通过 <code>new A()</code>创建出来的对象</li>
+<li>在该对象中依然没有找到 name 属性，于是请求被继续委托给这个对象构造器的原型<br><code>A.prototype</code></li>
+<li>在 A.prototype 中找到了 name 属性，并返回它的值</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.165Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">js设计模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/" rel="tag">原型链</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/03/16/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF%E7%9A%84Javascript%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/&title=《原型模式和基于原型继承的Javascript对象系统》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/03/16/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF%E7%9A%84Javascript%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/&title=《原型模式和基于原型继承的Javascript对象系统》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/03/16/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF%E7%9A%84Javascript%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《原型模式和基于原型继承的Javascript对象系统》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/03/16/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF%E7%9A%84Javascript%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/03/16/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF%E7%9A%84Javascript%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/03/16/BFC%E5%9D%97%E7%BA%A7%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%B8%8A%E4%B8%8B%E6%96%87/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">BFC块级格式化上下文</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/03/16/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">基本数据类型和引用数据类型</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/03/16/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF%E7%9A%84Javascript%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/&title=《原型模式和基于原型继承的Javascript对象系统》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/03/16/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF%E7%9A%84Javascript%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/&title=《原型模式和基于原型继承的Javascript对象系统》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/03/16/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF%E7%9A%84Javascript%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《原型模式和基于原型继承的Javascript对象系统》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/03/16/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF%E7%9A%84Javascript%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/03/16/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF%E7%9A%84Javascript%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2020/03/16/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF%E7%9A%84Javascript%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

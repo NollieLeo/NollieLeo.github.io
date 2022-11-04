@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>React源码学习-jsx的理解-part4 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="React,jsx">
+    <meta name="description" content="jsx理解 JSX和Fiber节点不是同一个东西 。  React Component 和 React Element 也不是一个东西。 从编译来看JSX在babel中会被编译成React.createElement（这也就是为什么需要手动import React from &#39;react&#39;的原因了） 但是在17之后不需要手动引入了 看这篇 如下图：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React源码学习-jsx的理解-part4">
+<meta property="og:url" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="jsx理解 JSX和Fiber节点不是同一个东西 。  React Component 和 React Element 也不是一个东西。 从编译来看JSX在babel中会被编译成React.createElement（这也就是为什么需要手动import React from &#39;react&#39;的原因了） 但是在17之后不需要手动引入了 看这篇 如下图：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/image-20210822155213907.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/image-20210822155830376.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/image-20210822160045714.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/image-20210822160957936.png">
+<meta property="article:published_time" content="2021-08-21T14:26:48.000Z">
+<meta property="article:modified_time" content="2022-02-09T01:45:19.054Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="jsx">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/image-20210822155213907.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">React源码学习-jsx的理解-part4</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">React源码学习-jsx的理解-part4</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-08-21T14:26:48.000Z" itemprop="datePublished" class="page-time">
+  2021-08-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/React/">React</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#jsx理解"><span class="post-toc-number">1.</span> <span class="post-toc-text">jsx理解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#从编译来看"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">从编译来看</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#React-createElement"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">React.createElement</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#执行步骤"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">执行步骤</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#React-Component"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">React Component</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JSX与Fiber节点"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">JSX与Fiber节点</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-React源码学习-jsx的理解-part4"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">React源码学习-jsx的理解-part4</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-08-21 22:26:48" datetime="2021-08-21T14:26:48.000Z"  itemprop="datePublished">2021-08-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/React/">React</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="jsx理解"><a href="#jsx理解" class="headerlink" title="jsx理解"></a>jsx理解</h1><p> <strong><code>JSX</code>和<code>Fiber节点</code>不是同一个东西 。</strong></p>
+<p> <strong>React Component 和 React Element 也不是一个东西。</strong></p>
+<h2 id="从编译来看"><a href="#从编译来看" class="headerlink" title="从编译来看"></a>从编译来看</h2><p>JSX在babel中会被编译成React.createElement（这也就是为什么需要手动<code>import React from &#39;react&#39;</code>的原因了）</p>
+<p>但是在17之后不需要手动引入了 <a href="https://zh-hans.reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html" target="_blank" rel="noopener">看这篇</a></p>
+<p>如下图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="image-20210822155213907.png" alt="image-20210822155213907" title>
+                </div>
+                <div class="image-caption">image-20210822155213907</div>
+            </figure>
+
+<blockquote>
+<p><code>JSX</code>并不是只能被编译为<code>React.createElement</code>方法，你可以通过<a href="https://babeljs.io/docs/en/babel-plugin-transform-react-jsx" target="_blank" rel="noopener">@babel/plugin-transform-react-jsx (opens new window)</a>插件显式告诉<code>Babel</code>编译时需要将<code>JSX</code>编译为什么函数的调用（默认为<code>React.createElement</code>）。</p>
+</blockquote>
+<p>比如在<a href="https://github.com/preactjs/preact">preact (opens new window)</a>这个类<code>React</code>库中，<code>JSX</code>会被编译为一个名为<code>h</code>的函数调用。</p>
+<h2 id="React-createElement"><a href="#React-createElement" class="headerlink" title="React.createElement"></a>React.createElement</h2><p><a href="https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L348">React.createElement地址</a></p>
+<pre><code class="js">createElement(type, config, children)</code></pre>
+<ul>
+<li>type: react component类型</li>
+<li>config：react component 的一些属性</li>
+<li>children：它的子孙react component</li>
+</ul>
+<h3 id="执行步骤"><a href="#执行步骤" class="headerlink" title="执行步骤"></a>执行步骤</h3><ol>
+<li><p>进来createElement我们会发现它定义了一些字段，这些字段都是我们比较常用的</p>
+<p> <img src="image-20210822155830376.png" alt="image-20210822155830376"></p>
+</li>
+<li><p>之后我们对传进来的config进行校验，我们会发现他做了几个合法性的校验，并且对相对应的变量进行赋值</p>
+<ul>
+<li><a href="https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L31">hasValidRef</a>：对config中的ref做合法性校验</li>
+<li><a href="https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L43">hasValidKey</a>：对config中的key做合法性校验</li>
+</ul>
+<p><img src="image-20210822160045714.png" alt="image-20210822160045714"></p>
+</li>
+<li><p>遍历config中的属性，将除了保留属性之外的其他属性赋值给<a href="https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L241">Props</a>（就是内部的一个中间对象）</p>
+<p><a href="https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L16">保留属性有哪些呢？</a></p>
+<p>可以看到react把，ref，key都提出来了，单独的作为 <code>ReactElement</code>函数的参数传递（这个下面说）</p>
+</li>
+<li><p>接下来处理type中的<code>defaultProps</code>，这里也能明白，因为我们经常需要给class的组件的一些参数设置默认的属性值</p>
+<p><img src="image-20210822160957936.png" alt="image-20210822160957936"></p>
+</li>
+<li><p>接下来我们走入<code>ReactElement</code><a href="https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L146">函数</a></p>
+<p>可以发现，它最终返回了一个Element对象</p>
+<pre><code class="js">const ReactElement = function(type, key, ref, self, source, owner, props) {
+    ......
+  const element = {
+    // 标记这是个 React Element
+    $$typeof: REACT_ELEMENT_TYPE,
+
+   // 这个是react component的类型   
+    type: type,
+    key: key,
+    ref: ref,
+    props: props,
+    _owner: owner,
+  };
+
+  return element;
+};</code></pre>
+</li>
+</ol>
+<pre><code>
+这里要注意，其中` $$typeof`这个参数很重要，主要是用来[isValidElement](https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L547)函数来判断这个element是不是合法的react element
+
+   ```js
+   export function isValidElement(object) {
+     return (
+       typeof object === &#39;object&#39; &amp;&amp;
+       object !== null &amp;&amp;
+       object.$$typeof === REACT_ELEMENT_TYPE
+     );
+   }
+
+
+</code></pre><blockquote>
+<p>可以看到，<code>$$typeof === REACT_ELEMENT_TYPE</code>的非<code>null</code>对象就是一个合法的<code>React Element</code>。换言之，在<code>React</code>中，所有<code>JSX</code>在运行时的返回结果（即<code>React.createElement()</code>的返回值）都是<code>React Element</code>。</p>
+</blockquote>
+<h2 id="React-Component"><a href="#React-Component" class="headerlink" title="React Component"></a>React Component</h2><p>在<code>React</code>中，我们常使用<code>ClassComponent</code>与<code>FunctionComponent</code>构建组件。</p>
+<pre><code class="jsx">class AppClass extends React.Component {
+  render() {
+    return &lt;p&gt;111&lt;/p&gt;
+  }
+}
+console.log(&#39;这是ClassComponent：&#39;, AppClass);
+console.log(&#39;这是Element：&#39;, &lt;AppClass/&gt;);
+
+
+function AppFunc() {
+  return &lt;p&gt;222&lt;/p&gt;;
+}
+console.log(&#39;这是FunctionComponent：&#39;, AppFunc);
+console.log(&#39;这是Element：&#39;, &lt;AppFunc/&gt;);</code></pre>
+<p> 我们可以从Demo控制台打印的对象看出，<code>ClassComponent</code>对应的<code>Element</code>的<code>type</code>字段为<code>AppClass</code>自身。</p>
+<p><code>FunctionComponent</code>对应的<code>Element</code>的<code>type</code>字段为<code>AppFunc</code>自身，如下所示：</p>
+<pre><code class="JS">{
+  $$typeof: Symbol(react.element),
+  key: null,
+  props: {},
+  ref: null,
+  type: ƒ AppFunc(),
+  _owner: null,
+  _store: {validated: false},
+  _self: null,
+  _source: null 
+}</code></pre>
+<h2 id="JSX与Fiber节点"><a href="#JSX与Fiber节点" class="headerlink" title="JSX与Fiber节点"></a>JSX与Fiber节点</h2><p>从上面的内容我们可以发现，<code>JSX</code>是一种描述当前组件内容的数据结构，他不包含组件<strong>schedule</strong>、<strong>reconcile</strong>、<strong>render</strong>所需的相关信息。</p>
+<p>比如如下信息就不包括在<code>JSX</code>中：</p>
+<ul>
+<li>组件在更新中的<code>优先级</code></li>
+<li>组件的<code>state</code></li>
+<li>组件被打上的用于<strong>Renderer</strong>的<code>标记</code></li>
+</ul>
+<p>这些内容都包含在<code>Fiber节点</code>中。</p>
+<p>所以，在组件<code>mount</code>时，<code>Reconciler</code>根据<code>JSX</code>描述的组件内容生成组件对应的<code>Fiber节点</code>。</p>
+<p>在<code>update</code>时，<code>Reconciler</code>将<code>JSX</code>与<code>Fiber节点</code>保存的数据对比，生成组件对应的<code>Fiber节点</code>，并根据对比结果为<code>Fiber节点</code>打上<code>标记</code>。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-02-09T01:45:19.054Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jsx/" rel="tag">jsx</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/&title=《React源码学习-jsx的理解-part4》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/&title=《React源码学习-jsx的理解-part4》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《React源码学习-jsx的理解-part4》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/08/22/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5%E7%AE%80%E4%BB%8B-part5/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">React源码学习-render阶段-part5</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">React源码学习-fiber原理-part3</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/&title=《React源码学习-jsx的理解-part4》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/&title=《React源码学习-jsx的理解-part4》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《React源码学习-jsx的理解-part4》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
