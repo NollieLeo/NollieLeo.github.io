@@ -149,6 +149,161 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-手写compose"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2021-12-13 10:40:26" datetime="2021-12-13T02:40:26.000Z"  itemprop="datePublished">2021-12-13</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2021/12/13/%E6%89%8B%E5%86%99compose/">手写compose</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        compose简介compose就是执行一系列的任务（函数），比如有以下任务队列
+let tasks = [step1, step2, step3, step4]
+
+每一个step都是一个步骤，按照步骤一步一步的执行到结尾，这就是一个compose
+compose在函数式编程中是一个很重要的工具函数，在这里实现的compose有三点说明
+
+第一个函数是多元的（接受多个参数），后面的函数都是单...
+    
+
+        <a href="/2021/12/13/%E6%89%8B%E5%86%99compose/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/compose/" rel="tag">compose</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-深拷贝最新优化代码"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2021-12-12 15:46:41" datetime="2021-12-12T07:46:41.000Z"  itemprop="datePublished">2021-12-12</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2021/12/12/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E6%9C%80%E6%96%B0%E4%BC%98%E5%8C%96%E4%BB%A3%E7%A0%81/">深拷贝最新优化代码</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        const map = new WeakMap()
+
+    const handleArrAndObject = (varias) =&gt; {
+      const constructor = Object.getPrototypeOf(varias).constructor;
+      const object = new constructor();
+      for (co...
+    
+
+        <a href="/2021/12/12/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E6%9C%80%E6%96%B0%E4%BC%98%E5%8C%96%E4%BB%A3%E7%A0%81/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E6%8B%B7%E8%B4%9D/" rel="tag">深拷贝</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-自定义loader记录"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2021-10-10 16:01:49" datetime="2021-10-10T08:01:49.000Z"  itemprop="datePublished">2021-10-10</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/loader/">loader</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2021/10/10/%E8%87%AA%E5%AE%9A%E4%B9%89loader%E8%AE%B0%E5%BD%95/">自定义loader记录</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        调试loader1. 准备好自己的webpack和loader这里我用的项目是我自己的
+webpack template
+2. vscode配置debug配置文件按照这个步骤配置完会生成一个.vscode文件夹下面有个launch.json文件
+  
+然后替换它
+{
+  &quot;version&quot;: &quot;0.2.0&quot;,
+  &quot;configuration...
+    
+
+        <a href="/2021/10/10/%E8%87%AA%E5%AE%9A%E4%B9%89loader%E8%AE%B0%E5%BD%95/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/loader/" rel="tag">loader</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-自定义脚手架搭建记录"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -541,162 +696,6 @@ React Fi...
 
         </li>
     
-        <li class="post-list-item fade">
-            <article id="post-React源码学习-入口-part1"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2021-08-16 13:52:58" datetime="2021-08-16T05:52:58.000Z"  itemprop="datePublished">2021-08-16</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/">React源码学习</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2021/08/16/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-%E5%85%A5%E5%8F%A3-part1/">React源码学习</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        
-官方： React 是用 JavaScript 构建快速响应的大型 Web 应用程序的首选方式 
-卡颂react深度解析
-
-
-首先学习一个框架的源码或者库的源码，我们都要从他们的入口函数出手。而react这个js库就是从ReactDOM.render入手的
-
-前言：React的快速响应是什么意思呢？
-
-遇到大量计算不会让页面掉帧或者导致卡顿（这里要想到每秒60帧（HZ），每帧16.6ms）...
-    
-
-        <a href="/2021/08/16/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-%E5%85%A5%E5%8F%A3-part1/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/" rel="tag">React</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-团队规范常用包"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2021-08-12 22:35:15" datetime="2021-08-12T14:35:15.000Z"  itemprop="datePublished">2021-08-12</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2021/08/12/%E5%9B%A2%E9%98%9F%E8%A7%84%E8%8C%83%E5%B8%B8%E7%94%A8%E5%8C%85/">团队规范以及解决方法</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        
-我们在平时日常开发的时候, 肯定是要制定一套项目规范，去进行团队的开发代码管理的，因此需要涉及到很多方面；比如eslint代码规则检查，husky这种为npm script提供git的钩子的，lint-staged结合husky，然后使用commitlint去规范提交代码消息等等
-
-代码检查huskyts-linteslintlint-stagedcommitlinthttps://git...
-    
-
-        <a href="/2021/08/12/%E5%9B%A2%E9%98%9F%E8%A7%84%E8%8C%83%E5%B8%B8%E7%94%A8%E5%8C%85/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-bug记录以及解决方案"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2021-08-12 09:45:16" datetime="2021-08-12T01:45:16.000Z"  itemprop="datePublished">2021-08-12</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2021/08/12/bug%E8%AE%B0%E5%BD%95%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">bug记录以及解决方案</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        Electron
-
-
-chrome devtools
-Error message “DevTools failed to load SourceMap: Could not load content for chrome-extension://…”
-
-PostCss
-Error: PostCSS plugin autoprefixer requires PostCSS 8. Update ...
-    
-
-        <a href="/2021/08/12/bug%E8%AE%B0%E5%BD%95%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bugs/" rel="tag">bugs</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
     </ul>
 
     
@@ -730,7 +729,7 @@ Error: PostCSS plugin autoprefixer requires PostCSS 8. Update ...
         </p>
     </div>
     <div class="bottom">
-        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+        <p><span>Mr.Weng &copy; 2020 - 2023</span>
             <span>
                 
                 Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>

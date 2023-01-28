@@ -20,7 +20,7 @@
     <meta name="theme-color" content="#00abc0">
     
     
-    <meta name="keywords" content="js,setInterval,setTimeout,异步,requestAnimationFrame">
+    <meta name="keywords" content="js,requestAnimationFrame,setInterval,setTimeout,异步">
     <meta name="description" content="异步编程当然少不了定时器了，常见的定时器函数有 setTimeout、setInterval、requestAnimationFrame。最常用的是setTimeout，很多人认为 setTimeout 是延时多久，那就应该是多久后执行。 其实这个观点是错误的，因为 JS 是单线程执行的，如果前面的代码影响了性能，就会导致 setTimeout 不会按期执行。当然了，可以通过代码去修正 setTi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="setInterval和setTimeout优化策略">
@@ -32,10 +32,10 @@
 <meta property="article:modified_time" content="2022-02-09T01:45:19.082Z">
 <meta property="article:author" content="Mr.Weng">
 <meta property="article:tag" content="js">
+<meta property="article:tag" content="requestAnimationFrame">
 <meta property="article:tag" content="setInterval">
 <meta property="article:tag" content="setTimeout">
 <meta property="article:tag" content="异步">
-<meta property="article:tag" content="requestAnimationFrame">
 <meta name="twitter:card" content="summary">
     
         <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
@@ -421,7 +421,7 @@ setInterval(timer =&gt; {
         </p>
     </div>
     <div class="bottom">
-        <p><span>Mr.Weng &copy; 2020 - 2022</span>
+        <p><span>Mr.Weng &copy; 2020 - 2023</span>
             <span>
                 
                 Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>

@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>vue3渲染器设计与总结 | 翁老师的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#00abc0">
+    
+    
+    <meta name="keywords" content="diff,vue">
+    <meta name="description" content="前置概念虚拟 domvdom，虚拟 dom 就是用来表示真实的 dom 元素的属性或者特点的一套数据结构，和真实 dom 一样具有树形结构，具有许多树形节点 vnode 可以简要的表示 const vnode &#x3D; {   type: &quot;h1&quot;,   children: [     {       type: &quot;h2&quot;,       children: &amp;qu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3渲染器设计与总结">
+<meta property="og:url" content="https://github.com/NollieLeo/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:description" content="前置概念虚拟 domvdom，虚拟 dom 就是用来表示真实的 dom 元素的属性或者特点的一套数据结构，和真实 dom 一样具有树形结构，具有许多树形节点 vnode 可以简要的表示 const vnode &#x3D; {   type: &quot;h1&quot;,   children: [     {       type: &quot;h2&quot;,       children: &amp;qu">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/Users/leo/Library/Application%20Support/marktext/images/2022-12-03-20-32-21-image.png">
+<meta property="og:image" content="https://github.com/Users/leo/Library/Application%20Support/marktext/images/2022-12-05-00-50-37-image.png">
+<meta property="og:image" content="https://github.com/Users/leo/Library/Application%20Support/marktext/images/2022-12-05-00-53-03-image.png">
+<meta property="og:image" content="file:///Users/leo/Library/Application%20Support/marktext/images/2022-12-09-22-45-02-image.png">
+<meta property="article:published_time" content="2022-12-03T11:39:37.000Z">
+<meta property="article:modified_time" content="2022-12-13T01:41:56.270Z">
+<meta property="article:author" content="Mr.Weng">
+<meta property="article:tag" content="diff">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/Users/leo/Library/Application%20Support/marktext/images/2022-12-03-20-32-21-image.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr.Weng</h5>
+          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/nollieleo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">vue3渲染器设计与总结</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">vue3渲染器设计与总结</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2022-12-03T11:39:37.000Z" itemprop="datePublished" class="page-time">
+  2022-12-03
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前置概念"><span class="post-toc-number">1.</span> <span class="post-toc-text">前置概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#虚拟-dom"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">虚拟 dom</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#渲染器"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">渲染器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#挂载"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">挂载</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#实现渲染器"><span class="post-toc-number">2.</span> <span class="post-toc-text">实现渲染器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简单的渲染原理"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">简单的渲染原理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#结合-reactivity"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">结合 reactivity</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自定义渲染器"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">自定义渲染器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#工厂函数"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">工厂函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#加入更新的概念"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">加入更新的概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#patch-简单实现"><span class="post-toc-number">2.2.2.1.</span> <span class="post-toc-text">patch 简单实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实现-mountElement-挂载"><span class="post-toc-number">2.2.2.2.</span> <span class="post-toc-text">实现 mountElement 挂载</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置项形式抽离"><span class="post-toc-number">2.2.3.</span> <span class="post-toc-text">配置项形式抽离</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#挂载和更新"><span class="post-toc-number">3.</span> <span class="post-toc-text">挂载和更新</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#子节点挂载"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">子节点挂载</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#挂载节点的属性"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">挂载节点的属性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#🌟HTML-attribute-和-DOM-properties-区别"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">🌟HTML attribute 和 DOM properties 区别</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#正确的设置节点的属性"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">正确的设置节点的属性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#布尔类型属性处理"><span class="post-toc-number">3.2.2.1.</span> <span class="post-toc-text">布尔类型属性处理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#只读类型属性处理"><span class="post-toc-number">3.2.2.2.</span> <span class="post-toc-text">只读类型属性处理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#提取平台无关代码"><span class="post-toc-number">3.2.2.3.</span> <span class="post-toc-text">提取平台无关代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#class-和-style-的处理"><span class="post-toc-number">3.2.3.</span> <span class="post-toc-text">class 和 style 的处理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实现-normalizeClass"><span class="post-toc-number">3.2.3.1.</span> <span class="post-toc-text">实现 normalizeClass</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#设置-class"><span class="post-toc-number">3.2.3.2.</span> <span class="post-toc-text">设置 class</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#卸载操作"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">卸载操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#建立-dom-与-vnode-联系"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">建立 dom 与 vnode 联系</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#改造-render-函数"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">改造 render 函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#封装-unmount"><span class="post-toc-number">3.3.3.</span> <span class="post-toc-text">封装 unmount</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#区分-vnode-类型"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">区分 vnode 类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#事件处理"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">事件处理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#绑定事件和更新"><span class="post-toc-number">3.5.1.</span> <span class="post-toc-text">绑定事件和更新</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#更新属性以及子节点"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">更新属性以及子节点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现-props-变化更新"><span class="post-toc-number">3.6.1.</span> <span class="post-toc-text">实现 props 变化更新</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#顺手改造-patchProps-函数"><span class="post-toc-number">3.6.1.1.</span> <span class="post-toc-text">顺手改造 patchProps 函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#操作-class-更新"><span class="post-toc-number">3.6.1.1.1.</span> <span class="post-toc-text">操作 class 更新</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#操作样式的更新"><span class="post-toc-number">3.6.1.1.2.</span> <span class="post-toc-text">操作样式的更新</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#操作事件的更新"><span class="post-toc-number">3.6.1.1.3.</span> <span class="post-toc-text">操作事件的更新</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#操作属性的更新"><span class="post-toc-number">3.6.1.1.4.</span> <span class="post-toc-text">操作属性的更新</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#更新-children-节点"><span class="post-toc-number">3.6.2.</span> <span class="post-toc-text">更新 children 节点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-新子节点是文本节点"><span class="post-toc-number">3.6.2.1.</span> <span class="post-toc-text">1. 新子节点是文本节点</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-新子节点是一组"><span class="post-toc-number">3.6.2.2.</span> <span class="post-toc-text">2. 新子节点是一组</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-新子节点啥也没有"><span class="post-toc-number">3.6.2.3.</span> <span class="post-toc-text">3. 新子节点啥也没有</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#特殊节点类型"><span class="post-toc-number">3.7.</span> <span class="post-toc-text">特殊节点类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文本节点和注释节点处理"><span class="post-toc-number">3.7.1.</span> <span class="post-toc-text">文本节点和注释节点处理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Fragment"><span class="post-toc-number">3.7.2.</span> <span class="post-toc-text">Fragment</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#diff-算法"><span class="post-toc-number">3.8.</span> <span class="post-toc-text">diff 算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简单的-diff-算法"><span class="post-toc-number">3.8.1.</span> <span class="post-toc-text">简单的 diff 算法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#双端-diff-算法"><span class="post-toc-number">3.8.2.</span> <span class="post-toc-text">双端 diff 算法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#快速-diff-算法"><span class="post-toc-number">3.8.3.</span> <span class="post-toc-text">快速 diff 算法</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-vue3渲染器设计与总结"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">vue3渲染器设计与总结</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2022-12-03 19:39:37" datetime="2022-12-03T11:39:37.000Z"  itemprop="datePublished">2022-12-03</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="前置概念"><a href="#前置概念" class="headerlink" title="前置概念"></a>前置概念</h1><h2 id="虚拟-dom"><a href="#虚拟-dom" class="headerlink" title="虚拟 dom"></a>虚拟 dom</h2><p>vdom，虚拟 dom 就是用来表示真实的 dom 元素的属性或者特点的一套数据结构，和真实 dom 一样具有树形结构，具有许多树形节点 vnode</p>
+<p>可以简要的表示</p>
+<pre><code class="js">const vnode = {
+  type: &quot;h1&quot;,
+  children: [
+    {
+      type: &quot;h2&quot;,
+      children: &quot;我是h2&quot;,
+    },
+  ],
+};</code></pre>
+<h2 id="渲染器"><a href="#渲染器" class="headerlink" title="渲染器"></a>渲染器</h2><p>渲染器的基本作用就是把虚拟 dom 渲染为平台上面的真实 元素，浏览器上就是真实的 dom 元素。</p>
+<h2 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h2><p>mounted，意思就是渲染器读取解析 vnode/vdom 属性之后，使用真实的 dom 形式并且表现在页面上/或者是具体的页面某个位置上</p>
+<h1 id="实现渲染器"><a href="#实现渲染器" class="headerlink" title="实现渲染器"></a>实现渲染器</h1><h2 id="简单的渲染原理"><a href="#简单的渲染原理" class="headerlink" title="简单的渲染原理"></a>简单的渲染原理</h2><p><strong>renderer</strong>: 渲染函数</p>
+<p>就是通过 innerHTML 的形式将第一个参数 domString 插入到对应容器当中</p>
+<pre><code class="js">function renderer(domString, container) {
+  container.innerHTML = domString;
+}
+
+renderer(&quot;&lt;h1&gt;vue3 renderer&lt;/h1&gt;&quot;, document.getElementById(&quot;app&quot;));</code></pre>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/Users/leo/Library/Application%20Support/marktext/images/2022-12-03-20-32-21-image.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h3 id="结合-reactivity"><a href="#结合-reactivity" class="headerlink" title="结合 reactivity"></a>结合 reactivity</h3><p>引入 vue3 的 reactivity 包，他会在全局暴露一个 VueReactivity 变量</p>
+<p><a href="https://cdn.jsdelivr.net/npm/@vue/reactivity@3.2.45/dist/reactivity.global.min.js" target="_blank" rel="noopener">cdn 地址</a></p>
+<pre><code class="html">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/@vue/reactivity@3.2.45/dist/reactivity.global.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;module&quot;&gt;
+  import { renderer } from &quot;./render.js&quot;;
+
+  const { effect, ref } = VueReactivity;
+
+  const count = ref(1);
+
+  effect(() =&gt; {
+    renderer(
+      `&lt;h1&gt;vue3 renderer times: ${count.value}&lt;/h1&gt;`,
+      document.getElementById(&quot;app&quot;)
+    );
+  });
+
+  setTimeout(() =&gt; {
+    count.value++;
+  }, 2000);
+&lt;/script&gt;</code></pre>
+<p>通过引入 vue3 的 reactivity，我们能够实现一个动态渲染的基本逻辑</p>
+<h2 id="自定义渲染器"><a href="#自定义渲染器" class="headerlink" title="自定义渲染器"></a>自定义渲染器</h2><blockquote>
+<p>vue3 中的渲染器，是设计为通用可配置的，即可实现渲染到任意目标的平台上，我们目前说的目标平台，先指定浏览器；后续可以将一些可抽象的 API 抽离，使得渲染器的核心不依赖与浏览器的 api</p>
+<p>这也就是 vue 的核心之一，将相关浏览器的 api 封装到了<strong>runtime-dom</strong>的一个包，提供了很多针对浏览器的 dom api，属性以及事件处理</p>
+</blockquote>
+<h3 id="工厂函数"><a href="#工厂函数" class="headerlink" title="工厂函数"></a>工厂函数</h3><p>首先我们创建一个 createRenderer 的工厂函数用于创建一个渲染器, 并且抛出许多的方法</p>
+<pre><code class="js">/** 创建一个渲染器 */
+function createRenderer() {
+  const render = (vnode, container) =&gt; {
+    // ...
+  };
+
+  // 后续会有各种方法
+
+  return { render };
+}</code></pre>
+<p>之后进行相关的渲染调用</p>
+<pre><code class="js">const renderer = createRenderer();
+renderer.render(vNode, document.getElementById(&quot;app&quot;));</code></pre>
+<h3 id="加入更新的概念"><a href="#加入更新的概念" class="headerlink" title="加入更新的概念"></a>加入更新的概念</h3><p>第一次调用</p>
+<pre><code class="js">renderer.render(vNode, document.getElementById(&quot;app&quot;));</code></pre>
+<p>第二次调用渲染的时候还是在同一个 container 上调用的</p>
+<pre><code class="js">renderer.render(newVNode, document.getElementById(&quot;app&quot;));</code></pre>
+<p>由于首次的渲染已经将对应的 dom 渲染到了 container 内部了，所以再次调用 render 函数的时候，渲染一个新的虚拟 dom，就单单是做一个简单的挂载的动作了，而是要进行更新对比，找出变动的节点，这个过程就叫做 - <strong>打补丁（更新）</strong></p>
+<p>因此我们可以相关的改造一下代码：</p>
+<p>引入一个更新的概念处理的逻辑</p>
+<pre><code class="js">/** 创建一个渲染器 */
+function createRenderer() {
+  const render = (vnode, container) =&gt; {
+    if (vnode) {
+      // 新的node存在的情况，将其旧的vnode一起传递给patch函数进行补丁的更新
+      patch(container._vnode, vnode, container);
+    } else {
+      if (container._vnode) {
+        // 旧的vnode存在，新的vnode不存在的情况，说明是一个 unmount（卸载）的操作
+        // 这里只需要将container内dom清空就可以, 目前暂时这样清空
+        container.innerHTML = &quot;&quot;;
+      }
+    }
+    // 每一次都需要保存上一次的vnode，存储在container下
+    container._vnode = vnode; // 暂时使用这段代码清空，后续会完善
+  };
+
+  return { render };
+}</code></pre>
+<h4 id="patch-简单实现"><a href="#patch-简单实现" class="headerlink" title="patch 简单实现"></a>patch 简单实现</h4><p>其中 patch 的函数，是最最重要的一个渲染器的核心，主要是做初始化和相关的 diff 操作</p>
+<p>目前进行简单实现，后续着重说</p>
+<pre><code class="js">/** 更新对比 */
+function patch(n1, n2, container) {
+  // 如果不存在
+  if (!n1) {
+    mountElement(n2, container);
+  } else {
+    // n1存在的情况下面，我们进行更新（打补丁）
+  }
+}</code></pre>
+<ul>
+<li><p>n1: 老的 vnode</p>
+</li>
+<li><p>n2: 新的 vnode</p>
+</li>
+<li><p>container: 容器</p>
+</li>
+</ul>
+<p>如果不存在旧的 vnode 的情况下，说明只是需要进行元素的挂载即可</p>
+<h4 id="实现-mountElement-挂载"><a href="#实现-mountElement-挂载" class="headerlink" title="实现 mountElement 挂载"></a>实现 mountElement 挂载</h4><pre><code class="js">/** 挂载 */
+function mountElement(vnode, container) {
+  // 创建dom元素
+  const el = document.createElement(vnode.type);
+  //处理子节点, 如果子节点是字符串，代表元素具有文本节点
+  if (typeof vnode.children === &quot;string&quot;) {
+    // 只需要设置元素的textContent的属性即可
+    el.textContent = vnode.children;
+  }
+  // 将元素添加到容器中
+  container.appendChild(el);
+}</code></pre>
+<p>通过 vnode 的 type 标签名称创建一个新的 dom 元素，接着处理 children，如果是字符串的类型，说明是文本的 child 节点，直接设置 textContent 就可以了，之后 appendChild 插入容器当中</p>
+<h3 id="配置项形式抽离"><a href="#配置项形式抽离" class="headerlink" title="配置项形式抽离"></a>配置项形式抽离</h3><p>因为我们要设计一个相当于是不依赖于平台的一个通用渲染器，所以，需要将上述所用到的所有依赖于浏览器的 api 都给抽离出来，实现独立封装的配置项</p>
+<p>例如，我们抽离<strong>mountElement</strong>函数使用到的一些浏览器方法</p>
+<pre><code class="js">/** 浏览器端的相关api */
+const BROWSER_APIS = {
+  // 用于创建元素
+  createElement(tag) {
+    return document.createElement(tag);
+  },
+
+  /** 用于设置元素的文本节点 */
+  setElementText(el, text) {
+    el.textContent = text;
+  },
+
+  /** 给特定的parent下添加指定的元素 */
+  insert(el, parent, anchor = null) {
+    parent.insertBefore(el, anchor);
+  },
+};
+
+export default BROWSER_APIS;</code></pre>
+<p>之后我们改造<strong>createRenderer</strong>函数</p>
+<p>将相关的 api 以 options 的形式传入</p>
+<pre><code class="js">/** 创建一个渲染器 */
+function createRenderer(options) {
+  const { createElement, insert, setElementText } = options;
+
+  /** 挂载 */
+  function mountElement(vnode, container) {
+    // ...
+  }
+
+  /** 更新对比 */
+  function patch(n1, n2, container) {
+    // ...
+  }
+
+  /** 渲染方法 */
+  const render = (vnode, container) =&gt; {
+    // ...
+  };
+
+  return { render };
+}
+
+export { createRenderer };</code></pre>
+<p>之后我们就可以通过传递进来的可配置的 apis 去实现相关的渲染器操作</p>
+<p>例如，我们可以改造<strong>mountElement</strong>并且使用到相关的 apis</p>
+<pre><code class="js">/** 挂载 */
+function mountElement(vnode, container) {
+  // 创建dom元素
+  const el = createElement(vnode.type); // ➕
+  //处理子节点, 如果子节点是字符串，代表元素具有文本节点
+  if (typeof vnode.children === &quot;string&quot;) {
+    // 只需要设置元素的textContent的属性即可
+    setElementText(e, vnode.children); // ➕
+  }
+  // 将元素添加到容器中
+  insert(el, container); // ➕
+}</code></pre>
+<blockquote>
+<p>通过了以上配置之后，渲染器将不仅仅可以在浏览器端进行使用，我们也可以根据不同的平台，传入不同的自定义的相关 api 参数</p>
+</blockquote>
+<h1 id="挂载和更新"><a href="#挂载和更新" class="headerlink" title="挂载和更新"></a>挂载和更新</h1><h2 id="子节点挂载"><a href="#子节点挂载" class="headerlink" title="子节点挂载"></a>子节点挂载</h2><p>上述我们只考虑到了一个 vnode 的 children 为 string 的情况下的挂载，使用 <strong>setElementText</strong> 对元素进行挂载，但是 children 可能存在多个 vnode 非 string 类型的情况</p>
+<p><strong>例如</strong>：以下的 vnode，有两个子节点</p>
+<pre><code class="js">const vNode = {
+  type: &quot;div&quot;,
+  children: [
+    {
+      type: &quot;p&quot;,
+      children: &quot;111&quot;,
+    },
+    {
+      type: &quot;p&quot;,
+      children: &quot;222&quot;,
+    },
+  ],
+};</code></pre>
+<p>因此需要改造挂载函数，使其具有挂载子节点的能力。这里加入一层 children 节点的判断</p>
+<pre><code class="js">/** 挂载函数调用 */
+function mountElement(vnode, container) {
+  // 创建dom元素
+  const el = createElement(vnode.type);
+  //处理子节点, 如果子节点是字符串，代表元素具有文本节点
+  if (typeof vnode.children === &quot;string&quot;) {
+    // 只需要设置元素的textContent的属性即可
+    setElementText(el, vnode.children);
+  } else if (Array.isArray(vnode.children)) {
+    // ➕
+    // 如果children是数组，则便遍历每一个字节点，然后调用patch的方法
+    vnode.children.forEach((child) =&gt; {
+      patch(null, child, el);
+    });
+  }
+  // 将元素添加到容器中
+  insert(el, container);
+}</code></pre>
+<h2 id="挂载节点的属性"><a href="#挂载节点的属性" class="headerlink" title="挂载节点的属性"></a>挂载节点的属性</h2><p>一个元素可以用多个属性来进行描述，当然映射到虚拟 dom 上的话，用一个 props 的属性进行表示。</p>
+<pre><code class="js">const vNode = {
+  type: &quot;div&quot;,
+  props: {
+    id: &quot;foo&quot;,
+  },
+  children: [
+    {
+      type: &quot;p&quot;,
+      children: &quot;111&quot;,
+    },
+    {
+      type: &quot;p&quot;,
+      children: &quot;222&quot;,
+    },
+  ],
+};</code></pre>
+<p>因此我们在挂载元素的时候，也需要将这些属性值渲染到对应的元素上面</p>
+<p>改造挂载函数</p>
+<pre><code class="js">/** 挂载函数调用 */
+function mountElement(vnode, container) {
+  // 创建dom元素
+  const el = createElement(vnode.type);
+  //处理子节点, 如果子节点是字符串，代表元素具有文本节点
+  if (typeof vnode.children === &quot;string&quot;) {
+    // 只需要设置元素的textContent的属性即可
+    setElementText(el, vnode.children);
+  } else if (Array.isArray(vnode.children)) {
+    // 如果children是数组，则便遍历每一个字节点，然后调用patch的方法
+    vnode.children.forEach((child) =&gt; {
+      patch(null, child, el);
+    });
+  }
+
+  // 处理props, 存在的情况下进行处理
+  if (vnode.props) {
+    // ➕
+    // 遍历
+    for (const key in vnode.props) {
+      if (key in el) {
+        const prop = vnode.props[key];
+        // 调用setAttribute将属性设置到元素上
+        el.setAttribute(key, prop); // 🌟
+      }
+    }
+  }
+
+  // 将元素添加到容器中
+  insert(el, container);
+}</code></pre>
+<p>在标记“🌟“的地方，也可以使用 <code>el[key] = vnode.props[key]</code>，但是由于这都是属于直接操作 dom 对象的行为，所以都会存在缺陷，因此，我们需要想办法如何的正确设置元素的属性</p>
+<h3 id="🌟HTML-attribute-和-DOM-properties-区别"><a href="#🌟HTML-attribute-和-DOM-properties-区别" class="headerlink" title="🌟HTML attribute 和 DOM properties 区别"></a>🌟HTML attribute 和 DOM properties 区别</h3><p>HTML attribute 指的就是定义在 HMTL 标签上的属性</p>
+<pre><code class="html">&lt;input id=&quot;my-input&quot; type=&quot;text&quot; value=&quot;foo&quot; /&gt;</code></pre>
+<p>document 文档解析之后，会生成一个与之相符的 dom 元素对象，这个对象上面包含了很多的属性</p>
+{% image /Users/leo/Library/Application%20Support/marktext/images/2022-12-05-00-37-36-image.png '' '' %}
+
+<p>这些就是所谓的 dom property。</p>
+<p><strong>两者的区分</strong>大致如下</p>
+<ol>
+<li><p>很多的 HTMl attribute 在 DOM 对象上面都有与之同名的 DOM properties，但是命名规则却不一样</p>
+<p><strong>例如</strong>：HTML attribute 的 <strong>class</strong> 对应的 dom property 就是 <strong>className</strong></p>
+</li>
+<li><p>两者存在关联：例如上述设置了 HTML attribute 的 id 为‘foo’，那么对应的 DOM properties 当中存在相同属性名称为 id 也为 foo，<strong>两者可以当作直接映射的关系</strong></p>
+</li>
+<li><p>并不是都存在直接直接映射关系：例如 value 属性，上述 input 设置了 value 值，但是在 DOM properties 对应的值不仅仅是 value，还有 defaultValue 值；如果后续在 input 框中输入了其他的 value 值 bar</p>
+<p><img src="/Users/leo/Library/Application%20Support/marktext/images/2022-12-05-00-50-37-image.png" alt></p>
+<p>然后我们再去读取其相关的 HTML Attribute 和 DOM properties 会发现</p>
+<p><img src="/Users/leo/Library/Application%20Support/marktext/images/2022-12-05-00-53-03-image.png" alt></p>
+<p>其实 HTML Attribute 只是做了一个<strong>初始值的赋值</strong>，但是却是对其他的 DOM property 也有相关影响</p>
+</li>
+<li><p>非法属性值会被浏览器校验处理掉：例如我们在 <strong>input</strong> 的 HTML attribute 上面设置了一个 <strong>type</strong> 等于一个‘foo‘的属性，那么会被浏览器自动处理掉。最终我们读取 DOM property 的时候，是被矫正之后的值 ‘<strong>text</strong>’</p>
+</li>
+</ol>
+<blockquote>
+<p>HTMl Atrribute 的作用就是设置与之对应的 DOM properties 的初始值</p>
+</blockquote>
+<p>所以按照上述的 HTML attribute 和 DOM props 的区别，我们可以改造相关的 mountElement 的操作</p>
+<pre><code class="js">/** 挂载函数调用 */
+function mountElement(vnode, container) {
+  // 创建dom元素
+  const el = createElement(vnode.type);
+  console.log(el);
+  //处理子节点, 如果子节点是字符串，代表元素具有文本节点
+  if (typeof vnode.children === &quot;string&quot;) {
+    // 只需要设置元素的textContent的属性即可
+    setElementText(el, vnode.children);
+  } else if (Array.isArray(vnode.children)) {
+    // 如果children是数组，则便遍历每一个字节点，然后调用patch的方法
+    vnode.children.forEach((child) =&gt; {
+      patch(null, child, el);
+    });
+  }
+
+  // 处理props, 存在的情况下进行处理
+  if (vnode.props) {
+    // 遍历
+    for (const key in vnode.props) {
+      const value = vnode.props[key]; // 获取props对应key的value
+      // dom properties存在的情况
+      if (key in el) {
+        el[key] = value;
+      } else {
+        // 设置的属性没有对应的DOM properties的情况，调用setAttribute将属性设置到元素上
+        el.setAttribute(key, value);
+      }
+    }
+  }
+
+  // 将元素添加到容器中
+  insert(el, container);
+}</code></pre>
+<h3 id="正确的设置节点的属性"><a href="#正确的设置节点的属性" class="headerlink" title="正确的设置节点的属性"></a>正确的设置节点的属性</h3><p><a href>浏览</a>器会自动为我们解析 HTML 文件中的 dom 元素，以及相关的 props 的属性设置操作。</p>
+<p>但是在 vue 中，因为用到了自身的模板文件，所以在解析相关的节点的时候需要自身处理这些属性的挂载操作</p>
+<h4 id="布尔类型属性处理"><a href="#布尔类型属性处理" class="headerlink" title="布尔类型属性处理"></a>布尔类型属性处理</h4><p>例如下面这段 html 代码：</p>
+<pre><code class="html">&lt;button disabled /&gt;</code></pre>
+<p>在浏览器中会将其属性 <strong>disabled</strong> 自动矫正为 disabled=true</p>
+<p>在目前的我们渲染器中，类似与等价于如下 vnode</p>
+<pre><code class="js">const vNode = {
+  type: &quot;button&quot;,
+  props: {
+    disabled: &quot;&quot;,
+  },
+};</code></pre>
+<p>最终在挂载的时候，会调用设置方法将空字符串 设置到 dom 属性上面。</p>
+<p>类似于：<code>el.disabled=&#39;&#39;</code></p>
+<p>但是由于浏览器的自动矫正功能，会将我们的空字符串，自动矫正为 false，这就不符合用户的本意了。</p>
+<p>因此我们要对这种 DOM attribute 布尔类型的属性，在赋值的时候加入一层判断</p>
+<pre><code class="js">/** 挂载函数调用 */
+function mountElement(vnode, container) {
+  // 创建dom元素
+  // ... 省略代码
+
+  // 处理props, 存在的情况下进行处理
+  if (vnode.props) {
+    // 遍历
+    for (const key in vnode.props) {
+      const value = vnode.props[key]; // 获取props对应key的value
+      // dom properties存在的情况
+      if (key in el) {
+        // 获取这个DOM properties元素的属性类型
+        const type = typeof el[key]; // ➕
+        // 如果原生属性类型为布尔类型，并且value是空的字符串的话，给他值矫正为true
+        if (type === &quot;boolean&quot; &amp;&amp; value === &quot;&quot;) {
+          // ➕
+          el[key] = true;
+        } else {
+          // 其他情况
+          el[key] = value;
+        }
+      } else {
+        // 设置的属性没有对应的DOM properties的情况，调用setAttribute将属性设置到元素上
+        el.setAttribute(key, value);
+      }
+    }
+  }
+
+  // 将元素添加到容器中
+  insert(el, container);
+}</code></pre>
+<h4 id="只读类型属性处理"><a href="#只读类型属性处理" class="headerlink" title="只读类型属性处理"></a>只读类型属性处理</h4><p>DOM properties 当中还存在很多只读的属性，例如：form</p>
+<p>如下例子：</p>
+<pre><code class="html">&lt;form id=&quot;form1&quot;&gt;&lt;/form&gt;
+&lt;input form=&quot;form1&quot; /&gt;</code></pre>
+<p>类似 <code>form</code> 这种 DOM properties 在所有的 form 控件上都是，只读的属性的，我们只能通过 <code>setAttribute</code>来设置他的属性，所以这时候还得要修改我们的逻辑，判断当前的属性在浏览器中是否是只读的，如果是匹配上这种只读的情况的属性，使用<code>setAttribute</code>来进行赋值</p>
+<pre><code class="js">// 判断是否应该作为DOM properties的设置
+function shouldSetAsProps(el, key, value) {
+  // 对特殊只读属性的处理
+  if (key === &quot;form&quot; &amp;&amp; el.tagName === &quot;INPUT&quot;) return false;
+
+  return key in el;
+}
+
+/** 挂载函数调用 */
+function mountElement(vnode, container) {
+  // 创建dom元素
+  // ... 省略代码
+
+  // 处理props, 存在的情况下进行处理
+  if (vnode.props) {
+    // 遍历
+    for (const key in vnode.props) {
+      const value = vnode.props[key]; // 获取props对应key的value
+      // dom properties存在的情况
+      if (shouldSetAsProps(el, key, value)) {
+        // 获取这个DOM properties元素的属性类型
+        const type = typeof el[key];
+        // 如果原生属性类型为布尔类型，并且value是空的字符串的话，给他值矫正为true
+        if (type === &quot;boolean&quot; &amp;&amp; value === &quot;&quot;) {
+          el[key] = true;
+        } else {
+          el[key] = value;
+        }
+      } else {
+        // 设置的属性没有对应的DOM properties的情况，调用setAttribute将属性设置到元素上
+        el.setAttribute(key, value);
+      }
+    }
+  }
+
+  // 将元素添加到容器中
+  insert(el, container);
+}</code></pre>
+<h4 id="提取平台无关代码"><a href="#提取平台无关代码" class="headerlink" title="提取平台无关代码"></a>提取平台无关代码</h4><p>我们将遍历 props 时候的 判断设值的代码，提取到 BROWSE_APIS 当中，作为浏览器端的方法，取名为<code>patchProps</code></p>
+<pre><code class="js">/** 将属性设置相关的操作封装到patchProps的函数中，并作为渲染器选项传递 */
+  patchProps(el, key, preValue, nextValue) {
+    // 判断是否应该作为DOM properties的设置
+    function shouldSetAsProps(el, key, value) {
+      // 对特殊只读属性的处理
+      if (key === &quot;form&quot; &amp;&amp; el.tagName === &quot;INPUT&quot;) return false;
+      // ...还有更多特殊处理情况todo
+
+      return Object.hasOwnProperty.call(vnode.props, key);
+    }
+
+    // dom properties存在的情况
+    if (shouldSetAsProps(el, key, nextValue)) {
+      // 获取这个DOM properties元素的属性类型
+      const type = typeof el[key];
+      // 如果原生属性类型为布尔类型，并且value是空的字符串的话，给他值矫正为true
+      if (type === &quot;boolean&quot; &amp;&amp; nextValue === &quot;&quot;) {
+        el[key] = true;
+      } else {
+        el[key] = nextValue;
+      }
+    } else {
+      // 设置的属性没有对应的DOM properties的情况，调用setAttribute将属性设置到元素上
+      el.setAttribute(key, nextValue);
+    }
+  },</code></pre>
+<p>最终在 mountElement 中就这样调用</p>
+<pre><code class="js">/** 挂载函数调用 */
+function mountElement(vnode, container) {
+  // 创建dom元素
+  const el = createElement(vnode.type);
+  console.log(el);
+  //处理子节点, 如果子节点是字符串，代表元素具有文本节点
+  if (typeof vnode.children === &quot;string&quot;) {
+    // 只需要设置元素的textContent的属性即可
+    setElementText(el, vnode.children);
+  } else if (Array.isArray(vnode.children)) {
+    // 如果children是数组，则便遍历每一个字节点，然后调用patch的方法
+    vnode.children.forEach((child) =&gt; {
+      patch(null, child, el);
+    });
+  }
+
+  // 处理props, 存在的情况下进行处理
+  if (vnode.props) {
+    // 遍历
+    for (const key in vnode.props) {
+      patchProps(el, key, null, vnode.props[key]); // ➕
+    }
+  }
+
+  // 将元素添加到容器中
+  insert(el, container);
+}</code></pre>
+<h3 id="class-和-style-的处理"><a href="#class-和-style-的处理" class="headerlink" title="class 和 style 的处理"></a>class 和 style 的处理</h3><p>在 vue 中，我们可以用 3 种方式去传递一个 class 的值</p>
+<p>字符串</p>
+<pre><code class="html">&lt;p class=&quot;foo bar&quot;&gt;&lt;/p&gt;</code></pre>
+<p>对象</p>
+<pre><code class="html">&lt;p :class=&quot;{ foo:true,  bar:false }&quot;&gt;&lt;/p&gt;</code></pre>
+<p>数组</p>
+<pre><code class="html">&lt;p :class=&quot;[&#39;foo bar&#39;, {foo:true,  bar:false }]&quot;&gt;&lt;/p&gt;</code></pre>
+<p>无论是何种结构，我们最终转化到 vNode 上面都是要成为一个字符串的</p>
+<pre><code class="js">const vNode = {
+  type: &quot;p&quot;,
+  props: {
+    class: &quot;foo bar&quot;,
+  },
+};</code></pre>
+<p>因此在生成 vnode 的过程，我们需要调用 normalizeClass 的方法去转换 class</p>
+<pre><code class="js">const vNode = {
+  type: &quot;p&quot;,
+  props: {
+    class: normalizeClass([
+      &quot;foo&quot;,
+      {
+        foo: false,
+        bar: true,
+      },
+    ]),
+  },
+};</code></pre>
+<h4 id="实现-normalizeClass"><a href="#实现-normalizeClass" class="headerlink" title="实现 normalizeClass"></a>实现 normalizeClass</h4><p>normalizeClass</p>
+<pre><code class="js">/** 格式化class */
+function normalizeClass(value) {
+  let res = &quot;&quot;;
+  if (isString(value)) {
+    res = value;
+  } else if (isArray(value)) {
+    // 类似数组 join(&#39; &#39;)
+    for (let i = 0; i &lt; value.length; i++) {
+      const normalized = normalizeClass(value[i]);
+      if (normalized) {
+        res += normalized + &quot; &quot;;
+      }
+    }
+  } else if (isObject(value)) {
+    for (const name in value) {
+      if (value[name]) {
+        res += name + &quot; &quot;;
+      }
+    }
+  }
+  return res.trim();
+}</code></pre>
+<h4 id="设置-class"><a href="#设置-class" class="headerlink" title="设置 class"></a>设置 class</h4><p>设置 dom class 属性的方式有多种，<code>setAttribute</code>, <code>el.className</code>, <code>el.classList</code></p>
+<p>其中<code>el.className</code>的性能最好<br>因此我们改之我们的<code>patchProps</code>方法</p>
+<pre><code class="js">/** 将属性设置相关的操作封装到patchProps的函数中，并作为渲染器选项传递 */
+  patchProps(el, key, preValue, nextValue) {
+    // 判断是否应该作为DOM properties的设置
+    function shouldSetAsProps(el, key, value) {
+      // ...
+    }
+
+    if (key === &quot;class&quot;) { // ➕
+      el.className = nextValue || &quot;&quot;;  // ➕
+    } else if (shouldSetAsProps(el, key, nextValue)) {
+      // ...
+    } else {
+      // ...
+    }
+  },</code></pre>
+<p>当然 style 也是类似的处理方案，只不过在 vue 中调用的是<code>normalizeStyle</code>的方法</p>
+<h2 id="卸载操作"><a href="#卸载操作" class="headerlink" title="卸载操作"></a>卸载操作</h2><p>上述说到，我们在 render 函数中使用了 <code>container.innerHTML = &#39;&#39;</code>的方式去清空卸载;</p>
+<pre><code class="js">/** 渲染方法 */
+const render = (vnode, container) =&gt; {
+  if (vnode) {
+    // 新的node存在的情况，将其旧的vnode一起传递给patch函数进行补丁的更新
+    patch(container._vnode, vnode, container);
+  } else {
+    if (container._vnode) {
+      // 旧的vnode存在，新的vnode不存在的情况，说明是一个 unmount（卸载）的操作
+      // 这里只需要将container内dom清空就可以
+      container.innerHTML = &quot;&quot;; // ✨
+    }
+  }
+  // 每一次都需要保存上一次的vnode，存储在container下
+  container._vnode = vnode;
+};</code></pre>
+<p>这么做不严谨，原因如下：</p>
+<ol>
+<li>容器的内容可能是某个组件或者多个渲染的，在卸载的时候应该去触发组件相关的卸载生命周期函数</li>
+<li>自定义指令，没办法正确执行</li>
+<li>dom 身上绑定的一些事件，不会进行移除</li>
+</ol>
+<p>正确的卸载方式：</p>
+<ol>
+<li><p>根据 vnode 对象获取其关联的真实 dom 元素</p>
+</li>
+<li><p>使用原生的 dom 移除操作将其移除</p>
+</li>
+</ol>
+<h3 id="建立-dom-与-vnode-联系"><a href="#建立-dom-与-vnode-联系" class="headerlink" title="建立 dom 与 vnode 联系"></a>建立 dom 与 vnode 联系</h3><p>要想根据 vnode 对象获取其关联的真实 dom 元素，首先必须要先建立联系</p>
+<p>在挂载阶段我们利用 <code>createElement</code>创建了真实的 dom，之后将其绑定在 vnode 上，这样就可以将 vNode 和真实 dom 之间的联系建立起来</p>
+<pre><code class="js">/** 挂载函数调用 */
+function mountElement(vnode, container) {
+  // 创建dom元素
+  const el = createElement(vnode.type);
+  console.log(el);
+  vnode.el = el; // 将其创建出来的dom添加到vnode上，建立联系 ➕
+  //处理子节点, 如果子节点是字符串，代表元素具有文本节点
+  if (typeof vnode.children === &quot;string&quot;) {
+    // ...
+  } else if (Array.isArray(vnode.children)) {
+    // ...
+  }
+
+  // 处理props, 存在的情况下进行处理
+  if (vnode.props) {
+    // ...
+  }
+
+  // 将元素添加到容器中
+  insert(el, container);
+}</code></pre>
+<h3 id="改造-render-函数"><a href="#改造-render-函数" class="headerlink" title="改造 render 函数"></a>改造 render 函数</h3><pre><code class="js">/** 渲染方法 */
+const render = (vnode, container) =&gt; {
+  if (vnode) {
+    // 新的node存在的情况，将其旧的vnode一起传递给patch函数进行补丁的更新
+    patch(container._vnode, vnode, container);
+  } else {
+    if (container._vnode) {
+      // 旧的vnode存在，新的vnode不存在的情况，说明是一个 unmount（卸载）的操作
+      // 根据vnode获取要卸载的真实dom元素
+      const el = container._vnode.el; // ➕
+      // 获取el的父级元素
+      const parent = el.parentNode; // ➕
+      // 调用removeChild删除元素
+      if (parent) parent.removeChild(el); // ➕
+    }
+  }
+  // 每一次都需要保存上一次的vnode，存储在container下
+  container._vnode = vnode;
+};</code></pre>
+<p>其中的 container._vnode 代表的就是旧的 vnode（即将要被卸载的），由于我们之前绑定上了相关的 dom 在 vnode 上，就可以调用其父级的移除元素的操作</p>
+<h3 id="封装-unmount"><a href="#封装-unmount" class="headerlink" title="封装 unmount"></a>封装 unmount</h3><p>将上述的卸载操作封装成一个 unmount 的函数，方便后续功能增加</p>
+<p>unmount</p>
+<pre><code class="js">/** 卸载操作 */
+function unmount(vnode) {
+  // 根据vnode获取要卸载的真实dom元素
+  // 获取el的父级元素
+  const parent = vnode.el.parentNode;
+  if (parent) {
+    parent.removeChild(vnode.el);
+  }
+}</code></pre>
+<p>render</p>
+<pre><code class="js">const render = (vnode, container) =&gt; {
+  if (vnode) {
+    // 新的node存在的情况，将其旧的vnode一起传递给patch函数进行补丁的更新
+    patch(container._vnode, vnode, container);
+  } else {
+    if (container._vnode) {
+      // 旧的vnode存在，新的vnode不存在的情况，说明是一个 unmount（卸载）的操作
+      unmount(container._vnode); // ➕
+    }
+  }
+  // 每一次都需要保存上一次的vnode，存储在container下
+  container._vnode = vnode;
+};</code></pre>
+<h2 id="区分-vnode-类型"><a href="#区分-vnode-类型" class="headerlink" title="区分 vnode 类型"></a>区分 vnode 类型</h2><p>在 render 函数中，vnode 存在的情况下，会将老的 vnode 和新的 vnode 都传递给 patch 函数去做一个更新，当然是我们的 node 的类型都是相同的情况下，我们才有去做比较的意义。</p>
+<p>比如：</p>
+<pre><code class="js">const vnode = { type: &quot;p&quot; }; //第一次渲染：
+const vnode = { type: &quot;input&quot; }; // 第二次渲染</code></pre>
+<p>这种情况就没有对比更新的一个必要了。</p>
+<p>这种情况下：</p>
+<ol>
+<li><p>先去卸载 p 元素</p>
+</li>
+<li><p>再将 input 挂载到容器中</p>
+</li>
+</ol>
+<p>因此我们需要改造 patch 的代码</p>
+<pre><code class="js">/** 更新对比, 并且做挂载相关的功能 */
+function patch(n1, n2, container) {
+  // n1老节点存在，对比n1和n2的类型
+  if (n1 &amp;&amp; n1.type !== n2.type) {
+    // ➕
+    // 如果新旧vnode的类型不同，则直接将旧的vnode卸载
+    unmount(n1); // ➕
+    n1 = null; // ➕
+  }
+  // 如果不存在
+  if (!n1) {
+    mountElement(n2, container);
+  } else {
+    // n1存在的情况下面，我们进行更新（打补丁）
+  }
+}</code></pre>
+<p>这种情况都是 vnode 为普通标签元素的类型情况下，我们也可以稍微改造一些对组件类型等等的支持</p>
+<pre><code class="js">/** 更新对比, 并且做挂载相关的功能 */
+function patch(n1, n2, container) {
+  // n1老节点存在，对比n1和n2的类型
+  if (n1 &amp;&amp; n1.type !== n2.type) {
+    // 如果新旧vnode的类型不同，则直接将旧的vnode卸载
+    unmount(n1);
+    n1 = null;
+  }
+
+  const { type } = n2;
+
+  if (typeof type === &quot;string&quot;) {
+    // 说明是普通的标签元素
+    if (!n1) {
+      // 如果不存在, 就进行挂载
+      mountElement(n2, container);
+    } else {
+      // n1存在的情况下面，我们进行更新（打补丁）
+      patchElement(n1, n2);
+    }
+  } else if (typeof type === &quot;object&quot;) {
+    // 组件
+  } else {
+    // 其他
+  }
+}</code></pre>
+<h2 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h2><p>首先我们要在 vnode 中去描述事件，假定一个规则，以字符串 on 开头的都视作事件</p>
+<pre><code class="js">const vnode = {
+  type: &quot;p&quot;,
+  props: {
+    onClick: () =&gt; {},
+  },
+  children: &quot;text&quot;,
+};</code></pre>
+<h3 id="绑定事件和更新"><a href="#绑定事件和更新" class="headerlink" title="绑定事件和更新"></a>绑定事件和更新</h3><p>事件绑定和更新我们就需要在 patchProps 函数中做相关的处理</p>
+<pre><code class="js"> /** 将属性设置相关的操作封装到patchProps的函数中，并作为渲染器选项传递 */
+  patchProps(el, key, preValue, nextValue) {
+    // 匹配事件，以on开头
+    if (/^on/.test(key)) { // ➕
+      // 根据属性名称得到对应的事件名称
+      const name = key.slice(2).toLowerCase(); // ➕
+      // 移除上一次绑定的事件处理函数
+      prevValue &amp;&amp; el.removeEventListener(name, prevValue); // ➕
+      // 绑定事件, nextvalue为事件函数
+      el.addEventListener(name, nextValue); // ➕
+    } else if (key === &quot;class&quot;) {
+      // ...
+    } else if (shouldSetAsProps(el, key, nextValue)) {
+       // ...
+    } else {
+      // ...
+    }
+  }</code></pre>
+<p>按如上的逻辑，就是相当于每次更新都要去移除之前绑定的函数，然后再对新的值重新进行监听。但是这么做性能并不是最优的。</p>
+<p>我们可以绑定一个伪造的事件处理函数 invoker，然后把真正的事件处理函数设置为 invoker.value，后续更新值的时候，我们只需要更新 invoker.value 值就可以</p>
+<pre><code class="js">/** 将属性设置相关的操作封装到patchProps的函数中，并作为渲染器选项传递 */
+function patchProps(el, key, prevValue, nextValue) {
+  // 匹配事件，以on开头
+  if (/^on/.test(key)) {
+    // 定义el.vei为一个对象，存在事件名称到事件处理函数的映射
+    const invokers = el._vei || (el._vei = {});
+
+    // 获取该元素伪造的事件处理函数, 根据key
+    let invoker = invokers[key];
+    // 根据属性名称得到对应的事件名称
+    const name = key.slice(2).toLowerCase();
+
+    if (nextValue) {
+      if (!invoker) {
+        // 如果没有invoker，为首次监听，则去伪造一个缓存到el.vei中
+        invoker = el._vei[key] = (e) =&gt; {
+          // 如果invoker是数组的情况，需要遍历执行
+          if (Array.isArray(invoker.value)) {
+            invoker.value.forEach((fn) =&gt; fn(e));
+          } else {
+            // 这里才是处理真正的事件函数
+            invoker.value(e);
+          }
+        };
+        // 赋值事件处理函数到invoker的value上
+        invoker.value = nextValue;
+        // 绑定invoker
+        el.addEventListener(name, invoker);
+      } else {
+        // 存在invoker说明是更新，只需要更新invoker.value值就行
+        invoker.value = nextValue;
+      }
+    } else if (invoker) {
+      // 新的事件函数不存在，需要销毁invoker
+      el.removeEventListener(name, invoker);
+    }
+  } else if (key === &quot;class&quot;) {
+    // ...
+  } else if (shouldSetAsProps(el, key, nextValue)) {
+    // ....
+  } else {
+    // ...
+  }
+}</code></pre>
+<ul>
+<li><p>invokers：存事件名称与对应函数的映射</p>
+</li>
+<li><p>el._vei：vue event invoker，在 el 上缓存 invoker</p>
+</li>
+</ul>
+<h2 id="更新属性以及子节点"><a href="#更新属性以及子节点" class="headerlink" title="更新属性以及子节点"></a>更新属性以及子节点</h2><blockquote>
+<p>更新必定涉及到整个 vnode 上面的属性的变化，包括节点的属性以及节点的子节点的变化</p>
+</blockquote>
+<p>元素的挂载是由 mountElement 触发的</p>
+<pre><code class="js">/** 挂载函数调用 */
+function mountElement(vnode, container) {
+  // 创建dom元素
+  const el = createElement(vnode.type);
+  console.log(el);
+  vnode.el = el; // 将其创建出来的dom添加到vnode上，建立联系
+  //处理子节点, 如果子节点是字符串，代表元素具有文本节点
+  if (typeof vnode.children === &quot;string&quot;) {
+    // 只需要设置元素的textContent的属性即可
+    setElementText(el, vnode.children);
+  } else if (Array.isArray(vnode.children)) {
+    // 如果children是数组，则便遍历每一个字节点，然后调用patch的方法
+    vnode.children.forEach((child) =&gt; {
+      patch(null, child, el);
+    });
+  }
+
+  // 处理props, 存在的情况下进行处理
+  if (vnode.props) {
+    // 遍历
+    for (const key in vnode.props) {
+      patchProps(el, key, null, vnode.props[key]);
+    }
+  }
+
+  // 将元素添加到容器中
+  insert(el, container);
+}</code></pre>
+<p>在挂载子节点的时候，首先有两种的类型的区分</p>
+<ul>
+<li><p>字符串：具有文本的子节点</p>
+</li>
+<li><p>数组：多个子节点</p>
+</li>
+</ul>
+<p>总的来说，子节点分为 3 种类型：</p>
+<ol>
+<li><p>没有子节点的情况</p>
+<pre><code class="js">vnode = {
+  type: &quot;div&quot;,
+  children: null,
+};</code></pre>
+</li>
+<li><p>字符串的情况</p>
+<pre><code class="js">vnode = {
+  type: &quot;div&quot;,
+  children: &quot;222&quot;,
+};</code></pre>
+</li>
+<li><p>数组的情况</p>
+<pre><code class="js">vnode = {
+  type: &quot;div&quot;,
+  children: [&quot;111&quot;, { type: &quot;p&quot; }],
+};</code></pre>
+</li>
+</ol>
+<p>对应到更新的时候，我们对应的新旧节点都分别是 3 种情况</p>
+<img src="file:///Users/leo/Library/Application%20Support/marktext/images/2022-12-09-22-45-02-image.png" title alt width="592">
+
+<p>接下来我们去实现 <strong>patchElement</strong>函数</p>
+<ul>
+<li><p>n1: 旧 vnode</p>
+</li>
+<li><p>n2: 新 vnode</p>
+</li>
+</ul>
+<p><strong>实现步骤</strong></p>
+<ol>
+<li><p>首先我们去更新他们的 <strong>props</strong> 的变化，调用之前封装好的 <strong>patchProps</strong> 函数做更新变化</p>
+</li>
+<li><p>之后去更新他们的 <strong>children</strong>，这里要对以上 <strong>9</strong> 种的情况进行覆盖。</p>
+</li>
+</ol>
+<h3 id="实现-props-变化更新"><a href="#实现-props-变化更新" class="headerlink" title="实现 props 变化更新"></a>实现 props 变化更新</h3><p><strong>实现 props 的更新</strong></p>
+<ol>
+<li><p>从新的 props 参数中找出旧的 props 中与之对应的 key value，调用 pacthProps 方法对 dom 元素进行对比更新</p>
+</li>
+<li><p>从旧的 props 中找出不存在新 props 中的属性，调用 pacthProps 的方法进行 dom 属性的卸载</p>
+</li>
+</ol>
+<pre><code class="js">/** 更新子节点 */
+function pacthElement(n1, n2) {
+  n2.el = n1.el;
+  const el = n2.el;
+  const { props: oldProps } = n1;
+  const { props: newProps } = n2;
+  // step 1 更新props
+  for (const key in newProps) {
+    if (newProps[key] !== oldProps[key]) {
+      patchProps(el, key, oldProps[key], newProps[key]);
+    }
+  }
+  for (const key in oldProps) {
+    if (!(key in newProps)) {
+      patchProps(el, key, oldProps[key], null);
+    }
+  }
+
+  // step 2：更新children
+  pacthChildren(n1, n2, el);
+}</code></pre>
+<h4 id="顺手改造-patchProps-函数"><a href="#顺手改造-patchProps-函数" class="headerlink" title="顺手改造 patchProps 函数"></a>顺手改造 patchProps 函数</h4><p>我们依据 patchProps 的各个分支，去相对应封装我们的更新方法</p>
+<p>最终的改造如下</p>
+<pre><code class="js">// 比对props做更新
+const patchProp = (el, key, prevValue, nextValue) =&gt; {
+  if (key === &quot;class&quot;) {
+    // class的处理
+    patchClass(el, nextValue);
+  } else if (key === &quot;style&quot;) {
+    // style的处理
+    patchStyle(el, prevValue, nextValue);
+  } else if (/^on[^a-z]/.test(key)) {
+    // 事件的处理
+    patchEvent(el, key, nextValue);
+  } else {
+    // 其他属性的处理
+    patchAttr(el, key, nextValue);
+  }
+};</code></pre>
+<h5 id="操作-class-更新"><a href="#操作-class-更新" class="headerlink" title="操作 class 更新"></a>操作 class 更新</h5><pre><code class="js">/** 比对class属性 */
+function patchClass(el, value) {
+  // 根据最新值设置类名
+  if (value == null) {
+    el.removeAttribute(&quot;class&quot;);
+  } else {
+    el.className = value;
+  }
+}</code></pre>
+<h5 id="操作样式的更新"><a href="#操作样式的更新" class="headerlink" title="操作样式的更新"></a>操作样式的更新</h5><pre><code class="js">/** 比对class属性 */
+function patchStyle(el, prev, next) {
+  // 更新style
+  const style = el.style;
+  for (const key in next) {
+    // 用最新的直接覆盖
+    style[key] = next[key];
+  }
+  if (prev) {
+    for (const key in prev) {
+      // 老的有新的没有删除
+      if (next[key] == null) {
+        style[key] = null;
+      }
+    }
+  }
+}</code></pre>
+<h5 id="操作事件的更新"><a href="#操作事件的更新" class="headerlink" title="操作事件的更新"></a>操作事件的更新</h5><pre><code class="js">/** 创建一个invoker */
+function createInvoker(initialValue) {
+  const invoker = (e) =&gt; invoker.value(e);
+  invoker.value = initialValue;
+  return invoker;
+}
+/** 比对事件更新 */
+function patchEvent(el, rawName, nextValue) {
+  // 更新事件
+  const invokers = el._vei || (el._vei = {});
+  const exisitingInvoker = invokers[rawName]; // 是否缓存过
+
+  if (nextValue &amp;&amp; exisitingInvoker) {
+    exisitingInvoker.value = nextValue;
+  } else {
+    const name = rawName.slice(2).toLowerCase(); // 转化事件是小写的
+    if (nextValue) {
+      // 缓存函数
+      const invoker = (invokers[rawName] = createInvoker(nextValue));
+      el.addEventListener(name, invoker);
+    } else if (exisitingInvoker) {
+      el.removeEventListener(name, exisitingInvoker);
+      invokers[rawName] = undefined;
+    }
+  }
+}</code></pre>
+<h5 id="操作属性的更新"><a href="#操作属性的更新" class="headerlink" title="操作属性的更新"></a>操作属性的更新</h5><pre><code class="js">/** 比对dom properties或者是html attributes */
+function patchAttr(el, key, value) {
+    // 更新属性
+    if (value == null) {
+      // 如果值不存在，说明是卸载props的操作
+      el.removeAttribute(key);
+    } else {
+      if (shouldSetAsProps(el, key, nextValue)) {
+        // dom properties存在的情况
+        // 获取这个DOM properties元素的属性类型
+        const type = typeof el[key];
+        // 如果原生属性类型为布尔类型，并且value是空的字符串的话，给他值矫正为true
+        if (type === &quot;boolean&quot; &amp;&amp; nextValue === &quot;&quot;) {
+          el[key] = true;
+        } else {
+          el[key] = nextValue;
+        }
+      } else {
+        el.setAttribute(key, value);
+      }
+    }
+  }</code></pre>
+<h3 id="更新-children-节点"><a href="#更新-children-节点" class="headerlink" title="更新 children 节点"></a>更新 children 节点</h3><p>对照以上 3*3 的节点情况</p>
+<h4 id="1-新子节点是文本节点"><a href="#1-新子节点是文本节点" class="headerlink" title="1. 新子节点是文本节点"></a>1. 新子节点是文本节点</h4><pre><code class="js">/** 更新children */
+function pacthChildren(n1, n2, container) {
+  // 判断新子节点的类型是否是文本节点
+  if (typeof n2.children === &quot;string&quot;) {
+    // 当新节点为文本节点的时候，如果旧节点是一组子的节点，我们需要逐个去卸载，其他情况啥也不做
+    if (Array.isArray(n1.children)) {
+      n1.children.forEach((node) =&gt; unmount(node));
+    }
+    // 最后设置新的节点内容
+    setElementText(container, n2.children);
+  }
+}</code></pre>
+<h4 id="2-新子节点是一组"><a href="#2-新子节点是一组" class="headerlink" title="2. 新子节点是一组"></a>2. 新子节点是一组</h4><pre><code class="js">/** 更新children */
+function pacthChildren(n1, n2, container) {
+  // 判断新子节点的类型是否是文本节点
+  if (typeof n2.children === &quot;string&quot;) {
+    // ...
+  } else if (Array.isArray(n2.children)) {
+    // 当新的子节点是一组
+    // 我们判断旧的子节点是否也是一组
+    if (Array.isArray(n1.children)) {
+      // diff算法 todo
+    } else {
+      // 到这里，存在两种情况，要么是文本节点要么无
+      // 什么情况下都去清空，然后将一组新的子节点添加进来
+      setElementText(container, &quot;&quot;);
+      n2.children.forEach((node) =&gt; patch(null, node, container));
+    }
+  }
+}</code></pre>
+<p>diff 算法，目前先用傻瓜逻辑实现，全部卸载然后再全部挂载</p>
+<pre><code class="js">n1.children.forEach((node) =&gt; unmount(node));
+n2.children.forEach((node) =&gt; patch(null, node, container));</code></pre>
+<h4 id="3-新子节点啥也没有"><a href="#3-新子节点啥也没有" class="headerlink" title="3. 新子节点啥也没有"></a>3. 新子节点啥也没有</h4><pre><code class="js">/** 更新children */
+function pacthChildren(n1, n2, container) {
+  // 判断新子节点的类型是否是文本节点
+  if (typeof n2.children === &quot;string&quot;) {
+    // 当新节点为文本节点的时候，如果旧节点是一组子的节点，我们需要逐个去卸载，其他情况啥也不做
+    if (Array.isArray(n1.children)) {
+      n1.children.forEach((node) =&gt; unmount(node));
+    }
+    // 最后设置新的节点内容
+    setElementText(container, n2.children);
+  } else if (Array.isArray(n2.children)) {
+    // ....
+  } else {
+    // 到这里，说明新的子节点不存在
+    // 如果旧的节点是一组子节点，只需要逐个卸载就可以
+    if (Array.isArray(n1.children)) {
+      n1.children.forEach((node) =&gt; unmount(node));
+    } else if (typeof n1.children === &quot;string&quot;) {
+      // 旧节点是文本，清空
+      setElementText(container, &quot;&quot;);
+    }
+    // 其他情况不用管
+  }
+}</code></pre>
+<h2 id="特殊节点类型"><a href="#特殊节点类型" class="headerlink" title="特殊节点类型"></a>特殊节点类型</h2><p>一般我们用 vnode 描述节点，都是用 type 去描述节点类型</p>
+<p>但是 像 文本节点 注释节点 以及 vue3 的 fragment，都较为特殊</p>
+<pre><code class="html">&lt;Fragment&gt;
+  &lt;!-- 注释节点 --&gt;
+  文本节点
+&lt;/Fragment&gt;</code></pre>
+<h3 id="文本节点和注释节点处理"><a href="#文本节点和注释节点处理" class="headerlink" title="文本节点和注释节点处理"></a>文本节点和注释节点处理</h3><p>这两者对于普通标签节点来说，不具备标签名称，所以需要框架认为的去创造一些唯一的标识，并且将其作为注释节点和文本节点的 type</p>
+<p>描述文本和注释节点：</p>
+<pre><code class="js">// 加入人为的文本节点标识
+const Text = Symbol();
+const newVnode = {
+  type: Text,
+  children: &quot;文本节点&quot;,
+};
+// 加入人为的注释节点标识
+const Comment = Symbol();
+const newVnode = {
+  type: Comment,
+  children: &quot;注释的节点&quot;,
+};</code></pre>
+<p>加入两者之后，我们需要在 patch 中去做相关的改造</p>
+<pre><code class="js">/** 更新对比, 并且做挂载相关的功能 */
+  function patch(n1, n2, container) {
+    // n1老节点存在，对比n1和n2的类型
+    if (n1 &amp;&amp; n1.type !== n2.type) {
+      // 如果新旧vnode的类型不同，则直接将旧的vnode卸载
+      unmount(n1);
+      n1 = null;
+    }
+
+    const { type } = n2;
+
+    if (typeof type === &quot;string&quot;) {
+      // ....
+    } else if (typeof type === &quot;object&quot;) {
+      // 组件
+    } else if (type === Text) {
+      // 文本标签
+      if (!n1) {
+        // 使用原生createTextNode去创建文本节点
+        const el = (n2.el = document.createTextNode(n2.children));
+        // 将文本节点插入到容器中
+        insert(el, container);
+      } else {
+        // 如果旧的vnode存在，只需要使用心得文本节点的文本内容更新旧文本节点就可以了
+        const el = (n2.el = n1.el);
+        if (n2.children !== n1.children) {
+          el.nodeValue = n2.children;
+        }
+      }
+    }</code></pre>
+<p>当然上述用到了相关浏览器的 api 我们需要给他提取出来<code>document.createTextNode</code>以及<code>el.nodeValue</code></p>
+<pre><code class="js">/** 浏览器端的相关api */
+const BROWSER_APIS = {
+  // 用于创建元素
+  createElement(tag) {
+    // ...
+  },
+
+  /** 用于设置元素的文本节点 */
+  setElementText(el, text) {
+    // ...
+  },
+
+  /** 给特定的parent下添加指定的元素 */
+  insert(el, parent, anchor = null) {
+    // ...
+  },
+
+  /** 创建文本节点 */
+  createText(text) {
+    // ➕
+    return document.createTextNode(text);
+  },
+
+  /** 设置文本值 */
+  setText(el, text) {
+    // ➕
+    el.nodeValue = text;
+  },
+
+  /** 将属性设置相关的操作封装到patchProps的函数中，并作为渲染器选项传递 */
+  patchProps(el, key, prevValue, nextValue) {
+    // ...
+  },
+};</code></pre>
+<p>处理注释的节点和其类似，调用原生的 <code>document.createComment</code>函数来创建即可</p>
+<h3 id="Fragment"><a href="#Fragment" class="headerlink" title="Fragment"></a>Fragment</h3><p>Fragment 和 tex 以及注释类似，type 也需要人为加入标识</p>
+<pre><code class="js">const Fragment = Symbol();</code></pre>
+<p>在项目中经常会有类似这样的 vNode，</p>
+<pre><code class="js">const vNode = {
+  type: &quot;ul&quot;,
+  children: [
+    {
+      type: Fragment,
+      children: [
+        {
+          type: &quot;li&quot;,
+          children: &quot;1&quot;,
+        },
+        {
+          type: &quot;li&quot;,
+          children: &quot;2&quot;,
+        },
+      ],
+    },
+  ],
+};</code></pre>
+<p>由于 Fragment 本身是不属于一个真正的节点的，所以在做渲染的时候，我们只需要渲染它的子节点就可以了</p>
+<p>因此我们改造 patch 函数</p>
+<pre><code class="js">/** 更新对比, 并且做挂载相关的功能 */
+function patch(n1, n2, container) {
+  // n1老节点存在，对比n1和n2的类型
+  if (n1 &amp;&amp; n1.type !== n2.type) {
+    // 如果新旧vnode的类型不同，则直接将旧的vnode卸载
+    unmount(n1);
+    n1 = null;
+  }
+
+  const { type } = n2;
+
+  if (typeof type === &quot;string&quot;) {
+    // ...
+  } else if (typeof type === &quot;object&quot;) {
+    // 组件
+  } else if (type === Text) {
+    // ...
+  } else if (type === Fragment) {
+    // 如果是 片段节点
+    if (!n1) {
+      // 如果不存在旧节点的话，只需要将Fragment的children逐个挂载就可以
+      n2.children.forEach((node) =&gt; patch(null, node, container));
+    } else {
+      // 如果旧的vnode存在的话， 则只需要更新fragment的children就可以
+      pacthChildren(n1, n2, container);
+    }
+  }
+}</code></pre>
+<p>并且对于我们在卸载的时候，也要做相关的处理</p>
+<pre><code class="js">/** 卸载操作 */
+function unmount(vnode) {
+  // 在卸载的时候，如果是卸载的vnode类型为Fragment， 则需要卸载他的children
+  if (vnode.type === Fragment) {
+    vnode.children.forEach((node) =&gt; unmount(node));
+    return;
+  }
+  // 根据vnode获取要卸载的真实dom元素
+  // 获取el的父级元素
+  const parent = vnode.el.parentNode;
+  if (parent) {
+    parent.removeChild(vnode.el);
+  }
+}</code></pre>
+<blockquote>
+<p>后面再说 diff</p>
+</blockquote>
+<h2 id="diff-算法"><a href="#diff-算法" class="headerlink" title="diff 算法"></a>diff 算法</h2><p>// todo….</p>
+<h3 id="简单的-diff-算法"><a href="#简单的-diff-算法" class="headerlink" title="简单的 diff 算法"></a>简单的 diff 算法</h3><h3 id="双端-diff-算法"><a href="#双端-diff-算法" class="headerlink" title="双端 diff 算法"></a>双端 diff 算法</h3><h3 id="快速-diff-算法"><a href="#快速-diff-算法" class="headerlink" title="快速 diff 算法"></a>快速 diff 算法</h3>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-12-13T01:41:56.270Z" itemprop="dateUpdated">2022-12-13 09:41:56</time>
+</span><br>
+
+
+        
+        Happy Coding
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/NollieLeo">
+            <img src="/img/avatar.png" alt="Mr.Weng">
+            Mr.Weng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/diff/" rel="tag">diff</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/&title=《vue3渲染器设计与总结》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/&title=《vue3渲染器设计与总结》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《vue3渲染器设计与总结》 — 翁老师的博客&url=https://github.com/NollieLeo/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2023/01/28/diff%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%93/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">diff算法原理和总结</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2022/11/09/%E5%8F%8C%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%8D%95%E6%9C%BA%E4%BA%8B%E4%BB%B6%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">双击事件和单机事件冲突解决方案</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/false" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr.Weng &copy; 2020 - 2023</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/&title=《vue3渲染器设计与总结》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/&title=《vue3渲染器设计与总结》 — 翁老师的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《vue3渲染器设计与总结》 — 翁老师的博客&url=https://github.com/NollieLeo/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/&via=https://github.com/NollieLeo" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我走了';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我来了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
