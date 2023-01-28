@@ -3,14 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 翁老师的博客
-subtitle: ''
+title: 翁先森的博客
+subtitle: '乌拉'
 description: ''
 keywords: '程序猿'
-author: Mr.Weng
+author: 翁先森
 language: zh-CN
 timezone: ''
-email: ''
+email: '736653759@qq.com'
+avatar: 'https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513'
+favicon: 'https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513'
+
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -46,13 +49,21 @@ post_asset_folder: true
 relative_link: false
 future: true
 highlight:
-  enable: false
-  line_number: true
+  enable: true
   auto_detect: false
+  line_number: true
+  line_threshold: 0
   tab_replace: ''
+  exclude_languages:
+    - expample
   wrap: true
   hljs: false
-
+prismjs:
+  enable: false
+  preprocess: true
+  line_number: true
+  line_threshold: 0
+  tab_replace: ''
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
@@ -94,7 +105,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: indigo
+theme: stellar
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
