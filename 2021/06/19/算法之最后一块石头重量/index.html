@@ -20,31 +20,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>算法之最后一块石头重量 - 翁老师的博客</title>
+  <title>算法之最后一块石头重量 - 翁先森的博客</title>
 
   
     <meta name="description" content="1046. 最后一块石头的重量有一堆石头，每块石头的重量都是正整数。 每一回合，从中选出两块 最重的 石头，然后将它们一起粉碎。假设石头的重量分别为 x 和 y，且 x &lt;&#x3D; y。那么粉碎的可能结果如下：  如果 x &#x3D;&#x3D; y，那么两块石头都会被完全粉碎；  如果 x !&#x3D; y，那么重量为 x 的石头将会完全粉碎，而重量为 y 的石头新重量为 y-x。   最后，最多只会剩下一块石头。返回此">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法之最后一块石头重量">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/06/19/%E7%AE%97%E6%B3%95%E4%B9%8B%E6%9C%80%E5%90%8E%E4%B8%80%E5%9D%97%E7%9F%B3%E5%A4%B4%E9%87%8D%E9%87%8F/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="1046. 最后一块石头的重量有一堆石头，每块石头的重量都是正整数。 每一回合，从中选出两块 最重的 石头，然后将它们一起粉碎。假设石头的重量分别为 x 和 y，且 x &lt;&#x3D; y。那么粉碎的可能结果如下：  如果 x &#x3D;&#x3D; y，那么两块石头都会被完全粉碎；  如果 x !&#x3D; y，那么重量为 x 的石头将会完全粉碎，而重量为 y 的石头新重量为 y-x。   最后，最多只会剩下一块石头。返回此">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//image-20210619153349043.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/19/%E7%AE%97%E6%B3%95%E4%B9%8B%E6%9C%80%E5%90%8E%E4%B8%80%E5%9D%97%E7%9F%B3%E5%A4%B4%E9%87%8D%E9%87%8F/image-20210619153349043.png">
 <meta property="article:published_time" content="2021-06-19T07:29:42.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.424Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="面试题">
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="栈">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//image-20210619153349043.png">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/06/19/%E7%AE%97%E6%B3%95%E4%B9%8B%E6%9C%80%E5%90%8E%E4%B8%80%E5%9D%97%E7%9F%B3%E5%A4%B4%E9%87%8D%E9%87%8F/image-20210619153349043.png">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -75,7 +75,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -113,7 +113,7 @@
 </li>
 </ul>
 <p>最后，最多只会剩下一块石头。返回此石头的重量。如果没有石头剩下，就返回 0。</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210619153349043.png" alt="image-20210619153349043"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210619153349043.png" alt="image-20210619153349043"></p>
 <p><strong>实现：</strong></p>
 <p><strong>1.非递归</strong></p>
 <p>排序后比较最后面两个</p>

@@ -20,31 +20,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>this,call和apply - 翁老师的博客</title>
+  <title>this,call和apply - 翁先森的博客</title>
 
   
     <meta name="description" content="this, call 和apply1. this JavaScript的 this 总是指向一个对象，而具体指向哪个对象是在运行时基于函数的执行环境动态绑定的，而非函数被声明时的环境  1.1 this指向 作为对象方法调用 作为普通函数调用 构造器调用 Function.prototype.apply或&#96;&#96;Function.prototype.call&#96;  1.1.1 作为对象方法调用var o">
 <meta property="og:type" content="article">
 <meta property="og:title" content="this,call和apply">
 <meta property="og:url" content="https://github.com/NollieLeo/2020/03/16/this-call%E5%92%8Capply/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="this, call 和apply1. this JavaScript的 this 总是指向一个对象，而具体指向哪个对象是在运行时基于函数的执行环境动态绑定的，而非函数被声明时的环境  1.1 this指向 作为对象方法调用 作为普通函数调用 构造器调用 Function.prototype.apply或&#96;&#96;Function.prototype.call&#96;  1.1.1 作为对象方法调用var o">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//1579747558506.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/this-call%E5%92%8Capply/1579747558506.png">
 <meta property="article:published_time" content="2020-03-16T09:16:30.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.082Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="javascript">
 <meta property="article:tag" content="js this指向">
 <meta property="article:tag" content="call,apply">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//1579747558506.png">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2020/03/16/this-call%E5%92%8Capply/1579747558506.png">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -75,7 +75,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -217,7 +217,7 @@ var getName = function () &#123;
 getName();
 getName.apply(obj1);
 getName.apply(obj2);</code></pre>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1579747558506.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1579747558506.png" alt></p>
 <p>实际开发过程中会遇到this指向被不经意改变</p>
 <p>例如：</p>
 <pre><code class="javascript">document.getElementById( &#39;div1&#39; ).onclick = function()&#123;

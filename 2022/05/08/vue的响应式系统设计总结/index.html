@@ -20,46 +20,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>vue的响应式系统设计总结 - 翁老师的博客</title>
+  <title>vue的响应式系统设计总结 - 翁先森的博客</title>
 
   
     <meta name="description" content="vue3 - 响应式学习前置知识副作用函数副作用函数就是指的会产生副作用的函数 function effect()&amp;#123;   document.body.innerHTML &#x3D; &#39;hello world&#39; &amp;#125; effect函数会直接或者间接的影响到其他地方函数的执行，也就是说，比如修改一个变量，这个变量其他地方也读取到了 响应式数据假如，有一个引用类型变量, 有一个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue的响应式系统设计总结">
 <meta property="og:url" content="https://github.com/NollieLeo/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="vue3 - 响应式学习前置知识副作用函数副作用函数就是指的会产生副作用的函数 function effect()&amp;#123;   document.body.innerHTML &#x3D; &#39;hello world&#39; &amp;#125; effect函数会直接或者间接的影响到其他地方函数的执行，也就是说，比如修改一个变量，这个变量其他地方也读取到了 响应式数据假如，有一个引用类型变量, 有一个">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//image-20220807160051989.png">
-<meta property="og:image" content="https://github.com/.com//image-20220809141823945.png">
-<meta property="og:image" content="https://github.com/.com//image-20220811141233280.png">
-<meta property="og:image" content="https://github.com/.com//image-20220813145103685.png">
-<meta property="og:image" content="https://github.com/.com//image-20220818170841267.png">
-<meta property="og:image" content="https://github.com/.com//image-20220820144311868.png">
-<meta property="og:image" content="https://github.com/.com//image-20220826163739163.png">
-<meta property="og:image" content="https://github.com/.com//image-20220829150759429.png">
-<meta property="og:image" content="https://github.com/.com//image-20220831114324906.png">
-<meta property="og:image" content="https://github.com/.com//image-20220831155534870.png">
-<meta property="og:image" content="https://github.com/.com//image-20220905204422368.png">
-<meta property="og:image" content="https://github.com/.com//image-20220905205830202.png">
-<meta property="og:image" content="https://github.com/.com//image-20220905215218547.png">
-<meta property="og:image" content="https://github.com/.com//image-20220905215335311.png">
-<meta property="og:image" content="https://github.com/.com//image-20220906221150671.png">
-<meta property="og:image" content="https://github.com/.com//image-20220907140633477.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/image-20220807160051989.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/image-20220809141823945.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/image-20220811141233280.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/image-20220813145103685.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/image-20220818170841267.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/image-20220820144311868.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/image-20220826163739163.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/image-20220829150759429.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/image-20220831114324906.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/image-20220831155534870.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/image-20220905204422368.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/image-20220905205830202.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/image-20220905215218547.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/image-20220905215335311.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/image-20220906221150671.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/image-20220907140633477.png">
 <meta property="og:image" content="https://github.com/Users/leo/Library/Application%20Support/marktext/images/2022-09-11-11-52-09-image.png">
 <meta property="og:image" content="https://github.com/Users/leo/Library/Application%20Support/marktext/images/2022-09-11-12-02-12-image.png">
 <meta property="article:published_time" content="2022-05-08T06:50:34.000Z">
 <meta property="article:modified_time" content="2022-11-03T09:15:55.813Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//image-20220807160051989.png">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/image-20220807160051989.png">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -90,7 +90,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -142,7 +142,7 @@ function read()&#123;
 <p>   不难联想到es5的<code>Object.defineProperty</code>和es6的<code>Proxy</code>代理，都是用于数据的拦截操作，我们只要做好读和取的拦截操作，就能实现数据的响应</p>
 </blockquote>
 <h3 id="-1"><a href="#-1" class="headerlink" title></a></h3><h3 id="基本实现"><a href="#基本实现" class="headerlink" title="基本实现"></a>基本实现</h3><h4 id="实现读取-拦截"><a href="#实现读取-拦截" class="headerlink" title="实现读取 拦截"></a>实现读取 拦截</h4><p>当我们读取data.a的时候，通过拦截将副作用函数加入到一个 “桶” 的数据结构中</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20220807160051989.png" alt="image-20220807160051989.png"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20220807160051989.png" alt="image-20220807160051989.png"></p>
 <p>接着我们设置data.a的时候把副作用函数取出来</p>
 <p>接下来执行对data的代理, obj就是代理的对象</p>
 <pre><code class="js">const buckect = new Set(); // 桶
@@ -253,7 +253,7 @@ setTimeout(() =&gt; &#123;
 <p>因此需要重新的设计桶结构，就不能<strong>简单</strong>的用Set了</p>
 </blockquote>
 <p>多个属性，多个响应式数据，要有一一的对应关系</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20220809141823945.png" alt="image-20220809141823945.png"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20220809141823945.png" alt="image-20220809141823945.png"></p>
 <ul>
 <li><p>target：表示不同的需要代理的引用类型数据（当然会存在很多不同的引用数据啊）</p>
 </li>
@@ -384,7 +384,7 @@ effect(function someFn()&#123;
 &#125;)</code></pre>
 <ol>
 <li><p>当<strong>someFn</strong>触发的时候，会读取obj.a和obj.b，但是obj.b只有在obj.a为true的情况下，才会打印出来，这时候someFn已经被收集到了a和b各自对应的Set当中了</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20220811141233280.png" alt="image-20220811141233280.png"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20220811141233280.png" alt="image-20220811141233280.png"></p>
 </li>
 </ol>
 <ol start="2">
@@ -432,7 +432,7 @@ obj.b = &#39;kaimin&#39;; // 仍然会触发someFn
 <p>解决这种问题的思路：</p>
 <ol>
 <li><p>副作用函数执行的时候，第一步，先把它从与之关联的 key—&gt;Set中删除</p>
-<p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20220813145103685.png" alt="image-20220813145103685.png"></p>
+<p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20220813145103685.png" alt="image-20220813145103685.png"></p>
 </li>
 </ol>
 <ol start="2">
@@ -603,7 +603,7 @@ setTimeout(() =&gt; &#123;
     obj.a = 3;
 &#125;, 2000);</code></pre>
 <p>常理上我们，理想我们需要这种收集的情况</p>
-<p>  <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20220818170841267.png" alt="image-20220818170841267.png"></p>
+<p>  <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20220818170841267.png" alt="image-20220818170841267.png"></p>
 <p>初始化执行结果是这样的</p>
 <pre><code class="shell">run effect outer
 run effect inner</code></pre>
@@ -633,7 +633,7 @@ function effect(fn)&#123;
 <pre><code class="js">// 全局加入effectStack栈结构
 let effectStack=[]</code></pre>
 <p>上述例子的流程如下：</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20220820144311868.png" alt="image-20220820144311868"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20220820144311868.png" alt="image-20220820144311868"></p>
 <p>改造effect函数</p>
 <pre><code class="js">// 注册函数
 function effect(fn)&#123;
@@ -1339,7 +1339,7 @@ setTimeout(() =&gt; &#123;
 &#125;, 2000);</code></pre>
 <p>另外一个effect函数中读取了计算数据，当我们修改了obj.a的值之后，发现并不会 打印出 computedSum.value之后的值</p>
 <p>回头看computed函数，会发现，getter函数使用到了obj.a和obj.b，getter被收集到了a,b对应的Set当中</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20220826163739163.png" alt="image-20220826163739163.png"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20220826163739163.png" alt="image-20220826163739163.png"></p>
 <p>getter是一个副作用函数，也是是被effect包裹并且处理为懒执行的函数</p>
 <p>如上的情况，就是发生了嵌套，外层的effect包裹了内层effect，而外层的effect真正读取的是computedSum.value，而这玩意并不是响应式数据，也无法收集到这个外层effect包裹的这个函数。</p>
 <p>而真正外层副作用函数读取的引用是computed内层的这个数据 <code>computedSum.value</code> —&gt; obj.value</p>
@@ -1396,7 +1396,7 @@ setTimeout(()=&gt;&#123;
 &#125;, 2000)</code></pre>
 <p>这就样可以打印出修改的之后的computed的值了，并且执行副作用函数</p>
 <p>他们之间的依赖关系就如图所示</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20220829150759429.png" alt="image-20220829150759429.png"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20220829150759429.png" alt="image-20220829150759429.png"></p>
 <h2 id="Step4-实现watch"><a href="#Step4-实现watch" class="headerlink" title="Step4: 实现watch"></a>Step4: 实现watch</h2><p>vue3中的wacth函数用法</p>
 <pre><code class="js">wactch(obj, ()=&gt;&#123;
   console.log(&#39;变化数据&#39;)
@@ -1696,7 +1696,7 @@ watch(obj, async ()=&gt;&#123;
 &#125;)</code></pre>
 <p>我们修改了obj的某个值，会触发getData的请求，假如，我们在短时间内连续修改了，obj的属性两次，其实会触发两次getData的请求</p>
 <p>假设第一次叫做A，第二次叫做B。因为两次请求落地的时机不相同，可能B会比A先落定，但是由于，我们第二次修改触发的请求得到的结果，才是我们真实想要的，但是由于AB落定时机不确定，我们无法明确最终是哪一次请求的值赋给了data。这种就存在了竞态的情况</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20220831114324906.png" alt="image-20220831114324906.png"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20220831114324906.png" alt="image-20220831114324906.png"></p>
 <p>由于B才是我们真正想要的结果，所以 我们可以当B为 “最新”，A为“过期”的副作用函数产生的</p>
 <blockquote>
 <p>在vue中watch的回调函数有第三个参数，叫做onInvalidate，这个函数就是当前副作用函数过期的时候执行的回调</p>
@@ -1802,7 +1802,7 @@ setTimeout(()=&gt;&#123;
 <p>以上代码我们修改了两次obj.a</p>
 <p>第一次sync立即执行，导致watch的回调执行。在回调内部，我们调用了onInvalidate，这时候就会在watch内部注册一个cleanupEffect，然后发送请求A（假设A用了2000ms才返回）</p>
 <p>第二次200ms后又修改了obj.a，又执行了watch的回调函数，这时候由于第一次已经注册了一个cleanupEffect，在job执行之前呢，其实会先去处理之前注册的回调函数，这时候之前的那个闭包变量expired就会被设置为true，之后就算是A请求落定了，也不会进行data的赋值操作</p>
-<p>  <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20220831155534870.png" alt="image-20220831155534870.png"></p>
+<p>  <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20220831155534870.png" alt="image-20220831155534870.png"></p>
 <h2 id="Step5-深入代理"><a href="#Step5-深入代理" class="headerlink" title="Step5: 深入代理"></a>Step5: 深入代理</h2><h3 id="前置知识-1"><a href="#前置知识-1" class="headerlink" title="前置知识"></a>前置知识</h3><blockquote>
 <p>Vue3中利用的是Proxy以及Reflect去代理对象的</p>
 </blockquote>
@@ -1947,9 +1947,9 @@ obj.a++</code></pre>
   &#39;a&#39; in obj;
 &#125;)</code></pre>
 <p>想找拦截in操作符必须知道in操作符的原理，其实需要理解<a target="_blank" rel="noopener" href="https://262.ecma-international.org/13.0/#sec-relational-operators-runtime-semantics-evaluation">ECMA-262</a>的规范</p>
-<p>  <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20220905204422368.png" alt="image-20220905204422368.png"></p>
+<p>  <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20220905204422368.png" alt="image-20220905204422368.png"></p>
 <p>第六点的  <a target="_blank" rel="noopener" href="https://262.ecma-international.org/13.0/#sec-hasproperty">HasProperty</a>(rval, ? <a target="_blank" rel="noopener" href="https://262.ecma-international.org/13.0/#sec-topropertykey">ToPropertyKey</a>(lval))</p>
-<p>  <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20220905205830202.png" alt="image-20220905205830202.png"></p>
+<p>  <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20220905205830202.png" alt="image-20220905205830202.png"></p>
 <p>这块的 <code>Return ? O.[[HasProperty]](P).</code> 的意思就是，调用原生对象的has方法去判断，是否有key值，因此我们可以理解为，in操作符的读取操作我们需要调用[[HasProperty]]函数槽对应的has方法，去做拦截</p>
 <p>因此我们可以修改我们的拦截器</p>
 <pre><code class="js">const obj = new Proxy(data, &#123;
@@ -1970,10 +1970,10 @@ effect(()=&gt;&#123;
   &#125;
 &#125;)</code></pre>
 <p>我们查看ECMA规范14.7.5.6</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20220905215218547.png" alt="image-20220905215218547"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20220905215218547.png" alt="image-20220905215218547"></p>
 <p>第六步的c. Let iterator be <a target="_blank" rel="noopener" href="https://262.ecma-international.org/13.0/#sec-enumerate-object-properties">EnumerateObjectProperties</a>(obj).</p>
 <p>如下是一个抽象方法，EnumerateObjectProperties该方法返回一个迭代器对象</p>
-<p>  <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20220905215335311.png" alt="image-20220905215335311.png"></p>
+<p>  <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20220905215335311.png" alt="image-20220905215335311.png"></p>
 <p>实际上，可以看出，如果的obj就是被for…in…循环遍历的对象，其关键点在与 使用到了 <code>Reflect.ownKeys()</code>来获取只属于对象自身拥有的键。</p>
 <p>因此我们可以使用Proxy的ownKeys来进行拦截。</p>
 <h5 id="改造代理，加入ownKeys拦截"><a href="#改造代理，加入ownKeys拦截" class="headerlink" title="改造代理，加入ownKeys拦截"></a>改造代理，加入ownKeys拦截</h5><pre><code class="js">const ITERATE_KEY = Symbol()
@@ -1996,7 +1996,7 @@ const obj = new Proxy(data, &#123;
 <pre><code class="js">obj.c=3;</code></pre>
 <p>按道理来说是能够触发上面的for循环的副作用函数。但是实际却不能正常触发。</p>
 <p>那是因为，我们是将 obj作为一个元素对应的<code>ITERATE_KEY</code>做关联</p>
-<p>  <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20220906221150671.png" alt="image-20220906221150671.png"></p>
+<p>  <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20220906221150671.png" alt="image-20220906221150671.png"></p>
 <p>其他的Key的Set副作用函数集合并没有将这个for…in…对应的副作用函数收起起来</p>
 <p>所以在设置新的属性 c 的时候，for…in…对应的副作用函数 和 c 完全没有任何关系</p>
 <p>所以，我们可以这么做，我们在trigger的时候，将那些与<code>ITERATE_KEY</code>相关副作用函数耶取出来执行就可以了。</p>
@@ -2202,7 +2202,7 @@ const TRIGGER_TYPE = &#123;
 <p>删除了a属性时候，其实我们要做的不是去触发，那些和a关联的副作用函数；</p>
 <p>其实和for…in…一样，删除了某个对象的key，其实会影响for…in…关联的副作用函数，会导致for…in…减少一层循环，应该合理的去触发这个副作用函数</p>
 <p>同样，我们需要拦截delete操作符，也需要提前了解EcMA的规范</p>
-<p>  <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20220907140633477.png" alt="image-20220907140633477.png"></p>
+<p>  <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20220907140633477.png" alt="image-20220907140633477.png"></p>
 <p>从 5.d 的步骤可以知道，delete操作符的行为依赖 <strong>[[Delete]]</strong> 函数槽。对应的是Proxy deleteProperty拦截函数</p>
 <p>从上就知道了其实我们要做的就是在 删除 某个对象的属性 的时候去触发 那个和 ITERATE_KEY 绑定的副作用函数</p>
 <h5 id="加入“删除”类型的TRIGGER-TYPE"><a href="#加入“删除”类型的TRIGGER-TYPE" class="headerlink" title="加入“删除”类型的TRIGGER_TYPE"></a>加入“删除”类型的TRIGGER_TYPE</h5><pre><code class="js">// 枚举 -- 触发类型，set为设置属性，add为添加属性，delete为删除属性

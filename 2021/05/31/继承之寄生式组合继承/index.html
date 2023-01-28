@@ -20,21 +20,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>继承之寄生式组合继承 - 翁老师的博客</title>
+  <title>继承之寄生式组合继承 - 翁先森的博客</title>
 
   
     <meta name="description" content="寄生式组合继承在组合式继承的那篇文章说过，组合式继承，会将父类的构造函数调用两次。 本质上，子类原型最终式要包含超类的所有实例属性，子类的构造函数只要在执行适合重写原型就行了 再看看组合式继承的例子 function SuperType(name)&amp;#123;     this.name &#x3D; name;     this.numbers &#x3D; [1,2,3,4]; &amp;#125;  SuperType">
 <meta property="og:type" content="article">
 <meta property="og:title" content="继承之寄生式组合继承">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%AF%84%E7%94%9F%E5%BC%8F%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="寄生式组合继承在组合式继承的那篇文章说过，组合式继承，会将父类的构造函数调用两次。 本质上，子类原型最终式要包含超类的所有实例属性，子类的构造函数只要在执行适合重写原型就行了 再看看组合式继承的例子 function SuperType(name)&amp;#123;     this.name &#x3D; name;     this.numbers &#x3D; [1,2,3,4]; &amp;#125;  SuperType">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//2.jpg">
-<meta property="og:image" content="https://github.com/.com//image-20210531171003754.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%AF%84%E7%94%9F%E5%BC%8F%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF/2.jpg">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%AF%84%E7%94%9F%E5%BC%8F%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF/image-20210531171003754.png">
 <meta property="article:published_time" content="2021-05-31T08:53:22.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.485Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="js">
 <meta property="article:tag" content="构造函数">
 <meta property="article:tag" content="原型链">
@@ -43,13 +43,13 @@
 <meta property="article:tag" content="组合式继承">
 <meta property="article:tag" content="寄生式组合继承">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//2.jpg">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%AF%84%E7%94%9F%E5%BC%8F%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF/2.jpg">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -80,7 +80,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -133,8 +133,8 @@ SubType.prototype.sayAge = function()&#123;
 &#125;
 </code></pre>
 <p>这个详细过程如下：</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//2.jpg" alt="image-20210531170936146"></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210531171003754.png" alt="image-20210531171003754"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="2.jpg" alt="image-20210531170936146"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210531171003754.png" alt="image-20210531171003754"></p>
 <p>可以看出这里重复调用了SuperType函数。</p>
 <p>为了解决这个，引出了了寄生组合式继承</p>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>通过盗用构造函数继承属性，但使用混合式原型链继承的方法。基本思路是不通过调用父类构造函数给子类原型赋值，而是取得父类原型的一个副本。</p>

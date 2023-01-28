@@ -20,35 +20,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>算法之二叉搜索树的众数 - 翁老师的博客</title>
+  <title>算法之二叉搜索树的众数 - 翁先森的博客</title>
 
   
     <meta name="description" content="501. 二叉搜索树中的众数给定一个有相同值的二叉搜索树（BST），找出 BST 中的所有众数（出现频率最高的元素）。 假定 BST 有如下定义：  结点左子树中所含结点的值小于等于当前结点的值、 结点右子树中所含结点的值大于等于当前结点的值 左子树和右子树都是二叉搜索树   解法： 1.递归中序遍历（开辟新空间） 思路：    var findMode &#x3D; function(root) &amp;#12">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法之二叉搜索树的众数">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/06/20/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E4%BC%97%E6%95%B0/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="501. 二叉搜索树中的众数给定一个有相同值的二叉搜索树（BST），找出 BST 中的所有众数（出现频率最高的元素）。 假定 BST 有如下定义：  结点左子树中所含结点的值小于等于当前结点的值、 结点右子树中所含结点的值大于等于当前结点的值 左子树和右子树都是二叉搜索树   解法： 1.递归中序遍历（开辟新空间） 思路：    var findMode &#x3D; function(root) &amp;#12">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//image-20210620160046650.png">
-<meta property="og:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E4%BC%97%E6%95%B0%5Cimage-20210620160831230.png">
-<meta property="og:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E4%BC%97%E6%95%B0%5Cimage-20210620160856742.png">
-<meta property="og:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E4%BC%97%E6%95%B0%5Cimage-20210620160915942.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/20/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E4%BC%97%E6%95%B0/image-20210620160046650.png">
+<meta property="og:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E4%BC%97%E6%95%B0%5Cimage-20210620160831230.png">
+<meta property="og:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E4%BC%97%E6%95%B0%5Cimage-20210620160856742.png">
+<meta property="og:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E4%BC%97%E6%95%B0%5Cimage-20210620160915942.png">
 <meta property="article:published_time" content="2021-06-20T07:59:30.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.405Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="面试题">
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="二叉树">
 <meta property="article:tag" content="二叉搜索树">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//image-20210620160046650.png">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/06/20/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E4%BC%97%E6%95%B0/image-20210620160046650.png">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -79,7 +79,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -115,13 +115,13 @@
 <li>结点右子树中所含结点的值大于等于当前结点的值</li>
 <li>左子树和右子树都是二叉搜索树</li>
 </ul>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210620160046650.png" alt="image-20210620160046650"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210620160046650.png" alt="image-20210620160046650"></p>
 <p>解法：</p>
 <p>1.递归中序遍历（开辟新空间）</p>
 <p>思路：</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E4%BC%97%E6%95%B0%5Cimage-20210620160831230.png" alt="image-20210620160831230"></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E4%BC%97%E6%95%B0%5Cimage-20210620160856742.png" alt="image-20210620160856742"></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E4%BC%97%E6%95%B0%5Cimage-20210620160915942.png" alt="image-20210620160915942"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E4%BC%97%E6%95%B0%5Cimage-20210620160831230.png" alt="image-20210620160831230"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E4%BC%97%E6%95%B0%5Cimage-20210620160856742.png" alt="image-20210620160856742"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E4%BC%97%E6%95%B0%5Cimage-20210620160915942.png" alt="image-20210620160915942"></p>
 <pre><code class="js">var findMode = function(root) &#123;
     let base = 0, count = 0, maxCount = 0;
     let answer = [];

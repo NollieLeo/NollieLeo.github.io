@@ -20,34 +20,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>算法之无重复字符最长子串 - 翁老师的博客</title>
+  <title>算法之无重复字符最长子串 - 翁先森的博客</title>
 
   
     <meta name="description" content="3. 无重复字符的最长子串给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。  解法： 1.滑动窗口    var lengthOfLongestSubstring &#x3D; function(s) &amp;#123;     &#x2F;&#x2F; 哈希集合，记录每个字符是否出现过     const occ &#x3D; new Set();     const n &#x3D; s.length;     &#x2F;&#x2F; 右指针，初始值">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法之无重复字符最长子串">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/06/20/%E7%AE%97%E6%B3%95%E4%B9%8B%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="3. 无重复字符的最长子串给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。  解法： 1.滑动窗口    var lengthOfLongestSubstring &#x3D; function(s) &amp;#123;     &#x2F;&#x2F; 哈希集合，记录每个字符是否出现过     const occ &#x3D; new Set();     const n &#x3D; s.length;     &#x2F;&#x2F; 右指针，初始值">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//image-20210620163148398.png">
-<meta property="og:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2%5Cimage-20210620163418701.png">
-<meta property="og:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2%5Cimage-20210620163439373.png">
-<meta property="og:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2%5Cimage-20210620163452684.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/20/%E7%AE%97%E6%B3%95%E4%B9%8B%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/image-20210620163148398.png">
+<meta property="og:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2%5Cimage-20210620163418701.png">
+<meta property="og:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2%5Cimage-20210620163439373.png">
+<meta property="og:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2%5Cimage-20210620163452684.png">
 <meta property="article:published_time" content="2021-06-20T08:30:50.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.423Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="哈希表">
 <meta property="article:tag" content="滑动窗口">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//image-20210620163148398.png">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/06/20/%E7%AE%97%E6%B3%95%E4%B9%8B%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/image-20210620163148398.png">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -78,7 +78,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -108,12 +108,12 @@
 <article class='md-text content post'>
 <h1 class="article-title"><span>算法之无重复字符最长子串</span></h1>
 <h4 id="3-无重复字符的最长子串"><a href="#3-无重复字符的最长子串" class="headerlink" title="3. 无重复字符的最长子串"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/">3. 无重复字符的最长子串</a></h4><p>给定一个字符串，请你找出其中不含有重复字符的 <strong>最长子串</strong> 的长度。</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210620163148398.png" alt="image-20210620163148398"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210620163148398.png" alt="image-20210620163148398"></p>
 <p>解法：</p>
 <p><strong>1.滑动窗口</strong></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2%5Cimage-20210620163418701.png" alt="image-20210620163418701"></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2%5Cimage-20210620163439373.png" alt="image-20210620163439373"></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2%5Cimage-20210620163452684.png" alt="image-20210620163452684"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2%5Cimage-20210620163418701.png" alt="image-20210620163418701"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2%5Cimage-20210620163439373.png" alt="image-20210620163439373"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2%5Cimage-20210620163452684.png" alt="image-20210620163452684"></p>
 <pre><code class="js">var lengthOfLongestSubstring = function(s) &#123;
     // 哈希集合，记录每个字符是否出现过
     const occ = new Set();

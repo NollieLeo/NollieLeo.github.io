@@ -20,33 +20,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>继承之原型式继承 - 翁老师的博客</title>
+  <title>继承之原型式继承 - 翁先森的博客</title>
 
   
     <meta name="description" content="原型式继承这是一种不涉及严格意义上构造函数的继承方式 这个思路就是，不需要自定义一个类型，就可以通过原型实现对象之间的信息共享 就仍然是为了实现对象之间的信息共享 目标函数如下 function object(o)&amp;#123;     function F()&amp;#123;&amp;#125;     F.prototype &#x3D; o;     return new F(); &amp;#125; 思路如下：  ob">
 <meta property="og:type" content="article">
 <meta property="og:title" content="继承之原型式继承">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%8E%9F%E5%9E%8B%E5%BC%8F%E7%BB%A7%E6%89%BF/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="原型式继承这是一种不涉及严格意义上构造函数的继承方式 这个思路就是，不需要自定义一个类型，就可以通过原型实现对象之间的信息共享 就仍然是为了实现对象之间的信息共享 目标函数如下 function object(o)&amp;#123;     function F()&amp;#123;&amp;#125;     F.prototype &#x3D; o;     return new F(); &amp;#125; 思路如下：  ob">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//image-20210531163110860.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%8E%9F%E5%9E%8B%E5%BC%8F%E7%BB%A7%E6%89%BF/image-20210531163110860.png">
 <meta property="article:published_time" content="2021-05-31T08:18:56.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.438Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="js">
 <meta property="article:tag" content="原型链">
 <meta property="article:tag" content="原型">
 <meta property="article:tag" content="继承">
 <meta property="article:tag" content="原型式继承">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//image-20210531163110860.png">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%8E%9F%E5%9E%8B%E5%BC%8F%E7%BB%A7%E6%89%BF/image-20210531163110860.png">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -77,7 +77,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -152,7 +152,7 @@ console.log(person.name);
 console.log(person.numbers);
 </code></pre>
 <p>这是最终的打印结果</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210531163110860.png" alt="image-20210531163110860"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210531163110860.png" alt="image-20210531163110860"></p>
 <p>这里的person, person2, person3之间的数据都是共享的</p>
 <h2 id="Object-create"><a href="#Object-create" class="headerlink" title="Object.create()"></a>Object.create()</h2><p>ES5将这种原型式继承的概念规范化了。</p>
 <p>Object.create()接受两个参数</p>

@@ -20,21 +20,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>算法之环形链表2 - 翁老师的博客</title>
+  <title>算法之环形链表2 - 翁先森的博客</title>
 
   
     <meta name="description" content="142.给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。 说明：不允许修改给定的链表。 进阶：  你是否可以使用 O(1) 空间解决此题？   解法： 1.哈希表 var detectCycle &#x3D; function(head) &amp;#123;   &#x2F;&#x2F;建立一个Set，如果有重复的，就说明是环。   const memo &#x3D; new Set()    while(hea">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法之环形链表2">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/06/13/%E7%AE%97%E6%B3%95%E4%B9%8B%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A82/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="142.给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。 说明：不允许修改给定的链表。 进阶：  你是否可以使用 O(1) 空间解决此题？   解法： 1.哈希表 var detectCycle &#x3D; function(head) &amp;#123;   &#x2F;&#x2F;建立一个Set，如果有重复的，就说明是环。   const memo &#x3D; new Set()    while(hea">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A82%5Cimage-20210613161001882.png">
-<meta property="og:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A82%5C1621542134-cQRGVb-LC142Floyd">
+<meta property="og:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A82%5Cimage-20210613161001882.png">
+<meta property="og:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A82%5C1621542134-cQRGVb-LC142Floyd">
 <meta property="article:published_time" content="2021-06-13T08:08:49.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.434Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="js">
 <meta property="article:tag" content="面试题">
 <meta property="article:tag" content="算法">
@@ -42,13 +42,13 @@
 <meta property="article:tag" content="哈希表">
 <meta property="article:tag" content="环形链表">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A82%5Cimage-20210613161001882.png">
+<meta name="twitter:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A82%5Cimage-20210613161001882.png">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -79,7 +79,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -116,7 +116,7 @@
 <ul>
 <li>你是否可以使用 <code>O(1)</code> 空间解决此题？</li>
 </ul>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A82%5Cimage-20210613161001882.png" alt="image-20210613161001882"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A82%5Cimage-20210613161001882.png" alt="image-20210613161001882"></p>
 <p>解法：</p>
 <p>1.哈希表</p>
 <pre><code class="js">var detectCycle = function(head) &#123;
@@ -158,7 +158,7 @@
   return fast;
 &#125;;</code></pre>
 <p>复杂度分析<br>时间复杂度：O(N)<br>空间复杂度：O(1)<br>有一个快指针fast，慢指针slow；快指针一次走两步，慢指针一次走一步；在有环的情况下，他们俩会在encounter相遇。相遇的时候有(Nfast - 2Nslow) * L = Path + E<br>通过Lucifer的例子，我们得知(Nfast - 2Nslow) 只要是个整数，就不会影响encounter在环上的位置，所以我们能推导出:<br>Path = L - E (就是那俩蓝色的地方)<br>这时候fast再从head开始走，slow从encounter走，他们俩每个都走一步，遇见的时候就刚好在环的入口。</p>
-<p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A82%5C1621542134-cQRGVb-LC142Floyd'sCircleFinding.jpg" alt="LC142Floyd&#39;sCircleFinding.jpg"> </p>
+<p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A82%5C1621542134-cQRGVb-LC142Floyd'sCircleFinding.jpg" alt="LC142Floyd&#39;sCircleFinding.jpg"> </p>
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>

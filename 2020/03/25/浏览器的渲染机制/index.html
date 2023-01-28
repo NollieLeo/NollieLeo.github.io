@@ -20,32 +20,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>浏览器的渲染机制 - 翁老师的博客</title>
+  <title>浏览器的渲染机制 - 翁先森的博客</title>
 
   
     <meta name="description" content="浏览器的渲染过程*面试题：在浏览器地址栏里输入一个URL,到这个页面呈现出来，中间会发生什么？  目前市面上常见的浏览器内核可以分为这四种：Trident（IE）、Gecko（火狐）、Blink（Chrome、Opera）、Webkit（Safari）。这里面大家最耳熟能详的可能就是 Webkit 内核了，Webkit 内核是当下浏览器世界真正的霸主。本文我们就以 Webkit 为例，对现代浏览器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浏览器的渲染机制">
 <meta property="og:url" content="https://github.com/NollieLeo/2020/03/25/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="浏览器的渲染过程*面试题：在浏览器地址栏里输入一个URL,到这个页面呈现出来，中间会发生什么？  目前市面上常见的浏览器内核可以分为这四种：Trident（IE）、Gecko（火狐）、Blink（Chrome、Opera）、Webkit（Safari）。这里面大家最耳熟能详的可能就是 Webkit 内核了，Webkit 内核是当下浏览器世界真正的霸主。本文我们就以 Webkit 为例，对现代浏览器">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//1585097884.jpg">
-<meta property="og:image" content="https://github.com/.com//image-20200325123754388.png">
-<meta property="og:image" content="https://github.com/.com//11123.png">
-<meta property="og:image" content="https://github.com/.com//1585097943.jpg">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/25/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/1585097884.jpg">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/25/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/image-20200325123754388.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/25/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/11123.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/25/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/1585097943.jpg">
 <meta property="article:published_time" content="2020-03-25T04:40:54.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.394Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="浏览器相关">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//1585097884.jpg">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2020/03/25/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/1585097884.jpg">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -76,7 +76,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -117,7 +117,7 @@
 <li>服务器收到这个包并且解析这个http请求返回相应的HTML给浏览器 </li>
 </ul>
 <p>其实就是一堆 HMTL 格式的字符串，因为只有 HTML 格式浏览器才能正确解析，这是 W3C 标准的要求。接下来就是浏览器的<strong>渲染过程。</strong> </p>
-<h2 id="2-浏览器的渲染过程"><a href="#2-浏览器的渲染过程" class="headerlink" title="2. 浏览器的渲染过程"></a>2. 浏览器的渲染过程</h2><p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1585097884.jpg" alt="webkit渲染过程"> </p>
+<h2 id="2-浏览器的渲染过程"><a href="#2-浏览器的渲染过程" class="headerlink" title="2. 浏览器的渲染过程"></a>2. 浏览器的渲染过程</h2><p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1585097884.jpg" alt="webkit渲染过程"> </p>
 <p><strong>1） 浏览器会解析三个东西</strong></p>
 <ul>
 <li>HTML/SVG/XHML，HTML字符串描述了一个页面的结构，浏览器会把HTML结构字符串解析转换DOM树形结构（DOM的构建）（在dom树的构建过程中如果遇到JS脚本和外部JS连接，则会停止构建DOM树来执行和下载相应的代码，造成阻塞，后面会说到）。 </li>
@@ -136,17 +136,17 @@
 <hr>
 <p>接下来叙述一些详细步骤</p>
 <h2 id="构建DOM树"><a href="#构建DOM树" class="headerlink" title="构建DOM树"></a>构建DOM树</h2><p> 浏览器会遵守一套步骤将HTML 文件转换为 DOM 树。宏观上，可以分为几个步骤： </p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200325123754388.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20200325123754388.png" alt></p>
 <ol>
 <li>浏览器从磁盘或网络读取HTML的原始字节，并且根据文件的指定编码（例：UTF-8）来将他们转换成字符串。（网络中传输的内容其实都是0 1这些字节数据。当浏览器收到这些字节数据以后，会将他们转成字符串，也就是我们写的代码）</li>
 <li>将字符串转换成TOKEN，例如：<code>&lt; html &gt;</code>,<code>&lt; body &gt;</code>等。Token中会自动标识出当前Token是“开始标签”还是“结束标签”或者是“文本”等信息。</li>
 <li>生成节点对象并且构建DOM。（ 构建DOM的过程中，不是等所有Token都转换完成后再去生成节点对象，而是一边生成Token一边消耗Token来生成节点对象。换句话说，每个Token被生成后，会立刻消耗这个Token创建出节点对象。<strong>注意：带有结束标签标识的Token不会创建节点对象。</strong> ）</li>
 </ol>
 <h2 id="构建CSSOM"><a href="#构建CSSOM" class="headerlink" title="构建CSSOM"></a>构建CSSOM</h2><p>DOM会捕获页面的内容，但浏览器还需要知道页面如何展示，所以需要构建CSSOM。</p>
-<p>构建CSSOM的过程与构建DOM的过程非常相似，当浏览器接收到一段CSS，浏览器首先要做的是识别出Token，然后构建节点并生成CSSOM。<br> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//11123.png" alt><br>在这一过程中，浏览器会确定下每一个节点的样式到底是什么，并且这一过程其实是很消耗资源的。因为样式你可以自行设置给某个节点，也可以通过继承获得。在这一过程中，浏览器得递归 CSSOM 树，然后确定具体的元素到底是什么样式。</p>
+<p>构建CSSOM的过程与构建DOM的过程非常相似，当浏览器接收到一段CSS，浏览器首先要做的是识别出Token，然后构建节点并生成CSSOM。<br> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="11123.png" alt><br>在这一过程中，浏览器会确定下每一个节点的样式到底是什么，并且这一过程其实是很消耗资源的。因为样式你可以自行设置给某个节点，也可以通过继承获得。在这一过程中，浏览器得递归 CSSOM 树，然后确定具体的元素到底是什么样式。</p>
 <p><strong>注意：CSS匹配HTML元素是一个相当复杂和有性能问题的事情。所以，DOM树要小，CSS尽量用id和class，千万不要过渡层叠下去</strong>。</p>
 <h2 id="构建渲染树"><a href="#构建渲染树" class="headerlink" title="构建渲染树"></a>构建渲染树</h2><p> 当我们生成 DOM 树和 CSSOM 树以后，就需要将这两棵树组合为渲染树。 </p>
-<p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1585097943.jpg" alt="生成渲染树"> </p>
+<p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1585097943.jpg" alt="生成渲染树"> </p>
 <p> 在这一过程中，不是简单的将两者合并就行了。为了构建渲染树，浏览器主要完成了以下工作：</p>
 <ol>
 <li>从DOM树的根节点开始遍历每个可见节点。</li>

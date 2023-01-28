@@ -20,30 +20,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>JS中typeof和instanceof的区别 - 翁老师的博客</title>
+  <title>JS中typeof和instanceof的区别 - 翁先森的博客</title>
 
   
     <meta name="description" content="undefined, number, string, boolean属于简单的值类型，不是对象。剩下的几种情况——函数、数组、对象、null、new Number(10)都是对象。他们都是引用类型。  基本数据类型和引用类型 typeofconsole.log(typeof (x)); &#x2F;&#x2F; &#39;undefined&#39; console.log(typeof (10)); &#x2F;&#x2F; &amp;#3">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS中typeof和instanceof的区别">
 <meta property="og:url" content="https://github.com/NollieLeo/2020/03/31/JS%E4%B8%ADtypeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="undefined, number, string, boolean属于简单的值类型，不是对象。剩下的几种情况——函数、数组、对象、null、new Number(10)都是对象。他们都是引用类型。  基本数据类型和引用类型 typeofconsole.log(typeof (x)); &#x2F;&#x2F; &#39;undefined&#39; console.log(typeof (10)); &#x2F;&#x2F; &amp;#3">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//20180203152226402.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/31/JS%E4%B8%ADtypeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/20180203152226402.png">
 <meta property="article:published_time" content="2020-03-31T01:29:49.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.051Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="ES6">
 <meta property="article:tag" content="基本数据类型和引用类型">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//20180203152226402.png">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2020/03/31/JS%E4%B8%ADtypeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/20180203152226402.png">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -74,7 +74,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -136,7 +136,7 @@ var people = new People();</code></pre>
 <p>people这个对象是由People的构造函数创建出来的，</p>
 <p><code>instanceof</code>的使用规则：<code>A instanceof B</code></p>
 <p> A沿着<strong>proto</strong>这条线来找，同时B沿着prototype这条线来找，如果两条线能找到同一个引用，即同一个对象，那么就返回true。如果找到终点还未重合，则返回false。 </p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//20180203152226402.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="20180203152226402.png" alt></p>
 <p>例如：</p>
 <h3 id="可以用于判断一个变量是否是某个对象的实例"><a href="#可以用于判断一个变量是否是某个对象的实例" class="headerlink" title="可以用于判断一个变量是否是某个对象的实例"></a>可以用于判断一个变量是否是某个对象的实例</h3><pre><code class="javascript">console.log(people instanceof People); // true</code></pre>
 <pre><code class="javascript">console.log(people instanceof Object); // true</code></pre>

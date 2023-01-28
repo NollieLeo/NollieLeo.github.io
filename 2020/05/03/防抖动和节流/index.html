@@ -20,34 +20,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>防抖动和节流 - 翁老师的博客</title>
+  <title>防抖动和节流 - 翁先森的博客</title>
 
   
     <meta name="description" content="场景： 在页面中很多的事件是会频繁执行的、如：  window的resize，scroll事件 拖拽过程中的 mousemove事件 文字输入过程中的keyup等事件  这些事件一旦触发会频繁执行、但是实际上我们可能只需要在特定的时候去执行绑定了这些事件的函数 例如：我需要检测一次拖拉浏览器，移动过程中都算是一次，知道最后鼠标抬起来了，才算是完成了一次拉伸窗口；有比如，我们输入搜索框内的文字的时候">
 <meta property="og:type" content="article">
 <meta property="og:title" content="防抖动和节流">
 <meta property="og:url" content="https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="场景： 在页面中很多的事件是会频繁执行的、如：  window的resize，scroll事件 拖拽过程中的 mousemove事件 文字输入过程中的keyup等事件  这些事件一旦触发会频繁执行、但是实际上我们可能只需要在特定的时候去执行绑定了这些事件的函数 例如：我需要检测一次拖拉浏览器，移动过程中都算是一次，知道最后鼠标抬起来了，才算是完成了一次拉伸窗口；有比如，我们输入搜索框内的文字的时候">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//debounce.gif">
-<meta property="og:image" content="https://github.com/.com//debounce-1.gif">
-<meta property="og:image" content="https://github.com/.com//image-20200503153245577.png">
-<meta property="og:image" content="https://github.com/.com//debounce-4.gif">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/debounce.gif">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/debounce-1.gif">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/image-20200503153245577.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/debounce-4.gif">
 <meta property="article:published_time" content="2020-05-03T06:27:27.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.576Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="js">
 <meta property="article:tag" content="防抖动">
 <meta property="article:tag" content="节流">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//debounce.gif">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2020/05/03/%E9%98%B2%E6%8A%96%E5%8A%A8%E5%92%8C%E8%8A%82%E6%B5%81/debounce.gif">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -78,7 +78,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -144,7 +144,7 @@
 &lt;/body&gt;
 </code></pre>
 <p>鼠标只要移动那么就会频繁的去触发addNumber的函数</p>
-<p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//debounce.gif" alt="debounce"> </p>
+<p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="debounce.gif" alt="debounce"> </p>
 <p>这个时候我们对他进行防抖动</p>
 <p>先写我们的第一版函数</p>
 <pre><code class="javascript">function debounce(fun, wait) &#123;
@@ -156,7 +156,7 @@
 &#125;</code></pre>
 <p>之后包裹住这个addnumber的函数</p>
 <p>现在随你怎么移动，反正你移动完 1000ms 内不再触发，我才执行事件。看看使用效果：</p>
-<p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//debounce-1.gif" alt="debounce 第一版"> </p>
+<p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="debounce-1.gif" alt="debounce 第一版"> </p>
 <p> 顿时就从 165 次降低成了 1 次! </p>
 <p>之后我们对他优化</p>
 <h3 id="this指向优化"><a href="#this指向优化" class="headerlink" title="this指向优化"></a>this指向优化</h3><p>如果我们再addNumber函数中加入<code>console.log(this)</code>，没有再addNumber外层包裹debounce的时候this指向是</p>
@@ -181,7 +181,7 @@ function debounce(fun, wait) &#123;
 &#125;
 containerDom.onmousemove = debounce(addNumber, 1000);</code></pre>
 <p>但是这里又有一个问题，就是这样包裹debounce的时候，onmousemove自带的事件对象event就会丢失，没有将参数传进去，故我们需要修改一哈，这样再我们需要用到event对象的时候就能拿得到</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200503153245577.png" alt="image-20200503153245577"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20200503153245577.png" alt="image-20200503153245577"></p>
 <pre><code class="javascript">var count = 0;
 var containerDom = document.getElementById(&#39;container&#39;);
 function addNumber(e) &#123;
@@ -221,7 +221,7 @@ containerDom.onmousemove = debounce(addNumber, 1000);</code></pre>
     &#125;
   &#125;
 &#125;</code></pre>
-<p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//debounce-4.gif" alt="debounce 第四版"> </p>
+<p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="debounce-4.gif" alt="debounce 第四版"> </p>
 <p>完~</p>
 <h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><blockquote>
 <p>可以理解为事件在一个管道中传输，加上这个节流阀以后，事件的流速就会减慢。实际上这个函数的作用就是如此，它可以将一个函数的调用频率限制在一定阈值内，例如 1s，那么 1s 内这个函数一定不会被调用两次</p>

@@ -20,37 +20,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>nodejs学习记录 - 翁老师的博客</title>
+  <title>nodejs学习记录 - 翁先森的博客</title>
 
   
     <meta name="description" content="1.node自带模块fs文件管理nodejs官方文档 1.1 readdir和readdirSync的区别 两者都用与读取文件或者文件夹里的文件有啥   fs.readdir(path[, options], callback)异步函数，需要传入一个回调  path   options encoding 默认值: &#39;utf8&#39;。 withFileTypes  默认值: false。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nodejs学习记录">
 <meta property="og:url" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="1.node自带模块fs文件管理nodejs官方文档 1.1 readdir和readdirSync的区别 两者都用与读取文件或者文件夹里的文件有啥   fs.readdir(path[, options], callback)异步函数，需要传入一个回调  path   options encoding 默认值: &#39;utf8&#39;。 withFileTypes  默认值: false。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//1570860020599.png">
-<meta property="og:image" content="https://github.com/.com//1570865560878.png">
-<meta property="og:image" content="https://github.com/.com//1571021112249.png">
-<meta property="og:image" content="https://github.com/.com//1571021180480.png">
-<meta property="og:image" content="https://github.com/.com//1571145900643.png">
-<meta property="og:image" content="https://github.com/.com//1571152056613.png">
-<meta property="og:image" content="https://github.com/.com//1571152747028.png">
-<meta property="og:image" content="https://github.com/.com//1571152776993.png">
-<meta property="og:image" content="https://github.com/.com//1571385182120.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1570860020599.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1570865560878.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571021112249.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571021180480.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571145900643.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571152056613.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571152747028.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571152776993.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571385182120.png">
 <meta property="article:published_time" content="2020-03-16T07:17:47.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.079Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="nodeJS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//1570860020599.png">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1570860020599.png">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -81,7 +81,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -170,9 +170,9 @@ catch (err) &#123;
 &#125;)</code></pre>
 <h4 id="1-6-fs-stat-path-options-callback"><a href="#1-6-fs-stat-path-options-callback" class="headerlink" title="1.6 fs.stat(path[, options], callback)"></a>1.6 fs.stat(path[, options], callback)</h4><p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/fs.html#fs_fs_stat_path_options_callback">fs.stat</a></p>
 <hr>
-<h3 id="2-url内置模块"><a href="#2-url内置模块" class="headerlink" title="2. url内置模块"></a>2. url内置模块</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1570860020599.png" alt></p>
+<h3 id="2-url内置模块"><a href="#2-url内置模块" class="headerlink" title="2. url内置模块"></a>2. url内置模块</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1570860020599.png" alt></p>
 <h4 id="2-1-url-parse-和url-format"><a href="#2-1-url-parse-和url-format" class="headerlink" title="2.1 url.parse()和url.format()"></a>2.1 url.parse()和url.format()</h4><p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/url.html#url_url_parse_urlstring_parsequerystring_slashesdenotehost">url.parse()</a>将其解析成一个url对象，从而可以从url中获取href中的各种值</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1570865560878.png" alt="1570865560878"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1570865560878.png" alt="1570865560878"></p>
 <p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/url.html#url_url_format_url_options">url.format()</a>将对象再拼起来</p>
 <pre><code class="javascript">let url = require(&quot;url&quot;);
 let urlStirng = &#39;https://code.choerodon.com.cn/choerodon-framework?page=2&#39;
@@ -180,7 +180,7 @@ let urlObj = url.parse(urlStirng);
 console.log(urlObj);
 let string = url.format(urlObj);
 console.log(string)</code></pre>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1571021112249.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1571021112249.png" alt></p>
 <hr>
 <h3 id="3-querystring内置模块"><a href="#3-querystring内置模块" class="headerlink" title="3. querystring内置模块"></a>3. querystring内置模块</h3><p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/querystring.html#querystring_query_string">querystring</a></p>
 <h4 id="3-1-stringfy-对象转成字符串，parse-根据符号解析querystring"><a href="#3-1-stringfy-对象转成字符串，parse-根据符号解析querystring" class="headerlink" title="3.1 stringfy()对象转成字符串，parse()根据符号解析querystring"></a>3.1 stringfy()对象转成字符串，parse()根据符号解析querystring</h4><h4 id="3-2-escape-和unescape-编码与解码"><a href="#3-2-escape-和unescape-编码与解码" class="headerlink" title="3.2 escape()和unescape()编码与解码"></a>3.2 escape()和unescape()编码与解码</h4><pre><code class="javascript">let qs = require(&#39;querystring&#39;)
@@ -192,7 +192,7 @@ let code = qs.escape(string);
 console.log(code);
 let parseCode = qs.unescape(code);
 console.log(parseCode);</code></pre>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1571021180480.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1571021180480.png" alt></p>
 <hr>
 <h3 id="4-nodemailer-第三方模块"><a href="#4-nodemailer-第三方模块" class="headerlink" title="4. nodemailer 第三方模块"></a>4. nodemailer 第三方模块</h3><p>基本的发送邮箱代码：</p>
 <pre><code class="javascript">&#39;use strict&#39;;
@@ -335,7 +335,7 @@ app.get(&#39;/user/login&#39;, (req, res) =&gt; &#123;
 
 // 协议 http https</code></pre>
 <p>地址栏中输入<a target="_blank" rel="noopener" href="http://localhost:3000/user/login?username=wengkaimin&amp;ps=123456">http://localhost:3000/user/login?username=wengkaimin&amp;ps=123456</a></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1571145900643.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1571145900643.png" alt></p>
 <p>控制台中就能接受到传过来的数据，通过req.query接受get方法传过来的参数</p>
 <p><strong>写一个post接口</strong></p>
 <blockquote>
@@ -343,7 +343,7 @@ app.get(&#39;/user/login&#39;, (req, res) =&gt; &#123;
 <p><code>body-parser</code></p>
 </blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/body-parser">body-parser npm</a></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1571152056613.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1571152056613.png" alt></p>
 <pre><code class="javascript">const express = require(&#39;express&#39;);
 const app = express() //express实例化
 const bp = require(&#39;body-parser&#39;);
@@ -379,8 +379,8 @@ app.post(&#39;/user/reg&#39;, (request, result) =&gt; &#123;
     result.send(&#123; status: 1 &#125;)
 &#125;)
 // 协议 http https</code></pre>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1571152747028.png" alt></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1571152776993.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1571152747028.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1571152776993.png" alt></p>
 <h4 id="7-2-中间件-middlewear"><a href="#7-2-中间件-middlewear" class="headerlink" title="7.2 中间件 middlewear"></a>7.2 中间件 middlewear</h4><ul>
 <li>内置中间件 static</li>
 <li>自定义中间件（全局）（局部）</li>
@@ -432,7 +432,7 @@ app.use(express.static(dirPath)); //可以从这个路径直接获取到资源
 app.listen(3000, () =&gt; &#123;
     console.log(&#39;server start at localhost://3000&#39;)
 &#125;)</code></pre>
-<h4 id="7-4-路由"><a href="#7-4-路由" class="headerlink" title="7.4 路由"></a>7.4 路由</h4><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1571385182120.png" alt></p>
+<h4 id="7-4-路由"><a href="#7-4-路由" class="headerlink" title="7.4 路由"></a>7.4 路由</h4><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1571385182120.png" alt></p>
 <p>server.js</p>
 <pre><code class="javascript">const express = require(&#39;express&#39;);
 const app = express();

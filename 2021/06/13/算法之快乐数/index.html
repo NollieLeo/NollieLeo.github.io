@@ -20,29 +20,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>算法之快乐数 - 翁老师的博客</title>
+  <title>算法之快乐数 - 翁先森的博客</title>
 
   
     <meta name="description" content="202.快乐数 编写一个算法来判断一个数 n 是不是快乐数。 「快乐数」定义为： 对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和。然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。如果 可以变为  1，那么这个数就是快乐数。如果 n 是快乐数就返回 true ；不是，则返回 false 。  思路: 1.哈希表 每次都去拆分数字计算平方和，如果和为1，就是快乐">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法之快乐数">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/06/13/%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="202.快乐数 编写一个算法来判断一个数 n 是不是快乐数。 「快乐数」定义为： 对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和。然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。如果 可以变为  1，那么这个数就是快乐数。如果 n 是快乐数就返回 true ；不是，则返回 false 。  思路: 1.哈希表 每次都去拆分数字计算平方和，如果和为1，就是快乐">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613171549533.png">
-<meta property="og:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170644838.png">
-<meta property="og:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170717617.png">
-<meta property="og:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170728576.png">
-<meta property="og:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170747791.png">
-<meta property="og:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170758347.png">
-<meta property="og:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170816336.png">
-<meta property="og:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170827279.png">
-<meta property="og:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170838148.png">
-<meta property="og:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613171129939.png">
+<meta property="og:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613171549533.png">
+<meta property="og:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170644838.png">
+<meta property="og:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170717617.png">
+<meta property="og:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170728576.png">
+<meta property="og:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170747791.png">
+<meta property="og:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170758347.png">
+<meta property="og:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170816336.png">
+<meta property="og:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170827279.png">
+<meta property="og:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170838148.png">
+<meta property="og:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613171129939.png">
 <meta property="article:published_time" content="2021-06-13T09:02:36.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.416Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="js">
 <meta property="article:tag" content="面试题">
 <meta property="article:tag" content="算法">
@@ -50,13 +50,13 @@
 <meta property="article:tag" content="快慢指针">
 <meta property="article:tag" content="环形链表">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613171549533.png">
+<meta name="twitter:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613171549533.png">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -87,7 +87,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -122,7 +122,7 @@
 <p>编写一个算法来判断一个数 n 是不是快乐数。</p>
 <p>「快乐数」定义为：</p>
 <p>对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和。<br>然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。<br>如果 可以变为  1，那么这个数就是快乐数。<br>如果 n 是快乐数就返回 true ；不是，则返回 false 。</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613171549533.png" alt="image-20210613171549533"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613171549533.png" alt="image-20210613171549533"></p>
 <p>思路:</p>
 <p>1.哈希表</p>
 <p>每次都去拆分数字计算平方和，如果和为1，就是快乐数，如果不唯一就存在Map里头。</p>
@@ -158,15 +158,15 @@ var isHappy = function (n) &#123;
 <p>此时，我们就可以判断当前数不是一个快乐数了~</p>
 <p>但是，为了降低空间复杂度，我们选择使用快慢指针来解决，流程如下：</p>
 <p>创建一个慢指针，一次走一步，再创建一个快指针，一次走两步。<br>当快慢指针相遇，代表形参环路，该数不是快乐数。<br>若指针移动过程中，找到了 11，则当前数是一个快乐数。</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170644838.png" alt="image-20210613170644838"></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170717617.png" alt="image-20210613170717617"></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170728576.png" alt="image-20210613170728576"></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170747791.png" alt="image-20210613170747791"></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170758347.png" alt="image-20210613170758347"></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170816336.png" alt="image-20210613170816336"></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170827279.png" alt="image-20210613170827279"></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170838148.png" alt="image-20210613170838148"></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613171129939.png" alt="image-20210613171129939"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170644838.png" alt="image-20210613170644838"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170717617.png" alt="image-20210613170717617"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170728576.png" alt="image-20210613170728576"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170747791.png" alt="image-20210613170747791"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170758347.png" alt="image-20210613170758347"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170816336.png" alt="image-20210613170816336"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170827279.png" alt="image-20210613170827279"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613170838148.png" alt="image-20210613170838148"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0%5Cimage-20210613171129939.png" alt="image-20210613171129939"></p>
 <pre><code class="js">let getNext = function (n) &#123;
     return n.toString().split(&#39;&#39;).map(i =&gt; i ** 2).reduce((a, b) =&gt; a + b);
 &#125;

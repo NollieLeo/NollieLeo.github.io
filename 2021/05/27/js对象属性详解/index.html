@@ -20,34 +20,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>js对象属性详解 - 翁老师的博客</title>
+  <title>js对象属性详解 - 翁先森的博客</title>
 
   
     <meta name="description" content="ECMA-262使用一些内部特性来描述属性的特征。这些特征是由为js实现引擎的规范定义的，开发者在js中不能直接访问这些特性，描述内部特性，一般会把这个特性括起来类似这样[[Enumerable]]  属性的类型属性分两种   数据属性 访问器属性  1. 数据属性数值属性包含一个保存数据值的位置。 以下有4种特性描述他们的行为  [[Configurable]]： 表示属性以下特性。（默认情况">
 <meta property="og:type" content="article">
 <meta property="og:title" content="js对象属性详解">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/05/27/js%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="ECMA-262使用一些内部特性来描述属性的特征。这些特征是由为js实现引擎的规范定义的，开发者在js中不能直接访问这些特性，描述内部特性，一般会把这个特性括起来类似这样[[Enumerable]]  属性的类型属性分两种   数据属性 访问器属性  1. 数据属性数值属性包含一个保存数据值的位置。 以下有4种特性描述他们的行为  [[Configurable]]： 表示属性以下特性。（默认情况">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//image-20210527212616268.png">
-<meta property="og:image" content="https://github.com/.com//image-20210527212733518.png">
-<meta property="og:image" content="https://github.com/.com//image-20210527212917495.png">
-<meta property="og:image" content="https://github.com/.com//image-20210527213001469.png">
-<meta property="og:image" content="https://github.com/.com//image-20210527214742659.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/05/27/js%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/image-20210527212616268.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/05/27/js%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/image-20210527212733518.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/05/27/js%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/image-20210527212917495.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/05/27/js%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/image-20210527213001469.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/05/27/js%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/image-20210527214742659.png">
 <meta property="article:published_time" content="2021-05-27T12:21:37.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.077Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="js">
 <meta property="article:tag" content="object">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//image-20210527212616268.png">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/05/27/js%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/image-20210527212616268.png">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -78,7 +78,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -259,15 +259,15 @@ let desc = Object.getOwnPropertyDescriptor(book,&quot;year_&quot;);
 let descYear = Object.getOwnPropertyDescriptor(book, &quot;year&quot;);
 </code></pre>
 <p>desc的值如下</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210527212616268.png" alt="image-20210527212616268"></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210527212733518.png" alt="image-20210527212733518"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210527212616268.png" alt="image-20210527212616268"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210527212733518.png" alt="image-20210527212733518"></p>
 <p>descYear值如下：</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210527212917495.png" alt="image-20210527212917495"></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210527213001469.png" alt="image-20210527213001469"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210527212917495.png" alt="image-20210527212917495"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210527213001469.png" alt="image-20210527213001469"></p>
 <h2 id="2-Object-getOwnPropertyDescriptors"><a href="#2-Object-getOwnPropertyDescriptors" class="headerlink" title="2. Object.getOwnPropertyDescriptors()"></a>2. Object.getOwnPropertyDescriptors()</h2><p>es2017新增的静态方法，这个方法会在每个自有属性上调用Object.defineProperties</p>
 <pre><code class="js">console.log(Object.getOwnPropertyDescriptors(book));</code></pre>
 <p>打印出来的如下</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210527214742659.png" alt="image-20210527214742659"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210527214742659.png" alt="image-20210527214742659"></p>
 <blockquote>
 <p>注意：这两个方法只对实例属性有效果，是不能取得原型属性上的描述符，如果需要取得原型属性上的描述符，就得直接再原型对象上面直接调用这两个方法</p>
 </blockquote>

@@ -20,15 +20,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>标签：react - 翁老师的博客</title>
+  <title>标签：React - 翁先森的博客</title>
 
   
     <meta property="og:type" content="website">
-<meta property="og:title" content="翁老师的博客">
-<meta property="og:url" content="https://github.com/NollieLeo/tags/react/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:title" content="翁先森的博客">
+<meta property="og:url" content="https://github.com/NollieLeo/tags/React/index.html">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="程序猿">
 <meta name="twitter:card" content="summary">
   
@@ -36,7 +36,7 @@
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -65,7 +65,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -85,7 +85,7 @@
       
   
 
-<header class="header mobile-only"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div></header>
+<header class="header mobile-only"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div></header>
 
 
 
@@ -96,55 +96,53 @@
 
   
 
-<div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：react</a><a href="/archives">归档</a></nav></div>
+<div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：React</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2021/08/03/useRef%E8%83%BD%E5%81%9A%E5%95%A5%EF%BC%9F/">
-<article class="md-text"><h2 class="post-title">useRef能做啥？</h2><div class="excerpt"><p>useRefuseRef主要的功能就是。
+  <div class="post-list post"><a class="post-card post " href="/2021/08/29/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-update%E9%80%92%E5%BD%92-part7/">
+<article class="md-text"><h2 class="post-title">React源码学习-render阶段-update递归-part7</h2><div class="excerpt"><p></p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2021-08-29T09:08:37.000Z">2021-08-29</time></span><span class="cap breadcrumb">React</span></div></article>
+</a><a class="post-card post " href="/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/">
+<article class="md-text"><h2 class="post-title">React源码学习-render阶段-mount递归-part6</h2><div class="excerpt"><p>
+这里说一下 mount时候的beginWork和completeWork的流程吧
 
-帮助我们获取到DOM元素或者组件实例
-保存在组件生命周期内不会变化的值
+mount递归断点调试render阶段的递阶段起点是beginWork，归阶段的起点是completeWork，那我们就在源码上打断点。
 
-如下：
-function TextInputWithFocusButton() &#123;
-  const inputEl = useRef(null);
-  const onButtonClick = () =&gt; &#123;
-    // `current` 指向...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2021-08-03T07:29:45.000Z">2021-08-03</time></span><span class="cap breadcrumb">useRef</span></div></article>
-</a><a class="post-card post " href="/2021/06/06/react%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/">
-<article class="md-text"><h2 class="post-title">react相关面试知识点</h2><div class="excerpt"><p>react 的生命周期，分别在哪个时候被执行setState，哪些生命周期可以setState函数组件和普通组件区别什么是render props组件fiber是什么diff算法VDom虚拟dom这里，小编的理解是：虚拟DOM是真实DOM的内存表示，是一种编程概念，一种模式。它的作用是判断DOM是否改变、哪些部分需要被重新渲染。这样，不需要操纵真实的DOM,同时极大的提高了React的性能。...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2021-06-06T07:34:05.000Z">2021-06-06</time></span><span class="cap breadcrumb">react</span></div></article>
-</a><a class="post-card post " href="/2020/12/24/react%E4%BD%95%E6%97%B6render%E5%91%A2%EF%BC%9F/">
-<article class="md-text"><h2 class="post-title">react何时render呢？</h2><div class="excerpt"><p>对于如下Demo，点击Parent组件的div，触发更新，Son组件会打印child render!么？
-function Son() &#123;  
-    console.log(&#39;child render!&#39;);  
-    return &lt;div&gt;Son&lt;/div&gt;;
-&#125;
-function Parent(props) &#123; ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2020-12-24T01:50:41.000Z">2020-12-24</time></span><span class="cap breadcrumb">react</span></div></article>
-</a><a class="post-card post " href="/2020/11/08/useRef%E6%8B%BF%E5%AD%90%E7%BB%84%E4%BB%B6%E6%96%B9%E6%B3%95/">
-<article class="md-text"><h2 class="post-title">useRef拿子组件方法</h2><div class="excerpt"><p>  
 
-useRef是一个方法，且useRef返回一个可变的ref对象（对象！！！）
+应用demo如下
 
-initialValue被赋值给其返回值的.current对象
+刷新页面正式进入调试。
+1.发现第一次进入页面beginWork中，current有值，并且此时的tag是等于3的，之前说的我们在createFi...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2021-08-23T13:53:25.000Z">2021-08-23</time></span><span class="cap breadcrumb">React</span></div></article>
+</a><a class="post-card post " href="/2021/08/22/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5%E7%AE%80%E4%BB%8B-part5/">
+<article class="md-text"><h2 class="post-title">React源码学习-render阶段-part5</h2><div class="excerpt"><p>
+之前fiber那边说过，当我们第一次创建完了整个应用的根节点（fiberRootNode的时候，我们就进入首屏渲染的阶段）
 
-可以保存任何类型的值:dom、对象等任何可辨值
+通过sheduleUpdateOnFiber去调度更新，调度成功之后会走performSyncWorkOnRoot，也就是说从根节点开始执行这次的更新。
+这时候也肯定是没有一个workInProgress的fiber tree的，所以从根节点出发，去触发更新（第一次...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2021-08-22T09:44:31.000Z">2021-08-22</time></span><span class="cap breadcrumb">React</span></div></article>
+</a><a class="post-card post " href="/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/">
+<article class="md-text"><h2 class="post-title">React源码学习-jsx的理解-part4</h2><div class="excerpt"><p>jsx理解 JSX和Fiber节点不是同一个东西 。
+ React Component 和 React Element 也不是一个东西。
+从编译来看JSX在babel中会被编译成React.createElement（这也就是为什么需要手动import React from &#39;react&#39;的原因了）
+但是在17之后不需要手动引入了 看这篇
+如下图：
 
-ref对象与自建一个{current：‘’}对象的区别是：useRef会在每次渲染时返回同一个ref对象，即返回的ref对象在组件的整个生命周期内保持不变。自建对象每次渲染时都建立一个新的。...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2020-11-08T04:58:36.000Z">2020-11-08</time></span><span class="cap breadcrumb">react</span></div></article>
-</a><a class="post-card post " href="/2020/03/19/%E5%B8%B8%E7%94%A8%E7%BD%91%E7%AB%99/">
-<article class="md-text"><h2 class="post-title">常用网站</h2><div class="excerpt"><p>
-react
-react官方文档](https://reactjs.org/docs/getting-started.html)
 
-git
-廖雪峰git教程
-git官网
+JSX并不是只能被编译...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2021-08-21T14:26:48.000Z">2021-08-21</time></span><span class="cap breadcrumb">React</span></div></article>
+</a><a class="post-card post " href="/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/">
+<article class="md-text"><h2 class="post-title">React源码学习-fiber原理-part3</h2><div class="excerpt"><p>Fiber架构官方回答什么是fiber
+Fiber并不是计算机术语中的新名词，他的中文翻译叫做纤程，与进程（Process）、线程（Thread）、协程（Coroutine）同为程序执行过程。
+在很多文章中将纤程理解为协程的一种实现。在JS中，协程的实现便是Generator。
+所以，我们可以将纤程(Fiber)、协程(Generator)理解为代数效应思想在JS中的体现。
+React Fi...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2021-08-21T09:17:17.000Z">2021-08-21</time></span><span class="cap breadcrumb">React</span></div></article>
+</a><a class="post-card post " href="/2021/08/16/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-%E5%85%A5%E5%8F%A3-part1/">
+<article class="md-text"><h2 class="post-title">React源码学习</h2><div class="excerpt"><p>
+官方： React 是用 JavaScript 构建快速响应的大型 Web 应用程序的首选方式 
+卡颂react深度解析
 
-JavaScript 
-菜鸟教程JS参考手册
 
-webpack
+首先学习一个框架的源码或者库的源码，我们都要从他们的入口函数出手。而react这个js库就是从ReactDOM.render入手的
 
-NPM  https://www.npmjs.com/ 
+前言：React的快速响应是什么意思呢？
 
-秦枫的git blog:  https://github.com/mqyqingfeng/Blo...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2020-03-19T01:03:44.000Z">2020-03-19</time></span><span class="cap breadcrumb">常用网站</span></div></article>
+遇到大量计算不会让页面掉帧或者导致卡顿（这里要想到每秒60帧（HZ），每帧16.6ms）...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2021-08-16T05:52:58.000Z">2021-08-16</time></span><span class="cap breadcrumb">React源码学习</span></div></article>
 </a></div>
   
 

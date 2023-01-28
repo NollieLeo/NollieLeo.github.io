@@ -20,39 +20,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>垂直居中的几种方式 - 翁老师的博客</title>
+  <title>垂直居中的几种方式 - 翁先森的博客</title>
 
   
     <meta name="description" content="在阅读此文章之前要搞明白行内元素和块级元素的区别，和其常用的标签 行内元素和块级元素 行内元素垂直居中1. 设置外层块元素的height，line-height为相同的值适用范围：作用于单行为文字，使文字垂直居中显示 原理：line-height与font-size的计算之差（在css中成为“行间距”）分为两半，分别加到一个文本行内容的顶部和底部。（可以包含这些内容的最小框就是行框）实现了单行文字">
 <meta property="og:type" content="article">
 <meta property="og:title" content="垂直居中的几种方式">
 <meta property="og:url" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="在阅读此文章之前要搞明白行内元素和块级元素的区别，和其常用的标签 行内元素和块级元素 行内元素垂直居中1. 设置外层块元素的height，line-height为相同的值适用范围：作用于单行为文字，使文字垂直居中显示 原理：line-height与font-size的计算之差（在css中成为“行间距”）分为两半，分别加到一个文本行内容的顶部和底部。（可以包含这些内容的最小框就是行框）实现了单行文字">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//image-20200326102804196.png">
-<meta property="og:image" content="https://github.com/.com//image-20200326103805967.png">
-<meta property="og:image" content="https://github.com/.com//image-20200326110227357.png">
-<meta property="og:image" content="https://github.com/.com//image-20200326113535458.png">
-<meta property="og:image" content="https://github.com/.com//image-20200326142740669.png">
-<meta property="og:image" content="https://github.com/.com//image-20200326143016605.png">
-<meta property="og:image" content="https://github.com/.com//image-20200326145604077.png">
-<meta property="og:image" content="https://github.com/.com//image-20200326145824002.png">
-<meta property="og:image" content="https://github.com/.com//image-20200326150745436.png">
-<meta property="og:image" content="https://github.com/.com//image-20200326151049822.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326102804196.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326103805967.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326110227357.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326113535458.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326142740669.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326143016605.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326145604077.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326145824002.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326150745436.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326151049822.png">
 <meta property="article:published_time" content="2020-03-26T02:09:04.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.166Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="css">
 <meta property="article:tag" content="垂直居中">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//image-20200326102804196.png">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326102804196.png">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -83,7 +83,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -133,7 +133,7 @@
     &lt;span class=&quot;content&quot;&gt;垂直居中&lt;/span&gt;
   &lt;/div&gt;
 &lt;/body&gt;</code></pre>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326102804196.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20200326102804196.png" alt></p>
 <h3 id="2-vertical-align"><a href="#2-vertical-align" class="headerlink" title="2.  vertical-align"></a>2.  vertical-align</h3><p>适用范围：外层块元素包含<strong>大于一个行内元素</strong>需要垂直居中时 （如图片和文字需要垂直居中显示时），可以通过对图片的标签或文字的标签（行内元素）设置<code>vertical-align</code>，可以达到效果； </p>
 <p>特点：</p>
 <ul>
@@ -163,7 +163,7 @@
     &lt;img src=&quot;https://www.baidu.com/img/bd_logo1.png&quot; /&gt;
   &lt;/div&gt;
 &lt;/body&gt;</code></pre>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326103805967.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20200326103805967.png" alt></p>
 <h3 id="3-外层父元素display-table-cell-vertical-align-middle"><a href="#3-外层父元素display-table-cell-vertical-align-middle" class="headerlink" title="3.  外层父元素display: table-cell;vertical-align: middle"></a>3.  外层父元素display: table-cell;vertical-align: middle</h3><p>特点：</p>
 <ul>
 <li>外层元素需要设置高度</li>
@@ -183,7 +183,7 @@
     &lt;img src=&quot;https://www.baidu.com/img/bd_logo1.png&quot; /&gt;
   &lt;/div&gt;
 &lt;/body&gt;</code></pre>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326110227357.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20200326110227357.png" alt></p>
 <h3 id="4-display-flex-align-items-center"><a href="#4-display-flex-align-items-center" class="headerlink" title="4. display:flex; align-items:center"></a>4. <code>display:flex;</code> <code>align-items:center</code></h3><p>特点：</p>
 <ul>
 <li>flex布局</li>
@@ -209,7 +209,7 @@
   &lt;/div&gt;
 
 &lt;/body&gt;</code></pre>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326113535458.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20200326113535458.png" alt></p>
 <h3 id="5-绝对定位-负外边距；"><a href="#5-绝对定位-负外边距；" class="headerlink" title="5.  绝对定位+负外边距；"></a>5.  绝对定位+负外边距；</h3><p>适用范围：包裹的行内元素必须是可以设置高度的，但是像文本元素是不建议使用这个的，因为文本的内容不确定，除非定高且设置超出溢出</p>
 <pre><code class="html">&lt;body&gt;
   &lt;style&gt;
@@ -289,7 +289,7 @@
   &lt;/div&gt;
 
 &lt;/body&gt;</code></pre>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326142740669.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20200326142740669.png" alt></p>
 <p>对table-cell元素设置百分比（如100%）的宽高值是无效的，但是可以将元素设置display:table，再将父元素设置百分比跨高，子元素table-cell会自动撑满父元素。这就可以做相对于整个页面的水平垂直居中。嗯，看下面的代码 </p>
 <pre><code class="html">&lt;body&gt;
   &lt;style&gt;
@@ -331,7 +331,7 @@
   &lt;/div&gt;
 
 &lt;/body&gt;</code></pre>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326143016605.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20200326143016605.png" alt></p>
 <h3 id="2-display-flex的方法"><a href="#2-display-flex的方法" class="headerlink" title="2. display:flex的方法"></a>2. display:flex的方法</h3><p>参考上面所说的行内元素的方法</p>
 <ol>
 <li><p>设置container的display的类型为flex，激活为flexbox模式。</p>
@@ -407,7 +407,7 @@
   &lt;/div&gt;
 
 &lt;/body&gt;</code></pre>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326145604077.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20200326145604077.png" alt></p>
 <h2 id="知道元素宽高的情况下"><a href="#知道元素宽高的情况下" class="headerlink" title="知道元素宽高的情况下"></a>知道元素宽高的情况下</h2><h3 id="1-绝对定位相对定位（-绝对定位-margin：auto；position-absolute-left-0-top-0-right-0-bottom-0-margin-auto）"><a href="#1-绝对定位相对定位（-绝对定位-margin：auto；position-absolute-left-0-top-0-right-0-bottom-0-margin-auto）" class="headerlink" title="1.绝对定位相对定位（ 绝对定位+margin：auto；position:absolute; left:0; top:0; right:0; bottom:0; margin:auto）"></a>1.绝对定位相对定位（ 绝对定位+margin：auto；position:absolute; left:0; top:0; right:0; bottom:0; margin:auto）</h3><p>一个条件都不能少</p>
 <pre><code class="html">&lt;body&gt;
   &lt;style&gt;
@@ -437,7 +437,7 @@
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/body&gt;</code></pre>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326145824002.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20200326145824002.png" alt></p>
 <p>原理：</p>
 <p>当一个绝对定位元素，其对立定位方向属性同时有具体定位数值的时候，流体特性就发生了。</p>
 <p>具有流体特性绝对定位元素的margin:auto的填充规则和普通流体元素一模一样：</p>
@@ -451,14 +451,14 @@
     top: 0; right: 0; bottom: 0; left: 0;
 &#125;</code></pre>
 <p>如图所示流体元素会布满整个父元素，此时<code>.son</code>这个元素的尺寸表现为“格式化宽度和格式化高度”，和的“正常流宽度”一样，同属于外部尺寸，也就是尺寸自动填充父级元素的可用尺寸的</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326150745436.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20200326150745436.png" alt></p>
 <p>然后，此时我们给.son设置尺寸，例如</p>
 <pre><code class="css">.son &#123; 
     position: absolute; 
     top: 0; right: 0; bottom: 0; left: 0;
     width: 200px; height: 100px;
 &#125;</code></pre>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326151049822.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20200326151049822.png" alt></p>
 <p>此时宽高被限制，原本应该填充的空间就被多余了出来，这多余的空间就是<code>margin:auto</code>计算的空间，因此，如果这时候，我们再设置一个<code>margin:auto</code>，那么：</p>
 <pre><code class="css">.son &#123; 
     position: absolute; 

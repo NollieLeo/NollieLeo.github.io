@@ -20,35 +20,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>手写bind - 翁老师的博客</title>
+  <title>手写bind - 翁先森的博客</title>
 
   
     <meta name="description" content="手写bind原理 bind() 方法会创建一个新函数。当这个新函数被调用时，bind() 的第一个参数将作为它运行时的 this，之后的一序列参数将会在传递的实参前传入作为它的参数。(来自于 MDN )  由此我们可以首先得出 bind 函数的两个特点：  返回一个函数 可以传入参数  实现首先先在Function的原型上挂载一个自定义bind函数 Function.prototype._bind">
 <meta property="og:type" content="article">
 <meta property="og:title" content="手写bind">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="手写bind原理 bind() 方法会创建一个新函数。当这个新函数被调用时，bind() 的第一个参数将作为它运行时的 this，之后的一序列参数将会在传递的实参前传入作为它的参数。(来自于 MDN )  由此我们可以首先得出 bind 函数的两个特点：  返回一个函数 可以传入参数  实现首先先在Function的原型上挂载一个自定义bind函数 Function.prototype._bind">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//image-20210604110748385.png">
-<meta property="og:image" content="https://github.com/.com//image-20210604150133583.png">
-<meta property="og:image" content="https://github.com/.com//image-20210604150802371.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/image-20210604110748385.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/image-20210604150133583.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/image-20210604150802371.png">
 <meta property="article:published_time" content="2021-06-03T08:58:33.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.312Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="js">
 <meta property="article:tag" content="面试题">
 <meta property="article:tag" content="原型链">
 <meta property="article:tag" content="bind">
 <meta property="article:tag" content="原型">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//image-20210604110748385.png">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/image-20210604110748385.png">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -79,7 +79,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -182,7 +182,7 @@ const o = new MyBar(12);
 
 console.log(o);</code></pre>
 <p>结果如下</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210604110748385.png" alt="image-20210604110748385"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210604110748385.png" alt="image-20210604110748385"></p>
 <p>可以得知此时Bar函数的this指向的是o对象，就是相当于以new的形式调用了构造函数，这块的原理可以去 手写new那篇文章看看</p>
 <pre><code class="js">Function.prototype._bind = function (context) &#123;
     const that = this;
@@ -264,9 +264,9 @@ const per1 = new NewPerson(23);
 
 console.log(per1);</code></pre>
 <p>最终打印的是这样的</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210604150133583.png" alt="image-20210604150133583"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210604150133583.png" alt="image-20210604150133583"></p>
 <p>正常打印出来是这样的，差了一个标识的问题， 这个无所谓了</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210604150802371.png" alt="image-20210604150802371"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210604150802371.png" alt="image-20210604150802371"></p>
 <pre><code class="js">let o = &#123;
     address: &#39;fujian&#39;
 &#125;

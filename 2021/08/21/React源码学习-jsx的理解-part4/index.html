@@ -20,33 +20,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>React源码学习-jsx的理解-part4 - 翁老师的博客</title>
+  <title>React源码学习-jsx的理解-part4 - 翁先森的博客</title>
 
   
     <meta name="description" content="jsx理解 JSX和Fiber节点不是同一个东西 。  React Component 和 React Element 也不是一个东西。 从编译来看JSX在babel中会被编译成React.createElement（这也就是为什么需要手动import React from &#39;react&#39;的原因了） 但是在17之后不需要手动引入了 看这篇 如下图：   JSX并不是只能被编译为Re">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React源码学习-jsx的理解-part4">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="jsx理解 JSX和Fiber节点不是同一个东西 。  React Component 和 React Element 也不是一个东西。 从编译来看JSX在babel中会被编译成React.createElement（这也就是为什么需要手动import React from &#39;react&#39;的原因了） 但是在17之后不需要手动引入了 看这篇 如下图：   JSX并不是只能被编译为Re">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//image-20210822155213907.png">
-<meta property="og:image" content="https://github.com/.com//image-20210822155830376.png">
-<meta property="og:image" content="https://github.com/.com//image-20210822160045714.png">
-<meta property="og:image" content="https://github.com/.com//image-20210822160957936.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/image-20210822155213907.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/image-20210822155830376.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/image-20210822160045714.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/image-20210822160957936.png">
 <meta property="article:published_time" content="2021-08-21T14:26:48.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.054Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="React">
 <meta property="article:tag" content="jsx">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//image-20210822155213907.png">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/image-20210822155213907.png">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -77,7 +77,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -111,7 +111,7 @@
 <h2 id="从编译来看"><a href="#从编译来看" class="headerlink" title="从编译来看"></a>从编译来看</h2><p>JSX在babel中会被编译成React.createElement（这也就是为什么需要手动<code>import React from &#39;react&#39;</code>的原因了）</p>
 <p>但是在17之后不需要手动引入了 <a target="_blank" rel="noopener" href="https://zh-hans.reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html">看这篇</a></p>
 <p>如下图：</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210822155213907.png" alt="image-20210822155213907"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210822155213907.png" alt="image-20210822155213907"></p>
 <blockquote>
 <p><code>JSX</code>并不是只能被编译为<code>React.createElement</code>方法，你可以通过<a target="_blank" rel="noopener" href="https://babeljs.io/docs/en/babel-plugin-transform-react-jsx">@babel/plugin-transform-react-jsx (opens new window)</a>插件显式告诉<code>Babel</code>编译时需要将<code>JSX</code>编译为什么函数的调用（默认为<code>React.createElement</code>）。</p>
 </blockquote>
@@ -125,21 +125,21 @@
 </ul>
 <h3 id="执行步骤"><a href="#执行步骤" class="headerlink" title="执行步骤"></a>执行步骤</h3><ol>
 <li><p>进来createElement我们会发现它定义了一些字段，这些字段都是我们比较常用的</p>
-<p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210822155830376.png" alt="image-20210822155830376"></p>
+<p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210822155830376.png" alt="image-20210822155830376"></p>
 </li>
 <li><p>之后我们对传进来的config进行校验，我们会发现他做了几个合法性的校验，并且对相对应的变量进行赋值</p>
 <ul>
 <li><a href="https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L31">hasValidRef</a>：对config中的ref做合法性校验</li>
 <li><a href="https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L43">hasValidKey</a>：对config中的key做合法性校验</li>
 </ul>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210822160045714.png" alt="image-20210822160045714"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210822160045714.png" alt="image-20210822160045714"></p>
 </li>
 <li><p>遍历config中的属性，将除了保留属性之外的其他属性赋值给<a href="https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L241">Props</a>（就是内部的一个中间对象）</p>
 <p><a href="https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L16">保留属性有哪些呢？</a></p>
 <p>可以看到react把，ref，key都提出来了，单独的作为 <code>ReactElement</code>函数的参数传递（这个下面说）</p>
 </li>
 <li><p>接下来处理type中的<code>defaultProps</code>，这里也能明白，因为我们经常需要给class的组件的一些参数设置默认的属性值</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210822160957936.png" alt="image-20210822160957936"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210822160957936.png" alt="image-20210822160957936"></p>
 </li>
 <li><p>接下来我们走入<code>ReactElement</code><a href="https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L146">函数</a></p>
 <p>可以发现，它最终返回了一个Element对象</p>

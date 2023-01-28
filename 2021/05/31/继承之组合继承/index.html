@@ -20,20 +20,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>继承之组合继承 - 翁老师的博客</title>
+  <title>继承之组合继承 - 翁先森的博客</title>
 
   
     <meta name="description" content="组合继承（伪经典继承）组合继承综合了原型链和盗用构造函数，将两者的优点集中起来了。 基本思路是：  使用原型链继承原型上的属性和方法  再通过盗用构造函数继承实例属性  如下例子： function SuperType(name)&amp;#123;     this.name &#x3D; name;     this.numbers &#x3D; [1,2,3,4]; &amp;#125;  SuperType.prototyp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="继承之组合继承">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="组合继承（伪经典继承）组合继承综合了原型链和盗用构造函数，将两者的优点集中起来了。 基本思路是：  使用原型链继承原型上的属性和方法  再通过盗用构造函数继承实例属性  如下例子： function SuperType(name)&amp;#123;     this.name &#x3D; name;     this.numbers &#x3D; [1,2,3,4]; &amp;#125;  SuperType.prototyp">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//image-20210531160333624.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF/image-20210531160333624.png">
 <meta property="article:published_time" content="2021-05-31T03:14:09.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.540Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="js">
 <meta property="article:tag" content="构造函数">
 <meta property="article:tag" content="原型链">
@@ -41,13 +41,13 @@
 <meta property="article:tag" content="继承">
 <meta property="article:tag" content="组合式继承">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//image-20210531160333624.png">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF/image-20210531160333624.png">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -78,7 +78,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -155,7 +155,7 @@ console.log(Object.getPrototypeOf(instance1));
 console.log(instance1.__proto__);
 console.log(instance1.__proto__.constructor);
 console.log(SubType.prototype.constructor);</code></pre>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210531160333624.png" alt="image-20210531160333624"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210531160333624.png" alt="image-20210531160333624"></p>
 <h1 id="组合继承的问题"><a href="#组合继承的问题" class="headerlink" title="组合继承的问题"></a>组合继承的问题</h1><p>看以上的组合继承代码，你会发现这里的超类也就是SuperType被实例化了两次</p>
 <ol>
 <li>在SubType将其原型覆盖为SuperType构造函数new出来的实例的时候</li>

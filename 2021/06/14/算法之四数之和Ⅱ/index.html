@@ -20,32 +20,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>算法之四数之和Ⅱ - 翁老师的博客</title>
+  <title>算法之四数之和Ⅱ - 翁先森的博客</title>
 
   
     <meta name="description" content="454.四数字相加Ⅱ 给定四个包含整数的数组列表 A , B , C , D ,计算有多少个元组 (i, j, k, l) ，使得 A[i] + B[j] + C[k] + D[l] &#x3D; 0。 为了使问题简单化，所有的 A, B, C, D 具有相同的长度 N，且 0 ≤ N ≤ 500 。所有整数的范围在 -228 到 228 - 1 之间，最终结果不会超过 231 - 1 。  思路： 四个数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法之四数之和Ⅱ">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/06/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C%E2%85%A1/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="454.四数字相加Ⅱ 给定四个包含整数的数组列表 A , B , C , D ,计算有多少个元组 (i, j, k, l) ，使得 A[i] + B[j] + C[k] + D[l] &#x3D; 0。 为了使问题简单化，所有的 A, B, C, D 具有相同的长度 N，且 0 ≤ N ≤ 500 。所有整数的范围在 -228 到 228 - 1 之间，最终结果不会超过 231 - 1 。  思路： 四个数">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C%E2%85%A1%5Cimage-20210614145011013.png">
+<meta property="og:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C%E2%85%A1%5Cimage-20210614145011013.png">
 <meta property="article:published_time" content="2021-06-14T06:48:40.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.415Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="js">
 <meta property="article:tag" content="面试题">
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="哈希表">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C%E2%85%A1%5Cimage-20210614145011013.png">
+<meta name="twitter:image" content="d:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C%E2%85%A1%5Cimage-20210614145011013.png">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -76,7 +76,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -110,7 +110,7 @@
 <p>454.四数字相加Ⅱ</p>
 <p>给定四个包含整数的数组列表 A , B , C , D ,计算有多少个元组 (i, j, k, l) ，使得 A[i] + B[j] + C[k] + D[l] = 0。</p>
 <p>为了使问题简单化，所有的 A, B, C, D 具有相同的长度 N，且 0 ≤ N ≤ 500 。所有整数的范围在 -228 到 228 - 1 之间，最终结果不会超过 231 - 1 。</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C%E2%85%A1%5Cimage-20210614145011013.png" alt="image-20210614145011013"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="D:%5CBlogs%5CNollieLeo.github.io%5Csource_posts%5C%E7%AE%97%E6%B3%95%E4%B9%8B%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C%E2%85%A1%5Cimage-20210614145011013.png" alt="image-20210614145011013"></p>
 <p>思路：</p>
 <p>四个数之和咱们可以给他转换成2数之和，这里因为是4个数组，两两组合，之后用Map存储和值，因为既然要</p>
 <p>使得 A[i] + B[j] + C[k] + D[l] = 0,换个思路就是使得 A[i] + B[j]  = -C[k] - D[l]，AB一组遍历存键值，CD再去遍历找到键值相等的，那就是一组，或者多组，因为AB可能有多种情况，CD也是</p>

@@ -20,32 +20,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>js的精度运算 - 翁老师的博客</title>
+  <title>js的精度运算 - 翁先森的博客</title>
 
   
     <meta name="description" content="前言0.1 + 0.2 是否等于 0.3 作为一道经典的面试题，已经广外熟知，说起原因，大家能回答出这是浮点数精度问题导致，也能辩证的看待这并非是 ECMAScript 这门语言的问题，今天就是具体看一下背后的原因。 数字类型ECMAScript 中的 Number 类型使用 IEEE754 标准来表示整数和浮点数值。所谓 IEEE754 标准，全称 IEEE 二进制浮点数算术标准，这个标准定义了">
 <meta property="og:type" content="article">
 <meta property="og:title" content="js的精度运算">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/06/06/js%E7%9A%84%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="前言0.1 + 0.2 是否等于 0.3 作为一道经典的面试题，已经广外熟知，说起原因，大家能回答出这是浮点数精度问题导致，也能辩证的看待这并非是 ECMAScript 这门语言的问题，今天就是具体看一下背后的原因。 数字类型ECMAScript 中的 Number 类型使用 IEEE754 标准来表示整数和浮点数值。所谓 IEEE754 标准，全称 IEEE 二进制浮点数算术标准，这个标准定义了">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//1.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/06/js%E7%9A%84%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/1.png">
 <meta property="article:published_time" content="2021-06-06T02:17:48.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.078Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="js">
 <meta property="article:tag" content="面试题">
 <meta property="article:tag" content="浮点数">
 <meta property="article:tag" content="精度运算">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//1.png">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/06/06/js%E7%9A%84%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/1.png">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -76,7 +76,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -182,7 +182,7 @@
 <p>我们这样解决，假如我们用 8 位字节来存储 E 这个数，如果只有正数的话，储存的值的范围是 0 ~ 254，而如果要储存正负数的话，值的范围就是 -127~127，我们在存储的时候，把要存储的数字加上 127，这样当我们存 -127 的时候，我们存 0，当存 127 的时候，存 254，这样就解决了存负数的问题。对应的，当取值的时候，我们再减去 127。</p>
 <p>所以呢，真到实际存储的时候，我们并不会直接存储 E，而是会存储 E + bias，当用 8 个字节的时候，这个 bias 就是 127。</p>
 <p>所以，如果要存储一个浮点数，我们存 S 和 Fraction 和 E + bias 这三个值就好了，那具体要分配多少个字节位来存储这些数呢？IEEE754 给出了标准：</p>
-<p>[<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1.png" alt="IEEE754">]</p>
+<p>[<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1.png" alt="IEEE754">]</p>
 <p>在这个标准下：</p>
 <p>我们会用 1 位存储 S，0 表示正数，1 表示负数。</p>
 <p>用 11 位存储 E + bias，对于 11 位来说，bias 的值是 2^(11-1) - 1，也就是 1023。</p>

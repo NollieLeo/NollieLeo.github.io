@@ -20,31 +20,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>浅拷贝和深拷贝 - 翁老师的博客</title>
+  <title>浅拷贝和深拷贝 - 翁先森的博客</title>
 
   
     <meta name="description" content="什么是拷贝？let arr &#x3D; [1, 2, 3]; let newArr &#x3D; arr; newArr[0] &#x3D; 100;  console.log(arr);&#x2F;&#x2F;[100, 2, 3]   这是直接赋值的情况，不涉及任何拷贝。当改变newArr的时候，由于是同一个引用，arr指向的值也跟着改变。  浅拷贝上面的那个例子进行浅拷贝 let arr &#x3D; [1, 2, 3]; let newArr &#x3D;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅拷贝和深拷贝">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/06/17/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="什么是拷贝？let arr &#x3D; [1, 2, 3]; let newArr &#x3D; arr; newArr[0] &#x3D; 100;  console.log(arr);&#x2F;&#x2F;[100, 2, 3]   这是直接赋值的情况，不涉及任何拷贝。当改变newArr的时候，由于是同一个引用，arr指向的值也跟着改变。  浅拷贝上面的那个例子进行浅拷贝 let arr &#x3D; [1, 2, 3]; let newArr &#x3D;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//image-20210619073628733.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/17/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/image-20210619073628733.png">
 <meta property="article:published_time" content="2021-06-17T09:29:37.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.393Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="js">
 <meta property="article:tag" content="面试题">
 <meta property="article:tag" content="深拷贝与浅拷贝">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//image-20210619073628733.png">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/06/17/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/image-20210619073628733.png">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -75,7 +75,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -221,7 +221,7 @@ a.target = a;</code></pre>
 a.target = a;
 console.log(deepClone(a));
 </code></pre>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210619073628733.png" alt="image-20210619073628733"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210619073628733.png" alt="image-20210619073628733"></p>
 <p>好像是没有问题了, 拷贝也完成了。但还是有一个潜在的坑, 就是map 上的 key 和 map 构成了<code>强引用关系</code>，这是相当危险的。我给你解释一下与之相对的弱引用的概念你就明白了：</p>
 <blockquote>
 <p>  在计算机程序设计中，弱引用与强引用相对， </p>

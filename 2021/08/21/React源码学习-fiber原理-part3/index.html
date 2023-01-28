@@ -20,40 +20,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>React源码学习-fiber原理-part3 - 翁老师的博客</title>
+  <title>React源码学习-fiber原理-part3 - 翁先森的博客</title>
 
   
     <meta name="description" content="Fiber架构官方回答什么是fiber Fiber并不是计算机术语中的新名词，他的中文翻译叫做纤程，与进程（Process）、线程（Thread）、协程（Coroutine）同为程序执行过程。 在很多文章中将纤程理解为协程的一种实现。在JS中，协程的实现便是Generator。 所以，我们可以将纤程(Fiber)、协程(Generator)理解为代数效应思想在JS中的体现。 React Fiber">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React源码学习-fiber原理-part3">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/index.html">
-<meta property="og:site_name" content="翁老师的博客">
+<meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="Fiber架构官方回答什么是fiber Fiber并不是计算机术语中的新名词，他的中文翻译叫做纤程，与进程（Process）、线程（Thread）、协程（Coroutine）同为程序执行过程。 在很多文章中将纤程理解为协程的一种实现。在JS中，协程的实现便是Generator。 所以，我们可以将纤程(Fiber)、协程(Generator)理解为代数效应思想在JS中的体现。 React Fiber">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//image-20210821213628488.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/image-20210821213628488.png">
 <meta property="og:image" content="https://react.iamkasong.com/img/rootfiber.png">
 <meta property="og:image" content="https://react.iamkasong.com/img/workInProgressFiber.png">
 <meta property="og:image" content="https://react.iamkasong.com/img/wipTreeFinish.png">
 <meta property="og:image" content="https://react.iamkasong.com/img/wipTreeUpdate.png">
 <meta property="og:image" content="https://react.iamkasong.com/img/currentTreeUpdate.png">
-<meta property="og:image" content="https://github.com/.com//image-20210821223750870.png">
-<meta property="og:image" content="https://github.com/.com//image-20210821224000472.png">
-<meta property="og:image" content="https://github.com/.com//image-20210822153431608.png">
-<meta property="og:image" content="https://github.com/.com//image-20210822153527527.png">
-<meta property="og:image" content="https://github.com/.com//image-20210822153638347.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/image-20210821223750870.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/image-20210821224000472.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/image-20210822153431608.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/image-20210822153527527.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/image-20210822153638347.png">
 <meta property="article:published_time" content="2021-08-21T09:17:17.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.052Z">
-<meta property="article:author" content="Mr.Weng">
+<meta property="article:author" content="翁先森">
 <meta property="article:tag" content="React">
 <meta property="article:tag" content="React fiber">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//image-20210821213628488.png">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-fiber%E5%8E%9F%E7%90%86-part3/image-20210821213628488.png">
   
   
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
   
 
   
@@ -84,7 +84,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -215,7 +215,7 @@ this.sibling = null;</code></pre>
     )
 &#125;
 </code></pre>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210821213628488.png" alt="image-20210821213628488"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210821213628488.png" alt="image-20210821213628488"></p>
 <blockquote>
 <p>这里需要提一下，为什么父级指针叫做<code>return</code>而不是<code>parent</code>或者<code>father</code>呢？因为作为一个工作单元，<code>return</code>指节点执行完<code>completeWork</code>（后面会说）后会返回的下一个节点。子<code>Fiber节点</code>及其兄弟节点完成工作后会返回其父级节点，所以用<code>return</code>指代父级节点。</p>
 </blockquote>
@@ -307,17 +307,17 @@ ReactDOM.render(&lt;App/&gt;, document.getElementById(&#39;root&#39;));</code></
 <h1 id="查看源码中的FiberRootNode"><a href="#查看源码中的FiberRootNode" class="headerlink" title="查看源码中的FiberRootNode"></a>查看源码中的FiberRootNode</h1><p>上面曾说到，我们首次创建react的应用的时候会创建整个应用的一个根节点 叫做 <code>FiberRootNode</code></p>
 <p>然后每次调用render方法都会创建当前组件的一个根节点叫做 <code>rootFiber</code></p>
 <p>这里我们验证以下这个 <code>FiberRootNode</code></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210821223750870.png" alt="image-20210821223750870"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210821223750870.png" alt="image-20210821223750870"></p>
 <p>图中圈出的部分就是react应用首次运行时候，创建一个<strong>应用根节点<code>FiberRootNode</code></strong>的过程</p>
 <p>我们顺着调用栈找到这个创建的调用方法 creatFiberRoot — createFiber（创建应用根的方法）</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210821224000472.png" alt="image-20210821224000472"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210821224000472.png" alt="image-20210821224000472"></p>
 <p>找到源码，打个断点</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210822153431608.png" alt="image-20210822153431608"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210822153431608.png" alt="image-20210822153431608"></p>
 <p>刷新页面之后</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210822153527527.png" alt="image-20210822153527527"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210822153527527.png" alt="image-20210822153527527"></p>
 <p>发现首次渲染，创建fiberRoot节点，这个tag为3，那么代表什么意思呢？</p>
 <p>我们可以在它右边的调用栈中找到上层函数<code>createHostRootFiber</code></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210822153638347.png" alt="image-20210822153638347"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210822153638347.png" alt="image-20210822153638347"></p>
 <p>其实发现这个tag，也就是这里的HostRoot值为3</p>
 
 
