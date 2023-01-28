@@ -2,10 +2,10 @@
 title: js数据类型以及typeOf操作符号
 date: 2021-03-14 16:23:49
 tags:
-- js
+- Javascript
 - typeOf
 categories:
-- js
+- Javascript
 
 ---
 

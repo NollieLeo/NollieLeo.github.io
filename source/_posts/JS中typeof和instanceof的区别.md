@@ -5,7 +5,7 @@ tags:
 - ES6
 - 基本数据类型和引用类型
 categories:
-- js
+- Javascript
 ---
 
  `undefined`, `number`, `string`, `boolean`属于简单的**值类型**，不是对象。剩下的几种情况——函数、数组、对象、`null`、`new Number(10)`都是对象。他们都是引用类型。 

@@ -2,10 +2,10 @@
 title: 'var, let, const声明变量'
 date: 2021-03-14 15:39:55
 tags:
-- js
+- Javascript
 - 变量
 categories:
-- js
+- Javascript
 
 ---
 

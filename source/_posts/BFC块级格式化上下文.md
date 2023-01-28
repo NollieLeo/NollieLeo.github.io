@@ -3,9 +3,9 @@ title: BFC块级格式化上下文
 date: 2020-03-16 22:56:11
 tags:
 - BFC
-- css
+- Css
 categories:
-- css
+- Css
 ---
 
 [参考文章](https://www.jianshu.com/p/0d713b32cd0d)

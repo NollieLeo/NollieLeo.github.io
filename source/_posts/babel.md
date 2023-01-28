@@ -4,7 +4,7 @@ date: 2021-08-07 10:37:22
 tags:
 - webpack
 categories:
-- babel
+- Babel
 
 ---
 

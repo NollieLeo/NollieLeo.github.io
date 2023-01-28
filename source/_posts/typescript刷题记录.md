@@ -1,3 +1,11 @@
+---
+title: typescript刷题记录
+date: 2022-08-02 10:44:13
+tags:
+- Typescript
+categories:
+- Typescript
+---
 #  typescript刷题记录
 
 ## 题目一 

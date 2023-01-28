@@ -5,7 +5,7 @@ tags:
 - 计时器
 - requestAnimationFrame
 categories:
-- js
+- Javascript
 ---
 
  在Web应用中，实现动画效果的方法比较多，Javascript 中可以通过定时器 `setTimeout `来实现，css3 可以使用 `transition `和 `animation `来实现，html5 中的 canvas 也可以实现。除此之外，html5 还提供一个专门用于请求动画的API，那就是 `requestAnimationFrame`，顾名思义就是**请求动画帧。** 

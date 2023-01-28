@@ -6,7 +6,7 @@ tags:
 - ==
 - ===
 categories:
-- js
+- Javascript
 - 面试题
 
 ---

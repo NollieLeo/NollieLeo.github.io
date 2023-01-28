@@ -3,9 +3,9 @@ title: Proxy代理应用场景
 date: 2021-06-15 16:55:27
 tags:
 - proxy
-- js
+- Javascript
 categories:
-- js
+- Javascript
 
 ---
 

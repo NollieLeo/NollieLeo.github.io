@@ -2,10 +2,10 @@
 title: 优雅的处理asnyc await
 date: 2020-11-08 14:39:36
 tags:
-- js
+- Javascript
 - async await
 categories:
-- js
+- Javascript
 ---
 
 

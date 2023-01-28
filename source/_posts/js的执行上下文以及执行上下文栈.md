@@ -4,11 +4,11 @@ date: 2021-06-05 15:37:38
 tags:
 - 执行上下文
 - 执行上下文栈
-- js
+- Javascript
 - 作用域
 - 面试题
 categories:
-- js
+- Javascript
 
 ---
 

@@ -4,10 +4,11 @@ date: 2021-06-02 11:04:59
 tags:
 - call
 - apply
-- js
+- Javascript
 - 面试题
 categories:
-- js
+- Javascript
+
 ---
 
 # 手写call，apply

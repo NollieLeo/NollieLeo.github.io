@@ -2,9 +2,9 @@
 title: 30-seconds-of-js
 date: 2020-07-24 14:07:43
 tags:
-- js
+- Javascript
 categories:
-- js
+- Javascript
 ---
 
 

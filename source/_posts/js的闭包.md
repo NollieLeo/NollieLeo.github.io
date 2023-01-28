@@ -5,10 +5,10 @@ tags:
 - 闭包
 - 作用域
 - 作用域链
-- js
+- Javascript
 - 面试题
 categories:
-- js
+- Javascript
 
 ---
 

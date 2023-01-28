@@ -4,6 +4,10 @@ date: 2021-12-13 11:02:58
 tags:
 - curry
 
+categories:
+- Javascript
+
+
 ---
 
 要求实现如下

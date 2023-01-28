@@ -3,7 +3,7 @@ title: electron学习记录
 date: 2022-01-12 14:58:10
 tags:
 - electron
-- vue
+- Vue
 
 ---
 

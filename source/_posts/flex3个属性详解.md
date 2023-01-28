@@ -2,7 +2,7 @@
 title: flex3个属性详解
 date: 2020-03-16 13:18:33
 categories:
-- css
+- Css
 tags:
 - flex
 ---

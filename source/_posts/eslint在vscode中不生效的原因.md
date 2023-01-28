@@ -2,9 +2,9 @@
 title: eslint在vscode中不生效的原因
 date: 2021-08-12 09:44:34
 tags:
-- eslint
+- Eslint
 categories:
-- eslint
+- Eslint
 
 ---
 

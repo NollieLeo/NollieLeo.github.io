@@ -2,9 +2,9 @@
 title: 写JS的时候一些小技巧或者常用操作
 date: 2020-07-11 00:27:18
 tags: 
-- js
+- Javascript
 categories:
-- js
+- Javascript
 ---
 
 >  记录一些平时开发过程或者编写JS过程小技巧或者注意事项

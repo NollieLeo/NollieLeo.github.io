@@ -2,13 +2,13 @@
 title: setInterval和setTimeout优化策略
 date: 2021-06-15 16:55:00
 tags:
-- js
+- Javascript
 - setInterval
 - setTimeout
 - 异步
 - requestAnimationFrame
 categories:
-- js
+- Javascript
 
 ---
 

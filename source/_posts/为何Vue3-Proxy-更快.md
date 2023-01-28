@@ -2,9 +2,11 @@
 title: 为何Vue3 Proxy 更快
 date: 2022-04-21 17:46:14
 tags:
-- vue3
-- proxy
+- Vue
+- Proxy
 - Object.defineProperty
+categories:
+- Javascript
 ---
 
 相比于Vue2.x Object.defineProperty的响应式原理，Vue3 Proxy的优势在哪里呢。以下我们从两者源码角度分析下使用Proxy的优势。

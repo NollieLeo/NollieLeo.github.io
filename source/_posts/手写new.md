@@ -3,11 +3,11 @@ title: 手写new
 date: 2021-06-01 15:27:54
 tags:
 - new
-- js
+- Javascript
 - 构造函数
 - 面试题
 categories:
-- js
+- Javascript
 
 ---
 

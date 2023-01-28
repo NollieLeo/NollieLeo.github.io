@@ -3,10 +3,10 @@ title: 'this,call和apply'
 date: 2020-03-16 17:16:30
 tags: 
 - javascript
-- js this指向
+- Javascript this指向
 - call,apply
 categories:
-- js
+- Javascript
 ---
 
 # this, call 和apply

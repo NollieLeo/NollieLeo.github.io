@@ -3,12 +3,13 @@ title: 手写bind
 date: 2021-06-03 16:58:33
 tags:
 - bind
-- js
+- Javascript
 - 面试题
 - 原型
 - 原型链
 categories:
-- js
+- Javascript
+
 
 ---
 

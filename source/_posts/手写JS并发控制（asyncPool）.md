@@ -6,7 +6,8 @@ tags:
 - all
 - race
 
-
+categories:
+- Javascript
 
 ---
 

@@ -2,10 +2,10 @@
 title: js对象属性详解
 date: 2021-05-27 20:21:37
 tags:
-- js
+- Javascript
 - object
 categories:
-- js
+- Javascript
 ---
 
 

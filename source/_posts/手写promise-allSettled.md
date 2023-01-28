@@ -2,9 +2,10 @@
 title: 手写promise allSettled
 date: 2021-12-13 16:06:06
 tags:
-- js
-categories:
 - Promise
+- Javascript
+categories:
+- Javascript
 ---
 
 

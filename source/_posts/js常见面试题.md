@@ -2,10 +2,10 @@
 title: js常见面试题
 date: 2021-07-01 21:22:53
 tags:
-- js
+- Javascript
 - 面试题
 categories:
-- js
+- Javascript
 ---
 
 

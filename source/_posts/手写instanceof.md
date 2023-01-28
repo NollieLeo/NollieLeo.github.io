@@ -2,14 +2,14 @@
 title: 手写instanceof
 date: 2021-06-02 17:45:33
 tags:
-- js
+- Javascript
 - 原型
 - 原型链
 - instanceof
 - 面试题
-categories:
-- js
 
+categories:
+- Javascript
 ---
 
 # 手写instanceof

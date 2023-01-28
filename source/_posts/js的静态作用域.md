@@ -3,12 +3,12 @@ title: js的静态作用域理解
 date: 2021-06-05 15:10:11
 tags:
 - 作用域
-- js
+- Javascript
 - 作用域链
 - 执行上下文
 - 面试题
 categories:
-- js
+- Javascript
 
 ---
 

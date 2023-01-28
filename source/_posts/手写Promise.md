@@ -2,11 +2,11 @@
 title: 手写Promise
 date: 2021-06-13 13:20:58
 tags:
-- js
+- Javascript
 - promise
 - 面试题
 categories:
-- js
+- Javascript
 ---
 
 暂未整理，先附上代码

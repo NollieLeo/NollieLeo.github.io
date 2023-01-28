@@ -2,7 +2,7 @@
 title: eslint rules常用配置项
 date: 2022-02-27 16:19:53
 tags:
-- eslint
+- Eslint
 ---
 
 

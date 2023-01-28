@@ -2,10 +2,10 @@
 title: 自定义loader记录
 date: 2021-10-10 16:01:49
 tags:
-- loader
+- webpack-loader
 - webpack
 categories:
-- loader
+- webpack-loader
 ---
 
 ## 调试loader

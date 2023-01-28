@@ -2,8 +2,8 @@
 title: vue2~vue3迁移记录
 date: 2022-04-16 10:59:12
 tags:
-- vue
-- vite
+- Vue
+- Vite
 ---
 
 > 记录vue2到vue3版本迁移事项

@@ -3,10 +3,10 @@ title: forEach中怎么跳出循环
 date: 2021-06-16 16:41:03
 tags:
 - forEach
-- js
+- Javascript
 - trycatch
 categories:
-- js
+- Javascript
 
 ---
 

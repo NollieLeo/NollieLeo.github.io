@@ -2,10 +2,10 @@
 title: react相关面试知识点
 date: 2021-06-06 15:34:05
 tags:
-- react
+- React
 - 面试题
 categories:
-- react
+- React
 ---
 
 

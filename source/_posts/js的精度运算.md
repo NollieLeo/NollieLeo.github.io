@@ -2,12 +2,12 @@
 title: js的精度运算
 date: 2021-06-06 10:17:48
 tags:
-- js
+- Javascript
 - 浮点数
 - 面试题
 - 精度运算
 categories:
-- js
+- Javascript
 
 ---
 

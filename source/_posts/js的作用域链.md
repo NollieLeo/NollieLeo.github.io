@@ -2,14 +2,14 @@
 title: js的作用域链
 date: 2021-06-05 15:34:14
 tags:
-- js
+- Javascript
 - 面试题
 - 作用域链
 - 作用域
 - 执行上下文
 - 面试题
 categories:
-- js
+- Javascript
 
 ---
 

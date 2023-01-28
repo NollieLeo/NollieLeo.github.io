@@ -2,10 +2,10 @@
 title: 算法之删除链表的倒数第N个节点
 date: 2021-06-13 15:35:20
 tags:
-- js
 - 链表
 - 算法
 - 快慢指针
+- Javascript
 categories:
 - 算法
 ---

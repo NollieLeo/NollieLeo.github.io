@@ -4,6 +4,9 @@ date: 2021-12-13 14:25:01
 tags:
 - Promise
 
+categories:
+- Javascript
+
 ---
 
 

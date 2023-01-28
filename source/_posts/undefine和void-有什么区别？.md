@@ -2,9 +2,9 @@
 title: undefine和void()有什么区别？
 date: 2020-12-25 15:23:53
 tags:
-- js
+- Javascript
 categories:
-- js
+- Javascript
 ---
 
 在 JavaScript 中，判断是否是 undefined，一般都这样写：

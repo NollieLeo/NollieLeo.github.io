@@ -2,9 +2,9 @@
 title: react何时render呢？
 date: 2020-12-24 09:50:41
 tags:
-- react
+- React
 categories:
-- react
+- React
 ---
 
 对于如下Demo，点击`Parent`组件的`div`，触发更新，`Son`组件会打印`child render!`么？

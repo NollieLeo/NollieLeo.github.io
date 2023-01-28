@@ -2,10 +2,10 @@
 title: useRef拿子组件方法
 date: 2020-11-08 12:58:36
 tags:
-- react
-- react hooks
+- React
+- React hooks
 categories:
-- react
+- React
 ---
 
  ![img](https://user-gold-cdn.xitu.io/2020/5/29/1725f508e4f8019d?imageView2/0/w/1280/h/960/format/webp/ignore-error/1) 

@@ -2,10 +2,10 @@
 title: 基于猪齿鱼平台的axios缓存封装
 date: 2021-06-24 14:02:44
 tags:
-- axios
-- js
+- Axios
+- Javascript
 categories:
-- js
+- Javascript
 ---
 
 ## 需求说明

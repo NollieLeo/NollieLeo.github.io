@@ -2,7 +2,7 @@
 title: 从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃），如何通知 A 页面？
 date: 2021-05-26 16:23:49
 tags:
-- js
+- Javascript
 - 面试题
 - onbeforeunload
 - onunload

@@ -3,6 +3,9 @@ title: 手写promise race
 date: 2021-12-13 15:59:30
 tags:
 - Promise
+  
+categories:
+- Javascript
 
 ---
 

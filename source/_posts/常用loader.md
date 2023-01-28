@@ -3,9 +3,9 @@ title: 常用loader
 date: 2021-08-05 20:50:16
 tags:
 - webpack
-- loader
+- webpack-loader
 categories:
-- loader
+- webpack-loader
 ---
 
 以下讲的都是针对webpack5版本的

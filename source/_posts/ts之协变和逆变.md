@@ -2,10 +2,10 @@
 title: ts之协变和逆变
 date: 2022-06-05 16:53:07
 tags:
-- typescript
+- Typescript
 - 协变和逆变
 category:
-- typescript
+- Typescript
 ---
 
 

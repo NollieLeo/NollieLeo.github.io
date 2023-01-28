@@ -2,8 +2,8 @@
 title: vue3渲染器设计与总结
 date: 2022-12-03 19:39:37
 tags:
-  - vue
-  - diff
+- Vue
+- diff
 ---
 
 # 前置概念

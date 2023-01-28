@@ -5,7 +5,10 @@ tags:
 - Proxy
 - Reflect
 - 响应式
-- vue3
+- Vue
+
+categories:
+- Javascript
 ---
 
 # 理解Proxy

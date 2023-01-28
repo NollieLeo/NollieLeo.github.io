@@ -4,7 +4,7 @@ date: 2021-08-05 21:40:40
 tags:
 - webpack
 categories:
-- plugins
+- webpack-plugins
 
 ---
 

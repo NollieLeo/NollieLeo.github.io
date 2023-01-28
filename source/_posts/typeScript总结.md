@@ -2,9 +2,9 @@
 title: typeScript总结
 date: 2020-08-02 22:44:13
 tags:
-- ts
+- Typescript
 categories:
-- ts
+- Typescript
 ---
 
 ## ts中需要理解的
