@@ -23,18 +23,18 @@
   <title>深拷贝与浅拷贝 - 翁先森的博客</title>
 
   
-    <meta name="description" content="深拷贝与浅拷贝一下部分参照知乎中的提问： javascript中的深拷贝和浅拷贝 浅拷贝赋值（&#x3D;）和浅拷贝的区别那么赋值和浅拷贝有什么区别呢，我们看下面这个例子： var obj1 &#x3D; &amp;#123;     &#39;name&#39; : &#39;zhangsan&#39;,     &#39;age&#39; :  &#39;18&#39;,     &#39;language&#39; :">
+    <meta name="description" content="深拷贝与浅拷贝一下部分参照知乎中的提问： javascript中的深拷贝和浅拷贝 浅拷贝赋值（&#x3D;）和浅拷贝的区别那么赋值和浅拷贝有什么区别呢，我们看下面这个例子： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546var obj1 &#x3D; &amp;#123;    &amp;#x27;name&amp;#x2">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深拷贝与浅拷贝">
 <meta property="og:url" content="https://github.com/NollieLeo/2020/03/16/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D2/index.html">
 <meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="深拷贝与浅拷贝一下部分参照知乎中的提问： javascript中的深拷贝和浅拷贝 浅拷贝赋值（&#x3D;）和浅拷贝的区别那么赋值和浅拷贝有什么区别呢，我们看下面这个例子： var obj1 &#x3D; &amp;#123;     &#39;name&#39; : &#39;zhangsan&#39;,     &#39;age&#39; :  &#39;18&#39;,     &#39;language&#39; :">
+<meta property="og:description" content="深拷贝与浅拷贝一下部分参照知乎中的提问： javascript中的深拷贝和浅拷贝 浅拷贝赋值（&#x3D;）和浅拷贝的区别那么赋值和浅拷贝有什么区别呢，我们看下面这个例子： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546var obj1 &#x3D; &amp;#123;    &amp;#x27;name&amp;#x2">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-16T14:02:38.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.393Z">
 <meta property="article:author" content="翁先森">
-<meta property="article:tag" content="javascript">
 <meta property="article:tag" content="ES6">
+<meta property="article:tag" content="javascript">
 <meta property="article:tag" content="深拷贝与浅拷贝">
 <meta name="twitter:card" content="summary">
   
@@ -51,6 +51,8 @@
 
   
 
+  
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
   
 
   
@@ -73,7 +75,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -89,7 +91,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -104,52 +106,8 @@
 <h1 class="article-title"><span>深拷贝与浅拷贝</span></h1>
 <h1 id="深拷贝与浅拷贝"><a href="#深拷贝与浅拷贝" class="headerlink" title="深拷贝与浅拷贝"></a>深拷贝与浅拷贝</h1><p>一下部分参照知乎中的提问： <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23031215">javascript中的深拷贝和浅拷贝</a></p>
 <h2 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h2><h3 id="赋值（-）和浅拷贝的区别"><a href="#赋值（-）和浅拷贝的区别" class="headerlink" title="赋值（=）和浅拷贝的区别"></a>赋值（=）和浅拷贝的区别</h3><p>那么赋值和浅拷贝有什么区别呢，我们看下面这个例子：</p>
-<pre><code class="js">var obj1 = &#123;
-    &#39;name&#39; : &#39;zhangsan&#39;,
-    &#39;age&#39; :  &#39;18&#39;,
-    &#39;language&#39; : [1,[2,3],[4,5]],
-&#125;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1 = &#123;</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span> : <span class="string">&#x27;zhangsan&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;age&#x27;</span> :  <span class="string">&#x27;18&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;language&#x27;</span> : [<span class="number">1</span>,[<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>]],</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj2 = obj1;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj3 = <span class="title function_">shallowCopy</span>(obj1);</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">shallowCopy</span>(<span class="params">src</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> dst = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> prop <span class="keyword">in</span> src) &#123;</span><br><span class="line">        <span class="keyword">if</span> (src.<span class="title function_">hasOwnProperty</span>(prop)) &#123;</span><br><span class="line">            dst[prop] = src[prop];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dst;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj2.<span class="property">name</span> = <span class="string">&quot;lisi&quot;</span>;</span><br><span class="line">obj3.<span class="property">age</span> = <span class="string">&quot;20&quot;</span>;</span><br><span class="line"></span><br><span class="line">obj2.<span class="property">language</span>[<span class="number">1</span>] = [<span class="string">&quot;二&quot;</span>,<span class="string">&quot;三&quot;</span>];</span><br><span class="line">obj3.<span class="property">language</span>[<span class="number">2</span>] = [<span class="string">&quot;四&quot;</span>,<span class="string">&quot;五&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj1);  </span><br><span class="line"><span class="comment">//obj1 = &#123;</span></span><br><span class="line"><span class="comment">//    &#x27;name&#x27; : &#x27;lisi&#x27;,</span></span><br><span class="line"><span class="comment">//    &#x27;age&#x27; :  &#x27;18&#x27;,</span></span><br><span class="line"><span class="comment">//    &#x27;language&#x27; : [1,[&quot;二&quot;,&quot;三&quot;],[&quot;四&quot;,&quot;五&quot;]],</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2);</span><br><span class="line"><span class="comment">//obj2 = &#123;</span></span><br><span class="line"><span class="comment">//    &#x27;name&#x27; : &#x27;lisi&#x27;,</span></span><br><span class="line"><span class="comment">//    &#x27;age&#x27; :  &#x27;18&#x27;,</span></span><br><span class="line"><span class="comment">//    &#x27;language&#x27; : [1,[&quot;二&quot;,&quot;三&quot;],[&quot;四&quot;,&quot;五&quot;]],</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj3);</span><br><span class="line"><span class="comment">//obj3 = &#123;</span></span><br><span class="line"><span class="comment">//    &#x27;name&#x27; : &#x27;zhangsan&#x27;,</span></span><br><span class="line"><span class="comment">//    &#x27;age&#x27; :  &#x27;20&#x27;,</span></span><br><span class="line"><span class="comment">//    &#x27;language&#x27; : [1,[&quot;二&quot;,&quot;三&quot;],[&quot;四&quot;,&quot;五&quot;]],</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br></pre></td></tr></table></figure>
 
-var obj2 = obj1;
-
-
-var obj3 = shallowCopy(obj1);
-function shallowCopy(src) &#123;
-    var dst = &#123;&#125;;
-    for (var prop in src) &#123;
-        if (src.hasOwnProperty(prop)) &#123;
-            dst[prop] = src[prop];
-        &#125;
-    &#125;
-    return dst;
-&#125;
-
-obj2.name = &quot;lisi&quot;;
-obj3.age = &quot;20&quot;;
-
-obj2.language[1] = [&quot;二&quot;,&quot;三&quot;];
-obj3.language[2] = [&quot;四&quot;,&quot;五&quot;];
-
-console.log(obj1);  
-//obj1 = &#123;
-//    &#39;name&#39; : &#39;lisi&#39;,
-//    &#39;age&#39; :  &#39;18&#39;,
-//    &#39;language&#39; : [1,[&quot;二&quot;,&quot;三&quot;],[&quot;四&quot;,&quot;五&quot;]],
-//&#125;;
-
-console.log(obj2);
-//obj2 = &#123;
-//    &#39;name&#39; : &#39;lisi&#39;,
-//    &#39;age&#39; :  &#39;18&#39;,
-//    &#39;language&#39; : [1,[&quot;二&quot;,&quot;三&quot;],[&quot;四&quot;,&quot;五&quot;]],
-//&#125;;
-
-console.log(obj3);
-//obj3 = &#123;
-//    &#39;name&#39; : &#39;zhangsan&#39;,
-//    &#39;age&#39; :  &#39;20&#39;,
-//    &#39;language&#39; : [1,[&quot;二&quot;,&quot;三&quot;],[&quot;四&quot;,&quot;五&quot;]],
-//&#125;;</code></pre>
 <p>先定义个一个原始的对象 <code>obj1</code>，然后使用赋值得到第二个对象 <code>obj2</code>，然后通过浅拷贝，将 <code>obj1</code> 里面的属性都赋值到 <code>obj3</code> 中。也就是说：</p>
 <ul>
 <li><code>obj1</code>：原始数据</li>
@@ -193,58 +151,12 @@ console.log(obj3);
 <p>深拷贝是对对象以及对象的所有子对象进行拷贝。</p>
 <p>那么问题来了，怎么进行深拷贝呢？</p>
 <p>思路就是递归调用刚刚的浅拷贝，把所有属于对象的属性类型都遍历赋给另一个对象即可。我们直接来看一下 Zepto 中深拷贝的代码：</p>
-<pre><code class="js">// 内部方法：用户合并一个或多个对象到第一个对象
-// 参数：
-// target 目标对象  对象都合并到target里
-// source 合并对象
-// deep 是否执行深度合并
-function extend(target, source, deep) &#123;
-    for (key in source)
-        if (deep &amp;&amp; (isPlainObject(source[key]) || isArray(source[key]))) &#123;
-            // source[key] 是对象，而 target[key] 不是对象， 则 target[key] = &#123;&#125; 初始化一下，否则递归会出错的
-            if (isPlainObject(source[key]) &amp;&amp; !isPlainObject(target[key]))
-                target[key] = &#123;&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 内部方法：用户合并一个或多个对象到第一个对象</span></span><br><span class="line"><span class="comment">// 参数：</span></span><br><span class="line"><span class="comment">// target 目标对象  对象都合并到target里</span></span><br><span class="line"><span class="comment">// source 合并对象</span></span><br><span class="line"><span class="comment">// deep 是否执行深度合并</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">extend</span>(<span class="params">target, source, deep</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (key <span class="keyword">in</span> source)</span><br><span class="line">        <span class="keyword">if</span> (deep &amp;&amp; (<span class="title function_">isPlainObject</span>(source[key]) || <span class="title function_">isArray</span>(source[key]))) &#123;</span><br><span class="line">            <span class="comment">// source[key] 是对象，而 target[key] 不是对象， 则 target[key] = &#123;&#125; 初始化一下，否则递归会出错的</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="title function_">isPlainObject</span>(source[key]) &amp;&amp; !<span class="title function_">isPlainObject</span>(target[key]))</span><br><span class="line">                target[key] = &#123;&#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// source[key] 是数组，而 target[key] 不是数组，则 target[key] = [] 初始化一下，否则递归会出错的</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="title function_">isArray</span>(source[key]) &amp;&amp; !<span class="title function_">isArray</span>(target[key]))</span><br><span class="line">                target[key] = []</span><br><span class="line">            <span class="comment">// 执行递归</span></span><br><span class="line">            <span class="title function_">extend</span>(target[key], source[key], deep)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 不满足以上条件，说明 source[key] 是一般的值类型，直接赋值给 target 就是了</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (source[key] !== <span class="literal">undefined</span>) target[key] = source[key]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Copy all but undefined properties from one or more</span></span><br><span class="line"><span class="comment">// objects to the `target` object.</span></span><br><span class="line">$.extend = <span class="keyword">function</span>(<span class="params">target</span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> deep, args = slice.<span class="title function_">call</span>(<span class="variable language_">arguments</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//第一个参数为boolean值时，表示是否深度合并</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> target == <span class="string">&#x27;boolean&#x27;</span>) &#123;</span><br><span class="line">        deep = target;</span><br><span class="line">        <span class="comment">//target取第二个参数</span></span><br><span class="line">        target = args.<span class="title function_">shift</span>()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 遍历后面的参数，都合并到target上</span></span><br><span class="line">    args.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">arg</span>)&#123; <span class="title function_">extend</span>(target, arg, deep) &#125;)</span><br><span class="line">    <span class="keyword">return</span> target</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-            // source[key] 是数组，而 target[key] 不是数组，则 target[key] = [] 初始化一下，否则递归会出错的
-            if (isArray(source[key]) &amp;&amp; !isArray(target[key]))
-                target[key] = []
-            // 执行递归
-            extend(target[key], source[key], deep)
-        &#125;
-        // 不满足以上条件，说明 source[key] 是一般的值类型，直接赋值给 target 就是了
-        else if (source[key] !== undefined) target[key] = source[key]
-&#125;
+<h3 id="利用weakMap实现递归clone"><a href="#利用weakMap实现递归clone" class="headerlink" title="利用weakMap实现递归clone"></a>利用weakMap实现递归clone</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">clone</span>(<span class="params">target, weakMap = <span class="keyword">new</span> weakMap</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> ((<span class="keyword">typeof</span> target === <span class="string">&#x27;object&#x27;</span>)) &#123;</span><br><span class="line">        <span class="keyword">let</span> cloneTarget = <span class="title class_">Array</span>.<span class="property">isArray</span>.<span class="title function_">call</span>(target) ? [] : &#123;&#125;;</span><br><span class="line">        <span class="keyword">if</span> (weakMap.<span class="title function_">get</span>(target)) &#123;</span><br><span class="line">            <span class="keyword">return</span> weakMap.<span class="title function_">get</span>(target);</span><br><span class="line">        &#125;</span><br><span class="line">        weakMap.<span class="title function_">set</span>(target, cloneTarget);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> target) &#123;</span><br><span class="line">            cloneTarget[key] = <span class="title function_">clone</span>(target[key], weakMap);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cloneTarget;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> target;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-// Copy all but undefined properties from one or more
-// objects to the `target` object.
-$.extend = function(target)&#123;
-    var deep, args = slice.call(arguments, 1);
 
-    //第一个参数为boolean值时，表示是否深度合并
-    if (typeof target == &#39;boolean&#39;) &#123;
-        deep = target;
-        //target取第二个参数
-        target = args.shift()
-    &#125;
-    // 遍历后面的参数，都合并到target上
-    args.forEach(function(arg)&#123; extend(target, arg, deep) &#125;)
-    return target
-&#125;</code></pre>
-<h3 id="利用weakMap实现递归clone"><a href="#利用weakMap实现递归clone" class="headerlink" title="利用weakMap实现递归clone"></a>利用weakMap实现递归clone</h3><pre><code class="js">function clone(target, weakMap = new weakMap) &#123;
-    if ((typeof target === &#39;object&#39;)) &#123;
-        let cloneTarget = Array.isArray.call(target) ? [] : &#123;&#125;;
-        if (weakMap.get(target)) &#123;
-            return weakMap.get(target);
-        &#125;
-        weakMap.set(target, cloneTarget);
-        for (const key in target) &#123;
-            cloneTarget[key] = clone(target[key], weakMap);
-        &#125;
-        return cloneTarget;
-    &#125; else &#123;
-        return target;
-    &#125;
-&#125;</code></pre>
+
 <h2 id="扩展运算符（…）-是什么类型的拷贝？"><a href="#扩展运算符（…）-是什么类型的拷贝？" class="headerlink" title="扩展运算符（…） 是什么类型的拷贝？"></a>扩展运算符（…） 是什么类型的拷贝？</h2><blockquote>
 <p>浅拷贝</p>
 </blockquote>

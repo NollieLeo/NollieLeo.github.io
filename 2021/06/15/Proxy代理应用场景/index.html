@@ -23,12 +23,12 @@
   <title>Proxy代理应用场景 - 翁先森的博客</title>
 
   
-    <meta name="description" content="Proxy 使用场景1 增强型数组定义 enhancedArray 函数function enhancedArray(arr) &amp;#123;   return new Proxy(arr, &amp;#123;     get(target, property, receiver) &amp;#123;       const range &#x3D; getRange(property);       const ind">
+    <meta name="description" content="Proxy 使用场景1 增强型数组定义 enhancedArray 函数1234567891011121314151617181920212223242526272829function enhancedArray(arr) &amp;#123;  return new Proxy(arr, &amp;#123;    get(target, property, receiver) &amp;#123;      con">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Proxy代理应用场景">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/06/15/Proxy%E4%BB%A3%E7%90%86%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/index.html">
 <meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="Proxy 使用场景1 增强型数组定义 enhancedArray 函数function enhancedArray(arr) &amp;#123;   return new Proxy(arr, &amp;#123;     get(target, property, receiver) &amp;#123;       const range &#x3D; getRange(property);       const ind">
+<meta property="og:description" content="Proxy 使用场景1 增强型数组定义 enhancedArray 函数1234567891011121314151617181920212223242526272829function enhancedArray(arr) &amp;#123;  return new Proxy(arr, &amp;#123;    get(target, property, receiver) &amp;#123;      con">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-15T08:55:27.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.051Z">
@@ -51,6 +51,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -72,7 +74,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -88,7 +90,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -101,236 +103,52 @@
 
 <article class='md-text content post'>
 <h1 class="article-title"><span>Proxy代理应用场景</span></h1>
-<h3 id="Proxy-使用场景"><a href="#Proxy-使用场景" class="headerlink" title="Proxy 使用场景"></a>Proxy 使用场景</h3><h4 id="1-增强型数组"><a href="#1-增强型数组" class="headerlink" title="1 增强型数组"></a>1 增强型数组</h4><h5 id="定义-enhancedArray-函数"><a href="#定义-enhancedArray-函数" class="headerlink" title="定义 enhancedArray 函数"></a>定义 enhancedArray 函数</h5><pre><code class="javascript">function enhancedArray(arr) &#123;
-  return new Proxy(arr, &#123;
-    get(target, property, receiver) &#123;
-      const range = getRange(property);
-      const indices = range ? range : getIndices(property);
-      const values = indices.map(function (index) &#123;
-        const key = index &lt; 0 ? String(target.length + index) : index;
-        return Reflect.get(target, key, receiver);
-      &#125;);
-      return values.length === 1 ? values[0] : values;
-    &#125;,
-  &#125;);
+<h3 id="Proxy-使用场景"><a href="#Proxy-使用场景" class="headerlink" title="Proxy 使用场景"></a>Proxy 使用场景</h3><h4 id="1-增强型数组"><a href="#1-增强型数组" class="headerlink" title="1 增强型数组"></a>1 增强型数组</h4><h5 id="定义-enhancedArray-函数"><a href="#定义-enhancedArray-函数" class="headerlink" title="定义 enhancedArray 函数"></a>定义 enhancedArray 函数</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">enhancedArray</span>(<span class="params">arr</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Proxy</span>(arr, &#123;</span><br><span class="line">    <span class="title function_">get</span>(<span class="params">target, property, receiver</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> range = <span class="title function_">getRange</span>(property);</span><br><span class="line">      <span class="keyword">const</span> indices = range ? range : <span class="title function_">getIndices</span>(property);</span><br><span class="line">      <span class="keyword">const</span> values = indices.<span class="title function_">map</span>(<span class="keyword">function</span> (<span class="params">index</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> key = index &lt; <span class="number">0</span> ? <span class="title class_">String</span>(target.<span class="property">length</span> + index) : index;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, key, receiver);</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="keyword">return</span> values.<span class="property">length</span> === <span class="number">1</span> ? values[<span class="number">0</span>] : values;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">getRange</span>(<span class="params">str</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> [start, end] = str.<span class="title function_">split</span>(<span class="string">&quot;:&quot;</span>).<span class="title function_">map</span>(<span class="title class_">Number</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> end === <span class="string">&quot;undefined&quot;</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> range = [];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = start; i &lt; end; i++) &#123;</span><br><span class="line">      range = range.<span class="title function_">concat</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> range;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">getIndices</span>(<span class="params">str</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> str.<span class="title function_">split</span>(<span class="string">&quot;,&quot;</span>).<span class="title function_">map</span>(<span class="title class_">Number</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-  function getRange(str) &#123;
-    var [start, end] = str.split(&quot;:&quot;).map(Number);
-    if (typeof end === &quot;undefined&quot;) return false;
+<h5 id="使用-enhancedArray-函数"><a href="#使用-enhancedArray-函数" class="headerlink" title="使用 enhancedArray 函数"></a>使用 enhancedArray 函数</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = <span class="title function_">enhancedArray</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr[-<span class="number">1</span>]); <span class="comment">//=&gt; 5</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr[[<span class="number">2</span>, <span class="number">4</span>]]); <span class="comment">//=&gt; [ 3, 5 ]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr[[<span class="number">2</span>, -<span class="number">2</span>, <span class="number">1</span>]]); <span class="comment">//=&gt; [ 3, 4, 2 ]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr[<span class="string">&quot;2:4&quot;</span>]); <span class="comment">//=&gt; [ 3, 4]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr[<span class="string">&quot;-2:3&quot;</span>]); <span class="comment">//=&gt; [ 4, 5, 1, 2, 3 ]</span></span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-    let range = [];
-    for (let i = start; i &lt; end; i++) &#123;
-      range = range.concat(i);
-    &#125;
-    return range;
-  &#125;
-
-  function getIndices(str) &#123;
-    return str.split(&quot;,&quot;).map(Number);
-  &#125;
-&#125;
-复制代码</code></pre>
-<h5 id="使用-enhancedArray-函数"><a href="#使用-enhancedArray-函数" class="headerlink" title="使用 enhancedArray 函数"></a>使用 enhancedArray 函数</h5><pre><code class="javascript">const arr = enhancedArray([1, 2, 3, 4, 5]);
-
-console.log(arr[-1]); //=&gt; 5
-console.log(arr[[2, 4]]); //=&gt; [ 3, 5 ]
-console.log(arr[[2, -2, 1]]); //=&gt; [ 3, 4, 2 ]
-console.log(arr[&quot;2:4&quot;]); //=&gt; [ 3, 4]
-console.log(arr[&quot;-2:3&quot;]); //=&gt; [ 4, 5, 1, 2, 3 ]
-复制代码</code></pre>
 <p>由以上的输出结果可知，增强后的数组对象，就可以支持负数索引、分片索引等功能。除了可以增强数组之外，我们也可以使用 Proxy API 来增强普通对象。</p>
-<h4 id="2-增强型对象"><a href="#2-增强型对象" class="headerlink" title="2 增强型对象"></a>2 增强型对象</h4><h5 id="创建-enhancedObject-函数"><a href="#创建-enhancedObject-函数" class="headerlink" title="创建 enhancedObject 函数"></a>创建 enhancedObject 函数</h5><pre><code class="javascript">const enhancedObject = (target) =&gt;
-  new Proxy(target, &#123;
-    get(target, property) &#123;
-      if (property in target) &#123;
-        return target[property];
-      &#125; else &#123;
-        return searchFor(property, target);
-      &#125;
-    &#125;,
-  &#125;);
+<h4 id="2-增强型对象"><a href="#2-增强型对象" class="headerlink" title="2 增强型对象"></a>2 增强型对象</h4><h5 id="创建-enhancedObject-函数"><a href="#创建-enhancedObject-函数" class="headerlink" title="创建 enhancedObject 函数"></a>创建 enhancedObject 函数</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">enhancedObject</span> = (<span class="params">target</span>) =&gt;</span><br><span class="line">  <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, &#123;</span><br><span class="line">    <span class="title function_">get</span>(<span class="params">target, property</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (property <span class="keyword">in</span> target) &#123;</span><br><span class="line">        <span class="keyword">return</span> target[property];</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_">searchFor</span>(property, target);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> value = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">searchFor</span>(<span class="params">property, target</span>) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">of</span> <span class="title class_">Object</span>.<span class="title function_">keys</span>(target)) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> target[key] === <span class="string">&quot;object&quot;</span>) &#123;</span><br><span class="line">      <span class="title function_">searchFor</span>(property, target[key]);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> target[property] !== <span class="string">&quot;undefined&quot;</span>) &#123;</span><br><span class="line">      value = target[property];</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-let value = null;
-function searchFor(property, target) &#123;
-  for (const key of Object.keys(target)) &#123;
-    if (typeof target[key] === &quot;object&quot;) &#123;
-      searchFor(property, target[key]);
-    &#125; else if (typeof target[property] !== &quot;undefined&quot;) &#123;
-      value = target[property];
-      break;
-    &#125;
-  &#125;
-  return value;
-&#125;
-复制代码</code></pre>
-<h5 id="使用-enhancedObject-函数"><a href="#使用-enhancedObject-函数" class="headerlink" title="使用 enhancedObject 函数"></a>使用 enhancedObject 函数</h5><pre><code class="javascript">const data = enhancedObject(&#123;
-  user: &#123;
-    name: &quot;阿宝哥&quot;,
-    settings: &#123;
-      theme: &quot;dark&quot;,
-    &#125;,
-  &#125;,
-&#125;);
+<h5 id="使用-enhancedObject-函数"><a href="#使用-enhancedObject-函数" class="headerlink" title="使用 enhancedObject 函数"></a>使用 enhancedObject 函数</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> data = <span class="title function_">enhancedObject</span>(&#123;</span><br><span class="line">  <span class="attr">user</span>: &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;阿宝哥&quot;</span>,</span><br><span class="line">    <span class="attr">settings</span>: &#123;</span><br><span class="line">      <span class="attr">theme</span>: <span class="string">&quot;dark&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(data.<span class="property">user</span>.<span class="property">settings</span>.<span class="property">theme</span>); <span class="comment">// dark</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(data.<span class="property">theme</span>); <span class="comment">// dark</span></span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-console.log(data.user.settings.theme); // dark
-console.log(data.theme); // dark
-复制代码</code></pre>
 <p>以上代码运行后，控制台会输出以下代码：</p>
-<pre><code class="shell">dark
-dark
-复制代码</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dark</span><br><span class="line">dark</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
 <p>通过观察以上的输出结果可知，使用 <code>enhancedObject</code> 函数处理过的对象，我们就可以方便地访问普通对象内部的深层属性。</p>
-<h4 id="3-创建只读的对象"><a href="#3-创建只读的对象" class="headerlink" title="3 创建只读的对象"></a>3 创建只读的对象</h4><h5 id="创建-Proxy-对象"><a href="#创建-Proxy-对象" class="headerlink" title="创建 Proxy 对象"></a>创建 Proxy 对象</h5><pre><code class="javascript">const man = &#123;
-  name: &quot;semlinker&quot;,
-&#125;;
+<h4 id="3-创建只读的对象"><a href="#3-创建只读的对象" class="headerlink" title="3 创建只读的对象"></a>3 创建只读的对象</h4><h5 id="创建-Proxy-对象"><a href="#创建-Proxy-对象" class="headerlink" title="创建 Proxy 对象"></a>创建 Proxy 对象</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> man = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;semlinker&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">  <span class="attr">set</span>: <span class="string">&quot;Read-Only&quot;</span>,</span><br><span class="line">  <span class="attr">defineProperty</span>: <span class="string">&quot;Read-Only&quot;</span>,</span><br><span class="line">  <span class="attr">deleteProperty</span>: <span class="string">&quot;Read-Only&quot;</span>,</span><br><span class="line">  <span class="attr">preventExtensions</span>: <span class="string">&quot;Read-Only&quot;</span>,</span><br><span class="line">  <span class="attr">setPrototypeOf</span>: <span class="string">&quot;Read-Only&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(man, handler);</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-const handler = &#123;
-  set: &quot;Read-Only&quot;,
-  defineProperty: &quot;Read-Only&quot;,
-  deleteProperty: &quot;Read-Only&quot;,
-  preventExtensions: &quot;Read-Only&quot;,
-  setPrototypeOf: &quot;Read-Only&quot;,
-&#125;;
+<h5 id="使用-proxy-对象"><a href="#使用-proxy-对象" class="headerlink" title="使用 proxy 对象"></a>使用 proxy 对象</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxy.<span class="property">name</span>);</span><br><span class="line">proxy.<span class="property">name</span> = <span class="string">&quot;kakuqo&quot;</span>;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-const proxy = new Proxy(man, handler);
-复制代码</code></pre>
-<h5 id="使用-proxy-对象"><a href="#使用-proxy-对象" class="headerlink" title="使用 proxy 对象"></a>使用 proxy 对象</h5><pre><code class="javascript">console.log(proxy.name);
-proxy.name = &quot;kakuqo&quot;;
-复制代码</code></pre>
 <p>以上代码运行后，控制台会输出以下代码：</p>
-<pre><code class="javascript">semlinker
-proxy.name = &quot;kakuqo&quot;;
-           ^
-TypeError: &#39;Read-Only&#39; returned for property &#39;set&#39; of object &#39;#&lt;Object&gt;&#39; is not a function
-复制代码</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">semlinker</span><br><span class="line">proxy.<span class="property">name</span> = <span class="string">&quot;kakuqo&quot;</span>;</span><br><span class="line">           ^</span><br><span class="line"><span class="title class_">TypeError</span>: <span class="string">&#x27;Read-Only&#x27;</span> returned <span class="keyword">for</span> property <span class="string">&#x27;set&#x27;</span> <span class="keyword">of</span> object <span class="string">&#x27;#&lt;Object&gt;&#x27;</span> is not a <span class="keyword">function</span></span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
 <p>观察以上的异常信息可知，导致异常的原因是因为 <code>handler</code> 对象的 <code>set</code> 属性值不是一个函数。如果不希望抛出运行时异常，我们可以定义一个 <code>freeze</code> 函数：</p>
-<pre><code class="javascript">function freeze (obj) &#123;
-  return new Proxy(obj, &#123;
-    set () &#123; return true; &#125;,
-    deleteProperty () &#123; return false; &#125;,
-    defineProperty () &#123; return true; &#125;,
-    setPrototypeOf () &#123; return true; &#125;
-  &#125;);
-&#125;
-复制代码</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">freeze</span> (obj) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">    set () &#123; <span class="keyword">return</span> <span class="literal">true</span>; &#125;,</span><br><span class="line">    deleteProperty () &#123; <span class="keyword">return</span> <span class="literal">false</span>; &#125;,</span><br><span class="line">    defineProperty () &#123; <span class="keyword">return</span> <span class="literal">true</span>; &#125;,</span><br><span class="line">    setPrototypeOf () &#123; <span class="keyword">return</span> <span class="literal">true</span>; &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
 <p>定义好 <code>freeze</code> 函数，我们使用数组对象来测试一下它的功能：</p>
-<pre><code class="javascript">let frozen = freeze([1, 2, 3]);
-frozen[0] = 6;
-delete frozen[0];
-frozen = Object.defineProperty(frozen, 0, &#123; value: 66 &#125;);
-console.log(frozen); // [ 1, 2, 3 ]
-复制代码</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> frozen = <span class="title function_">freeze</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line">frozen[<span class="number">0</span>] = <span class="number">6</span>;</span><br><span class="line"><span class="keyword">delete</span> frozen[<span class="number">0</span>];</span><br><span class="line">frozen = <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(frozen, <span class="number">0</span>, &#123; <span class="attr">value</span>: <span class="number">66</span> &#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(frozen); <span class="comment">// [ 1, 2, 3 ]</span></span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
 <p>上述代码成功执行后，控制台会输出 <code>[ 1, 2, 3 ]</code>，很明显经过 <code>freeze</code> 函数处理过的数组对象，已经被 “冻结” 了。</p>
-<h4 id="4-拦截方法调用"><a href="#4-拦截方法调用" class="headerlink" title="4 拦截方法调用"></a>4 拦截方法调用</h4><h5 id="定义-traceMethodCalls-函数"><a href="#定义-traceMethodCalls-函数" class="headerlink" title="定义 traceMethodCalls 函数"></a>定义 traceMethodCalls 函数</h5><pre><code class="javascript">function traceMethodCalls(obj) &#123;
-  const handler = &#123;
-    get(target, propKey, receiver) &#123;
-      const origMethod = target[propKey]; // 获取原始方法
-      return function (...args) &#123;
-        const result = origMethod.apply(this, args);
-        console.log(
-          propKey + JSON.stringify(args) + &quot; -&gt; &quot; + JSON.stringify(result)
-        );
-        return result;
-      &#125;;
-    &#125;,
-  &#125;;
-  return new Proxy(obj, handler);
-&#125;
-复制代码</code></pre>
-<h5 id="使用-traceMethodCalls-函数"><a href="#使用-traceMethodCalls-函数" class="headerlink" title="使用 traceMethodCalls 函数"></a>使用 traceMethodCalls 函数</h5><pre><code class="javascript">const obj = &#123;
-  multiply(x, y) &#123;
-    return x * y;
-  &#125;,
-&#125;;
+<h4 id="4-拦截方法调用"><a href="#4-拦截方法调用" class="headerlink" title="4 拦截方法调用"></a>4 拦截方法调用</h4><h5 id="定义-traceMethodCalls-函数"><a href="#定义-traceMethodCalls-函数" class="headerlink" title="定义 traceMethodCalls 函数"></a>定义 traceMethodCalls 函数</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">traceMethodCalls</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> handler = &#123;</span><br><span class="line">    <span class="title function_">get</span>(<span class="params">target, propKey, receiver</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> origMethod = target[propKey]; <span class="comment">// 获取原始方法</span></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">...args</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> result = origMethod.<span class="title function_">apply</span>(<span class="variable language_">this</span>, args);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(</span><br><span class="line">          propKey + <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(args) + <span class="string">&quot; -&gt; &quot;</span> + <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(result)</span><br><span class="line">        );</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, handler);</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-const tracedObj = traceMethodCalls(obj);
-tracedObj.multiply(2, 5); // multiply[2,5] -&gt; 10
-复制代码</code></pre>
+<h5 id="使用-traceMethodCalls-函数"><a href="#使用-traceMethodCalls-函数" class="headerlink" title="使用 traceMethodCalls 函数"></a>使用 traceMethodCalls 函数</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="title function_">multiply</span>(<span class="params">x, y</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> x * y;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> tracedObj = <span class="title function_">traceMethodCalls</span>(obj);</span><br><span class="line">tracedObj.<span class="title function_">multiply</span>(<span class="number">2</span>, <span class="number">5</span>); <span class="comment">// multiply[2,5] -&gt; 10</span></span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
 <p>上述代码成功执行后，控制台会输出 <code>multiply[2,5] -&gt; 10</code>，即我们能够成功跟踪 <code>obj</code> 对象中方法的调用过程。其实，除了能够跟踪方法的调用，我们也可以跟踪对象中属性的访问，具体示例如下：</p>
-<pre><code class="javascript">function tracePropAccess(obj, propKeys) &#123;
-  const propKeySet = new Set(propKeys);
-  return new Proxy(obj, &#123;
-    get(target, propKey, receiver) &#123;
-      if (propKeySet.has(propKey)) &#123;
-        console.log(&quot;GET &quot; + propKey);
-      &#125;
-      return Reflect.get(target, propKey, receiver);
-    &#125;,
-    set(target, propKey, value, receiver) &#123;
-      if (propKeySet.has(propKey)) &#123;
-        console.log(&quot;SET &quot; + propKey + &quot;=&quot; + value);
-      &#125;
-      return Reflect.set(target, propKey, value, receiver);
-    &#125;,
-  &#125;);
-&#125;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">tracePropAccess</span>(<span class="params">obj, propKeys</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> propKeySet = <span class="keyword">new</span> <span class="title class_">Set</span>(propKeys);</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">    <span class="title function_">get</span>(<span class="params">target, propKey, receiver</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (propKeySet.<span class="title function_">has</span>(propKey)) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;GET &quot;</span> + propKey);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, propKey, receiver);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="title function_">set</span>(<span class="params">target, propKey, value, receiver</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (propKeySet.<span class="title function_">has</span>(propKey)) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;SET &quot;</span> + propKey + <span class="string">&quot;=&quot;</span> + value);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">set</span>(target, propKey, value, receiver);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> man = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;semlinker&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> tracedMan = <span class="title function_">tracePropAccess</span>(man, [<span class="string">&quot;name&quot;</span>]);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(tracedMan.<span class="property">name</span>); <span class="comment">// GET name; semlinker</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(tracedMan.<span class="property">age</span>); <span class="comment">// undefined</span></span><br><span class="line">tracedMan.<span class="property">name</span> = <span class="string">&quot;kakuqo&quot;</span>; <span class="comment">// SET name=kakuqo</span></span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-const man = &#123;
-  name: &quot;semlinker&quot;,
-&#125;;
-const tracedMan = tracePropAccess(man, [&quot;name&quot;]);
-
-console.log(tracedMan.name); // GET name; semlinker
-console.log(tracedMan.age); // undefined
-tracedMan.name = &quot;kakuqo&quot;; // SET name=kakuqo
-复制代码</code></pre>
 <p>在以上示例中，我们定义了一个 <code>tracePropAccess</code> 函数，该函数接收两个参数：obj 和 propKeys，它们分别表示需跟踪的目标和需跟踪的属性列表。调用 <code>tracePropAccess</code> 函数后，会返回一个代理对象，当我们访问被跟踪的属性时，控制台就会输出相应的访问日志。</p>
-<h4 id="5-隐藏属性"><a href="#5-隐藏属性" class="headerlink" title="5 隐藏属性"></a>5 隐藏属性</h4><h5 id="创建-hideProperty-函数"><a href="#创建-hideProperty-函数" class="headerlink" title="创建 hideProperty 函数"></a>创建 hideProperty 函数</h5><pre><code class="javascript">const hideProperty = (target, prefix = &quot;_&quot;) =&gt;
-  new Proxy(target, &#123;
-    has: (obj, prop) =&gt; !prop.startsWith(prefix) &amp;&amp; prop in obj,
-    ownKeys: (obj) =&gt;
-      Reflect.ownKeys(obj).filter(
-        (prop) =&gt; typeof prop !== &quot;string&quot; || !prop.startsWith(prefix)
-      ),
-    get: (obj, prop, rec) =&gt; (prop in rec ? obj[prop] : undefined),
-  &#125;);
-复制代码</code></pre>
-<h5 id="使用-hideProperty-函数"><a href="#使用-hideProperty-函数" class="headerlink" title="使用 hideProperty 函数"></a>使用 hideProperty 函数</h5><pre><code class="javascript">const man = hideProperty(&#123;
-  name: &quot;阿宝哥&quot;,
-  _pwd: &quot;www.semlinker.com&quot;,
-&#125;);
+<h4 id="5-隐藏属性"><a href="#5-隐藏属性" class="headerlink" title="5 隐藏属性"></a>5 隐藏属性</h4><h5 id="创建-hideProperty-函数"><a href="#创建-hideProperty-函数" class="headerlink" title="创建 hideProperty 函数"></a>创建 hideProperty 函数</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">hideProperty</span> = (<span class="params">target, prefix = <span class="string">&quot;_&quot;</span></span>) =&gt;</span><br><span class="line">  <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, &#123;</span><br><span class="line">    <span class="attr">has</span>: <span class="function">(<span class="params">obj, prop</span>) =&gt;</span> !prop.<span class="title function_">startsWith</span>(prefix) &amp;&amp; prop <span class="keyword">in</span> obj,</span><br><span class="line">    <span class="attr">ownKeys</span>: <span class="function">(<span class="params">obj</span>) =&gt;</span></span><br><span class="line">      <span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(obj).<span class="title function_">filter</span>(</span><br><span class="line">        <span class="function">(<span class="params">prop</span>) =&gt;</span> <span class="keyword">typeof</span> prop !== <span class="string">&quot;string&quot;</span> || !prop.<span class="title function_">startsWith</span>(prefix)</span><br><span class="line">      ),</span><br><span class="line">    <span class="attr">get</span>: <span class="function">(<span class="params">obj, prop, rec</span>) =&gt;</span> (prop <span class="keyword">in</span> rec ? obj[prop] : <span class="literal">undefined</span>),</span><br><span class="line">  &#125;);</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-console.log(man._pwd); // undefined
-console.log(&#39;_pwd&#39; in man); // false
-console.log(Object.keys(man)); // [ &#39;name&#39; ]
-复制代码</code></pre>
+<h5 id="使用-hideProperty-函数"><a href="#使用-hideProperty-函数" class="headerlink" title="使用 hideProperty 函数"></a>使用 hideProperty 函数</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> man = <span class="title function_">hideProperty</span>(&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;阿宝哥&quot;</span>,</span><br><span class="line">  <span class="attr">_pwd</span>: <span class="string">&quot;www.semlinker.com&quot;</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(man.<span class="property">_pwd</span>); <span class="comment">// undefined</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;_pwd&#x27;</span> <span class="keyword">in</span> man); <span class="comment">// false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">keys</span>(man)); <span class="comment">// [ &#x27;name&#x27; ]</span></span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
 <p>通过观察以上的输出结果，我们可以知道，利用 Proxy API，我们实现了指定前缀属性的隐藏。除了能实现隐藏属性之外，利用 Proxy API，我们还可以实现验证属性值的功能。</p>
-<h4 id="6-验证属性值"><a href="#6-验证属性值" class="headerlink" title="6 验证属性值"></a>6 验证属性值</h4><h5 id="创建-validatedUser-函数"><a href="#创建-validatedUser-函数" class="headerlink" title="创建 validatedUser 函数"></a>创建 validatedUser 函数</h5><pre><code class="javascript">const validatedUser = (target) =&gt;
-  new Proxy(target, &#123;
-    set(target, property, value) &#123;
-      switch (property) &#123;
-        case &quot;email&quot;:
-          const regex = /^(([^&lt;&gt;()\[\]\\.,;:\s@&quot;]+(\.[^&lt;&gt;()\[\]\\.,;:\s@&quot;]+)*)|(&quot;.+&quot;))@((\[[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]&#123;2,&#125;))$/;
-          if (!regex.test(value)) &#123;
-            console.error(&quot;The user must have a valid email&quot;);
-            return false;
-          &#125;
-          break;
-        case &quot;age&quot;:
-          if (value &lt; 20 || value &gt; 80) &#123;
-            console.error(&quot;A user&#39;s age must be between 20 and 80&quot;);
-            return false;
-          &#125;
-          break;
-      &#125;
+<h4 id="6-验证属性值"><a href="#6-验证属性值" class="headerlink" title="6 验证属性值"></a>6 验证属性值</h4><h5 id="创建-validatedUser-函数"><a href="#创建-validatedUser-函数" class="headerlink" title="创建 validatedUser 函数"></a>创建 validatedUser 函数</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">validatedUser</span> = (<span class="params">target</span>) =&gt;</span><br><span class="line">  <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, &#123;</span><br><span class="line">    <span class="title function_">set</span>(<span class="params">target, property, value</span>) &#123;</span><br><span class="line">      <span class="keyword">switch</span> (property) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;email&quot;</span>:</span><br><span class="line">          <span class="keyword">const</span> regex = <span class="regexp">/^(([^&lt;&gt;()\[\]\\.,;:\s@&quot;]+(\.[^&lt;&gt;()\[\]\\.,;:\s@&quot;]+)*)|(&quot;.+&quot;))@((\[[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]&#123;2,&#125;))$/</span>;</span><br><span class="line">          <span class="keyword">if</span> (!regex.<span class="title function_">test</span>(value)) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&quot;The user must have a valid email&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;age&quot;</span>:</span><br><span class="line">          <span class="keyword">if</span> (value &lt; <span class="number">20</span> || value &gt; <span class="number">80</span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&quot;A user&#x27;s age must be between 20 and 80&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">set</span>(...<span class="variable language_">arguments</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-      return Reflect.set(...arguments);
-    &#125;,
-  &#125;);
-复制代码</code></pre>
-<h5 id="使用-validatedUser-函数"><a href="#使用-validatedUser-函数" class="headerlink" title="使用 validatedUser 函数"></a>使用 validatedUser 函数</h5><pre><code class="javascript">let user = &#123;
-  email: &quot;&quot;,
-  age: 0,
-&#125;;
+<h5 id="使用-validatedUser-函数"><a href="#使用-validatedUser-函数" class="headerlink" title="使用 validatedUser 函数"></a>使用 validatedUser 函数</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> user = &#123;</span><br><span class="line">  <span class="attr">email</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">0</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">user = <span class="title function_">validatedUser</span>(user);</span><br><span class="line">user.<span class="property">email</span> = <span class="string">&quot;semlinker.com&quot;</span>; <span class="comment">// The user must have a valid email</span></span><br><span class="line">user.<span class="property">age</span> = <span class="number">100</span>; <span class="comment">// A user&#x27;s age must be between 20 and 80</span></span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-user = validatedUser(user);
-user.email = &quot;semlinker.com&quot;; // The user must have a valid email
-user.age = 100; // A user&#39;s age must be between 20 and 80
-复制代码</code></pre>
 <p>上述代码成功执行后，控制台会输出以下结果：</p>
-<pre><code class="shell">The user must have a valid email
-A user&#39;s age must be between 20 and 80</code></pre>
-
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The user must have a valid email</span><br><span class="line">A user&#x27;s age must be between 20 and 80</span><br></pre></td></tr></table></figure>
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
 </div></section></div>

@@ -63,6 +63,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -84,7 +86,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -100,7 +102,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -124,10 +126,8 @@
 <h3 id="代数效应"><a href="#代数效应" class="headerlink" title="代数效应"></a>代数效应</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36968599/article/details/114851241">这篇文章可以好好看看</a></p>
 <p> <code>代数效应</code>能够将<code>副作用</code>从函数逻辑中分离，使函数关注点保持纯粹。 </p>
 <p>就比如我们平时用await来等待一个值的返回</p>
-<pre><code class="js">async function getData()&#123;
-    const res = await loadData();
-    return res;
-&#125;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getData</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">loadData</span>();</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>代数效应相当于，我关注的是 await loadData()能给我什么东西，而不是关注他里头是异步还是同步，怎么处理这个数据的；</p>
 <h3 id="代数效应-in-React"><a href="#代数效应-in-React" class="headerlink" title="代数效应 in React"></a>代数效应 in React</h3><p>在react中有个结合Suspense的例子</p>
 <p><a target="_blank" rel="noopener" href="https://codesandbox.io/s/frosty-hermann-bztrp?file=/src/index.js:152-160">Suspense Demo</a></p>
@@ -150,106 +150,29 @@
 </li>
 </ol>
 <h3 id="Fiber数据结构"><a href="#Fiber数据结构" class="headerlink" title="Fiber数据结构"></a>Fiber数据结构</h3><p><a href="https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react-reconciler/src/ReactFiber.new.js#L117">Fiber数据结构</a></p>
-<pre><code class="js">function FiberNode(
-  tag: WorkTag,
-  pendingProps: mixed,
-  key: null | string,
-  mode: TypeOfMode,
-) &#123;
-  // 作为静态数据结构的属性
-  this.tag = tag;
-  this.key = key;
-  this.elementType = null;
-  this.type = null;
-  this.stateNode = null;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">FiberNode</span>(<span class="params"></span></span><br><span class="line"><span class="params">  tag: WorkTag,</span></span><br><span class="line"><span class="params">  pendingProps: mixed,</span></span><br><span class="line"><span class="params">  key: <span class="literal">null</span> | string,</span></span><br><span class="line"><span class="params">  mode: TypeOfMode,</span></span><br><span class="line"><span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 作为静态数据结构的属性</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">tag</span> = tag;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">key</span> = key;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">elementType</span> = <span class="literal">null</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">type</span> = <span class="literal">null</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">stateNode</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 用于连接其他Fiber节点形成Fiber树</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">return</span> = <span class="literal">null</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">child</span> = <span class="literal">null</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">sibling</span> = <span class="literal">null</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">index</span> = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">ref</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">pendingProps</span> = pendingProps;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">memoizedProps</span> = <span class="literal">null</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">updateQueue</span> = <span class="literal">null</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">memoizedState</span> = <span class="literal">null</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">dependencies</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">mode</span> = mode;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 作为动态的工作单元的属性</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">effectTag</span> = <span class="title class_">NoEffect</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">subtreeTag</span> = <span class="title class_">NoSubtreeEffect</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">deletions</span> = <span class="literal">null</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">nextEffect</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">firstEffect</span> = <span class="literal">null</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">lastEffect</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 调度优先级相关</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">lanes</span> = <span class="title class_">NoLanes</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">childLanes</span> = <span class="title class_">NoLanes</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 指向该fiber在另一次更新时对应的fiber， current tree中的fiber节点和workinprogress tree的fiber节点连接</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">alternate</span> = <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
-  // 用于连接其他Fiber节点形成Fiber树
-  this.return = null;
-  this.child = null;
-  this.sibling = null;
-  this.index = 0;
-
-  this.ref = null;
-
-  this.pendingProps = pendingProps;
-  this.memoizedProps = null;
-  this.updateQueue = null;
-  this.memoizedState = null;
-  this.dependencies = null;
-
-  this.mode = mode;
-
-  // 作为动态的工作单元的属性
-  this.effectTag = NoEffect;
-  this.subtreeTag = NoSubtreeEffect;
-  this.deletions = null;
-  this.nextEffect = null;
-
-  this.firstEffect = null;
-  this.lastEffect = null;
-
-  // 调度优先级相关
-  this.lanes = NoLanes;
-  this.childLanes = NoLanes;
-
-  // 指向该fiber在另一次更新时对应的fiber， current tree中的fiber节点和workinprogress tree的fiber节点连接
-  this.alternate = null;
-  &#125;</code></pre>
 <h4 id="Fiber节点之间关系"><a href="#Fiber节点之间关系" class="headerlink" title="Fiber节点之间关系"></a>Fiber节点之间关系</h4><p><code>Fiber</code>节点之间是通过以下三个属性建立起连接的</p>
-<pre><code class="js">// 指向父级Fiber节点
-this.return = null;
-// 指向子Fiber节点
-this.child = null;
-// 指向右边第一个兄弟Fiber节点
-this.sibling = null;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 指向父级Fiber节点</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="property">return</span> = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// 指向子Fiber节点</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="property">child</span> = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// 指向右边第一个兄弟Fiber节点</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="property">sibling</span> = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
 <p>比如下面的代码和对应的Fiber树如下：</p>
-<pre><code class="jsx">function App()&#123;
-    return (
-        &lt;div&gt;
-            &lt;span&gt;hello world&lt;/span&gt;
-            &lt;a&gt;
-                weng
-                &lt;span/&gt;
-            &lt;/a&gt;
-        &lt;/div&gt;
-    )
-&#125;
-</code></pre>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">App</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">    	<span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        	<span class="tag">&lt;<span class="name">span</span>&gt;</span>hello world<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">a</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                weng</span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">span</span>/&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210821213628488.png" alt="image-20210821213628488"></p>
 <blockquote>
 <p>这里需要提一下，为什么父级指针叫做<code>return</code>而不是<code>parent</code>或者<code>father</code>呢？因为作为一个工作单元，<code>return</code>指节点执行完<code>completeWork</code>（后面会说）后会返回的下一个节点。子<code>Fiber节点</code>及其兄弟节点完成工作后会返回其父级节点，所以用<code>return</code>指代父级节点。</p>
 </blockquote>
 <h4 id="作为静态的数据结构"><a href="#作为静态的数据结构" class="headerlink" title="作为静态的数据结构"></a>作为静态的数据结构</h4><p>作为一种静态的数据结构，保存了组件相关的信息：</p>
-<pre><code class="js">// Fiber对应组件的类型 Function/Class/Host...
-this.tag = tag;
-// key属性
-this.key = key;
-// 大部分情况同type，某些情况不同，比如FunctionComponent使用React.memo包裹
-this.elementType = null;
-// 对于 FunctionComponent，指函数本身，对于ClassComponent，指class，对于HostComponent，指DOM节点tagName
-this.type = null;
-// Fiber对应的真实DOM节点
-this.stateNode = null;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Fiber对应组件的类型 Function/Class/Host...</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="property">tag</span> = tag;</span><br><span class="line"><span class="comment">// key属性</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="property">key</span> = key;</span><br><span class="line"><span class="comment">// 大部分情况同type，某些情况不同，比如FunctionComponent使用React.memo包裹</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="property">elementType</span> = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// 对于 FunctionComponent，指函数本身，对于ClassComponent，指class，对于HostComponent，指DOM节点tagName</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="property">type</span> = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// Fiber对应的真实DOM节点</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="property">stateNode</span> = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
 <h4 id="作为动态的工作单元"><a href="#作为动态的工作单元" class="headerlink" title="作为动态的工作单元"></a>作为动态的工作单元</h4><p>作为动态的工作单元，<code>Fiber</code>中如下参数保存了本次更新相关的信息，我们会在后续的更新流程中使用到具体属性时再详细介绍</p>
-<pre><code class="js">// 保存本次更新造成的状态改变相关信息
-this.pendingProps = pendingProps;
-this.memoizedProps = null;
-this.updateQueue = null;
-this.memoizedState = null;
-this.dependencies = null;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 保存本次更新造成的状态改变相关信息</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="property">pendingProps</span> = pendingProps;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">memoizedProps</span> = <span class="literal">null</span>;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">updateQueue</span> = <span class="literal">null</span>;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">memoizedState</span> = <span class="literal">null</span>;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">dependencies</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">this</span>.<span class="property">mode</span> = mode;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 保存本次更新会造成的DOM操作</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="property">effectTag</span> = <span class="title class_">NoEffect</span>;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">nextEffect</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">this</span>.<span class="property">firstEffect</span> = <span class="literal">null</span>;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">lastEffect</span> = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
 
-this.mode = mode;
-
-// 保存本次更新会造成的DOM操作
-this.effectTag = NoEffect;
-this.nextEffect = null;
-
-this.firstEffect = null;
-this.lastEffect = null;</code></pre>
 <p>如下两个字段保存调度优先级相关的信息，会在学习<code>Scheduler</code>时说</p>
-<pre><code class="js">// 调度优先级相关
-this.lanes = NoLanes;
-this.childLanes = NoLanes;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 调度优先级相关</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="property">lanes</span> = <span class="title class_">NoLanes</span>;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">childLanes</span> = <span class="title class_">NoLanes</span>;</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="Fiber工作原理"><a href="#Fiber工作原理" class="headerlink" title="Fiber工作原理"></a>Fiber工作原理</h2><p>首先，上面说了，Fiber节点直接会构成一棵Fiber树，并且存有节点以及各种信息每个Fiber。</p>
 <p>所以一个Fiber是根据一个dom或者说React Element的出来的，那么树的结构也和dom或者组件树相同。</p>
 <p>主要 <strong>更新</strong> 工作原理，这里用到了一个叫做 <strong>双缓存</strong>的技术</p>
@@ -266,20 +189,14 @@ this.childLanes = NoLanes;</code></pre>
 <li><code>workInProgress Fiber</code> 树：正在内存中构建的树</li>
 </ol>
 <p> <code>current Fiber树</code>中的<code>Fiber节点</code>被称为<code>current fiber</code>，<code>workInProgress Fiber树</code>中的<code>Fiber节点</code>被称为<code>workInProgress fiber</code>，他们通过<code>alternate</code>属性连接。 </p>
-<pre><code class="js">currentFiber.alternate === workInProgressFiber;
-workInProgressFiber.alternate === currentFiber;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">currentFiber.<span class="property">alternate</span> === workInProgressFiber;</span><br><span class="line">workInProgressFiber.<span class="property">alternate</span> === currentFiber;</span><br></pre></td></tr></table></figure>
+
 <p><code>React</code>应用的根节点通过使<code>current</code>指针在不同<code>Fiber树</code>的<code>rootFiber</code>间切换来完成<code>current Fiber</code>树指向的切换。 </p>
 <p>即当<code>workInProgress Fiber树</code>构建完成交给<code>Renderer</code>渲染在页面上后，应用根节点的<code>current</code>指针指向<code>workInProgress Fiber树</code>，此时<code>workInProgress Fiber树</code>就变为<code>current Fiber树</code>。</p>
 <p>每次状态更新都会产生新的<code>workInProgress Fiber树</code>，通过<code>current</code>与<code>workInProgress</code>的替换，完成<code>DOM</code>更新。</p>
 <h4 id="mount时候"><a href="#mount时候" class="headerlink" title="mount时候"></a>mount时候</h4><p>考虑如下例子：</p>
-<pre><code class="js">function App() &#123;
-  const [num, add] = useState(0);
-  return (
-    &lt;p onClick=&#123;() =&gt; add(num + 1)&#125;&gt;&#123;num&#125;&lt;/p&gt;
-  )
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">App</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [num, add] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">p</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> add(num + 1)&#125;&gt;&#123;num&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">ReactDOM</span>.<span class="title function_">render</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">App</span>/&gt;</span></span>, <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;root&#x27;</span>));</span><br></pre></td></tr></table></figure>
 
-ReactDOM.render(&lt;App/&gt;, document.getElementById(&#39;root&#39;));</code></pre>
 <ol>
 <li>首次执行<code>ReactDOM.render</code>会创建<code>fiberRootNode</code>（源码中叫<code>fiberRoot</code>）和<code>rootFiber</code>。其中<code>fiberRootNode</code>是整个应用的根节点，<code>rootFiber</code>是``所在组件树的根节点。</li>
 </ol>

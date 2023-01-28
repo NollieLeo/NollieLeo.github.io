@@ -57,6 +57,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -78,7 +80,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -94,7 +96,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -139,35 +141,19 @@
 </li>
 </ul>
 <h3 id="1-修改属性的默认特性"><a href="#1-修改属性的默认特性" class="headerlink" title="1. 修改属性的默认特性"></a>1. 修改属性的默认特性</h3><p>例如：</p>
-<pre><code class="js">let person = &#123;
-    name: &#39;weng&#39;
-&#125;
-// 这里name属性的特性[[Value]]就会被赋值为 weng
-// 而其他的特性默认都是为true</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">	<span class="attr">name</span>: <span class="string">&#x27;weng&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 这里name属性的特性[[Value]]就会被赋值为 weng</span></span><br><span class="line"><span class="comment">// 而其他的特性默认都是为true</span></span><br></pre></td></tr></table></figure>
+
 <p>假如要 修改特性需要用到对象的 <code>Object.defineProperty</code>方法</p>
 <p>这个方法接受三个参数</p>
 <p>要给添加属性的对象，属性名称， 一个描述符对象（就是相关特性的描述属性，configurable，writable, enumerable, value）</p>
-<pre><code class="js">let person = &#123;&#125;;
-Object.defineProperty(person, &quot;name&quot;, &#123;
-    writable: false,
-    value: &#39;weng&#39;
-&#125;);
-// 这里设置了`[[Writable]]`属性为false，表示这个属性不能再被修改了
-console.log(person.name) // weng
-person.name = &#39;helloworld&#39;;  // 修改无效
-console.log(person.name) // weng</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = &#123;&#125;;</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(person, <span class="string">&quot;name&quot;</span>, &#123;</span><br><span class="line">    <span class="attr">writable</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">value</span>: <span class="string">&#x27;weng&#x27;</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 这里设置了`[[Writable]]`属性为false，表示这个属性不能再被修改了</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person.<span class="property">name</span>) <span class="comment">// weng</span></span><br><span class="line">person.<span class="property">name</span> = <span class="string">&#x27;helloworld&#x27;</span>;  <span class="comment">// 修改无效</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person.<span class="property">name</span>) <span class="comment">// weng</span></span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>上述这种情况，在严格模式之下尝试修改属性会抛出错误</p>
 </blockquote>
 <p>创建一个不可配置的属性如下</p>
-<pre><code class="js">let person = &#123;&#125;;
-Object.defineProperty(person, &#39;name&#39;, &#123;
-    configurable: false,
-    value: &#39;weng&#39;
-&#125;)
-// 这里把对象的[[Configurable]]特性设置为false
-delete person.name;  // 删除无效
-console.log(person.name) // weng</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = &#123;&#125;;</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(person, <span class="string">&#x27;name&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">value</span>: <span class="string">&#x27;weng&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 这里把对象的[[Configurable]]特性设置为false</span></span><br><span class="line"><span class="keyword">delete</span> person.<span class="property">name</span>;  <span class="comment">// 删除无效</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person.<span class="property">name</span>) <span class="comment">// weng</span></span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>这里如果修改了[[Configurable]]特性为不可配置，之后都不能再变回可配置的了，如果再调用Object.defineProperty把这个特性设置为true会报错</p>
 <p>并且设置这个特性为false，如果没有定义其他特性，那么其他特性都默认为false</p>
@@ -193,71 +179,24 @@ console.log(person.name) // weng</code></pre>
 </ul>
 <p>和数据属性一样，访问器的属性也是不能直接定义的，必须使用Object.defineProperty()</p>
 <p>如下例子：</p>
-<pre><code class="js">const book = &#123;
-    year_: 2021, // 表示私有属性不能被外部访问
-    edition: 1
-&#125;
-Object.defineProperty(book, &quot;year&quot;, &#123;
-    get()&#123;
-        return this.year_;
-    &#125;
-    set(newValue)&#123;
-        if(newValue &gt; 2021)&#123;
-            this.year_ = newValue;
-            this.edition += newValue - 2021
-        &#125;
-    &#125;
-&#125;)
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> book = &#123;</span><br><span class="line">    <span class="attr">year_</span>: <span class="number">2021</span>, <span class="comment">// 表示私有属性不能被外部访问</span></span><br><span class="line">    <span class="attr">edition</span>: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(book, <span class="string">&quot;year&quot;</span>, &#123;</span><br><span class="line">    <span class="title function_">get</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">year_</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">set</span>(<span class="params">newValue</span>)&#123;</span><br><span class="line">    	<span class="keyword">if</span>(newValue &gt; <span class="number">2021</span>)&#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">year_</span> = newValue;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">edition</span> += newValue - <span class="number">2021</span></span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">book.<span class="property">year</span> = <span class="number">2022</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(book.<span class="property">edition</span>) <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
 
-book.year = 2022;
-console.log(book.edition) // 2</code></pre>
 <p>以上是访问器属性的经典使用场景</p>
 <blockquote>
 <p> 获取函数和设置函数不一定都需要定义</p>
 <p>只定义获取函数意味着属性是只读的</p>
 </blockquote>
 <p>当然可以以上的Object.defineProperty只能定义单个属性，可以使用Object.defineProperties来定义多个属性值以及特性</p>
-<pre><code class="js">let book = &#123;&#125;
-Object.defineProperties(book, &#123;
-    year_:&#123;
-        value: 2021
-    &#125;,
-    edition:&#123;
-        value: 1
-    &#125;,
-    year: &#123;
-        get()&#123;
-            ....
-        &#125;
-        set()&#123;
-            ....
-        &#125;
-    &#125;
-&#125;)</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> book = &#123;&#125;</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperties</span>(book, &#123;</span><br><span class="line">    <span class="attr">year_</span>:&#123;</span><br><span class="line">        <span class="attr">value</span>: <span class="number">2021</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">edition</span>:&#123;</span><br><span class="line">        <span class="attr">value</span>: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">year</span>: &#123;</span><br><span class="line">        <span class="title function_">get</span>(<span class="params"></span>)&#123;</span><br><span class="line">            ....</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">set</span>(<span class="params"></span>)&#123;</span><br><span class="line">    		....</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
 <h1 id="读取属性的特性"><a href="#读取属性的特性" class="headerlink" title="读取属性的特性"></a>读取属性的特性</h1><h2 id="1-Object-getOwnPropertyDescriptor"><a href="#1-Object-getOwnPropertyDescriptor" class="headerlink" title="1. Object.getOwnPropertyDescriptor()"></a>1. Object.getOwnPropertyDescriptor()</h2><p>使用 Object.getOwnPropertyDescriptor()方法可以获取指定属性的属性描述符。</p>
 <p>接受两个参数</p>
 <p>属性所在对象，以及要取得其描述符号的属性名（数据属性，和访问器属性）。返回一个对象</p>
 <p>例如：</p>
-<pre><code class="js">let book = &#123;&#125;;
-Object.defineProperties(book, &#123;
-    year_:&#123;
-        value: 2021
-    &#125;,
-    edition:&#123;
-        value: 1
-    &#125;,
-    year: &#123;
-        get()&#123;
-            ....
-        &#125;
-        set()&#123;
-            ....
-        &#125;
-    &#125;
-&#125;)
-let desc = Object.getOwnPropertyDescriptor(book,&quot;year_&quot;);
-let descYear = Object.getOwnPropertyDescriptor(book, &quot;year&quot;);
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> book = &#123;&#125;;</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperties</span>(book, &#123;</span><br><span class="line">    <span class="attr">year_</span>:&#123;</span><br><span class="line">        <span class="attr">value</span>: <span class="number">2021</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">edition</span>:&#123;</span><br><span class="line">        <span class="attr">value</span>: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">year</span>: &#123;</span><br><span class="line">        <span class="title function_">get</span>(<span class="params"></span>)&#123;</span><br><span class="line">            ....</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">set</span>(<span class="params"></span>)&#123;</span><br><span class="line">    		....</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">let</span> desc = <span class="title class_">Object</span>.<span class="title function_">getOwnPropertyDescriptor</span>(book,<span class="string">&quot;year_&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> descYear = <span class="title class_">Object</span>.<span class="title function_">getOwnPropertyDescriptor</span>(book, <span class="string">&quot;year&quot;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>desc的值如下</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210527212616268.png" alt="image-20210527212616268"></p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210527212733518.png" alt="image-20210527212733518"></p>
@@ -265,7 +204,8 @@ let descYear = Object.getOwnPropertyDescriptor(book, &quot;year&quot;);
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210527212917495.png" alt="image-20210527212917495"></p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210527213001469.png" alt="image-20210527213001469"></p>
 <h2 id="2-Object-getOwnPropertyDescriptors"><a href="#2-Object-getOwnPropertyDescriptors" class="headerlink" title="2. Object.getOwnPropertyDescriptors()"></a>2. Object.getOwnPropertyDescriptors()</h2><p>es2017新增的静态方法，这个方法会在每个自有属性上调用Object.defineProperties</p>
-<pre><code class="js">console.log(Object.getOwnPropertyDescriptors(book));</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">getOwnPropertyDescriptors</span>(book));</span><br></pre></td></tr></table></figure>
+
 <p>打印出来的如下</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210527214742659.png" alt="image-20210527214742659"></p>
 <blockquote>

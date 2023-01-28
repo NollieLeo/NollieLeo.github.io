@@ -56,6 +56,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -77,7 +79,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -93,7 +95,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -119,38 +121,14 @@
 <p>t1 和 t2 都为 null，t1t1 依然 t1。（return t1）</p>
 <p>t1、t2 都存在，将 t2 的值加给 t1 。（t1.val += t2.val）</p>
 <p>『子树的合并』交给递归去做，它会对每一个节点做同样的事情。</p>
-<pre><code class="js">t1.left = mergeTrees(t1.left, t2.left);
-t1.right = mergeTrees(t1.right, t2.right);</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t1.<span class="property">left</span> = <span class="title function_">mergeTrees</span>(t1.<span class="property">left</span>, t2.<span class="property">left</span>);</span><br><span class="line">t1.<span class="property">right</span> = <span class="title function_">mergeTrees</span>(t1.<span class="property">right</span>, t2.<span class="property">right</span>);</span><br></pre></td></tr></table></figure>
+
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210619152328260.png" alt="image-20210619152328260"></p>
 <p><strong>代码</strong></p>
-<pre><code class="js">const mergeTrees = (t1, t2) =&gt; &#123;
-  if (t1 == null &amp;&amp; t2) &#123;
-    return t2;
-  &#125;
-  if ((t1 &amp;&amp; t2 == null) || (t1 == null &amp;&amp; t2 == null)) &#123;
-    return t1;
-  &#125;
-  t1.val += t2.val;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">mergeTrees</span> = (<span class="params">t1, t2</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (t1 == <span class="literal">null</span> &amp;&amp; t2) &#123;</span><br><span class="line">    <span class="keyword">return</span> t2;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ((t1 &amp;&amp; t2 == <span class="literal">null</span>) || (t1 == <span class="literal">null</span> &amp;&amp; t2 == <span class="literal">null</span>)) &#123;</span><br><span class="line">    <span class="keyword">return</span> t1;</span><br><span class="line">  &#125;</span><br><span class="line">  t1.<span class="property">val</span> += t2.<span class="property">val</span>;</span><br><span class="line"></span><br><span class="line">  t1.<span class="property">left</span> = <span class="title function_">mergeTrees</span>(t1.<span class="property">left</span>, t2.<span class="property">left</span>);</span><br><span class="line">  t1.<span class="property">right</span> = <span class="title function_">mergeTrees</span>(t1.<span class="property">right</span>, t2.<span class="property">right</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> t1;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-  t1.left = mergeTrees(t1.left, t2.left);
-  t1.right = mergeTrees(t1.right, t2.right);
+<h4 id="如果不在原树修改，新建一个树呢？"><a href="#如果不在原树修改，新建一个树呢？" class="headerlink" title="如果不在原树修改，新建一个树呢？"></a>如果不在原树修改，新建一个树呢？</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">mergeTrees</span> = (<span class="params">t1, t2</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (t1 == <span class="literal">null</span> &amp;&amp; t2) &#123;</span><br><span class="line">    <span class="keyword">return</span> t2;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ((t1 &amp;&amp; t2 == <span class="literal">null</span>) || (t1 == <span class="literal">null</span> &amp;&amp; t2 == <span class="literal">null</span>)) &#123;</span><br><span class="line">    <span class="keyword">return</span> t1;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> root=<span class="keyword">new</span> <span class="title class_">TreeNode</span>(t1.<span class="property">val</span> + t2.<span class="property">val</span>)</span><br><span class="line"></span><br><span class="line">  root.<span class="property">left</span> = <span class="title function_">mergeTrees</span>(t1.<span class="property">left</span>, t2.<span class="property">left</span>);</span><br><span class="line">  root.<span class="property">right</span> = <span class="title function_">mergeTrees</span>(t1.<span class="property">right</span>, t2.<span class="property">right</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> root;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-  return t1;
-&#125;;</code></pre>
-<h4 id="如果不在原树修改，新建一个树呢？"><a href="#如果不在原树修改，新建一个树呢？" class="headerlink" title="如果不在原树修改，新建一个树呢？"></a>如果不在原树修改，新建一个树呢？</h4><pre><code class="js">const mergeTrees = (t1, t2) =&gt; &#123;
-  if (t1 == null &amp;&amp; t2) &#123;
-    return t2;
-  &#125;
-  if ((t1 &amp;&amp; t2 == null) || (t1 == null &amp;&amp; t2 == null)) &#123;
-    return t1;
-  &#125;
-  const root=new TreeNode(t1.val + t2.val)
-
-  root.left = mergeTrees(t1.left, t2.left);
-  root.right = mergeTrees(t1.right, t2.right);
-
-  return root;
-&#125;;</code></pre>
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>

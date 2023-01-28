@@ -23,12 +23,12 @@
   <title>vite学习记录 - 翁先森的博客</title>
 
   
-    <meta name="description" content="vite前置知识 no-bundle：利用浏览器原生 ES 模块的支持，实现开发阶段的 Dev Server，进行模块的按需加载，而不是先整体打包再进行加载。 import：vite中的一个 import 语句代表一个 HTTP 请求  初始化模板 这里我们采用pnpm和vite，当然需要全局安装一下。学习记录中使用的是react + ts技术栈  pnpm create vite 初始化之后的文">
+    <meta name="description" content="vite前置知识 no-bundle：利用浏览器原生 ES 模块的支持，实现开发阶段的 Dev Server，进行模块的按需加载，而不是先整体打包再进行加载。 import：vite中的一个 import 语句代表一个 HTTP 请求  初始化模板 这里我们采用pnpm和vite，当然需要全局安装一下。学习记录中使用的是react + ts技术栈  1pnpm create vite  初始化之后">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vite学习记录">
 <meta property="og:url" content="https://github.com/NollieLeo/2022/11/03/vite%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="vite前置知识 no-bundle：利用浏览器原生 ES 模块的支持，实现开发阶段的 Dev Server，进行模块的按需加载，而不是先整体打包再进行加载。 import：vite中的一个 import 语句代表一个 HTTP 请求  初始化模板 这里我们采用pnpm和vite，当然需要全局安装一下。学习记录中使用的是react + ts技术栈  pnpm create vite 初始化之后的文">
+<meta property="og:description" content="vite前置知识 no-bundle：利用浏览器原生 ES 模块的支持，实现开发阶段的 Dev Server，进行模块的按需加载，而不是先整体打包再进行加载。 import：vite中的一个 import 语句代表一个 HTTP 请求  初始化模板 这里我们采用pnpm和vite，当然需要全局安装一下。学习记录中使用的是react + ts技术栈  1pnpm create vite  初始化之后">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://github.com/Users/leo/Library/Application%20Support/marktext/images/2022-11-06-15-55-54-image.png">
 <meta property="og:image" content="https://github.com/Users/leo/Library/Application%20Support/marktext/images/2022-11-06-16-20-23-image.png">
@@ -53,6 +53,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -74,7 +76,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -90,7 +92,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -110,38 +112,17 @@
 <h1 id="初始化模板"><a href="#初始化模板" class="headerlink" title="初始化模板"></a>初始化模板</h1><blockquote>
 <p>这里我们采用pnpm和vite，当然需要全局安装一下。<br>学习记录中使用的是react + ts技术栈</p>
 </blockquote>
-<pre><code class="shell">pnpm create vite</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnpm create vite</span><br></pre></td></tr></table></figure>
+
 <p>初始化之后的文件格式是</p>
-<pre><code>├── index.html
-├── package.json
-├── pnpm-lock.yaml
-├── src
-│   ├── App.css
-│   ├── App.tsx
-│   ├── favicon.svg
-│   ├── index.css
-│   ├── logo.svg
-│   ├── main.tsx
-│   └── vite-env.d.ts
-├── tsconfig.json
-└── vite.config.ts</code></pre><ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">├── index.html</span><br><span class="line">├── package.json</span><br><span class="line">├── pnpm-lock.yaml</span><br><span class="line">├── src</span><br><span class="line">│   ├── App.css</span><br><span class="line">│   ├── App.tsx</span><br><span class="line">│   ├── favicon.svg</span><br><span class="line">│   ├── index.css</span><br><span class="line">│   ├── logo.svg</span><br><span class="line">│   ├── main.tsx</span><br><span class="line">│   └── vite-env.d.ts</span><br><span class="line">├── tsconfig.json</span><br><span class="line">└── vite.config.ts</span><br></pre></td></tr></table></figure>
+
+<ul>
 <li><p>index.html：入口文件，vite会默认把根目录下的index.html作为打包入口</p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot; /&gt;
-    &lt;link rel=&quot;icon&quot; type=&quot;image/svg+xml&quot; href=&quot;/vite.svg&quot; /&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
-    &lt;title&gt;Vite + React + TS&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div id=&quot;root&quot;&gt;&lt;/div&gt;
-    &lt;script type=&quot;module&quot; src=&quot;/src/main.tsx&quot;&gt;&lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;icon&quot;</span> <span class="attr">type</span>=<span class="string">&quot;image/svg+xml&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/vite.svg&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Vite + React + TS<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;root&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/src/main.tsx&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <p>这段代码代表了我们脚本文件的入口，使用type=”module”的ES模块加载的模式，当我们访问项目的时候会去通过本地的去请求main.tsx文件</p>
-<pre><code class="html">&lt;script type=&quot;module&quot; src=&quot;/src/main.tsx&quot;&gt;&lt;/script&gt;</code></pre>
-</li>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/src/main.tsx&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
 <li><p>main.tsx: 入口文件引用的脚本文件</p>
 </li>
 </ul>
@@ -159,53 +140,20 @@
 </li>
 </ul>
 <p>// vite.config.ts</p>
-<pre><code class="ts">// vite.config.ts
-import &#123; defineConfig &#125; from &#39;vite&#39;
-// 引入 path 包注意两点:
-// 1. 为避免类型报错，你需要通过 `pnpm i @types/node -D` 安装类型
-// 2. tsconfig.node.json 中设置 `allowSyntheticDefaultImports: true`，以允许下面的 default 导入方式
-import path from &#39;path&#39;
-import react from &#39;@vitejs/plugin-react&#39;
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vite.config.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; defineConfig &#125; <span class="keyword">from</span> <span class="string">&#x27;vite&#x27;</span></span><br><span class="line"><span class="comment">// 引入 path 包注意两点:</span></span><br><span class="line"><span class="comment">// 1. 为避免类型报错，你需要通过 `pnpm i @types/node -D` 安装类型</span></span><br><span class="line"><span class="comment">// 2. tsconfig.node.json 中设置 `allowSyntheticDefaultImports: true`，以允许下面的 default 导入方式</span></span><br><span class="line"><span class="keyword">import</span> path <span class="keyword">from</span> <span class="string">&#x27;path&#x27;</span></span><br><span class="line"><span class="keyword">import</span> react <span class="keyword">from</span> <span class="string">&#x27;@vitejs/plugin-react&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line">  <span class="comment">// 手动指定项目根目录位置</span></span><br><span class="line">  <span class="attr">root</span>: path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;src&#x27;</span>)</span><br><span class="line">  <span class="attr">plugins</span>: [<span class="title function_">react</span>()]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-export default defineConfig(&#123;
-  // 手动指定项目根目录位置
-  root: path.join(__dirname, &#39;src&#39;)
-  plugins: [react()]
-&#125;)</code></pre>
 <p>// tsconfig.node.json</p>
-<pre><code class="json">&#123;
-  &quot;compilerOptions&quot;: &#123;
-    &quot;composite&quot;: true,
-    &quot;module&quot;: &quot;ESNext&quot;,
-    &quot;moduleResolution&quot;: &quot;Node&quot;,
-    // 以允许 node相关的默认 导入方式
-    &quot;allowSyntheticDefaultImports&quot;: true
-  &#125;,
-  &quot;include&quot;: [&quot;vite.config.ts&quot;]
-&#125;</code></pre>
-<h2 id="默认指令"><a href="#默认指令" class="headerlink" title="默认指令"></a>默认指令</h2><pre><code class="json">&quot;scripts&quot;: &#123;
-  // 开发阶段启动 Vite Dev Server
-  &quot;dev&quot;: &quot;vite&quot;,
-  // 生产环境打包
-  &quot;build&quot;: &quot;tsc &amp;&amp; vite build&quot;,
-  // 生产环境打包完预览产物
-  &quot;preview&quot;: &quot;vite preview&quot;
-&#125;,</code></pre>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;compilerOptions&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;composite&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;module&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ESNext&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;moduleResolution&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Node&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="comment">// 以允许 node相关的默认 导入方式</span></span><br><span class="line">    <span class="attr">&quot;allowSyntheticDefaultImports&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;include&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;vite.config.ts&quot;</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="默认指令"><a href="#默认指令" class="headerlink" title="默认指令"></a>默认指令</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="comment">// 开发阶段启动 Vite Dev Server</span></span><br><span class="line">  <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="comment">// 生产环境打包</span></span><br><span class="line">  <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;tsc &amp;&amp; vite build&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="comment">// 生产环境打包完预览产物</span></span><br><span class="line">  <span class="attr">&quot;preview&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite preview&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><p>“dev”: 通过启动vite的Dev Server，在开发阶段实现不打包的特性</p>
 </li>
 <li><p>“build”: 因为当前初始化模板选用的是ts，所以在真正的使用vite打生产包的时候，要编译 TypeScript 代码并进行类型检查</p>
 <ul>
 <li><p>此从用到的时候tsc，是TypeScript 的官方编译命令。在tsconfig.ts文件中其实有这样的配置</p>
-<pre><code class="ts">&#123;
-    &quot;compilerOptions&quot;: &#123;
-        // 省略其他配置
-        // 1. noEmit 表示只做类型检查，而不会输出产物文件
-        // 2. 这行配置与 tsc --noEmit 命令等效
-        &quot;noEmit&quot;: true,
-    &#125;,
-&#125;</code></pre>
-</li>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">        <span class="comment">// 省略其他配置</span></span><br><span class="line">        <span class="comment">// 1. noEmit 表示只做类型检查，而不会输出产物文件</span></span><br><span class="line">        <span class="comment">// 2. 这行配置与 tsc --noEmit 命令等效</span></span><br><span class="line">        <span class="string">&quot;noEmit&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>在vue的项目中，我们就得使用到 <code>vue-tsc</code></p>
 </li>
 </ul>
@@ -216,27 +164,10 @@ export default defineConfig(&#123;
 <h1 id="css相关改造点"><a href="#css相关改造点" class="headerlink" title="css相关改造点"></a>css相关改造点</h1><h2 id="样式方案的意义"><a href="#样式方案的意义" class="headerlink" title="样式方案的意义"></a>样式方案的意义</h2><p>原生 CSS 开发的各种问题</p>
 <ol>
 <li><p>开发体验欠佳。比如原生 CSS 不支持选择器的嵌套:</p>
-<pre><code class="css">// 选择器只能平铺，不能嵌套
-.container .header .nav .title .text &#123;
- color: blue;
-&#125;
-
-.container .header .nav .box &#123;
- color: blue;
- border: 1px solid grey;
-&#125;</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 选择器只能平铺，不能嵌套</span><br><span class="line"><span class="selector-class">.container</span> <span class="selector-class">.header</span> <span class="selector-class">.nav</span> <span class="selector-class">.title</span> <span class="selector-class">.text</span> &#123;</span><br><span class="line"> <span class="attribute">color</span>: blue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> <span class="selector-class">.header</span> <span class="selector-class">.nav</span> <span class="selector-class">.box</span> &#123;</span><br><span class="line"> <span class="attribute">color</span>: blue;</span><br><span class="line"> <span class="attribute">border</span>: <span class="number">1px</span> solid grey;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>样式污染问题。如果出现同样的类名，很容易造成不同的样式互相覆盖和污染。</p>
-<pre><code class="css">// a.css
-.container &#123;
-  color: red;
-&#125;
-
-// b.css
-// 很有可能覆盖 a.css 的样式！
-.container &#123;
-  color: blue;
-&#125;</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// <span class="selector-tag">a</span><span class="selector-class">.css</span></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// <span class="selector-tag">b</span><span class="selector-class">.css</span></span><br><span class="line">// 很有可能覆盖 <span class="selector-tag">a</span><span class="selector-class">.css</span> 的样式！</span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>浏览器兼容问题。为了兼容不同的浏览器，我们需要对一些属性(如transition)加上不同的浏览器前缀，比如 -webkit-、-moz-、-ms-、-o-，意味着开发者要针对同一个样式属性写很多的冗余代码。</p>
 </li>
@@ -267,49 +198,23 @@ export default defineConfig(&#123;
 <p>但是由于 Vite 底层会调用 CSS 预处理器的官方库进行编译，而 Vite 为了实现按需加载，并没有内置这些工具库，而是让用户根据需要安装</p>
 </blockquote>
 <p>例如我们要使用 sass预处理</p>
-<pre><code class="shell">pnpm install sass</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnpm install sass</span><br></pre></td></tr></table></figure>
+
 <p>之后不需要任何配置就可以使用scss了</p>
 <h3 id="全局变量的引入"><a href="#全局变量的引入" class="headerlink" title="全局变量的引入"></a>全局变量的引入</h3><p>比如我们在全局有许多的样式变量</p>
-<pre><code class="scss">$theme-color: #17c2c2;</code></pre>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$theme-color</span>: <span class="number">#17c2c2</span>;</span><br></pre></td></tr></table></figure>
+
 <p>在其他scss文件中引入的时候，常常会需要先导入这个样式变量的文件</p>
-<pre><code class="scss">@import &#39;./variable.scss&#39;;</code></pre>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;./variable.scss&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
 <p>vite中有可配置参数，能够配置全局引入的文件</p>
 <p>// vite.config.ts</p>
-<pre><code class="ts">// vite.config.ts
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vite.config.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; normalizePath &#125; <span class="keyword">from</span> <span class="string">&#x27;vite&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果类型报错，需要安装 @types/node: pnpm i @types/node -D</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> path <span class="keyword">from</span> <span class="string">&#x27;path&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 全局 scss 文件的路径</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 用 normalizePath 解决 window 下的路径问题</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> variablePath = <span class="title function_">normalizePath</span>(path.<span class="title function_">resolve</span>(<span class="string">&#x27;./xxxxx&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">// css 相关的配置</span></span><br><span class="line"></span><br><span class="line"><span class="attr">css</span>: &#123;</span><br><span class="line"></span><br><span class="line">    <span class="attr">preprocessorOptions</span>: &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">scss</span>: &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// additionalData 的内容会在每个 scss 文件的开头自动注入</span></span><br><span class="line"></span><br><span class="line">        <span class="attr">additionalData</span>: <span class="string">`@import &quot;<span class="subst">$&#123;variablePath&#125;</span>&quot;;`</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-import &#123; normalizePath &#125; from &#39;vite&#39;;
 
-// 如果类型报错，需要安装 @types/node: pnpm i @types/node -D
 
-import path from &#39;path&#39;;
 
-// 全局 scss 文件的路径
 
-// 用 normalizePath 解决 window 下的路径问题
-
-const variablePath = normalizePath(path.resolve(&#39;./xxxxx&#39;));
-
-export default defineConfig(&#123;
-
-// css 相关的配置
-
-css: &#123;
-
-    preprocessorOptions: &#123;
-
-        scss: &#123;
-
-        // additionalData 的内容会在每个 scss 文件的开头自动注入
-
-        additionalData: `@import &quot;$&#123;variablePath&#125;&quot;;`
-
-        &#125;
-
-    &#125;
-
-   &#125;
-
-&#125;)</code></pre>
 <h2 id="css-modules"><a href="#css-modules" class="headerlink" title="css modules"></a>css modules</h2><blockquote>
 <p>CSS Modules 在 Vite 也是一个开箱即用的能力，Vite 会对后缀带有<code>.module</code>的样式文件自动应用 CSS Modules。</p>
 </blockquote>
@@ -318,60 +223,14 @@ css: &#123;
 <p>例如一个Header组件</p>
 <ul>
 <li><p>改造样式文件名称为index.module.scss</p>
-<pre><code class="scss">.page-header &#123;
-    display: flex;
-    color: #fff;
-    background-color: $theme-color;
-&#125;</code></pre>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.page-header</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="variable">$theme-color</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在tsx中引入</p>
-<pre><code class="tsx">import &#123; useState &#125; from &quot;react&quot;;
-
-import style from  &quot;./index.module.scss&quot;;
-
-function PageHeader() &#123;
-  const prefixCls = &quot;w-page-header&quot;;
-
-  const [count, setCount] = useState(0);
-
-  return (
-    &lt;div className=&#123;style[&#39;page-header&#39;]&#125;&gt;
-      page header
-      &lt;button onClick=&#123;() =&gt; setCount(1)&#125;&gt;add&lt;/button&gt;
-      &#123;count&#125;
-    &lt;/div&gt;
-  );
-&#125;
-
-export default PageHeader;
-</code></pre>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> style <span class="keyword">from</span>  <span class="string">&quot;./index.module.scss&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">PageHeader</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> prefixCls = <span class="string">&quot;w-page-header&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&#123;style[</span>&#x27;<span class="attr">page-header</span>&#x27;]&#125;&gt;</span></span></span><br><span class="line"><span class="language-xml">      page header</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> setCount(1)&#125;&gt;add<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;count&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">PageHeader</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>修改配置，生成的hash</p>
-<pre><code class="ts">import &#123; defineConfig, normalizePath &#125; from &#39;vite&#39;
-import react from &#39;@vitejs/plugin-react&#39;
-import path from &#39;path&#39;;
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; defineConfig, normalizePath &#125; <span class="keyword">from</span> <span class="string">&#x27;vite&#x27;</span></span><br><span class="line"><span class="keyword">import</span> react <span class="keyword">from</span> <span class="string">&#x27;@vitejs/plugin-react&#x27;</span></span><br><span class="line"><span class="keyword">import</span> path <span class="keyword">from</span> <span class="string">&#x27;path&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> variablePath = <span class="title function_">normalizePath</span>(path.<span class="title function_">resolve</span>(<span class="string">&#x27;./src/assets/style/variable.scss&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// https://vitejs.dev/config/</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line">  <span class="attr">root</span>: path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;src&#x27;</span>),</span><br><span class="line">  <span class="attr">plugins</span>: [<span class="title function_">react</span>()],</span><br><span class="line">  <span class="attr">css</span>: &#123;</span><br><span class="line">    <span class="attr">modules</span>: &#123;</span><br><span class="line">      <span class="comment">// 一般我们可以通过 generateScopedName 属性来对生成的类名进行自定义</span></span><br><span class="line">      <span class="comment">// 其中，name 表示当前文件名，local 表示类名</span></span><br><span class="line">      <span class="attr">generateScopedName</span>: <span class="string">&quot;[name]__[local]___[hash:base64:5]&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">preprocessorOptions</span>: &#123;</span><br><span class="line">      <span class="attr">scss</span>: &#123;</span><br><span class="line">        <span class="comment">// additionalData 的内容会在每个 scss 文件的开头自动注入</span></span><br><span class="line">        <span class="attr">additionalData</span>: <span class="string">`@import &quot;<span class="subst">$&#123;variablePath&#125;</span>&quot;;`</span></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-const variablePath = normalizePath(path.resolve(&#39;./src/assets/style/variable.scss&#39;));
-
-// https://vitejs.dev/config/
-export default defineConfig(&#123;
-  root: path.join(__dirname, &#39;src&#39;),
-  plugins: [react()],
-  css: &#123;
-    modules: &#123;
-      // 一般我们可以通过 generateScopedName 属性来对生成的类名进行自定义
-      // 其中，name 表示当前文件名，local 表示类名
-      generateScopedName: &quot;[name]__[local]___[hash:base64:5]&quot;
-    &#125;,
-    preprocessorOptions: &#123;
-      scss: &#123;
-        // additionalData 的内容会在每个 scss 文件的开头自动注入
-        additionalData: `@import &quot;$&#123;variablePath&#125;&quot;;`
-      &#125;
-
-    &#125;
-  &#125;
-&#125;)</code></pre>
 <p>就可以看到生成的类名为</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/Users/leo/Library/Application%20Support/marktext/images/2022-11-06-15-55-54-image.png" alt></p>
 </li>
@@ -383,36 +242,11 @@ export default defineConfig(&#123;
 <p>这个插件主要用来自动为不同的目标浏览器添加样式前缀，解决的是浏览器兼容性的问题</p>
 </blockquote>
 <p>装上这个插件（不再需要手动安装postcss了，只需要装对应插件）</p>
-<pre><code class="shell">pnpm i autoprefixer -D</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnpm i autoprefixer -D</span><br></pre></td></tr></table></figure>
+
 <p>配置vite.config.ts</p>
-<pre><code class="ts">import &#123; defineConfig &#125; from &#39;vite&#39;
-import react from &#39;@vitejs/plugin-react&#39;
-import autoprefixer from &#39;autoprefixer&#39;;
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; defineConfig &#125; <span class="keyword">from</span> <span class="string">&#x27;vite&#x27;</span></span><br><span class="line"><span class="keyword">import</span> react <span class="keyword">from</span> <span class="string">&#x27;@vitejs/plugin-react&#x27;</span></span><br><span class="line"><span class="keyword">import</span> autoprefixer <span class="keyword">from</span> <span class="string">&#x27;autoprefixer&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// https://vitejs.dev/config/</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line">  <span class="attr">root</span>: path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;src&#x27;</span>),</span><br><span class="line">  <span class="attr">plugins</span>: [<span class="title function_">react</span>()],</span><br><span class="line">  <span class="attr">css</span>: &#123;</span><br><span class="line">   .....</span><br><span class="line">    <span class="attr">postcss</span>: &#123;</span><br><span class="line">      <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="title function_">autoprefixer</span>(&#123;</span><br><span class="line">          <span class="comment">// 指定目标浏览器</span></span><br><span class="line">          <span class="attr">overrideBrowserslist</span>: [</span><br><span class="line">            <span class="string">&#x27;Android 4.1&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;iOS 7.1&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;Chrome &gt; 31&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;ff &gt; 31&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;ie &gt;= 8&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;&gt; 1%&#x27;</span>,]</span><br><span class="line">        &#125;)</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-
-// https://vitejs.dev/config/
-export default defineConfig(&#123;
-  root: path.join(__dirname, &#39;src&#39;),
-  plugins: [react()],
-  css: &#123;
-   .....
-    postcss: &#123;
-      plugins: [
-        autoprefixer(&#123;
-          // 指定目标浏览器
-          overrideBrowserslist: [
-            &#39;Android 4.1&#39;,
-            &#39;iOS 7.1&#39;,
-            &#39;Chrome &gt; 31&#39;,
-            &#39;ff &gt; 31&#39;,
-            &#39;ie &gt;= 8&#39;,
-            &#39;&gt; 1%&#39;,]
-        &#125;)
-      ]
-    &#125;
-  &#125;
-&#125;)
-</code></pre>
 <p>之后打包生成的文件中就能自动添加前缀了</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/Users/leo/Library/Application%20Support/marktext/images/2022-11-06-16-20-23-image.png" alt></p>
 <h3 id="其他插件"><a href="#其他插件" class="headerlink" title="其他插件"></a>其他插件</h3><blockquote>
@@ -440,31 +274,9 @@ export default defineConfig(&#123;
 </li>
 </ul>
 <p>而<code>styled-components</code>和<code>emotion</code>已经提供了对应的 babel 插件来解决这些问题，我们在 Vite 中要做的就是集成这些 babel 插件。</p>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><pre><code class="ts">// vite.config.ts
-import &#123; defineConfig &#125; from &#39;vite&#39;
-import react from &#39;@vitejs/plugin-react&#39;
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vite.config.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; defineConfig &#125; <span class="keyword">from</span> <span class="string">&#x27;vite&#x27;</span></span><br><span class="line"><span class="keyword">import</span> react <span class="keyword">from</span> <span class="string">&#x27;@vitejs/plugin-react&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// https://vitejs.dev/config/</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="title function_">react</span>(&#123;</span><br><span class="line">      <span class="attr">babel</span>: &#123;</span><br><span class="line">        <span class="comment">// 加入 babel 插件</span></span><br><span class="line">        <span class="comment">// 以下插件包都需要提前安装</span></span><br><span class="line">        <span class="comment">// 当然，通过这个配置你也可以添加其它的 Babel 插件</span></span><br><span class="line">        <span class="attr">plugins</span>: [</span><br><span class="line">          <span class="comment">// 适配 styled-component</span></span><br><span class="line">          <span class="string">&quot;babel-plugin-styled-components&quot;</span></span><br><span class="line">          <span class="comment">// 适配 emotion</span></span><br><span class="line">          <span class="string">&quot;@emotion/babel-plugin&quot;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// 注意: 对于 emotion，需要单独加上这个配置</span></span><br><span class="line">      <span class="comment">// 通过 `@emotion/react` 包编译 emotion 中的特殊 jsx 语法</span></span><br><span class="line">      <span class="attr">jsxImportSource</span>: <span class="string">&quot;@emotion/react&quot;</span></span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-// https://vitejs.dev/config/
-export default defineConfig(&#123;
-  plugins: [
-    react(&#123;
-      babel: &#123;
-        // 加入 babel 插件
-        // 以下插件包都需要提前安装
-        // 当然，通过这个配置你也可以添加其它的 Babel 插件
-        plugins: [
-          // 适配 styled-component
-          &quot;babel-plugin-styled-components&quot;
-          // 适配 emotion
-          &quot;@emotion/babel-plugin&quot;
-        ]
-      &#125;,
-      // 注意: 对于 emotion，需要单独加上这个配置
-      // 通过 `@emotion/react` 包编译 emotion 中的特殊 jsx 语法
-      jsxImportSource: &quot;@emotion/react&quot;
-    &#125;)
-  ]
-&#125;)</code></pre>
+
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>

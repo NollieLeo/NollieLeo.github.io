@@ -53,6 +53,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -74,7 +76,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -85,14 +87,14 @@
 
 
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/01/28/diff%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%93/"><span class="title">diff算法原理和总结</span></a><a class="item title" href="/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/"><span class="title">vue3渲染器设计与总结</span></a><a class="item title" href="/2022/11/09/%E5%8F%8C%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%8D%95%E6%9C%BA%E4%BA%8B%E4%BB%B6%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"><span class="title">双击事件和单机事件冲突解决方案</span></a><a class="item title" href="/2022/11/03/vite%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><span class="title">vite学习记录</span></a><a class="item title" href="/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/"><span class="title">vue的响应式系统设计总结</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2022/11/09/%E5%8F%8C%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%8D%95%E6%9C%BA%E4%BA%8B%E4%BB%B6%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"><span class="title">双击事件和单机事件冲突解决方案</span></a><a class="item title" href="/2023/01/28/diff%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%93/"><span class="title">diff算法原理和总结</span></a><a class="item title" href="/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/"><span class="title">vue3渲染器设计与总结</span></a><a class="item title" href="/2022/11/03/vite%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><span class="title">vite学习记录</span></a><a class="item title" href="/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/"><span class="title">vue的响应式系统设计总结</span></a></div></widget>
 
 
 
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -121,56 +123,8 @@
 </li>
 </ul>
 <p>上代码</p>
-<pre><code class="jsx">// 父组件
-import React, &#123;
-  useRef,
-  useEffect,
-  useImperativeHandle,
-  forwardRef,
-&#125; from &quot;react&quot;;
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父组件</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123;</span><br><span class="line">  useRef,</span><br><span class="line">  useEffect,</span><br><span class="line">  useImperativeHandle,</span><br><span class="line">  forwardRef,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Child</span> <span class="keyword">from</span> <span class="string">&#x27;./TestItem&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">RefDemo</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> domRef = <span class="title function_">useRef</span>(<span class="number">1</span>);</span><br><span class="line">  <span class="keyword">const</span> childRef = <span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;ref:deom-init&quot;</span>, domRef, domRef.<span class="property">current</span>);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;ref:child-init&quot;</span>, childRef, childRef.<span class="property">current</span>);</span><br><span class="line">  &#125;,[]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">showChild</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;ref:child&quot;</span>, childRef, childRef.<span class="property">current</span>);</span><br><span class="line">    childRef.<span class="property">current</span>.<span class="title function_">say</span>();</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">margin:</span> &quot;<span class="attr">100px</span>&quot;, <span class="attr">border:</span> &quot;<span class="attr">2px</span> <span class="attr">dashed</span>&quot;, <span class="attr">padding:</span> &quot;<span class="attr">20px</span>&quot; &#125;&#125;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>这是外层组件<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-xml">          console.log(&quot;ref:deom&quot;, domRef, domRef.current);</span></span><br><span class="line"><span class="language-xml">          domRef.current.focus();</span></span><br><span class="line"><span class="language-xml">          if(!domRef.current.value)&#123;</span></span><br><span class="line"><span class="language-xml">            domRef.current.value = &#x27;hh&#x27;;</span></span><br><span class="line"><span class="language-xml">          &#125;</span></span><br><span class="line"><span class="language-xml">        &#125;&#125;</span></span><br><span class="line"><span class="language-xml">      &gt;</span></span><br><span class="line"><span class="language-xml">       <span class="tag">&lt;<span class="name">label</span>&gt;</span>这是一个dom节点<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">ref</span>=<span class="string">&#123;domRef&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">p</span> <span class="attr">onClick</span>=<span class="string">&#123;showChild&#125;</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">marginTop:</span> &quot;<span class="attr">20px</span>&quot; &#125;&#125;&gt;</span></span></span><br><span class="line"><span class="language-xml">        这是子组件</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">border:</span> &quot;<span class="attr">1px</span> <span class="attr">solid</span>&quot;, <span class="attr">padding:</span> &quot;<span class="attr">10px</span>&quot; &#125;&#125;&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Child</span> <span class="attr">ref</span>=<span class="string">&#123;childRef&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">RefDemo</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-import Child from &#39;./TestItem&#39;;
-
-const RefDemo = () =&gt; &#123;
-  const domRef = useRef(1);
-  const childRef = useRef(null);
-
-  useEffect(() =&gt; &#123;
-    console.log(&quot;ref:deom-init&quot;, domRef, domRef.current);
-    console.log(&quot;ref:child-init&quot;, childRef, childRef.current);
-  &#125;,[]);
-
-  const showChild = () =&gt; &#123;
-    console.log(&quot;ref:child&quot;, childRef, childRef.current);
-    childRef.current.say();
-  &#125;;
-
-  return (
-    &lt;div style=&#123;&#123; margin: "100px", border: "2px dashed", padding: "20px" &#125;&#125;&gt;
-      &lt;h2&gt;这是外层组件&lt;/h2&gt;
-      &lt;div
-        onClick=&#123;() =&gt; &#123;
-          console.log(&quot;ref:deom&quot;, domRef, domRef.current);
-          domRef.current.focus();
-          if(!domRef.current.value)&#123;
-            domRef.current.value = &#39;hh&#39;;
-          &#125;
-        &#125;&#125;
-      &gt;
-       &lt;label&gt;这是一个dom节点&lt;/label&gt;&lt;input ref=&#123;domRef&#125; /&gt;
-      &lt;/div&gt;
-      &lt;br /&gt;
-      &lt;p onClick=&#123;showChild&#125; style=&#123;&#123; marginTop: "20px" &#125;&#125;&gt;
-        这是子组件
-      &lt;/p&gt;
-      &lt;div style=&#123;&#123; border: "1px solid", padding: "10px" &#125;&#125;&gt;
-        &lt;Child ref=&#123;childRef&#125; /&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  );
-&#125;;
-export default RefDemo;
-</code></pre>
 <ul>
 <li><p>useImperativeHandle(ref,createHandle,[deps])可以自定义暴露给父组件的实例值。如果不使用，父组件的ref(chidlRef)访问不到任何值（childRef.current==null）</p>
 </li>
@@ -181,27 +135,10 @@ export default RefDemo;
 <li><p>React.forward接受渲染函数作为参数，React将使用prop和ref作为参数来调用此函数</p>
 </li>
 </ul>
-<pre><code class="jsx">// 子组件
-import React, &#123;
-  useRef,
-  useEffect,
-  useImperativeHandle,
-  forwardRef,
-&#125; from &quot;react&quot;;
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123;</span><br><span class="line">  useRef,</span><br><span class="line">  useEffect,</span><br><span class="line">  useImperativeHandle,</span><br><span class="line">  forwardRef,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">ChildComponent</span> = (<span class="params">props, ref</span>) =&gt; &#123;</span><br><span class="line">  <span class="title function_">useImperativeHandle</span>(ref, <span class="function">() =&gt;</span> (&#123;</span><br><span class="line">    <span class="attr">say</span>: sayHello,</span><br><span class="line">  &#125;));</span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">sayHello</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="title function_">alert</span>(<span class="string">&quot;hello,我是子组件&quot;</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>子组件<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Child</span> = <span class="title function_">forwardRef</span>(<span class="title class_">ChildComponent</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Child</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-const ChildComponent = (props, ref) =&gt; &#123;
-  useImperativeHandle(ref, () =&gt; (&#123;
-    say: sayHello,
-  &#125;));
-  const sayHello = () =&gt; &#123;
-    alert(&quot;hello,我是子组件&quot;);
-  &#125;;
-  return &lt;h3&gt;子组件&lt;/h3&gt;;
-&#125;;
-const Child = forwardRef(ChildComponent);
 
-export default Child;
-</code></pre>
+
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>

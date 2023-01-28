@@ -53,6 +53,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -74,7 +76,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -90,7 +92,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -125,64 +127,11 @@
 <li>利用frame/a标签实现浏览器的get下载</li>
 </ul>
 <p><strong>首先封装一个download方法，用于发送请求</strong></p>
-<pre><code class="js">// request.js
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// request.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Axios</span> form <span class="string">&#x27;axios&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @params &#123;string&#125; url 请求地址</span></span><br><span class="line"><span class="comment"> * @params &#123;object&#125; resOpts 请求配置参数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">download</span> = (<span class="params">url, resOpts = &#123;&#125;</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; type = <span class="string">&#x27;get&#x27;</span>, data = <span class="string">&#x27;&#x27;</span> &#125; = resOpts</span><br><span class="line">  <span class="keyword">const</span> queryArgs = &#123;</span><br><span class="line">    url,</span><br><span class="line">    <span class="attr">method</span>: type,</span><br><span class="line">    data,</span><br><span class="line">    <span class="attr">headers</span>: &#123;</span><br><span class="line">      <span class="title class_">Accept</span>: <span class="string">&#x27;application/json&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json; charset=utf-8&#x27;</span>,</span><br><span class="line">      <span class="attr">withCredentials</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// tips: 这里直接返回的是response整体!</span></span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Axios</span>.<span class="title function_">request</span>(queryArgs).<span class="title function_">catch</span>(<span class="function"><span class="params">err</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(err))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
-import Axios form &#39;axios&#39;;
-
-/*
- * @params &#123;string&#125; url 请求地址
- * @params &#123;object&#125; resOpts 请求配置参数
- */
-const download = (url, resOpts = &#123;&#125;) =&gt; &#123;
-  const &#123; type = &#39;get&#39;, data = &#39;&#39; &#125; = resOpts
-  const queryArgs = &#123;
-    url,
-    method: type,
-    data,
-    headers: &#123;
-      Accept: &#39;application/json&#39;,
-      &#39;Content-Type&#39;: &#39;application/json; charset=utf-8&#39;,
-      withCredentials: true,
-    &#125;,
-  &#125;
-  // tips: 这里直接返回的是response整体!
-  return Axios.request(queryArgs).catch(err =&gt; console.log(err))
-&#125;
-
-...</code></pre>
 <p><strong>拿到response之后我们需要将流文件通过浏览器下载</strong></p>
-<pre><code class="js">// utils.js
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// utils.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">convertRes2Blob</span>(<span class="params">response</span>) &#123;</span><br><span class="line">  <span class="comment">// 提取文件名</span></span><br><span class="line">  <span class="keyword">const</span> fileName = response.<span class="property">headers</span>[<span class="string">&#x27;content-disposition&#x27;</span>].<span class="title function_">match</span>(</span><br><span class="line">    <span class="regexp">/filename=(.*)/</span></span><br><span class="line">  )[<span class="number">1</span>]</span><br><span class="line">  <span class="comment">// 将二进制流转为blob</span></span><br><span class="line">  <span class="keyword">const</span> blob = <span class="keyword">new</span> <span class="title class_">Blob</span>([response.<span class="property">data</span>], &#123; <span class="attr">type</span>: <span class="string">&#x27;application/octet-stream&#x27;</span> &#125;)</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="variable language_">window</span>.<span class="property">navigator</span>.<span class="property">msSaveBlob</span> !== <span class="string">&#x27;undefined&#x27;</span>) &#123;</span><br><span class="line">    <span class="comment">// 兼容IE，window.navigator.msSaveBlob：以本地方式保存文件</span></span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">navigator</span>.<span class="title function_">msSaveBlob</span>(blob, <span class="built_in">decodeURI</span>(filename))</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 创建新的URL并指向File对象或者Blob对象的地址</span></span><br><span class="line">    <span class="keyword">const</span> blobURL = <span class="variable language_">window</span>.<span class="property">URL</span>.<span class="title function_">createObjectURL</span>(blob)</span><br><span class="line">    <span class="comment">// 创建a标签，用于跳转至下载链接</span></span><br><span class="line">    <span class="keyword">const</span> tempLink = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">    tempLink.<span class="property">style</span>.<span class="property">display</span> = <span class="string">&#x27;none&#x27;</span></span><br><span class="line">    tempLink.<span class="property">href</span> = blobURL</span><br><span class="line">    tempLink.<span class="title function_">setAttribute</span>(<span class="string">&#x27;download&#x27;</span>, <span class="built_in">decodeURI</span>(filename))</span><br><span class="line">    <span class="comment">// 兼容：某些浏览器不支持HTML5的download属性</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> tempLink.<span class="property">download</span> === <span class="string">&#x27;undefined&#x27;</span>) &#123;</span><br><span class="line">      tempLink.<span class="title function_">setAttribute</span>(<span class="string">&#x27;target&#x27;</span>, <span class="string">&#x27;_blank&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 挂载a标签</span></span><br><span class="line">    <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(tempLink)</span><br><span class="line">    tempLink.<span class="title function_">click</span>()</span><br><span class="line">    <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">removeChild</span>(tempLink)</span><br><span class="line">    <span class="comment">// 释放blob URL地址</span></span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">URL</span>.<span class="title function_">revokeObjectURL</span>(blobURL)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-export function convertRes2Blob(response) &#123;
-  // 提取文件名
-  const fileName = response.headers[&#39;content-disposition&#39;].match(
-    /filename=(.*)/
-  )[1]
-  // 将二进制流转为blob
-  const blob = new Blob([response.data], &#123; type: &#39;application/octet-stream&#39; &#125;)
-  if (typeof window.navigator.msSaveBlob !== &#39;undefined&#39;) &#123;
-    // 兼容IE，window.navigator.msSaveBlob：以本地方式保存文件
-    window.navigator.msSaveBlob(blob, decodeURI(filename))
-  &#125; else &#123;
-    // 创建新的URL并指向File对象或者Blob对象的地址
-    const blobURL = window.URL.createObjectURL(blob)
-    // 创建a标签，用于跳转至下载链接
-    const tempLink = document.createElement(&#39;a&#39;)
-    tempLink.style.display = &#39;none&#39;
-    tempLink.href = blobURL
-    tempLink.setAttribute(&#39;download&#39;, decodeURI(filename))
-    // 兼容：某些浏览器不支持HTML5的download属性
-    if (typeof tempLink.download === &#39;undefined&#39;) &#123;
-      tempLink.setAttribute(&#39;target&#39;, &#39;_blank&#39;)
-    &#125;
-    // 挂载a标签
-    document.body.appendChild(tempLink)
-    tempLink.click()
-    document.body.removeChild(tempLink)
-    // 释放blob URL地址
-    window.URL.revokeObjectURL(blobURL)
-  &#125;
-&#125;</code></pre>
 <h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ul>
 <li>download请求方法与convertRes2Blob处理文件下载的方法，需要分开调用</li>
 <li>download使用独立的实例，不能公用一个axios，基础配置需要单独维护</li>

@@ -60,6 +60,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -81,7 +83,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -97,7 +99,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -130,13 +132,10 @@
 </li>
 </ul>
 <p>错误处理代码：</p>
-<pre><code class="javascript">let dirs = fs.readdir(&#39;./hello.txt&#39;, (err, files) =&gt; &#123;
-    if(err)&#123;
-        console.log(err);
-    &#125;else&#123;
-        console.log(files);
-    &#125;
-&#125;)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> dirs = fs.<span class="title function_">readdir</span>(<span class="string">&#x27;./hello.txt&#x27;</span>, <span class="function">(<span class="params">err, files</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(err);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(files);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
 <hr>
 <p><code>fs.readdirSync(path[, options])</code> 同步函数</p>
 <ul>
@@ -149,94 +148,46 @@
 <li>返回:</li>
 </ul>
 <p>错误处理代码：</p>
-<pre><code class="javascript">try &#123;
-    let dirs = fs.readdirSync(&#39;./node.js&#39;); //异步
-&#125;
-catch (err) &#123;
-    console.log(&#39;粗ucol&#39;);
-    console.log(err)
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> dirs = fs.<span class="title function_">readdirSync</span>(<span class="string">&#x27;./node.js&#x27;</span>); <span class="comment">//异步</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;粗ucol&#x27;</span>);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>因为同步函数没有异步那样的处理错误机制，因此需要配合<code>try catch</code>才能捕获错误的同时又不暂停下面的代码运行。</p>
 <h4 id="1-2-mkdir和mkdirSync-创建文件"><a href="#1-2-mkdir和mkdirSync-创建文件" class="headerlink" title="1.2 mkdir和mkdirSync 创建文件"></a>1.2 mkdir和mkdirSync 创建文件</h4><p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/fs.html#fs_fs_mkdir_path_options_callback">mkdir文档</a></p>
 <h4 id="1-3-rename-重命名-和-rmdir删除文件"><a href="#1-3-rename-重命名-和-rmdir删除文件" class="headerlink" title="1.3 rename 重命名 和 rmdir删除文件"></a>1.3 rename 重命名 和 rmdir删除文件</h4><p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/fs.html#fs_fs_rename_oldpath_newpath_callback">rename</a></p>
 <p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/fs.html#fs_fs_rmdir_path_options_callback">rmdir</a></p>
-<h4 id="1-4-writeFile-覆盖写入-和appendFile添加写入文件"><a href="#1-4-writeFile-覆盖写入-和appendFile添加写入文件" class="headerlink" title="1.4 writeFile 覆盖写入 和appendFile添加写入文件"></a>1.4 writeFile 覆盖写入 和appendFile添加写入文件</h4><h4 id="1-5-readFile-读取文件内容-二进制数据流"><a href="#1-5-readFile-读取文件内容-二进制数据流" class="headerlink" title="1.5 readFile 读取文件内容(二进制数据流)"></a>1.5 readFile 读取文件内容(二进制数据流)</h4><pre><code class="javascript">fs.readFile(&#39;name.txt&#39;,(err,data)=&gt;&#123;
-    console.log(data.toString(&#39;UTF-8&#39;))
-&#125;)</code></pre>
+<h4 id="1-4-writeFile-覆盖写入-和appendFile添加写入文件"><a href="#1-4-writeFile-覆盖写入-和appendFile添加写入文件" class="headerlink" title="1.4 writeFile 覆盖写入 和appendFile添加写入文件"></a>1.4 writeFile 覆盖写入 和appendFile添加写入文件</h4><h4 id="1-5-readFile-读取文件内容-二进制数据流"><a href="#1-5-readFile-读取文件内容-二进制数据流" class="headerlink" title="1.5 readFile 读取文件内容(二进制数据流)"></a>1.5 readFile 读取文件内容(二进制数据流)</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;name.txt&#x27;</span>,<span class="function">(<span class="params">err,data</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data.<span class="title function_">toString</span>(<span class="string">&#x27;UTF-8&#x27;</span>))</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
 <p>可以用toString(‘UTF-8’)的方法将文字提取出来；</p>
 <p>或者直接在配置项中</p>
-<pre><code class="javascript">fs.readFile(&#39;name.txt&#39;, &#39;UTF-8&#39;, (err, data) =&gt; &#123;
-    console.log(data)
-&#125;)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;name.txt&#x27;</span>, <span class="string">&#x27;UTF-8&#x27;</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
 <h4 id="1-6-fs-stat-path-options-callback"><a href="#1-6-fs-stat-path-options-callback" class="headerlink" title="1.6 fs.stat(path[, options], callback)"></a>1.6 fs.stat(path[, options], callback)</h4><p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/fs.html#fs_fs_stat_path_options_callback">fs.stat</a></p>
 <hr>
 <h3 id="2-url内置模块"><a href="#2-url内置模块" class="headerlink" title="2. url内置模块"></a>2. url内置模块</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1570860020599.png" alt></p>
 <h4 id="2-1-url-parse-和url-format"><a href="#2-1-url-parse-和url-format" class="headerlink" title="2.1 url.parse()和url.format()"></a>2.1 url.parse()和url.format()</h4><p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/url.html#url_url_parse_urlstring_parsequerystring_slashesdenotehost">url.parse()</a>将其解析成一个url对象，从而可以从url中获取href中的各种值</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1570865560878.png" alt="1570865560878"></p>
 <p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/url.html#url_url_format_url_options">url.format()</a>将对象再拼起来</p>
-<pre><code class="javascript">let url = require(&quot;url&quot;);
-let urlStirng = &#39;https://code.choerodon.com.cn/choerodon-framework?page=2&#39;
-let urlObj = url.parse(urlStirng);
-console.log(urlObj);
-let string = url.format(urlObj);
-console.log(string)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> url = <span class="built_in">require</span>(<span class="string">&quot;url&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> urlStirng = <span class="string">&#x27;https://code.choerodon.com.cn/choerodon-framework?page=2&#x27;</span></span><br><span class="line"><span class="keyword">let</span> urlObj = url.<span class="title function_">parse</span>(urlStirng);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(urlObj);</span><br><span class="line"><span class="keyword">let</span> string = url.<span class="title function_">format</span>(urlObj);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(string)</span><br></pre></td></tr></table></figure>
+
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1571021112249.png" alt></p>
 <hr>
 <h3 id="3-querystring内置模块"><a href="#3-querystring内置模块" class="headerlink" title="3. querystring内置模块"></a>3. querystring内置模块</h3><p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/querystring.html#querystring_query_string">querystring</a></p>
-<h4 id="3-1-stringfy-对象转成字符串，parse-根据符号解析querystring"><a href="#3-1-stringfy-对象转成字符串，parse-根据符号解析querystring" class="headerlink" title="3.1 stringfy()对象转成字符串，parse()根据符号解析querystring"></a>3.1 stringfy()对象转成字符串，parse()根据符号解析querystring</h4><h4 id="3-2-escape-和unescape-编码与解码"><a href="#3-2-escape-和unescape-编码与解码" class="headerlink" title="3.2 escape()和unescape()编码与解码"></a>3.2 escape()和unescape()编码与解码</h4><pre><code class="javascript">let qs = require(&#39;querystring&#39;)
-// let string = &#39;name=weng&amp;pass=12121&amp;sex=0&amp;hello=111&#39;
-// let obj = qs.parse(string);
-// console.log(obj)
-let string = &#39;w=你好&amp;boo=21&#39;;
-let code = qs.escape(string);
-console.log(code);
-let parseCode = qs.unescape(code);
-console.log(parseCode);</code></pre>
+<h4 id="3-1-stringfy-对象转成字符串，parse-根据符号解析querystring"><a href="#3-1-stringfy-对象转成字符串，parse-根据符号解析querystring" class="headerlink" title="3.1 stringfy()对象转成字符串，parse()根据符号解析querystring"></a>3.1 stringfy()对象转成字符串，parse()根据符号解析querystring</h4><h4 id="3-2-escape-和unescape-编码与解码"><a href="#3-2-escape-和unescape-编码与解码" class="headerlink" title="3.2 escape()和unescape()编码与解码"></a>3.2 escape()和unescape()编码与解码</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> qs = <span class="built_in">require</span>(<span class="string">&#x27;querystring&#x27;</span>)</span><br><span class="line"><span class="comment">// let string = &#x27;name=weng&amp;pass=12121&amp;sex=0&amp;hello=111&#x27;</span></span><br><span class="line"><span class="comment">// let obj = qs.parse(string);</span></span><br><span class="line"><span class="comment">// console.log(obj)</span></span><br><span class="line"><span class="keyword">let</span> string = <span class="string">&#x27;w=你好&amp;boo=21&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> code = qs.<span class="built_in">escape</span>(string);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(code);</span><br><span class="line"><span class="keyword">let</span> parseCode = qs.<span class="built_in">unescape</span>(code);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(parseCode);</span><br></pre></td></tr></table></figure>
+
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1571021180480.png" alt></p>
 <hr>
 <h3 id="4-nodemailer-第三方模块"><a href="#4-nodemailer-第三方模块" class="headerlink" title="4. nodemailer 第三方模块"></a>4. nodemailer 第三方模块</h3><p>基本的发送邮箱代码：</p>
-<pre><code class="javascript">&#39;use strict&#39;;
-const nodemailer = require(&#39;nodemailer&#39;);
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> nodemailer = <span class="built_in">require</span>(<span class="string">&#x27;nodemailer&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建发送邮件的请求对象</span></span><br><span class="line"><span class="keyword">let</span> transporter = nodemailer.<span class="title function_">createTransport</span>(&#123;</span><br><span class="line">    <span class="attr">host</span>: <span class="string">&#x27;smtp.qq.com&#x27;</span>, <span class="comment">//发送方用的邮箱</span></span><br><span class="line">    <span class="attr">port</span>: <span class="number">465</span>, <span class="comment">//端口号</span></span><br><span class="line">    <span class="attr">secure</span>: <span class="literal">true</span>, <span class="comment">// true for 465, false for other ports</span></span><br><span class="line">    <span class="attr">auth</span>: &#123;</span><br><span class="line">        <span class="attr">user</span>: <span class="string">&#x27;736653759@qq.com&#x27;</span>, <span class="comment">// 发生方邮箱地址</span></span><br><span class="line">        <span class="attr">pass</span>: <span class="string">&#x27;hebnhkaruvzlbfdg&#x27;</span> <span class="comment">// mtp验证码</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// send mail with defined transport object</span></span><br><span class="line"><span class="keyword">let</span> mailObj = &#123;</span><br><span class="line">    <span class="attr">from</span>: <span class="string">&#x27;&quot;Fred Foo 👻&quot; &lt;736653759@qq.com&gt;&#x27;</span>,</span><br><span class="line">    <span class="attr">to</span>: <span class="string">&#x27;736653759@qq.com&#x27;</span>,</span><br><span class="line">    <span class="attr">subject</span>: <span class="string">&#x27;Hello test nodemailer ✔&#x27;</span>, <span class="comment">// Subject line</span></span><br><span class="line">    <span class="attr">text</span>: <span class="string">&#x27;Hello world of node.js?&#x27;</span>, <span class="comment">// plain text body</span></span><br><span class="line">    <span class="attr">html</span>: <span class="string">&#x27;&lt;b&gt;Hello world?&lt;/b&gt;&#x27;</span> <span class="comment">// html body</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// main().catch(console.error);</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    transporter.<span class="title function_">sendMail</span>(mailObj, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(data)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;, <span class="number">2000</span>)</span><br></pre></td></tr></table></figure>
 
-// 创建发送邮件的请求对象
-let transporter = nodemailer.createTransport(&#123;
-    host: &#39;smtp.qq.com&#39;, //发送方用的邮箱
-    port: 465, //端口号
-    secure: true, // true for 465, false for other ports
-    auth: &#123;
-        user: &#39;736653759@qq.com&#39;, // 发生方邮箱地址
-        pass: &#39;hebnhkaruvzlbfdg&#39; // mtp验证码
-    &#125;
-&#125;);
-
-// send mail with defined transport object
-let mailObj = &#123;
-    from: &#39;&quot;Fred Foo 👻&quot; &lt;736653759@qq.com&gt;&#39;,
-    to: &#39;736653759@qq.com&#39;,
-    subject: &#39;Hello test nodemailer ✔&#39;, // Subject line
-    text: &#39;Hello world of node.js?&#39;, // plain text body
-    html: &#39;&lt;b&gt;Hello world?&lt;/b&gt;&#39; // html body
-&#125;;
-
-
-// main().catch(console.error);
-setTimeout(() =&gt; &#123;
-    transporter.sendMail(mailObj, (err, data) =&gt; &#123;
-        console.log(data)
-    &#125;)
-&#125;, 2000)</code></pre>
 <h3 id="5-error对象"><a href="#5-error对象" class="headerlink" title="5. error对象"></a>5. error对象</h3><p>错误对象本身没有终止代码执行，所以你需要throw抛出异常</p>
-<pre><code class="javascript">let err = new Error(&#39;发生错误&#39;);
-throw err;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> err = <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;发生错误&#x27;</span>);</span><br><span class="line"><span class="keyword">throw</span> err;</span><br></pre></td></tr></table></figure>
+
 <h3 id="6-爬虫案例-（方法2待补充）"><a href="#6-爬虫案例-（方法2待补充）" class="headerlink" title="6. 爬虫案例 （方法2待补充）"></a>6. 爬虫案例 （方法2待补充）</h3><ul>
 <li><p>获取目标网站</p>
 </li>
 <li><p>分析网站内容  <a target="_blank" rel="noopener" href="https://cheerio.js.org/">cheerio</a> 可以用<code>jquery</code>中的选择器进行网页内容分析</p>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/629a81b4e013">cheerio中文文档</a></p>
-<pre><code class="javascript">const cheerio = require(&#39;cheerio&#39;);
-let $ = cheerio.load(&#39;&lt;div&gt;&lt;p&gt;hello&lt;/p&gt;&lt;img src = &quot;http://www.baidu.com&quot;/&gt;&#39;);
-const img = $(&#39;div img&#39;).attr(&#39;src&#39;);
-console.log(img)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cheerio = <span class="built_in">require</span>(<span class="string">&#x27;cheerio&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> $ = cheerio.<span class="title function_">load</span>(<span class="string">&#x27;&lt;div&gt;&lt;p&gt;hello&lt;/p&gt;&lt;img src = &quot;http://www.baidu.com&quot;/&gt;&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> img = $(<span class="string">&#x27;div img&#x27;</span>).<span class="title function_">attr</span>(<span class="string">&#x27;src&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(img)</span><br></pre></td></tr></table></figure>
+
 <p>将一组html转化为类dom,可以通过cheerio实现jq中的$选择器，从而实现一些dom获取的操作。</p>
 </li>
 <li><p>获取有效信息，下载或者其他操作 </p>
@@ -247,69 +198,11 @@ console.log(img)</code></pre>
 <p>根据不同的请求选择不同的协议。</p>
 <p><span style="color:red">*爬图片的代码</span></p>
 <h5 id="方法1："><a href="#方法1：" class="headerlink" title="方法1："></a>方法1：</h5><p><strong>downLoad.js文件</strong></p>
-<pre><code class="javascript">const fs = require(&#39;fs&#39;);
-const path = require(&#39;path&#39;);
-const request = require(&#39;request&#39;);
-var dirPath = path.join(__dirname, &quot;MarvelImages&quot;); //__dirname当前路径，加上要创建的文件名
-function downloadfile(downloadUrl, index) &#123;
-    // 创建文件夹
-    if (!fs.existsSync(dirPath)) &#123; // 同步查询文件夹是否存在
-        fs.mkdirSync(dirPath); // 同步创建文件夹
-        console.log(dirPath + &#39;文件创建成功&#39;);
-    &#125;
-    let imgUrlArray = downloadUrl.split(&#39;/&#39;);  //分割Url
-    let imgUrl = imgUrlArray[imgUrlArray.length - 1]; //获取文件名
-    let filename = imgUrl;
-    let stream = fs.createWriteStream(path.join(dirPath, filename));
-    if (downloadUrl.indexOf(&#39;http&#39;) !== -1) &#123;
-        request(downloadUrl).pipe(stream).on(&#39;error&#39;, (err) =&gt; &#123;
-            console.log(err);
-        &#125;).on(&#39;close&#39;, () =&gt; &#123;
-            console.log(`文件【$&#123;filename&#125;】下载完`);
-            // callback(null, dest);
-        &#125;)
-    &#125; else &#123;
-        console.log(`$&#123;downloadUrl&#125;文件找不到`);
-    &#125;
-&#125;
-module.exports = downloadfile;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> request = <span class="built_in">require</span>(<span class="string">&#x27;request&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> dirPath = path.<span class="title function_">join</span>(__dirname, <span class="string">&quot;MarvelImages&quot;</span>); <span class="comment">//__dirname当前路径，加上要创建的文件名</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">downloadfile</span>(<span class="params">downloadUrl, index</span>) &#123;</span><br><span class="line">    <span class="comment">// 创建文件夹</span></span><br><span class="line">    <span class="keyword">if</span> (!fs.<span class="title function_">existsSync</span>(dirPath)) &#123; <span class="comment">// 同步查询文件夹是否存在</span></span><br><span class="line">        fs.<span class="title function_">mkdirSync</span>(dirPath); <span class="comment">// 同步创建文件夹</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(dirPath + <span class="string">&#x27;文件创建成功&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> imgUrlArray = downloadUrl.<span class="title function_">split</span>(<span class="string">&#x27;/&#x27;</span>);  <span class="comment">//分割Url</span></span><br><span class="line">    <span class="keyword">let</span> imgUrl = imgUrlArray[imgUrlArray.<span class="property">length</span> - <span class="number">1</span>]; <span class="comment">//获取文件名</span></span><br><span class="line">    <span class="keyword">let</span> filename = imgUrl;</span><br><span class="line">    <span class="keyword">let</span> stream = fs.<span class="title function_">createWriteStream</span>(path.<span class="title function_">join</span>(dirPath, filename));</span><br><span class="line">    <span class="keyword">if</span> (downloadUrl.<span class="title function_">indexOf</span>(<span class="string">&#x27;http&#x27;</span>) !== -<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="title function_">request</span>(downloadUrl).<span class="title function_">pipe</span>(stream).<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(err);</span><br><span class="line">        &#125;).<span class="title function_">on</span>(<span class="string">&#x27;close&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`文件【<span class="subst">$&#123;filename&#125;</span>】下载完`</span>);</span><br><span class="line">            <span class="comment">// callback(null, dest);</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;downloadUrl&#125;</span>文件找不到`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = downloadfile;</span><br></pre></td></tr></table></figure>
+
 <p><strong>splider.js</strong></p>
-<pre><code class="javascript">const http = require(&#39;http&#39;);
-const cheerio = require(&#39;cheerio&#39;);
-let downLoad = require(&#39;./downLoad&#39;);
-let mavelUrl = &#39;http://marvel.mtime.com/&#39;
-http.get(mavelUrl, (res) =&gt; &#123;
-    const &#123; statusCode &#125; = res; //状态码
-    const contentType = res.headers[&#39;content-type&#39;]; //请求到的文件类型
-    console.log(`请求到的文件类型` + contentType);
-    // 做安全判断
-    let error;
-    if (statusCode !== 200) &#123;
-        error = new Error(&#39;请求失败.&#39; + `Status Code: $&#123;statusCode&#125;错误`);
-    &#125; else if (!/^text\/html/.test(contentType)) &#123;
-        error = new Error(&#39;Invalid content-type.\n&#39; + `Expected text/html but received $&#123;contentType&#125;`)
-    &#125;
-    if (error) &#123; //如果出错的话直接来到这一行
-        console.error(error.message);
-        res.resume(); //重置缓存
-        return false;
-    &#125;
-    // 数据是分段的,每一次接受到一段数据都会触发data事件，chunk就是数据片段
-    // 所以必须用一个string来当总chunk，每一次请求一个拼接一个
-    let rawData = &#39;&#39;;
-    res.on(&#39;data&#39;, (chunk) =&gt; &#123;
-        rawData += chunk.toString(&#39;UTF-8&#39;);
-    &#125;);
-    res.on(&#39;end&#39;, () =&gt; &#123;
-        let $ = cheerio.load(rawData);
-        $(&#39;img&#39;).each((index, ele) =&gt; &#123;
-            let imgSrc = $(ele).attr(&#39;src&#39;);
-            downLoad(&#39;http://marvel.mtime.com/&#39; + imgSrc, index);
-        &#125;)
-    &#125;)
-&#125;).on(&#39;error&#39;, (err) =&gt; &#123;
-    console.log(&#39;请求错误&#39;);
-&#125;)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> cheerio = <span class="built_in">require</span>(<span class="string">&#x27;cheerio&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> downLoad = <span class="built_in">require</span>(<span class="string">&#x27;./downLoad&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> mavelUrl = <span class="string">&#x27;http://marvel.mtime.com/&#x27;</span></span><br><span class="line">http.<span class="title function_">get</span>(mavelUrl, <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; statusCode &#125; = res; <span class="comment">//状态码</span></span><br><span class="line">    <span class="keyword">const</span> contentType = res.<span class="property">headers</span>[<span class="string">&#x27;content-type&#x27;</span>]; <span class="comment">//请求到的文件类型</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`请求到的文件类型`</span> + contentType);</span><br><span class="line">    <span class="comment">// 做安全判断</span></span><br><span class="line">    <span class="keyword">let</span> error;</span><br><span class="line">    <span class="keyword">if</span> (statusCode !== <span class="number">200</span>) &#123;</span><br><span class="line">        error = <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;请求失败.&#x27;</span> + <span class="string">`Status Code: <span class="subst">$&#123;statusCode&#125;</span>错误`</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!<span class="regexp">/^text\/html/</span>.<span class="title function_">test</span>(contentType)) &#123;</span><br><span class="line">        error = <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;Invalid content-type.\n&#x27;</span> + <span class="string">`Expected text/html but received <span class="subst">$&#123;contentType&#125;</span>`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (error) &#123; <span class="comment">//如果出错的话直接来到这一行</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">error</span>(error.<span class="property">message</span>);</span><br><span class="line">        res.<span class="title function_">resume</span>(); <span class="comment">//重置缓存</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 数据是分段的,每一次接受到一段数据都会触发data事件，chunk就是数据片段</span></span><br><span class="line">    <span class="comment">// 所以必须用一个string来当总chunk，每一次请求一个拼接一个</span></span><br><span class="line">    <span class="keyword">let</span> rawData = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    res.<span class="title function_">on</span>(<span class="string">&#x27;data&#x27;</span>, <span class="function">(<span class="params">chunk</span>) =&gt;</span> &#123;</span><br><span class="line">        rawData += chunk.<span class="title function_">toString</span>(<span class="string">&#x27;UTF-8&#x27;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    res.<span class="title function_">on</span>(<span class="string">&#x27;end&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> $ = cheerio.<span class="title function_">load</span>(rawData);</span><br><span class="line">        $(<span class="string">&#x27;img&#x27;</span>).<span class="title function_">each</span>(<span class="function">(<span class="params">index, ele</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> imgSrc = $(ele).<span class="title function_">attr</span>(<span class="string">&#x27;src&#x27;</span>);</span><br><span class="line">            <span class="title function_">downLoad</span>(<span class="string">&#x27;http://marvel.mtime.com/&#x27;</span> + imgSrc, index);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;).<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;请求错误&#x27;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
 <h5 id="方法2："><a href="#方法2：" class="headerlink" title="方法2："></a>方法2：</h5><h3 id="7-express框架（写api）"><a href="#7-express框架（写api）" class="headerlink" title="7. express框架（写api）"></a>7. express框架（写api）</h3><p><a target="_blank" rel="noopener" href="http://www.expressjs.com.cn/4x/api.html">express中文文档</a></p>
 <h4 id="7-1-简要用法"><a href="#7-1-简要用法" class="headerlink" title="7.1.简要用法"></a>7.1.简要用法</h4><p>先明确一点，接口的构成要素有啥</p>
 <ul>
@@ -319,21 +212,8 @@ http.get(mavelUrl, (res) =&gt; &#123;
 <li>method (get post put delete)</li>
 </ul>
 <p><strong>写一个get接口</strong></p>
-<pre><code class="javascript">const express = require(&#39;express&#39;);
-const app = express() //express实例化
-// 监听3000端口
-app.listen(3000, () =&gt; &#123;
-    console.log(&#39;server start at localhost://3000&#39;);
-&#125;)
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>() <span class="comment">//express实例化</span></span><br><span class="line"><span class="comment">// 监听3000端口</span></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;server start at localhost://3000&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写一个get接口</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/user/login&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(req.<span class="property">query</span>); <span class="comment">//接受到的值</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;你好&#x27;</span>);</span><br><span class="line">    res.<span class="title function_">send</span>(&#123; <span class="attr">status</span>: <span class="string">&#x27;success&#x27;</span> &#125;);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 协议 http https</span></span><br></pre></td></tr></table></figure>
 
-// 写一个get接口
-app.get(&#39;/user/login&#39;, (req, res) =&gt; &#123;
-    console.log(req.query); //接受到的值
-    console.log(&#39;你好&#39;);
-    res.send(&#123; status: &#39;success&#39; &#125;);
-&#125;)
-
-// 协议 http https</code></pre>
 <p>地址栏中输入<a target="_blank" rel="noopener" href="http://localhost:3000/user/login?username=wengkaimin&amp;ps=123456">http://localhost:3000/user/login?username=wengkaimin&amp;ps=123456</a></p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1571145900643.png" alt></p>
 <p>控制台中就能接受到传过来的数据，通过req.query接受get方法传过来的参数</p>
@@ -344,41 +224,10 @@ app.get(&#39;/user/login&#39;, (req, res) =&gt; &#123;
 </blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/body-parser">body-parser npm</a></p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1571152056613.png" alt></p>
-<pre><code class="javascript">const express = require(&#39;express&#39;);
-const app = express() //express实例化
-const bp = require(&#39;body-parser&#39;);
-// express中app.use表示使用一个中间件
-// parse application/x-www-form-urlencoded解析表单格式数据
-app.use(bp.urlencoded(&#123; extended: false &#125;))
-// parse application/json
-app.use(bp.json());
-// 监听3000端口
-app.listen(3000, () =&gt; &#123;
-    console.log(&#39;server start at localhost://3000&#39;);
-&#125;)
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>() <span class="comment">//express实例化</span></span><br><span class="line"><span class="keyword">const</span> bp = <span class="built_in">require</span>(<span class="string">&#x27;body-parser&#x27;</span>);</span><br><span class="line"><span class="comment">// express中app.use表示使用一个中间件</span></span><br><span class="line"><span class="comment">// parse application/x-www-form-urlencoded解析表单格式数据</span></span><br><span class="line">app.<span class="title function_">use</span>(bp.<span class="title function_">urlencoded</span>(&#123; <span class="attr">extended</span>: <span class="literal">false</span> &#125;))</span><br><span class="line"><span class="comment">// parse application/json</span></span><br><span class="line">app.<span class="title function_">use</span>(bp.<span class="title function_">json</span>());</span><br><span class="line"><span class="comment">// 监听3000端口</span></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;server start at localhost://3000&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写一个get接口</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/user/login&#x27;</span>, <span class="function">(<span class="params">request, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(request.<span class="property">query</span>);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;你好&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> &#123; username, ps &#125; = request.<span class="property">query</span>;</span><br><span class="line">    <span class="keyword">if</span> (username === <span class="string">&#x27;weng&#x27;</span> &amp;&amp; ps === <span class="string">&#x27;1234&#x27;</span>) &#123;</span><br><span class="line">        res.<span class="title function_">send</span>(&#123; <span class="attr">status</span>: <span class="string">&#x27;success&#x27;</span> &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        res.<span class="title function_">send</span>(<span class="string">&#x27;登陆失败&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写一个post接口</span></span><br><span class="line">app.<span class="title function_">post</span>(<span class="string">&#x27;/user/reg&#x27;</span>, <span class="function">(<span class="params">request, result</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// request.body获取数据，消息体，请求体</span></span><br><span class="line">    <span class="comment">// let &#123; us, ps &#125; = request.body;</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(request.<span class="property">body</span>);</span><br><span class="line">    <span class="comment">// express不能直接解析消息体</span></span><br><span class="line">    <span class="comment">// 需要第三方插件 body-parser</span></span><br><span class="line">    result.<span class="title function_">send</span>(&#123; <span class="attr">status</span>: <span class="number">1</span> &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 协议 http https</span></span><br></pre></td></tr></table></figure>
 
-// 写一个get接口
-app.get(&#39;/user/login&#39;, (request, res) =&gt; &#123;
-    console.log(request.query);
-    console.log(&#39;你好&#39;);
-    let &#123; username, ps &#125; = request.query;
-    if (username === &#39;weng&#39; &amp;&amp; ps === &#39;1234&#39;) &#123;
-        res.send(&#123; status: &#39;success&#39; &#125;);
-    &#125; else &#123;
-        res.send(&#39;登陆失败&#39;)
-    &#125;
-&#125;);
 
-// 写一个post接口
-app.post(&#39;/user/reg&#39;, (request, result) =&gt; &#123;
-    // request.body获取数据，消息体，请求体
-    // let &#123; us, ps &#125; = request.body;
-    console.log(request.body);
-    // express不能直接解析消息体
-    // 需要第三方插件 body-parser
-    result.send(&#123; status: 1 &#125;)
-&#125;)
-// 协议 http https</code></pre>
+
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1571152747028.png" alt></p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1571152776993.png" alt></p>
 <h4 id="7-2-中间件-middlewear"><a href="#7-2-中间件-middlewear" class="headerlink" title="7.2 中间件 middlewear"></a>7.2 中间件 middlewear</h4><ul>
@@ -388,78 +237,23 @@ app.post(&#39;/user/reg&#39;, (request, result) =&gt; &#123;
 </ul>
 <!--一定要在合适的地方next()-->
 
-<pre><code class="javascript">const express = require(&#39;express&#39;);
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 中间件</span></span><br><span class="line"><span class="comment">// 全局中间件,所有请求发送之前都要走这一步</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> &#123; token &#125; = req.<span class="property">query</span>;</span><br><span class="line">    <span class="keyword">if</span> (token) &#123;</span><br><span class="line">        res.<span class="title function_">send</span>(<span class="string">&quot;OK&quot;</span>);</span><br><span class="line">        <span class="title function_">next</span>(); <span class="comment">//是否继续往下执行</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        res.<span class="title function_">send</span>(<span class="string">&#x27;缺少token&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/test1&#x27;</span>, <span class="function">(<span class="params">requst, result</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;test1&#x27;</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(requst.<span class="property">query</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/test2&#x27;</span>, <span class="function">(<span class="params">requst, result</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;test2&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;server start at localhost://3000&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-const app = express();
-
-// 中间件
-// 全局中间件,所有请求发送之前都要走这一步
-app.use(&#39;/&#39;, (req, res, next) =&gt; &#123;
-    let &#123; token &#125; = req.query;
-    if (token) &#123;
-        res.send(&quot;OK&quot;);
-        next(); //是否继续往下执行
-    &#125; else &#123;
-        res.send(&#39;缺少token&#39;);
-    &#125;
-
-&#125;)
-
-app.get(&#39;/test1&#39;, (requst, result) =&gt; &#123;
-    console.log(&#39;test1&#39;)
-    console.log(requst.query)
-&#125;)
-
-app.get(&#39;/test2&#39;, (requst, result) =&gt; &#123;
-    console.log(&#39;test2&#39;)
-&#125;)
-
-app.listen(3000, () =&gt; &#123;
-    console.log(&#39;server start at localhost://3000&#39;)
-&#125;)</code></pre>
 <h4 id="7-3-静态资源目录-static"><a href="#7-3-静态资源目录-static" class="headerlink" title="7.3 静态资源目录 static"></a>7.3 静态资源目录 static</h4><blockquote>
 <p>指定一个目录，可以被访问 像apache的www一样</p>
 </blockquote>
 <p>部署静态资源文件</p>
-<pre><code class="javascript">const express = require(&#39;express&#39;);
-const path = require(&#39;path&#39;);
-const app = express();
-const dirPath = path.join(__dirname, &#39;/static&#39;);
-console.log(dirPath);
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>();</span><br><span class="line"><span class="keyword">const</span> dirPath = path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;/static&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(dirPath);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(express.<span class="title function_">static</span>(dirPath)); <span class="comment">//可以从这个路径直接获取到资源</span></span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;server start at localhost://3000&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-app.use(express.static(dirPath)); //可以从这个路径直接获取到资源
-
-app.listen(3000, () =&gt; &#123;
-    console.log(&#39;server start at localhost://3000&#39;)
-&#125;)</code></pre>
 <h4 id="7-4-路由"><a href="#7-4-路由" class="headerlink" title="7.4 路由"></a>7.4 路由</h4><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1571385182120.png" alt></p>
 <p>server.js</p>
-<pre><code class="javascript">const express = require(&#39;express&#39;);
-const app = express();
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> userRouter = <span class="built_in">require</span>(<span class="string">&#x27;./router/userRouter&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> foodRouter = <span class="built_in">require</span>(<span class="string">&#x27;./router/foodRouter&#x27;</span>);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(<span class="string">&#x27;/user&#x27;</span>, userRouter);</span><br><span class="line">app.<span class="title function_">use</span>(<span class="string">&#x27;/food&#x27;</span>, foodRouter)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;server start localhost:3000&quot;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-let userRouter = require(&#39;./router/userRouter&#39;);
-let foodRouter = require(&#39;./router/foodRouter&#39;);
-
-app.use(&#39;/user&#39;, userRouter);
-app.use(&#39;/food&#39;, foodRouter)
-
-
-app.listen(3000, () =&gt; &#123;
-    console.log(&quot;server start localhost:3000&quot;);
-&#125;)</code></pre>
 <p>userRouter.js</p>
-<pre><code class="javascript">const express = require(&#39;express&#39;);
-const router = express.Router();
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> router = express.<span class="title class_">Router</span>();</span><br><span class="line"></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/add&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    res.<span class="title function_">send</span>(<span class="string">&#x27;user add&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/del&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;user delete&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = router</span><br></pre></td></tr></table></figure>
 
-router.get(&#39;/add&#39;, (req, res) =&gt; &#123;
-    res.send(&#39;user add&#39;)
-&#125;)
 
-router.get(&#39;/del&#39;, () =&gt; &#123;
-    console.log(&#39;user delete&#39;)
-&#125;)
 
-module.exports = router</code></pre>
 <h3 id="8-MongoDB-非关系型数据库"><a href="#8-MongoDB-非关系型数据库" class="headerlink" title="8. MongoDB 非关系型数据库"></a>8. MongoDB <strong>非关系型数据库</strong></h3><h4 id="8-1-指令基本"><a href="#8-1-指令基本" class="headerlink" title="8.1 指令基本"></a>8.1 指令基本</h4><ul>
 <li>mongodb 数据库名</li>
 <li>mongod 命令行启动数据库命令</li>

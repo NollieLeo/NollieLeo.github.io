@@ -55,6 +55,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -76,7 +78,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -92,7 +94,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -141,17 +143,9 @@
 </blockquote>
 <p>所以 0.75 用二进制表示就是 0.ab，也就是 0.11</p>
 <p>然而不是所有的数都像 0.75 这么好算，我们来算下 0.1：</p>
-<pre><code>0.1 = a * 2^-1 + b * 2^-2 + c * 2^-3 + d * 2^-4 + ...
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">0.1 = a * 2^-1 + b * 2^-2 + c * 2^-3 + d * 2^-4 + ...</span><br><span class="line"></span><br><span class="line">0 + 0.2 = a * 2^0 + b * 2^-1 + c * 2^-2 + ...   (a = 0)</span><br><span class="line">0 + 0.4 = b * 2^0 + c * 2^-1 + d * 2^-2 + ...   (b = 0)</span><br><span class="line">0 + 0.8 = c * 2^0 + d * 2^-1 + e * 2^-2 + ...   (c = 0)</span><br><span class="line">1 + 0.6 = d * 2^0 + e * 2^-1 + f * 2^-2 + ...   (d = 1)</span><br><span class="line">1 + 0.2 = e * 2^0 + f * 2^-1 + g * 2^-2 + ...   (e = 1)</span><br><span class="line">0 + 0.4 = f * 2^0 + g * 2^-1 + h * 2^-2 + ...   (f = 0)</span><br><span class="line">0 + 0.8 = g * 2^0 + h * 2^-1 + i * 2^-2 + ...   (g = 0)</span><br><span class="line">1 + 0.6 = h * 2^0 + i * 2^-1 + j * 2^-2 + ...   (h = 1)</span><br><span class="line">....</span><br></pre></td></tr></table></figure>
 
-0 + 0.2 = a * 2^0 + b * 2^-1 + c * 2^-2 + ...   (a = 0)
-0 + 0.4 = b * 2^0 + c * 2^-1 + d * 2^-2 + ...   (b = 0)
-0 + 0.8 = c * 2^0 + d * 2^-1 + e * 2^-2 + ...   (c = 0)
-1 + 0.6 = d * 2^0 + e * 2^-1 + f * 2^-2 + ...   (d = 1)
-1 + 0.2 = e * 2^0 + f * 2^-1 + g * 2^-2 + ...   (e = 1)
-0 + 0.4 = f * 2^0 + g * 2^-1 + h * 2^-2 + ...   (f = 0)
-0 + 0.8 = g * 2^0 + h * 2^-1 + i * 2^-2 + ...   (g = 0)
-1 + 0.6 = h * 2^0 + i * 2^-1 + j * 2^-2 + ...   (h = 1)
-....</code></pre><p>然后你就会发现，这个计算在不停的循环，所以 0.1 用二进制表示就是 0.00011001100110011……</p>
+<p>然后你就会发现，这个计算在不停的循环，所以 0.1 用二进制表示就是 0.00011001100110011……</p>
 <h2 id="浮点数的存储"><a href="#浮点数的存储" class="headerlink" title="浮点数的存储"></a>浮点数的存储</h2><p>虽然 0.1 转成二进制时是一个无限循环的数，但计算机总要储存吧，我们知道 ECMAScript 使用 64 位字节来储存一个浮点数，那具体是怎么储存的呢？这就要说回 IEEE754 这个标准了，毕竟是这个标准规定了存储的方式。</p>
 <p>这个标准认为，一个浮点数 (Value) 可以这样表示：</p>
 <blockquote>
@@ -200,33 +194,22 @@
 <h2 id="浮点数的运算"><a href="#浮点数的运算" class="headerlink" title="浮点数的运算"></a>浮点数的运算</h2><p>关于浮点数的运算，一般由以下五个步骤完成：对阶、尾数运算、规格化、舍入处理、溢出判断。我们来简单看一下 0.1 和 0.2 的计算。</p>
 <p>首先是对阶，所谓对阶，就是把阶码调整为相同，比如 0.1 是 <code>1.1001100110011…… * 2^-4</code>，阶码是 -4，而 0.2 就是 <code>1.10011001100110...* 2^-3</code>，阶码是 -3，两个阶码不同，所以先调整为相同的阶码再进行计算，调整原则是小阶对大阶，也就是 0.1 的 -4 调整为 -3，对应变成 <code>0.11001100110011…… * 2^-3</code></p>
 <p>接下来是尾数计算:</p>
-<pre><code>  0.1100110011001100110011001100110011001100110011001101
-+ 1.1001100110011001100110011001100110011001100110011010
-————————————————————————————————————————————————————————
- 10.0110011001100110011001100110011001100110011001100111</code></pre><p>我们得到结果为 <code>10.0110011001100110011001100110011001100110011001100111 * 2^-3</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  0.1100110011001100110011001100110011001100110011001101</span><br><span class="line">+ 1.1001100110011001100110011001100110011001100110011010</span><br><span class="line">————————————————————————————————————————————————————————</span><br><span class="line"> 10.0110011001100110011001100110011001100110011001100111</span><br></pre></td></tr></table></figure>
+
+<p>我们得到结果为 <code>10.0110011001100110011001100110011001100110011001100111 * 2^-3</code></p>
 <p>将这个结果处理一下，即结果规格化，变成 <code>1.0011001100110011001100110011001100110011001100110011(1) * 2^-2</code></p>
 <p>括号里的 1 意思是说计算后这个 1 超出了范围，所以要被舍弃了。</p>
 <p>再然后是舍入，四舍五入对应到二进制中，就是 0 舍 1 入，因为我们要把括号里的 1 丢了，所以这里会进一，结果变成</p>
-<pre><code>1.0011001100110011001100110011001100110011001100110100 * 2^-2</code></pre><p>本来还有一个溢出判断，因为这里不涉及，就不讲了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.0011001100110011001100110011001100110011001100110100 * 2^-2</span><br></pre></td></tr></table></figure>
+
+<p>本来还有一个溢出判断，因为这里不涉及，就不讲了。</p>
 <p>所以最终的结果存成 64 位就是</p>
 <blockquote>
 <p>0 01111111101 0011001100110011001100110011001100110011001100110100</p>
 </blockquote>
 <p>将它转换为10进制数就得到 <code>0.30000000000000004440892098500626</code></p>
 <p>因为两次存储时的精度丢失加上一次运算时的精度丢失，最终导致了 0.1 + 0.2 !== 0.3</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><pre><code>// 十进制转二进制
-parseFloat(0.1).toString(2);
-=&gt; &quot;0.0001100110011001100110011001100110011001100110011001101&quot;
-
-// 二进制转十进制
-parseInt(1100100,2)
-=&gt; 100
-
-// 以指定的精度返回该数值对象的字符串表示
-(0.1 + 0.2).toPrecision(21)
-=&gt; &quot;0.300000000000000044409&quot;
-(0.3).toPrecision(21)
-=&gt; &quot;0.299999999999999988898&quot;</code></pre>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 十进制转二进制</span><br><span class="line">parseFloat(0.1).toString(2);</span><br><span class="line">=&gt; &quot;0.0001100110011001100110011001100110011001100110011001101&quot;</span><br><span class="line"></span><br><span class="line">// 二进制转十进制</span><br><span class="line">parseInt(1100100,2)</span><br><span class="line">=&gt; 100</span><br><span class="line"></span><br><span class="line">// 以指定的精度返回该数值对象的字符串表示</span><br><span class="line">(0.1 + 0.2).toPrecision(21)</span><br><span class="line">=&gt; &quot;0.300000000000000044409&quot;</span><br><span class="line">(0.3).toPrecision(21)</span><br><span class="line">=&gt; &quot;0.299999999999999988898&quot;</span><br></pre></td></tr></table></figure>
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
 </div></section></div>

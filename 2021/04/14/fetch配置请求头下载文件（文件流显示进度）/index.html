@@ -23,12 +23,12 @@
   <title>fetch配置请求头下载文件（文件流显示进度） - 翁先森的博客</title>
 
   
-    <meta name="description" content="上代码，到时候再写为什么这么做，因为懒 import &amp;#123;   WritableStream, &amp;#125; from &#39;web-streams-polyfill&#x2F;ponyfill&#39;;   import StreamSaver from &#39;streamsaver&#39;;  const handleFileDownLoad &#x3D; async (url, userna">
+    <meta name="description" content="上代码，到时候再写为什么这么做，因为懒 12345678910111213141516171819202122232425262728293031323334353637383940414243444546import &amp;#123;  WritableStream,&amp;#125; from &amp;#x27;web-streams-polyfill&#x2F;ponyfill&amp;#x27;;  import Stre">
 <meta property="og:type" content="article">
 <meta property="og:title" content="fetch配置请求头下载文件（文件流显示进度）">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/04/14/fetch%E9%85%8D%E7%BD%AE%E8%AF%B7%E6%B1%82%E5%A4%B4%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%EF%BC%88%E6%96%87%E4%BB%B6%E6%B5%81%E6%98%BE%E7%A4%BA%E8%BF%9B%E5%BA%A6%EF%BC%89/index.html">
 <meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="上代码，到时候再写为什么这么做，因为懒 import &amp;#123;   WritableStream, &amp;#125; from &#39;web-streams-polyfill&#x2F;ponyfill&#39;;   import StreamSaver from &#39;streamsaver&#39;;  const handleFileDownLoad &#x3D; async (url, userna">
+<meta property="og:description" content="上代码，到时候再写为什么这么做，因为懒 12345678910111213141516171819202122232425262728293031323334353637383940414243444546import &amp;#123;  WritableStream,&amp;#125; from &amp;#x27;web-streams-polyfill&#x2F;ponyfill&amp;#x27;;  import Stre">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-14T02:24:33.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.075Z">
@@ -51,6 +51,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -72,7 +74,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -83,14 +85,14 @@
 
 
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/01/28/diff%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%93/"><span class="title">diff算法原理和总结</span></a><a class="item title" href="/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/"><span class="title">vue3渲染器设计与总结</span></a><a class="item title" href="/2022/11/09/%E5%8F%8C%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%8D%95%E6%9C%BA%E4%BA%8B%E4%BB%B6%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"><span class="title">双击事件和单机事件冲突解决方案</span></a><a class="item title" href="/2022/11/03/vite%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><span class="title">vite学习记录</span></a><a class="item title" href="/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/"><span class="title">vue的响应式系统设计总结</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2022/11/09/%E5%8F%8C%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%8D%95%E6%9C%BA%E4%BA%8B%E4%BB%B6%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"><span class="title">双击事件和单机事件冲突解决方案</span></a><a class="item title" href="/2023/01/28/diff%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%93/"><span class="title">diff算法原理和总结</span></a><a class="item title" href="/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/"><span class="title">vue3渲染器设计与总结</span></a><a class="item title" href="/2022/11/03/vite%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><span class="title">vite学习记录</span></a><a class="item title" href="/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/"><span class="title">vue的响应式系统设计总结</span></a></div></widget>
 
 
 
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -104,52 +106,8 @@
 <article class='md-text content post'>
 <h1 class="article-title"><span>fetch配置请求头下载文件（文件流显示进度）</span></h1>
 <p>上代码，到时候再写为什么这么做，因为懒</p>
-<pre><code class="js">import &#123;
-  WritableStream,
-&#125; from &#39;web-streams-polyfill/ponyfill&#39;;  
-import StreamSaver from &#39;streamsaver&#39;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  <span class="title class_">WritableStream</span>,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&#x27;web-streams-polyfill/ponyfill&#x27;</span>;  </span><br><span class="line"><span class="keyword">import</span> <span class="title class_">StreamSaver</span> <span class="keyword">from</span> <span class="string">&#x27;streamsaver&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">handleFileDownLoad</span> = <span class="keyword">async</span> (<span class="params">url, username, password, filename</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> tempHeader = <span class="keyword">new</span> <span class="title class_">Headers</span>();</span><br><span class="line">    tempHeader.<span class="title function_">append</span>(<span class="string">&#x27;Authorization&#x27;</span>, <span class="string">`Basic <span class="subst">$&#123;Base64.encode(<span class="string">`<span class="subst">$&#123;username&#125;</span>:<span class="subst">$&#123;password&#125;</span>`</span>)&#125;</span>`</span>);</span><br><span class="line">    <span class="title function_">fetch</span>(<span class="string">`<span class="subst">$&#123;url&#125;</span>?pipelineDownLoad=true`</span>, &#123;</span><br><span class="line">      <span class="attr">method</span>: <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">      <span class="attr">headers</span>: tempHeader,</span><br><span class="line">      <span class="comment">// mode: &#x27;no-cors&#x27;,</span></span><br><span class="line">      <span class="comment">// redirect: &#x27;manual&#x27;,</span></span><br><span class="line">    &#125;)</span><br><span class="line">      .<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(response);</span><br><span class="line">        <span class="keyword">if</span> (!<span class="variable language_">window</span>.<span class="property">WritableStream</span>) &#123;</span><br><span class="line">          <span class="title class_">StreamSaver</span>.<span class="property">WritableStream</span> = <span class="title class_">WritableStream</span>;</span><br><span class="line">          <span class="variable language_">window</span>.<span class="property">WritableStream</span> = <span class="title class_">WritableStream</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> fileStream = <span class="title class_">StreamSaver</span>.<span class="title function_">createWriteStream</span>(filename, &#123;</span><br><span class="line">          <span class="attr">writableStrategy</span>: <span class="literal">true</span>,</span><br><span class="line">          <span class="attr">readableStrategy</span>: <span class="literal">true</span>,</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">const</span> readableStream = response.<span class="property">body</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">WritableStream</span> &amp;&amp; readableStream?.<span class="property">pipeTo</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> readableStream.<span class="title function_">pipeTo</span>(fileStream).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            message.<span class="title function_">success</span>(<span class="string">&#x27;下载成功&#x27;</span>);</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> writer = fileStream.<span class="title function_">getWriter</span>();</span><br><span class="line">        <span class="variable language_">window</span>.<span class="property">writer</span> = writer;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> reader = response.<span class="property">body</span>?.<span class="title function_">getReader</span>();</span><br><span class="line">        <span class="keyword">const</span> <span class="title function_">pump</span> = (<span class="params"></span>) =&gt; reader?.<span class="title function_">read</span>()</span><br><span class="line">          .<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> (res.<span class="property">done</span></span><br><span class="line">            ? writer.<span class="title function_">close</span>()</span><br><span class="line">            : writer.<span class="title function_">write</span>(res.<span class="property">value</span>).<span class="title function_">then</span>(pump)));</span><br><span class="line">        <span class="title function_">pump</span>();</span><br><span class="line">        <span class="comment">// message.success(&#x27;下载成功&#x27;);</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125;).<span class="title function_">catch</span>(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(error);</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
 
-const handleFileDownLoad = async (url, username, password, filename) =&gt; &#123;
-    const tempHeader = new Headers();
-    tempHeader.append(&#39;Authorization&#39;, `Basic $&#123;Base64.encode(`$&#123;username&#125;:$&#123;password&#125;`)&#125;`);
-    fetch(`$&#123;url&#125;?pipelineDownLoad=true`, &#123;
-      method: &#39;GET&#39;,
-      headers: tempHeader,
-      // mode: &#39;no-cors&#39;,
-      // redirect: &#39;manual&#39;,
-    &#125;)
-      .then((response) =&gt; &#123;
-        console.log(response);
-        if (!window.WritableStream) &#123;
-          StreamSaver.WritableStream = WritableStream;
-          window.WritableStream = WritableStream;
-        &#125;
-        const fileStream = StreamSaver.createWriteStream(filename, &#123;
-          writableStrategy: true,
-          readableStrategy: true,
-        &#125;);
-        const readableStream = response.body;
-        if (window.WritableStream &amp;&amp; readableStream?.pipeTo) &#123;
-          return readableStream.pipeTo(fileStream).then(() =&gt; &#123;
-            message.success(&#39;下载成功&#39;);
-          &#125;);
-        &#125;
-
-        const writer = fileStream.getWriter();
-        window.writer = writer;
-
-        const reader = response.body?.getReader();
-        const pump = () =&gt; reader?.read()
-          .then((res) =&gt; (res.done
-            ? writer.close()
-            : writer.write(res.value).then(pump)));
-        pump();
-        // message.success(&#39;下载成功&#39;);
-        return true;
-      &#125;).catch((error) =&gt; &#123;
-        throw new Error(error);
-      &#125;);
-  &#125;;</code></pre>
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>

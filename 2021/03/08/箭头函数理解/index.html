@@ -23,18 +23,18 @@
   <title>箭头函数理解 - 翁先森的博客</title>
 
   
-    <meta name="description" content="箭头函数es6语法 &#x2F;&#x2F; ES6语法 const fn &#x3D; v &#x3D;&gt; v; 一. 特点1. 语法简介箭头函数省去了function关键字，用&#x3D;&gt;代替function，圆括号代表参数部分，当只有一个参数时，圆括号可省略，当只有一行返回语句时，return和花括号&amp;#123;&amp;#125;都可以省略。 &#x2F;&#x2F; 求两数之和 const fn &#x3D; (a, b) &#x3D;&gt; &amp;#123;return">
+    <meta name="description" content="箭头函数es6语法 12&#x2F;&#x2F; ES6语法const fn &#x3D; v &#x3D;&gt; v;  一. 特点1. 语法简介箭头函数省去了function关键字，用&#x3D;&gt;代替function，圆括号代表参数部分，当只有一个参数时，圆括号可省略，当只有一行返回语句时，return和花括号&amp;#123;&amp;#125;都可以省略。 1234567891011&#x2F;&#x2F; 求两数之和const fn &#x3D; (a, b) &#x3D;&amp;gt">
 <meta property="og:type" content="article">
 <meta property="og:title" content="箭头函数理解">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/03/08/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%90%86%E8%A7%A3/index.html">
 <meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="箭头函数es6语法 &#x2F;&#x2F; ES6语法 const fn &#x3D; v &#x3D;&gt; v; 一. 特点1. 语法简介箭头函数省去了function关键字，用&#x3D;&gt;代替function，圆括号代表参数部分，当只有一个参数时，圆括号可省略，当只有一行返回语句时，return和花括号&amp;#123;&amp;#125;都可以省略。 &#x2F;&#x2F; 求两数之和 const fn &#x3D; (a, b) &#x3D;&gt; &amp;#123;return">
+<meta property="og:description" content="箭头函数es6语法 12&#x2F;&#x2F; ES6语法const fn &#x3D; v &#x3D;&gt; v;  一. 特点1. 语法简介箭头函数省去了function关键字，用&#x3D;&gt;代替function，圆括号代表参数部分，当只有一个参数时，圆括号可省略，当只有一行返回语句时，return和花括号&amp;#123;&amp;#125;都可以省略。 1234567891011&#x2F;&#x2F; 求两数之和const fn &#x3D; (a, b) &#x3D;&amp;gt">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-08T02:19:44.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.437Z">
 <meta property="article:author" content="翁先森">
-<meta property="article:tag" content="es6">
 <meta property="article:tag" content="js">
+<meta property="article:tag" content="es6">
 <meta name="twitter:card" content="summary">
   
   
@@ -50,6 +50,8 @@
 
   
 
+  
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
   
 
   
@@ -72,7 +74,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -88,7 +90,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -102,124 +104,43 @@
 <article class='md-text content post'>
 <h1 class="article-title"><span>箭头函数理解</span></h1>
 <h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><p>es6语法</p>
-<pre><code class="js">// ES6语法
-const fn = v =&gt; v;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES6语法</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">fn</span> = v =&gt; v;</span><br></pre></td></tr></table></figure>
+
 <h3 id="一-特点"><a href="#一-特点" class="headerlink" title="一. 特点"></a>一. 特点</h3><h4 id="1-语法简介"><a href="#1-语法简介" class="headerlink" title="1. 语法简介"></a>1. 语法简介</h4><p>箭头函数省去了<code>function</code>关键字，用<code>=&gt;</code>代替function，圆括号代表参数部分，当只有一个参数时，圆括号可省略，当只有一行返回语句时，<code>return</code>和花括号<code>&#123;&#125;</code>都可以省略。</p>
-<pre><code class="js">// 求两数之和
-const fn = (a, b) =&gt; &#123;return a + b;&#125;; // 等价于 const fn = (a, b) =&gt; a + b;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 求两数之和</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">fn</span> = (<span class="params">a, b</span>) =&gt; &#123;<span class="keyword">return</span> a + b;&#125;; <span class="comment">// 等价于 const fn = (a, b) =&gt; a + b;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 求一个数组各项之和</span></span><br><span class="line"><span class="keyword">const</span> sum = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>].<span class="title function_">reduce</span>(<span class="function">(<span class="params">x, y</span>) =&gt;</span> x + y, <span class="number">0</span>); <span class="comment">// 15</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 将数组中的元素按从小到大顺序排序</span></span><br><span class="line"><span class="keyword">const</span> array = [<span class="number">2</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">7</span>].<span class="title function_">sort</span>(<span class="function">(<span class="params">x, y</span>) =&gt;</span> x - y); <span class="comment">//  [1, 2, 4, 5, 7, 9]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 过滤数组中为偶数的数字</span></span><br><span class="line"><span class="keyword">const</span> array = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>].<span class="title function_">filter</span>(<span class="function"><span class="params">x</span> =&gt;</span> x % <span class="number">2</span> === <span class="number">0</span>); <span class="comment">// [0, 2, 4, 6]</span></span><br></pre></td></tr></table></figure>
 
-// 求一个数组各项之和
-const sum = [1, 2, 3, 4, 5].reduce((x, y) =&gt; x + y, 0); // 15
-
-// 将数组中的元素按从小到大顺序排序
-const array = [2, 4, 1, 5, 9, 7].sort((x, y) =&gt; x - y); //  [1, 2, 4, 5, 7, 9]
-
-// 过滤数组中为偶数的数字
-const array = [0, 1, 2, 3, 4, 5, 6].filter(x =&gt; x % 2 === 0); // [0, 2, 4, 6]</code></pre>
 <h4 id="2-不绑定this"><a href="#2-不绑定this" class="headerlink" title="2. 不绑定this"></a>2. 不绑定this</h4><p> 箭头函数体内的<code>this</code>永远指向的是定义时所在的对象，而不是调用时所在的对象。 </p>
-<pre><code class="js">function Fn() &#123;
-  this.s1 = 0;
-  this.s2 = 0;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">s1</span> = <span class="number">0</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">s2</span> = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 箭头函数</span></span><br><span class="line">  <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> <span class="variable language_">this</span>.<span class="property">s1</span>++, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 普通函数</span></span><br><span class="line">  <span class="built_in">setInterval</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">s2</span>++;</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> fn = <span class="keyword">new</span> <span class="title class_">Fn</span>();</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;s1= &#x27;</span>, fn.<span class="property">s1</span>), <span class="number">3100</span>); <span class="comment">// 3.1秒后输出s1= 3</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;s2= &#x27;</span>, fn.<span class="property">s2</span>), <span class="number">3100</span>); <span class="comment">// 3.1秒后输出s2= 0</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-  // 箭头函数
-  setInterval(() =&gt; this.s1++, 1000);
-
-  // 普通函数
-  setInterval(function() &#123;
-    this.s2++;
-  &#125;, 1000);
-&#125;
-
-var fn = new Fn();
-setTimeout(() =&gt; console.log(&#39;s1= &#39;, fn.s1), 3100); // 3.1秒后输出s1= 3
-setTimeout(() =&gt; console.log(&#39;s2= &#39;, fn.s2), 3100); // 3.1秒后输出s2= 0
-</code></pre>
 <p>上面代码中，Fn函数内部设置了两个定时器，分别使用了箭头函数和普通函数。</p>
 <p>箭头函数中的<code>this</code>指向定义时所在的作用域（即Fn函数），this.s1++是处在箭头函数中，这里的this就是<code>fn</code>，所以fn.s1的值为3。 </p>
 <p>而普通函数中的<code>this</code>指向运行时所在的作用域（即全局对象window），this.s2++实际等于window.s2++，fn.s2一次都没有更新，因而得到的是0。 </p>
 <p>所以，从严格意义上讲，箭头函数中不会创建自己的<code>this</code>，而是会从自己作用域链的上一层继承。</p>
-<pre><code class="js">const Person = &#123;
-  name: &#39;Kimmy&#39;,
-  age: 20,
-  doSomething: function() &#123;
-    setTimeout(() =&gt; console.log(`name: $&#123;this.name&#125;, age: $&#123;this.age&#125;`), 1000);
-  &#125;
-&#125;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Person</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Kimmy&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">20</span>,</span><br><span class="line">  <span class="attr">doSomething</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`name: <span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>, age: <span class="subst">$&#123;<span class="variable language_">this</span>.age&#125;</span>`</span>), <span class="number">1000</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Person</span>.<span class="title function_">doSomething</span>(); <span class="comment">// name: Kimmy, age: 20</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Person2</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Kimmy&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">20</span>,</span><br><span class="line">  <span class="attr">doSomething</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`name: <span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>, age: <span class="subst">$&#123;<span class="variable language_">this</span>.age&#125;</span>`</span>), <span class="number">1000</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Person2</span>.<span class="title function_">doSomething</span>(); <span class="comment">// name: , age: undefined</span></span><br></pre></td></tr></table></figure>
 
-Person.doSomething(); // name: Kimmy, age: 20
-
-const Person2 = &#123;
-  name: &#39;Kimmy&#39;,
-  age: 20,
-  doSomething: () =&gt; &#123;
-    setTimeout(() =&gt; console.log(`name: $&#123;this.name&#125;, age: $&#123;this.age&#125;`), 1000);
-  &#125;
-&#125;;
-
-Person2.doSomething(); // name: , age: undefined</code></pre>
 <p>上面两段代码的唯一区别在于doSomething()函数的写法，Person中使用了普通函数定义，Person2中使用了箭头函数定义。 </p>
 <p>在第一段代码中，Person.doSomeThing()中的<code>this</code>指向函数的调用体，即<code>Person</code>本身，在调用<code>setTimeout()</code>函数时，由于其函数体部分是通过箭头函数定义的，内部的<code>this</code>会继承父作用域的<code>this</code>（即<code>Person</code>），从而输出<code>name: Kimmy, age: 20</code>。</p>
 <p> 在第二段代码中，Person2.doSomething()中的<code>this</code>指向外层作用域，而Person2的父作用域是全局作用域window，在调用<code>setTimeout()</code>函数时，由于其函数体部分是通过箭头函数定义的，内部的<code>this</code>会继承<code>doSomething()</code>函数所在的作用域<code>this</code>（即window），而window上name属性是<code>&#39;&#39;</code>，age属性不存在，所以<code>Person2.doSomething()</code>输出<code>name: , age: undefined</code>。 </p>
 <p>综上所述，箭头函数根本没有自己的<code>this</code>，导致内部的<code>this</code>就是外层代码块的<code>this</code>。正因为它没有<code>this</code>，所以也就<code>不能用作构造函数</code>。</p>
 <h4 id="3-不支持-call-、-apply-、bind-函数的特性"><a href="#3-不支持-call-、-apply-、bind-函数的特性" class="headerlink" title="3. 不支持 call()、 apply()、bind() 函数的特性"></a>3. 不支持 call()、 apply()、bind() 函数的特性</h4><p>通过调用 <code>call()</code> 、<code>apply()</code>、<code>bind()</code> 函数可以改变一个函数的执行主体，即改变被调用函数中 <code>this</code> 的指向</p>
 <p>但箭头函数中不支持 <code>call()</code> 、<code>apply()</code>、<code>bind()</code>等，因为箭头函数中没有自己的 <code>this</code> ，而是继承父作用域中的 <code>this</code>。</p>
-<pre><code class="js">function fn() &#123;
-  return () =&gt; &#123;
-    console.log(`id= $&#123;this.id&#125;`);
-  &#125;
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`id= <span class="subst">$&#123;<span class="variable language_">this</span>.id&#125;</span>`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> f = fn.<span class="title function_">call</span>(&#123;<span class="attr">id</span>: <span class="number">1</span>&#125;); <span class="comment">// id= 1</span></span><br><span class="line"><span class="keyword">let</span> f2 = f.<span class="title function_">call</span>(&#123;<span class="attr">id</span>: <span class="number">2</span>&#125;)()(); <span class="comment">// id = 1</span></span><br><span class="line"><span class="keyword">let</span> f3 = <span class="title function_">f</span>().<span class="title function_">call</span>(&#123;<span class="attr">id</span>: <span class="number">3</span>&#125;)(); <span class="comment">// id= 1</span></span><br><span class="line"><span class="keyword">let</span> f4 = <span class="title function_">f</span>()().<span class="title function_">call</span>(&#123;<span class="attr">id</span>: <span class="number">4</span>&#125;); <span class="comment">// id= 1</span></span><br></pre></td></tr></table></figure>
 
-let f = fn.call(&#123;id: 1&#125;); // id= 1
-let f2 = f.call(&#123;id: 2&#125;)()(); // id = 1
-let f3 = f().call(&#123;id: 3&#125;)(); // id= 1
-let f4 = f()().call(&#123;id: 4&#125;); // id= 1</code></pre>
 <p> 上面代码中只有一个<code>this</code>，即函数<code>fn</code>的<code>this</code>，所以<code>f2</code>、<code>f3</code>、<code>f4</code>都输出同样的结果。因为内层函数时箭头函数，没有自己的<code>this</code>，它们的<code>this</code>都是最外层<code>fn</code>函数是<code>this</code>。 </p>
 <h4 id="4-不绑定-arguments"><a href="#4-不绑定-arguments" class="headerlink" title="4. 不绑定 arguments"></a>4. 不绑定 arguments</h4><p> 在普通函数<code>function</code>中，我们可以通过<code>arguments</code>对象来获取到实际传入的参数值，但在箭头函数中是不存在的。 </p>
-<pre><code class="js">const fn = () =&gt; &#123;
-  console.log(arguments);
-&#125;
-fn(1, 2); // Uncaught ReferenceError: arguments is not defined
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">fn</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">arguments</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">fn</span>(<span class="number">1</span>, <span class="number">2</span>); <span class="comment">// Uncaught ReferenceError: arguments is not defined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">arguments</span>);</span><br><span class="line">  &#125;, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fn</span>(<span class="number">1</span>, <span class="number">2</span>); <span class="comment">// [1, 2]</span></span><br></pre></td></tr></table></figure>
 
-function fn() &#123;
-  setTimeout(() =&gt; &#123;
-    console.log(arguments);
-  &#125;, 0);
-&#125;
+<h4 id="5-支持嵌套"><a href="#5-支持嵌套" class="headerlink" title="5.支持嵌套"></a>5.支持嵌套</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">pipeline</span> = (<span class="params">...funcs</span>) =&gt; <span class="function"><span class="params">val</span> =&gt;</span> funcs.<span class="title function_">reduce</span>((a, <span class="function"><span class="params">b</span> =&gt;</span> <span class="title function_">b</span>(a)), val);</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">plus1</span> = a =&gt; a + <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">mult2</span> = a =&gt; a * <span class="number">2</span>;</span><br><span class="line"><span class="keyword">const</span> addThenMult = <span class="title function_">pipeline</span>(plus1, mult2);</span><br><span class="line"><span class="title function_">addThenMult</span>(<span class="number">5</span>); <span class="comment">// 12</span></span><br></pre></td></tr></table></figure>
 
-fn(1, 2); // [1, 2]</code></pre>
-<h4 id="5-支持嵌套"><a href="#5-支持嵌套" class="headerlink" title="5.支持嵌套"></a>5.支持嵌套</h4><pre><code class="js">const pipeline = (...funcs) =&gt; val =&gt; funcs.reduce((a, b =&gt; b(a)), val);
-const plus1 = a =&gt; a + 1;
-const mult2 = a =&gt; a * 2;
-const addThenMult = pipeline(plus1, mult2);
-addThenMult(5); // 12</code></pre>
-<h3 id="二-箭头函数不适用场景"><a href="#二-箭头函数不适用场景" class="headerlink" title="二.箭头函数不适用场景"></a>二.箭头函数不适用场景</h3><h4 id="（1）定义对象的方法且该方法内部包括this"><a href="#（1）定义对象的方法且该方法内部包括this" class="headerlink" title="（1）定义对象的方法且该方法内部包括this"></a>（1）定义对象的方法且该方法内部包括<code>this</code></h4><pre><code class="js">const Person = &#123;
-  name: &#39;Kimmy&#39;,
-  age: 20,
-  doSomething: () =&gt; &#123;
-    this.age++;
-  &#125;
-&#125;;</code></pre>
+
+
+<h3 id="二-箭头函数不适用场景"><a href="#二-箭头函数不适用场景" class="headerlink" title="二.箭头函数不适用场景"></a>二.箭头函数不适用场景</h3><h4 id="（1）定义对象的方法且该方法内部包括this"><a href="#（1）定义对象的方法且该方法内部包括this" class="headerlink" title="（1）定义对象的方法且该方法内部包括this"></a>（1）定义对象的方法且该方法内部包括<code>this</code></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Person</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Kimmy&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">20</span>,</span><br><span class="line">  <span class="attr">doSomething</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span>++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>Person.doSomething()方法是一个箭头函数，调用Person.doSomething()时，如果是普通函数，该方法内部的<code>this</code>指向Person，如果写成上面那样的箭头函数，使得<code>this</code>指向全局对象。</p>
 <h4 id="（2）不能作为构造函数，不能使用-new-操作符"><a href="#（2）不能作为构造函数，不能使用-new-操作符" class="headerlink" title="（2）不能作为构造函数，不能使用 new 操作符"></a>（2）不能作为构造函数，不能使用 new 操作符</h4><p>构造函数时通过<code>new</code>操作符生成对象实例的，生成实例的过程也是通过构造函数给实例绑定<code>this</code>的过程，而箭头函数没有自己的<code>this</code>，因此不能使用箭头函数作为构造函数，也不能通过<code>new</code>操作符来调用箭头函数。</p>
-<pre><code class="js">// 普通函数
-function Person(name) &#123;
-  this.name = name;
-&#125;
-let p = new Person(&#39;Kimmy&#39;); // 正常
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 普通函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&#x27;Kimmy&#x27;</span>); <span class="comment">// 正常</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 箭头函数</span></span><br><span class="line"><span class="keyword">let</span> <span class="title function_">Person</span> = (<span class="params">name</span>) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&#x27;Kimmy&#x27;</span>); <span class="comment">// Uncaught TypeError: Person is not a constructor</span></span><br></pre></td></tr></table></figure>
 
-// 箭头函数
-let Person = (name) =&gt; &#123;
-  this.name = name;
-&#125;
-let p = new Person(&#39;Kimmy&#39;); // Uncaught TypeError: Person is not a constructor</code></pre>
-<h4 id="（3）没有-prototype-属性"><a href="#（3）没有-prototype-属性" class="headerlink" title="（3）没有 prototype 属性"></a>（3）没有 prototype 属性</h4><pre><code class="js">let a = () =&gt; 1;
+<h4 id="（3）没有-prototype-属性"><a href="#（3）没有-prototype-属性" class="headerlink" title="（3）没有 prototype 属性"></a>（3）没有 prototype 属性</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="title function_">a</span> = (<span class="params"></span>) =&gt; <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">b</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a.<span class="property"><span class="keyword">prototype</span></span> <span class="comment">// undefined</span></span><br><span class="line">b.<span class="property"><span class="keyword">prototype</span></span> <span class="comment">// &#123;constructor: ƒ&#125;</span></span><br></pre></td></tr></table></figure>
 
-function b() &#123;
-  return 2;
-&#125;
-
-a.prototype // undefined
-b.prototype // &#123;constructor: ƒ&#125;</code></pre>
 <h4 id="（4）不适合将原型函数定义成箭头函数"><a href="#（4）不适合将原型函数定义成箭头函数" class="headerlink" title="（4）不适合将原型函数定义成箭头函数"></a>（4）不适合将原型函数定义成箭头函数</h4><p>在给构造函数添加原型函数时，如果使用箭头函数，其中的<code>this</code>会指向全局作用域<code>window</code>，而并不会指向构造函数，因此并不会访问到构造函数本身，也就无法访问到实例属性，这就失去了作为原型函数的意义。 </p>
 
 

@@ -23,12 +23,12 @@
   <title>手写curry - 翁先森的博客</title>
 
   
-    <meta name="description" content="要求实现如下 const add &#x3D; (a, b, c) &#x3D;&gt; a + b + c; const a1 &#x3D; currying(add, 1); const a2 &#x3D; a1(2); console.log(a2(3)) &#x2F;&#x2F; 6 &#x2F;&#x2F; curry pro function curryPro(fn, ...outerProps) &amp;#123;   function curried(...midd">
+    <meta name="description" content="要求实现如下 1234const add &#x3D; (a, b, c) &#x3D;&gt; a + b + c;const a1 &#x3D; currying(add, 1);const a2 &#x3D; a1(2);console.log(a2(3)) &#x2F;&#x2F; 6    12345678910111213141516&#x2F;&#x2F; curry profunction curryPro(fn, ...outerProps) &amp;#123;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="手写curry">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/12/13/%E6%89%8B%E5%86%99curry/index.html">
 <meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="要求实现如下 const add &#x3D; (a, b, c) &#x3D;&gt; a + b + c; const a1 &#x3D; currying(add, 1); const a2 &#x3D; a1(2); console.log(a2(3)) &#x2F;&#x2F; 6 &#x2F;&#x2F; curry pro function curryPro(fn, ...outerProps) &amp;#123;   function curried(...midd">
+<meta property="og:description" content="要求实现如下 1234const add &#x3D; (a, b, c) &#x3D;&gt; a + b + c;const a1 &#x3D; currying(add, 1);const a2 &#x3D; a1(2);console.log(a2(3)) &#x2F;&#x2F; 6    12345678910111213141516&#x2F;&#x2F; curry profunction curryPro(fn, ...outerProps) &amp;#123;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-13T03:02:58.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.314Z">
@@ -49,6 +49,8 @@
 
   
 
+  
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
   
 
   
@@ -71,7 +73,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -82,14 +84,14 @@
 
 
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/01/28/diff%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%93/"><span class="title">diff算法原理和总结</span></a><a class="item title" href="/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/"><span class="title">vue3渲染器设计与总结</span></a><a class="item title" href="/2022/11/09/%E5%8F%8C%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%8D%95%E6%9C%BA%E4%BA%8B%E4%BB%B6%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"><span class="title">双击事件和单机事件冲突解决方案</span></a><a class="item title" href="/2022/11/03/vite%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><span class="title">vite学习记录</span></a><a class="item title" href="/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/"><span class="title">vue的响应式系统设计总结</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2022/11/09/%E5%8F%8C%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%8D%95%E6%9C%BA%E4%BA%8B%E4%BB%B6%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"><span class="title">双击事件和单机事件冲突解决方案</span></a><a class="item title" href="/2023/01/28/diff%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%93/"><span class="title">diff算法原理和总结</span></a><a class="item title" href="/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/"><span class="title">vue3渲染器设计与总结</span></a><a class="item title" href="/2022/11/03/vite%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><span class="title">vite学习记录</span></a><a class="item title" href="/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/"><span class="title">vue的响应式系统设计总结</span></a></div></widget>
 
 
 
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -103,26 +105,12 @@
 <article class='md-text content post'>
 <h1 class="article-title"><span>手写curry</span></h1>
 <p>要求实现如下</p>
-<pre><code class="js">const add = (a, b, c) =&gt; a + b + c;
-const a1 = currying(add, 1);
-const a2 = a1(2);
-console.log(a2(3)) // 6</code></pre>
-<pre><code class="js">// curry pro
-function curryPro(fn, ...outerProps) &#123;
-  function curried(...middleProps) &#123;
-    const concatArr = [...middleProps];
-    if (concatArr.length &gt;= fn.length) &#123;
-      return fn.call(this, ...concatArr)
-    &#125;
-    return function (...innerProps) &#123;
-      return curried.call(this, ...concatArr.concat(innerProps))
-    &#125;
-  &#125;
-  if(outerProps.length)&#123;
-    return curried(...outerProps);
-  &#125;
-  return curried
-&#125;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">add</span> = (<span class="params">a, b, c</span>) =&gt; a + b + c;</span><br><span class="line"><span class="keyword">const</span> a1 = <span class="title function_">currying</span>(add, <span class="number">1</span>);</span><br><span class="line"><span class="keyword">const</span> a2 = <span class="title function_">a1</span>(<span class="number">2</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">a2</span>(<span class="number">3</span>)) <span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// curry pro</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">curryPro</span>(<span class="params">fn, ...outerProps</span>) &#123;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">curried</span>(<span class="params">...middleProps</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> concatArr = [...middleProps];</span><br><span class="line">    <span class="keyword">if</span> (concatArr.<span class="property">length</span> &gt;= fn.<span class="property">length</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> fn.<span class="title function_">call</span>(<span class="variable language_">this</span>, ...concatArr)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">...innerProps</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> curried.<span class="title function_">call</span>(<span class="variable language_">this</span>, ...concatArr.<span class="title function_">concat</span>(innerProps))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(outerProps.<span class="property">length</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">curried</span>(...outerProps);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> curried</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>

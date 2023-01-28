@@ -51,6 +51,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -72,7 +74,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -88,7 +90,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -108,31 +110,11 @@
 <li>当<code>f()</code>是双变时：若 <code>A -&gt; B</code>，则以上均成立</li>
 <li>当<code>f()</code>是不变时：若 <code>A -&gt; B</code>，则以上均不成立，没有兼容关系</li>
 </ul>
-<pre><code class="ts">class Animal &#123;
-  move()&#123;
-    console.log(&quot;animal is moving&quot;);
-  &#125;
-&#125;
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">  <span class="title function_">move</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;animal is moving&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Animal</span> &#123;</span><br><span class="line">  <span class="title function_">purr</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;cat is purring&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">WhiteCat</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Cat</span> &#123;</span><br><span class="line">  <span class="title function_">showoffColor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;see my hair color&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-class Cat extends Animal &#123;
-  purr() &#123;
-    console.log(&quot;cat is purring&quot;);
-  &#125;
-&#125;
-
-class WhiteCat extends Cat &#123;
-  showoffColor() &#123;
-    console.log(&quot;see my hair color&quot;);
-  &#125;
-&#125;</code></pre>
 <p>我们有名为<code>Animial</code>的父类，<code>Cat</code>是<code>Animal</code>的子类。<code>WhiteCat</code>是<code>Cat</code>的子类， 即<code>WhiteCat -&gt; Cat -&gt; Animal</code>。根据父类兼容子类的原则可知：</p>
-<pre><code class="ts">let animal: Animal;
-let cat: Cat;
-let whiteCat: WhiteCat;
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">animal</span>: <span class="title class_">Animal</span>;</span><br><span class="line"><span class="keyword">let</span> <span class="attr">cat</span>: <span class="title class_">Cat</span>;</span><br><span class="line"><span class="keyword">let</span> <span class="attr">whiteCat</span>: <span class="title class_">WhiteCat</span>;</span><br><span class="line"></span><br><span class="line">animal = cat;</span><br><span class="line">animal = whiteCat;</span><br><span class="line">cat = whiteCat;</span><br></pre></td></tr></table></figure>
 
-animal = cat;
-animal = whiteCat;
-cat = whiteCat;</code></pre>
 <h2 id="抛出问题"><a href="#抛出问题" class="headerlink" title="抛出问题"></a>抛出问题</h2><p>假如现在有一个函数，类型为<code>(param: Cat) =&gt; Cat</code>。那么它的兼容类型是什么呢？</p>
 <p>我们可以把这个问题分解成两个部分参数兼容性和返回值兼容性。</p>
 <ul>
@@ -146,26 +128,12 @@ cat = whiteCat;</code></pre>
 </ul>
 <p>那么<code>A</code>兼容哪一个函数？</p>
 <h3 id="假设兼容B"><a href="#假设兼容B" class="headerlink" title="假设兼容B"></a>假设兼容B</h3><p>那么此时 <code>A = B</code>成立：</p>
-<pre><code class="ts">let A: (param: Cat) =&gt; void;
-const B = (param: WhiteCat) =&gt; &#123;
-  param.move();
-  param.purr();
-  param.showoffColor();
-&#125;;
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">A</span>: <span class="function">(<span class="params">param: Cat</span>) =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">B</span> = (<span class="params">param: WhiteCat</span>) =&gt; &#123;</span><br><span class="line">  param.<span class="title function_">move</span>();</span><br><span class="line">  param.<span class="title function_">purr</span>();</span><br><span class="line">  param.<span class="title function_">showoffColor</span>();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">A = B;</span><br><span class="line"><span class="title function_">A</span>(<span class="keyword">new</span> <span class="title class_">Cat</span>());</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-A = B;
-A(new Cat());
-</code></pre>
 <p>函数运行到<code>param.showoffColor()</code>会报错。那么假设不成立。</p>
 <h3 id="假设兼容C"><a href="#假设兼容C" class="headerlink" title="假设兼容C"></a>假设兼容C</h3><p>那么此时 <code>A = C</code>成立：</p>
-<pre><code class="ts">let A: (param: Cat) =&gt; void;
-const C = (param: Animal) =&gt; &#123;
-  param.move();
-&#125;;
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">A</span>: <span class="function">(<span class="params">param: Cat</span>) =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">C</span> = (<span class="params">param: Animal</span>) =&gt; &#123;</span><br><span class="line">  param.<span class="title function_">move</span>();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">A = C;</span><br><span class="line"><span class="title function_">A</span>(<span class="keyword">new</span> <span class="title class_">Cat</span>());</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-A = C;
-A(new Cat());
-</code></pre>
 <p>此时函数成功运行。那么假设成立。</p>
 <p>所以<code>(param: Animal) =&gt; void -&gt; (param: Cat) =&gt; void</code> 。根据前面的定义可以看出函数参数是逆变的。</p>
 <h2 id="返回值兼容性"><a href="#返回值兼容性" class="headerlink" title="返回值兼容性"></a>返回值兼容性</h2><p>我们假设<code>() =&gt; Cat</code>为<code>A</code>，此时有以下两种函数：</p>
@@ -175,42 +143,18 @@ A(new Cat());
 </ul>
 <p>那么<code>A</code>兼容哪一个函数？</p>
 <h3 id="假设兼容B-1"><a href="#假设兼容B-1" class="headerlink" title="假设兼容B"></a>假设兼容B</h3><p>那么此时 <code>A = B</code>成立：</p>
-<pre><code class="ts">let A: () =&gt; Cat;
-const B = () =&gt; new Animal();
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">A</span>: <span class="function">() =&gt;</span> <span class="title class_">Cat</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">B</span> = (<span class="params"></span>) =&gt; <span class="keyword">new</span> <span class="title class_">Animal</span>();</span><br><span class="line"></span><br><span class="line">A = B;</span><br><span class="line"><span class="keyword">const</span> result = <span class="title function_">A</span>();</span><br><span class="line">result.<span class="title function_">move</span>();</span><br><span class="line">result.<span class="title function_">purr</span>();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-A = B;
-const result = A();
-result.move();
-result.purr();
-</code></pre>
 <p>函数运行到<code>result.purr()</code>会报错。那么假设不成立。</p>
 <h3 id="假设兼容C-1"><a href="#假设兼容C-1" class="headerlink" title="假设兼容C"></a>假设兼容C</h3><p>那么此时 <code>A = C</code>成立：</p>
-<pre><code class="ts">let A: () =&gt; Cat;
-const C = () =&gt; new WhiteCat();
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">A</span>: <span class="function">() =&gt;</span> <span class="title class_">Cat</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">C</span> = (<span class="params"></span>) =&gt; <span class="keyword">new</span> <span class="title class_">WhiteCat</span>();</span><br><span class="line"></span><br><span class="line">A = C;</span><br><span class="line"><span class="keyword">const</span> result = <span class="title function_">A</span>();</span><br><span class="line">result.<span class="title function_">move</span>();</span><br><span class="line">result.<span class="title function_">purr</span>();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-A = C;
-const result = A();
-result.move();
-result.purr();
-</code></pre>
 <p>此时函数成功运行。那么假设成立。</p>
 <p>所以<code>() =&gt; WhiteCat -&gt; () =&gt; Cat</code>。根据前面的定义可以看出函数返回值是协变的。</p>
 <h2 id="函数参数类型的现实"><a href="#函数参数类型的现实" class="headerlink" title="函数参数类型的现实"></a>函数参数类型的现实</h2><p>在ts中，参数类型是双变的，也就是说既是协变，也是逆变。这当然不安全。所以我们可以通过开启<code>strictFunctionTypes</code>修复这个问题，保证参数类型是逆变。</p>
 <p>那么为什么ts会让函数参数类型保留双变转换呢？下面是一个十分常见的例子：</p>
-<pre><code class="typescript">interface Event &#123; timestamp: number; &#125;
-interface MouseEvent extends Event &#123; x: number; y: number &#125;
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Event</span> &#123; <span class="attr">timestamp</span>: <span class="built_in">number</span>; &#125;</span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">MouseEvent</span> <span class="keyword">extends</span> <span class="title class_">Event</span> &#123; <span class="attr">x</span>: <span class="built_in">number</span>; <span class="attr">y</span>: <span class="built_in">number</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">listenEvent</span>(<span class="params">eventType: EventType, handler: (n: Event) =&gt; <span class="built_in">void</span></span>) &#123;</span><br><span class="line">    <span class="comment">/* ... */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 虽然不安全，且编译无法通过，但是十分常见的使用方式</span></span><br><span class="line"><span class="title function_">listenEvent</span>(<span class="title class_">EventType</span>.<span class="property">Mouse</span>, <span class="function">(<span class="params">e: MouseEvent</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">x</span>, e.<span class="property">y</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 为了保证编译通过，只能通过以下方式</span></span><br><span class="line"><span class="title function_">listenEvent</span>(<span class="title class_">EventType</span>.<span class="property">Mouse</span>, <span class="function">(<span class="params">e: Event</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>((e <span class="keyword">as</span> <span class="title class_">MouseEvent</span>).<span class="property">x</span>, (e <span class="keyword">as</span> <span class="title class_">MouseEvent</span>).<span class="property">y</span>));</span><br><span class="line"><span class="title function_">listenEvent</span>(<span class="title class_">EventType</span>.<span class="property">Mouse</span>, (<span class="function">(<span class="params">e: MouseEvent</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">x</span>, e.<span class="property">y</span>)) <span class="keyword">as</span> (<span class="attr">e</span>: <span class="title class_">Event</span>) =&gt; <span class="built_in">void</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-function listenEvent(eventType: EventType, handler: (n: Event) =&gt; void) &#123;
-    /* ... */
-&#125;
-
-// 虽然不安全，且编译无法通过，但是十分常见的使用方式
-listenEvent(EventType.Mouse, (e: MouseEvent) =&gt; console.log(e.x, e.y));
-
-// 为了保证编译通过，只能通过以下方式
-listenEvent(EventType.Mouse, (e: Event) =&gt; console.log((e as MouseEvent).x, (e as MouseEvent).y));
-listenEvent(EventType.Mouse, ((e: MouseEvent) =&gt; console.log(e.x, e.y)) as (e: Event) =&gt; void);
-</code></pre>
 <p>而如果函数参数类型是双变，那么上面第一种形式的代码也能顺利通过编译，无需使用后两种绕路的方式。</p>
 
 

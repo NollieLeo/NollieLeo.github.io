@@ -54,6 +54,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -75,7 +77,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -86,14 +88,14 @@
 
 
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/01/28/diff%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%93/"><span class="title">diff算法原理和总结</span></a><a class="item title" href="/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/"><span class="title">vue3渲染器设计与总结</span></a><a class="item title" href="/2022/11/09/%E5%8F%8C%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%8D%95%E6%9C%BA%E4%BA%8B%E4%BB%B6%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"><span class="title">双击事件和单机事件冲突解决方案</span></a><a class="item title" href="/2022/11/03/vite%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><span class="title">vite学习记录</span></a><a class="item title" href="/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/"><span class="title">vue的响应式系统设计总结</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2022/11/09/%E5%8F%8C%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%8D%95%E6%9C%BA%E4%BA%8B%E4%BB%B6%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"><span class="title">双击事件和单机事件冲突解决方案</span></a><a class="item title" href="/2023/01/28/diff%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%93/"><span class="title">diff算法原理和总结</span></a><a class="item title" href="/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/"><span class="title">vue3渲染器设计与总结</span></a><a class="item title" href="/2022/11/03/vite%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><span class="title">vite学习记录</span></a><a class="item title" href="/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/"><span class="title">vue的响应式系统设计总结</span></a></div></widget>
 
 
 
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -108,66 +110,16 @@
 <h1 class="article-title"><span>setInterval和setTimeout优化策略</span></h1>
 <p>异步编程当然少不了定时器了，常见的定时器函数有 <code>setTimeout</code>、<code>setInterval</code>、<code>requestAnimationFrame</code>。最常用的是<code>setTimeout</code>，很多人认为 <code>setTimeout</code> 是延时多久，那就应该是多久后执行。</p>
 <p>其实这个观点是错误的，因为 JS 是单线程执行的，如果前面的代码影响了性能，就会导致 <code>setTimeout</code> 不会按期执行。当然了，可以通过代码去修正 <code>setTimeout</code>，从而使定时器相对准确：</p>
-<pre><code class="js">let period = 60 * 1000 * 60 * 2
-let startTime = new Date().getTime()
-let count = 0
-let end = new Date().getTime() + period
-let interval = 1000
-let currentInterval = interval
-function loop() &#123;
-  count++
-  // 代码执行所消耗的时间
-  let offset = new Date().getTime() - (startTime + count * interval);
-  let diff = end - new Date().getTime()
-  let h = Math.floor(diff / (60 * 1000 * 60))
-  let hdiff = diff % (60 * 1000 * 60)
-  let m = Math.floor(hdiff / (60 * 1000))
-  let mdiff = hdiff % (60 * 1000)
-  let s = mdiff / (1000)
-  let sCeil = Math.ceil(s)
-  let sFloor = Math.floor(s)
-  // 得到下一次循环所消耗的时间
-  currentInterval = interval - offset 
-  console.log(&#39;时：&#39;+h, &#39;分：&#39;+m, &#39;毫秒：&#39;+s, &#39;秒向上取整：&#39;+sCeil, &#39;代码执行时间：&#39;+offset, &#39;下次循环间隔&#39;+currentInterval) 
-  setTimeout(loop, currentInterval)
-&#125;
-setTimeout(loop, currentInterval)
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> period = <span class="number">60</span> * <span class="number">1000</span> * <span class="number">60</span> * <span class="number">2</span></span><br><span class="line"><span class="keyword">let</span> startTime = <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">getTime</span>()</span><br><span class="line"><span class="keyword">let</span> count = <span class="number">0</span></span><br><span class="line"><span class="keyword">let</span> end = <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">getTime</span>() + period</span><br><span class="line"><span class="keyword">let</span> interval = <span class="number">1000</span></span><br><span class="line"><span class="keyword">let</span> currentInterval = interval</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">loop</span>(<span class="params"></span>) &#123;</span><br><span class="line">  count++</span><br><span class="line">  <span class="comment">// 代码执行所消耗的时间</span></span><br><span class="line">  <span class="keyword">let</span> offset = <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">getTime</span>() - (startTime + count * interval);</span><br><span class="line">  <span class="keyword">let</span> diff = end - <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">getTime</span>()</span><br><span class="line">  <span class="keyword">let</span> h = <span class="title class_">Math</span>.<span class="title function_">floor</span>(diff / (<span class="number">60</span> * <span class="number">1000</span> * <span class="number">60</span>))</span><br><span class="line">  <span class="keyword">let</span> hdiff = diff % (<span class="number">60</span> * <span class="number">1000</span> * <span class="number">60</span>)</span><br><span class="line">  <span class="keyword">let</span> m = <span class="title class_">Math</span>.<span class="title function_">floor</span>(hdiff / (<span class="number">60</span> * <span class="number">1000</span>))</span><br><span class="line">  <span class="keyword">let</span> mdiff = hdiff % (<span class="number">60</span> * <span class="number">1000</span>)</span><br><span class="line">  <span class="keyword">let</span> s = mdiff / (<span class="number">1000</span>)</span><br><span class="line">  <span class="keyword">let</span> sCeil = <span class="title class_">Math</span>.<span class="title function_">ceil</span>(s)</span><br><span class="line">  <span class="keyword">let</span> sFloor = <span class="title class_">Math</span>.<span class="title function_">floor</span>(s)</span><br><span class="line">  <span class="comment">// 得到下一次循环所消耗的时间</span></span><br><span class="line">  currentInterval = interval - offset </span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;时：&#x27;</span>+h, <span class="string">&#x27;分：&#x27;</span>+m, <span class="string">&#x27;毫秒：&#x27;</span>+s, <span class="string">&#x27;秒向上取整：&#x27;</span>+sCeil, <span class="string">&#x27;代码执行时间：&#x27;</span>+offset, <span class="string">&#x27;下次循环间隔&#x27;</span>+currentInterval) </span><br><span class="line">  <span class="built_in">setTimeout</span>(loop, currentInterval)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">setTimeout</span>(loop, currentInterval)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>接下来看 <code>setInterval</code>，其实这个函数作用和 <code>setTimeout</code> 基本一致，只是该函数是每隔一段时间执行一次回调函数。</p>
 <p>通常来说不建议使用 <code>setInterval</code>。第一，它和 <code>setTimeout</code> 一样，不能保证在预期的时间执行任务。第二，它存在执行累积的问题，请看以下伪代码</p>
-<pre><code class="js">function demo() &#123;
-  setInterval(function()&#123;
-    console.log(2)
-  &#125;,1000)
-  sleep(2000)
-&#125;
-demo()
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">demo</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="built_in">setInterval</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>)</span><br><span class="line">  &#125;,<span class="number">1000</span>)</span><br><span class="line">  <span class="title function_">sleep</span>(<span class="number">2000</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">demo</span>()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>以上代码在浏览器环境中，如果定时器执行过程中出现了耗时操作，多个回调函数会在耗时操作结束以后同时执行，这样可能就会带来性能上的问题。</p>
 <p>如果有循环定时器的需求，其实完全可以通过 <code>requestAnimationFrame</code> 来实现：</p>
-<pre><code class="js">function setInterval(callback, interval) &#123;
-  let timer
-  const now = Date.now
-  let startTime = now()
-  let endTime = startTime
-  const loop = () =&gt; &#123;
-    timer = window.requestAnimationFrame(loop)
-    endTime = now()
-    if (endTime - startTime &gt;= interval) &#123;
-      startTime = endTime = now()
-      callback(timer)
-    &#125;
-  &#125;
-  timer = window.requestAnimationFrame(loop)
-  return timer
-&#125;
-let a = 0
-setInterval(timer =&gt; &#123;
-  console.log(1)
-  a++
-  if (a === 3) cancelAnimationFrame(timer)
-&#125;, 1000)
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">setInterval</span>(<span class="params">callback, interval</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> timer</span><br><span class="line">  <span class="keyword">const</span> now = <span class="title class_">Date</span>.<span class="property">now</span></span><br><span class="line">  <span class="keyword">let</span> startTime = <span class="title function_">now</span>()</span><br><span class="line">  <span class="keyword">let</span> endTime = startTime</span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">loop</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    timer = <span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(loop)</span><br><span class="line">    endTime = <span class="title function_">now</span>()</span><br><span class="line">    <span class="keyword">if</span> (endTime - startTime &gt;= interval) &#123;</span><br><span class="line">      startTime = endTime = <span class="title function_">now</span>()</span><br><span class="line">      <span class="title function_">callback</span>(timer)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  timer = <span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(loop)</span><br><span class="line">  <span class="keyword">return</span> timer</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> a = <span class="number">0</span></span><br><span class="line"><span class="built_in">setInterval</span>(<span class="function"><span class="params">timer</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>)</span><br><span class="line">  a++</span><br><span class="line">  <span class="keyword">if</span> (a === <span class="number">3</span>) <span class="title function_">cancelAnimationFrame</span>(timer)</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>首先 <code>requestAnimationFrame</code> 自带函数节流功能，基本可以保证在 16.6 毫秒内只执行一次（不掉帧的情况下），并且该函数的延时效果是精确的，没有其他定时器时间不准的问题，当然你也可以通过该函数来实现 <code>setTimeout</code>。</p>
 
 

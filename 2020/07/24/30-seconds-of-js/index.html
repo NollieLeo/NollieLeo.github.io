@@ -23,12 +23,12 @@
   <title>30-seconds-of-js - 翁先森的博客</title>
 
   
-    <meta name="description" content="方法- 对象转queryStrings通过Object.entries以及reduce进行queryString的累加，只能将对象中值为string的转进去，可以改进 const objectToQuerystring &#x3D; (queryParams) &#x3D;&gt; &amp;#123;     return Object.entries(queryParams).reduce((queryString, [">
+    <meta name="description" content="方法- 对象转queryStrings通过Object.entries以及reduce进行queryString的累加，只能将对象中值为string的转进去，可以改进 123456789const objectToQuerystring &#x3D; (queryParams) &#x3D;&gt; &amp;#123;    return Object.entries(queryParams).reduce((queryS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="30-seconds-of-js">
 <meta property="og:url" content="https://github.com/NollieLeo/2020/07/24/30-seconds-of-js/index.html">
 <meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="方法- 对象转queryStrings通过Object.entries以及reduce进行queryString的累加，只能将对象中值为string的转进去，可以改进 const objectToQuerystring &#x3D; (queryParams) &#x3D;&gt; &amp;#123;     return Object.entries(queryParams).reduce((queryString, [">
+<meta property="og:description" content="方法- 对象转queryStrings通过Object.entries以及reduce进行queryString的累加，只能将对象中值为string的转进去，可以改进 123456789const objectToQuerystring &#x3D; (queryParams) &#x3D;&gt; &amp;#123;    return Object.entries(queryParams).reduce((queryS">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-07-24T06:07:43.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.047Z">
@@ -49,6 +49,8 @@
 
   
 
+  
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
   
 
   
@@ -71,7 +73,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -87,7 +89,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -101,74 +103,32 @@
 <article class='md-text content post'>
 <h1 class="article-title"><span>30-seconds-of-js</span></h1>
 <h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><h2 id="对象转queryStrings"><a href="#对象转queryStrings" class="headerlink" title="- 对象转queryStrings"></a>- 对象转queryStrings</h2><p>通过Object.entries以及reduce进行queryString的累加，只能将对象中值为string的转进去，可以改进</p>
-<pre><code class="javascript">const objectToQuerystring = (queryParams) =&gt; &#123;
-    return Object.entries(queryParams).reduce((queryString, [key, value], index) =&gt; &#123;
-        const symbol = queryString.length === 0 ? &#39;?&#39; : &#39;&amp;&#39;;
-        queryString += typeof value === &#39;string&#39; ? `$&#123;symbol&#125;$&#123;key&#125;=$&#123;value&#125;` : &#39;&#39;;
-        return queryString;
-    &#125;, &#39;&#39;);
-&#125;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">objectToQuerystring</span> = (<span class="params">queryParams</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">entries</span>(queryParams).<span class="title function_">reduce</span>(<span class="function">(<span class="params">queryString, [key, value], index</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> symbol = queryString.<span class="property">length</span> === <span class="number">0</span> ? <span class="string">&#x27;?&#x27;</span> : <span class="string">&#x27;&amp;&#x27;</span>;</span><br><span class="line">        queryString += <span class="keyword">typeof</span> value === <span class="string">&#x27;string&#x27;</span> ? <span class="string">`<span class="subst">$&#123;symbol&#125;</span><span class="subst">$&#123;key&#125;</span>=<span class="subst">$&#123;value&#125;</span>`</span> : <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="keyword">return</span> queryString;</span><br><span class="line">    &#125;, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ?name=weng&amp;address=11111</span></span><br></pre></td></tr></table></figure>
 
-// ?name=weng&amp;address=11111</code></pre>
 <h2 id="深度冻结一个对象"><a href="#深度冻结一个对象" class="headerlink" title="- 深度冻结一个对象"></a>- 深度冻结一个对象</h2><p>使用Object.keys（）获取所传递对象的所有属性，使用Array.prototype.forEach（）遍历它们。 在所有属性上递归调用Object.freeze（obj），检查是否使用Object.isFrozen（）冻结了每个属性，并根据需要应用deepFreeze（）。 最后，使用Object.freeze（）冻结给定的对象。</p>
-<pre><code class="javascript">const deepFreeze = obj =&gt; &#123;
-  Object.keys(obj).forEach(prop =&gt; &#123;
-    if (typeof(obj[prop]) === &#39;object&#39; &amp;&amp; !Object.isFrozen(obj[prop]))   deepFreeze(obj[prop]);
-  &#125;);
-  return Object.freeze(obj);
-&#125;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">deepFreeze</span> = obj =&gt; &#123;</span><br><span class="line">  <span class="title class_">Object</span>.<span class="title function_">keys</span>(obj).<span class="title function_">forEach</span>(<span class="function"><span class="params">prop</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">typeof</span>(obj[prop]) === <span class="string">&#x27;object&#x27;</span> &amp;&amp; !<span class="title class_">Object</span>.<span class="title function_">isFrozen</span>(obj[prop]))   <span class="title function_">deepFreeze</span>(obj[prop]);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">freeze</span>(obj);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="variable constant_">EXAMPLES</span></span><br><span class="line"><span class="meta">&#x27;use strict&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> o = <span class="title function_">deepFreeze</span>([<span class="number">1</span>, [<span class="number">2</span>, <span class="number">3</span>]]);</span><br><span class="line"></span><br><span class="line">o[<span class="number">0</span>] = <span class="number">3</span>; <span class="comment">// not allowed</span></span><br><span class="line">o[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">4</span>; <span class="comment">// not allowed as well</span></span><br></pre></td></tr></table></figure>
 
-
-EXAMPLES
-&#39;use strict&#39;;
-
-const o = deepFreeze([1, [2, 3]]);
-
-o[0] = 3; // not allowed
-o[1][0] = 4; // not allowed as well</code></pre>
 <h2 id="获取当前url（不带任何参数）"><a href="#获取当前url（不带任何参数）" class="headerlink" title="- 获取当前url（不带任何参数）"></a>- 获取当前url（不带任何参数）</h2><p>返回没有任何参数的当前URL。</p>
 <p>使用String.prototype.indexOf（）检查给定的url是否具有参数，使用String.prototype.slice（）删除它们（如有必要）。</p>
-<pre><code class="javascript">const getBaseURL = url =&gt;
-  url.indexOf(&#39;?&#39;) &gt; 0 ? url.slice(0, url.indexOf(&#39;?&#39;)) : url;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">getBaseURL</span> = url =&gt;</span><br><span class="line">  url.<span class="title function_">indexOf</span>(<span class="string">&#x27;?&#x27;</span>) &gt; <span class="number">0</span> ? url.<span class="title function_">slice</span>(<span class="number">0</span>, url.<span class="title function_">indexOf</span>(<span class="string">&#x27;?&#x27;</span>)) : url;</span><br></pre></td></tr></table></figure>
+
 <h2 id="获取当前URL下的值"><a href="#获取当前URL下的值" class="headerlink" title="- 获取当前URL下的值"></a>- 获取当前URL下的值</h2><p>返回一个包含当前URL参数的对象。</p>
 <p>使用带有适当正则表达式的String.prototype.match（）来获取所有键值对，使用Array.prototype.reduce（）来映射它们并将它们组合成一个对象。 传递location.search作为参数以应用于当前网址。</p>
-<pre><code class="javascript">const getURLParameters = url =&gt;
-    (url.match(/([^?=&amp;]+)(=([^&amp;]*))/g) || []).reduce(
-    (a, v) =&gt; ((a[v.slice(0, v.indexOf(&#39;=&#39;))] = v.slice(v.indexOf(&#39;=&#39;) + 1)), a),
-    &#123;&#125;
-);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">getURLParameters</span> = url =&gt;</span><br><span class="line">    (url.<span class="title function_">match</span>(<span class="regexp">/([^?=&amp;]+)(=([^&amp;]*))/g</span>) || []).<span class="title function_">reduce</span>(</span><br><span class="line">    <span class="function">(<span class="params">a, v</span>) =&gt;</span> ((a[v.<span class="title function_">slice</span>(<span class="number">0</span>, v.<span class="title function_">indexOf</span>(<span class="string">&#x27;=&#x27;</span>))] = v.<span class="title function_">slice</span>(v.<span class="title function_">indexOf</span>(<span class="string">&#x27;=&#x27;</span>) + <span class="number">1</span>)), a),</span><br><span class="line">    &#123;&#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+
 <h1 id="JavaScript-api"><a href="#JavaScript-api" class="headerlink" title="JavaScript api"></a>JavaScript api</h1><h2 id="for-in-for-of-和-forEach"><a href="#for-in-for-of-和-forEach" class="headerlink" title="-for in , for of 和 forEach"></a>-for in , for of 和 forEach</h2><h3 id="for-in"><a href="#for-in" class="headerlink" title="for in"></a>for in</h3><p>for … in用于迭代对象的所有可枚举属性，包括继承的可枚举属性。 该迭代语句可用于数组字符串或普通对象，但不能用于Map或Set对象。</p>
-<pre><code class="javascript">for (let prop in [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]) 
-  console.log(prop);            // 0, 1, 2 (array indexes)
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> prop <span class="keyword">in</span> [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]) </span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(prop);            <span class="comment">// 0, 1, 2 (array indexes)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> prop <span class="keyword">in</span> <span class="string">&#x27;str&#x27;</span>) </span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(prop);            <span class="comment">// 0, 1, 2 (string indexes)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> prop <span class="keyword">in</span> &#123;<span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span>, <span class="attr">c</span>: <span class="number">3</span>&#125;) </span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(prop);            <span class="comment">// a, b, c (object property names)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> prop <span class="keyword">in</span> <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;d&#x27;</span>])) </span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(prop);            <span class="comment">// undefined (no enumerable properties)</span></span><br></pre></td></tr></table></figure>
 
-for (let prop in &#39;str&#39;) 
-  console.log(prop);            // 0, 1, 2 (string indexes)
-
-for (let prop in &#123;a: 1, b: 2, c: 3&#125;) 
-  console.log(prop);            // a, b, c (object property names)
-
-for (let prop in new Set([&#39;a&#39;, &#39;b&#39;, &#39;a&#39;, &#39;d&#39;])) 
-  console.log(prop);            // undefined (no enumerable properties)</code></pre>
 <h3 id="for-of"><a href="#for-of" class="headerlink" title="for of"></a>for of</h3><p>for … of用于迭代可迭代对象，迭代其值而不是其属性。 该迭代语句可用于数组，字符串，Map或Set对象，但不能用于普通对象。</p>
-<pre><code class="javascript">for (let val of [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]) 
-  console.log(val);            // a, b, c (array values)
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> val <span class="keyword">of</span> [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]) </span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(val);            <span class="comment">// a, b, c (array values)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> val <span class="keyword">of</span> <span class="string">&#x27;str&#x27;</span>) </span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(val);            <span class="comment">// s, t, r (string characters)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> val <span class="keyword">of</span> &#123;<span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span>, <span class="attr">c</span>: <span class="number">3</span>&#125;) </span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(prop);           <span class="comment">// TypeError (not iterable)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> val <span class="keyword">of</span> <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;d&#x27;</span>])) </span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(val);            <span class="comment">// a, b, d (Set values)</span></span><br></pre></td></tr></table></figure>
 
-for (let val of &#39;str&#39;) 
-  console.log(val);            // s, t, r (string characters)
 
-for (let val of &#123;a: 1, b: 2, c: 3&#125;) 
-  console.log(prop);           // TypeError (not iterable)
 
-for (let val of new Set([&#39;a&#39;, &#39;b&#39;, &#39;a&#39;, &#39;d&#39;])) 
-  console.log(val);            // a, b, d (Set values)</code></pre>
 <h3 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h3><p>forEach（）是Array原型的一种方法，它允许您遍历数组的元素。 尽管forEach（）仅迭代数组，但它可以在迭代时访问每个元素的值和索引。</p>
-<pre><code class="javascript">[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;].forEach(
-  val =&gt; console.log(val)     // a, b, c (array values)
-);
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>].<span class="title function_">forEach</span>(</span><br><span class="line">  <span class="function"><span class="params">val</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(val)     <span class="comment">// a, b, c (array values)</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>].<span class="title function_">forEach</span>(</span><br><span class="line">  <span class="function">(<span class="params">val, i</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(i)  <span class="comment">// 0, 1, 2 (array indexes)</span></span><br><span class="line">);	</span><br></pre></td></tr></table></figure>
 
-[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;].forEach(
-  (val, i) =&gt; console.log(i)  // 0, 1, 2 (array indexes)
-);    </code></pre>
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>

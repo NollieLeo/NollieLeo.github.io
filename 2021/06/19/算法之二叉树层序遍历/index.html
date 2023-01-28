@@ -55,6 +55,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -76,7 +78,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -92,7 +94,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -117,44 +119,13 @@
 </ul>
 </li>
 </ul>
-<pre><code class="js">/**
- * @param &#123;TreeNode&#125; root
- * @return &#123;number[][]&#125;
- */
-var levelOrder = function(root) &#123;
-    if (!root) return [];
-    const queue = [root];
-    const res = []; // 存放遍历结果
-    let level = 0; // 代表当前层数
-    while (queue.length) &#123;
-        res[level] = []; // 第level层的遍历结果
-        // 这里一开始我以为每层节点数量都是满的。。。然后就每层乘以2了。。。
-        let levelNum = queue.length; // 第level层的节点数量
-        while (levelNum--) &#123;
-            const front = queue.shift();
-            res[level].push(front.val);
-            if (front.left) queue.push(front.left);
-            if (front.right) queue.push(front.right);
-        &#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">TreeNode</span>&#125; <span class="variable">root</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">number[][]</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> levelOrder = <span class="keyword">function</span>(<span class="params">root</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> [];</span><br><span class="line">    <span class="keyword">const</span> queue = [root];</span><br><span class="line">    <span class="keyword">const</span> res = []; <span class="comment">// 存放遍历结果</span></span><br><span class="line">    <span class="keyword">let</span> level = <span class="number">0</span>; <span class="comment">// 代表当前层数</span></span><br><span class="line">    <span class="keyword">while</span> (queue.<span class="property">length</span>) &#123;</span><br><span class="line">        res[level] = []; <span class="comment">// 第level层的遍历结果</span></span><br><span class="line">        <span class="comment">// 这里一开始我以为每层节点数量都是满的。。。然后就每层乘以2了。。。</span></span><br><span class="line">        <span class="keyword">let</span> levelNum = queue.<span class="property">length</span>; <span class="comment">// 第level层的节点数量</span></span><br><span class="line">        <span class="keyword">while</span> (levelNum--) &#123;</span><br><span class="line">            <span class="keyword">const</span> front = queue.<span class="title function_">shift</span>();</span><br><span class="line">            res[level].<span class="title function_">push</span>(front.<span class="property">val</span>);</span><br><span class="line">            <span class="keyword">if</span> (front.<span class="property">left</span>) queue.<span class="title function_">push</span>(front.<span class="property">left</span>);</span><br><span class="line">            <span class="keyword">if</span> (front.<span class="property">right</span>) queue.<span class="title function_">push</span>(front.<span class="property">right</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        level++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-        level++;
-    &#125;
-    return res;
-&#125;;</code></pre>
+
+
 <p>思路2：递归</p>
-<pre><code class="js">var levelOrder = function (root) &#123;
-    let res = [];
-    const traversal = (root, level = 0) =&gt; &#123;
-        if (root) &#123;
-            if (!res[level]) res[level] = [];
-            res[level].push(root.val);
-            traversal(root.left, level + 1)
-            traversal(root.right, level + 1)
-        &#125;
-    &#125;
-    traversal(root);
-    return res;
-&#125;;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> levelOrder = <span class="keyword">function</span> (<span class="params">root</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> res = [];</span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">traversal</span> = (<span class="params">root, level = <span class="number">0</span></span>) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (root) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!res[level]) res[level] = [];</span><br><span class="line">            res[level].<span class="title function_">push</span>(root.<span class="property">val</span>);</span><br><span class="line">            <span class="title function_">traversal</span>(root.<span class="property">left</span>, level + <span class="number">1</span>)</span><br><span class="line">            <span class="title function_">traversal</span>(root.<span class="property">right</span>, level + <span class="number">1</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">traversal</span>(root);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>

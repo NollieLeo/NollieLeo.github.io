@@ -51,6 +51,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -72,7 +74,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -88,7 +90,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -124,18 +126,19 @@
 </blockquote>
 <h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><h3 id="undefined"><a href="#undefined" class="headerlink" title="undefined"></a>undefined</h3><p>只有一个值，就是特殊值<code>undefined</code></p>
 <p>当用let或者var 声明了变量但是没有初始化（给一个初始值）的时候，这个变量就相当于赋予了undefined值</p>
-<pre><code class="js">let msg;
-console.log(msg);// undefined</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> msg;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(msg);<span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
 <p>我们不需要显式的去给值赋值一个undefined，因为系统自动都会给未初始化的值赋值undefined</p>
 <p>*注意:</p>
 <p>使用typeof，未声明的变量和未初始化的变量返回都是<code>undefined</code></p>
-<pre><code>typeof a; // undefined
-let b;
-typeof b; // undefined</code></pre><h3 id="NULL"><a href="#NULL" class="headerlink" title="NULL"></a>NULL</h3><p>null类型也是同样只有一个值，特殊值Null；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">typeof a; // undefined</span><br><span class="line">let b;</span><br><span class="line">typeof b; // undefined</span><br></pre></td></tr></table></figure>
+
+<h3 id="NULL"><a href="#NULL" class="headerlink" title="NULL"></a>NULL</h3><p>null类型也是同样只有一个值，特殊值Null；</p>
 <p>null逻辑上讲，表示的是一个<strong>空对象指针</strong>，毕竟typeof null的时候是‘object’;</p>
 <p>因此在定义将来要保存对象值得变量得时候，建议使用null初始化</p>
 <p>undefined值是由null值派生而来的，因此ECMA-262将他们定义为表面上相等。</p>
-<pre><code class="js">console.log(null == undefined)</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="literal">null</span> == <span class="literal">undefined</span>)</span><br></pre></td></tr></table></figure>
+
 <p>*==操作符会对数据两头得数据类型进行转换，这个单独写一篇讲</p>
 <h3 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h3><p>boolean就两值，<code>true</code> or <code>false</code>；</p>
 <p>虽然只有两个值，但是可以通过特定得<strong>Boolean()</strong>转型函数将其他类型得值转换为布尔值</p>
@@ -175,11 +178,10 @@ typeof b; // undefined</code></pre><h3 id="NULL"><a href="#NULL" class="headerli
 </tr>
 </tbody></table>
 <p>*像一些if等流控制语句会自动得将其他类型值转换为boolean类型值</p>
-<pre><code class="js">const a = &#39;2121&#39;;
-if(a)&#123;
-    console.log(hello);
-&#125;
-// hello;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="string">&#x27;2121&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span>(a)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(hello);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// hello;</span></span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="Number"><a href="#Number" class="headerlink" title="*Number"></a>*Number</h3><p>最有意思得数据类型了</p>
 <p>Number类型使用得是<strong>IEEE 754</strong>格式表示整数和浮点值</p>
 <ol>
@@ -187,15 +189,12 @@ if(a)&#123;
 <li>八进制(0开头，数字0~7)</li>
 <li>十六进制（0x开头，数字0<del>9，字母A</del>F）</li>
 </ol>
-<pre><code class="js">let a1 = 55; // 55
-let a2 = 070; // 八进制的 56
-let a3 = 098; // 无效八进制,自动转为十进制98</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a1 = <span class="number">55</span>; <span class="comment">// 55</span></span><br><span class="line"><span class="keyword">let</span> a2 = <span class="number">070</span>; <span class="comment">// 八进制的 56</span></span><br><span class="line"><span class="keyword">let</span> a3 = <span class="number">098</span>; <span class="comment">// 无效八进制,自动转为十进制98</span></span><br></pre></td></tr></table></figure>
+
 <h4 id="1-浮点数"><a href="#1-浮点数" class="headerlink" title="1. 浮点数"></a>1. 浮点数</h4><p>表示：1.1， 1.2 ， 3.125e7， 3.125e-8</p>
 <p>*浮点数精确度问题</p>
-<pre><code class="js">if(0.1 + 0.2==0.3)&#123;
-    console.log(&#39;hello&#39;) 
-&#125;
-// 这里的0.1 + 0.2 是不等于0.3的</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="number">0.1</span> + <span class="number">0.2</span>==<span class="number">0.3</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;hello&#x27;</span>) </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 这里的0.1 + 0.2 是不等于0.3的</span></span><br></pre></td></tr></table></figure>
+
 <h4 id="2-值得范围"><a href="#2-值得范围" class="headerlink" title="2. 值得范围"></a>2. 值得范围</h4><p>内存限制，ES不能表示这世界上所有得</p>
 <p>最小值存在：<code>Number.MIN_VALUE</code>中</p>
 <p>最大值存在：<code>Number.MAX_VALUE</code>中</p>
@@ -205,11 +204,8 @@ let a3 = 098; // 无效八进制,自动转为十进制98</code></pre>
 <h5 id="1）涉及任何NaN得操作都会返回NaN"><a href="#1）涉及任何NaN得操作都会返回NaN" class="headerlink" title="1）涉及任何NaN得操作都会返回NaN"></a>1）涉及任何NaN得操作都会返回NaN</h5><h5 id="2）console-NaN-NaN"><a href="#2）console-NaN-NaN" class="headerlink" title="2）console(NaN == NaN)"></a>2）console(NaN == NaN)</h5><p>为false</p>
 <h5 id="3）isNaN-函数"><a href="#3）isNaN-函数" class="headerlink" title="3）isNaN()函数"></a>3）isNaN()函数</h5><p>判断传入得值是否 ”不是数值“</p>
 <p>该函数会将传入得值尝试去转换为数值，任何不能转换为数值得值都会导致这个函数返回true</p>
-<pre><code class="JS">isNaN(NaN) // true
-isNaN(10) // false
-isNaN(&#39;10&#39;) // false
-isNaN(&#39;blue&#39;) //true
-isNaN(true) // false</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">isNaN</span>(<span class="title class_">NaN</span>) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="number">10</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="string">&#x27;10&#x27;</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="string">&#x27;blue&#x27;</span>) <span class="comment">//true</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="literal">true</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>isNaN可以用于测试对象，首先会去调用对象得valueOf()方法，确定返回得值是否可以转换为数值，如果不行再调用toString()方法并测试返回值；</p>
 </blockquote>
@@ -229,12 +225,14 @@ isNaN(true) // false</code></pre>
 <li><p>字符串</p>
 <ul>
 <li><p>包含数值字符串，包括前面带着+，- 号得情况，则转换为一个十进制数值</p>
-<pre><code class="js">Number(&quot;1&quot;) // 1
-Number(&quot;123abc&quot;) // 123
-Number(&quot;0111&quot;) // 111</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Number</span>(<span class="string">&quot;1&quot;</span>) <span class="comment">// 1</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="string">&quot;123abc&quot;</span>) <span class="comment">// 123</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="string">&quot;0111&quot;</span>) <span class="comment">// 111</span></span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><p>字符串包含浮点值字符串</p>
-<pre><code class="js">Number(&quot;1.1&quot;) // 1.1</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Number</span>(<span class="string">&quot;1.1&quot;</span>) <span class="comment">// 1.1</span></span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ul>
 </li>
@@ -243,9 +241,7 @@ Number(&quot;0111&quot;) // 111</code></pre>
 </ol>
 <pre><code>- 字符串包含有效得十六进制格式，则转换为该十六进制对应得十进制数
 
-  ```js
-  Number(&quot;0xA&quot;) // 10
-  ```
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Number</span>(<span class="string">&quot;0xA&quot;</span>) <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -254,7 +250,9 @@ Number(&quot;0111&quot;) // 111</code></pre>
 - 除了以上情况外，返回NaN</code></pre><ol start="6">
 <li><p>对象</p>
 <p>调用对象得valueOf()方法，并且按照上述规则转换返回得值。如果转换结果是NaN，则再调用对象得toString()方法，再按规则去转换</p>
-<pre><code>Number(&quot;hello world&quot;) // NaN</code></pre><blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Number(&quot;hello world&quot;) // NaN</span><br></pre></td></tr></table></figure>
+
+<blockquote>
 <p>一元加操作符也遵循Number()转换规则</p>
 </blockquote>
 </li>
@@ -262,39 +260,24 @@ Number(&quot;0111&quot;) // 111</code></pre>
 <h5 id="2-ParseInt"><a href="#2-ParseInt" class="headerlink" title="2) ParseInt()"></a>2) ParseInt()</h5><p>此函数更加专注于字符串是否包含数值模式</p>
 <p>如果第一个字符不是数值字符， + -符号，则立即返回NaN</p>
 <p>空字符串也立即返回NaN</p>
-<pre><code class="js">parseInt(&quot;123&quot;) //123
-parseInt(&quot;123abc&quot;) // 123
-parseInt(&quot;&quot;) // NaN
-parseInt(&quot;0xf&quot;) // 15
-parseInt(&quot;07&quot;) // 7</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">parseInt</span>(<span class="string">&quot;123&quot;</span>) <span class="comment">//123</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">&quot;123abc&quot;</span>) <span class="comment">// 123</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">&quot;&quot;</span>) <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">&quot;0xf&quot;</span>) <span class="comment">// 15</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">&quot;07&quot;</span>) <span class="comment">// 7</span></span><br></pre></td></tr></table></figure>
+
 <p>也接受第二个参数</p>
-<pre><code>parseInt(&quot;0xAF&quot;,16) // 175
-parseInt(&quot;AF&quot;,16) // 175
-parseInt(&quot;AF&quot;) //NaN</code></pre><h5 id="3-ParseFloat"><a href="#3-ParseFloat" class="headerlink" title="3) ParseFloat()"></a>3) ParseFloat()</h5><p>和parseInt相似</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">parseInt(&quot;0xAF&quot;,16) // 175</span><br><span class="line">parseInt(&quot;AF&quot;,16) // 175</span><br><span class="line">parseInt(&quot;AF&quot;) //NaN</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-ParseFloat"><a href="#3-ParseFloat" class="headerlink" title="3) ParseFloat()"></a>3) ParseFloat()</h5><p>和parseInt相似</p>
 <h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><p>字符串数据类型表示零或者多个16位得Unicode字符序列</p>
 <h5 id="1-字符字面量"><a href="#1-字符字面量" class="headerlink" title="1. 字符字面量"></a>1. 字符字面量</h5><p>用于表示非打印字符或者其他用途字符</p>
-<pre><code class="js">\t 
-\n
-\b
-\r
-\f
-\\
-\&#39;
-\&quot;
-\`
-\xnn
-\unnn</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">\t </span><br><span class="line">\n</span><br><span class="line">\b</span><br><span class="line">\r</span><br><span class="line">\f</span><br><span class="line">\\</span><br><span class="line">\<span class="string">&#x27;</span></span><br><span class="line"><span class="string">\&quot;</span></span><br><span class="line"><span class="string">\`</span></span><br><span class="line"><span class="string">\xnn</span></span><br><span class="line"><span class="string">\unnn</span></span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>如果字符串包含双字节字符，length就不好确定了</p>
 </blockquote>
 <h5 id="2-字符串特点"><a href="#2-字符串特点" class="headerlink" title="2. 字符串特点"></a>2. 字符串特点</h5><p>es中得字符串是不可变的，一旦创建，值就不能再变化，要修改其中一个字符串值，必须先销毁原来得字符串再将包含新值的另一个字符串保存到该变量</p>
 <h5 id="3-转换为字符串（toString-amp-String-）"><a href="#3-转换为字符串（toString-amp-String-）" class="headerlink" title="3. 转换为字符串（toString &amp; String()）"></a>3. 转换为字符串（toString &amp; String()）</h5><p>适用于 数值，字符串，布尔值，对象（字符串的toString只是简单的返回自身的一个副本），<strong>null和undefined没有这个方法</strong></p>
 <h6 id="1）toString"><a href="#1）toString" class="headerlink" title="1）toString()"></a>1）toString()</h6><p>toString再对数值类型进行转换的时候可以传入参数，其他的类型不允许</p>
-<pre><code class="js">let num = 10;
-num.toString(); // &quot;10&quot;
-num.toString(2); // &quot;1010&quot;
-num.toString(8); // &quot;12&quot;
-num.toString(16); // &quot;a&quot;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">10</span>;</span><br><span class="line">num.<span class="title function_">toString</span>(); <span class="comment">// &quot;10&quot;</span></span><br><span class="line">num.<span class="title function_">toString</span>(<span class="number">2</span>); <span class="comment">// &quot;1010&quot;</span></span><br><span class="line">num.<span class="title function_">toString</span>(<span class="number">8</span>); <span class="comment">// &quot;12&quot;</span></span><br><span class="line">num.<span class="title function_">toString</span>(<span class="number">16</span>); <span class="comment">// &quot;a&quot;</span></span><br></pre></td></tr></table></figure>
+
 <h6 id="2-String"><a href="#2-String" class="headerlink" title="2)   String()"></a>2)   String()</h6><p>如果不确定一个值是否为null或者undefined可以使用String()转型函数</p>
 <p>转换规则↓</p>
 <ul>
@@ -304,127 +287,63 @@ num.toString(16); // &quot;a&quot;</code></pre>
 <blockquote>
 <p>用加号给一值加上一个空字符串””也可以将其转换为字符串</p>
 </blockquote>
-<h5 id="4-模板字面量"><a href="#4-模板字面量" class="headerlink" title="4. 模板字面量"></a>4. 模板字面量</h5><pre><code class="js">const name = &#39;lihua&#39;;
-console.log(`hello $&#123;name&#125;`); // hello lihua</code></pre>
+<h5 id="4-模板字面量"><a href="#4-模板字面量" class="headerlink" title="4. 模板字面量"></a>4. 模板字面量</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> name = <span class="string">&#x27;lihua&#x27;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`hello <span class="subst">$&#123;name&#125;</span>`</span>); <span class="comment">// hello lihua</span></span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>模板字面量保留换行符号,  空格</li>
 </ul>
-<pre><code class="js">const one = &#39;first line \nsecond line&#39;; 
-// first line
-// second line
-const two = `first line
-second line`;
-// first line
-// second line</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> one = <span class="string">&#x27;first line \nsecond line&#x27;</span>; </span><br><span class="line"><span class="comment">// first line</span></span><br><span class="line"><span class="comment">// second line</span></span><br><span class="line"><span class="keyword">const</span> two = <span class="string">`first line</span></span><br><span class="line"><span class="string">second line`</span>;</span><br><span class="line"><span class="comment">// first line</span></span><br><span class="line"><span class="comment">// second line</span></span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><p>模板字面量不是字符串而是一种特殊的js句法表达式，只不过求值之后是字符串</p>
 <p>所有的插入值最后都会使用<code>toString()</code>强制转型维字符串，适用与任何的js表达式</p>
-<pre><code class="js">let foo =  &#123;
-    toString: ()=&gt; &#39;world&#39;
-&#125;;
-console.log(`hello $&#123;foo&#125;`);</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> foo =  &#123;</span><br><span class="line">    <span class="attr">toString</span>: <span class="function">()=&gt;</span> <span class="string">&#x27;world&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`hello <span class="subst">$&#123;foo&#125;</span>`</span>);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>模板字面量标签函数</p>
-<pre><code class="js">let a = 6;
-let b = 5;
-function simpleTag(strings, aValExpression, bValExpression, sum)&#123;
-    console.log(strings);
-    console.log(aValExpression);
-    console.log(bValExpression);
-    console.log(sum);
-    return &#39;motherfucker&#39;;
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">6</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">simpleTag</span>(<span class="params">strings, aValExpression, bValExpression, sum</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(strings);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(aValExpression);</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(bValExpression);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(sum);</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&#x27;motherfucker&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> resUntagged = <span class="string">`<span class="subst">$&#123;a&#125;</span> + <span class="subst">$&#123;b&#125;</span> = <span class="subst">$&#123;a + b&#125;</span>`</span>;</span><br><span class="line"><span class="keyword">let</span> resTagged = simpleTag<span class="string">`<span class="subst">$&#123;a&#125;</span> + <span class="subst">$&#123;b&#125;</span> = <span class="subst">$&#123;a + b&#125;</span>`</span>;</span><br><span class="line"><span class="comment">// [&quot;&quot;, &quot;+&quot;, &quot;=&quot;, &quot;&quot;]</span></span><br><span class="line"><span class="comment">// 6 </span></span><br><span class="line"><span class="comment">// 5</span></span><br><span class="line"><span class="comment">// 11</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(resUntagged); <span class="comment">// 6 + 9 = 15</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(resTagged); <span class="comment">// motherfucker</span></span><br></pre></td></tr></table></figure>
 
-let resUntagged = `$&#123;a&#125; + $&#123;b&#125; = $&#123;a + b&#125;`;
-let resTagged = simpleTag`$&#123;a&#125; + $&#123;b&#125; = $&#123;a + b&#125;`;
-// [&quot;&quot;, &quot;+&quot;, &quot;=&quot;, &quot;&quot;]
-// 6 
-// 5
-// 11
-
-console.log(resUntagged); // 6 + 9 = 15
-console.log(resTagged); // motherfucker</code></pre>
 <p>表达式的参数一般可变，所以用…rest 传入</p>
-<pre><code class="js">let a = 6;
-let b = 5;
-function simpleTag(strings, ...rest)&#123;
-    console.log(strings);
-    for(const express of rest)&#123;
-        console.log(express);
-    &#125;
-    return &#39;motherfucker&#39;;
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">6</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">simpleTag</span>(<span class="params">strings, ...rest</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(strings);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">const</span> express <span class="keyword">of</span> rest)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(express);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&#x27;motherfucker&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> resTagged = simpleTag<span class="string">`<span class="subst">$&#123;a&#125;</span> + <span class="subst">$&#123;b&#125;</span> = <span class="subst">$&#123;a + b&#125;</span>`</span>;</span><br><span class="line"><span class="comment">// [&quot;&quot;, &quot;+&quot;, &quot;=&quot;, &quot;&quot;]</span></span><br><span class="line"><span class="comment">// 6 </span></span><br><span class="line"><span class="comment">// 5</span></span><br><span class="line"><span class="comment">// 11</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(resTagged); <span class="comment">// motherfucker</span></span><br></pre></td></tr></table></figure>
 
-let resTagged = simpleTag`$&#123;a&#125; + $&#123;b&#125; = $&#123;a + b&#125;`;
-// [&quot;&quot;, &quot;+&quot;, &quot;=&quot;, &quot;&quot;]
-// 6 
-// 5
-// 11
-
-console.log(resTagged); // motherfucker</code></pre>
 <p>如果需要通过一个标签函数得到原始字符串的话</p>
-<pre><code class="js">let a = 6;
-let b = 9;
-
-function zipTag(strings, ...rest)&#123;
-    return strings[0] + rest.map((e, i)=&gt;`$&#123;e&#125;$&#123;strings[i+1]&#125;`).join(&#39;&#39;);
-&#125;
-
-console.log(zipTag`$&#123;a&#125; + $&#123;b&#125; = $&#123;a + b&#125;`); // 6 + 9 = 15</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">6</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">9</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">zipTag</span>(<span class="params">strings, ...rest</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> strings[<span class="number">0</span>] + rest.<span class="title function_">map</span>(<span class="function">(<span class="params">e, i</span>)=&gt;</span><span class="string">`<span class="subst">$&#123;e&#125;</span><span class="subst">$&#123;strings[i+<span class="number">1</span>]&#125;</span>`</span>).<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(zipTag<span class="string">`<span class="subst">$&#123;a&#125;</span> + <span class="subst">$&#123;b&#125;</span> = <span class="subst">$&#123;a + b&#125;</span>`</span>); <span class="comment">// 6 + 9 = 15</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>原始字符串获取, 可以使用String.raw标签函数，从而获取到不是被转换后的字符</p>
-<pre><code class="js">console.log(`hello\nworld`);
-// hello
-// world
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`hello\nworld`</span>);</span><br><span class="line"><span class="comment">// hello</span></span><br><span class="line"><span class="comment">// world</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">String</span>.<span class="property">raw</span><span class="string">`hello\nworld`</span>) <span class="comment">// &quot;hello\nworld&quot;</span></span><br></pre></td></tr></table></figure>
 
-console.log(String.raw`hello\nworld`) // &quot;hello\nworld&quot;</code></pre>
 <blockquote>
 <p>但是对于实际的换行符号是不可以的</p>
 </blockquote>
 </li>
 </ul>
 <h3 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h3><p>符号属性是对内存中符号的一个引用</p>
-<h4 id="1-基本用法"><a href="#1-基本用法" class="headerlink" title="1.基本用法"></a>1.基本用法</h4><pre><code class="js">let sym = Symbol();
-let symV = Symbol(&#39;V&#39;);
-typeof sym; // symbol</code></pre>
+<h4 id="1-基本用法"><a href="#1-基本用法" class="headerlink" title="1.基本用法"></a>1.基本用法</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sym = <span class="title class_">Symbol</span>();</span><br><span class="line"><span class="keyword">let</span> symV = <span class="title class_">Symbol</span>(<span class="string">&#x27;V&#x27;</span>);</span><br><span class="line"><span class="keyword">typeof</span> sym; <span class="comment">// symbol</span></span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>这里不可以使用像Boolean, String, Number那样使用构造函数初始化包装对象</p>
 </blockquote>
-<pre><code class="js">let sym = new Symbol(); // TypeError: Symbol is not a constructor</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sym = <span class="keyword">new</span> <span class="title class_">Symbol</span>(); <span class="comment">// TypeError: Symbol is not a constructor</span></span><br></pre></td></tr></table></figure>
+
 <h4 id="2-创建全局符号注册表"><a href="#2-创建全局符号注册表" class="headerlink" title="2.创建全局符号注册表"></a>2.创建全局符号注册表</h4><p><code>Symbol.for()</code>全局创建符号实现 共享 重用</p>
-<pre><code class="js">let globleSym = Symbol.for(&quot;mine&quot;);</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> globleSym = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&quot;mine&quot;</span>);</span><br></pre></td></tr></table></figure>
+
 <p>第一次调用Symbol.for()会去全局注册一个符号，如果再次调用则直接从注册表中检查，并且返回该符号实例；</p>
 <p>全局注册和使用普通方式定义的符号实例不等</p>
-<pre><code class="js">let a = Symbol.for(&#39;hello&#39;);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&#x27;hello&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&#x27;hello&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c= <span class="title class_">Symbol</span>(<span class="string">&#x27;hello&#x27;</span>);</span><br><span class="line"></span><br><span class="line">a === b <span class="comment">// true</span></span><br><span class="line">a === c <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 
-let b = Symbol.for(&#39;hello&#39;);
-
-let c= Symbol(&#39;hello&#39;);
-
-a === b // true
-a === c // false</code></pre>
 <blockquote>
 <p>传给Symbol.for()函数的任何值都会被转换为字符串</p>
 <p>let empty = Symbol.for();</p>
 <p>empty // Symbol(undefined);</p>
 </blockquote>
 <p>可以使用 <code>Symbol.keyFor()</code>来查询<strong>全局注册表</strong>，这个方法接受符号，返回该全局符号对应的字符串键（如果没有则返回undefined, 如果传入的不是符号则会报错</p>
-<pre><code class="js">let s = Symbol.for(&#39;foo&#39;);
-console.log(Symbol.keyFor(s)); // foo    
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&#x27;foo&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Symbol</span>.<span class="title function_">keyFor</span>(s)); <span class="comment">// foo	</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="title class_">Symbol</span>(<span class="string">&#x27;bar&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Symbol</span>.<span class="title function_">keyFor</span>(a)); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
 
-let a = Symbol(&#39;bar&#39;);
-console.log(Symbol.keyFor(a)); // undefined</code></pre>
+
+
 <h4 id="3-使用符号作为属性"><a href="#3-使用符号作为属性" class="headerlink" title="3. 使用符号作为属性"></a>3. 使用符号作为属性</h4><p>凡是可以使用字符串或数值作属性的地方都可以使用符号，包扩了<code>Object.defineProperty()</code> / <code>Object.defineProperties()</code>定义属性</p>
-<pre><code class="js">let s1 = Symbol(&#39;hello&#39;), s2 = Symbol(&#39;world&#39;), s3 = Symbol(&#39;beauty&#39;);
-let o = &#123;
-    [s1]: &#39;1212&#39;
-&#125;;
-console.log(o); // &#123;Symbol(hello): 1212&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s1 = <span class="title class_">Symbol</span>(<span class="string">&#x27;hello&#x27;</span>), s2 = <span class="title class_">Symbol</span>(<span class="string">&#x27;world&#x27;</span>), s3 = <span class="title class_">Symbol</span>(<span class="string">&#x27;beauty&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> o = &#123;</span><br><span class="line">    [s1]: <span class="string">&#x27;1212&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(o); <span class="comment">// &#123;Symbol(hello): 1212&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperties</span>(o, &#123;</span><br><span class="line">    [s2]: <span class="string">&#x27;ssss&#x27;</span>,</span><br><span class="line">    [s3]: <span class="string">&#x27;2121&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-Object.defineProperties(o, &#123;
-    [s2]: &#39;ssss&#39;,
-    [s3]: &#39;2121&#39;
-&#125;)</code></pre>
 <ul>
 <li>Object.getOwnPropertyNames()返回对象实例的常规属性数组</li>
 <li>Object.getOwnPropertySymbols()返回对象实例的符号属性数组</li>
@@ -436,222 +355,63 @@ Object.defineProperties(o, &#123;
 <p>改变原生行为。比如for-of循环会在相关对象上使用Symbol.iterator属性，那么就可以通过在自定义的对象上面重新定义这个[Symbol.iterator]从而改变for-of遍历对象时候的行为</p>
 </blockquote>
 <h5 id="1）-Symbol-asyncIterator-（异步迭代器符号）-ES2018"><a href="#1）-Symbol-asyncIterator-（异步迭代器符号）-ES2018" class="headerlink" title="1） Symbol.asyncIterator （异步迭代器符号）(ES2018)"></a>1） Symbol.asyncIterator （异步迭代器符号）(ES2018)</h5><p>这个符号作为一个属性，标识一个方法，该方法返回对象默认的AsyncIterator，由for-await-of语句使用，也就是异步迭代API函数</p>
-<pre><code class="js">class Foo&#123;
-    async *[Symbol.asyncIterator]()&#123;&#125;
-&#125;
-let f = new Foo();
-console.log(f[Symbol.asyncIterator()]);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span>&#123;</span><br><span class="line">    <span class="keyword">async</span> *[<span class="title class_">Symbol</span>.<span class="property">asyncIterator</span>]()&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> f = <span class="keyword">new</span> <span class="title class_">Foo</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(f[<span class="title class_">Symbol</span>.<span class="title function_">asyncIterator</span>()]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// AsyncGenerator(&lt;suspended&gt;)</span></span><br></pre></td></tr></table></figure>
 
-// AsyncGenerator(&lt;suspended&gt;)</code></pre>
 <p>由此符号函数生成的对象应该显式通过next()方法陆续返回Promise实例，也可以隐式通过异步生成器函数返回</p>
-<pre><code class="js">class Emitter &#123; 
-    constructor(max)&#123;
-        this.max = max;
-        this.index = 0;
-    &#125;
-    async *[Symbol.asyncIterator]()&#123;
-        while(this.index&lt; this.max)&#123;
-            yield new Promise((resolve)=&gt;resolve (this.index++));
-        &#125;
-    &#125;
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Emitter</span> &#123; </span><br><span class="line">	<span class="title function_">constructor</span>(<span class="params">max</span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">max</span> = max;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">index</span> = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">async</span> *[<span class="title class_">Symbol</span>.<span class="property">asyncIterator</span>]()&#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="variable language_">this</span>.<span class="property">index</span>&lt; <span class="variable language_">this</span>.<span class="property">max</span>)&#123;</span><br><span class="line">            <span class="keyword">yield</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>)=&gt;</span>resolve (<span class="variable language_">this</span>.<span class="property">index</span>++));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">count</span>(<span class="params">number</span>)&#123;</span><br><span class="line">    <span class="keyword">let</span> emitter = <span class="keyword">new</span> <span class="title class_">Emitter</span>(number);</span><br><span class="line">    <span class="keyword">for</span> <span class="title function_">await</span>(<span class="params"><span class="keyword">const</span> x <span class="keyword">of</span> emitter</span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(x)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">count</span>(<span class="number">5</span>);</span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 3</span></span><br><span class="line"><span class="comment">// 4</span></span><br><span class="line"><span class="comment">// </span></span><br></pre></td></tr></table></figure>
 
-async function count(number)&#123;
-    let emitter = new Emitter(number);
-    for await(const x of emitter)&#123;
-        console.log(x)
-    &#125;
-&#125;
 
-count(5);
-// 0
-// 1
-// 2
-// 3
-// 4
-// </code></pre>
+
 <h5 id="2-Symbol-hasInstance"><a href="#2-Symbol-hasInstance" class="headerlink" title="2) Symbol.hasInstance"></a>2) Symbol.hasInstance</h5><p>标识一个方法，决定一个构造器对象是否认可一个对象式它的实例。由<code>instanceof</code> 操作符使用</p>
-<pre><code class="js">function Foo()&#123;&#125;
-let f = new Foo();
-console.log(f instanceof Foo); // true
-console.log(Foo[Symbol.hasInstance](f)) // true;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Foo</span>(<span class="params"></span>)&#123;&#125;</span><br><span class="line"><span class="keyword">let</span> f = <span class="keyword">new</span> <span class="title class_">Foo</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(f <span class="keyword">instanceof</span> <span class="title class_">Foo</span>); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Foo</span>[<span class="title class_">Symbol</span>.<span class="property">hasInstance</span>](f)) <span class="comment">// true;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FlaseInstance</span>()&#123;</span><br><span class="line">    <span class="keyword">static</span> [<span class="title class_">Symbol</span>.<span class="property">hasInstance</span>]()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="keyword">new</span> <span class="title class_">FalseInstance</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a intanceof <span class="title class_">FalseInstance</span>) <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
 
-class FlaseInstance()&#123;
-    static [Symbol.hasInstance]()&#123;
-        return false
-    &#125;
-&#125;
-
-let a = new FalseInstance();
-console.log(a intanceof FalseInstance) //false</code></pre>
 <h5 id="3-Symbol-isConcatSpreadable"><a href="#3-Symbol-isConcatSpreadable" class="headerlink" title="3) Symbol.isConcatSpreadable"></a>3) Symbol.isConcatSpreadable</h5><p>标识一个布尔值，如果是true以为着对象改用Array.prototype.concat()打平其数组元素。</p>
 <p>ES6中的<code>Array.prototype.concat()</code>方法会根据接收到的对象类型选择如何将一个类数组对象拼接成数组实例。</p>
 <p>如值为false，则会导致整个对象被追加到数组末尾，其他不是类数组对象的对象在true情况下会被忽略</p>
-<pre><code class="js">let init = [&#39;foo&#39;];
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> init = [<span class="string">&#x27;foo&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="string">&#x27;bar&#x27;</span>];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr[<span class="title class_">Symbol</span>.<span class="property">isConcatSpreadable</span>]) <span class="comment">// undefined</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(init,<span class="title function_">concat</span>(arr)) <span class="comment">// [&#x27;foo&#x27;, &#x27;bar&#x27;]</span></span><br><span class="line">arr[<span class="title class_">Symbol</span>.<span class="property">isConcatSpreadable</span>] = <span class="literal">false</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(init.<span class="title function_">concat</span>(arr)) <span class="comment">// [&#x27;foo&#x27;, Array(1)];</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> likeObj = &#123; <span class="attr">length</span>:<span class="number">1</span>, <span class="number">0</span>: <span class="string">&#x27;bar&#x27;</span>&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(likeObj[<span class="title class_">Symbol</span>.<span class="property">isConcatSpreadable</span>]); <span class="comment">//undefined</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(init.<span class="title function_">cancat</span>(likeObj)) <span class="comment">// [&#x27;foo&#x27;, &#123;...&#125;];</span></span><br><span class="line">likeObj[<span class="title class_">Symbol</span>.<span class="property">isConcatSpreadable</span>] = <span class="literal">true</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(init.<span class="title function_">concat</span>(likeObj)) <span class="comment">// [&#x27;foo&#x27;, &#x27;bar&#x27;]</span></span><br></pre></td></tr></table></figure>
 
-let arr = [&#39;bar&#39;];
-console.log(arr[Symbol.isConcatSpreadable]) // undefined
-console.log(init,concat(arr)) // [&#39;foo&#39;, &#39;bar&#39;]
-arr[Symbol.isConcatSpreadable] = false;
-console.log(init.concat(arr)) // [&#39;foo&#39;, Array(1)];
-
-let likeObj = &#123; length:1, 0: &#39;bar&#39;&#125;;
-console.log(likeObj[Symbol.isConcatSpreadable]); //undefined
-console.log(init.cancat(likeObj)) // [&#39;foo&#39;, &#123;...&#125;];
-likeObj[Symbol.isConcatSpreadable] = true;
-console.log(init.concat(likeObj)) // [&#39;foo&#39;, &#39;bar&#39;]</code></pre>
 <h5 id="4-Symbol-iterator"><a href="#4-Symbol-iterator" class="headerlink" title="4) Symbol.iterator"></a>4) Symbol.iterator</h5><p>标识一个方法，返回对象默认迭代器，由<code>for-of</code>语句使用</p>
 <p>这与上面的Symbol.asyncIterator相类似</p>
-<pre><code class="js">class Bar &#123;
-    constructor(max)&#123;
-        this.max = max;
-        this.index = 0;
-    &#125;
-    *[Symbol.iterator]()&#123;
-        while(this.index &lt; this.max)&#123;
-            yield this.index++;
-        &#125;
-    &#125;
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Bar</span> &#123;</span><br><span class="line">	<span class="title function_">constructor</span>(<span class="params">max</span>)&#123;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">max</span> = max;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">index</span> = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	*[<span class="title class_">Symbol</span>.<span class="property">iterator</span>]()&#123;</span><br><span class="line">		<span class="keyword">while</span>(<span class="variable language_">this</span>.<span class="property">index</span> &lt; <span class="variable language_">this</span>.<span class="property">max</span>)&#123;</span><br><span class="line">			<span class="keyword">yield</span> <span class="variable language_">this</span>.<span class="property">index</span>++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">count</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="keyword">let</span> bar = <span class="keyword">new</span> <span class="title class_">Bar</span>(<span class="number">5</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">const</span> x <span class="keyword">of</span> bar)&#123;</span><br><span class="line">		<span class="variable language_">console</span>.<span class="title function_">log</span>(x)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 3</span></span><br><span class="line"><span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
 
-function count()&#123;
-    let bar = new Bar(5);
-    for(const x of bar)&#123;
-        console.log(x)
-    &#125;
-&#125;
-// 0
-// 1
-// 2
-// 3
-// 4</code></pre>
 <h5 id="5-Symbol-match"><a href="#5-Symbol-match" class="headerlink" title="5) Symbol.match"></a>5) Symbol.match</h5><p>标识一个正则表达式的方法，该方法用正则表达式去匹配字符串；</p>
 <p>由<code>String.prototype.match()</code>方法使用，使用以Symbol.match为键的函数来对这个正则表达式求值。正则表达式的原型上默认有这个函数的定义</p>
-<pre><code class="js">console.log(RegExp.prototype[Symbol.match]);
-// f [Symbol.match]() &#123; [native code] &#125;
-console.log(&#39;foobar&#39;.match(/bar/));
-// [&quot;bar&quot;, index: 3, input: &quot;foobar&quot;, groups: undefined]</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">RegExp</span>.<span class="property"><span class="keyword">prototype</span></span>[<span class="title class_">Symbol</span>.<span class="property">match</span>]);</span><br><span class="line"><span class="comment">// f [Symbol.match]() &#123; [native code] &#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;foobar&#x27;</span>.<span class="title function_">match</span>(<span class="regexp">/bar/</span>));</span><br><span class="line"><span class="comment">// [&quot;bar&quot;, index: 3, input: &quot;foobar&quot;, groups: undefined]</span></span><br></pre></td></tr></table></figure>
+
 <p>给这个方法传入非正则的表达式值会导致该值呗转换为RegExp对象，如果想要改变这行为，允许方法直接使用参数，则重新定义Symbol.match</p>
-<pre><code class="js">class FooMatcher &#123;
-     static [Symbol.match](target)&#123;
-         return target.includes(&#39;foo&#39;)
-     &#125;
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FooMatcher</span> &#123;</span><br><span class="line">     <span class="keyword">static</span> [<span class="title class_">Symbol</span>.<span class="property">match</span>](target)&#123;</span><br><span class="line">         <span class="keyword">return</span> target.<span class="title function_">includes</span>(<span class="string">&#x27;foo&#x27;</span>)</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;foobar&#x27;</span>.<span class="title function_">match</span>(<span class="title class_">FooMacther</span>)) <span class="comment">// true;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">StringMatcher</span>&#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">str</span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">str</span> = str;</span><br><span class="line">    &#125;</span><br><span class="line">    [<span class="title class_">Symbol</span>.<span class="property">match</span>](target)&#123;</span><br><span class="line">        <span class="keyword">return</span> target.<span class="title function_">includes</span>(<span class="variable language_">this</span>.<span class="property">str</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;foobar&#x27;</span>.<span class="title function_">match</span>(<span class="keyword">new</span> <span class="title class_">StringMacther</span>(<span class="string">&#x27;foo&#x27;</span>))) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
-console.log(&#39;foobar&#39;.match(FooMacther)) // true;
-
-class StringMatcher&#123;
-    constructor(str)&#123;
-        this.str = str;
-    &#125;
-    [Symbol.match](target)&#123;
-        return target.includes(this.str);
-    &#125;
-&#125;
-
-console.log(&#39;foobar&#39;.match(new StringMacther(&#39;foo&#39;))) // true</code></pre>
 <h5 id="6-Symbol-replace"><a href="#6-Symbol-replace" class="headerlink" title="6) Symbol.replace"></a>6) Symbol.replace</h5><p>标识一个正则表达式的方法，替换一个字符串中匹配的子串；</p>
 <p>由<code>String.prototype.replace()</code>方法会使用以Symbol.replace为键的函数来对正则表达式求值, 和上面的match一样，为了阻止默认的非正则表达式值被强行转换为RegExp对象，可以覆盖默认行为</p>
-<pre><code class="js">class FooReplacer &#123;
-    static [Symbol.replace](target, replacememt) &#123;
-        return target,split(&#39;foo&#39;).join(replacement);
-    &#125;
-&#125;
-console.log(&#39;barfoobaz&#39;.replace(FooReplacer, &#39;quz&#39;));
-// barquxbaz
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FooReplacer</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> [<span class="title class_">Symbol</span>.<span class="property">replace</span>](target, replacememt) &#123;</span><br><span class="line">        <span class="keyword">return</span> target,<span class="title function_">split</span>(<span class="string">&#x27;foo&#x27;</span>).<span class="title function_">join</span>(replacement);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;barfoobaz&#x27;</span>.<span class="title function_">replace</span>(<span class="title class_">FooReplacer</span>, <span class="string">&#x27;quz&#x27;</span>));</span><br><span class="line"><span class="comment">// barquxbaz</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">StringReplacer</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">str</span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">str</span> = str;</span><br><span class="line">    &#125;</span><br><span class="line">    [<span class="title class_">Symbol</span>.<span class="property">replace</span>](target, replacement)&#123;</span><br><span class="line">        <span class="keyword">return</span> target.<span class="title function_">split</span>(<span class="variable language_">this</span>.<span class="property">str</span>).<span class="title function_">join</span>(replacement);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;barfoobaz&#x27;</span>.<span class="title function_">replace</span>(<span class="keyword">new</span> <span class="title class_">StringReplacer</span>(<span class="string">&#x27;foo&#x27;</span>), <span class="string">&#x27;quz&#x27;</span>));</span><br><span class="line"><span class="comment">// barfoobaz</span></span><br></pre></td></tr></table></figure>
 
-class StringReplacer &#123;
-    constructor(str)&#123;
-        this.str = str;
-    &#125;
-    [Symbol.replace](target, replacement)&#123;
-        return target.split(this.str).join(replacement);
-    &#125;
-&#125;
-console.log(&#39;barfoobaz&#39;.replace(new StringReplacer(&#39;foo&#39;), &#39;quz&#39;));
-// barfoobaz</code></pre>
 <h5 id="7）Symbol-search"><a href="#7）Symbol-search" class="headerlink" title="7）Symbol.search"></a>7）Symbol.search</h5><p>标识一个正则的方法，返回字符串中匹配正则表达式的索以。</p>
 <p>由<code>String.prototype.search()</code>方法使用。String.prototype.search()方法会使用以Symbol.search为键的函数来对正则表达式进行求值, 同样和上述两个方法一样，为了阻止默认的行为，可以覆盖</p>
-<pre><code class="js">console.log(&#39;foobar&#39;.search(/bar/)); //3
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;foobar&#x27;</span>.<span class="title function_">search</span>(<span class="regexp">/bar/</span>)); <span class="comment">//3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">StringSearcher</span> &#123;</span><br><span class="line">	<span class="title function_">constructor</span>(<span class="params">str</span>)&#123;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">str</span> = str;</span><br><span class="line">	&#125;</span><br><span class="line">	[<span class="title class_">Symbol</span>.<span class="property">search</span>](target)&#123;</span><br><span class="line">		<span class="keyword">return</span> target.<span class="title function_">indexOf</span>(<span class="variable language_">this</span>.<span class="property">str</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;foobar&#x27;</span>.<span class="title function_">search</span>(<span class="keyword">new</span> <span class="title class_">StringSeacher</span>(<span class="string">&#x27;foo&#x27;</span>))); <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
 
-class StringSearcher &#123;
-    constructor(str)&#123;
-        this.str = str;
-    &#125;
-    [Symbol.search](target)&#123;
-        return target.indexOf(this.str);
-    &#125;
-&#125;
-
-console.log(&#39;foobar&#39;.search(new StringSeacher(&#39;foo&#39;))); // 0</code></pre>
 <h5 id="8-Symbol-species"><a href="#8-Symbol-species" class="headerlink" title="8) Symbol.species"></a>8) Symbol.species</h5><p>标识一个属性。表示一个函数值，该函数作为创建派生对象的构造函数。</p>
 <p>用Symbol.specied定义静态的获取器（getter）方法，可覆盖</p>
-<pre><code class="js">class Bar extends Array &#123;&#125;
-class Baz extends Array &#123;
-    static get [Symbol.species]()&#123;
-        return Array;
-    &#125;
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Bar</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Array</span> &#123;&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Baz</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Array</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> get [<span class="title class_">Symbol</span>.<span class="property">species</span>]()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Array</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> bar = <span class="keyword">new</span> <span class="title class_">Bar</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(bar <span class="keyword">instanceof</span> <span class="title class_">Array</span>) <span class="comment">// true;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(bar <span class="keyword">instanceof</span> <span class="title class_">Bar</span>) <span class="comment">// true;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> baz = <span class="keyword">new</span> <span class="title class_">Baz</span>()</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(baz <span class="keyword">instanceof</span> <span class="title class_">Array</span>) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(baz <span class="keyword">instanceof</span> <span class="title class_">Baz</span>) <span class="comment">// true</span></span><br><span class="line">baz = baz.<span class="title function_">concat</span>(<span class="string">&#x27;baz&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(baz <span class="keyword">instanceof</span> <span class="title class_">Array</span>) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(baz <span class="keyword">instanceof</span> <span class="title class_">Baz</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 
-let bar = new Bar();
-console.log(bar instanceof Array) // true;
-console.log(bar instanceof Bar) // true;
-
-let baz = new Baz()
-console.log(baz instanceof Array) // true
-console.log(baz instanceof Baz) // true
-baz = baz.concat(&#39;baz&#39;);
-console.log(baz instanceof Array) // true
-console.log(baz instanceof Baz) // false</code></pre>
 <h5 id="9-Symbol-toPrimitive"><a href="#9-Symbol-toPrimitive" class="headerlink" title="9) Symbol.toPrimitive"></a>9) Symbol.toPrimitive</h5><p>标识一个属性标识一个方法，该方法将对象转换为相应的原始值。有ToPrimitive抽象操作使用</p>
 <p>很多内置操作都会尝试强制将对象转换为原始的值，包括字符串数值和未指定的原始类型。对于一个自定义对象实例，通过这个实例的Symbol.toPrimitive属性覆盖默认行为</p>
-<pre><code class="js">class Foo&#123;&#125;
-let foo = new Foo();
-console.log(3 + foo); // 3[object Object]
-console.log(3 - foo); // NaN
-console.log(String(foo)); // [object Object]
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span>&#123;&#125;</span><br><span class="line"><span class="keyword">let</span> foo = <span class="keyword">new</span> <span class="title class_">Foo</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span> + foo); <span class="comment">// 3[object Object]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span> - foo); <span class="comment">// NaN</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">String</span>(foo)); <span class="comment">// [object Object]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Baz</span>&#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>[<span class="title class_">Symbol</span>.<span class="property">toPrimitive</span>] = <span class="keyword">function</span>(<span class="params">hint</span>)&#123;</span><br><span class="line">            <span class="keyword">switch</span>(hint)&#123;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">&#x27;number&#x27;</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;string&#x27;</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="string">&#x27;string bar&#x27;</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;default&#x27;</span>:</span><br><span class="line">                <span class="attr">default</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="string">&#x27;default bar&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> bar = <span class="keyword">new</span> <span class="title class_">Bar</span>();</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span> + bar) <span class="comment">// 3default bar</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span> - bar) <span class="comment">// 0</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">String</span>(<span class="number">3</span>)) <span class="comment">// string bar</span></span><br></pre></td></tr></table></figure>
 
-class Baz&#123;
-    constructor()&#123;
-        this[Symbol.toPrimitive] = function(hint)&#123;
-            switch(hint)&#123;
-                case &#39;number&#39;:
-                    return 3;
-                case &#39;string&#39;:
-                    return &#39;string bar&#39;;
-                case &#39;default&#39;:
-                default:
-                    return &#39;default bar&#39;;
-            &#125;
-        &#125;
-    &#125;
-&#125;
 
-let bar = new Bar();
 
-console.log(3 + bar) // 3default bar
-console.log(3 - bar) // 0
-console.log(String(3)) // string bar</code></pre>
+
+
 <h5 id="10）Symbol-toStringTag"><a href="#10）Symbol-toStringTag" class="headerlink" title="10）Symbol.toStringTag"></a>10）Symbol.toStringTag</h5><p>标识一个属性表示一个字符串，该字符串用再创建对象的默认字符串描述。由内置方法Object.prototype.toString()使用</p>
 <p>通过toString()方法获取对象标识时候，会自动检索由Symbol.toStringTag指定的实例表示符号，默认为”Object”。</p>
 <p>内置类型以及指定了这个值，自定义类实力还是需要明确定义的</p>
-<pre><code class="js">let s = new Set();
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="title class_">Set</span>();</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s) <span class="comment">// Set(0)&#123;&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s.<span class="title function_">toString</span>()); <span class="comment">// [object Set];</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s[<span class="title class_">Symbol</span>.<span class="property">toStringTag</span>]); <span class="comment">// Set</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Baz</span>&#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>[<span class="title class_">Symbol</span>.<span class="property">toStringTag</span>] = <span class="string">&quot;Bar&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> baz = <span class="keyword">new</span> <span class="title class_">Baz</span>(); <span class="comment">// Baz &#123;&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(baz.<span class="title function_">toString</span>()) <span class="comment">// [object Baz]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(baz[<span class="title class_">Symbol</span>.<span class="property">toStringTag</span>]) <span class="comment">// Baz</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-console.log(s) // Set(0)&#123;&#125;
-console.log(s.toString()); // [object Set];
-console.log(s[Symbol.toStringTag]); // Set
 
-class Baz&#123;
-    constructor()&#123;
-        this[Symbol.toStringTag] = &quot;Bar&quot;;
-    &#125;
-&#125;
 
-let baz = new Baz(); // Baz &#123;&#125;
-console.log(baz.toString()) // [object Baz]
-console.log(baz[Symbol.toStringTag]) // Baz
 
-</code></pre>
+
+
+
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>

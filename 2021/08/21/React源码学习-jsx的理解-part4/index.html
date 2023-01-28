@@ -37,8 +37,8 @@
 <meta property="article:published_time" content="2021-08-21T14:26:48.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.054Z">
 <meta property="article:author" content="翁先森">
-<meta property="article:tag" content="React">
 <meta property="article:tag" content="jsx">
+<meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://github.com/NollieLeo/2021/08/21/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-jsx%E7%9A%84%E7%90%86%E8%A7%A3-part4/image-20210822155213907.png">
   
@@ -55,6 +55,8 @@
 
   
 
+  
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
   
 
   
@@ -77,7 +79,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -93,7 +95,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -117,7 +119,8 @@
 </blockquote>
 <p>比如在<a href="https://github.com/preactjs/preact">preact (opens new window)</a>这个类<code>React</code>库中，<code>JSX</code>会被编译为一个名为<code>h</code>的函数调用。</p>
 <h2 id="React-createElement"><a href="#React-createElement" class="headerlink" title="React.createElement"></a>React.createElement</h2><p><a href="https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L348">React.createElement地址</a></p>
-<pre><code class="js">createElement(type, config, children)</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">createElement</span>(type, config, children)</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>type: react component类型</li>
 <li>config：react component 的一些属性</li>
@@ -143,68 +146,24 @@
 </li>
 <li><p>接下来我们走入<code>ReactElement</code><a href="https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L146">函数</a></p>
 <p>可以发现，它最终返回了一个Element对象</p>
-<pre><code class="js">const ReactElement = function(type, key, ref, self, source, owner, props) &#123;
-    ......
-  const element = &#123;
-    // 标记这是个 React Element
-    $$typeof: REACT_ELEMENT_TYPE,
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">ReactElement</span> = <span class="keyword">function</span>(<span class="params">type, key, ref, self, source, owner, props</span>) &#123;</span><br><span class="line">    ......</span><br><span class="line">  <span class="keyword">const</span> element = &#123;</span><br><span class="line">    <span class="comment">// 标记这是个 React Element</span></span><br><span class="line">    <span class="attr">$$typeof</span>: <span class="variable constant_">REACT_ELEMENT_TYPE</span>,</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 这个是react component的类型   </span></span><br><span class="line">    <span class="attr">type</span>: type,</span><br><span class="line">    <span class="attr">key</span>: key,</span><br><span class="line">    <span class="attr">ref</span>: ref,</span><br><span class="line">    <span class="attr">props</span>: props,</span><br><span class="line">    <span class="attr">_owner</span>: owner,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> element;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-   // 这个是react component的类型   
-    type: type,
-    key: key,
-    ref: ref,
-    props: props,
-    _owner: owner,
-  &#125;;
-
-  return element;
-&#125;;</code></pre>
 </li>
 </ol>
-<pre><code>
-这里要注意，其中` $$typeof`这个参数很重要，主要是用来[isValidElement](https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L547)函数来判断这个element是不是合法的react element
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">   </span><br><span class="line">这里要注意，其中` $$typeof`这个参数很重要，主要是用来[isValidElement](https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react/src/ReactElement.js#L547)函数来判断这个element是不是合法的react element</span><br><span class="line">   </span><br><span class="line">   ```js</span><br><span class="line">   export function isValidElement(object) &#123;</span><br><span class="line">     return (</span><br><span class="line">       typeof object === &#x27;object&#x27; &amp;&amp;</span><br><span class="line">       object !== null &amp;&amp;</span><br><span class="line">       object.$$typeof === REACT_ELEMENT_TYPE</span><br><span class="line">     );</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">   </span><br></pre></td></tr></table></figure>
 
-   ```js
-   export function isValidElement(object) &#123;
-     return (
-       typeof object === &#39;object&#39; &amp;&amp;
-       object !== null &amp;&amp;
-       object.$$typeof === REACT_ELEMENT_TYPE
-     );
-   &#125;
-
-
-</code></pre><blockquote>
+<blockquote>
 <p>可以看到，<code>$$typeof === REACT_ELEMENT_TYPE</code>的非<code>null</code>对象就是一个合法的<code>React Element</code>。换言之，在<code>React</code>中，所有<code>JSX</code>在运行时的返回结果（即<code>React.createElement()</code>的返回值）都是<code>React Element</code>。</p>
 </blockquote>
 <h2 id="React-Component"><a href="#React-Component" class="headerlink" title="React Component"></a>React Component</h2><p>在<code>React</code>中，我们常使用<code>ClassComponent</code>与<code>FunctionComponent</code>构建组件。</p>
-<pre><code class="jsx">class AppClass extends React.Component &#123;
-  render() &#123;
-    return &lt;p&gt;111&lt;/p&gt;
-  &#125;
-&#125;
-console.log(&#39;这是ClassComponent：&#39;, AppClass);
-console.log(&#39;这是Element：&#39;, &lt;AppClass/&gt;);
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AppClass</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>111<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;这是ClassComponent：&#x27;</span>, <span class="title class_">AppClass</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;这是Element：&#x27;</span>, <span class="language-xml"><span class="tag">&lt;<span class="name">AppClass</span>/&gt;</span></span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">AppFunc</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>222<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;这是FunctionComponent：&#x27;</span>, <span class="title class_">AppFunc</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;这是Element：&#x27;</span>, <span class="language-xml"><span class="tag">&lt;<span class="name">AppFunc</span>/&gt;</span></span>);</span><br></pre></td></tr></table></figure>
 
-
-function AppFunc() &#123;
-  return &lt;p&gt;222&lt;/p&gt;;
-&#125;
-console.log(&#39;这是FunctionComponent：&#39;, AppFunc);
-console.log(&#39;这是Element：&#39;, &lt;AppFunc/&gt;);</code></pre>
 <p> 我们可以从Demo控制台打印的对象看出，<code>ClassComponent</code>对应的<code>Element</code>的<code>type</code>字段为<code>AppClass</code>自身。</p>
 <p><code>FunctionComponent</code>对应的<code>Element</code>的<code>type</code>字段为<code>AppFunc</code>自身，如下所示：</p>
-<pre><code class="JS">&#123;
-  $$typeof: Symbol(react.element),
-  key: null,
-  props: &#123;&#125;,
-  ref: null,
-  type: ƒ AppFunc(),
-  _owner: null,
-  _store: &#123;validated: false&#125;,
-  _self: null,
-  _source: null 
-&#125;</code></pre>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">$$typeof</span>: <span class="title class_">Symbol</span>(react.<span class="property">element</span>),</span><br><span class="line">  <span class="attr">key</span>: <span class="literal">null</span>,</span><br><span class="line">  <span class="attr">props</span>: &#123;&#125;,</span><br><span class="line">  <span class="attr">ref</span>: <span class="literal">null</span>,</span><br><span class="line">  <span class="attr">type</span>: ƒ <span class="title class_">AppFunc</span>(),</span><br><span class="line">  <span class="attr">_owner</span>: <span class="literal">null</span>,</span><br><span class="line">  <span class="attr">_store</span>: &#123;<span class="attr">validated</span>: <span class="literal">false</span>&#125;,</span><br><span class="line">  <span class="attr">_self</span>: <span class="literal">null</span>,</span><br><span class="line">  <span class="attr">_source</span>: <span class="literal">null</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="JSX与Fiber节点"><a href="#JSX与Fiber节点" class="headerlink" title="JSX与Fiber节点"></a>JSX与Fiber节点</h2><p>从上面的内容我们可以发现，<code>JSX</code>是一种描述当前组件内容的数据结构，他不包含组件<strong>schedule</strong>、<strong>reconcile</strong>、<strong>render</strong>所需的相关信息。</p>
 <p>比如如下信息就不包括在<code>JSX</code>中：</p>
 <ul>

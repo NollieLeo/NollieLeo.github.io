@@ -57,6 +57,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -78,7 +80,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -94,7 +96,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -121,140 +123,46 @@
 <p>当一次事件发生后，事件处理器要等一定阈值的时间，如果这段时间过去后 再也没有 事件发生，就处理最后一次发生的事件。假设还差 <code>0.01</code> 秒就到达指定时间，这时又来了一个事件，那么之前的等待作废，需要重新再等待指定时间。</p>
 </blockquote>
 <p>例如：</p>
-<pre><code class="html">&lt;body&gt;
-  &lt;style&gt;
-    #container &#123;
-      width: 200px;
-      height: 300px;
-      background-color: aquamarine;
-    &#125;
-  &lt;/style&gt;
-  &lt;div id=&quot;container&quot;&gt;
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-id">#container</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background-color</span>: aquamarine;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> count = <span class="number">1</span>;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> containerDom = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;container&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">addNumber</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      containerDom.<span class="property">innerHTML</span> = count++;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">    containerDom.<span class="property">onmousemove</span> = addNumber;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-  &lt;/div&gt;
-  &lt;script&gt;
-    var count = 1;
-    var containerDom = document.getElementById(&#39;container&#39;);
-    function addNumber() &#123;
-      containerDom.innerHTML = count++;
-    &#125;
-    containerDom.onmousemove = addNumber;
-
-  &lt;/script&gt;
-&lt;/body&gt;
-</code></pre>
 <p>鼠标只要移动那么就会频繁的去触发addNumber的函数</p>
 <p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="debounce.gif" alt="debounce"> </p>
 <p>这个时候我们对他进行防抖动</p>
 <p>先写我们的第一版函数</p>
-<pre><code class="javascript">function debounce(fun, wait) &#123;
-  var time;
-  return function () &#123;
-    clearTimeout(time);
-    time = setTimeout(fun, wait);
-  &#125;
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">debounce</span>(<span class="params">fun, wait</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> time;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="built_in">clearTimeout</span>(time);</span><br><span class="line">    time = <span class="built_in">setTimeout</span>(fun, wait);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>之后包裹住这个addnumber的函数</p>
 <p>现在随你怎么移动，反正你移动完 1000ms 内不再触发，我才执行事件。看看使用效果：</p>
 <p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="debounce-1.gif" alt="debounce 第一版"> </p>
 <p> 顿时就从 165 次降低成了 1 次! </p>
 <p>之后我们对他优化</p>
 <h3 id="this指向优化"><a href="#this指向优化" class="headerlink" title="this指向优化"></a>this指向优化</h3><p>如果我们再addNumber函数中加入<code>console.log(this)</code>，没有再addNumber外层包裹debounce的时候this指向是</p>
-<pre><code class="html">&lt;div id=&quot;container&quot;&gt;&lt;/div&gt;</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;container&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <p>但是包裹了debounce之后this就会指向windows对象</p>
 <p>所以需要对它进行修改</p>
-<pre><code class="javascript">var count = 0;
-var containerDom = document.getElementById(&#39;container&#39;);
-function addNumber() &#123;
-  containerDom.innerHTML = `&lt;div&gt;
-  值为$&#123;++count&#125;
-  &lt;/div&gt;`;
-  console.log(this);
-&#125;
-function debounce(fun, wait) &#123;
-  var time;
-  return function () &#123;
-    var that = this;
-    clearTimeout(time);
-    time = setTimeout(fun.bind(that), wait);
-  &#125;
-&#125;
-containerDom.onmousemove = debounce(addNumber, 1000);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> containerDom = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;container&#x27;</span>);</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">addNumber</span>(<span class="params"></span>) &#123;</span><br><span class="line">  containerDom.<span class="property">innerHTML</span> = <span class="string">`&lt;div&gt;</span></span><br><span class="line"><span class="string">  值为<span class="subst">$&#123;++count&#125;</span></span></span><br><span class="line"><span class="string">  &lt;/div&gt;`</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">debounce</span>(<span class="params">fun, wait</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> time;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> that = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="built_in">clearTimeout</span>(time);</span><br><span class="line">    time = <span class="built_in">setTimeout</span>(fun.<span class="title function_">bind</span>(that), wait);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">containerDom.<span class="property">onmousemove</span> = <span class="title function_">debounce</span>(addNumber, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
 <p>但是这里又有一个问题，就是这样包裹debounce的时候，onmousemove自带的事件对象event就会丢失，没有将参数传进去，故我们需要修改一哈，这样再我们需要用到event对象的时候就能拿得到</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20200503153245577.png" alt="image-20200503153245577"></p>
-<pre><code class="javascript">var count = 0;
-var containerDom = document.getElementById(&#39;container&#39;);
-function addNumber(e) &#123;
-  containerDom.innerHTML = `&lt;div&gt;
-  值为$&#123;++count&#125;
-  &lt;/div&gt;`;
-  console.log(this);
-  console.log(e);
-&#125;
-function debounce(fun, wait) &#123;
-  var time;
-  return function () &#123;
-    var that = this, args = arguments;
-    clearTimeout(time);
-    time = setTimeout(fn.bind(that, ...args), wait);
-  &#125;
-&#125;
-containerDom.onmousemove = debounce(addNumber, 1000);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> containerDom = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;container&#x27;</span>);</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">addNumber</span>(<span class="params">e</span>) &#123;</span><br><span class="line">  containerDom.<span class="property">innerHTML</span> = <span class="string">`&lt;div&gt;</span></span><br><span class="line"><span class="string">  值为<span class="subst">$&#123;++count&#125;</span></span></span><br><span class="line"><span class="string">  &lt;/div&gt;`</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(e);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">debounce</span>(<span class="params">fun, wait</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> time;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> that = <span class="variable language_">this</span>, args = <span class="variable language_">arguments</span>;</span><br><span class="line">    <span class="built_in">clearTimeout</span>(time);</span><br><span class="line">    time = <span class="built_in">setTimeout</span>(fn.<span class="title function_">bind</span>(that, ...args), wait);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">containerDom.<span class="property">onmousemove</span> = <span class="title function_">debounce</span>(addNumber, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
 <p>这个时候我们函数就非常的完善了。</p>
 <h3 id="第一次立刻执行"><a href="#第一次立刻执行" class="headerlink" title="第一次立刻执行"></a>第一次立刻执行</h3><p>假设我需要立即触发这个函数，但是又想防抖，就是相当于先执行函数再N秒内如果再此触发这个函数，就给他重新计算等待值。</p>
-<pre><code class="javascript">function debounce(fun, wait, immediate) &#123;
-  var time;
-  return function () &#123;
-    var that = this, args = arguments;
-    if (time) clearTimeout(time);
-    if (immediate) &#123;
-      // 如果已经执行过，不再执行
-      var callNow = !time;
-      time = setTimeout(function () &#123;
-        time = null
-      &#125;, wait);
-      if (callNow) fun.apply(that, args);
-    &#125; else &#123;
-      time = setTimeout(function () &#123;
-        fun.apply(that, args);
-      &#125;, wait);
-    &#125;
-  &#125;
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">debounce</span>(<span class="params">fun, wait, immediate</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> time;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> that = <span class="variable language_">this</span>, args = <span class="variable language_">arguments</span>;</span><br><span class="line">    <span class="keyword">if</span> (time) <span class="built_in">clearTimeout</span>(time);</span><br><span class="line">    <span class="keyword">if</span> (immediate) &#123;</span><br><span class="line">      <span class="comment">// 如果已经执行过，不再执行</span></span><br><span class="line">      <span class="keyword">var</span> callNow = !time;</span><br><span class="line">      time = <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        time = <span class="literal">null</span></span><br><span class="line">      &#125;, wait);</span><br><span class="line">      <span class="keyword">if</span> (callNow) fun.<span class="title function_">apply</span>(that, args);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      time = <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        fun.<span class="title function_">apply</span>(that, args);</span><br><span class="line">      &#125;, wait);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="debounce-4.gif" alt="debounce 第四版"> </p>
 <p>完~</p>
 <h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><blockquote>
 <p>可以理解为事件在一个管道中传输，加上这个节流阀以后，事件的流速就会减慢。实际上这个函数的作用就是如此，它可以将一个函数的调用频率限制在一定阈值内，例如 1s，那么 1s 内这个函数一定不会被调用两次</p>
 </blockquote>
 <p>以下是一个简版的节流,这里的this和argument处理方式和上面的防抖是一样的处理方式</p>
-<pre><code class="js">function throttle(fn, wait) &#123;
-    let prev = new Date();
-    return function() &#123; 
-        const args = arguments;
-        const now = new Date();
-        if (now - prev &gt; wait) &#123;
-            fn.apply(this, args);
-            prev = new Date();
-        &#125;
-    &#125;
-&#125;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">throttle</span>(<span class="params">fn, wait</span>) &#123;</span><br><span class="line">	<span class="keyword">let</span> prev = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">function</span>(<span class="params"></span>) &#123; </span><br><span class="line">	    <span class="keyword">const</span> args = <span class="variable language_">arguments</span>;</span><br><span class="line">		<span class="keyword">const</span> now = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">		<span class="keyword">if</span> (now - prev &gt; wait) &#123;</span><br><span class="line">			fn.<span class="title function_">apply</span>(<span class="variable language_">this</span>, args);</span><br><span class="line">			prev = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>按照以上的实现，第一次进入的时候就立马执行事件，但是如果最后一次的时间和pre的时间插值小于我们的wait时间，这时候的函数是不执行的，但是我们想要让它执行，这时候加入定时器，让他在最后一次调用执行函数的时候，算出它距离wait的时间还剩多少，然后让他在剩余时间内再执行；</p>
 <p>最终的代码是这样</p>
-<pre><code class="js">function throttle(fn, wait) &#123;
-    let prev = new Date();
-    let time;
-    return function () &#123;
-      const args = arguments;
-      const now = new Date();
-      clearTimeout(time);
-      if (now - prev &gt;= wait) &#123;
-        fn.apply(this, args);
-        prev = new Date();
-      &#125; else &#123;
-        time = setTimeout(fn.bind(this, args), wait - (prev - now));
-      &#125;
-    &#125;;
-&#125;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">throttle</span>(<span class="params">fn, wait</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> prev = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">    <span class="keyword">let</span> time;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> args = <span class="variable language_">arguments</span>;</span><br><span class="line">      <span class="keyword">const</span> now = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">      <span class="built_in">clearTimeout</span>(time);</span><br><span class="line">      <span class="keyword">if</span> (now - prev &gt;= wait) &#123;</span><br><span class="line">        fn.<span class="title function_">apply</span>(<span class="variable language_">this</span>, args);</span><br><span class="line">        prev = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        time = <span class="built_in">setTimeout</span>(fn.<span class="title function_">bind</span>(<span class="variable language_">this</span>, args), wait - (prev - now));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>

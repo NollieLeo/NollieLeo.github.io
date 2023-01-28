@@ -50,6 +50,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -71,7 +73,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -87,7 +89,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -114,23 +116,8 @@
 <h3 id="autoprefixer"><a href="#autoprefixer" class="headerlink" title="autoprefixer"></a>autoprefixer</h3><p>PostCSS 插件，用于解析 CSS 并使用 Can I Use 中的值向 CSS 规则添加供应商前缀。它由 Google 推荐并用于 Twitter 和阿里巴巴。</p>
 <p>Autoprefixer 将使用基于当前浏览器流行度和属性支持的数据为您应用前缀</p>
 <p>列如：在<code>postcss.config.js</code>中</p>
-<pre><code class="js">module.exports = &#123;
-  plugins: [
-    [
-      require(&quot;autoprefixer&quot;)(&#123;
-        overrideBrowserslist: [
-          &quot;last 2 versions&quot;,
-          &quot;Firefox ESR&quot;,
-          &quot;&gt; 1%&quot;,
-          &quot;ie &gt;= 8&quot;,
-          &quot;iOS &gt;= 8&quot;,
-          &quot;Android &gt;= 4&quot;,
-        ],
-      &#125;)
-    ],
-  ],
-&#125;;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    [</span><br><span class="line">      <span class="built_in">require</span>(<span class="string">&quot;autoprefixer&quot;</span>)(&#123;</span><br><span class="line">        <span class="attr">overrideBrowserslist</span>: [</span><br><span class="line">          <span class="string">&quot;last 2 versions&quot;</span>,</span><br><span class="line">          <span class="string">&quot;Firefox ESR&quot;</span>,</span><br><span class="line">          <span class="string">&quot;&gt; 1%&quot;</span>,</span><br><span class="line">          <span class="string">&quot;ie &gt;= 8&quot;</span>,</span><br><span class="line">          <span class="string">&quot;iOS &gt;= 8&quot;</span>,</span><br><span class="line">          <span class="string">&quot;Android &gt;= 4&quot;</span>,</span><br><span class="line">        ],</span><br><span class="line">      &#125;)</span><br><span class="line">    ],</span><br><span class="line">  ],</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>当然在webpack中也需要配置postcss-loader这个loader是执行所有postcss的插件的关键loader</p>
 <h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><h3 id="HtmlWebpackPlugin"><a href="#HtmlWebpackPlugin" class="headerlink" title="HtmlWebpackPlugin"></a>HtmlWebpackPlugin</h3><p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/html-webpack-plugin">https://www.npmjs.com/package/html-webpack-plugin</a></p>
 <p>这是一个 webpack 插件，它简化了 HTML 文件的创建以服务于你的 webpack 包。这对于在文件名中包含哈希值的 webpack 包特别有用，该哈希值会更改每次编译。</p>

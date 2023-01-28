@@ -50,6 +50,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -71,7 +73,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -87,7 +89,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -102,47 +104,14 @@
 <h1 class="article-title"><span>项目初始化-HTML模板</span></h1>
 <p>我们在项目初始化的时候，都会有一个html的模板，里面会做各种兼容和声明等工作。PC端如果需要适配IE8需要加入很多垫片，而且还要做好双核浏览器的优先选择配置等；M端更是需要做到不同分辨率屏幕的适配，另外还有300ms延迟问题。这里送上笔者在项目当中整理的两个模板，已经经过了一定项目的考验，供大家参考。</p>
 <p>另外，本文中涉及的M端适配并非rem，而是修改viewport的显示比例，这个方案相较rem来说起码有2个优点：一是省字符，二是不用计算，设计稿是多少就是多少。不过在实践当中，UC浏览器貌似不认user-scalabe=0，还是会被双击放大，不过笔者认为还是可以接受的。如果还遇到了其他bug，请反馈，谢谢。</p>
-<h2 id="PC模板"><a href="#PC模板" class="headerlink" title="PC模板"></a>PC模板</h2><pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;zh&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot; /&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge,chrome=1&quot; /&gt;
-    &lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot; /&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-&lt;!--[if lt IE 9]&gt;
-    &lt;script src=&quot;//cdn.staticfile.org/html5shiv/r29/html5.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;//cdn.staticfile.org/respond.js/1.4.2/respond.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;//cdn.staticfile.org/es5-shim/4.5.9/es5-shim.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;//cdn.staticfile.org/es5-shim/4.5.9/es5-sham.min.js&quot;&gt;&lt;/script&gt;
-&lt;![endif]--&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;//cdn.staticfile.org/normalize/6.0.0/normalize.min.css&quot;&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h2 id="M模板"><a href="#M模板" class="headerlink" title="M模板"></a>M模板</h2><pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;zh&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot; /&gt;
-    &lt;meta name=&quot;format-detection&quot; content=&quot;telephone=no&quot; /&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;script&gt;
-    (function() &#123;
-        var w = 750; // 设计稿尺寸
-        document.write(&#39;&lt;meta name=&quot;viewport&quot; content=&quot;width=&#39; + w + &#39;, initial-scale=&#39; +           window.screen.width / w + &#39;, user-scalable=0&quot; /&gt;&#39;);
-    &#125;)()
-    &lt;/script&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;//cdn.staticfile.org/normalize/6.0.0/normalize.min.css&quot;&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;script src=&quot;//cdn.staticfile.org/fastclick/1.0.6/fastclick.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script&gt;
-    document.addEventListener(&#39;DOMContentLoaded&#39;, function() &#123;
-        Origami.fastclick(document.body);
-    &#125;, false);
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+<h2 id="PC模板"><a href="#PC模板" class="headerlink" title="PC模板"></a>PC模板</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;zh&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge,chrome=1&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;renderer&quot;</span> <span class="attr">content</span>=<span class="string">&quot;webkit&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--[if lt IE 9]&gt;</span></span><br><span class="line"><span class="comment">    &lt;script src=&quot;//cdn.staticfile.org/html5shiv/r29/html5.min.js&quot;&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="comment">    &lt;script src=&quot;//cdn.staticfile.org/respond.js/1.4.2/respond.min.js&quot;&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="comment">    &lt;script src=&quot;//cdn.staticfile.org/es5-shim/4.5.9/es5-shim.min.js&quot;&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="comment">    &lt;script src=&quot;//cdn.staticfile.org/es5-shim/4.5.9/es5-sham.min.js&quot;&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="comment">&lt;![endif]--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;//cdn.staticfile.org/normalize/6.0.0/normalize.min.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="M模板"><a href="#M模板" class="headerlink" title="M模板"></a>M模板</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;zh&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;format-detection&quot;</span> <span class="attr">content</span>=<span class="string">&quot;telephone=no&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    (<span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> w = <span class="number">750</span>; <span class="comment">// 设计稿尺寸</span></span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&#x27;&lt;meta name=&quot;viewport&quot; content=&quot;width=&#x27;</span> + w + <span class="string">&#x27;, initial-scale=&#x27;</span> + 		  <span class="variable language_">window</span>.<span class="property">screen</span>.<span class="property">width</span> / w + <span class="string">&#x27;, user-scalable=0&quot; /&gt;&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">    &#125;)()</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;//cdn.staticfile.org/normalize/6.0.0/normalize.min.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;//cdn.staticfile.org/fastclick/1.0.6/fastclick.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;DOMContentLoaded&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="title class_">Origami</span>.<span class="title function_">fastclick</span>(<span class="variable language_">document</span>.<span class="property">body</span>);</span></span><br><span class="line"><span class="language-javascript">    &#125;, <span class="literal">false</span>);</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="公共部分说明"><a href="#公共部分说明" class="headerlink" title="公共部分说明"></a>公共部分说明</h2><p>1、<!DOCTYPE html><br>在 HTML 4.01 中，&lt;!DOCTYPE&gt; 声明引用 DTD，因为 HTML 4.01 基于 SGML。DTD 规定了标记语言的规则，这样浏览器才能正确地呈现内容。HTML5 不基于 SGML，所以不需要引用 DTD。<br>请始终向 HTML 文档添加 &lt;!DOCTYPE&gt; 声明，这样浏览器才能获知文档类型。它不是 HTML 标签，是指示 web 浏览器关于页面使用哪个 HTML 版本进行编写的指令；必须是 HTML 文档的第一行，位于 <html> 标签之前，没有结束标签，对大小写不敏感；<br>参考文献：<a target="_blank" rel="noopener" href="http://www.w3school.com.cn/tags/tag_doctype.asp">http://www.w3school.com.cn/tags/tag_doctype.asp</a> </html></p>
 <p>2、<html lang="zh"><br>HTML 的 lang 属性可用于网页或部分网页的语言。这对搜索引擎和浏览器是有帮助的。根据 W3C 推荐标准，您应该通过 <html> 标签中的 lang 属性对每张页面中的主要语言进行声明。<br>参考文献：<a target="_blank" rel="noopener" href="http://www.w3school.com.cn/tags/html_ref_language_codes.asp">http://www.w3school.com.cn/tags/html_ref_language_codes.asp</a></html></html></p>
 <p>3、<meta charset="UTF-8"><br>当你的 html 文件是以 UTF-8 编码保存的，而且里面有中文，你试试加与不加在 Chrome 的效果你就知道有没有区别了</p>
@@ -151,18 +120,12 @@
 <p>2、<meta name="renderer" content="webkit|ie-comp|ie-stand"><br>控制双核浏览器渲染引擎，content的取值为webkit、ie-comp、ie-stand之一，区分大小写，分别代表用webkit内核，IE兼容内核，IE标准内核。<br>参考文献：<a target="_blank" rel="noopener" href="http://se.360.cn/v6/help/meta.html">http://se.360.cn/v6/help/meta.html</a></p>
 <p>3、&lt;!–[if lt IE 9]&gt; //code here<br>兼容IE9以下（不含）的写法，只有IE认。（例子中js为IE9-的垫片）<br>参考文献：<a target="_blank" rel="noopener" href="http://www.weste.net/2013/8-9/93104.html">http://www.weste.net/2013/8-9/93104.html</a></p>
 <h2 id="M部分说明"><a href="#M部分说明" class="headerlink" title="M部分说明"></a>M部分说明</h2><p>1、js输出viewport缩放屏幕，适配不同大小设备</p>
-<pre><code class="HTML">(function() &#123;
-    var w = 750; //设计稿设备宽度
-    document.write(&#39;&lt;meta name=&quot;viewport&quot; content=&quot;width=&#39; + w + &#39;, initial-scale=&#39; +       window.screen.width / w + &#39;, user-scalable=0&quot; /&gt;&#39;);
-&#125;)()</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(function() &#123;</span><br><span class="line">    var w = 750; //设计稿设备宽度</span><br><span class="line">    document.write(&#x27;<span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=&#x27; + w + &#x27;, initial-scale=&#x27; + 	  window.screen.width / w + &#x27;, user-scalable=0&quot;</span> /&gt;</span>&#x27;);</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
 <p>加入以上代码，需修改变量值为设计稿的设备宽度，样式全部按照设计稿的数值和单位写就可以。详见：移动端常用布局方法<br>参考文献：<a target="_blank" rel="noopener" href="http://www.cnblogs.com/2050/p/3877280.html">http://www.cnblogs.com/2050/p/3877280.html</a></p>
 <p>2、fastclick解决iphone等手机的300ms延迟问题</p>
-<pre><code class="html">&lt;script src=&quot;//st01.chrstatic.com/themes/chr-cdn/fastclick/v1.0.6/fastclick.min.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;
-    document.addEventListener(&#39;DOMContentLoaded&#39;, function() &#123;
-        Origami.fastclick(document.body);
-    &#125;, false);
-&lt;/script&gt;</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;//st01.chrstatic.com/themes/chr-cdn/fastclick/v1.0.6/fastclick.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;DOMContentLoaded&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="title class_">Origami</span>.<span class="title function_">fastclick</span>(<span class="variable language_">document</span>.<span class="property">body</span>);</span></span><br><span class="line"><span class="language-javascript">    &#125;, <span class="literal">false</span>);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <p>先加载fastclick.min.js，之后将需要去除300ms的dom挂上，压缩版写Origami.fastclick(document.body);，非压缩版写FastClick.attach(document.body);即可<br>参考文献：<a href="https://github.com/ftlabs/fastclick/">https://github.com/ftlabs/fastclick/</a></p>
 
 

@@ -55,6 +55,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -76,7 +78,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -92,7 +94,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -111,56 +113,15 @@
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210619144925385.png" alt="image-20210619144925385"></p>
 <p>1.递归实现</p>
 <p>思路：在存在节点的情况下，每次设置一个起始深度1，之后去遍历他的左子树和右子树找出最大层级，就像这样一个个节点去找</p>
-<pre><code class="js">/**
- * Definition for a binary tree node.
- * function TreeNode(val) &#123;
- *     this.val = val;
- *     this.left = this.right = null;
- * &#125;
- */
-/**
- * @param &#123;TreeNode&#125; root
- * @return &#123;number&#125;
- */
-var maxDepth = function (root) &#123;
-    if(!root)&#123;
-        return 0
-    &#125;;
-    let dep = 1;
-    dep += Math.max(maxDepth(root.left), maxDepth(root.right));
-    return dep
-&#125;;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * function TreeNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.left = this.right = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">TreeNode</span>&#125; <span class="variable">root</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">number</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> maxDepth = <span class="keyword">function</span> (<span class="params">root</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(!root)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">let</span> dep = <span class="number">1</span>;</span><br><span class="line">    dep += <span class="title class_">Math</span>.<span class="title function_">max</span>(<span class="title function_">maxDepth</span>(root.<span class="property">left</span>), <span class="title function_">maxDepth</span>(root.<span class="property">right</span>));</span><br><span class="line">    <span class="keyword">return</span> dep</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
 <p>2.栈迭代实现</p>
 <p>思路：</p>
 <p>通过前序遍历或者其他什么遍历，每次向栈中存储一个对象保存节点以及上面遍历过的节点深度，之后拿max值和节点深度值做Math.max比较，找出最大的深度就行，重点是每一次都需要存深度</p>
-<pre><code class="js">/**
- * Definition for a binary tree node.
- * function TreeNode(val) &#123;
- *     this.val = val;
- *     this.left = this.right = null;
- * &#125;
- */
-/**
- * @param &#123;TreeNode&#125; root
- * @return &#123;number&#125;
- */
-var maxDepth = function(root) &#123;
-    if (!root) return 0
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * function TreeNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.left = this.right = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">TreeNode</span>&#125; <span class="variable">root</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">number</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> maxDepth = <span class="keyword">function</span>(<span class="params">root</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> max = <span class="number">0</span></span><br><span class="line">    <span class="keyword">const</span> stack = [[root, <span class="number">0</span>]]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (stack.<span class="property">length</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> [node, p] = stack.<span class="title function_">pop</span>()</span><br><span class="line"></span><br><span class="line">        max = <span class="title class_">Math</span>.<span class="title function_">max</span>(max, p + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        node.<span class="property">left</span> &amp;&amp; stack.<span class="title function_">push</span>([node.<span class="property">left</span>, p + <span class="number">1</span>])</span><br><span class="line">        node.<span class="property">right</span> &amp;&amp; stack.<span class="title function_">push</span>([node.<span class="property">right</span>, p + <span class="number">1</span>])</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> max</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-    let max = 0
-    const stack = [[root, 0]]
-
-    while (stack.length) &#123;
-        const [node, p] = stack.pop()
-
-        max = Math.max(max, p + 1)
-
-        node.left &amp;&amp; stack.push([node.left, p + 1])
-        node.right &amp;&amp; stack.push([node.right, p + 1])
-    &#125;
-
-    return max
-&#125;;</code></pre>
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>

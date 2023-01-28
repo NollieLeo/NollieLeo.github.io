@@ -23,12 +23,12 @@
   <title>自定义loader记录 - 翁先森的博客</title>
 
   
-    <meta name="description" content="调试loader1. 准备好自己的webpack和loader这里我用的项目是我自己的 webpack template 2. vscode配置debug配置文件按照这个步骤配置完会生成一个.vscode文件夹下面有个launch.json文件    然后替换它 &amp;#123;   &quot;version&quot;: &quot;0.2.0&quot;,   &quot;configurati">
+    <meta name="description" content="调试loader1. 准备好自己的webpack和loader这里我用的项目是我自己的 webpack template 2. vscode配置debug配置文件按照这个步骤配置完会生成一个.vscode文件夹下面有个launch.json文件    然后替换它 1234567891011121314151617&amp;#123;  &quot;version&quot;: &quot;0.2.0&amp;qu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自定义loader记录">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/10/10/%E8%87%AA%E5%AE%9A%E4%B9%89loader%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="调试loader1. 准备好自己的webpack和loader这里我用的项目是我自己的 webpack template 2. vscode配置debug配置文件按照这个步骤配置完会生成一个.vscode文件夹下面有个launch.json文件    然后替换它 &amp;#123;   &quot;version&quot;: &quot;0.2.0&quot;,   &quot;configurati">
+<meta property="og:description" content="调试loader1. 准备好自己的webpack和loader这里我用的项目是我自己的 webpack template 2. vscode配置debug配置文件按照这个步骤配置完会生成一个.vscode文件夹下面有个launch.json文件    然后替换它 1234567891011121314151617&amp;#123;  &quot;version&quot;: &quot;0.2.0&amp;qu">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae53a2653c7e43799c9802a100886a37~tplv-k3u1fbpfcp-watermark.awebp">
 <meta property="og:image" content="https://github.com/NollieLeo/2021/10/10/%E8%87%AA%E5%AE%9A%E4%B9%89loader%E8%AE%B0%E5%BD%95/image-20211010161220568.png">
@@ -56,6 +56,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -77,7 +79,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -93,7 +95,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -111,29 +113,13 @@
 <h3 id="2-vscode配置debug配置文件"><a href="#2-vscode配置debug配置文件" class="headerlink" title="2. vscode配置debug配置文件"></a>2. vscode配置debug配置文件</h3><p>按照这个步骤配置完会生成一个.vscode文件夹下面有个launch.json文件</p>
 <p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae53a2653c7e43799c9802a100886a37~tplv-k3u1fbpfcp-watermark.awebp" alt="img"> </p>
 <p>然后替换它</p>
-<pre><code class="js">&#123;
-  &quot;version&quot;: &quot;0.2.0&quot;,
-  &quot;configurations&quot;: [
-    &#123;
-      &quot;type&quot;: &quot;node&quot;,
-      &quot;request&quot;: &quot;launch&quot;,
-      &quot;name&quot;: &quot;Webpack Debug&quot;,
-      &quot;cwd&quot;: &quot;$&#123;workspaceFolder&#125;&quot;,
-      &quot;runtimeExecutable&quot;: &quot;npm&quot;,
-      &quot;runtimeArgs&quot;: [
-        &quot;run&quot;,
-        &quot;debug&quot;
-      ],
-      &quot;port&quot;: 5858
-    &#125;
-  ]
-&#125;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;version&quot;</span>: <span class="string">&quot;0.2.0&quot;</span>,</span><br><span class="line">  <span class="string">&quot;configurations&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">&quot;type&quot;</span>: <span class="string">&quot;node&quot;</span>,</span><br><span class="line">      <span class="string">&quot;request&quot;</span>: <span class="string">&quot;launch&quot;</span>,</span><br><span class="line">      <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Webpack Debug&quot;</span>,</span><br><span class="line">      <span class="string">&quot;cwd&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;&quot;</span>,</span><br><span class="line">      <span class="string">&quot;runtimeExecutable&quot;</span>: <span class="string">&quot;npm&quot;</span>,</span><br><span class="line">      <span class="string">&quot;runtimeArgs&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;run&quot;</span>,</span><br><span class="line">        <span class="string">&quot;debug&quot;</span></span><br><span class="line">      ],</span><br><span class="line">      <span class="string">&quot;port&quot;</span>: <span class="number">5858</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>利用以上配置信息，我们创建了一个 <strong>Webpack Debug</strong> 的调试任务。当运行该任务的时候，会在当前工作目录下执行 <code>npm run debug</code> 命令。因此，接下来我们需要在 <strong>package.json</strong> 文件中增加 <strong>debug</strong> 命令，具体内容如下所示：</p>
-<pre><code class="json">&#123;
-  &quot;scripts&quot;: &#123;
-    &quot;debug&quot;: &quot;webpack --config build/webpack.dev.js&quot;
-  &#125;
-&#125;</code></pre>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;debug&quot;</span><span class="punctuation">:</span> <span class="string">&quot;webpack --config build/webpack.dev.js&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="3-把自定义loader写道自己的rule里头"><a href="#3-把自定义loader写道自己的rule里头" class="headerlink" title="3. 把自定义loader写道自己的rule里头"></a>3. 把自定义loader写道自己的rule里头</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20211010161220568.png" alt="image-20211010161220568"></p>
 <p>然后打断点</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20211010161333822.png" alt="image-20211010161333822"></p>

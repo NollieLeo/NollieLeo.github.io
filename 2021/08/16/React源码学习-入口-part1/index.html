@@ -55,6 +55,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -76,7 +78,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -92,7 +94,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -127,21 +129,16 @@
 </ul>
 <p>所以我们引出： react是如何从这两个方面进行优化的呢？</p>
 <h3 id="CPU瓶颈"><a href="#CPU瓶颈" class="headerlink" title="CPU瓶颈"></a>CPU瓶颈</h3><p>加入我们一个页面中需要一次性渲染30k个dom元素</p>
-<pre><code class="jsx">function App() &#123;
-  const len = 3000;
-  return (
-    &lt;ul&gt;
-      &#123;Array(len).fill(0).map((_, i) =&gt; &lt;li&gt;&#123;i&#125;&lt;/li&gt;)&#125;
-    &lt;/ul&gt;
-  );
-&#125;
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">App</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> len = <span class="number">3000</span>;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;Array(len).fill(0).map((_, i) =&gt; <span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;i&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span>)&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> rootEl = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#root&quot;</span>);</span><br><span class="line"><span class="title class_">ReactDOM</span>.<span class="title function_">render</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">App</span>/&gt;</span></span>, rootEl); </span><br></pre></td></tr></table></figure>
 
-const rootEl = document.querySelector(&quot;#root&quot;);
-ReactDOM.render(&lt;App/&gt;, rootEl); </code></pre>
+
+
 <p>而大部分目前设备浏览器刷新比率都是60HZ（每秒60帧），16.6ms刷新一帧</p>
 <p>而， JS可以操作DOM，<code>GUI渲染线程</code>与<code>JS线程</code>是互斥的， <strong>JS脚本执行</strong>和<strong>浏览器布局、绘制</strong>不能同时执行。 </p>
 <p> 在每16.6ms时间内，需要完成如下工作： </p>
-<pre><code>JS脚本执行 -----  样式布局 ----- 样式绘制</code></pre><p>当JS执行时间过长，超出了16.6ms，这次刷新就没有时间执行<strong>样式布局</strong>和<strong>样式绘制</strong>了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JS脚本执行 -----  样式布局 ----- 样式绘制</span><br></pre></td></tr></table></figure>
+
+<p>当JS执行时间过长，超出了16.6ms，这次刷新就没有时间执行<strong>样式布局</strong>和<strong>样式绘制</strong>了。</p>
 <p>在Demo中，由于组件数量繁多（3000个），JS脚本执行时间过长，页面掉帧，造成卡顿。</p>
 <p>可以从打印的执行堆栈图看到，JS执行时间为73.65ms，远远多于一帧的时间</p>
 <p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://react.iamkasong.com/img/long-task.png" alt="长任务"> </p>
@@ -152,9 +149,8 @@ ReactDOM.render(&lt;App/&gt;, rootEl); </code></pre>
 <p>这种将长任务分拆到每一帧中，像蚂蚁搬家一样一次执行一小段任务的操作，被称为<code>时间切片</code>（time slice）</p>
 </blockquote>
 <p>接下来我们开启<code>Concurrent Mode</code></p>
-<pre><code class="jsx">// 通过使用ReactDOM.unstable_createRoot开启Concurrent Mode
-// ReactDOM.render(&lt;App/&gt;, rootEl);  
-ReactDOM.unstable_createRoot(rootEl).render(&lt;App/&gt;);</code></pre>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过使用ReactDOM.unstable_createRoot开启Concurrent Mode</span></span><br><span class="line"><span class="comment">// ReactDOM.render(&lt;App/&gt;, rootEl);  </span></span><br><span class="line"><span class="title class_">ReactDOM</span>.<span class="title function_">unstable_createRoot</span>(rootEl).<span class="title function_">render</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">App</span>/&gt;</span></span>);</span><br></pre></td></tr></table></figure>
+
 <p>此时我们的长任务被拆分到每一帧不同的<code>task</code>中，<code>JS脚本</code>执行时间大体在<code>5ms</code>左右，这样浏览器就有剩余时间执行<strong>样式布局</strong>和<strong>样式绘制</strong>，减少掉帧的可能性。</p>
 <p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://react.iamkasong.com/img/time-slice.png" alt="长任务"> </p>
 <p> 所以，解决<code>CPU瓶颈</code>的关键是实现<code>时间切片</code>，而<code>时间切片</code>的关键是：将<strong>同步的更新</strong>变为<strong>可中断的异步更新</strong>。 </p>

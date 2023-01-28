@@ -51,6 +51,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -72,7 +74,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -88,7 +90,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -122,7 +124,8 @@
 <p>(2) 浏览器清空上一轮的动画函数；</p>
 <p>(3) 这个方法返回的<code>handlerId</code> 值会和动画函数<code>callback</code>，以``  进入到动画帧请求回调函数列；</p>
 <p>(4) 浏览器会遍历动画帧请求回调函数列表，根据<code>handlerId</code> 的值大小，依次去执行相应的动画函数。</p>
-<h3 id="3-取消动画函数的方法："><a href="#3-取消动画函数的方法：" class="headerlink" title="3. 取消动画函数的方法："></a>3. 取消动画函数的方法：</h3><pre><code class="js">cancelAnimationFrame(handlerId)</code></pre>
+<h3 id="3-取消动画函数的方法："><a href="#3-取消动画函数的方法：" class="headerlink" title="3. 取消动画函数的方法："></a>3. 取消动画函数的方法：</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">cancelAnimationFrame</span>(handlerId)</span><br></pre></td></tr></table></figure>
+
 <h2 id="setTimeout和requestAnimationFrame区别"><a href="#setTimeout和requestAnimationFrame区别" class="headerlink" title="setTimeout和requestAnimationFrame区别"></a>setTimeout和requestAnimationFrame区别</h2><h3 id="1-setTimeout"><a href="#1-setTimeout" class="headerlink" title="1. setTimeout"></a>1. setTimeout</h3><p>  理解了上面的概念以后，我们不难发现，<code>setTimeout</code>其实就是通过设置一个间隔时间来不断的改变图像的位置，从而达到动画效果的。但利用<code>seTimeout</code>实现的动画在某些低端机上会出现卡顿、抖动的现象。 这种现象的产生有两个原因：</p>
 <ul>
 <li><code>setTimeout</code>的执行时间并不是确定的。在Javascript中， <code>setTimeout</code>任务被放进了异步队列中，只有当主线程上的任务执行完以后，才会去检查该队列里的任务是否需要开始执行，因此 <strong>setTimeout 的实际执行时间一般要比其设定的时间晚一些。</strong></li>
@@ -142,16 +145,8 @@
 <p>从上面的绘制过程中可以看出，屏幕没有更新left=2px的那一帧画面，图像直接从1px的位置跳到了3px的的位置，这就是丢帧现象，这种现象就会引起动画卡顿。</p>
 <h3 id="2-requestAnimationFrame"><a href="#2-requestAnimationFrame" class="headerlink" title="2. requestAnimationFrame"></a>2. requestAnimationFrame</h3><p>与<code>setTimeout</code>相比，<code>requestAnimationFrame</code>最大的优势是<strong>由系统来决定回调函数的执行时机。</strong>具体一点讲，如果屏幕刷新率是60Hz,那么回调函数就每16.7ms被执行一次，如果刷新率是75Hz，那么这个时间间隔就变成了1000/75=13.3ms，换句话说就是，<code>requestAnimationFrame</code>的步伐跟着系统的刷新步伐走。<strong>它能保证回调函数在屏幕每一次的刷新间隔中只被执行一次</strong>，这样就不会引起丢帧现象，也不会导致动画出现卡顿的问题。</p>
 <p>这个API的调用很简单，如下所示：</p>
-<pre><code class="js">var progress = 0;
-//回调函数
-function render() &#123;  
-  progress += 1; //修改图像的位置  
-  if (progress &lt; 100) &#123;  //在动画没有结束前，递归渲染    
-    window.requestAnimationFrame(render); 
-  &#125;
-&#125;
-//第一帧渲染
-window.requestAnimationFrame(render);复制代码</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> progress = <span class="number">0</span>;</span><br><span class="line"><span class="comment">//回调函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">render</span>(<span class="params"></span>) &#123;  </span><br><span class="line">  progress += <span class="number">1</span>; <span class="comment">//修改图像的位置  </span></span><br><span class="line">  <span class="keyword">if</span> (progress &lt; <span class="number">100</span>) &#123;  <span class="comment">//在动画没有结束前，递归渲染    </span></span><br><span class="line">    <span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(render); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//第一帧渲染</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(render);复制代码</span><br></pre></td></tr></table></figure>
+
 <p>除此之外，<code>requestAnimationFrame</code>还有以下两个优势：</p>
 <ul>
 <li><p><strong>CPU节能</strong>：使用<code>setTimeout</code>实现的动画，当页面被隐藏或最小化时，<code>setTimeout</code>仍然在后台执行动画任务，由于此时页面处于不可见或不可用状态，刷新动画是没有意义的，完全是浪费CPU资源。而<code>requestAnimationFrame</code>则完全不同，当页面处理未激活的状态下，该页面的屏幕刷新任务也会被系统暂停，因此跟着系统步伐走的<code>requestAnimationFrame</code>也会停止渲染，当页面被激活时，动画就从上次停留的地方继续执行，有效节省了CPU开销。</p>

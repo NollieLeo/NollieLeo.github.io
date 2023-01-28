@@ -23,12 +23,12 @@
   <title>多态 - 翁先森的博客</title>
 
   
-    <meta name="description" content="多态的实际含义是：同一操作作用于不同的对象上面，可以产生不同的解释和不同的执行结果。换句话说，给不同的对象发送同一个消息的时候，这些对象会根据这个消息分别给出不同的反馈。  var makeSound &#x3D; function (animal) &amp;#123;     if(animal instanceof Duck)&amp;#123;         console.log(&#39;嘎嘎嘎&#39;)">
+    <meta name="description" content="多态的实际含义是：同一操作作用于不同的对象上面，可以产生不同的解释和不同的执行结果。换句话说，给不同的对象发送同一个消息的时候，这些对象会根据这个消息分别给出不同的反馈。  123456789101112var makeSound &#x3D; function (animal) &amp;#123;    if(animal instanceof Duck)&amp;#123;        console.log(&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多态">
 <meta property="og:url" content="https://github.com/NollieLeo/2020/03/16/%E5%A4%9A%E6%80%81/index.html">
 <meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="多态的实际含义是：同一操作作用于不同的对象上面，可以产生不同的解释和不同的执行结果。换句话说，给不同的对象发送同一个消息的时候，这些对象会根据这个消息分别给出不同的反馈。  var makeSound &#x3D; function (animal) &amp;#123;     if(animal instanceof Duck)&amp;#123;         console.log(&#39;嘎嘎嘎&#39;)">
+<meta property="og:description" content="多态的实际含义是：同一操作作用于不同的对象上面，可以产生不同的解释和不同的执行结果。换句话说，给不同的对象发送同一个消息的时候，这些对象会根据这个消息分别给出不同的反馈。  123456789101112var makeSound &#x3D; function (animal) &amp;#123;    if(animal instanceof Duck)&amp;#123;        console.log(&amp;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-16T09:16:30.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.282Z">
@@ -51,6 +51,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -72,7 +74,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -88,7 +90,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -104,36 +106,12 @@
 <blockquote>
 <p>多态的实际含义是：同一操作作用于不同的对象上面，可以产生不同的解释和不同的执行结<br>果。换句话说，给不同的对象发送同一个消息的时候，这些对象会根据这个消息分别给出不同的<br>反馈。</p>
 </blockquote>
-<pre><code class="javascript">var makeSound = function (animal) &#123;
-    if(animal instanceof Duck)&#123;
-        console.log(&#39;嘎嘎嘎&#39;);
-    &#125;else if(animal instanceof Dog)&#123;
-        console.log(&#39;汪汪&#39;);
-    &#125;
-&#125;
-var Duck = function()&#123;&#125;;
-var Dog = function()&#123;&#125;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> makeSound = <span class="keyword">function</span> (<span class="params">animal</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(animal <span class="keyword">instanceof</span> <span class="title class_">Duck</span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;嘎嘎嘎&#x27;</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(animal <span class="keyword">instanceof</span> <span class="title class_">Dog</span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;汪汪&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> <span class="title class_">Duck</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> <span class="title class_">Dog</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">makeSound</span>(<span class="keyword">new</span> <span class="title class_">Duck</span>());</span><br><span class="line"><span class="title function_">makeSound</span>(<span class="keyword">new</span> <span class="title class_">Dog</span>());</span><br></pre></td></tr></table></figure>
 
-makeSound(new Duck());
-makeSound(new Dog());</code></pre>
 <p>​    这段代码确实体现了“多态性”，当我们分别向鸭和鸡发出“叫唤”的消息时，它们根据此<br>消息作出了各自不同的反应。但这样的“多态性”是无法令人满意的，如果后来又增加了一只动<br>物，比如狗，显然狗的叫声是“汪汪汪”，此时我们必须得改动 makeSound 函数，才能让狗也发出<br>叫声。修改代码总是危险的，修改的地方越多，程序出错的可能性就越大，而且当动物的种类越<br>来越多时， makeSound 有可能变成一个巨大的函数。</p>
 <p>​    多态背后的思想是将“做什么”和“谁去做以及怎样去做”分离开来，也就是将“不变的事<br>物”与 “可能改变的事物”分离开来。在这个故事中，动物都会叫，这是不变的，但是不同类<br>型的动物具体怎么叫是可变的。把不变的部分隔离出来，把可变的部分封装起来，这给予了我们<br>扩展程序的能力，程序看起来是可生长的，也是符合<strong>开放 — 封闭原则</strong>的，相对于修改代码来说，<br>仅仅增加代码就能完成同样的功能，这显然优雅和安全得多</p>
-<h3 id="1-对象的多态性"><a href="#1-对象的多态性" class="headerlink" title="1. 对象的多态性"></a>1. 对象的多态性</h3><pre><code class="javascript">var makeSound = function (animal) &#123;
-    if (typeof animal === &#39;object&#39; &amp;&amp; animal.sound) &#123;
-        animal.sound();
-    &#125; else &#123;
-        console.log(&#39;我不是动物我不能叫&#39;)
-    &#125;
-&#125;
-var Duck = function () &#123; &#125;;
-var Dog = function () &#123; &#125;;
+<h3 id="1-对象的多态性"><a href="#1-对象的多态性" class="headerlink" title="1. 对象的多态性"></a>1. 对象的多态性</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> makeSound = <span class="keyword">function</span> (<span class="params">animal</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> animal === <span class="string">&#x27;object&#x27;</span> &amp;&amp; animal.<span class="property">sound</span>) &#123;</span><br><span class="line">        animal.<span class="title function_">sound</span>();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;我不是动物我不能叫&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> <span class="title class_">Duck</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123; &#125;;</span><br><span class="line"><span class="keyword">var</span> <span class="title class_">Dog</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123; &#125;;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Duck</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">sound</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;嘎嘎嘎嘎&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">makeSound</span>(<span class="keyword">new</span> <span class="title class_">Duck</span>());</span><br><span class="line"><span class="title function_">makeSound</span>(<span class="keyword">new</span> <span class="title class_">Dog</span>());</span><br></pre></td></tr></table></figure>
 
-Duck.prototype.sound = function () &#123;
-    console.log(&#39;嘎嘎嘎嘎&#39;);
-&#125;
-
-makeSound(new Duck());
-makeSound(new Dog());</code></pre>
 <h3 id="2-JavaScript的多态"><a href="#2-JavaScript的多态" class="headerlink" title="2. JavaScript的多态"></a>2. JavaScript的多态</h3><p>多态的思想实际上是把“做什么”和“谁去做”分离开来，要实现这一点，归根结底先要消除类型之间的耦合关系。如果类型之间的耦合关系没有被消除，那么我们在 makeSound 方法中指定了发出叫声的对象是某个类型，它就不可能再被替换为另外一个类型。</p>
 <p>在 Java中，可以通过向上转型来实现多态。</p>
 <p>而 JavaScript的变量类型在运行期是可变的。一个 JavaScript对象，既可以表示 Duck 类型的<br>对象，又可以表示 Chicken 类型的对象，这意味着 JavaScript对象的多态性是与生俱来的</p>

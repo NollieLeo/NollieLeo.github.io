@@ -23,12 +23,12 @@
   <title>this,call和apply - 翁先森的博客</title>
 
   
-    <meta name="description" content="this, call 和apply1. this JavaScript的 this 总是指向一个对象，而具体指向哪个对象是在运行时基于函数的执行环境动态绑定的，而非函数被声明时的环境  1.1 this指向 作为对象方法调用 作为普通函数调用 构造器调用 Function.prototype.apply或&#96;&#96;Function.prototype.call&#96;  1.1.1 作为对象方法调用var o">
+    <meta name="description" content="this, call 和apply1. this JavaScript的 this 总是指向一个对象，而具体指向哪个对象是在运行时基于函数的执行环境动态绑定的，而非函数被声明时的环境  1.1 this指向 作为对象方法调用 作为普通函数调用 构造器调用 Function.prototype.apply或&#96;&#96;Function.prototype.call&#96;  1.1.1 作为对象方法调用12345">
 <meta property="og:type" content="article">
 <meta property="og:title" content="this,call和apply">
 <meta property="og:url" content="https://github.com/NollieLeo/2020/03/16/this-call%E5%92%8Capply/index.html">
 <meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="this, call 和apply1. this JavaScript的 this 总是指向一个对象，而具体指向哪个对象是在运行时基于函数的执行环境动态绑定的，而非函数被声明时的环境  1.1 this指向 作为对象方法调用 作为普通函数调用 构造器调用 Function.prototype.apply或&#96;&#96;Function.prototype.call&#96;  1.1.1 作为对象方法调用var o">
+<meta property="og:description" content="this, call 和apply1. this JavaScript的 this 总是指向一个对象，而具体指向哪个对象是在运行时基于函数的执行环境动态绑定的，而非函数被声明时的环境  1.1 this指向 作为对象方法调用 作为普通函数调用 构造器调用 Function.prototype.apply或&#96;&#96;Function.prototype.call&#96;  1.1.1 作为对象方法调用12345">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/this-call%E5%92%8Capply/1579747558506.png">
 <meta property="article:published_time" content="2020-03-16T09:16:30.000Z">
@@ -54,6 +54,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -75,7 +77,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -91,7 +93,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -113,140 +115,62 @@
 <li>构造器调用</li>
 <li><code>Function.prototype.apply</code>或``Function.prototype.call`</li>
 </ul>
-<h4 id="1-1-1-作为对象方法调用"><a href="#1-1-1-作为对象方法调用" class="headerlink" title="1.1.1 作为对象方法调用"></a>1.1.1 作为对象方法调用</h4><pre><code class="javascript">var obj = &#123;
-    a:1,
-    getA:function()&#123;
-        alert(this === obj);
-        alert(this.a);
-    &#125;
-&#125;
-obj.getA();</code></pre>
+<h4 id="1-1-1-作为对象方法调用"><a href="#1-1-1-作为对象方法调用" class="headerlink" title="1.1.1 作为对象方法调用"></a>1.1.1 作为对象方法调用</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">a</span>:<span class="number">1</span>,</span><br><span class="line">    <span class="attr">getA</span>:<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="title function_">alert</span>(<span class="variable language_">this</span> === obj);</span><br><span class="line">        <span class="title function_">alert</span>(<span class="variable language_">this</span>.<span class="property">a</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="title function_">getA</span>();</span><br></pre></td></tr></table></figure>
+
 <h4 id="1-1-2-作为普通函数调用"><a href="#1-1-2-作为普通函数调用" class="headerlink" title="1.1.2 作为普通函数调用"></a>1.1.2 作为普通函数调用</h4><p>当函数<u>不作为对象的属性</u>被调用时，也就是我们常说的普通函数方式，此时的 <strong>this 总是指向全局</strong>对象。在浏览器的 JavaScript里，这个全局对象是 window 对象</p>
-<pre><code class="javascript">window.name = &#39;globalName&#39;;
-var myObject = &#123;
-    name: &#39;sven&#39;,
-    getName: function () &#123;
-        return this.name;
-    &#125;
-&#125;;
-var getName = myObject.getName; //作为普通函数，这时候this指向全局，因为它不是以对象的属性调用的，可以看1.2
-console.log(getName()); // globalName</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">name</span> = <span class="string">&#x27;globalName&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> myObject = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;sven&#x27;</span>,</span><br><span class="line">    <span class="attr">getName</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">name</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> getName = myObject.<span class="property">getName</span>; <span class="comment">//作为普通函数，这时候this指向全局，因为它不是以对象的属性调用的，可以看1.2</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">getName</span>()); <span class="comment">// globalName</span></span><br></pre></td></tr></table></figure>
+
 <h4 id="1-1-3-构造器调用"><a href="#1-1-3-构造器调用" class="headerlink" title="1.1.3 构造器调用"></a>1.1.3 构造器调用</h4><blockquote>
 <p>JavaScript 中没有类，但是可以从构造器中创建对象，同时也提供了 new 运算符，使得构造器看起来更像一个类</p>
 <p>除了宿主提供的一些内置函数，大部分 JavaScript函数都可以当作构造器使用。构造器的外表跟普通函数一模一样，它们的区别在于被调用的方式。当用 new 运算符调用函数时，该函数总会返回一个对象，通常情况下，构造器里的 this 就指向返回的这个对象</p>
 </blockquote>
-<pre><code class="javascript">var MyClass = function()&#123;
-this.name = &#39;sven&#39;;
-&#125;;
-var obj = new MyClass();
-alert ( obj.name ); // 输出：sven</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title class_">MyClass</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;sven&#x27;</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="title class_">MyClass</span>();</span><br><span class="line">alert ( obj.<span class="property">name</span> ); <span class="comment">// 输出：sven</span></span><br></pre></td></tr></table></figure>
+
 <p>但用 new 调用构造器时，还要注意一个问题，如果构造器显式地返回了一个 object 类型的对象，那么此次运算结果最终会返回这个对象，而不是我们之前期待的 this</p>
-<pre><code class="javascript">var MyClass = function()&#123;
-this.name = &#39;sven&#39;;
-return &#123; // 显式地返回一个对象
-name: &#39;anne&#39;
-&#125;
-&#125;;
-var obj = new MyClass();
-alert ( obj.name ); // 输出：anne</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title class_">MyClass</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;sven&#x27;</span>;</span><br><span class="line"><span class="keyword">return</span> &#123; <span class="comment">// 显式地返回一个对象</span></span><br><span class="line"><span class="attr">name</span>: <span class="string">&#x27;anne&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="title class_">MyClass</span>();</span><br><span class="line">alert ( obj.<span class="property">name</span> ); <span class="comment">// 输出：anne</span></span><br></pre></td></tr></table></figure>
+
 <p>如果构造器不显式地返回任何数据，或者是返回一个非对象类型的数据，就不会造成上述<br>问题：</p>
-<pre><code class="javas">var MyClass = function()&#123;
-this.name = &#39;sven&#39;
-return &#39;anne&#39;; // 返回 string 类型
-&#125;;
-var obj = new MyClass();
-alert ( obj.name ); // 输出：sven</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var MyClass = function()&#123;</span><br><span class="line">this.name = &#x27;sven&#x27;</span><br><span class="line">return &#x27;anne&#x27;; // 返回 string 类型</span><br><span class="line">&#125;;</span><br><span class="line">var obj = new MyClass();</span><br><span class="line">alert ( obj.name ); // 输出：sven</span><br></pre></td></tr></table></figure>
+
 <h4 id="1-1-4-Function-prototype-call-或-Function-prototype-apply-调用"><a href="#1-1-4-Function-prototype-call-或-Function-prototype-apply-调用" class="headerlink" title="1.1.4  Function.prototype.call 或 Function.prototype.apply 调用"></a>1.1.4  Function.prototype.call 或 Function.prototype.apply 调用</h4><p>跟普通的函数调用相比，用 Function.prototype.call 或 Function.prototype.apply 可以动态地<br>改变传入函数的 this ：</p>
-<pre><code class="javascript">var obj1 = &#123;
-    name: &#39;sven&#39;,
-    getName: function()&#123;
-        return this.name;
-    &#125;
-&#125;;
-var obj2 = &#123;
-    name: &#39;anne&#39;
-&#125;;
-console.log( obj1.getName() ); // 输出: sven
-console.log( obj1.getName.call( obj2 ) ); // 输出：anne</code></pre>
-<h3 id="1-2-丢失的this"><a href="#1-2-丢失的this" class="headerlink" title="1.2 丢失的this"></a>1.2 丢失的this</h3><pre><code class="javascript">var obj = &#123;
-myName: &#39;sven&#39;,
-    getName: function()&#123;
-    return this.myName;
-    &#125;
-&#125;;
-console.log( obj.getName() ); // 输出：&#39;sven&#39;
-var getName2 = obj.getName;
-console.log( getName2() ); // 输出：undefined</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1 = &#123;</span><br><span class="line">	<span class="attr">name</span>: <span class="string">&#x27;sven&#x27;</span>,</span><br><span class="line">	<span class="attr">getName</span>: <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">name</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;</span><br><span class="line">	<span class="attr">name</span>: <span class="string">&#x27;anne&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>( obj1.<span class="title function_">getName</span>() ); <span class="comment">// 输出: sven</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>( obj1.<span class="property">getName</span>.<span class="title function_">call</span>( obj2 ) ); <span class="comment">// 输出：anne</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-丢失的this"><a href="#1-2-丢失的this" class="headerlink" title="1.2 丢失的this"></a>1.2 丢失的this</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line"><span class="attr">myName</span>: <span class="string">&#x27;sven&#x27;</span>,</span><br><span class="line">	<span class="attr">getName</span>: <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">myName</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>( obj.<span class="title function_">getName</span>() ); <span class="comment">// 输出：&#x27;sven&#x27;</span></span><br><span class="line"><span class="keyword">var</span> getName2 = obj.<span class="property">getName</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>( <span class="title function_">getName2</span>() ); <span class="comment">// 输出：undefined</span></span><br></pre></td></tr></table></figure>
+
 <p>当调用 obj.getName 时， getName 方法是作为 obj 对象的属性被调用的，当用<strong>另外一个变量</strong> getName2 来引用 obj.getName ，并且调用getName2 时，此时是以普通函数的形式来调用的， this 是指向全局 window 的</p>
 <p>再来个栗子</p>
-<pre><code class="javascript">document.getElementById = (function( func )&#123;
-    return function()&#123;
-        return func.apply( document, arguments );
-&#125;
-&#125;)( document.getElementById );
-var getId = document.getElementById;
-var div = getId( &#39;div1&#39; );
-alert (div.id); // 输出： div1</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="property">getElementById</span> = (<span class="keyword">function</span>(<span class="params"> func </span>)&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> func.<span class="title function_">apply</span>( <span class="variable language_">document</span>, <span class="variable language_">arguments</span> );</span><br><span class="line">&#125;</span><br><span class="line">&#125;)( <span class="variable language_">document</span>.<span class="property">getElementById</span> );</span><br><span class="line"><span class="keyword">var</span> getId = <span class="variable language_">document</span>.<span class="property">getElementById</span>;</span><br><span class="line"><span class="keyword">var</span> div = <span class="title function_">getId</span>( <span class="string">&#x27;div1&#x27;</span> );</span><br><span class="line">alert (div.<span class="property">id</span>); <span class="comment">// 输出： div1</span></span><br></pre></td></tr></table></figure>
+
 <p>利用 apply 把 document 当作 this 传入 getId 函数，帮助“修正” this</p>
 <p>否则如果想要简化document.getElementById单纯的是不可取的</p>
-<pre><code class="javascript"> var getId = document.getElementById;
-        console.log(getId(&#39;hello&#39;));</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getId = <span class="variable language_">document</span>.<span class="property">getElementById</span>;</span><br><span class="line">       <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">getId</span>(<span class="string">&#x27;hello&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
 <h2 id="2-call-和apply"><a href="#2-call-和apply" class="headerlink" title="2. call 和apply"></a>2. call 和apply</h2><h3 id="2-1-区别"><a href="#2-1-区别" class="headerlink" title="2.1 区别"></a>2.1 区别</h3><p><code>Function.prototype.call</code>和 <code>Function.prototype.apply</code>都是非常常用的方法。它们的作用一模一样，区别仅在于传入参数形式的不同</p>
 <p><strong>apply</strong> 接受两个参数，<strong>第一个参数</strong>指定了函数体内 this 对象的指向，<strong>第二个参数</strong>为一个带下标的集合，这个集合可以为<u>数组</u>，也可以为<u>类数组</u>,apply 方法把这个集合中的元素作为参数传递给被调用的函数</p>
 <p><strong>call</strong> 传入的参数数量不固定，跟 apply 相同的是，第一个参数也是代表函数体内的 this 指向，从<strong>第二个参数</strong>开始往后，每个参数被依次传入函数</p>
-<pre><code class="javascript">var func = function (a, b, c) &#123;
-    alert([a, b, c]); // 输出 [ 1, 2, 3 ]
-&#125;;
-func.call(null, 1, 2, 3);
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> func = <span class="keyword">function</span> (<span class="params">a, b, c</span>) &#123;</span><br><span class="line">    <span class="title function_">alert</span>([a, b, c]); <span class="comment">// 输出 [ 1, 2, 3 ]</span></span><br><span class="line">&#125;;</span><br><span class="line">func.<span class="title function_">call</span>(<span class="literal">null</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">func.<span class="title function_">apply</span>(<span class="literal">null</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br></pre></td></tr></table></figure>
 
-func.apply(null, [1, 2, 3]);</code></pre>
 <p>当调用一个函数时，JavaScript 的解释器并不会计较形参和实参在数量、类型以及顺序上的区别，JavaScript的参数在内部就是用一个数组来表示的。从这个意义上说， apply 比 call 的使用率更高，我们不必关心具体有多少参数被传入函数，只要用 apply 一股脑地推过去就可以了</p>
 <p><u>当使用 call 或者 apply 的时候，如果我们传入的第一个参数为 null ，函数体内的 this 会指向默认的宿主对象，在浏览器中则是 window</u></p>
 <p>有时候我们使用 call 或者 apply 的目的不在于指定 this 指向，而是另有用途，比如借用其<br>他对象的方法。那么我们可以传入 null 来代替某个具体的对象：</p>
-<pre><code class="javascript">Math.max.apply( null, [ 1, 2, 5, 3, 4 ] ) // 输出：5</code></pre>
-<h3 id="2-2-call-和-apply-的用途"><a href="#2-2-call-和-apply-的用途" class="headerlink" title="2.2 call 和 apply 的用途"></a>2.2 call 和 apply 的用途</h3><h4 id="2-2-1-改变-this-指向"><a href="#2-2-1-改变-this-指向" class="headerlink" title="2.2.1 改变 this 指向"></a>2.2.1 改变 this 指向</h4><pre><code class="javascript">window.name = &#39;motherfucker&#39;;
-obj1 = &#123;
-    name: &#39;helloobj1&#39;,
-&#125;
-obj2 = &#123;
-    name: &#39;hellowobj2&#39;,
-&#125;
-var getName = function () &#123;
-    console.log(this.name);
-&#125;
-getName();
-getName.apply(obj1);
-getName.apply(obj2);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Math</span>.<span class="property">max</span>.<span class="title function_">apply</span>( <span class="literal">null</span>, [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">4</span> ] ) <span class="comment">// 输出：5</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-call-和-apply-的用途"><a href="#2-2-call-和-apply-的用途" class="headerlink" title="2.2 call 和 apply 的用途"></a>2.2 call 和 apply 的用途</h3><h4 id="2-2-1-改变-this-指向"><a href="#2-2-1-改变-this-指向" class="headerlink" title="2.2.1 改变 this 指向"></a>2.2.1 改变 this 指向</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">name</span> = <span class="string">&#x27;motherfucker&#x27;</span>;</span><br><span class="line">obj1 = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;helloobj1&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line">obj2 = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;hellowobj2&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> getName = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">getName</span>();</span><br><span class="line">getName.<span class="title function_">apply</span>(obj1);</span><br><span class="line">getName.<span class="title function_">apply</span>(obj2);</span><br></pre></td></tr></table></figure>
+
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1579747558506.png" alt></p>
 <p>实际开发过程中会遇到this指向被不经意改变</p>
 <p>例如：</p>
-<pre><code class="javascript">document.getElementById( &#39;div1&#39; ).onclick = function()&#123;
-    alert( this.id ); // 输出：div1
-&#125;;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>( <span class="string">&#x27;div1&#x27;</span> ).<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="title function_">alert</span>( <span class="variable language_">this</span>.<span class="property">id</span> ); <span class="comment">// 输出：div1</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 <p>假如该事件函数中有一个内部函数 func ，在事件内部调用 func 函数时， func 函数体内的 this就指向了 window ，而不是我们预期的 div </p>
-<pre><code class="javascript">document.getElementById( &#39;div1&#39; ).onclick = function()&#123;
-    alert( this.id ); // 输出：div1
-    var func = function()&#123;
-        alert ( this.id ); // 输出：undefined
-    &#125;
-    func();
-&#125;;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>( <span class="string">&#x27;div1&#x27;</span> ).<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="title function_">alert</span>( <span class="variable language_">this</span>.<span class="property">id</span> ); <span class="comment">// 输出：div1</span></span><br><span class="line">	<span class="keyword">var</span> func = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">		alert ( <span class="variable language_">this</span>.<span class="property">id</span> ); <span class="comment">// 输出：undefined</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="title function_">func</span>();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 <p>解决方法有两种，一种是之前提到的</p>
-<pre><code class="javascript">document.getElementById(&#39;hello&#39;).onclick = function () &#123;
-    var that = this;
-    console.log(that.id); // 输出：hello
-    var func = function () &#123;
-        console.log(that.id); // 输出：undefined
-    &#125;
-    func();
-&#125;;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;hello&#x27;</span>).<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> that = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(that.<span class="property">id</span>); <span class="comment">// 输出：hello</span></span><br><span class="line">    <span class="keyword">var</span> func = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(that.<span class="property">id</span>); <span class="comment">// 输出：undefined</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">func</span>();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 <p>第二种就是call和apply</p>
-<pre><code class="javascript">document.getElementById( &#39;div1&#39; ).onclick = function()&#123;
-    var func = function()&#123;
-        alert ( this.id ); // 输出：div1
-    &#125;
-    func.call( this );
-&#125;;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>( <span class="string">&#x27;div1&#x27;</span> ).<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="keyword">var</span> func = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">		alert ( <span class="variable language_">this</span>.<span class="property">id</span> ); <span class="comment">// 输出：div1</span></span><br><span class="line">	&#125;</span><br><span class="line">	func.<span class="title function_">call</span>( <span class="variable language_">this</span> );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>

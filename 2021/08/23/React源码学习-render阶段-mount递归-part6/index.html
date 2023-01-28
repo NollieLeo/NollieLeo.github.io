@@ -77,6 +77,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -98,7 +100,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -114,7 +116,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -177,19 +179,8 @@
 <p>发现这两个走的都是同一个函数，只是参数不一样</p>
 <h3 id="4-打上不一样的effectTag或者直接return"><a href="#4-打上不一样的effectTag或者直接return" class="headerlink" title="4. 打上不一样的effectTag或者直接return"></a>4. 打上不一样的effectTag或者直接return</h3><p>上面的 childReconciler的参数 代表的是否追踪副作用</p>
 <p>例如下面的这个<code>deleteChild</code>函数是表示删除当前节点的子节点的操作</p>
-<pre><code class="ts">function deleteChild(returnFiber: Fiber, childToDelete: Fiber): void &#123;
-    if (!shouldTrackSideEffects) &#123;
-      // Noop.
-      return;
-    &#125;
-    const deletions = returnFiber.deletions;
-    if (deletions === null) &#123;
-      returnFiber.deletions = [childToDelete];
-      returnFiber.flags |= ChildDeletion;
-    &#125; else &#123;
-      deletions.push(childToDelete);
-    &#125;
-  &#125;</code></pre>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">deleteChild</span>(<span class="params">returnFiber: Fiber, childToDelete: Fiber</span>): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!shouldTrackSideEffects) &#123;</span><br><span class="line">      <span class="comment">// Noop.</span></span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> deletions = returnFiber.<span class="property">deletions</span>;</span><br><span class="line">    <span class="keyword">if</span> (deletions === <span class="literal">null</span>) &#123;</span><br><span class="line">      returnFiber.<span class="property">deletions</span> = [childToDelete];</span><br><span class="line">      returnFiber.<span class="property">flags</span> |= <span class="title class_">ChildDeletion</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      deletions.<span class="title function_">push</span>(childToDelete);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
 <p>如果说需要追踪副作用的话，会给删除节点的fiber打上一个<code>flags</code></p>
 <blockquote>
 <p> 搜索reactFiberFlags文件看这些<a href="https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react-reconciler/src/ReactSideEffectTags.js">Flags</a>都有些啥</p>
@@ -200,11 +191,10 @@
 <p>当一个fiber节点需要插入并且需要更新属性的话</p>
 <p>那就得绑定2个flags，一个是 <code>Update</code>一个是 <code>Placement</code></p>
 <p>这里用二进制的话就可以直接进行按位 <code>或</code>的操作</p>
-<pre><code class="js">const effectTag = NoEffect;
-effectTag |= Update;
-effectTag |= Placement;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> effectTag = <span class="title class_">NoEffect</span>;</span><br><span class="line">effectTag |= <span class="title class_">Update</span>;</span><br><span class="line">effectTag |= <span class="title class_">Placement</span>;</span><br><span class="line"></span><br><span class="line">(effectTag &amp; <span class="title class_">PlacementAndUpdate</span>) !== <span class="title class_">NoEffect</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
-(effectTag &amp; PlacementAndUpdate) !== NoEffect; // true</code></pre>
+
+
 <p>无论如何最终，都会走到<code>reconcileChildFibers</code>这个方法里头，而这个方法是写在 <code>ChildReconciler</code>函数的，总而言之就是加了一层去判断是否要追踪副作用。</p>
 <h3 id="5-reconcileChildFibers"><a href="#5-reconcileChildFibers" class="headerlink" title="5. reconcileChildFibers"></a>5. reconcileChildFibers</h3><p><a href="https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react-reconciler/src/ReactChildFiber.old.js#L1272">地址</a></p>
 <p>这个方法中会判断当前child的类型，进而对不同的类型做不一样的操作</p>
@@ -215,10 +205,8 @@ effectTag |= Placement;
 </ol>
 <p>当然最需要细分的就是为object的情况，里头还包括了child是children等情形</p>
 <p>我们走到object里头细看一下，假设我们现在走到了一个节点是这样的</p>
-<pre><code class="jsx">&lt;header&gt;
-        &lt;span&gt;title&lt;/span&gt;
-&lt;/header&gt;
-</code></pre>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;header&gt;</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span>title<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">&lt;/header&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>那他就会去调用 <code>reconcileSingleElement</code>的方法</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210829105504513.png" alt="image-20210829105504513"></p>
 <p>最终这个方法会走到createFiberFromElement</p>
@@ -236,19 +224,10 @@ effectTag |= Placement;
 <p>要注意的点是，当你调用<code>reconcileChildFibers</code>时候子节点可能是一个数组，<strong>这种情况react仍然是只针对数组的第一个元素创建fiber</strong></p>
 <p>​    </p>
 <h2 id="completeWork做了啥？"><a href="#completeWork做了啥？" class="headerlink" title="completeWork做了啥？"></a>completeWork做了啥？</h2><h3 id="1-根据fiber节点的tag进入不同的case"><a href="#1-根据fiber节点的tag进入不同的case" class="headerlink" title="1. 根据fiber节点的tag进入不同的case"></a>1. 根据fiber节点的tag进入不同的case</h3><p>这里首先进入completeWork阶段的时候span标签</p>
-<pre><code class="js">function App() &#123;
-  return (
-    &lt;div className=&quot;node1&quot;&gt;
-      &lt;header&gt;
-        &lt;span&gt;title&lt;/span&gt;
-      &lt;/header&gt;
-      &lt;main&gt;
-        main
-        &lt;p&gt;test&lt;/p&gt;
-      &lt;/main&gt;
-    &lt;/div&gt;
-  );
-&#125;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">App</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;node1&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">header</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>title<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">header</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">main</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        main</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>test<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210829152223028.png" alt="image-20210829152223028"></p>
 <p>这里是span 标签所以先进入 HostComponent的case逻辑</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210829152900269.png" alt="image-20210829152900269"></p>
@@ -260,7 +239,10 @@ effectTag |= Placement;
 <p>这里domElement就是一个span</p>
 <p>之后返回一个instance去执行appendAllChidren函数，由于span是我们第一个创建的元素，所以append会被跳过</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210829161632571.png" alt="image-20210829161632571"></p>
-<h3 id="3-保存创建出来的dom到fiber节点的stateNode中"><a href="#3-保存创建出来的dom到fiber节点的stateNode中" class="headerlink" title="3. 保存创建出来的dom到fiber节点的stateNode中"></a>3. 保存创建出来的dom到fiber节点的stateNode中</h3><pre><code class="js">workInProgress.stateNode = instance;</code></pre>
+<h3 id="3-保存创建出来的dom到fiber节点的stateNode中"><a href="#3-保存创建出来的dom到fiber节点的stateNode中" class="headerlink" title="3. 保存创建出来的dom到fiber节点的stateNode中"></a>3. 保存创建出来的dom到fiber节点的stateNode中</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">workInProgress.<span class="property">stateNode</span> = instance;</span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="4-将属性绑定到创建出来的dom元素上"><a href="#4-将属性绑定到创建出来的dom元素上" class="headerlink" title="4. 将属性绑定到创建出来的dom元素上"></a>4. 将属性绑定到创建出来的dom元素上</h3><p>执行finalizerInitialChildren, 将所有的属性绑到我们新创建的dom元素上面，到这里一个节点span的completework就大致完成了</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210829161958750.png" alt="image-20210829161958750"></p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210829162021263.png" alt="image-20210829162021263"></p>

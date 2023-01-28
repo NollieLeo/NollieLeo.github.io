@@ -23,12 +23,12 @@
   <title>继承之寄生式组合继承 - 翁先森的博客</title>
 
   
-    <meta name="description" content="寄生式组合继承在组合式继承的那篇文章说过，组合式继承，会将父类的构造函数调用两次。 本质上，子类原型最终式要包含超类的所有实例属性，子类的构造函数只要在执行适合重写原型就行了 再看看组合式继承的例子 function SuperType(name)&amp;#123;     this.name &#x3D; name;     this.numbers &#x3D; [1,2,3,4]; &amp;#125;  SuperType">
+    <meta name="description" content="寄生式组合继承在组合式继承的那篇文章说过，组合式继承，会将父类的构造函数调用两次。 本质上，子类原型最终式要包含超类的所有实例属性，子类的构造函数只要在执行适合重写原型就行了 再看看组合式继承的例子 1234567891011121314151617181920function SuperType(name)&amp;#123;    this.name &#x3D; name;    this.numbers &#x3D;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="继承之寄生式组合继承">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%AF%84%E7%94%9F%E5%BC%8F%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF/index.html">
 <meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="寄生式组合继承在组合式继承的那篇文章说过，组合式继承，会将父类的构造函数调用两次。 本质上，子类原型最终式要包含超类的所有实例属性，子类的构造函数只要在执行适合重写原型就行了 再看看组合式继承的例子 function SuperType(name)&amp;#123;     this.name &#x3D; name;     this.numbers &#x3D; [1,2,3,4]; &amp;#125;  SuperType">
+<meta property="og:description" content="寄生式组合继承在组合式继承的那篇文章说过，组合式继承，会将父类的构造函数调用两次。 本质上，子类原型最终式要包含超类的所有实例属性，子类的构造函数只要在执行适合重写原型就行了 再看看组合式继承的例子 1234567891011121314151617181920function SuperType(name)&amp;#123;    this.name &#x3D; name;    this.numbers &#x3D;">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%AF%84%E7%94%9F%E5%BC%8F%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF/2.jpg">
 <meta property="og:image" content="https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%AF%84%E7%94%9F%E5%BC%8F%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF/image-20210531171003754.png">
@@ -59,6 +59,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -80,7 +82,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -96,7 +98,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -112,26 +114,8 @@
 <h1 id="寄生式组合继承"><a href="#寄生式组合继承" class="headerlink" title="寄生式组合继承"></a>寄生式组合继承</h1><p>在组合式继承的那篇文章说过，组合式继承，会将父类的构造函数调用两次。</p>
 <p>本质上，子类原型最终式要包含超类的所有实例属性，子类的构造函数只要在执行适合重写原型就行了</p>
 <p>再看看组合式继承的例子</p>
-<pre><code class="js">function SuperType(name)&#123;
-    this.name = name;
-    this.numbers = [1,2,3,4];
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">SuperType</span>(<span class="params">name</span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">numbers</span> = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">SuperType</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">sayName</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">SubType</span>(<span class="params">name, age</span>)&#123;</span><br><span class="line">    <span class="title class_">SuperType</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>, name);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">SubType</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="keyword">new</span> <span class="title class_">SuperType</span>();</span><br><span class="line"><span class="title class_">SubType</span>.<span class="property">constructor</span> = <span class="title class_">SubType</span>;</span><br><span class="line"><span class="title class_">SubType</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">sayAge</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">age</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-SuperType.prototype.sayName = function()&#123;
-    console.log(this.name);
-&#125;
-
-function SubType(name, age)&#123;
-    SuperType.call(this, name);
-    this.age = age;
-&#125;
-
-SubType.prototype = new SuperType();
-SubType.constructor = SubType;
-SubType.prototype.sayAge = function()&#123;
-    console.log(this.age);
-&#125;
-</code></pre>
 <p>这个详细过程如下：</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="2.jpg" alt="image-20210531170936146"></p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210531171003754.png" alt="image-20210531171003754"></p>
@@ -139,11 +123,8 @@ SubType.prototype.sayAge = function()&#123;
 <p>为了解决这个，引出了了寄生组合式继承</p>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>通过盗用构造函数继承属性，但使用混合式原型链继承的方法。基本思路是不通过调用父类构造函数给子类原型赋值，而是取得父类原型的一个副本。</p>
 <p>说到底就是使用寄生式继承来继承父类原型，然后将返回的新对象赋值给子类原型</p>
-<pre><code class="js">function inheritPrototype(subType, superType)&#123;
-    let prototype = object(superType.prototype); // 创建对象
-    prototype.constructor = subType; // 增强对象
-    subType.prototype = prototype; // 赋值对象
-&#125;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">inheritPrototype</span>(<span class="params">subType, superType</span>)&#123;</span><br><span class="line">    <span class="keyword">let</span> prototype = <span class="title function_">object</span>(superType.<span class="property"><span class="keyword">prototype</span></span>); <span class="comment">// 创建对象</span></span><br><span class="line">    prototype.<span class="property">constructor</span> = subType; <span class="comment">// 增强对象</span></span><br><span class="line">    subType.<span class="property"><span class="keyword">prototype</span></span> = prototype; <span class="comment">// 赋值对象</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>inheritPrototype函数接受两个参数，子构造函数和父类构造函数</p>
 <ol>
 <li>创建父类原型的一个副本</li>

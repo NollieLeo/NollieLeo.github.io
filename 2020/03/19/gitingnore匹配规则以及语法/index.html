@@ -50,6 +50,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -71,7 +73,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -87,7 +89,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -212,83 +214,14 @@
 <li><p>不过，这样做虽然可以删除远程仓库里被 .gitignore 规则忽略的内容，但是这些内容的 git 压缩版本依然被保存在可回滚记录中以备以后回滚，这会导致 git 仓库过大。虽然有一些办法可以给 git 仓库进行瘦身，但是操作比较繁琐，非常的不推荐。因此，个人觉得还是应该有良好的 git 使用习惯，对于不用提交到仓库的内容，要第一时间用 .gitignore 进行过滤。对于占用空间小的内容，可以不予理会，但如果有较多、较大文件，不光是占了太多的远程仓库空间和本地空间，并且在 clone、push 的时候，也会因为仓库过大，而影响 clone 速度。</p>
 </li>
 </ul>
-<h2 id="四-模板"><a href="#四-模板" class="headerlink" title="四. 模板"></a>四. 模板</h2><h3 id="java-开发通用版本模板"><a href="#java-开发通用版本模板" class="headerlink" title="java 开发通用版本模板"></a>java 开发通用版本模板</h3><pre><code class=".gitignore">#java
-*.class
+<h2 id="四-模板"><a href="#四-模板" class="headerlink" title="四. 模板"></a>四. 模板</h2><h3 id="java-开发通用版本模板"><a href="#java-开发通用版本模板" class="headerlink" title="java 开发通用版本模板"></a>java 开发通用版本模板</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#java</span><br><span class="line">*.class</span><br><span class="line"></span><br><span class="line">#package file</span><br><span class="line">*.war</span><br><span class="line">*.ear</span><br><span class="line">*.zip</span><br><span class="line">*.tar.gz</span><br><span class="line">*.rar</span><br><span class="line">#maven ignore</span><br><span class="line">target/</span><br><span class="line">build/</span><br><span class="line"></span><br><span class="line">#eclipse ignore</span><br><span class="line">.settings/</span><br><span class="line">.project</span><br><span class="line">.classpatch</span><br><span class="line"></span><br><span class="line">#Intellij idea</span><br><span class="line">.idea/</span><br><span class="line">/idea/</span><br><span class="line">*.ipr</span><br><span class="line">*.iml</span><br><span class="line">*.iws</span><br><span class="line"></span><br><span class="line"># temp file</span><br><span class="line">*.log</span><br><span class="line">*.cache</span><br><span class="line">*.diff</span><br><span class="line">*.patch</span><br><span class="line">*.tmp</span><br><span class="line"></span><br><span class="line"># system ignore</span><br><span class="line">.DS_Store</span><br><span class="line">Thumbs.db</span><br></pre></td></tr></table></figure>
 
-#package file
-*.war
-*.ear
-*.zip
-*.tar.gz
-*.rar
-#maven ignore
-target/
-build/
+<h3 id="前端项目"><a href="#前端项目" class="headerlink" title="前端项目"></a>前端项目</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"># Numerous always-ignore extensions</span><br><span class="line">*.bak</span><br><span class="line">*.patch</span><br><span class="line">*.diff</span><br><span class="line">*.err</span><br><span class="line"> </span><br><span class="line"># temp file for git conflict merging</span><br><span class="line">*.orig</span><br><span class="line">*.log</span><br><span class="line">*.rej</span><br><span class="line">*.swo</span><br><span class="line">*.swp</span><br><span class="line">*.zip</span><br><span class="line">*.vi</span><br><span class="line">*~</span><br><span class="line">*.sass-cache</span><br><span class="line">*.tmp.html</span><br><span class="line">*.dump</span><br><span class="line"> </span><br><span class="line"># OS or Editor folders</span><br><span class="line">.DS_Store</span><br><span class="line">._*</span><br><span class="line">.cache</span><br><span class="line">.project</span><br><span class="line">.settings</span><br><span class="line">.tmproj</span><br><span class="line">*.esproj</span><br><span class="line">*.sublime-project</span><br><span class="line">*.sublime-workspace</span><br><span class="line">nbproject</span><br><span class="line">thumbs.db</span><br><span class="line">*.iml</span><br><span class="line"> </span><br><span class="line"># Folders to ignore</span><br><span class="line">.hg</span><br><span class="line">.svn</span><br><span class="line">.CVS</span><br><span class="line">.idea</span><br><span class="line">node_modules/</span><br><span class="line">jscoverage_lib/</span><br><span class="line">bower_components/</span><br><span class="line">dist/</span><br></pre></td></tr></table></figure>
 
-#eclipse ignore
-.settings/
-.project
-.classpatch
 
-#Intellij idea
-.idea/
-/idea/
-*.ipr
-*.iml
-*.iws
 
-# temp file
-*.log
-*.cache
-*.diff
-*.patch
-*.tmp
 
-# system ignore
-.DS_Store
-Thumbs.db</code></pre>
-<h3 id="前端项目"><a href="#前端项目" class="headerlink" title="前端项目"></a>前端项目</h3><pre><code class=".gitignore"># Numerous always-ignore extensions
-*.bak
-*.patch
-*.diff
-*.err
 
-# temp file for git conflict merging
-*.orig
-*.log
-*.rej
-*.swo
-*.swp
-*.zip
-*.vi
-*~
-*.sass-cache
-*.tmp.html
-*.dump
-
-# OS or Editor folders
-.DS_Store
-._*
-.cache
-.project
-.settings
-.tmproj
-*.esproj
-*.sublime-project
-*.sublime-workspace
-nbproject
-thumbs.db
-*.iml
-
-# Folders to ignore
-.hg
-.svn
-.CVS
-.idea
-node_modules/
-jscoverage_lib/
-bower_components/
-dist/</code></pre>
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>

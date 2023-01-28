@@ -59,6 +59,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -80,7 +82,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -96,7 +98,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -111,30 +113,20 @@
 <h1 class="article-title"><span>electron学习记录</span></h1>
 <h2 id="electron"><a href="#electron" class="headerlink" title="electron"></a>electron</h2><h3 id="核心模块"><a href="#核心模块" class="headerlink" title="核心模块"></a>核心模块</h3><p>![WeChat2314efdd8331a8e89163bc315a1a25a4](/Users/leo/Desktop/weng’s code/weng’blog/NollieLeo.github.io/source/_posts/electron学习记录/WeChat2314efdd8331a8e89163bc315a1a25a4.png)</p>
 <h2 id="快速搭建demo"><a href="#快速搭建demo" class="headerlink" title="快速搭建demo"></a>快速搭建demo</h2><h3 id="官方demo快速搭建（electron-quick-template）"><a href="#官方demo快速搭建（electron-quick-template）" class="headerlink" title="官方demo快速搭建（electron-quick-template）"></a>官方demo快速搭建（electron-quick-template）</h3><p><a href="https://github.com/electron/electron-quick-start">git地址</a></p>
-<pre><code class="shell"># Clone this repository
-git clone https://github.com/electron/electron-quick-start
-# Go into the repository
-cd electron-quick-start
-# Install dependencies
-npm install
-# Run the app
-npm start</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Clone this repository</span></span><br><span class="line">git clone https://github.com/electron/electron-quick-start</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Go into the repository</span></span><br><span class="line">cd electron-quick-start</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install dependencies</span></span><br><span class="line">npm install</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Run the app</span></span><br><span class="line">npm start</span><br></pre></td></tr></table></figure>
+
 <h3 id="搭建vue-electron"><a href="#搭建vue-electron" class="headerlink" title="搭建vue + electron"></a>搭建vue + electron</h3><h4 id="使用electron-vue"><a href="#使用electron-vue" class="headerlink" title="使用electron-vue"></a>使用electron-vue</h4><blockquote>
 <p><a target="_blank" rel="noopener" href="https://simulatedgreg.gitbooks.io/electron-vue/content/cn/">中文文档</a></p>
 </blockquote>
-<pre><code class="shell"># 安装 vue-cli 和 脚手架样板代码
-npm install -g vue-cli
-vue init simulatedgreg/electron-vue my-project
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 vue-cli 和 脚手架样板代码</span></span><br><span class="line">npm install -g vue-cli</span><br><span class="line">vue init simulatedgreg/electron-vue my-project</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装依赖并运行你的程序</span></span><br><span class="line">cd my-project</span><br><span class="line">yarn # 或者 npm install</span><br><span class="line">yarn run dev # 或者 npm run dev</span><br></pre></td></tr></table></figure>
 
-# 安装依赖并运行你的程序
-cd my-project
-yarn # 或者 npm install
-yarn run dev # 或者 npm run dev</code></pre>
+
+
 <h4 id="使用vue-cli自带的可视化创建项目"><a href="#使用vue-cli自带的可视化创建项目" class="headerlink" title="使用vue cli自带的可视化创建项目"></a>使用vue cli自带的可视化创建项目</h4><blockquote>
 <p>vue cli有很多插件化的东西可以用</p>
 </blockquote>
-<pre><code class="shell"># 打开可视化界面
-vue ui</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">打开可视化界面</span></span><br><span class="line">vue ui</span><br></pre></td></tr></table></figure>
+
 <p>如图：</p>
 <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="Users\Weng\AppData\Roaming\Typora\typora-user-images\image-20220112153725964.png" alt="image-20220112153725964" style="zoom: 50%;">
 
@@ -156,7 +148,8 @@ vue ui</code></pre>
 <p>或者使用 <code>vue add electron-builder</code>安装</p>
 <p>![image-20220112154326504](/Users/leo/Desktop/weng’s code/weng’blog/NollieLeo.github.io/source/_posts/electron学习记录\image-20220112154326504.png)</p>
 <p>接下来直接就：就ok了</p>
-<pre><code class="shell">npm run electron:serve</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run electron:serve</span><br></pre></td></tr></table></figure>
+
 <p>![image-20220112154639191](/Users/leo/Desktop/weng’s code/weng’blog/NollieLeo.github.io/source/_posts/electron学习记录\image-20220112154639191.png)</p>
 <h2 id="如何调试主进程"><a href="#如何调试主进程" class="headerlink" title="如何调试主进程"></a>如何调试主进程</h2><blockquote>
 <p>基于vscode通过ws协议进行调试，之后通过端口就可进入调试的页面，就形容调试node  <a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/editor/debugging#_launch-configurations">vscode调试官方文档</a></p>
@@ -189,22 +182,8 @@ vue ui</code></pre>
 <blockquote>
 <p>基于electron-vue的配置（以下配置再用electron-vue的时候复制进去吧）</p>
 </blockquote>
-<pre><code class="json">&#123;
-&quot;version&quot;: &quot;0.2.0&quot;,
-&quot;configurations&quot;: [
-  &#123;
-    &quot;name&quot;: &quot;Electron Main&quot;,
-    &quot;program&quot;: &quot;$&#123;workspaceFolder&#125;/.electron-vue/dev-runner.js&quot;,
-    &quot;request&quot;: &quot;launch&quot;,
-    &quot;skipFiles&quot;: [
-      &quot;&lt;node_internals&gt;/**&quot;
-    ],
-    &quot;type&quot;: &quot;node&quot;,
-    &quot;autoAttachChildProcesses&quot;: true,
-    &quot;protocol&quot;: &quot;inspector&quot;
-  &#125;
-  ]
-&#125;</code></pre>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0.2.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;configurations&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Electron Main&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;program&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;workspaceFolder&#125;/.electron-vue/dev-runner.js&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;request&quot;</span><span class="punctuation">:</span> <span class="string">&quot;launch&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;skipFiles&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;&lt;node_internals&gt;/**&quot;</span></span><br><span class="line">      <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;node&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;autoAttachChildProcesses&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;protocol&quot;</span><span class="punctuation">:</span> <span class="string">&quot;inspector&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">	<span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
 <p>这里的program指的是调试的入口文件，如果是用 官方的快速 模板搭建的话，就是main.js，而electron-vue则得是<code>.electron-vue/dev-runner.js</code>文件</p>
 </li>
 </ol>
@@ -219,13 +198,8 @@ vue ui</code></pre>
 <p>再electron-vue搭建的目录.electron-vue下的dev-runner.js</p>
 </blockquote>
 <p>把 .electron-vue/dev-runner.js 里以下报错代码注释掉。</p>
-<pre><code class="js">// // detect yarn or npm and process commandline args accordingly
-// if (process.env.npm_execpath.endsWith(&#39;yarn.js&#39;)) &#123;
-//   args = args.concat(process.argv.slice(3))
-// &#125; else if (process.env.npm_execpath.endsWith(&#39;npm-cli.js&#39;)) &#123;
-//   args = args.concat(process.argv.slice(2))
-// &#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// // detect yarn or npm and process commandline args accordingly</span></span><br><span class="line"><span class="comment">// if (process.env.npm_execpath.endsWith(&#x27;yarn.js&#x27;)) &#123;</span></span><br><span class="line"><span class="comment">//   args = args.concat(process.argv.slice(3))</span></span><br><span class="line"><span class="comment">// &#125; else if (process.env.npm_execpath.endsWith(&#x27;npm-cli.js&#x27;)) &#123;</span></span><br><span class="line"><span class="comment">//   args = args.concat(process.argv.slice(2))</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>这样是为了避免控制台报错</p>
 <p>![image-20220115121919211](/Users/leo/Desktop/weng’s code/weng’blog/NollieLeo.github.io/source/_posts/electron学习记录\image-20220115121919211.png)</p>
 <h4 id="开始调试"><a href="#开始调试" class="headerlink" title="开始调试"></a>开始调试</h4><p>打开vscode </p>
@@ -241,38 +215,12 @@ vue ui</code></pre>
 <p>![image-20220115122506756](/Users/leo/Desktop/weng’s code/weng’blog/NollieLeo.github.io/source/_posts/electron学习记录\image-20220115122506756.png)</p>
 <h3 id="vue-cli-vue-cli-plugin-electron-builder-调试"><a href="#vue-cli-vue-cli-plugin-electron-builder-调试" class="headerlink" title="vue-cli + vue-cli-plugin-electron-builder 调试"></a>vue-cli + vue-cli-plugin-electron-builder 调试</h3><p><a target="_blank" rel="noopener" href="https://nklayman.github.io/vue-cli-plugin-electron-builder/guide/recipes.html#multiple-pages">官方文档</a></p>
 <p>调试demo<a href="https://github.com/nklayman/electron-vscode-debug-example/blob/master/.vscode/tasks.json">地址</a></p>
-<h3 id="其他调试的launch-json配置"><a href="#其他调试的launch-json配置" class="headerlink" title="其他调试的launch.json配置"></a>其他调试的launch.json配置</h3><pre><code class="json">&#123;
-  &quot;version&quot;: &quot;0.2.0&quot;,
-  &quot;configurations&quot;: [
-    &#123;
-      //方式一
-      &quot;name&quot;: &quot;Debug Main Process&quot;,
-      &quot;type&quot;: &quot;node&quot;,
-      &quot;request&quot;: &quot;launch&quot;,
-      &quot;cwd&quot;: &quot;$&#123;workspaceFolder&#125;&quot;,
-      &quot;timeout&quot;: 60000, //避免出现can not connect to the target错误
-      &quot;runtimeExecutable&quot;: &quot;$&#123;workspaceFolder&#125;/node_modules/.bin/electron&quot;,
-      &quot;windows&quot;: &#123;
-        &quot;runtimeExecutable&quot;: &quot;$&#123;workspaceFolder&#125;/node_modules/.bin/electron.cmd&quot;
-      &#125;,
-      &quot;args&quot; : [&quot;.&quot;],
-      &quot;env&quot;: &#123;
-        &quot;NODE_ENV&quot;: &quot;development&quot;
-      &#125;,
-      &quot;protocol&quot;: &quot;inspector&quot;
-    &#125;,
-    &#123;
-      //方式二
-      &quot;name&quot;: &quot;Attach&quot;,
-      &quot;type&quot;: &quot;node&quot;,
-      &quot;request&quot;: &quot;attach&quot;,
-      &quot;port&quot;: 5858,
-      &quot;sourceMaps&quot;: true,
-      &quot;address&quot;: &quot;localhost&quot;,
-      &quot;timeout&quot;: 60000 //避免出现can not connect to the target错误
-    &#125;
-  ]
-&#125;</code></pre>
+<h3 id="其他调试的launch-json配置"><a href="#其他调试的launch-json配置" class="headerlink" title="其他调试的launch.json配置"></a>其他调试的launch.json配置</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0.2.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;configurations&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="comment">//方式一</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Debug Main Process&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;node&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;request&quot;</span><span class="punctuation">:</span> <span class="string">&quot;launch&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;cwd&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;workspaceFolder&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;timeout&quot;</span><span class="punctuation">:</span> <span class="number">60000</span><span class="punctuation">,</span> <span class="comment">//避免出现can not connect to the target错误</span></span><br><span class="line">      <span class="attr">&quot;runtimeExecutable&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;workspaceFolder&#125;/node_modules/.bin/electron&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;windows&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;runtimeExecutable&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;workspaceFolder&#125;/node_modules/.bin/electron.cmd&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;args&quot;</span> <span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;.&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;env&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;NODE_ENV&quot;</span><span class="punctuation">:</span> <span class="string">&quot;development&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;protocol&quot;</span><span class="punctuation">:</span> <span class="string">&quot;inspector&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="comment">//方式二</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Attach&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;node&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;request&quot;</span><span class="punctuation">:</span> <span class="string">&quot;attach&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;port&quot;</span><span class="punctuation">:</span> <span class="number">5858</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;sourceMaps&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;address&quot;</span><span class="punctuation">:</span> <span class="string">&quot;localhost&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;timeout&quot;</span><span class="punctuation">:</span> <span class="number">60000</span> <span class="comment">//避免出现can not connect to the target错误</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <h2 id="进程之间的通信"><a href="#进程之间的通信" class="headerlink" title="进程之间的通信"></a>进程之间的通信</h2><blockquote>
 <p>官方文档：</p>
 <p><a href="https://link.juejin.cn/?target=https%3A%2F%2Fwww.electronjs.org%2Fdocs%2Fapi%2Fipc-main">ipcMain</a></p>
@@ -290,7 +238,8 @@ vue ui</code></pre>
 <p>在编译Electron源码的过程，mojo框架会把这些通信描述文件转义为具体的实现代码</p>
 <p>之后shell\renderer\api\electron_api_ipc_renderer.cc和shell\browser\api\electron_api_web_contents.cc这两个c++文件都会去引用这个编译之后的文件（shell\common\api\api.mojom.h）头文件。</p>
 <p>在我们js代码中使用</p>
-<pre><code class="js">await ipcRenderer.invoke(&#39;event&#39;,&#39;message&#39;);</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> ipcRenderer.<span class="title function_">invoke</span>(<span class="string">&#x27;event&#x27;</span>,<span class="string">&#x27;message&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
 <p>其实地层走的就是<a href="https://github.com/electron/electron/blob/main/shell/renderer/api/electron_api_ipc_renderer.cc">shell\renderer\api\electron_api_ipc_renderer.cc</a></p>
 <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/Users/leo/Library/Application Support/typora-user-images/image-20220327111337555.png" alt="image-20220327111337555" style="zoom:67%;">
 
@@ -309,35 +258,21 @@ vue ui</code></pre>
 <p>就是将用户的处理逻辑包装起来存放到map对象当中，这就对应了上述的invoke触发的时候，做的事情了。</p>
 <p>大致是通信的基本逻辑</p>
 <h3 id="渲染进程和主进程异步通信"><a href="#渲染进程和主进程异步通信" class="headerlink" title="渲染进程和主进程异步通信"></a>渲染进程和主进程异步通信</h3><h4 id="ipcRenderer-send-ipcMain-on-once"><a href="#ipcRenderer-send-ipcMain-on-once" class="headerlink" title="ipcRenderer.send + ipcMain.on/once"></a>ipcRenderer.send + ipcMain.on/once</h4><p>renderer.js (渲染进程文件)</p>
-<pre><code class="js">import &#123; ipcRenderer &#125; from &#39;electron&#39;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ipcRenderer &#125; <span class="keyword">from</span> <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">handleMessage</span>(<span class="params"></span>)&#123;</span><br><span class="line">  ipcRenderer.<span class="title function_">send</span>(<span class="string">&#x27;renderer-to-main&#x27;</span>, <span class="string">&#x27;this is weng&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-function handleMessage()&#123;
-  ipcRenderer.send(&#39;renderer-to-main&#39;, &#39;this is weng&#39;)
-&#125;</code></pre>
 <p>main.js (主进程)</p>
-<pre><code class="js">import &#123; ipcMain &#125; from &#39;electron&#39;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ipcMain &#125; <span class="keyword">from</span> <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line"></span><br><span class="line">ipcMain.<span class="title function_">on</span>(<span class="string">&#x27;renderer-to-main&#x27;</span>, <span class="function">(<span class="params">event, message</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;this is a message from weng&#x27;</span>, message)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-ipcMain.on(&#39;renderer-to-main&#39;, (event, message)=&gt;&#123;
-  console.log(&#39;this is a message from weng&#39;, message)
-&#125;)</code></pre>
+
+
 <p>假如主进程需要回复渲染进程的消息</p>
 <p>主进程可以通过 <code>event.reply</code> 回复<strong>异步消息</strong>，然后前提是渲染进程也需要监听这个事件</p>
 <p>renderer.js</p>
-<pre><code class="js">import &#123; ipcRenderer &#125; from &#39;electron&#39;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ipcRenderer &#125; <span class="keyword">from</span> <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">handleMessage</span>(<span class="params"></span>)&#123;</span><br><span class="line">  ipcRenderer.<span class="title function_">send</span>(<span class="string">&#x27;renderer-to-main&#x27;</span>, <span class="string">&#x27;this is weng&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line">ipcRenderer.<span class="title function_">on</span>(<span class="string">&#x27;main-to-renderer&#x27;</span>,<span class="function">(<span class="params">event, message</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;reply to weng&#x27;</span>, message); <span class="comment">// 给翁恺敏发消息</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-function handleMessage()&#123;
-  ipcRenderer.send(&#39;renderer-to-main&#39;, &#39;this is weng&#39;)
-&#125;
-ipcRenderer.on(&#39;main-to-renderer&#39;,(event, message)=&gt;&#123;
-  console.log(&#39;reply to weng&#39;, message); // 给翁恺敏发消息
-&#125;)</code></pre>
 <p>Main.js</p>
-<pre><code class="js">import &#123; ipcMain &#125; from &#39;electron&#39;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ipcMain &#125; <span class="keyword">from</span> <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line"></span><br><span class="line">ipcMain.<span class="title function_">on</span>(<span class="string">&#x27;renderer-to-main&#x27;</span>, <span class="function">(<span class="params">event, message</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;this is a message from weng&#x27;</span>, message)</span><br><span class="line">  event.<span class="title function_">reply</span>(<span class="string">&#x27;main-to-renderer&#x27;</span>, <span class="string">&quot;给翁恺敏发消息&quot;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-ipcMain.on(&#39;renderer-to-main&#39;, (event, message)=&gt;&#123;
-  console.log(&#39;this is a message from weng&#39;, message)
-  event.reply(&#39;main-to-renderer&#39;, &quot;给翁恺敏发消息&quot;);
-&#125;)</code></pre>
 <p>1、主进程通过 <code>ipcMain.on</code> 来监听渲染进程的消息；</p>
 <p>2、主进程接收到消息后，可以回复消息，也可以不回复。如果回复的话，通过 <code>event.reply</code> 发送另一个事件，渲染进程监听这个事件得到回复结果。如果不回复消息的话，渲染进程将接着执行 <code>ipcRenderer.send</code> 之后的代码。</p>
 <p>上面提到过了, <code>send</code> 这样的方式，主进程可以给回复，也可以不给回复，但是得通过 <code>event.replay</code>。如果此时你试图用 <code>return</code> 的方式传递返回值的话，结果并不能达到你的预期。</p>
@@ -345,336 +280,134 @@ ipcMain.on(&#39;renderer-to-main&#39;, (event, message)=&gt;&#123;
 <p>这是另外一种通信手段</p>
 </blockquote>
 <p>main.js</p>
-<pre><code class="js">// main.js
-const &#123; ipcMain &#125; = require(&#39;electron&#39;);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> &#123; ipcMain &#125; = <span class="built_in">require</span>(<span class="string">&#x27;electron&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回的数据将会被promise包裹</span></span><br><span class="line">ipcMain.<span class="title function_">handle</span>(<span class="string">&#x27;render-invoke-to-main&#x27;</span>, <span class="keyword">async</span> (event, message) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`receive message from render: <span class="subst">$&#123;message&#125;</span>`</span>)</span><br><span class="line">  <span class="keyword">const</span> result = <span class="keyword">await</span> <span class="title function_">asyncWork</span>();</span><br><span class="line">  <span class="keyword">return</span> result; <span class="comment">// 假如需要回复渲染进程直接return就行</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">asyncWork</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">resolve</span>(<span class="string">&#x27;延迟 2 秒获取到主进程的返回结果&#x27;</span>)</span><br><span class="line">    &#125;, <span class="number">2000</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-// 返回的数据将会被promise包裹
-ipcMain.handle(&#39;render-invoke-to-main&#39;, async (event, message) =&gt; &#123;
-  console.log(`receive message from render: $&#123;message&#125;`)
-  const result = await asyncWork();
-  return result; // 假如需要回复渲染进程直接return就行
-&#125;)
-
-const asyncWork = async () =&gt; &#123;
-  return new Promise(resolve =&gt; &#123;
-    setTimeout(() =&gt; &#123;
-      resolve(&#39;延迟 2 秒获取到主进程的返回结果&#39;)
-    &#125;, 2000)
-  &#125;)
-&#125;</code></pre>
 <p>renderer.js</p>
-<pre><code class="js">// render.js
-const &#123; ipcRenderer &#125; = require(&#39;electron&#39;);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// render.js</span></span><br><span class="line"><span class="keyword">const</span> &#123; ipcRenderer &#125; = <span class="built_in">require</span>(<span class="string">&#x27;electron&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">invokeMessageToMain</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> replyMessage = <span class="keyword">await</span> ipcRenderer.<span class="title function_">invoke</span>(<span class="string">&#x27;render-invoke-to-main&#x27;</span>, <span class="string">&#x27;我是渲染进程通过 invoke 发送的消息&#x27;</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;replyMessage&#x27;</span>, replyMessage);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-async function invokeMessageToMain() &#123;
-  const replyMessage = await ipcRenderer.invoke(&#39;render-invoke-to-main&#39;, &#39;我是渲染进程通过 invoke 发送的消息&#39;);
-  console.log(&#39;replyMessage&#39;, replyMessage);
-&#125;
-</code></pre>
 <p>1、主进程通过 <code>ipcMain.handle</code> 来处理渲染进程发送的消息；</p>
 <p>2、主进程接收到消息后，可以回复消息，也可以不回复。如果回复消息的话，可以通过 <code>return</code> 给渲染进程回复消息；如果不回复消息的话，渲染进程将接着执行 <code>ipcRenderer.invoke</code> 之后的代码。</p>
 <p>3、渲染进程异步等待主进程的回应， <code>invoke</code> 的返回值是一个 <code>Promise&lt;pending&gt;</code> 。</p>
 <h4 id="window-webContents-send"><a href="#window-webContents-send" class="headerlink" title="window.webContents.send"></a><strong>window.webContents.send</strong></h4><blockquote>
 <p>这种方式依赖于 <code>webContents</code> 对象，它是我们在项目中新建窗口时，产生的窗口对象上的一个属性。</p>
 </blockquote>
-<pre><code class="js">// 窗口在完成加载时，通过 webContents.send 给渲染进程发送消息
-window.webContents.on(&#39;did-finish-load&#39;, () =&gt; &#123;
-  window.webContents.send(&#39;main-send-to-render&#39;, &#39;启动完成了&#39;)
-&#125;)</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 窗口在完成加载时，通过 webContents.send 给渲染进程发送消息</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="property">webContents</span>.<span class="title function_">on</span>(<span class="string">&#x27;did-finish-load&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">window</span>.<span class="property">webContents</span>.<span class="title function_">send</span>(<span class="string">&#x27;main-send-to-render&#x27;</span>, <span class="string">&#x27;启动完成了&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
 <p>之前我们通过渲染进程监听主进程的事件</p>
-<pre><code class="js">// render.js
-const &#123; ipcRenderer &#125; = require(&#39;electron&#39;);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// render.js</span></span><br><span class="line"><span class="keyword">const</span> &#123; ipcRenderer &#125; = <span class="built_in">require</span>(<span class="string">&#x27;electron&#x27;</span>);</span><br><span class="line"></span><br><span class="line">ipcRenderer.<span class="title function_">on</span>(<span class="string">&#x27;main-send-to-render&#x27;</span>, <span class="function">(<span class="params">event, message</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`receive message from main: <span class="subst">$&#123;message&#125;</span>`</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-ipcRenderer.on(&#39;main-send-to-render&#39;, (event, message) =&gt; &#123;
-  console.log(`receive message from main: $&#123;message&#125;`)
-&#125;)
-</code></pre>
+
+
 <h3 id="渲染进程和主进程的同步通信"><a href="#渲染进程和主进程的同步通信" class="headerlink" title="渲染进程和主进程的同步通信"></a>渲染进程和主进程的同步通信</h3><h4 id="ipcRenderer-sendSync-ipcMain-on-once"><a href="#ipcRenderer-sendSync-ipcMain-on-once" class="headerlink" title="ipcRenderer.sendSync + ipcMain.on/once"></a>ipcRenderer.sendSync + ipcMain.on/once</h4><p>renderer.js</p>
-<pre><code class="js">// render.js
-const &#123; ipcRenderer &#125; = require(&#39;electron&#39;);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// render.js</span></span><br><span class="line"><span class="keyword">const</span> &#123; ipcRenderer &#125; = <span class="built_in">require</span>(<span class="string">&#x27;electron&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sendSyncMessageToMain</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> replyMessage = ipcRenderer.<span class="title function_">sendSync</span>(<span class="string">&#x27;render-send-sync-to-main&#x27;</span>, <span class="string">&#x27;我是渲染进程通过 syncSend 发送给主进程的消息&#x27;</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;replyMessage&#x27;</span>, replyMessage); <span class="comment">// &#x27;主进程回复的消息&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-function sendSyncMessageToMain() &#123;
-  const replyMessage = ipcRenderer.sendSync(&#39;render-send-sync-to-main&#39;, &#39;我是渲染进程通过 syncSend 发送给主进程的消息&#39;);
-  console.log(&#39;replyMessage&#39;, replyMessage); // &#39;主进程回复的消息&#39;
-&#125;
-</code></pre>
+
+
 <p>Main.js</p>
-<pre><code class="js">// main.js
-const &#123; ipcMain &#125; = require(&#39;electron&#39;);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> &#123; ipcMain &#125; = <span class="built_in">require</span>(<span class="string">&#x27;electron&#x27;</span>);</span><br><span class="line"></span><br><span class="line">ipcMain.<span class="title function_">on</span>(<span class="string">&#x27;render-send-sync-to-main&#x27;</span>, <span class="function">(<span class="params">event, message</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`receive message from render: <span class="subst">$&#123;message&#125;</span>`</span>)</span><br><span class="line">  event.<span class="property">returnValue</span> = <span class="string">&#x27;主进程回复的消息&#x27;</span>; </span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-ipcMain.on(&#39;render-send-sync-to-main&#39;, (event, message) =&gt; &#123;
-  console.log(`receive message from render: $&#123;message&#125;`)
-  event.returnValue = &#39;主进程回复的消息&#39;; 
-&#125;)
-</code></pre>
+
+
 <p>1、主进程通过 <code>ipcMain.on</code> 来处理渲染进程发送的消息；</p>
 <p>2、主进程通过 <code>event.returnValue</code> 回复渲染进程消息；</p>
 <p>3、如果 <code>event.returnValue</code> 不为 <code>undefined</code> 的话，渲染进程会等待 <code>sendSync</code> 的返回值才执行后面的代码；</p>
 <p>4、请保证 <code>event.returnValue</code>是有值的，否则会造成非预期的影响。</p>
 <p>上面的案例，主进程绑定的处理函数是一个同步的，我们将它换为异步的来看看：</p>
-<pre><code class="javascript">// main.js
-const &#123; ipcMain &#125; = require(&#39;electron&#39;);
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> &#123; ipcMain &#125; = <span class="built_in">require</span>(<span class="string">&#x27;electron&#x27;</span>);</span><br><span class="line"></span><br><span class="line">ipcMain.<span class="title function_">on</span>(<span class="string">&#x27;render-send-sync-to-main&#x27;</span>, <span class="keyword">async</span> (event, message) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`receive message from render: <span class="subst">$&#123;message&#125;</span>`</span>)</span><br><span class="line">  <span class="keyword">const</span> result = <span class="keyword">await</span> <span class="title function_">asyncWork</span>();</span><br><span class="line">  event.<span class="property">returnValue</span> = result;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">asyncWork</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">resolve</span>(<span class="string">&#x27;延迟 2 秒获取到主进程的返回结果&#x27;</span>)</span><br><span class="line">    &#125;, <span class="number">2000</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-ipcMain.on(&#39;render-send-sync-to-main&#39;, async (event, message) =&gt; &#123;
-  console.log(`receive message from render: $&#123;message&#125;`)
-  const result = await asyncWork();
-  event.returnValue = result;
-&#125;)
-
-const asyncWork = async () =&gt; &#123;
-  return new Promise(resolve =&gt; &#123;
-    setTimeout(() =&gt; &#123;
-      resolve(&#39;延迟 2 秒获取到主进程的返回结果&#39;)
-    &#125;, 2000)
-  &#125;)
-&#125;
-</code></pre>
 <p>这次我们在执行完一个异步函数 <code>asyncWork</code> 之后再给 <code>event.returnValue</code> 赋值。</p>
 <p>结果发现渲染进程那边会在 2 秒之后才打印：</p>
-<pre><code>&quot;replyMessage 延迟 2 秒获取到主进程的返回结果&quot;
-</code></pre><p>而且对于渲染进程，以下两种写法，结果都是一样的：</p>
-<pre><code class="javascript">// render.js
-const &#123; ipcRenderer &#125; = require(&#39;electron&#39;);
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;replyMessage 延迟 2 秒获取到主进程的返回结果&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-function sendSyncMessageToMain() &#123;
-  const replyMessage = ipcRenderer.sendSync(&#39;render-send-sync-to-main&#39;, &#39;我是渲染进程通过 syncSend 发送给主进程的消息&#39;);
-  console.log(&#39;replyMessage&#39;, replyMessage); // &#39;replyMessage 延迟 2 秒获取到主进程的返回结果&#39;&#39;
-&#125;
+<p>而且对于渲染进程，以下两种写法，结果都是一样的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// render.js</span></span><br><span class="line"><span class="keyword">const</span> &#123; ipcRenderer &#125; = <span class="built_in">require</span>(<span class="string">&#x27;electron&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sendSyncMessageToMain</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> replyMessage = ipcRenderer.<span class="title function_">sendSync</span>(<span class="string">&#x27;render-send-sync-to-main&#x27;</span>, <span class="string">&#x27;我是渲染进程通过 syncSend 发送给主进程的消息&#x27;</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;replyMessage&#x27;</span>, replyMessage); <span class="comment">// &#x27;replyMessage 延迟 2 秒获取到主进程的返回结果&#x27;&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者改用 async 函数</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">sendSyncMessageToMain</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> replyMessage = <span class="keyword">await</span> ipcRenderer.<span class="title function_">sendSync</span>(<span class="string">&#x27;render-send-sync-to-main&#x27;</span>, <span class="string">&#x27;我是渲染进程发送给主进程的同步消息&#x27;</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;replyMessage&#x27;</span>, replyMessage); <span class="comment">// &#x27;replyMessage 延迟 2 秒获取到主进程的返回结果&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-// 或者改用 async 函数
-async function sendSyncMessageToMain() &#123;
-  const replyMessage = await ipcRenderer.sendSync(&#39;render-send-sync-to-main&#39;, &#39;我是渲染进程发送给主进程的同步消息&#39;);
-  console.log(&#39;replyMessage&#39;, replyMessage); // &#39;replyMessage 延迟 2 秒获取到主进程的返回结果&#39;
-&#125;
-</code></pre>
 <p>也就是说，不论渲染进程在接收 <code>sendSync</code> 结果的时候，是不是用 <code>await</code> 等待，都会等待结果返回后才向下执行。但如果你已经确定你的请求是一个异步的话，建议还是使用 <code>invoke</code> 去发送消息，这里出于两点原因考虑：</p>
 <p>1、方法名 <code>sendSync</code> 就很符合语义，发送同步消息；</p>
 <p>2、请求执行的明明是异步代码，但是如果你用 <code>const replyMessage = ipcRenderer.sendSync(&#39;xxx&#39;)</code> 方式来获取响应信息，会很奇怪。</p>
 <p>OKK，上面的第四点谈到了，请保证 <code>event.returnValue</code> 是有值的，否则会照成非预期的影响。让我们也来写个例子：</p>
-<pre><code class="javascript">// render.js
-const &#123; ipcRenderer &#125; = require(&#39;electron&#39;);
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// render.js</span></span><br><span class="line"><span class="keyword">const</span> &#123; ipcRenderer &#125; = <span class="built_in">require</span>(<span class="string">&#x27;electron&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sendSyncMessageToMain</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> replyMessage = ipcRenderer.<span class="title function_">sendSync</span>(<span class="string">&#x27;render-send-sync-to-main&#x27;</span>, <span class="string">&#x27;我是渲染进程通过 syncSend 发送给主进程的消息&#x27;</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;replyMessage&#x27;</span>, replyMessage); <span class="comment">// replyMessage &#123;error: &quot;reply was never sent&quot;&#125;</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;next&#x27;</span>); <span class="comment">// 这里也会执行</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line">ipcMain.<span class="title function_">on</span>(<span class="string">&#x27;render-send-sync-to-main&#x27;</span>, <span class="keyword">async</span> (event, message) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`receive message from render: <span class="subst">$&#123;message&#125;</span>`</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-function sendSyncMessageToMain() &#123;
-  const replyMessage = ipcRenderer.sendSync(&#39;render-send-sync-to-main&#39;, &#39;我是渲染进程通过 syncSend 发送给主进程的消息&#39;);
-  console.log(&#39;replyMessage&#39;, replyMessage); // replyMessage &#123;error: &quot;reply was never sent&quot;&#125;
-  console.log(&#39;next&#39;); // 这里也会执行
-&#125;
-
-// main.js
-ipcMain.on(&#39;render-send-sync-to-main&#39;, async (event, message) =&gt; &#123;
-  console.log(`receive message from render: $&#123;message&#125;`)
-&#125;)
-</code></pre>
 <p>在上面的例子中，主进程那边不对 <code>event.returnValue</code> 做处理，在渲染进程这边将会得到一个错误：</p>
-<pre><code class="javascript">&#123;error: &quot;reply was never sent&quot;&#125;
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">error</span>: <span class="string">&quot;reply was never sent&quot;</span>&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>虽然 <code>next</code> 也会打印，但是如果你再想去发送一次 <code>render-send-sync-to-main</code> 你会发现页面已经卡了…</p>
 <h3 id="渲染进程与渲染进程-窗口与窗口-的通讯"><a href="#渲染进程与渲染进程-窗口与窗口-的通讯" class="headerlink" title="渲染进程与渲染进程(窗口与窗口)的通讯"></a>渲染进程与渲染进程(窗口与窗口)的通讯</h3><h4 id="ipcRenderer-sendTo-ipcRenderer-on"><a href="#ipcRenderer-sendTo-ipcRenderer-on" class="headerlink" title="ipcRenderer.sendTo + ipcRenderer.on"></a>ipcRenderer.sendTo + ipcRenderer.on</h4><blockquote>
 <p>举个例子：B窗口给你A窗口发送消息</p>
 </blockquote>
 <p>窗口A</p>
-<pre><code class="js">ipcRenderer.on(&#39;B-to-A&#39;,(event,message)=&gt;&#123;
-  console.log(message)
-&#125;)</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ipcRenderer.<span class="title function_">on</span>(<span class="string">&#x27;B-to-A&#x27;</span>,<span class="function">(<span class="params">event,message</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(message)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
 <p>窗口B</p>
-<pre><code class="js">const A_ID = ipcRenderer.sendSync(&#39;getWinId&#39;, &#39;A&#39;)
-ipcRenderer.sendTo(A_ID,&#39;B-to-A&#39;,&#39;我是来自B窗口的消息&#39;)</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">A_ID</span> = ipcRenderer.<span class="title function_">sendSync</span>(<span class="string">&#x27;getWinId&#x27;</span>, <span class="string">&#x27;A&#x27;</span>)</span><br><span class="line">ipcRenderer.<span class="title function_">sendTo</span>(<span class="variable constant_">A_ID</span>,<span class="string">&#x27;B-to-A&#x27;</span>,<span class="string">&#x27;我是来自B窗口的消息&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="渲染进程和webview的通讯"><a href="#渲染进程和webview的通讯" class="headerlink" title="渲染进程和webview的通讯"></a>渲染进程和webview的通讯</h3><h4 id="ipcRenderer-sendToHost-webview-addEventListener-“ipc-message”"><a href="#ipcRenderer-sendToHost-webview-addEventListener-“ipc-message”" class="headerlink" title="ipcRenderer.sendToHost + webview.addEventListener(“ipc-message”)"></a>ipcRenderer.sendToHost + webview.addEventListener(“ipc-message”)</h4><p>渲染进程</p>
-<pre><code class="js">const webview = document.querySelector(&#39;webview&#39;);
-webview.addEventListener(&#39;ipc-message&#39;,(event, message)=&gt;&#123;
-  console.log(message)
-&#125;)
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> webview = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;webview&#x27;</span>);</span><br><span class="line">webview.<span class="title function_">addEventListener</span>(<span class="string">&#x27;ipc-message&#x27;</span>,<span class="function">(<span class="params">event, message</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(message)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">webview.<span class="title function_">send</span>(<span class="string">&#x27;rende-to-webview&#x27;</span>,<span class="string">&#x27;发给webview里头的界面&#x27;</span>); <span class="comment">// 给webview发消息</span></span><br></pre></td></tr></table></figure>
 
-webview.send(&#39;rende-to-webview&#39;,&#39;发给webview里头的界面&#39;); // 给webview发消息</code></pre>
 <p>webview内嵌的页面</p>
-<pre><code class="js">import &#123; ipcRenderer &#125; from &#39;electron&#39;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ipcRenderer &#125; <span class="keyword">from</span> <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line"></span><br><span class="line">ipcRenderer.<span class="title function_">on</span>(<span class="string">&#x27;send-to&#x27;</span>,<span class="function">(<span class="params">event,args</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;收到渲染进程发来的消息&#x27;</span>,args);</span><br><span class="line">  ipcRenderer.<span class="title function_">sendToHost</span>(<span class="string">&#x27;message&#x27;</span>, <span class="string">&#x27;我是webview发过来的消息&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-ipcRenderer.on(&#39;send-to&#39;,(event,args)=&gt;&#123;
-    console.log(&#39;收到渲染进程发来的消息&#39;,args);
-  ipcRenderer.sendToHost(&#39;message&#39;, &#39;我是webview发过来的消息&#39;)
-&#125;)</code></pre>
+
+
 <h4 id="webview-preload协议-提供桥接方法"><a href="#webview-preload协议-提供桥接方法" class="headerlink" title="webview + preload协议 提供桥接方法"></a>webview + preload协议 提供桥接方法</h4><p>通过利用webview的preload属性 <a target="_blank" rel="noopener" href="https://www.electronjs.org/zh/docs/latest/api/webview-tag#preload">preload</a></p>
 <blockquote>
 <p>preload其实是相当于一个页面运行其他脚本之前，先加载的指定脚本</p>
 </blockquote>
 <p>有一点需要注意的是，webview的preload属性接受的是asar和file协议，注入js脚本</p>
 <p>preload.js</p>
-<pre><code class="js">import &#123; ipcRenderer &#125; from &#39;electron&#39;;
-const Bridge = &#123;
-  ...各种方法或者什么参数
-  sayHi(data)&#123;
-    ipcRenderer.send(&#39;some-event&#39;, dataÏ)
-  &#125;
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ipcRenderer &#125; <span class="keyword">from</span> <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Bridge</span> = &#123;</span><br><span class="line">  ...各种方法或者什么参数</span><br><span class="line">  <span class="title function_">sayHi</span>(<span class="params">data</span>)&#123;</span><br><span class="line">    ipcRenderer.<span class="title function_">send</span>(<span class="string">&#x27;some-event&#x27;</span>, dataÏ)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="variable language_">global</span>.<span class="property">Bridge</span> = <span class="title class_">Bridge</span>; <span class="comment">// 将Bridge的对象注入到全局对象上，webview打开的时候指的就是window</span></span><br></pre></td></tr></table></figure>
 
-global.Bridge = Bridge; // 将Bridge的对象注入到全局对象上，webview打开的时候指的就是window</code></pre>
 <p>webview内嵌的页面</p>
-<pre><code class="js">const myBridge = window.Bridge;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myBridge = <span class="variable language_">window</span>.<span class="property">Bridge</span>;</span><br><span class="line"></span><br><span class="line">myBridge.<span class="title function_">sayHi</span>(<span class="string">&#x27;我是webview&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
-myBridge.sayHi(&#39;我是webview&#39;)</code></pre>
 <p>处理地址</p>
-<pre><code class="js">const localPreloadFile = `file://$&#123;require(&#39;path&#39;).resolve(&#39;./preload.js&#39;)&#125;`
-webview.setAtrribute(&#39;preload&#39;,preloadFileÏ)</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> localPreloadFile = <span class="string">`file://<span class="subst">$&#123;<span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>).resolve(<span class="string">&#x27;./preload.js&#x27;</span>)&#125;</span>`</span></span><br><span class="line">webview.<span class="title function_">setAtrribute</span>(<span class="string">&#x27;preload&#x27;</span>,preloadFileÏ)</span><br></pre></td></tr></table></figure>
+
 <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/Users/leo/Library/Application Support/typora-user-images/image-20220326183153864.png" alt="image-20220326183153864" style="zoom: 67%;">
 
 <p>通过桥接的方法，实现electron的通信机制的转发，进而实现webview和渲染进程之间的沟通</p>
-<h3 id="进程统一实现方案（暂未完善）"><a href="#进程统一实现方案（暂未完善）" class="headerlink" title="进程统一实现方案（暂未完善）"></a>进程统一实现方案（暂未完善）</h3><pre><code class="js">import events from &quot;events&quot;;
-import &#123; ipcRenderer, ipcMain, webContents &#125; from &quot;electron&quot;;
+<h3 id="进程统一实现方案（暂未完善）"><a href="#进程统一实现方案（暂未完善）" class="headerlink" title="进程统一实现方案（暂未完善）"></a>进程统一实现方案（暂未完善）</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> events <span class="keyword">from</span> <span class="string">&quot;events&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; ipcRenderer, ipcMain, webContents &#125; <span class="keyword">from</span> <span class="string">&quot;electron&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">PIPE_EVENT</span> = <span class="string">&quot;__eventPipe&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Eventer</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">instance</span> = <span class="keyword">new</span> events.<span class="title class_">EventEmitter</span>();</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">instance</span>.<span class="title function_">setMaxListeners</span>(<span class="number">20</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">initEventPipe</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@description</span>: 初始化管道配置</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="title function_">initEventPipe</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (ipcRenderer) &#123;</span><br><span class="line">      ipcRenderer.<span class="title function_">on</span>(<span class="variable constant_">PIPE_EVENT</span>, <span class="function">(<span class="params">e, &#123; eventName, eventArgs &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">instance</span>.<span class="title function_">emit</span>(eventName, eventArgs);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (ipcMain) &#123;</span><br><span class="line">      ipcMain.<span class="title function_">handle</span>(<span class="variable constant_">PIPE_EVENT</span>, <span class="function">(<span class="params">e, &#123; eventName, eventArgs &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">instance</span>.<span class="title function_">emit</span>(eventName, eventArgs);</span><br><span class="line">        webContents.<span class="title function_">getAllWebContents</span>().<span class="title function_">forEach</span>(<span class="function">(<span class="params">wc</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (wc.<span class="property">id</span> !== e.<span class="property">sender</span>.<span class="property">id</span>) &#123;</span><br><span class="line">            wc.<span class="title function_">send</span>(<span class="variable constant_">PIPE_EVENT</span>, &#123; eventName, eventArgs &#125;);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@description</span>: 监听事件</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">*</span>&#125; eventName 事件名称</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">*</span>&#125; callBack 回调</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span> &#123;<span class="type">*</span>&#125;</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="title function_">on</span>(<span class="params">eventName, callBack</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">instance</span>.<span class="title function_">on</span>(eventName, callBack);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@description</span>: 事件触发</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">*</span>&#125; <span class="variable">eventName</span></span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">*</span>&#125; <span class="variable">eventArgs</span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="title function_">emit</span>(<span class="params">eventName, eventArgs</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">instance</span>.<span class="title function_">emit</span>(eventName, eventArgs);</span><br><span class="line">    <span class="keyword">if</span> (ipcMain) &#123;</span><br><span class="line">      webContents.<span class="title function_">getAllWebContents</span>().<span class="title function_">forEach</span>(<span class="function">(<span class="params">wc</span>) =&gt;</span> &#123;</span><br><span class="line">        wc.<span class="title function_">send</span>(<span class="variable constant_">PIPE_EVENT</span>, &#123; eventName, eventArgs &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (ipcRenderer) &#123;</span><br><span class="line">      ipcRenderer.<span class="title function_">invoke</span>(<span class="variable constant_">PIPE_EVENT</span>, &#123; eventName, eventArgs &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> event = <span class="keyword">new</span> <span class="title class_">Eventer</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> event;</span><br></pre></td></tr></table></figure>
 
-const PIPE_EVENT = &quot;__eventPipe&quot;;
 
-class Eventer &#123;
-  constructor() &#123;
-    this.instance = new events.EventEmitter();
-    this.instance.setMaxListeners(20);
-    this.initEventPipe();
-  &#125;
 
-  /**
-   * @description: 初始化管道配置
-   */
-  initEventPipe() &#123;
-    if (ipcRenderer) &#123;
-      ipcRenderer.on(PIPE_EVENT, (e, &#123; eventName, eventArgs &#125;) =&gt; &#123;
-        this.instance.emit(eventName, eventArgs);
-      &#125;);
-    &#125;
-    if (ipcMain) &#123;
-      ipcMain.handle(PIPE_EVENT, (e, &#123; eventName, eventArgs &#125;) =&gt; &#123;
-        this.instance.emit(eventName, eventArgs);
-        webContents.getAllWebContents().forEach((wc) =&gt; &#123;
-          if (wc.id !== e.sender.id) &#123;
-            wc.send(PIPE_EVENT, &#123; eventName, eventArgs &#125;);
-          &#125;
-        &#125;);
-      &#125;);
-    &#125;
-  &#125;
-
-  /**
-   * @description: 监听事件
-   * @param &#123;*&#125; eventName 事件名称
-   * @param &#123;*&#125; callBack 回调
-   * @return &#123;*&#125;
-   */
-  on(eventName, callBack) &#123;
-    this.instance.on(eventName, callBack);
-  &#125;
-
-  /**
-   * @description: 事件触发
-   * @param &#123;*&#125; eventName
-   * @param &#123;*&#125; eventArgs
-   */
-  emit(eventName, eventArgs) &#123;
-    this.instance.emit(eventName, eventArgs);
-    if (ipcMain) &#123;
-      webContents.getAllWebContents().forEach((wc) =&gt; &#123;
-        wc.send(PIPE_EVENT, &#123; eventName, eventArgs &#125;);
-      &#125;);
-    &#125;
-    if (ipcRenderer) &#123;
-      ipcRenderer.invoke(PIPE_EVENT, &#123; eventName, eventArgs &#125;);
-    &#125;
-  &#125;
-&#125;
-
-const event = new Eventer();
-
-export default event;</code></pre>
 <p>主进程</p>
-<pre><code class="js">import eventer from &#39;@/common/eventer&#39;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> eventer <span class="keyword">from</span> <span class="string">&#x27;@/common/eventer&#x27;</span>;</span><br><span class="line"></span><br><span class="line">eventer.<span class="title function_">on</span>(<span class="string">&#x27;my-event&#x27;</span>, <span class="function">(<span class="params">args</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(args)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-eventer.on(&#39;my-event&#39;, (args)=&gt;&#123;
-  console.log(args)
-&#125;)</code></pre>
 <p>渲染进程</p>
-<pre><code class="js">import eventer from &#39;@/common/eventer&#39;;
-eventer.emit(&#39;my-event&#39;,(args)=&gt;&#123;
-  console.log(args);
-&#125;)</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> eventer <span class="keyword">from</span> <span class="string">&#x27;@/common/eventer&#x27;</span>;</span><br><span class="line">eventer.<span class="title function_">emit</span>(<span class="string">&#x27;my-event&#x27;</span>,<span class="function">(<span class="params">args</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(args);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <h2 id="一些使用记录"><a href="#一些使用记录" class="headerlink" title="一些使用记录"></a>一些使用记录</h2><h3 id="按键配置"><a href="#按键配置" class="headerlink" title="按键配置"></a>按键配置</h3><p><a target="_blank" rel="noopener" href="https://www.electronjs.org/zh/docs/latest/api/accelerator">https://www.electronjs.org/zh/docs/latest/api/accelerator</a></p>
-<h3 id="渲染进程和webview的通信"><a href="#渲染进程和webview的通信" class="headerlink" title="渲染进程和webview的通信"></a>渲染进程和webview的通信</h3><pre><code class="js">const webview = document.querySelector(&#39;webview&#39;);
-webview.addEventListener(&#39;dom-ready&#39;,()=&gt;&#123;&#125;);
-webview.addEventListener(&#39;ipc-message&#39;, ()=&gt;&#123;
-  webview.send(&#39;sth&#39;)
-&#125;)
+<h3 id="渲染进程和webview的通信"><a href="#渲染进程和webview的通信" class="headerlink" title="渲染进程和webview的通信"></a>渲染进程和webview的通信</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> webview = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;webview&#x27;</span>);</span><br><span class="line">webview.<span class="title function_">addEventListener</span>(<span class="string">&#x27;dom-ready&#x27;</span>,<span class="function">()=&gt;</span>&#123;&#125;);</span><br><span class="line">webview.<span class="title function_">addEventListener</span>(<span class="string">&#x27;ipc-message&#x27;</span>, <span class="function">()=&gt;</span>&#123;</span><br><span class="line">  webview.<span class="title function_">send</span>(<span class="string">&#x27;sth&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ipcRenderer.<span class="title function_">sendToHost</span>(<span class="string">&#x27;sth&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// preload</span></span><br><span class="line"><span class="keyword">const</span> preloadFile = <span class="string">&#x27;file://&#x27;</span> + <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>).<span class="title function_">resolve</span>(<span class="string">&#x27;./preload.js&#x27;</span>);</span><br><span class="line">webview.<span class="title function_">setAttribute</span>(<span class="string">&#x27;preload&#x27;</span>, preloadFile);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端</span></span><br><span class="line"><span class="keyword">const</span> clientSocket = <span class="title function_">io</span>(<span class="string">&#x27;http://127.0.0.1:3000/&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
 
-ipcRenderer.sendToHost(&#39;sth&#39;)
 
+<h3 id="menu（应用菜单）"><a href="#menu（应用菜单）" class="headerlink" title="menu（应用菜单）"></a>menu（应用菜单）</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> menuTemplate = [</span><br><span class="line">  <span class="variable constant_">IS_MAC</span> &amp;&amp; &#123; <span class="attr">label</span>: <span class="string">&quot;ismac&quot;</span> &#125;, <span class="comment">//  macOS下第一个标签是应用程序名字,所以这里是为了兼容mac的</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">label</span>: <span class="string">&quot;选项&quot;</span>,</span><br><span class="line">    <span class="attr">submenu</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">label</span>: <span class="string">&quot;退出&quot;</span>,</span><br><span class="line">        <span class="attr">role</span>: <span class="string">&quot;quit&quot;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">label</span>: <span class="string">&quot;我的博客&quot;</span>,</span><br><span class="line">        <span class="attr">click</span>: createBlogWin,</span><br><span class="line">      &#125;,</span><br><span class="line">      isDevelopment &amp;&amp; &#123;</span><br><span class="line">        <span class="attr">label</span>: <span class="string">&quot;打开devTool&quot;</span>,</span><br><span class="line">        <span class="attr">click</span>: createDevTool,</span><br><span class="line">        <span class="attr">accelerator</span>: <span class="string">&quot;CommandOrControl + shift + i&quot;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    ].<span class="title function_">filter</span>(<span class="title class_">Boolean</span>),</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123; <span class="attr">type</span>: <span class="string">&quot;separator&quot;</span> &#125;, <span class="comment">// mac下无效</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">label</span>: <span class="string">&quot;文件&quot;</span>,</span><br><span class="line">    <span class="attr">submenu</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">label</span>: <span class="string">&quot;子菜单&quot;</span>,</span><br><span class="line">        <span class="attr">click</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">          <span class="comment">// 调用了dialog（弹窗模块），演示效果</span></span><br><span class="line">          dialog.<span class="title function_">showMessageBoxSync</span>(&#123;</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&quot;info&quot;</span>,</span><br><span class="line">            <span class="attr">title</span>: <span class="string">&quot;提示&quot;</span>,</span><br><span class="line">            <span class="attr">message</span>: <span class="string">&quot;点击了子菜单&quot;</span>,</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">].<span class="title function_">filter</span>(<span class="title class_">Boolean</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> menu = <span class="title class_">Menu</span>.<span class="title function_">buildFromTemplate</span>(menuTemplate);</span><br><span class="line"><span class="title class_">Menu</span>.<span class="title function_">setApplicationMenu</span>(menu);</span><br></pre></td></tr></table></figure>
 
-// preload
-const preloadFile = &#39;file://&#39; + require(&#39;path&#39;).resolve(&#39;./preload.js&#39;);
-webview.setAttribute(&#39;preload&#39;, preloadFile);</code></pre>
-<pre><code class="js">// 客户端
-const clientSocket = io(&#39;http://127.0.0.1:3000/&#39;)</code></pre>
-<h3 id="menu（应用菜单）"><a href="#menu（应用菜单）" class="headerlink" title="menu（应用菜单）"></a>menu（应用菜单）</h3><pre><code class="js">const menuTemplate = [
-  IS_MAC &amp;&amp; &#123; label: &quot;ismac&quot; &#125;, //  macOS下第一个标签是应用程序名字,所以这里是为了兼容mac的
-  &#123;
-    label: &quot;选项&quot;,
-    submenu: [
-      &#123;
-        label: &quot;退出&quot;,
-        role: &quot;quit&quot;,
-      &#125;,
-      &#123;
-        label: &quot;我的博客&quot;,
-        click: createBlogWin,
-      &#125;,
-      isDevelopment &amp;&amp; &#123;
-        label: &quot;打开devTool&quot;,
-        click: createDevTool,
-        accelerator: &quot;CommandOrControl + shift + i&quot;,
-      &#125;,
-    ].filter(Boolean),
-  &#125;,
-  &#123; type: &quot;separator&quot; &#125;, // mac下无效
-  &#123;
-    label: &quot;文件&quot;,
-    submenu: [
-      &#123;
-        label: &quot;子菜单&quot;,
-        click: () =&gt; &#123;
-          // 调用了dialog（弹窗模块），演示效果
-          dialog.showMessageBoxSync(&#123;
-            type: &quot;info&quot;,
-            title: &quot;提示&quot;,
-            message: &quot;点击了子菜单&quot;,
-          &#125;);
-        &#125;,
-      &#125;,
-    ],
-  &#125;,
-].filter(Boolean);
-
-const menu = Menu.buildFromTemplate(menuTemplate);
-Menu.setApplicationMenu(menu);</code></pre>
 <p>比较要注意的就是mac的第一个菜单被系统设置为了应用的名称等等</p>
 <p>所以最上面的数组加了一行<strong>mac</strong>相关的是配</p>
-<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><pre><code class="js">const &#123; remote &#125; from &#39;electron&#39;;
+<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; remote &#125; <span class="keyword">from</span> <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">getCookie</span> = <span class="keyword">async</span> (<span class="params">name</span>)=&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> cookie = <span class="keyword">await</span> remote.<span class="property">session</span>.<span class="property">defautlSession</span>.<span class="property">cookies</span>.<span class="title function_">get</span>(&#123;name&#125;);</span><br><span class="line">  <span class="keyword">if</span>(cookie.<span class="property">length</span>) <span class="keyword">return</span> cookies[<span class="number">0</span>].<span class="property">value</span>;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">setCookie</span> = <span class="keyword">async</span> (<span class="params">cookie</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">await</span> remote.<span class="property">session</span>.<span class="property">defautlSession</span>.<span class="property">cookies</span>.<span class="title function_">set</span>(cookie)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-const getCookie = async (name)=&gt; &#123;
-  let cookie = await remote.session.defautlSession.cookies.get(&#123;name&#125;);
-  if(cookie.length) return cookies[0].value;
-  else return &#39;&#39;
-&#125;
-const setCookie = async (cookie) =&gt; &#123;
-  await remote.session.defautlSession.cookies.set(cookie)
-&#125;</code></pre>
 <ul>
 <li>defaultSession是当前浏览器会话的对象实例，也可以通过<code>window.webContents.session</code>获取session对象</li>
 </ul>
-<h3 id="删除浏览器缓存"><a href="#删除浏览器缓存" class="headerlink" title="删除浏览器缓存"></a>删除浏览器缓存</h3><pre><code class="js">await remote.session.defaultSession.cookie.clearStorageData(&#123;
-  storages: &#39;localstorage, cookie&#39; // 删除localStroage中和cookie的缓存数据
-&#125;)</code></pre>
+<h3 id="删除浏览器缓存"><a href="#删除浏览器缓存" class="headerlink" title="删除浏览器缓存"></a>删除浏览器缓存</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> remote.<span class="property">session</span>.<span class="property">defaultSession</span>.<span class="property">cookie</span>.<span class="title function_">clearStorageData</span>(&#123;</span><br><span class="line">  <span class="attr">storages</span>: <span class="string">&#x27;localstorage, cookie&#x27;</span> <span class="comment">// 删除localStroage中和cookie的缓存数据</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
 <p>storages的参数可以查看 <a target="_blank" rel="noopener" href="https://www.electronjs.org/zh/docs/latest/api/session#sesclearstoragedataoptions">官方文档</a></p>
 <h3 id="判断操作系统类型"><a href="#判断操作系统类型" class="headerlink" title="判断操作系统类型"></a>判断操作系统类型</h3><blockquote>
 <p>process.platform <a target="_blank" rel="noopener" href="http://nodejs.cn/api/process/process_platform.html">文档</a></p>
 </blockquote>
-<pre><code class="js">import &#123; platform &#125; from &#39;process&#39;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; platform &#125; <span class="keyword">from</span> <span class="string">&#x27;process&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`This platform is <span class="subst">$&#123;platform&#125;</span>`</span>);</span><br></pre></td></tr></table></figure>
 
-console.log(`This platform is $&#123;platform&#125;`);</code></pre>
 <ul>
 <li>‘aix’</li>
 <li>‘darwin’</li>
@@ -703,17 +436,9 @@ console.log(`This platform is $&#123;platform&#125;`);</code></pre>
 <p><a target="_blank" rel="noopener" href="https://www.electronjs.org/zh/docs/latest/api/webview-tag#src">官方使用文档</a></p>
 </blockquote>
 <p>main.js</p>
-<pre><code class="js">const win = new BrowserWindow(&#123;
-    width: 800,
-    height: 600,
-    webPreferences: &#123;
-        nodeIntegration: true,
-        contextIsolation: false,
-        webviewTag: true
-    &#125;
-&#125;)
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> win = <span class="keyword">new</span> <span class="title class_">BrowserWindow</span>(&#123;</span><br><span class="line">    <span class="attr">width</span>: <span class="number">800</span>,</span><br><span class="line">    <span class="attr">height</span>: <span class="number">600</span>,</span><br><span class="line">    <span class="attr">webPreferences</span>: &#123;</span><br><span class="line">        <span class="attr">nodeIntegration</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">contextIsolation</span>: <span class="literal">false</span>,</span><br><span class="line">    	<span class="attr">webviewTag</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-</code></pre>
+
 <h2 id="electron项目中常用的库"><a href="#electron项目中常用的库" class="headerlink" title="electron项目中常用的库"></a>electron项目中常用的库</h2><h3 id="mousetrap"><a href="#mousetrap" class="headerlink" title="mousetrap"></a>mousetrap</h3><p>按键事件的监听库，监听网页的按键事件</p>
 <h3 id="SQLite持久化数据"><a href="#SQLite持久化数据" class="headerlink" title="SQLite持久化数据"></a>SQLite持久化数据</h3><p>推荐二次封装库 <code>node-sqlite3</code></p>
 <p>三次封装库 <code>knextjs</code></p>
@@ -728,10 +453,13 @@ console.log(`This platform is $&#123;platform&#125;`);</code></pre>
 <p>![image-20220112210828647](/Users/leo/Desktop/weng’s code/weng’blog/NollieLeo.github.io/source/_posts/electron学习记录\image-20220112210828647.png)</p>
 <p><strong>解决：</strong></p>
 <p>执行start的脚本中加入</p>
-<pre><code class="json">&quot;start&quot;: &quot;chcp 65001 &amp;&amp; ....&quot;    </code></pre>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;start&quot;</span><span class="punctuation">:</span> <span class="string">&quot;chcp 65001 &amp;&amp; ....&quot;</span>	</span><br></pre></td></tr></table></figure>
+
 <h3 id="electron的包装不上"><a href="#electron的包装不上" class="headerlink" title="electron的包装不上"></a>electron的包装不上</h3><p><strong>解决：</strong>将electron包的源改为国内的源：</p>
 <p>.npmrc文件中强制指定源</p>
-<pre><code>electron_mirror=&quot;https://npm.taobao.org/mirrors/electron/&quot;</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">electron_mirror=&quot;https://npm.taobao.org/mirrors/electron/&quot;</span><br></pre></td></tr></table></figure>
+
+
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
 </div></section></div>

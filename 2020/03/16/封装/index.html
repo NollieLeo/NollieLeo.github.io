@@ -50,6 +50,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -71,7 +73,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -87,7 +89,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -103,15 +105,8 @@
 <h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>封装的目的是将信息隐藏。一般而言，我们讨论的封装是封装数据和封装实现。这一节将讨<br>论更广义的封装，不仅包括封装数据和封装实现，还包括封装类型和封装变化。</p>
 <h3 id="1-封装数据"><a href="#1-封装数据" class="headerlink" title="1. 封装数据"></a>1. 封装数据</h3><p>在许多语言的对象系统中，封装数据是由语法解析来实现的，这些语言也许提供了 private 、<br>public 、 protected 等关键字来提供不同的访问权限。</p>
 <p>但 JavaScript并没有提供对这些关键字的支持，我们只能依赖变量的作用域来实现封装特性，<br>而且只能模拟出 public 和 private 这两种封装性。</p>
-<pre><code class="javascript">var myObject = (function () &#123;
-    var _name = &#39;sven&#39;;
-    return &#123;
-        getName: function () &#123;
-            return _name;
-        &#125;
-    &#125;
-&#125;)()
-console.log(myObject.getName());        </code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myObject = (<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> _name = <span class="string">&#x27;sven&#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">getName</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> _name;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(myObject.<span class="title function_">getName</span>());		</span><br></pre></td></tr></table></figure>
+
 <h3 id="2-封装实现"><a href="#2-封装实现" class="headerlink" title="2. 封装实现"></a>2. 封装实现</h3><p>封装的目的是将信息隐藏，封装应该被视为“任何形式的封装”，也就是说，封装不仅仅是<br>隐藏数据，还包括隐藏实现细节、设计细节以及隐藏对象的类型等</p>
 <p>从封装实现细节来讲，封装使得对象内部的变化对其他对象而言是透明的，也就是不可见的。<br>对象对它自己的行为负责。其他对象或者用户都不关心它的内部实现。封装使得对象之间的耦合松散，对象之间只通过暴露的 API接口来通信。当我们修改一个对象时，可以随意地修改它的<br>内部实现，只要对外的接口没有变化，就不会影响到程序的其他功能。</p>
 

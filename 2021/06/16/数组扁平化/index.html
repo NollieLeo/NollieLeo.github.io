@@ -23,12 +23,12 @@
   <title>数组扁平化 - 翁先森的博客</title>
 
   
-    <meta name="description" content="对于前端项目开发过程中，偶尔会出现层叠数据结构的数组，我们需要将多层级数组转化为一级数组（即提取嵌套数组元素最终合并为一个数组），使其内容合并且展开。那么该如何去实现呢？ 需求:多维数组&#x3D;&gt;一维数组 let ary &#x3D; [1, [2, [3, [4, 5]]], 6];&#x2F;&#x2F; -&gt; [1, 2, 3, 4, 5, 6] let str &#x3D; JSON.stringify(ary);  1.">
+    <meta name="description" content="对于前端项目开发过程中，偶尔会出现层叠数据结构的数组，我们需要将多层级数组转化为一级数组（即提取嵌套数组元素最终合并为一个数组），使其内容合并且展开。那么该如何去实现呢？ 需求:多维数组&#x3D;&gt;一维数组 123let ary &#x3D; [1, [2, [3, [4, 5]]], 6];&#x2F;&#x2F; -&gt; [1, 2, 3, 4, 5, 6]let str &#x3D; JSON.stringify(ary);">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数组扁平化">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/06/16/%E6%95%B0%E7%BB%84%E6%89%81%E5%B9%B3%E5%8C%96/index.html">
 <meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="对于前端项目开发过程中，偶尔会出现层叠数据结构的数组，我们需要将多层级数组转化为一级数组（即提取嵌套数组元素最终合并为一个数组），使其内容合并且展开。那么该如何去实现呢？ 需求:多维数组&#x3D;&gt;一维数组 let ary &#x3D; [1, [2, [3, [4, 5]]], 6];&#x2F;&#x2F; -&gt; [1, 2, 3, 4, 5, 6] let str &#x3D; JSON.stringify(ary);  1.">
+<meta property="og:description" content="对于前端项目开发过程中，偶尔会出现层叠数据结构的数组，我们需要将多层级数组转化为一级数组（即提取嵌套数组元素最终合并为一个数组），使其内容合并且展开。那么该如何去实现呢？ 需求:多维数组&#x3D;&gt;一维数组 123let ary &#x3D; [1, [2, [3, [4, 5]]], 6];&#x2F;&#x2F; -&gt; [1, 2, 3, 4, 5, 6]let str &#x3D; JSON.stringify(ary);">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-16T09:04:21.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.315Z">
@@ -52,6 +52,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -73,7 +75,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -89,7 +91,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -104,41 +106,19 @@
 <h1 class="article-title"><span>数组扁平化</span></h1>
 <p>对于前端项目开发过程中，偶尔会出现层叠数据结构的数组，我们需要将多层级数组转化为一级数组（即提取嵌套数组元素最终合并为一个数组），使其内容合并且展开。那么该如何去实现呢？</p>
 <p>需求:多维数组=&gt;一维数组</p>
-<pre><code class="js">let ary = [1, [2, [3, [4, 5]]], 6];// -&gt; [1, 2, 3, 4, 5, 6]
-let str = JSON.stringify(ary);
-</code></pre>
-<h3 id="1-调用ES6中的flat方法"><a href="#1-调用ES6中的flat方法" class="headerlink" title="1. 调用ES6中的flat方法"></a>1. 调用ES6中的flat方法</h3><pre><code class="js">ary = ary.flat(Infinity);
-</code></pre>
-<h3 id="2-replace-split"><a href="#2-replace-split" class="headerlink" title="2. replace + split"></a>2. replace + split</h3><pre><code class="js">ary = str.replace(/(\[|\])/g, &#39;&#39;).split(&#39;,&#39;)
-</code></pre>
-<h3 id="3-replace-JSON-parse"><a href="#3-replace-JSON-parse" class="headerlink" title="3. replace + JSON.parse"></a>3. replace + JSON.parse</h3><pre><code class="js">str = str.replace(/(\[|\])/g, &#39;&#39;);
-str = &#39;[&#39; + str + &#39;]&#39;;
-ary = JSON.parse(str);
-</code></pre>
-<h3 id="4-普通递归"><a href="#4-普通递归" class="headerlink" title="4. 普通递归"></a>4. 普通递归</h3><pre><code class="js">let result = [];
-let fn = function(ary) &#123;
-  for(let i = 0; i &lt; ary.length; i++) &#123;
-    let item = ary[i];
-    if (Array.isArray(ary[i]))&#123;
-      fn(item);
-    &#125; else &#123;
-      result.push(item);
-    &#125;
-  &#125;
-&#125;
-</code></pre>
-<h3 id="5-利用reduce函数迭代"><a href="#5-利用reduce函数迭代" class="headerlink" title="5. 利用reduce函数迭代"></a>5. 利用reduce函数迭代</h3><pre><code class="js">function flatten(ary) &#123;
-    return ary.reduce((pre, cur) =&gt; &#123;
-        return pre.concat(Array.isArray(cur) ? flatten(cur) : cur);
-    &#125;, []);
-&#125;
-let ary = [1, 2, [3, 4], [5, [6, 7]]]
-console.log(flatten(ary))</code></pre>
-<h3 id="6：扩展运算符"><a href="#6：扩展运算符" class="headerlink" title="6：扩展运算符"></a>6：扩展运算符</h3><pre><code class="js">//只要有一个元素有数组，那么循环继续
-while (ary.some(Array.isArray)) &#123;
-  ary = [].concat(...ary);
-&#125;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ary = [<span class="number">1</span>, [<span class="number">2</span>, [<span class="number">3</span>, [<span class="number">4</span>, <span class="number">5</span>]]], <span class="number">6</span>];<span class="comment">// -&gt; [1, 2, 3, 4, 5, 6]</span></span><br><span class="line"><span class="keyword">let</span> str = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(ary);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<h3 id="1-调用ES6中的flat方法"><a href="#1-调用ES6中的flat方法" class="headerlink" title="1. 调用ES6中的flat方法"></a>1. 调用ES6中的flat方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ary = ary.<span class="title function_">flat</span>(<span class="title class_">Infinity</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-replace-split"><a href="#2-replace-split" class="headerlink" title="2. replace + split"></a>2. replace + split</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ary = str.<span class="title function_">replace</span>(<span class="regexp">/(\[|\])/g</span>, <span class="string">&#x27;&#x27;</span>).<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-replace-JSON-parse"><a href="#3-replace-JSON-parse" class="headerlink" title="3. replace + JSON.parse"></a>3. replace + JSON.parse</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str = str.<span class="title function_">replace</span>(<span class="regexp">/(\[|\])/g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">str = <span class="string">&#x27;[&#x27;</span> + str + <span class="string">&#x27;]&#x27;</span>;</span><br><span class="line">ary = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(str);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-普通递归"><a href="#4-普通递归" class="headerlink" title="4. 普通递归"></a>4. 普通递归</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> result = [];</span><br><span class="line"><span class="keyword">let</span> fn = <span class="keyword">function</span>(<span class="params">ary</span>) &#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; ary.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> item = ary[i];</span><br><span class="line">    <span class="keyword">if</span> (<span class="title class_">Array</span>.<span class="title function_">isArray</span>(ary[i]))&#123;</span><br><span class="line">      <span class="title function_">fn</span>(item);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      result.<span class="title function_">push</span>(item);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-利用reduce函数迭代"><a href="#5-利用reduce函数迭代" class="headerlink" title="5. 利用reduce函数迭代"></a>5. 利用reduce函数迭代</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">flatten</span>(<span class="params">ary</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> ary.<span class="title function_">reduce</span>(<span class="function">(<span class="params">pre, cur</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> pre.<span class="title function_">concat</span>(<span class="title class_">Array</span>.<span class="title function_">isArray</span>(cur) ? <span class="title function_">flatten</span>(cur) : cur);</span><br><span class="line">    &#125;, []);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> ary = [<span class="number">1</span>, <span class="number">2</span>, [<span class="number">3</span>, <span class="number">4</span>], [<span class="number">5</span>, [<span class="number">6</span>, <span class="number">7</span>]]]</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">flatten</span>(ary))</span><br></pre></td></tr></table></figure>
+
+<h3 id="6：扩展运算符"><a href="#6：扩展运算符" class="headerlink" title="6：扩展运算符"></a>6：扩展运算符</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//只要有一个元素有数组，那么循环继续</span></span><br><span class="line"><span class="keyword">while</span> (ary.<span class="title function_">some</span>(<span class="title class_">Array</span>.<span class="property">isArray</span>)) &#123;</span><br><span class="line">  ary = [].<span class="title function_">concat</span>(...ary);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
 </div></section></div>

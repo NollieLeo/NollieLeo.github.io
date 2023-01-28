@@ -51,6 +51,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -72,7 +74,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -88,7 +90,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -126,27 +128,41 @@
 <h2 id="electron-进程通信"><a href="#electron-进程通信" class="headerlink" title="electron 进程通信"></a><strong>electron 进程通信</strong></h2><p>electron 会先启动主进程，然后通过 BrowserWindow 创建渲染进程，加载 html 页面实现渲染。这两个进程之间的通信是通过 electron 提供的 ipc 的 api。</p>
 <p><strong>ipcMain、ipcRenderer</strong></p>
 <p>主进程里面通过 ipcMain 的 on 方法监听事件</p>
-<pre><code>import &#123; ipcMain &#125; from ``&#39;electron&#39;``;` `ipcMain.on(``&#39;异步事件&#39;``, (event, arg) =&gt; &#123;`` ``event.sender.send(``&#39;异步事件返回&#39;``, ``&#39;yyy&#39;``);``&#125;)</code></pre><p>渲染进程里面通过 ipcRenderer 的 on 方法监听事件，通过 send 发送消息</p>
-<pre><code>import &#123; ipcRenderer &#125; from ``&#39;electron&#39;``;` `ipcRender.on(``&#39;异步事件返回&#39;``, ``function` `(event, arg) &#123;`` ``const message = `异步消息: $&#123;arg&#125;```&#125;)` `ipcRenderer.send(``&#39;异步事件&#39;``, ``&#39;xxx&#39;``)</code></pre><p>api 使用比较简单，这是经过 c++ 层的封装，然后暴露给 js 的事件形式的 api。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#123; ipcMain &#125; from ``&#x27;electron&#x27;``;` `ipcMain.on(``&#x27;异步事件&#x27;``, (event, arg) =&gt; &#123;`` ``event.sender.send(``&#x27;异步事件返回&#x27;``, ``&#x27;yyy&#x27;``);``&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>渲染进程里面通过 ipcRenderer 的 on 方法监听事件，通过 send 发送消息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#123; ipcRenderer &#125; from ``&#x27;electron&#x27;``;` `ipcRender.on(``&#x27;异步事件返回&#x27;``, ``function` `(event, arg) &#123;`` ``const message = `异步消息: $&#123;arg&#125;```&#125;)` `ipcRenderer.send(``&#x27;异步事件&#x27;``, ``&#x27;xxx&#x27;``)</span><br></pre></td></tr></table></figure>
+
+<p>api 使用比较简单，这是经过 c++ 层的封装，然后暴露给 js 的事件形式的 api。</p>
 <p>我们可以想一下它是基于哪种机制实现的呢？</p>
 <p>很明显有一定的异步性，而且是父子进程之间的通信，所以是消息队列的方式实现的。</p>
 <p><strong>remote</strong></p>
 <p>除了事件形式的 api 外，electron 还提供了远程方法调用 rmi （remote method invoke）形式的 api。</p>
 <p>其实就是对消息的进一步封装，也就是根据传递的消息，调用不同的方法，形式上就像调用本进程的方法一样，但其实是发消息到另一个进程来做的，和 ipcMain、ipcRenderer 的形式本质上一样。</p>
 <p>比如在渲染进程里面，通过 remote 来直接调用主进程才有的 BrowserWindow 的 api。</p>
-<pre><code>const &#123; BrowserWindow &#125; = require(``&#39;electron&#39;``).remote;` `let win = ``new` `BrowserWindow(&#123; width: 800, height: 600 &#125;);``win.loadURL(``&#39;&#39;``);</code></pre><p>小结一下，electron 的父子进程通信方式是基于消息队列封装的，封装形式有两种，一种是事件的方式，通过 ipcMain、ipcRenderer 的 api 使用，另一种则是进一步封装成了不同方法的调用（rmi），底层也是基于消息，执行远程方法但是看上去像执行本地方法一样。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const &#123; BrowserWindow &#125; = require(``&#x27;electron&#x27;``).remote;` `let win = ``new` `BrowserWindow(&#123; width: 800, height: 600 &#125;);``win.loadURL(``&#x27;&#x27;``);</span><br></pre></td></tr></table></figure>
+
+<p>小结一下，electron 的父子进程通信方式是基于消息队列封装的，封装形式有两种，一种是事件的方式，通过 ipcMain、ipcRenderer 的 api 使用，另一种则是进一步封装成了不同方法的调用（rmi），底层也是基于消息，执行远程方法但是看上去像执行本地方法一样。</p>
 <h2 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a><strong>nodejs</strong></h2><p>nodejs 提供了创建进程的 api，有两个模块： c 和 cluster。很明显，一个是用于父子进程的创建和通信，一个是用于多个进程。</p>
 <p><strong>child_process</strong></p>
 <p>child_process 提供了 spawn、exec、execFile、fork 的 api，分别用于不同的进程的创建：</p>
 <p><strong>spawn、exec</strong></p>
 <p>如果想通过 shell 执行命令，那就用 spawn 或者 exec。因为一般执行命令是需要返回值的，这俩 api 在返回值的方式上有所不同。</p>
 <p>spawn 返回的是 stream，通过 data 事件来取，exec 进一步分装成了 buffer，使用起来简单一些，但是可能会超过 maxBuffer。</p>
-<pre><code>const &#123; spawn &#125; = require(``&#39;child_process&#39;``);` `var` `app = spawn(``&#39;node&#39;``,``&#39;main.js&#39;` `&#123;env:&#123;&#125;&#125;);` `app.stderr.on(``&#39;data&#39;``,``function``(data) &#123;`` ``console.log(``&#39;Error:&#39;``,data);``&#125;);` `app.stdout.on(``&#39;data&#39;``,``function``(data) &#123;`` ``console.log(data);``&#125;);</code></pre><p>其实 exec 是基于 spwan 封装出来的，简单场景可以用，有的时候要设置下 maxBuffer。</p>
-<pre><code>const &#123; exec &#125; = require(``&#39;child_process&#39;``);` `exec(``&#39;find . -type f&#39;``, &#123; maxBuffer: 1024*1024 &#125;(err, stdout, stderr) =&gt; &#123;``  ``if` `(err) &#123;``    ``console.error(`exec error: $&#123;err&#125;`); ``return``;``  ``&#125; ``  ``console.log(stdout);``&#125;);</code></pre><p><strong>execFile</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const &#123; spawn &#125; = require(``&#x27;child_process&#x27;``);` `var` `app = spawn(``&#x27;node&#x27;``,``&#x27;main.js&#x27;` `&#123;env:&#123;&#125;&#125;);` `app.stderr.on(``&#x27;data&#x27;``,``function``(data) &#123;`` ``console.log(``&#x27;Error:&#x27;``,data);``&#125;);` `app.stdout.on(``&#x27;data&#x27;``,``function``(data) &#123;`` ``console.log(data);``&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>其实 exec 是基于 spwan 封装出来的，简单场景可以用，有的时候要设置下 maxBuffer。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const &#123; exec &#125; = require(``&#x27;child_process&#x27;``);` `exec(``&#x27;find . -type f&#x27;``, &#123; maxBuffer: 1024*1024 &#125;(err, stdout, stderr) =&gt; &#123;``  ``if` `(err) &#123;``    ``console.error(`exec error: $&#123;err&#125;`); ``return``;``  ``&#125; ``  ``console.log(stdout);``&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>execFile</strong></p>
 <p>除了执行命令外，如果要执行可执行文件就用 execFile 的 api：</p>
-<pre><code>const &#123; execFile &#125; = require(``&#39;child_process&#39;``);` `const child = execFile(``&#39;node&#39;``, [``&#39;--version&#39;``], (error, stdout, stderr) =&gt; &#123;``  ``if` `(error) &#123; ``throw` `error; &#125;``  ``console.log(stdout);``&#125;);</code></pre><p><strong>fork</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const &#123; execFile &#125; = require(``&#x27;child_process&#x27;``);` `const child = execFile(``&#x27;node&#x27;``, [``&#x27;--version&#x27;``], (error, stdout, stderr) =&gt; &#123;``  ``if` `(error) &#123; ``throw` `error; &#125;``  ``console.log(stdout);``&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>fork</strong></p>
 <p>还有如果是想执行 js ，那就用 fork：</p>
-<pre><code>const &#123; fork &#125; = require(``&#39;child_process&#39;``); ` `const xxxProcess = fork(``&#39;./xxx.js&#39;``);  ``xxxProcess.send(``&#39;111111&#39;``); ``xxxProcess.on(``&#39;message&#39;``, sum =&gt; &#123;  ``  ``res.end(``&#39;22222&#39;``); ``&#125;);</code></pre><p><strong>小结</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const &#123; fork &#125; = require(``&#x27;child_process&#x27;``); ` `const xxxProcess = fork(``&#x27;./xxx.js&#x27;``);  ``xxxProcess.send(``&#x27;111111&#x27;``); ``xxxProcess.on(``&#x27;message&#x27;``, sum =&gt; &#123;  ``  ``res.end(``&#x27;22222&#x27;``); ``&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>小结</strong></p>
 <p>简单小结一下 child_process 的 4 个 api：</p>
 <p>如果想执行 shell 命令，用 spawn 和 exec，spawn 返回一个 stream，而 exec 进一步封装成了 buffer。除了 exec 有的时候需要设置下 maxBuffer，其他没区别。</p>
 <p>如果想执行可执行文件，用 execFile。</p>
@@ -155,22 +171,24 @@
 <p>说完了 api 我们来说下 child_process 创建的子进程怎么和父进程通信，也就是怎么做 ipc。</p>
 <p><strong>pipe</strong></p>
 <p>首先，支持了 pipe，很明显是通过管道的机制封装出来的，能同步的传输流的数据。</p>
-<pre><code class="js">const &#123; spawn &#125; = require(&#39;child_process&#39;);
-const find = spawn(&#39;cat&#39;, [&#39;./aaa.js&#39;]);
-const wc = spawn(&#39;wc&#39;, [&#39;-l&#39;]); 
-find.stdout.pipe(wc.stdin);</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; spawn &#125; = <span class="built_in">require</span>(<span class="string">&#x27;child_process&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> find = <span class="title function_">spawn</span>(<span class="string">&#x27;cat&#x27;</span>, [<span class="string">&#x27;./aaa.js&#x27;</span>]);</span><br><span class="line"><span class="keyword">const</span> wc = <span class="title function_">spawn</span>(<span class="string">&#x27;wc&#x27;</span>, [<span class="string">&#x27;-l&#x27;</span>]); </span><br><span class="line">find.<span class="property">stdout</span>.<span class="title function_">pipe</span>(wc.<span class="property">stdin</span>);</span><br></pre></td></tr></table></figure>
+
 <p>比如上面通过管道把一个进程的输出流传输到了另一个进程的输入流，和下面的 shell 命令效果一样：</p>
-<pre><code>cat ./aaa.js | wc -l</code></pre><p><strong>message</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ./aaa.js | wc -l</span><br></pre></td></tr></table></figure>
+
+<p><strong>message</strong></p>
 <p>spawn 支持 stdio 参数，可以设置和父进程的 stdin、stdout、stderr 的关系，比如指定 pipe 或者 null。还有第四个参数，可以设置 ipc，这时候就是通过事件的方式传递消息了，很明s显，是基于消息队列实现的。</p>
-<pre><code class="js">const &#123; spawn &#125; = require(&#39;child_process&#39;);
-const child = spawn(&#39;node&#39;, [&#39;./child.js&#39;], &#123; stdio: [&#39;pipe&#39;, &#39;pipe&#39;, &#39;pipe&#39;, &#39;ipc&#39;]&#125;);
-child.on(&#39;message&#39;, (m) =&gt; &#123;  console.log(m);&#125;);
-child.send(&#39;this is weng&#39;);</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; spawn &#125; = <span class="built_in">require</span>(<span class="string">&#x27;child_process&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> child = <span class="title function_">spawn</span>(<span class="string">&#x27;node&#x27;</span>, [<span class="string">&#x27;./child.js&#x27;</span>], &#123; <span class="attr">stdio</span>: [<span class="string">&#x27;pipe&#x27;</span>, <span class="string">&#x27;pipe&#x27;</span>, <span class="string">&#x27;pipe&#x27;</span>, <span class="string">&#x27;ipc&#x27;</span>]&#125;);</span><br><span class="line">child.<span class="title function_">on</span>(<span class="string">&#x27;message&#x27;</span>, <span class="function">(<span class="params">m</span>) =&gt;</span> &#123;  <span class="variable language_">console</span>.<span class="title function_">log</span>(m);&#125;);</span><br><span class="line">child.<span class="title function_">send</span>(<span class="string">&#x27;this is weng&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
 <p>而 fork 的 api 创建的子进程自带了 ipc 的传递消息机制，可以直接用。</p>
-<pre><code>const &#123; fork &#125; = require(``&#39;child_process&#39;``); ` `const xxxProcess = fork(``&#39;./xxx.js&#39;``);  ``xxxProcess.send(``&#39;111111&#39;``); ``xxxProcess.on(``&#39;message&#39;``, sum =&gt; &#123;  ``  ``res.end(``&#39;22222&#39;``); ``&#125;);</code></pre><p><strong>cluster</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const &#123; fork &#125; = require(``&#x27;child_process&#x27;``); ` `const xxxProcess = fork(``&#x27;./xxx.js&#x27;``);  ``xxxProcess.send(``&#x27;111111&#x27;``); ``xxxProcess.on(``&#x27;message&#x27;``, sum =&gt; &#123;  ``  ``res.end(``&#x27;22222&#x27;``); ``&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>cluster</strong></p>
 <p>cluster 不再是父子进程了，而是更多进程，也提供了 fork 的 api。</p>
 <p>比如 http server 会根据 cpu 数启动多个进程来处理请求。</p>
-<pre><code>import cluster from ``&#39;cluster&#39;``;``import http from ``&#39;http&#39;``;``import &#123; cpus &#125; from ``&#39;os&#39;``;``import process from ``&#39;process&#39;``;` `const numCPUs = cpus().length;` `if` `(cluster.isPrimary) &#123;`` ``for` `(let i = 0; i &lt; numCPUs; i++) &#123;``  ``cluster.fork();`` ``&#125;``&#125; ``else` `&#123;`` ``const server = http.createServer((req, res) =&gt; &#123;``  ``res.writeHead(200);``  ``res.end(``&#39;hello worldn&#39;``);`` ``&#125;)`` ` ` ``server.listen(8000);`` ` ` ``process.on(``&#39;message&#39;``, (msg) =&gt; &#123;``  ``if` `(msg === ``&#39;shutdown&#39;``) &#123;``    ``server.close();``  ``&#125;`` ``&#125;);``&#125;</code></pre><p>它同样支持了事件形式的 api，用于多个进程之间的消息传递，因为多个进程其实也只是多个父子进程的通信，子进程之间不能直接通信，所以还是基于消息队列实现的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import cluster from ``&#x27;cluster&#x27;``;``import http from ``&#x27;http&#x27;``;``import &#123; cpus &#125; from ``&#x27;os&#x27;``;``import process from ``&#x27;process&#x27;``;` `const numCPUs = cpus().length;` `if` `(cluster.isPrimary) &#123;`` ``for` `(let i = 0; i &lt; numCPUs; i++) &#123;``  ``cluster.fork();`` ``&#125;``&#125; ``else` `&#123;`` ``const server = http.createServer((req, res) =&gt; &#123;``  ``res.writeHead(200);``  ``res.end(``&#x27;hello worldn&#x27;``);`` ``&#125;)`` ` ` ``server.listen(8000);`` ` ` ``process.on(``&#x27;message&#x27;``, (msg) =&gt; &#123;``  ``if` `(msg === ``&#x27;shutdown&#x27;``) &#123;``    ``server.close();``  ``&#125;`` ``&#125;);``&#125;</span><br></pre></td></tr></table></figure>
+
+<p>它同样支持了事件形式的 api，用于多个进程之间的消息传递，因为多个进程其实也只是多个父子进程的通信，子进程之间不能直接通信，所以还是基于消息队列实现的。</p>
 <p><strong>共享内存</strong></p>
 <p>子进程之间通信还得通过父进程中转一次，要多次读写消息队列，效率太低了，就不能直接共享内存么？</p>
 <blockquote>

@@ -23,12 +23,12 @@
   <title>创建对象之原型模式 - 翁先森的博客</title>
 
   
-    <meta name="description" content="原型模式每一个函数都会创建一个prototype的属性 原型方式 function Person()&amp;#123;&amp;#125;  Person.prototype.name &#x3D; &#39;weng&#39;; Person.prototype.age &#x3D; 23; Person.sayName &#x3D; function()&amp;#123;     console.log(this.name); &amp;#125;">
+    <meta name="description" content="原型模式每一个函数都会创建一个prototype的属性 原型方式 12345678910111213function Person()&amp;#123;&amp;#125;Person.prototype.name &#x3D; &amp;#x27;weng&amp;#x27;;Person.prototype.age &#x3D; 23;Person.sayName &#x3D; function()&amp;#123;    console.log(this.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="创建对象之原型模式">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/05/30/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="原型模式每一个函数都会创建一个prototype的属性 原型方式 function Person()&amp;#123;&amp;#125;  Person.prototype.name &#x3D; &#39;weng&#39;; Person.prototype.age &#x3D; 23; Person.sayName &#x3D; function()&amp;#123;     console.log(this.name); &amp;#125;">
+<meta property="og:description" content="原型模式每一个函数都会创建一个prototype的属性 原型方式 12345678910111213function Person()&amp;#123;&amp;#125;Person.prototype.name &#x3D; &amp;#x27;weng&amp;#x27;;Person.prototype.age &#x3D; 23;Person.sayName &#x3D; function()&amp;#123;    console.log(this.">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://github.com/NollieLeo/2021/05/30/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/image-20210530153200440.png">
 <meta property="og:image" content="https://github.com/NollieLeo/2021/05/30/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/image-20210530163634192.png">
@@ -55,6 +55,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -76,7 +78,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -92,7 +94,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -107,27 +109,25 @@
 <h1 class="article-title"><span>创建对象之原型模式</span></h1>
 <h1 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h1><p><strong>每一个函数都会创建一个prototype的属性</strong></p>
 <p>原型方式</p>
-<pre><code class="js">function Person()&#123;&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>)&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">name</span> = <span class="string">&#x27;weng&#x27;</span>;</span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">age</span> = <span class="number">23</span>;</span><br><span class="line"><span class="title class_">Person</span>.<span class="property">sayName</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> per1 = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">ler per2 = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"></span><br><span class="line">per1.<span class="title function_">sayName</span>(); <span class="comment">// weng</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-Person.prototype.name = &#39;weng&#39;;
-Person.prototype.age = 23;
-Person.sayName = function()&#123;
-    console.log(this.name);
-&#125;
-let per1 = new Person();
-ler per2 = new Person();
 
-per1.sayName(); // weng
 
-</code></pre>
 <h2 id="1-与构造函数的不同"><a href="#1-与构造函数的不同" class="headerlink" title="1.与构造函数的不同"></a>1.与构造函数的不同</h2><p>原型模式是直接再构造函数的prototype属性上加对象和相应的属性（也就是再构造函数的原型对象上面加属性）</p>
 <p>与构造函数不同的是，使用这种原型模式定义的属性和方法，之后创建出来的实例，都是一起共享这些属性的，因此</p>
 <p>上述的per1和per2的sayName()函数指向的是同一个指针, 他们的原型也同样都是Person构造函数指向的原型对象</p>
-<pre><code class="js">console.log(per1.sayName = per2.sayName);</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(per1.<span class="property">sayName</span> = per2.<span class="property">sayName</span>);</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="2-理解原型"><a href="#2-理解原型" class="headerlink" title="2. 理解原型"></a>2. 理解原型</h2><p>自定义构造函数的时候，原型对象，也就是构造函数的原型对象（prototype指向的对象），会自动获得一个constructor的属性，这个属性是重新指向自定义的构造函数，如果没有父类的话，其他的所有方法都是继承于js内部的Object对象的所有方法。</p>
-<pre><code class="js">console.log(Person.prototype.constructor === Person; // true;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span> === <span class="title class_">Person</span>; <span class="comment">// true;</span></span><br></pre></td></tr></table></figure>
+
+
+
 <p>例如，根据上述的Person自定义构造函数创建一个实例</p>
-<pre><code class="js">let per1 = new Person()</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> per1 = <span class="keyword">new</span> <span class="title class_">Person</span>()</span><br></pre></td></tr></table></figure>
+
 <p>这个过程是这样的</p>
 <ol>
 <li>per1实例（对象）内部的[[Prototype]]指针就会被赋值为Person构造函数的原型对象（也就是Person.prototype）</li>
@@ -139,11 +139,13 @@ per1.sayName(); // weng
 <blockquote>
 <p>但是，实例是和构造函数没有直接的联系的，只和构造函数的原型又关联</p>
 </blockquote>
-<pre><code class="js">console.log(Person.prototype === per1.__proto__); // true;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span> === per1.<span class="property">__proto__</span>); <span class="comment">// true;</span></span><br></pre></td></tr></table></figure>
+
+
+
 <p><strong>Object的原型的原型是null</strong></p>
-<pre><code class="js">console.log(Person.prototype.__proto__ === Object.prototype) // true
-console.log(Person.prototype.__proto__.constructor === Object); //true
-console.log(Person.prototype.__proto__.__proto__ === null);</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">__proto__</span> === <span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">__proto__</span>.<span class="property">constructor</span> === <span class="title class_">Object</span>); <span class="comment">//true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">__proto__</span>.<span class="property">__proto__</span> === <span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210530153200440.png" alt="1"></p>
 <p>如图可以看出实例，构造函数，构造函数的原型之间的关系</p>
 <p>这里比较<strong>重要</strong>的点在于</p>
@@ -156,72 +158,45 @@ console.log(Person.prototype.__proto__.__proto__ === null);</code></pre>
 <blockquote>
 <p>这里一定要注意，是判断某个构造函数的原型</p>
 </blockquote>
-<pre><code class="js">console.log(per1 instanceof Person); // true
-console.log(per1 instanceof Object); // true;
-console.log(Person.prototype instanceof Object); // true;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(per1 <span class="keyword">instanceof</span> <span class="title class_">Person</span>); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(per1 <span class="keyword">instanceof</span> <span class="title class_">Object</span>); <span class="comment">// true;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span> <span class="keyword">instanceof</span> <span class="title class_">Object</span>); <span class="comment">// true;</span></span><br></pre></td></tr></table></figure>
+
 <p>如第二大点的图1可以看清这样的继承关系，继承关系另一篇文章再说</p>
 <h3 id="2-isPrototypeOf"><a href="#2-isPrototypeOf" class="headerlink" title="2. isPrototypeOf"></a>2. isPrototypeOf</h3><p>这个方法是为了确定两个对象之间原型的关系</p>
 <p>因为如第2大点所说，不是所有的实现都对外暴露的<code>[[Prototype]]</code>的指针</p>
 <p>所以可以直接在原型上去调用这个方法检测某个对象是否的<code>[[Prototype]]</code>的指针是否指向它，因此也能够检测出两个对象之间的关系</p>
-<pre><code class="js">console.log(Person.prototype.isPrototypeOf(per1)); // true;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="title function_">isPrototypeOf</span>(per1)); <span class="comment">// true;</span></span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="3-Object-getPrototypeOf"><a href="#3-Object-getPrototypeOf" class="headerlink" title="3. Object.getPrototypeOf()"></a>3. Object.getPrototypeOf()</h3><p>这个方法会返回参数的内部<code>[[Prototype]]</code>的指针（这个<code>[[Prototype]]</code>也其实就是参数的特性，可以去一篇叫做对象的属性特性详解的文章查看）</p>
 <p>这个函数传入一个 实例， 返回这个实例的原型对象，也就是它的构造函数的原型对象</p>
-<pre><code class="js">console.log(Object.getPrototypeOf(per1)===Person.prototype);
-Object.getPrototypeOf(per1).name; // weng</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(per1)===<span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>);</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(per1).<span class="property">name</span>; <span class="comment">// weng</span></span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="4-Object-setPrototypeOf"><a href="#4-Object-setPrototypeOf" class="headerlink" title="4. *Object.setPrototypeOf()"></a>4. *Object.setPrototypeOf()</h3><p>这个方法可以给实例的<code>[[Prototype]]</code>指针写入一个新的值，这样可以重写一个实例的原型继承关系</p>
-<pre><code class="js">let a = &#123;
-    name: &#39;weng&#39;;
-    age:23
-&#125;;
-let b = &#123;
-    name: &#39;kaimin&#39;
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;weng&#x27;</span>;</span><br><span class="line">    <span class="attr">age</span>:<span class="number">23</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> b = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;kaimin&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">setPrototypeof</span>(b, a);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b.<span class="property">name</span>) <span class="comment">// kaimin</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b.<span class="property">age</span>) <span class="comment">// 23</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(b) === a); <span class="comment">// true;</span></span><br></pre></td></tr></table></figure>
 
-Object.setPrototypeof(b, a);
-
-console.log(b.name) // kaimin
-console.log(b.age) // 23
-console.log(Object.getPrototypeOf(b) === a); // true;</code></pre>
 <blockquote>
 <p>这里不推荐使用这种覆盖实例原型指向的方式改变原型继承的关系，会严重的影响代码的性能。</p>
 <p>Mozilla文档中说的“在所有浏览器和js的引擎中，修改继承关系的影响都是微妙而且深远的。这种影响并不是执行以上这个代码那么简单，而是会涉及到所有访问了那些修改过 [[Prototype]]指向的实例的代码”</p>
 </blockquote>
 <p>因为有上述的弊端，可以看另外一篇文章，继承之原型式继承 中讲到的创建新对象的形式，也就是类似于<code>Object.create()</code>来创建一个新对象，同时给他指定一个原型，这块继承会在继承文章中详细解释</p>
-<pre><code class="js">let a = &#123;
-    name: &#39;weng&#39;;
-    age:23
-&#125;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;weng&#x27;</span>;</span><br><span class="line">    <span class="attr">age</span>:<span class="number">23</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b = <span class="title class_">Object</span>.<span class="title function_">create</span>(a);</span><br><span class="line">b.<span class="property">name</span> = <span class="string">&#x27;kaimin&#x27;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b.<span class="property">name</span>) <span class="comment">// kaimin</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b.<span class="property">age</span>) <span class="comment">// 23</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(b)) <span class="comment">// a</span></span><br></pre></td></tr></table></figure>
 
-let b = Object.create(a);
-b.name = &#39;kaimin&#39;;
-console.log(b.name) // kaimin
-console.log(b.age) // 23
-console.log(Object.getPrototypeOf(b)) // a</code></pre>
 <p>Object.create这种形式其实是以匿名构造函数的形式，指定这个匿名函数的原型为你想要的那个实例，因为这里咱们只是在乎这个新创建的实例（这里指的是b）他的<code>[[Prototype]]</code>的指向是否是指向所需对象（这里指的是a）的，完全可以跳过显示创建构造函数的形式，使用这个方法不仅仅不会改变原来实例（这里指的是a）的<code>[[Prototype]]</code>指向，而且又让新实例的原型指向了a，就很棒，这里具体还是去继承那边文章看</p>
 <h2 id="4-原型的层级"><a href="#4-原型的层级" class="headerlink" title="4.原型的层级"></a>4.原型的层级</h2><p>例如以下代码</p>
-<pre><code class="js">function BasePerson()&#123;
-    this.country = &#39;China&#39;;
-    this.age = 23;
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">BasePerson</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">country</span> = <span class="string">&#x27;China&#x27;</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = <span class="number">23</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;weng&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="keyword">new</span> <span class="title class_">BasePersn</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> per1 = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">per1.<span class="property">address</span> = <span class="string">&#x27;fujian&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(per1.<span class="property">age</span>) <span class="comment">// 23</span></span><br></pre></td></tr></table></figure>
 
-function Person()&#123;
-    this.name = &#39;weng&#39;;
-&#125;
 
-Person.prototype = new BasePersn();
 
-const per1 = new Person();
-per1.address = &#39;fujian&#39;;
-
-console.log(per1.age) // 23</code></pre>
 <p>以上代码的各个关系如下图所示；</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210530163634192.png" alt="image-20210530163634192"></p>
 <p>这里比较重要的是<code>Person.prototype</code>，这里手动给他赋值给了new BasePerson()构造出来的实例，后面又手动的给把他的constructor属性赋值给了Person，这里为什么呢？本文最后会说明</p>
 <p>之后呢，Person的原型对象中有了BasePerson构造函数内部初始化的时候的一些参数</p>
 <p>按照这上面的层级关系</p>
-<pre><code class="js">per1.name; // weng
-per1.address; // fujian
-per1.age; // 23</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">per1.<span class="property">name</span>; <span class="comment">// weng</span></span><br><span class="line">per1.<span class="property">address</span>; <span class="comment">// fujian</span></span><br><span class="line">per1.<span class="property">age</span>; <span class="comment">// 23</span></span><br></pre></td></tr></table></figure>
+
 <p>这里其实都是可以访问到的</p>
 <p>在通过实例访问属性的时候，会按这个属性的名称开始搜索，一层层往上走，一开始搜索实例本身是否有这些属性</p>
 <p>，如果有就返回，如果没有继续通过 <code>[[Prototype]]</code>的指针向上搜索原型。</p>
@@ -232,16 +207,14 @@ per1.age; // 23</code></pre>
 <h3 id="1-删除实例中的属性"><a href="#1-删除实例中的属性" class="headerlink" title="1.删除实例中的属性"></a>1.删除实例中的属性</h3><p>delete操作符号可以删除实例上面定义的属性值，调用时候，这个实例的原型上的值不会被删除</p>
 <p>要删除的话得直接在原型上做操作</p>
 <p>例如上面的代码构建的实例per1</p>
-<pre><code class="js">delete per1.address;
-console.log(per1.address) // undefined</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> per1.<span class="property">address</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(per1.<span class="property">address</span>) <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
 <p>通过删除实例上的属性，可能会暴露出原型上的同名属性，这里的话具体而论，那怎么判断这个属性是在原型上还是在实例上的呢？</p>
 <h3 id="2-判断属性在原型上还是在实例上"><a href="#2-判断属性在原型上还是在实例上" class="headerlink" title="2. 判断属性在原型上还是在实例上"></a>2. 判断属性在原型上还是在实例上</h3><h4 id="1-hasOwnProperty"><a href="#1-hasOwnProperty" class="headerlink" title="1. hasOwnProperty()"></a>1. hasOwnProperty()</h4><p>这个方法可以用来判断某个属性是否在实例上面（这个函数不进入实例的原型中去搜索指定属性）</p>
 <p>这个方法直接在实例上调用，继承至Object构造函数的原型对象，如果害怕实例的中有同名方法的话可以使用Object.prototype.hasOwnProperty.call(this)来调用</p>
 <p>比如上面的per1实例在没有删除addrss的情况下</p>
-<pre><code class="js">per1.hasOwnProperty(&#39;address&#39;); // true;
-per1.hasOwnProperty(&#39;name&#39;); // true;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">per1.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;address&#x27;</span>); <span class="comment">// true;</span></span><br><span class="line">per1.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;name&#x27;</span>); <span class="comment">// true;</span></span><br><span class="line"></span><br><span class="line">per1.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;age&#x27;</span>); <span class="comment">// false;</span></span><br></pre></td></tr></table></figure>
 
-per1.hasOwnProperty(&#39;age&#39;); // false;</code></pre>
 <p>per1.age实际上返回的是这个实例原型上的age，hasOwnProperty是访问不到的</p>
 <p>那如果要确定是否原型上有这个值呢？不用per1[‘….’]来判断</p>
 <h4 id="2-in"><a href="#2-in" class="headerlink" title="2. in"></a>2. in</h4><p>in操作符有两种使用方式</p>
@@ -252,23 +225,25 @@ per1.hasOwnProperty(&#39;age&#39;); // false;</code></pre>
 <p>这里先说说单独使用in，下面得第5点说for-in</p>
 <p>in操作符号可以通过对象访问指定属性时候返回true，<strong>无论是在原型上还是在实例上面，都可以访问的到</strong></p>
 <p>例如上面的per1对象</p>
-<pre><code class="js">console.log(&#39;name&#39; in per1); // true
-console.log(&#39;address&#39; in per1); // true
-console.log(&#39;age&#39; in per1); // true</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;name&#x27;</span> <span class="keyword">in</span> per1); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;address&#x27;</span> <span class="keyword">in</span> per1); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;age&#x27;</span> <span class="keyword">in</span> per1); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="3-确定实例的某个属性不在实例上，只在原型上"><a href="#3-确定实例的某个属性不在实例上，只在原型上" class="headerlink" title="3. 确定实例的某个属性不在实例上，只在原型上"></a>3. 确定实例的某个属性不在实例上，只在原型上</h3><p>结合第4大点的第二小点的两个操作符，可以确定一个函数</p>
-<pre><code class="js">function hasPrototypeProperty(object,name)&#123;
-    return !object.hasOwnProperty(name) &amp;&amp; (name in object);
-&#125;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">hasPrototypeProperty</span>(<span class="params">object,name</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> !object.<span class="title function_">hasOwnProperty</span>(name) &amp;&amp; (name <span class="keyword">in</span> object);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="4-获取实例的属性"><a href="#4-获取实例的属性" class="headerlink" title="4. 获取实例的属性"></a>4. 获取实例的属性</h3><h4 id="1-Object-keys-获取实例上的属性（仅仅是实例上可枚举属性）"><a href="#1-Object-keys-获取实例上的属性（仅仅是实例上可枚举属性）" class="headerlink" title="1. Object.keys()获取实例上的属性（仅仅是实例上可枚举属性）"></a>1. Object.keys()获取实例上的属性（仅仅是实例上可枚举属性）</h4><h4 id="2-for-in遍历实例以及其原型上的所有属性（仅仅是可枚举属性）"><a href="#2-for-in遍历实例以及其原型上的所有属性（仅仅是可枚举属性）" class="headerlink" title="2. for-in遍历实例以及其原型上的所有属性（仅仅是可枚举属性）"></a>2. for-in遍历实例以及其原型上的所有属性（仅仅是可枚举属性）</h4><h4 id="3-Object-getOwnPropertyNames-获取仅仅是实例上的属性（是否可枚举都能获取）"><a href="#3-Object-getOwnPropertyNames-获取仅仅是实例上的属性（是否可枚举都能获取）" class="headerlink" title="3.Object.getOwnPropertyNames()获取仅仅是实例上的属性（是否可枚举都能获取）"></a>3.Object.getOwnPropertyNames()获取仅仅是实例上的属性（是否可枚举都能获取）</h4><p>例如：</p>
 <p>正常来说，一个实例的原型对象上的constructor属性都是不可以枚举的，是不能够通过1，2两个方法获取的</p>
-<pre><code class="js">let keys = Object.getOwnPropertyNames(Person.prototype);
-console.log(keys); // [...., &#39;constructor&#39;]</code></pre>
-<h4 id="4-Object-getOwnPropertySymbols-仅仅针对符号针对实例属性（是否枚举都可以）"><a href="#4-Object-getOwnPropertySymbols-仅仅针对符号针对实例属性（是否枚举都可以）" class="headerlink" title="4. Object.getOwnPropertySymbols() 仅仅针对符号针对实例属性（是否枚举都可以）"></a>4. Object.getOwnPropertySymbols() 仅仅针对符号针对实例属性（是否枚举都可以）</h4><pre><code class="js">let k1 = Symbol(&#39;k1&#39;);
-let o = &#123;
-    [k1]: &#39;helloworld&#39;
-&#125;
-console.log(o);
-// [Symbol(k1)]</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> keys = <span class="title class_">Object</span>.<span class="title function_">getOwnPropertyNames</span>(<span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(keys); <span class="comment">// [...., &#x27;constructor&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-Object-getOwnPropertySymbols-仅仅针对符号针对实例属性（是否枚举都可以）"><a href="#4-Object-getOwnPropertySymbols-仅仅针对符号针对实例属性（是否枚举都可以）" class="headerlink" title="4. Object.getOwnPropertySymbols() 仅仅针对符号针对实例属性（是否枚举都可以）"></a>4. Object.getOwnPropertySymbols() 仅仅针对符号针对实例属性（是否枚举都可以）</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> k1 = <span class="title class_">Symbol</span>(<span class="string">&#x27;k1&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> o = &#123;</span><br><span class="line">    [k1]: <span class="string">&#x27;helloworld&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(o);</span><br><span class="line"><span class="comment">// [Symbol(k1)]</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <h2 id="5-属性的枚举顺序"><a href="#5-属性的枚举顺序" class="headerlink" title="5. 属性的枚举顺序"></a>5. 属性的枚举顺序</h2><p>以上可以总结几种获取实例或者实例原型上的一些属性的方法</p>
 <ol>
 <li>for-in</li>
@@ -286,87 +261,33 @@ console.log(o);
 <li>对象字面量中定义的键，以逗号分隔的顺序插入</li>
 </ol>
 <p>例如：</p>
-<pre><code class="js">let k1 = Symbol(&#39;k1&#39;), k2 = Symbol(&#39;k2&#39;);
-let o = &#123;
-    1: 1,
-    first:&#39;first&#39;,
-    [k1]:&#39;hello&#39;,
-    second:&#39;second&#39;,
-    0:0
-&#125;
-o[k2] = &#39;world&#39;;
-o[3] = 3;
-o.third = &#39;third&#39;;
-o[2] = 2;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> k1 = <span class="title class_">Symbol</span>(<span class="string">&#x27;k1&#x27;</span>), k2 = <span class="title class_">Symbol</span>(<span class="string">&#x27;k2&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> o = &#123;</span><br><span class="line">    <span class="number">1</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">first</span>:<span class="string">&#x27;first&#x27;</span>,</span><br><span class="line">    [k1]:<span class="string">&#x27;hello&#x27;</span>,</span><br><span class="line">    <span class="attr">second</span>:<span class="string">&#x27;second&#x27;</span>,</span><br><span class="line">    <span class="number">0</span>:<span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line">o[k2] = <span class="string">&#x27;world&#x27;</span>;</span><br><span class="line">o[<span class="number">3</span>] = <span class="number">3</span>;</span><br><span class="line">o.<span class="property">third</span> = <span class="string">&#x27;third&#x27;</span>;</span><br><span class="line">o[<span class="number">2</span>] = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">getOwnPropertyNames</span>(<span class="number">0</span>));</span><br><span class="line"><span class="comment">// [&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;first&quot;,&quot;second&quot;,&quot;third&quot;];</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">getOwnPropertySymbols</span>(o));</span><br><span class="line"><span class="comment">// [Symbol(k1),Symbol(k2)];</span></span><br></pre></td></tr></table></figure>
 
-console.log(Object.getOwnPropertyNames(0));
-// [&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;first&quot;,&quot;second&quot;,&quot;third&quot;];
 
-console.log(Object.getOwnPropertySymbols(o));
-// [Symbol(k1),Symbol(k2)];</code></pre>
 <h2 id="6-原型中存在的问题"><a href="#6-原型中存在的问题" class="headerlink" title="6. 原型中存在的问题"></a>6. 原型中存在的问题</h2><ol>
 <li>弱化了向构造函数传递初始化参数的能力，会导致所有实例默认都取得相同的属性值</li>
 <li>原型上引用值属性的问题</li>
 </ol>
 <p>第一点是显而易见的</p>
 <p>第二点中举个例子</p>
-<pre><code class="js">function Person()&#123;&#125;
-Person.prototype.arr = [1,2,3,4];
-let per1 = new Person();
-let per2 = new Person();
-per1.arr.push(5);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>)&#123;&#125;</span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">arr</span> = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> per1 = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"><span class="keyword">let</span> per2 = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">per1.<span class="property">arr</span>.<span class="title function_">push</span>(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(per2.<span class="property">arr</span>) <span class="comment">// [1,2,3,4, 5];</span></span><br></pre></td></tr></table></figure>
 
-console.log(per2.arr) // [1,2,3,4, 5];</code></pre>
 <p>引用类型的arr定义在原型上，这时候对per1上的arr属性进行修改，因为per1实例上不存在arr的属性，那么会找到原型中的arr，这时候通过arr.push是直接作用在原型中的arr的，所以，引用类型属性之间的共享特性导致per2.arr访问的也是原型上的arr，意思就是引用类型访问的都是一个指针，就特么和对象一样。</p>
 <h1 id="本篇文章中留下来的疑问"><a href="#本篇文章中留下来的疑问" class="headerlink" title="本篇文章中留下来的疑问"></a>本篇文章中留下来的疑问</h1><h2 id="1-constructor手动赋值的情况"><a href="#1-constructor手动赋值的情况" class="headerlink" title="1. constructor手动赋值的情况"></a>1. constructor手动赋值的情况</h2><p>以上第4大点中的层级关系代码中，手动将原型中的constructor赋值给了Person</p>
-<pre><code class="js">function BasePerson()&#123;
-    this.country = &#39;China&#39;;
-    this.age = 23;
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">BasePerson</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">country</span> = <span class="string">&#x27;China&#x27;</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = <span class="number">23</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;weng&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="keyword">new</span> <span class="title class_">BasePersn</span>();</span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span> = <span class="title class_">Person</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> per1 = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">per1.<span class="property">address</span> = <span class="string">&#x27;fujian&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(per1.<span class="property">age</span>) <span class="comment">// 23</span></span><br></pre></td></tr></table></figure>
 
-function Person()&#123;
-    this.name = &#39;weng&#39;;
-&#125;
-
-Person.prototype = new BasePersn();
-Person.prototype.constructor = Person;
-
-const per1 = new Person();
-per1.address = &#39;fujian&#39;;
-
-console.log(per1.age) // 23</code></pre>
 <p>因为在这个例子中，Person.prototype被手动设置为一个BasePerson构建函数构建出来的新实例，这个过程相当于重写了Person构造函数的原型，这样重写之后，Person.prototype就不再指向自身的Person，由本文开头说的一样，函数构建的时候会默认创建原型，也就是prototype对象，也会自动给原型的contructor赋值，这个写法完全覆盖了默认的prototype，造成了constructor不再指向自身的构造函数，而是指向了Object构造函数Object(){}</p>
 <p>这个时候就不在能够通过constructor属性来识别是什么类型了，还是得用instanceof</p>
 <p>再比如下面的代码</p>
-<pre><code class="js">function Person()&#123;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>)&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> f = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span> = &#123;</span><br><span class="line">    <span class="attr">name</span>:<span class="string">&#x27;weng&#x27;</span>,</span><br><span class="line">    <span class="title function_">sayName</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f.<span class="title function_">sayName</span>(); <span class="comment">// 报错，sayName is not a function</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-&#125;
-let f = new Person();
-Person.prototype = &#123;
-    name:&#39;weng&#39;,
-    sayName()&#123;
-        console.log(this.name);
-    &#125;
-&#125;
-
-f.sayName(); // 报错，sayName is not a function
-</code></pre>
 <p>这是为什么呢？</p>
 <p>由于f实例是在重写Person原型之前就已经构建出来了的，它的[[Prototype]]指针指向的原型对象是一开始Person构造函数所指向的，那本身就不存在sayName这个方法，这时候Person的原型被覆盖了，和f一点关系都没有；</p>
 <p>这就解释了为什么不能用实例访问constructor来判断类型标识了得用intanceof</p>
 <p>那这时候来解决上面手动赋值constructor的问题</p>
 <p>如果constructor的值很重要，可以在上述代码中加入</p>
-<pre><code class="js">function Person()&#123;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>)&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> f = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span> = &#123;</span><br><span class="line">    <span class="attr">constructor</span>: <span class="title class_">Person</span>,</span><br><span class="line">    <span class="attr">name</span>:<span class="string">&#x27;weng&#x27;</span>,</span><br><span class="line">    <span class="title function_">sayName</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-&#125;
-let f = new Person();
-Person.prototype = &#123;
-    constructor: Person,
-    name:&#39;weng&#39;,
-    sayName()&#123;
-        console.log(this.name);
-    &#125;
-&#125;</code></pre>
 <p>这样就可</p>
 <p>但是又存在个问题</p>
 <p>咱们知道原型上的constructor的属性是不可枚举的，也就是constructor本身这个属性的特性<code>[[Enumberable]]</code>特性是false，但是这样定义的constructor属性是可以枚举的，那这个时候可以看看 那篇 对象属性特性的文章，然后定义这个属性</p>

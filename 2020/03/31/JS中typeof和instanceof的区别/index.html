@@ -23,12 +23,12 @@
   <title>JS中typeof和instanceof的区别 - 翁先森的博客</title>
 
   
-    <meta name="description" content="undefined, number, string, boolean属于简单的值类型，不是对象。剩下的几种情况——函数、数组、对象、null、new Number(10)都是对象。他们都是引用类型。  基本数据类型和引用类型 typeofconsole.log(typeof (x)); &#x2F;&#x2F; &#39;undefined&#39; console.log(typeof (10)); &#x2F;&#x2F; &amp;#3">
+    <meta name="description" content="undefined, number, string, boolean属于简单的值类型，不是对象。剩下的几种情况——函数、数组、对象、null、new Number(10)都是对象。他们都是引用类型。  基本数据类型和引用类型 typeof1234567891011console.log(typeof (x)); &#x2F;&#x2F; &amp;#x27;undefined&amp;#x27;console.log(typeof">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS中typeof和instanceof的区别">
 <meta property="og:url" content="https://github.com/NollieLeo/2020/03/31/JS%E4%B8%ADtypeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
 <meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="undefined, number, string, boolean属于简单的值类型，不是对象。剩下的几种情况——函数、数组、对象、null、new Number(10)都是对象。他们都是引用类型。  基本数据类型和引用类型 typeofconsole.log(typeof (x)); &#x2F;&#x2F; &#39;undefined&#39; console.log(typeof (10)); &#x2F;&#x2F; &amp;#3">
+<meta property="og:description" content="undefined, number, string, boolean属于简单的值类型，不是对象。剩下的几种情况——函数、数组、对象、null、new Number(10)都是对象。他们都是引用类型。  基本数据类型和引用类型 typeof1234567891011console.log(typeof (x)); &#x2F;&#x2F; &amp;#x27;undefined&amp;#x27;console.log(typeof">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://github.com/NollieLeo/2020/03/31/JS%E4%B8%ADtypeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/20180203152226402.png">
 <meta property="article:published_time" content="2020-03-31T01:29:49.000Z">
@@ -53,6 +53,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -74,7 +76,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -90,7 +92,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -105,87 +107,41 @@
 <h1 class="article-title"><span>JS中typeof和instanceof的区别</span></h1>
 <p> <code>undefined</code>, <code>number</code>, <code>string</code>, <code>boolean</code>属于简单的<strong>值类型</strong>，不是对象。剩下的几种情况——函数、数组、对象、<code>null</code>、<code>new Number(10)</code>都是对象。他们都是引用类型。 </p>
 <p><a target="_blank" rel="noopener" href="http://pxc3lp.coding-pages.com/2020/03/16/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">基本数据类型和引用类型</a></p>
-<h2 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h2><pre><code class="javascript">console.log(typeof (x)); // &#39;undefined&#39;
-console.log(typeof (10)); // &#39;number&#39;
-console.log(typeof (&#39;abc&#39;)); // &#39;string&#39;
-console.log(typeof (true)); // &#39;boolean&#39;
-console.log(typeof (function () &#123; &#125;)); // &#39;function&#39;
-console.log(typeof ([1, &#39;dsa&#39;, true])); // &#39;object&#39;
-console.log(typeof (&#123; a: 123, b: true &#125;)); // &#39;object&#39;
-console.log(typeof (null)); // &#39;object&#39;
-console.log(typeof (new Number(0))); // &#39;object&#39;
-console.log(typeof(new Date())); // &#39;object&#39;
-console.log(typeof(/a/g)); // &#39;object&#39;</code></pre>
+<h2 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> (x)); <span class="comment">// &#x27;undefined&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> (<span class="number">10</span>)); <span class="comment">// &#x27;number&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> (<span class="string">&#x27;abc&#x27;</span>)); <span class="comment">// &#x27;string&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> (<span class="literal">true</span>)); <span class="comment">// &#x27;boolean&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> (<span class="keyword">function</span> (<span class="params"></span>) &#123; &#125;)); <span class="comment">// &#x27;function&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> ([<span class="number">1</span>, <span class="string">&#x27;dsa&#x27;</span>, <span class="literal">true</span>])); <span class="comment">// &#x27;object&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> (&#123; <span class="attr">a</span>: <span class="number">123</span>, <span class="attr">b</span>: <span class="literal">true</span> &#125;)); <span class="comment">// &#x27;object&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> (<span class="literal">null</span>)); <span class="comment">// &#x27;object&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> (<span class="keyword">new</span> <span class="title class_">Number</span>(<span class="number">0</span>))); <span class="comment">// &#x27;object&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">typeof</span>(<span class="keyword">new</span> <span class="title class_">Date</span>())); <span class="comment">// &#x27;object&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">typeof</span>(<span class="regexp">/a/g</span>)); <span class="comment">// &#x27;object&#x27;</span></span><br></pre></td></tr></table></figure>
+
 <p><strong>我们可以用typeof判断一个变量是否存在</strong></p>
-<pre><code class="javascript">if(typeof a !==&#39;undefined&#39;)&#123;
-    alert(&#39;OK&#39;)
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span> a !==<span class="string">&#x27;undefined&#x27;</span>)&#123;</span><br><span class="line">	<span class="title function_">alert</span>(<span class="string">&#x27;OK&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>而不是<code>if(a)</code>这样的用法，因为如果这样a为定义就会报错。</p>
 <p>简单的<strong>值类型</strong>直接用<code>typeof</code>就能够判断出来</p>
 <p>但是引用类型使用 <code>typeof</code> 判断就不太准确。如上代码所示，例如数组，正则表达式，日期，对象等<code>typeof</code>返回值都是为 <code>object</code> 函数的返回值则是<code>function</code></p>
 <p><strong>在 JavaScript 中，判断一个变量的类型尝尝会用 <code>typeof</code> 运算符，在使用 <code>typeof</code> 运算符时采用引用类型存储值会出现一个问题，无论引用的是什么类型的对象，它都返回 “object”。这就需要用到<code>instanceof</code>来检测某个对象是不是另一个对象的实例。</strong></p>
-<h2 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h2><pre><code class="javascript">语法：object instanceof constructor</code></pre>
+<h2 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">语法：object <span class="keyword">instanceof</span> constructor</span><br></pre></td></tr></table></figure>
+
 <p>参数：<code>object</code>（要检测的对象.）<code>constructor</code>（某个构造函数）</p>
 <p>描述：<code>instanceof</code>运算符用来检测<code>constructor.prototype</code>是否存在于参数object的原型链上</p>
 <p><strong>对象与函数的关系</strong>： 函数是一种对象，但函数不像数组正则日期这些对象。其他的对象（函数除外）都是对象的一个子集，但是函数却可以创造出对象来</p>
-<pre><code class="javascript">function People()&#123;
-    this.name = &#39;hello world&#39;;
-    this.birth - 1998;
-&#125;
-var people = new People();</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">People</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;hello world&#x27;</span>;</span><br><span class="line">	<span class="variable language_">this</span>.<span class="property">birth</span> - <span class="number">1998</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> people = <span class="keyword">new</span> <span class="title class_">People</span>();</span><br></pre></td></tr></table></figure>
+
 <p>people这个对象是由People的构造函数创建出来的，</p>
 <p><code>instanceof</code>的使用规则：<code>A instanceof B</code></p>
 <p> A沿着<strong>proto</strong>这条线来找，同时B沿着prototype这条线来找，如果两条线能找到同一个引用，即同一个对象，那么就返回true。如果找到终点还未重合，则返回false。 </p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="20180203152226402.png" alt></p>
 <p>例如：</p>
-<h3 id="可以用于判断一个变量是否是某个对象的实例"><a href="#可以用于判断一个变量是否是某个对象的实例" class="headerlink" title="可以用于判断一个变量是否是某个对象的实例"></a>可以用于判断一个变量是否是某个对象的实例</h3><pre><code class="javascript">console.log(people instanceof People); // true</code></pre>
-<pre><code class="javascript">console.log(people instanceof Object); // true</code></pre>
+<h3 id="可以用于判断一个变量是否是某个对象的实例"><a href="#可以用于判断一个变量是否是某个对象的实例" class="headerlink" title="可以用于判断一个变量是否是某个对象的实例"></a>可以用于判断一个变量是否是某个对象的实例</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(people <span class="keyword">instanceof</span> <span class="title class_">People</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(people <span class="keyword">instanceof</span> <span class="title class_">Object</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
 <p>因为people是由 People构造函数搞出来的，而People又是object的子类</p>
 <h3 id="可以在继承关系中用来判断一个实例是否属于它的父类型"><a href="#可以在继承关系中用来判断一个实例是否属于它的父类型" class="headerlink" title="可以在继承关系中用来判断一个实例是否属于它的父类型"></a>可以在继承关系中用来判断一个实例是否属于它的父类型</h3><p>例如：</p>
-<pre><code class="javascript">function People() &#123;
-  this.name = &#39;hello world&#39;;
-  this.birth = 1998;
-&#125;
-function Male()&#123;&#125;
-Male.prototype = new People();
-const man = new Male();
-console.log(man instanceof Male); // true 
-console.log(man instanceof People); // true</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">People</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;hello world&#x27;</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">birth</span> = <span class="number">1998</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Male</span>(<span class="params"></span>)&#123;&#125;</span><br><span class="line"><span class="title class_">Male</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="keyword">new</span> <span class="title class_">People</span>();</span><br><span class="line"><span class="keyword">const</span> man = <span class="keyword">new</span> <span class="title class_">Male</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(man <span class="keyword">instanceof</span> <span class="title class_">Male</span>); <span class="comment">// true </span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(man <span class="keyword">instanceof</span> <span class="title class_">People</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
 <p>又如：</p>
-<pre><code class="javascript">// 定义构造函数
-function C()&#123;&#125; 
-function D()&#123;&#125; 
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义构造函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">C</span>(<span class="params"></span>)&#123;&#125; </span><br><span class="line"><span class="keyword">function</span> <span class="title function_">D</span>(<span class="params"></span>)&#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="title function_">C</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// true，因为 Object.getPrototypeOf(o) === C.prototype</span></span><br><span class="line">o <span class="keyword">instanceof</span> C; </span><br><span class="line"></span><br><span class="line"><span class="comment">// false，因为 D.prototype不在o的原型链上</span></span><br><span class="line">o <span class="keyword">instanceof</span> D; </span><br><span class="line"></span><br><span class="line">o <span class="keyword">instanceof</span> <span class="title class_">Object</span>; <span class="comment">// true,因为Object.prototype.isPrototypeOf(o)返回true</span></span><br><span class="line">C.<span class="property"><span class="keyword">prototype</span></span> <span class="keyword">instanceof</span> <span class="title class_">Object</span> <span class="comment">// true,同上</span></span><br><span class="line"></span><br><span class="line">C.<span class="property"><span class="keyword">prototype</span></span> = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> o2 = <span class="keyword">new</span> <span class="title function_">C</span>();</span><br><span class="line"></span><br><span class="line">o2 <span class="keyword">instanceof</span> C; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">o <span class="keyword">instanceof</span> C; <span class="comment">// false,C.prototype指向了一个空对象,这个空对象不在o的原型链上.</span></span><br><span class="line"></span><br><span class="line">D.<span class="property"><span class="keyword">prototype</span></span> = <span class="keyword">new</span> <span class="title function_">C</span>(); <span class="comment">// 继承</span></span><br><span class="line"><span class="keyword">var</span> o3 = <span class="keyword">new</span> <span class="title function_">D</span>();</span><br><span class="line">o3 <span class="keyword">instanceof</span> D; <span class="comment">// true</span></span><br><span class="line">o3 <span class="keyword">instanceof</span> C; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
-var o = new C();
-
-// true，因为 Object.getPrototypeOf(o) === C.prototype
-o instanceof C; 
-
-// false，因为 D.prototype不在o的原型链上
-o instanceof D; 
-
-o instanceof Object; // true,因为Object.prototype.isPrototypeOf(o)返回true
-C.prototype instanceof Object // true,同上
-
-C.prototype = &#123;&#125;;
-var o2 = new C();
-
-o2 instanceof C; // true
-
-o instanceof C; // false,C.prototype指向了一个空对象,这个空对象不在o的原型链上.
-
-D.prototype = new C(); // 继承
-var o3 = new D();
-o3 instanceof D; // true
-o3 instanceof C; // true</code></pre>
 <p>需要注意的是，如果表达式 <code>obj instanceof Foo</code> 返回true，则并不意味着该表达式会永远返回true，因为<code>Foo.prototype</code>属性的值有可能会改变，改变之后的值很有可能不存在于<code>obj</code>的原型链上，这时原表达式的值就会成为<code>false</code>。另外一种情况下，原表达式的值也会改变，就是改变对象<code>obj</code>的原型链的情况，虽然在目前的ES规范中，我们只能读取对象的原型而不能改变它，但借助于非标准的<code>__proto__</code>魔法属性，是可以实现的。比如执行<code>obj.__proto__ = &#123;&#125;</code>之后，<code>obj instanceof Foo</code>就会返回<code>false</code>了。</p>
-<pre><code class="javascript">function People()&#123;
-  this.name = &#39;hello&#39;
-&#125;
-const a = new People();
-console.log(a instanceof People); // true
-a.__proto__ = &#123;&#125;;
-console.log(a instanceof People); // false</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">People</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;hello&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> a = <span class="keyword">new</span> <span class="title class_">People</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a <span class="keyword">instanceof</span> <span class="title class_">People</span>); <span class="comment">// true</span></span><br><span class="line">a.<span class="property">__proto__</span> = &#123;&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a <span class="keyword">instanceof</span> <span class="title class_">People</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>

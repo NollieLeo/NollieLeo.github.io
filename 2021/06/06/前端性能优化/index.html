@@ -51,6 +51,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -72,7 +74,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -88,7 +90,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -216,9 +218,9 @@
 </ul>
 <p>首次访问、没有相应的 DNS 缓存时，域名越多，查询时间越长。所以应尽量减少域名数量。但基于并行下载考虑，<strong>把资源分布到 2 个域名上（最多不超过 4 个）</strong>。这是减少 DNS 查询同时保证并行下载的折衷方案。</p>
 <h3 id="避免重定向"><a href="#避免重定向" class="headerlink" title="避免重定向"></a>避免重定向</h3><p>HTTP 重定向通过 <code>301</code>/<code>302</code> 状态码实现。</p>
-<pre><code>HTTP/1.1 301 Moved Permanently
-Location: http://example.com/newuri
-Content-Type: text/html</code></pre><p>客户端收到服务器的重定向响应后，会根据响应头中 <code>Location</code> 的地址再次发送请求。重定向会影响用户体验，尤其是多次重定向时，用户在一段时间内看不到任何内容，只看到浏览器进度条一直在刷新。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 301 Moved Permanently</span><br><span class="line">Location: http://example.com/newuri</span><br><span class="line">Content-Type: text/html</span><br></pre></td></tr></table></figure>
+
+<p>客户端收到服务器的重定向响应后，会根据响应头中 <code>Location</code> 的地址再次发送请求。重定向会影响用户体验，尤其是多次重定向时，用户在一段时间内看不到任何内容，只看到浏览器进度条一直在刷新。</p>
 <p>有时重定向无法避免，在糟糕也比抛出 404 好。虽然通过 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Meta_refresh">HTML meta refresh</a> 和 JavaScript 也能实现，但首选 HTTP <code>3xx</code> 跳转，以保证浏览器「后退」功能正常工作（也利于 SEO）。</p>
 <ul>
 <li>最浪费的重定向经常发生、而且很容易被忽略：URL 末尾应该添加 <code>/</code> 但未添加。比如，访问 <code>http://astrology.yahoo.com/astrology</code> 将被 301 重定向到 <code>http://astrology.yahoo.com/astrology/</code>（注意末尾的 <code>/</code>）。如果使用 Apache，可以通过 <code>Alias</code> 或 <code>mod_rewrite</code> 或 <code>DirectorySlash</code> 解决这个问题。</li>
@@ -273,7 +275,8 @@ Content-Type: text/html</code></pre><p>客户端收到服务器的重定向响�
 <li>能通过伪元素实现的功能，就没必要添加额外元素，如清除浮动。</li>
 </ul>
 <p>浏览器控制台中输入以下代码可以计算出页面中有多少 DOM 元素：</p>
-<pre><code class="javascript">document.getElementsByTagName(&#39;*&#39;).length;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&#x27;*&#x27;</span>).<span class="property">length</span>;</span><br></pre></td></tr></table></figure>
+
 <p>对比标记良好的的网站，看看差距是多少。</p>
 <blockquote>
 <p>为什么不使用表格布局？</p>
@@ -338,25 +341,29 @@ Content-Type: text/html</code></pre><p>客户端收到服务器的重定向响�
 <h3 id="启用-Gzip"><a href="#启用-Gzip" class="headerlink" title="启用 Gzip"></a>启用 Gzip</h3><p>Gzip 压缩通常可以减少 70% 的响应大小，对某些文件更可能高达 90%，比 Deflate 更高效。主流 Web 服务器都有相应模块，而且绝大多数浏览器支持 gzip 解码。所以，应该对 HTML、CSS、JS、XML、JSON 等文本类型的内容启用压缩。</p>
 <p><strong>注意</strong>，图片和 PDF 文件不要使用 gzip。它们本身已经压缩过，再使用 gzip 压缩不仅浪费 CPU 资源，而且还可能增加文件体积。</p>
 <p>对于不支持的 Gzip 的用户代理，通过设置 Vary 响应头，返回为未压缩的数据：</p>
-<pre><code>Vary: *</code></pre><h3 id="配置-Etag"><a href="#配置-Etag" class="headerlink" title="配置 Etag"></a>配置 Etag</h3><p>Etag 通过文件版本标识，方便服务器判断请求的内容是否有更新，如果没有就响应 <code>304</code>，避免重新下载。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vary: *</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="配置-Etag"><a href="#配置-Etag" class="headerlink" title="配置 Etag"></a>配置 Etag</h3><p>Etag 通过文件版本标识，方便服务器判断请求的内容是否有更新，如果没有就响应 <code>304</code>，避免重新下载。</p>
 <p>当然，启用 Etag 可能会导致其他问题，还需要根据具体情况做判断。（TODO：补充相关内容）</p>
 <h3 id="尽早输出（flush）缓冲"><a href="#尽早输出（flush）缓冲" class="headerlink" title="尽早输出（flush）缓冲"></a>尽早输出（flush）缓冲</h3><p>用户请求页面时，服务器通常需要花费 200 ~ 500 毫秒来组合 HTML 页面。在此期间，浏览器处于空闲、等待数据状态。使用PHP 中的 <a target="_blank" rel="noopener" href="http://php.net/flush">flush()</a> 函数，可以发送部分已经准备好的 HTML 到浏览器，以便服务器还在忙于处理剩余页面时，浏览器可以提前开始获取资源。</p>
 <p>可以考虑在 <code>之后输出一次缓冲，HTML head 一般比较容易生成，先发送以便浏览器开始获取</code> 里引用的 CSS 等资源。</p>
 <p>Example:</p>
-<pre><code class="html">&lt;!-- css, js --&gt;
-&lt;/head&gt;
-&lt;?php flush(); ?&gt;
-&lt;body&gt;
-&lt;!-- content --&gt;</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- css, js --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="meta">&lt;?php flush(); ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- content --&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="Ajax-请求使用-GET-方法"><a href="#Ajax-请求使用-GET-方法" class="headerlink" title="Ajax 请求使用 GET 方法"></a>Ajax 请求使用 GET 方法</h3><p>浏览器执行 XMLHttpRequest POST 请求时分成两步，先发送 Header，再发送数据。而 GET 只使用一个 TCP 数据包发送数据，所以首选 GET 方法。</p>
 <p>根据 <a target="_blank" rel="noopener" href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">HTTP 规范</a>，GET 用于获取数据，POST 则用于向服务器发送数据，所以 Ajax 请求数据时使用 GET 更符合规范（<a target="_blank" rel="noopener" href="http://www.w3schools.com/tags/ref_httpmethods.asp">GET 和 POST 对比</a>）。</p>
 <p>IE 中最大 URL 长度为 2K，如果超出 2K，则需要考虑使用 POST 方法。</p>
 <h3 id="避免图片-src-为空"><a href="#避免图片-src-为空" class="headerlink" title="避免图片 src 为空"></a>避免图片 src 为空</h3><p>图片 <code>src</code> 属性值为空字符串可能以下面两种形式出现：</p>
 <p>HTML:</p>
-<pre><code class="html">&lt;img src=&quot;&quot; /&gt;</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
 <p>JavaScript：</p>
-<pre><code class="javascript">var img = new Image(); 
-img.src = &quot;&quot;;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> img = <span class="keyword">new</span> <span class="title class_">Image</span>(); </span><br><span class="line">img.<span class="property">src</span> = <span class="string">&quot;&quot;</span>;</span><br></pre></td></tr></table></figure>
+
 <p>虽然 <code>src</code> 属性为空字符串，但浏览器仍然会向服务器发起一个 HTTP 请求：</p>
 <ul>
 <li>IE 向页面所在的目录发送请求；</li>

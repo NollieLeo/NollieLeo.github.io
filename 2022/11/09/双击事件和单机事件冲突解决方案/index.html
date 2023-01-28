@@ -30,13 +30,13 @@
 <meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="双击事件（dblclick）时，不触发单击事件(click)事件绑定中，执行双击事件(dblclick)时能触发两次单击事件(click)。即一个标签元素（如button等），如果元素同时绑定了单击事件(click)和双击事件(dblclick),那么执行单击事件(click)时，不会触发双击事件(dblclick)， 执行双击事件(dblclick)时却会触发两次单击事件(click)。 执行顺">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/NollieLeo/2022/11/09/%E5%8F%8C%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%8D%95%E6%9C%BA%E4%BA%8B%E4%BB%B6%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/code.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2022/11/09/%E5%8F%8C%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%8D%95%E6%9C%BA%E4%BA%8B%E4%BB%B6%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/code.jpg">
 <meta property="article:published_time" content="2022-11-09T06:37:20.000Z">
-<meta property="article:modified_time" content="2022-11-22T07:21:28.754Z">
+<meta property="article:modified_time" content="2023-01-28T07:55:23.616Z">
 <meta property="article:author" content="翁先森">
 <meta property="article:tag" content="js">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/NollieLeo/2022/11/09/%E5%8F%8C%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%8D%95%E6%9C%BA%E4%BA%8B%E4%BB%B6%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/code.png">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2022/11/09/%E5%8F%8C%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%8D%95%E6%9C%BA%E4%BA%8B%E4%BB%B6%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/code.jpg">
   
   
 
@@ -51,6 +51,8 @@
 
   
 
+  
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
   
 
   
@@ -73,7 +75,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -89,7 +91,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -105,7 +107,7 @@
 <h1 id="双击事件（dblclick）时，不触发单击事件-click"><a href="#双击事件（dblclick）时，不触发单击事件-click" class="headerlink" title="双击事件（dblclick）时，不触发单击事件(click)"></a>双击事件（dblclick）时，不触发单击事件(click)</h1><p>事件绑定中，执行双击事件(dblclick)时能触发两次单击事件(click)。即一个标签元素（如button等），如果元素同时绑定了单击事件(click)和双击事件(dblclick),那么执行单击事件(click)时，不会触发双击事件(dblclick)， 执行双击事件(dblclick)时却会触发两次单击事件(click)。</p>
 <h2 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h2><p>单击(click)：mousedown，mouseout，click；<br>双击(dblclick)：mousedown，mouseout，click ， mousedown，mouseout，click，dblclick；</p>
 <p>在单击的时候不会执行双击，但是双击的时候会执行两次单击再执行双击事件。<br>解决的思路：使用定时器清除掉两个单击事件，留下一个双击事件。</p>
-<h2 id="setTimeout"><a href="#setTimeout" class="headerlink" title="setTimeout"></a>setTimeout</h2><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="code.png" alt="code"></p>
+<h2 id="setTimeout"><a href="#setTimeout" class="headerlink" title="setTimeout"></a>setTimeout</h2><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="code.jpg" alt="code"></p>
 <p>然后现在，单击按钮打印“单击”，双击按钮打印“双击”。</p>
 <p>关于 time=200，大家知道js的事件循环机制，点击事件会添加一个任务队列。time=0， 也会添加一个任务队列。那么time=0与time=200有什么区别呢？</p>
 <p>因为第一次单击事件后，主线程没有任何任务，就会立马执行这个单击事件的任务。待第二次单击的时候，假设距离第一次单击事件是150ms, 如果你的定时器小于150ms, 那么第一次的任务队列就会执行完。<br>要想不执行第一次的任务队列，那么定时器时间间隔就必须大于两次单击的时间间隔了。所以，这个200是酌情值，大于间隔就行。</p>

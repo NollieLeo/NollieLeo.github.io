@@ -23,18 +23,18 @@
   <title>手写Promise - 翁先森的博客</title>
 
   
-    <meta name="description" content="暂未整理，先附上代码 class _Promise &amp;#123; constructor(excutor) &amp;#123;   this.state &#x3D; &quot;pending&quot;;    this.resolveInfo &#x3D; undefined;   this.rejectInfo &#x3D; undefined;    this.resolveCb &#x3D; [];    this.rejectC">
+    <meta name="description" content="暂未整理，先附上代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899">
 <meta property="og:type" content="article">
 <meta property="og:title" content="手写Promise">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/06/13/%E6%89%8B%E5%86%99Promise/index.html">
 <meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="暂未整理，先附上代码 class _Promise &amp;#123; constructor(excutor) &amp;#123;   this.state &#x3D; &quot;pending&quot;;    this.resolveInfo &#x3D; undefined;   this.rejectInfo &#x3D; undefined;    this.resolveCb &#x3D; [];    this.rejectC">
+<meta property="og:description" content="暂未整理，先附上代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-13T05:20:58.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.312Z">
 <meta property="article:author" content="翁先森">
-<meta property="article:tag" content="promise">
 <meta property="article:tag" content="js">
+<meta property="article:tag" content="promise">
 <meta property="article:tag" content="面试题">
 <meta name="twitter:card" content="summary">
   
@@ -51,6 +51,8 @@
 
   
 
+  
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
   
 
   
@@ -73,7 +75,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -84,14 +86,14 @@
 
 
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/01/28/diff%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%93/"><span class="title">diff算法原理和总结</span></a><a class="item title" href="/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/"><span class="title">vue3渲染器设计与总结</span></a><a class="item title" href="/2022/11/09/%E5%8F%8C%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%8D%95%E6%9C%BA%E4%BA%8B%E4%BB%B6%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"><span class="title">双击事件和单机事件冲突解决方案</span></a><a class="item title" href="/2022/11/03/vite%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><span class="title">vite学习记录</span></a><a class="item title" href="/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/"><span class="title">vue的响应式系统设计总结</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2022/11/09/%E5%8F%8C%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%8D%95%E6%9C%BA%E4%BA%8B%E4%BB%B6%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"><span class="title">双击事件和单机事件冲突解决方案</span></a><a class="item title" href="/2023/01/28/diff%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%93/"><span class="title">diff算法原理和总结</span></a><a class="item title" href="/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/"><span class="title">vue3渲染器设计与总结</span></a><a class="item title" href="/2022/11/03/vite%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><span class="title">vite学习记录</span></a><a class="item title" href="/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/"><span class="title">vue的响应式系统设计总结</span></a></div></widget>
 
 
 
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -105,152 +107,8 @@
 <article class='md-text content post'>
 <h1 class="article-title"><span>手写Promise</span></h1>
 <p>暂未整理，先附上代码</p>
-<pre><code class="js">class _Promise &#123;
-constructor(excutor) &#123;
-  this.state = &quot;pending&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">_Promise</span> &#123;</span><br><span class="line"><span class="title function_">constructor</span>(<span class="params">excutor</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">state</span> = <span class="string">&quot;pending&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">resolveInfo</span> = <span class="literal">undefined</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">rejectInfo</span> = <span class="literal">undefined</span>;</span><br><span class="line"></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">resolveCb</span> = [];</span><br><span class="line"></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">rejectCb</span> = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">resolve</span> = (<span class="params">value</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">state</span> === <span class="string">&quot;pending&quot;</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">state</span> = <span class="string">&quot;fullfilled&quot;</span>;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">resolveInfo</span> = value;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">resolveCb</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">fn</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">fn</span>(<span class="variable language_">this</span>.<span class="property">resolveInfo</span>);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">reject</span> = (<span class="params">value</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">state</span> === <span class="string">&quot;pending&quot;</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">state</span> = <span class="string">&quot;rejected&quot;</span>;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">rejectInfo</span> = value;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">rejectCb</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">fn</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">fn</span>(<span class="variable language_">this</span>.<span class="property">rejectInfo</span>);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="title function_">excutor</span>(resolve, reject);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="title function_">reject</span>(error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">then</span>(<span class="params">onFullfilled, onRejected</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> innerPromise = <span class="keyword">new</span> <span class="title function_">_Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">state</span> === <span class="string">&quot;fullfilled&quot;</span>) &#123;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">          <span class="keyword">const</span> returnValue =</span><br><span class="line">            <span class="keyword">typeof</span> onFullfilled === <span class="string">&quot;function&quot;</span></span><br><span class="line">              ? <span class="title function_">onFullfilled</span>(<span class="variable language_">this</span>.<span class="property">resolveInfo</span>)</span><br><span class="line">              : <span class="function">(<span class="params">value</span>) =&gt;</span> value;</span><br><span class="line">          _Promise.<span class="property">resolvePromise</span>.<span class="title function_">apply</span>(</span><br><span class="line">            innerPromise,</span><br><span class="line">            returnValue,</span><br><span class="line">            resolve,</span><br><span class="line">            reject</span><br><span class="line">          );</span><br><span class="line">        &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">          <span class="title function_">reject</span>(error);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">state</span> === <span class="string">&quot;rejected&quot;</span>) &#123;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">          <span class="keyword">const</span> returnValue =</span><br><span class="line">            <span class="keyword">typeof</span> onRejected === <span class="string">&quot;function&quot;</span></span><br><span class="line">              ? <span class="title function_">onRejected</span>(<span class="variable language_">this</span>.<span class="property">rejectInfo</span>)</span><br><span class="line">              : <span class="function">(<span class="params">value</span>) =&gt;</span> value;</span><br><span class="line">          _Promise.<span class="property">resolvePromise</span>.<span class="title function_">apply</span>(</span><br><span class="line">            innerPromise,</span><br><span class="line">            returnValue,</span><br><span class="line">            resolve,</span><br><span class="line">            reject</span><br><span class="line">          );</span><br><span class="line">        &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">          <span class="title function_">reject</span>(error);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">state</span> === <span class="string">&quot;pending&quot;</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">resolveCb</span>.<span class="title function_">push</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> returnValue =</span><br><span class="line">              <span class="keyword">typeof</span> onFullfilled === <span class="string">&quot;function&quot;</span></span><br><span class="line">                ? <span class="title function_">onFullfilled</span>(<span class="variable language_">this</span>.<span class="property">resolveInfo</span>)</span><br><span class="line">                : <span class="function">(<span class="params">value</span>) =&gt;</span> value;</span><br><span class="line">            _Promise.<span class="property">resolvePromise</span>.<span class="title function_">apply</span>(</span><br><span class="line">              innerPromise,</span><br><span class="line">              returnValue,</span><br><span class="line">              resolve,</span><br><span class="line">              reject</span><br><span class="line">            );</span><br><span class="line">          &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">            <span class="title function_">reject</span>(error);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;, <span class="number">0</span>);</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">rejectCb</span>.<span class="title function_">push</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> returnValue =</span><br><span class="line">              <span class="keyword">typeof</span> onRejected === <span class="string">&quot;function&quot;</span></span><br><span class="line">                ? <span class="title function_">onRejected</span>(<span class="variable language_">this</span>.<span class="property">rejectInfo</span>)</span><br><span class="line">                : <span class="function">(<span class="params">value</span>) =&gt;</span> value;</span><br><span class="line">            _Promise.<span class="property">resolvePromise</span>.<span class="title function_">apply</span>(</span><br><span class="line">              innerPromise,</span><br><span class="line">              returnValue,</span><br><span class="line">              resolve,</span><br><span class="line">              reject</span><br><span class="line">            );</span><br><span class="line">          &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">            <span class="title function_">reject</span>(error);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;, <span class="number">0</span>);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> innerPromise;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="title function_">resolvePromise</span>(<span class="params">newPromise, returnValue, resolve, reject</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (newPromise === returnValue) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">reject</span>(<span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&quot;不能重复引用&quot;</span>));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 防止多次调用</span></span><br><span class="line">  <span class="keyword">let</span> called;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (</span><br><span class="line">    returnValue <span class="keyword">instanceof</span> _Promise &amp;&amp;</span><br><span class="line">    <span class="keyword">typeof</span> returnValue.<span class="property">then</span> === <span class="string">&quot;function&quot;</span></span><br><span class="line">  ) &#123;</span><br><span class="line">    returnValue.<span class="title function_">then</span>(</span><br><span class="line">      <span class="function">(<span class="params">innerResolveMsg</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (called) <span class="keyword">return</span>;</span><br><span class="line">        called = <span class="literal">true</span>;</span><br><span class="line">        <span class="title function_">resolvePromise</span>(newPromise, innerResolveMsg, resolve, reject);</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="function">(<span class="params">innerRejectedMsg</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (called) <span class="keyword">return</span>;</span><br><span class="line">        called = <span class="literal">true</span>;</span><br><span class="line">        <span class="title function_">resolvePromise</span>(newPromise, innerRejectedMsg, resolve, reject);</span><br><span class="line">      &#125;</span><br><span class="line">    );</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="title function_">resolve</span>(returnValue);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-  this.resolveInfo = undefined;
-  this.rejectInfo = undefined;
-
-  this.resolveCb = [];
-
-  this.rejectCb = [];
-
-  const resolve = (value) =&gt; &#123;
-    if (this.state === &quot;pending&quot;) &#123;
-      this.state = &quot;fullfilled&quot;;
-      this.resolveInfo = value;
-      this.resolveCb.forEach((fn) =&gt; &#123;
-        fn(this.resolveInfo);
-      &#125;);
-    &#125;
-  &#125;;
-  const reject = (value) =&gt; &#123;
-    if (this.state === &quot;pending&quot;) &#123;
-      this.state = &quot;rejected&quot;;
-      this.rejectInfo = value;
-      this.rejectCb.forEach((fn) =&gt; &#123;
-        fn(this.rejectInfo);
-      &#125;);
-    &#125;
-  &#125;;
-  try &#123;
-    excutor(resolve, reject);
-  &#125; catch (error) &#123;
-    reject(error);
-  &#125;
-&#125;
-then(onFullfilled, onRejected) &#123;
-  const innerPromise = new _Promise((resolve, reject) =&gt; &#123;
-    if (this.state === &quot;fullfilled&quot;) &#123;
-      setTimeout(() =&gt; &#123;
-        try &#123;
-          const returnValue =
-            typeof onFullfilled === &quot;function&quot;
-              ? onFullfilled(this.resolveInfo)
-              : (value) =&gt; value;
-          _Promise.resolvePromise.apply(
-            innerPromise,
-            returnValue,
-            resolve,
-            reject
-          );
-        &#125; catch (error) &#123;
-          reject(error);
-        &#125;
-      &#125;, 0);
-    &#125;
-    if (this.state === &quot;rejected&quot;) &#123;
-      setTimeout(() =&gt; &#123;
-        try &#123;
-          const returnValue =
-            typeof onRejected === &quot;function&quot;
-              ? onRejected(this.rejectInfo)
-              : (value) =&gt; value;
-          _Promise.resolvePromise.apply(
-            innerPromise,
-            returnValue,
-            resolve,
-            reject
-          );
-        &#125; catch (error) &#123;
-          reject(error);
-        &#125;
-      &#125;, 0);
-    &#125;
-    if (this.state === &quot;pending&quot;) &#123;
-      this.resolveCb.push(() =&gt; &#123;
-        setTimeout(() =&gt; &#123;
-          try &#123;
-            const returnValue =
-              typeof onFullfilled === &quot;function&quot;
-                ? onFullfilled(this.resolveInfo)
-                : (value) =&gt; value;
-            _Promise.resolvePromise.apply(
-              innerPromise,
-              returnValue,
-              resolve,
-              reject
-            );
-          &#125; catch (error) &#123;
-            reject(error);
-          &#125;
-        &#125;, 0);
-      &#125;);
-      this.rejectCb.push(() =&gt; &#123;
-        setTimeout(() =&gt; &#123;
-          try &#123;
-            const returnValue =
-              typeof onRejected === &quot;function&quot;
-                ? onRejected(this.rejectInfo)
-                : (value) =&gt; value;
-            _Promise.resolvePromise.apply(
-              innerPromise,
-              returnValue,
-              resolve,
-              reject
-            );
-          &#125; catch (error) &#123;
-            reject(error);
-          &#125;
-        &#125;, 0);
-      &#125;);
-    &#125;
-  &#125;);
-  return innerPromise;
-&#125;
-
-static resolvePromise(newPromise, returnValue, resolve, reject) &#123;
-  if (newPromise === returnValue) &#123;
-    return reject(new Error(&quot;不能重复引用&quot;));
-  &#125;
-  // 防止多次调用
-  let called;
-
-  if (
-    returnValue instanceof _Promise &amp;&amp;
-    typeof returnValue.then === &quot;function&quot;
-  ) &#123;
-    returnValue.then(
-      (innerResolveMsg) =&gt; &#123;
-        if (called) return;
-        called = true;
-        resolvePromise(newPromise, innerResolveMsg, resolve, reject);
-      &#125;,
-      (innerRejectedMsg) =&gt; &#123;
-        if (called) return;
-        called = true;
-        resolvePromise(newPromise, innerRejectedMsg, resolve, reject);
-      &#125;
-    );
-  &#125; else &#123;
-    resolve(returnValue);
-  &#125;
-&#125;
-&#125;
-
-
-</code></pre>
 <p>目前只实现了then方法，后续还有resolve,reject,catch, all, race, finally</p>
 
 

@@ -23,12 +23,12 @@
   <title>useRef能做啥？ - 翁先森的博客</title>
 
   
-    <meta name="description" content="useRefuseRef主要的功能就是。  帮助我们获取到DOM元素或者组件实例 保存在组件生命周期内不会变化的值  如下： function TextInputWithFocusButton() &amp;#123;   const inputEl &#x3D; useRef(null);   const onButtonClick &#x3D; () &#x3D;&gt; &amp;#123;     &#x2F;&#x2F; &#96;current&#96; 指向已挂载">
+    <meta name="description" content="useRefuseRef主要的功能就是。  帮助我们获取到DOM元素或者组件实例 保存在组件生命周期内不会变化的值  如下： 1234567891011121314function TextInputWithFocusButton() &amp;#123;  const inputEl &#x3D; useRef(null);  const onButtonClick &#x3D; () &#x3D;&gt; &amp;#123;    &#x2F;&#x2F;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="useRef能做啥？">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/08/03/useRef%E8%83%BD%E5%81%9A%E5%95%A5%EF%BC%9F/index.html">
 <meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="useRefuseRef主要的功能就是。  帮助我们获取到DOM元素或者组件实例 保存在组件生命周期内不会变化的值  如下： function TextInputWithFocusButton() &amp;#123;   const inputEl &#x3D; useRef(null);   const onButtonClick &#x3D; () &#x3D;&gt; &amp;#123;     &#x2F;&#x2F; &#96;current&#96; 指向已挂载">
+<meta property="og:description" content="useRefuseRef主要的功能就是。  帮助我们获取到DOM元素或者组件实例 保存在组件生命周期内不会变化的值  如下： 1234567891011121314function TextInputWithFocusButton() &amp;#123;  const inputEl &#x3D; useRef(null);  const onButtonClick &#x3D; () &#x3D;&gt; &amp;#123;    &#x2F;&#x2F;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-03T07:29:45.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.082Z">
@@ -49,6 +49,8 @@
 
   
 
+  
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
   
 
   
@@ -71,7 +73,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -87,7 +89,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -106,20 +108,8 @@
 <li>保存在组件<strong>生命周期内不会变化</strong>的值</li>
 </ol>
 <p>如下：</p>
-<pre><code class="jsx">function TextInputWithFocusButton() &#123;
-  const inputEl = useRef(null);
-  const onButtonClick = () =&gt; &#123;
-    // `current` 指向已挂载到 DOM 上的文本输入元素
-    inputEl.current.focus();
-  &#125;;
-  return (
-    &lt;&gt;
-      &lt;input ref=&#123;inputEl&#125; type=&quot;text&quot; /&gt;
-      &lt;button onClick=&#123;onButtonClick&#125;&gt;Focus the input&lt;/button&gt;
-    &lt;/&gt;
-  );
-&#125;
-</code></pre>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">TextInputWithFocusButton</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> inputEl = <span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">onButtonClick</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="comment">// `current` 指向已挂载到 DOM 上的文本输入元素</span></span><br><span class="line">    inputEl.<span class="property">current</span>.<span class="title function_">focus</span>();</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">ref</span>=<span class="string">&#123;inputEl&#125;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;onButtonClick&#125;</span>&gt;</span>Focus the input<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>这个创建ref的过程是这样的</p>
 <ol>
 <li>组件初始化，执行到useRef，初始化了一个参数null</li>
@@ -130,89 +120,26 @@
 <li><code>ref.current</code>发生变化的时候，不会触发组件的重新渲染，区别于其他的hooks</li>
 </ul>
 <p>因此引出两个场景</p>
-<h4 id="1-不要单独拿ref作为依赖项"><a href="#1-不要单独拿ref作为依赖项" class="headerlink" title="1.不要单独拿ref作为依赖项"></a>1.不要单独拿ref作为依赖项</h4><pre><code class="jsx">useEffect(()=&gt;&#123;
-    ....
-&#125;,[ref]);
+<h4 id="1-不要单独拿ref作为依赖项"><a href="#1-不要单独拿ref作为依赖项" class="headerlink" title="1.不要单独拿ref作为依赖项"></a>1.不要单独拿ref作为依赖项</h4><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">useEffect</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    ....</span><br><span class="line">&#125;,[ref]);</span><br><span class="line"></span><br><span class="line"><span class="title function_">useEffect</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">  ...  </span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure>
 
-useEffect(()=&gt;&#123;
-  ...  
-&#125;, []);</code></pre>
 <p>上面两者相当于是一样的了，因为ref始终是同一个引用。</p>
 <h4 id="2-手动调用自己的ref挂载函数"><a href="#2-手动调用自己的ref挂载函数" class="headerlink" title="2.手动调用自己的ref挂载函数"></a>2.手动调用自己的ref挂载函数</h4><p>这里我们需要通过<code>callback ref</code>的形式去挂载</p>
-<pre><code class="tsx">function MeasureExample() &#123;
-  const [height, setHeight] = useState(0);
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">MeasureExample</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [height, setHeight] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> measuredRef = <span class="title function_">useCallback</span>(<span class="function"><span class="params">node</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (node !== <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="title function_">setHeight</span>(node.<span class="title function_">getBoundingClientRect</span>().<span class="property">height</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h1</span> <span class="attr">ref</span>=<span class="string">&#123;measuredRef&#125;</span>&gt;</span>Hello, world<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>The above header is &#123;Math.round(height)&#125;px tall<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-  const measuredRef = useCallback(node =&gt; &#123;
-    if (node !== null) &#123;
-      setHeight(node.getBoundingClientRect().height);
-    &#125;
-  &#125;, []);
-
-  return (
-    &lt;&gt;
-      &lt;h1 ref=&#123;measuredRef&#125;&gt;Hello, world&lt;/h1&gt;
-      &lt;h2&gt;The above header is &#123;Math.round(height)&#125;px tall&lt;/h2&gt;
-    &lt;/&gt;
-  );
-&#125;
-</code></pre>
 <blockquote>
 <p>注意：这里的ref挂载针对的是DOM元素，如果是要拿组件的ref，则往下看</p>
 </blockquote>
 <h2 id="forwardRef"><a href="#forwardRef" class="headerlink" title="forwardRef"></a>forwardRef</h2><p>我们用<code>forwardRef</code>包裹函数式组件，见下例</p>
-<pre><code class="tsx">const Parent = () =&gt; &#123;
-  const childRef = useRef(null);
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">Parent</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> childRef = <span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    ref.<span class="property">current</span>.<span class="title function_">focus</span>();</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Child</span> <span class="attr">ref</span>=<span class="string">&#123;ref&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Child</span> = <span class="title function_">forwardRef</span>(<span class="function">(<span class="params">props, ref</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;child&quot;</span> <span class="attr">ref</span>=<span class="string">&#123;ref&#125;</span> /&gt;</span></span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-  useEffect(() =&gt; &#123;
-    ref.current.focus();
-  &#125;, []);
-
-  return (
-    &lt;&gt;
-      &lt;Child ref=&#123;ref&#125; /&gt;
-    &lt;/&gt;
-  );
-&#125;;
-const Child = forwardRef((props, ref) =&gt; &#123;
-  return &lt;input type=&quot;text&quot; name=&quot;child&quot; ref=&#123;ref&#125; /&gt;;
-&#125;);
-</code></pre>
 <p>使用<code>forwardRef</code>包裹之后，函数式组件会获得被分配给自己的ref（作为第二个参数）。如果你没有使用<code>forwardRef</code>而直接去<code>ref</code>的话，<code>React</code>会报错。</p>
 <h2 id="useImperativeHandle"><a href="#useImperativeHandle" class="headerlink" title="useImperativeHandle"></a>useImperativeHandle</h2><p>上面<code>forwardRef</code>的例子中，<code>Parent</code>中的<code>ref</code>拿到了<code>Child</code>组件的完整实例，它不但可以使用<code>focus</code>方法，还可以使用其它所有的DOM方法，比如<code>blur</code>,<code>style</code>。这种方式是不推荐的，我们需要严格的控制<code>ref</code>的权力，控制它所能调用到的方法。</p>
 <p>所以我们要使用<code>useImperativeHandle</code>来限制暴露给父组件的方法。</p>
-<pre><code class="jsx">const Parent = () =&gt; &#123;
-  const childRef = useRef(null);
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">Parent</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> childRef = <span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 这里只能调用到focus方法</span></span><br><span class="line">    ref.<span class="property">current</span>.<span class="title function_">focus</span>();</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Child</span> <span class="attr">ref</span>=<span class="string">&#123;ref&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Child</span> = <span class="title function_">forwardRef</span>(<span class="function">(<span class="params">props, ref</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> inputRef = <span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line">  <span class="title function_">useImperativeHandle</span>(ref, <span class="function">() =&gt;</span> (&#123;</span><br><span class="line">    <span class="attr">focus</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      inputRef.<span class="property">current</span>.<span class="title function_">focus</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;));</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;child&quot;</span> <span class="attr">ref</span>=<span class="string">&#123;inputRef&#125;</span> /&gt;</span></span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-  useEffect(() =&gt; &#123;
-    // 这里只能调用到focus方法
-    ref.current.focus();
-  &#125;, []);
-
-  return (
-    &lt;&gt;
-      &lt;Child ref=&#123;ref&#125; /&gt;
-    &lt;/&gt;
-  );
-&#125;;
-const Child = forwardRef((props, ref) =&gt; &#123;
-  const inputRef = useRef(null);
-  useImperativeHandle(ref, () =&gt; (&#123;
-    focus: () =&gt; &#123;
-      inputRef.current.focus();
-    &#125;
-  &#125;));
-  return &lt;input type=&quot;text&quot; name=&quot;child&quot; ref=&#123;inputRef&#125; /&gt;;
-&#125;);
-</code></pre>
 <p>这样子，我们就可以手动控制需要暴露给父组件的方法。</p>
-<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="获取上一次的值"><a href="#获取上一次的值" class="headerlink" title="获取上一次的值"></a>获取上一次的值</h3><pre><code class="tsx">function usePrevious(value) &#123;
-  const ref = useRef();
-  useEffect(() =&gt; &#123;
-    ref.current = value;
-  &#125;);
-  return ref.current;
-&#125;
-</code></pre>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="获取上一次的值"><a href="#获取上一次的值" class="headerlink" title="获取上一次的值"></a>获取上一次的值</h3><figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">usePrevious</span>(<span class="params">value</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> ref = <span class="title function_">useRef</span>();</span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    ref.<span class="property">current</span> = value;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> ref.<span class="property">current</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>这个hooks返回出来的值，在渲染的过程中，总是会显示上一次的值。我们来解析一下这个函数的运行步骤。 假设上例中<code>ref</code>的初始值传入的<code>value</code>是0,每次数据更新传入的都是递增的数据，比如1，2，3。</p>
 <ul>
 <li>初始化，ref.current = 0，渲染出来 </li>
@@ -221,68 +148,21 @@ const Child = forwardRef((props, ref) =&gt; &#123;
 </ul>
 <h3 id="使用useRef来保存不需要变化的值"><a href="#使用useRef来保存不需要变化的值" class="headerlink" title="使用useRef来保存不需要变化的值"></a>使用useRef来保存不需要变化的值</h3><p> 因为<code>useRef</code>的返回值在组件的每次<code>redner</code>之后都是同一个，所以它可以用来保存一些在组件整个生命周期都不需要变化的值。最常见的就是定时器的清除场景。 </p>
 <p>刚开始在<code>React</code>里写定时器，你可能会这样写</p>
-<pre><code class="jsx">const App = () =&gt; &#123;
-  let timer;
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">App</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> timer;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    timer = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;触发了&#x27;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;,[]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">clearTimer</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Button</span> <span class="attr">onClick</span>=<span class="string">&#123;clearTimer&#125;</span>&gt;</span>停止<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-  useEffect(() =&gt; &#123;
-    timer = setInterval(() =&gt; &#123;
-      console.log(&#39;触发了&#39;);
-    &#125;, 1000);
-  &#125;,[]);
-
-  const clearTimer = () =&gt; &#123;
-    clearInterval(timer);
-  &#125;
-
-  return (
-    &lt;&gt;
-      &lt;Button onClick=&#123;clearTimer&#125;&gt;停止&lt;/Button&gt;
-    &lt;/&gt;)
-&#125;
-</code></pre>
 <p>但是上面这个写法有个巨大的问题，如果这个<code>App</code>组件里有<code>state</code>变化或者他的父组件重新<code>render</code>等原因导致这个<code>App</code>组件重新<code>render</code>的时候，我们会发现，点击按钮停止，定时器依然会不断的在控制台打印，定时器清除事件无效了。</p>
 <p>为什么呢？因为组件重新渲染之后，这里的<code>timer</code>以及<code>clearTimer</code>方法都会<strong>重新创建</strong>，<code>timer</code>已经不是定时器的变量了。</p>
 <p>所以对于定时器，我们都会使用<code>useRef</code>来定义变量。</p>
-<pre><code class="jsx">const App = () =&gt; &#123;
-  const timer = useRef();
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">App</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> timer = <span class="title function_">useRef</span>();</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    timer.<span class="property">current</span> = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;触发了&#x27;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;,[]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">clearTimer</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="built_in">clearInterval</span>(timer.<span class="property">current</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Button</span> <span class="attr">onClick</span>=<span class="string">&#123;clearTimer&#125;</span>&gt;</span>停止<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-  useEffect(() =&gt; &#123;
-    timer.current = setInterval(() =&gt; &#123;
-      console.log(&#39;触发了&#39;);
-    &#125;, 1000);
-  &#125;,[]);
 
-  const clearTimer = () =&gt; &#123;
-    clearInterval(timer.current);
-  &#125;
 
-  return (
-    &lt;&gt;
-      &lt;Button onClick=&#123;clearTimer&#125;&gt;停止&lt;/Button&gt;
-    &lt;/&gt;)
-&#125;
-</code></pre>
 <h3 id="实现深度比较useEffect"><a href="#实现深度比较useEffect" class="headerlink" title="实现深度比较useEffect"></a>实现深度比较useEffect</h3><p>普通的<code>useEffect</code>只是一个浅比较的方法，如果我们依赖的<code>state</code>是一个对象，组件重新渲染，这个<code>state</code>对象的值没变，但是内存引用地址变化了，一样会触发<code>useEffect</code>的重新渲染。</p>
-<pre><code class="tsx">const createObj = () =&gt; (&#123;
-    name: &#39;zouwowo&#39;
-&#125;);
-useEffect(() =&gt; &#123;
-  // 这个方法会无限循环
-&#125;, [createObj()]);
-</code></pre>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">createObj</span> = (<span class="params"></span>) =&gt; (&#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;zouwowo&#x27;</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 这个方法会无限循环</span></span><br><span class="line">&#125;, [<span class="title function_">createObj</span>()]);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>我们来使用<code>useRef</code>实现一个深度依赖对比的<code>useDeepEffect</code></p>
-<pre><code class="jsx">import equal from &#39;fast-deep-equal&#39;;
-export useDeepEffect = (callback, deps) =&gt; &#123;
-  const emitEffect = useRef(0);
-  const prevDeps = useRef(deps);
-  if (!equal(prevDeps.current, deps)) &#123;
-    // 当深比较不相等的时候，修改emitEffect.current的值，触发下面的useEffect更新
-    emitEffect.current++;
-  &#125;
-  prevDeps.current = deps;
-  return useEffect(callback, [emitEffect.current]);
-&#125;
-</code></pre>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> equal <span class="keyword">from</span> <span class="string">&#x27;fast-deep-equal&#x27;</span>;</span><br><span class="line"><span class="keyword">export</span> useDeepEffect = <span class="function">(<span class="params">callback, deps</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> emitEffect = <span class="title function_">useRef</span>(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">const</span> prevDeps = <span class="title function_">useRef</span>(deps);</span><br><span class="line">  <span class="keyword">if</span> (!<span class="title function_">equal</span>(prevDeps.<span class="property">current</span>, deps)) &#123;</span><br><span class="line">    <span class="comment">// 当深比较不相等的时候，修改emitEffect.current的值，触发下面的useEffect更新</span></span><br><span class="line">    emitEffect.<span class="property">current</span>++;</span><br><span class="line">  &#125;</span><br><span class="line">  prevDeps.<span class="property">current</span> = deps;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">useEffect</span>(callback, [emitEffect.<span class="property">current</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>

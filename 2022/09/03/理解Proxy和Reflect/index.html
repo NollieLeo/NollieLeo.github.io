@@ -23,12 +23,12 @@
   <title>理解Proxy和Reflect - 翁先森的博客</title>
 
   
-    <meta name="description" content="理解Proxy Vue3中利用的是Proxy以及Reflect去代理对象的  我们知道Proxy是只能代理对象类型的，非对象类型不可以进行代理 所谓代理：  指的是对一个 对象 的 基本语义 的代理  何为基本语义比如我们对对象的一堆简单操作 console.log(obj.a); &#x2F;&#x2F; 读取属性操作 obj.a++; &#x2F;&#x2F; 设置属性值操作 类似这种读取，设置属性值的操作，就是属于基本的语义操作">
+    <meta name="description" content="理解Proxy Vue3中利用的是Proxy以及Reflect去代理对象的  我们知道Proxy是只能代理对象类型的，非对象类型不可以进行代理 所谓代理：  指的是对一个 对象 的 基本语义 的代理  何为基本语义比如我们对对象的一堆简单操作 12console.log(obj.a); &#x2F;&#x2F; 读取属性操作obj.a++; &#x2F;&#x2F; 设置属性值操作  类似这种读取，设置属性值的操作，就是属于基本的语义操">
 <meta property="og:type" content="article">
 <meta property="og:title" content="理解Proxy和Reflect">
 <meta property="og:url" content="https://github.com/NollieLeo/2022/09/03/%E7%90%86%E8%A7%A3Proxy%E5%92%8CReflect/index.html">
 <meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="理解Proxy Vue3中利用的是Proxy以及Reflect去代理对象的  我们知道Proxy是只能代理对象类型的，非对象类型不可以进行代理 所谓代理：  指的是对一个 对象 的 基本语义 的代理  何为基本语义比如我们对对象的一堆简单操作 console.log(obj.a); &#x2F;&#x2F; 读取属性操作 obj.a++; &#x2F;&#x2F; 设置属性值操作 类似这种读取，设置属性值的操作，就是属于基本的语义操作">
+<meta property="og:description" content="理解Proxy Vue3中利用的是Proxy以及Reflect去代理对象的  我们知道Proxy是只能代理对象类型的，非对象类型不可以进行代理 所谓代理：  指的是对一个 对象 的 基本语义 的代理  何为基本语义比如我们对对象的一堆简单操作 12console.log(obj.a); &#x2F;&#x2F; 读取属性操作obj.a++; &#x2F;&#x2F; 设置属性值操作  类似这种读取，设置属性值的操作，就是属于基本的语义操">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-03T02:43:45.000Z">
 <meta property="article:modified_time" content="2022-09-05T08:09:20.155Z">
@@ -53,6 +53,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -74,7 +76,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -90,7 +92,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -112,29 +114,23 @@
 <p>指的是对一个 对象 的 <strong>基本语义</strong> 的代理</p>
 </blockquote>
 <h2 id="何为基本语义"><a href="#何为基本语义" class="headerlink" title="何为基本语义"></a>何为基本语义</h2><p>比如我们对对象的一堆简单操作</p>
-<pre><code class="js">console.log(obj.a); // 读取属性操作
-obj.a++; // 设置属性值操作</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="property">a</span>); <span class="comment">// 读取属性操作</span></span><br><span class="line">obj.<span class="property">a</span>++; <span class="comment">// 设置属性值操作</span></span><br></pre></td></tr></table></figure>
+
 <p>类似这种读取，设置属性值的操作，就是属于基本的语义操作 —- <strong>基本操作</strong></p>
 <p>类似这种的基本操作就可以用Proxy进行代理拦截</p>
 <p>基本操作的基本用法</p>
-<pre><code class="js">const data = new Proxy(obj, &#123;
-  // 拦截读取属性操作
-  get()&#123; .... &#125;,
-  // 拦截设置属性操作
-  set()&#123;  .... &#125;
-&#125;)</code></pre>
-<p>例如函数：我们也可以使用apply对函数进行拦截</p>
-<pre><code class="js">const fn = ()=&gt;&#123;
-  console.log(&#39;wengkaimin&#39;)
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> data = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">  <span class="comment">// 拦截读取属性操作</span></span><br><span class="line">  <span class="title function_">get</span>(<span class="params"></span>)&#123; .... &#125;,</span><br><span class="line">  <span class="comment">// 拦截设置属性操作</span></span><br><span class="line">  <span class="title function_">set</span>(<span class="params"></span>)&#123;  .... &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-const proFn = new Proxy(fn, &#123;
-  apply(target, thisArg, argArray)&#123;
-    target.call(thisArg, ...argArray)
-  &#125;
-&#125;)</code></pre>
+
+
+<p>例如函数：我们也可以使用apply对函数进行拦截</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">fn</span> = (<span class="params"></span>)=&gt;&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;wengkaimin&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proFn = <span class="keyword">new</span> <span class="title class_">Proxy</span>(fn, &#123;</span><br><span class="line">  <span class="title function_">apply</span>(<span class="params">target, thisArg, argArray</span>)&#123;</span><br><span class="line">    target.<span class="title function_">call</span>(thisArg, ...argArray)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="复合操作"><a href="#复合操作" class="headerlink" title="复合操作"></a>复合操作</h2><p>既然有基本操作，可以也有非基本操作，在js里头，我们叫他复合操作</p>
-<pre><code class="js">obj.fn()</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj.<span class="title function_">fn</span>()</span><br></pre></td></tr></table></figure>
+
 <p>这个显而易见，是又多个语义构成的（调用一个对象的一个函数属性）、</p>
 <p>两个语义是：</p>
 <ol>
@@ -145,57 +141,25 @@ const proFn = new Proxy(fn, &#123;
 <p>Reflect是一个全局对象，其中存在和Proxy的拦截器很多名字相同的方法</p>
 </blockquote>
 <p>如下的等价操作</p>
-<pre><code class="js">const obj = &#123; a: &#39;wengkaimin&#39; &#125;;
-console.log(obj.a);
-console.log(Reflect.get(obj, &#39;a&#39;));</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">a</span>: <span class="string">&#x27;wengkaimin&#x27;</span> &#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="property">a</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Reflect</span>.<span class="title function_">get</span>(obj, <span class="string">&#x27;a&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
 <p>但是Reflect它能够传入第三个参数 reveiver</p>
 <p>就相当于函数执行过程中，指向的this</p>
-<pre><code class="js">console.log(Reflect.get(obj, &#39;a&#39;, &#123; a: &#39;kaimin&#39; &#125;)); // kaimin</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Reflect</span>.<span class="title function_">get</span>(obj, <span class="string">&#x27;a&#x27;</span>, &#123; <span class="attr">a</span>: <span class="string">&#x27;kaimin&#x27;</span> &#125;)); <span class="comment">// kaimin</span></span><br></pre></td></tr></table></figure>
+
+
+
 <blockquote>
 <p>在vue3响应式学习 整理的那篇文章中，记录了实现 响应式代理的代码</p>
 </blockquote>
-<pre><code class="js">const obj = new Proxy(data, &#123;
-  get(target, key) &#123;
-    track(target, key);
-    // 返回函数属性
-    // 这里没有用Reflect.get实现读取数据
-    return target[key];
-  &#125;,
-  set(target, key, newVal) &#123;
-    target[key] = newVal;
-    trigger(target, key);
-  &#125;,
-&#125;);</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = <span class="keyword">new</span> <span class="title class_">Proxy</span>(data, &#123;</span><br><span class="line">  <span class="title function_">get</span>(<span class="params">target, key</span>) &#123;</span><br><span class="line">    <span class="title function_">track</span>(target, key);</span><br><span class="line">    <span class="comment">// 返回函数属性</span></span><br><span class="line">    <span class="comment">// 这里没有用Reflect.get实现读取数据</span></span><br><span class="line">    <span class="keyword">return</span> target[key];</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">set</span>(<span class="params">target, key, newVal</span>) &#123;</span><br><span class="line">    target[key] = newVal;</span><br><span class="line">    <span class="title function_">trigger</span>(target, key);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
 <p>我们在Proxy中无论设置get还是set拦截，都是直接用的原始对象target来进行读取或者赋值</p>
 <p>假如目前的obj为，返回了this.foo的值。</p>
 <p>接着我们在effect副作用函数中通过代理对象data读取b的值。</p>
 <p>之后我们修改了a的值</p>
-<pre><code class="js">const obj = &#123;
-  a:1,
-  get b()&#123;
-    return this.a + 1;
-  &#125;
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="attr">a</span>:<span class="number">1</span>,</span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">b</span>()&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">a</span> + <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> data = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">  <span class="title function_">get</span>(<span class="params">target, key</span>) &#123;</span><br><span class="line">    <span class="title function_">track</span>(target, key);</span><br><span class="line">    <span class="comment">// 返回函数属性</span></span><br><span class="line">    <span class="comment">// 这里没有用Reflect.get实现读取数据</span></span><br><span class="line">    <span class="keyword">return</span> target[key];</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">set</span>(<span class="params">target, key, newVal</span>) &#123;</span><br><span class="line">    <span class="comment">// 这里没有用Reflect.set</span></span><br><span class="line">    target[key] = newVal;</span><br><span class="line">    <span class="title function_">trigger</span>(target, key);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="title function_">effect</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data.<span class="property">b</span>) <span class="comment">// 2</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">data.<span class="property">a</span>++</span><br></pre></td></tr></table></figure>
 
-const data = new Proxy(obj, &#123;
-  get(target, key) &#123;
-    track(target, key);
-    // 返回函数属性
-    // 这里没有用Reflect.get实现读取数据
-    return target[key];
-  &#125;,
-  set(target, key, newVal) &#123;
-    // 这里没有用Reflect.set
-    target[key] = newVal;
-    trigger(target, key);
-  &#125;,
-&#125;)
-
-effect(()=&gt;&#123;
-  console.log(data.b) // 2
-&#125;)
-
-data.a++</code></pre>
 <p>修改了a的值之后，并不会相对应的触发副作用函数的重新执行</p>
 <p>梳理下读取步骤：</p>
 <ol>
@@ -206,22 +170,12 @@ data.a++</code></pre>
 </ol>
 <p>当然，在副作用函数effect当中相当于，直接读取了原生对象obj的属性，虽然看上去走了代理，但不多。所以这肯定是没有追踪到的，建立不起相应的联系</p>
 <p>就类似</p>
-<pre><code class="js">effect(()=&gt;&#123;
-  console.log(obj.a + 1) // 2
-&#125;)</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">effect</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="property">a</span> + <span class="number">1</span>) <span class="comment">// 2</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
 <p>在这种场景下Reflect的第三个参数receiver就派上用场了</p>
 <p>使用Reflect改造完get拦截器</p>
-<pre><code class="js">const obj = new Proxy(data, &#123;
-  get(target, key, receiver) &#123;
-    track(target, key);
-    // 返回函数属性
-    return Reflect.get(target, key, receiver)
-  &#125;,
-  set(target, key, newVal) &#123;
-    target[key] = newVal;
-    trigger(target, key);
-  &#125;,
-&#125;);</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = <span class="keyword">new</span> <span class="title class_">Proxy</span>(data, &#123;</span><br><span class="line">  <span class="title function_">get</span>(<span class="params">target, key, receiver</span>) &#123;</span><br><span class="line">    <span class="title function_">track</span>(target, key);</span><br><span class="line">    <span class="comment">// 返回函数属性</span></span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, key, receiver)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">set</span>(<span class="params">target, key, newVal</span>) &#123;</span><br><span class="line">    target[key] = newVal;</span><br><span class="line">    <span class="title function_">trigger</span>(target, key);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
 <p>使用了Relfect之后，this指向就转为了data代理对象，就可以成功的建立联系了</p>
 <blockquote>
 <p> Reflect的作用不仅于此</p>

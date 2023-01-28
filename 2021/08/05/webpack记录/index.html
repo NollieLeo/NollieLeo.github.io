@@ -52,6 +52,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -73,7 +75,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -89,7 +91,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -108,14 +110,10 @@
 <h2 id="优化手段"><a href="#优化手段" class="headerlink" title="优化手段"></a>优化手段</h2><h3 id="output"><a href="#output" class="headerlink" title="output"></a>output</h3><p>浏览器缓存，就是进入某个网站后，加载的静态资源被浏览器缓存，再次进入该网站后，将直接拉取缓存资源，加快加载速度。</p>
 <p>webpack 支持根据资源内容，创建 hash id，当资源内容发生变化时，将会创建新的 hash id。</p>
 <p>配置 JS bundle hash，<code>webpack.js</code> 配置方式如下：</p>
-<pre><code class="js">module.exports = &#123;
-  // 输出
-  output: &#123;
-    // 仅在生产环境添加 hash
-    filename: ctx.isEnvProduction ? &#39;[name].[contenthash].bundle.js&#39; : &#39;[name].bundle.js&#39;,
-  &#125;,
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// 输出</span></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="comment">// 仅在生产环境添加 hash</span></span><br><span class="line">    <span class="attr">filename</span>: ctx.<span class="property">isEnvProduction</span> ? <span class="string">&#x27;[name].[contenthash].bundle.js&#x27;</span> : <span class="string">&#x27;[name].bundle.js&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="tree-shaking"><a href="#tree-shaking" class="headerlink" title="tree shaking"></a>tree shaking</h3><ul>
 <li>js的shaking看这个 <a target="_blank" rel="noopener" href="https://juejin.cn/post/6993275177647751182">原理</a></li>
 </ul>
@@ -123,139 +121,82 @@
 <li>使用<code>babel-loader</code>可以开启缓存，在第2次编译时，直接使用<strong>缓存</strong>，不用重新编译，缓存一般只适用于开发环境</li>
 <li>使用<code>include</code>或<code>exclude</code>适当缩小<code>loader</code>的适用范围，让其更快找到要解析的文件，开发和生产环境皆适用</li>
 </ol>
-<pre><code class="json"> module: &#123;
-      rules: [
-        &#123;
-          test: /\.(js|jsx|ts|tsx)$/i,
-          use: [&#39;babel-loader?cacheDirectory&#39;],
-          exclude: /node_modules/,
-          include: /src/,
-        &#125;,
-      ]
- &#125;</code></pre>
-<h3 id="压缩-css-文件"><a href="#压缩-css-文件" class="headerlink" title="压缩 css 文件"></a>压缩 css 文件</h3><p>使用css-minimizer-webpack-plugin</p>
-<pre><code class="js">const CssMinimizerPlugin = require(&quot;css-minimizer-webpack-plugin&quot;);
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">module<span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">     rules<span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">       <span class="punctuation">&#123;</span></span><br><span class="line">         test<span class="punctuation">:</span> /\.(js|jsx|ts|tsx)$/i<span class="punctuation">,</span></span><br><span class="line">         use<span class="punctuation">:</span> <span class="punctuation">[</span>&#x27;babel-loader?cacheDirectory&#x27;<span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">         exclude<span class="punctuation">:</span> /node_modules/<span class="punctuation">,</span></span><br><span class="line">         include<span class="punctuation">:</span> /src/<span class="punctuation">,</span></span><br><span class="line">       <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">     <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
-module.exports = &#123;
-  optimization: &#123;
-    minimizer: [
-      new CssMinimizerPlugin(&#123;
-          parallel: 4,
-        &#125;),
-    ],
-  &#125;
-&#125;
-</code></pre>
+
+
+<h3 id="压缩-css-文件"><a href="#压缩-css-文件" class="headerlink" title="压缩 css 文件"></a>压缩 css 文件</h3><p>使用css-minimizer-webpack-plugin</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">CssMinimizerPlugin</span> = <span class="built_in">require</span>(<span class="string">&quot;css-minimizer-webpack-plugin&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">optimization</span>: &#123;</span><br><span class="line">    <span class="attr">minimizer</span>: [</span><br><span class="line">      <span class="keyword">new</span> <span class="title class_">CssMinimizerPlugin</span>(&#123;</span><br><span class="line">          <span class="attr">parallel</span>: <span class="number">4</span>,</span><br><span class="line">        &#125;),</span><br><span class="line">    ],</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
 <h3 id="输出结果不携带路径信息"><a href="#输出结果不携带路径信息" class="headerlink" title="输出结果不携带路径信息"></a>输出结果不携带路径信息</h3><p>默认 webpack 会在输出的 bundle 中生成路径信息，将路径信息删除可小幅提升构建速度。</p>
-<pre><code>module.exports = &#123;
-    output: &#123;
-        pathinfo: false,
-      &#125;,
-    &#125;;
-&#125;</code></pre><h3 id="React的优化"><a href="#React的优化" class="headerlink" title="React的优化"></a>React的优化</h3><ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">    output: &#123;</span><br><span class="line">        pathinfo: false,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="React的优化"><a href="#React的优化" class="headerlink" title="React的优化"></a>React的优化</h3><ul>
 <li>可以使用  <a href="https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fpmmmwh%2Freact-refresh-webpack-plugin">react-refresh-webpack-plugin</a> 这个plugin来实现react组件的热更新</li>
 </ul>
 <h3 id="优化-resolve-配置"><a href="#优化-resolve-配置" class="headerlink" title="优化 resolve 配置"></a>优化 resolve 配置</h3><h4 id="1-alias"><a href="#1-alias" class="headerlink" title="1. alias"></a>1. alias</h4><p>alias 可以创建 <code>import</code> 或 <code>require</code> 的别名，用来简化模块引入。</p>
 <h4 id="2-extensions"><a href="#2-extensions" class="headerlink" title="2. extensions"></a>2. extensions</h4><p>根据项目中的文件类型，定义 extensions，以覆盖 webpack 默认的 extensions，加快解析速度。</p>
 <p>由于 webpack 的解析顺序是从左到右，因此要将使用频率高的文件类型放在左侧，如下我将 <code>tsx</code> 放在最左侧。</p>
 <p><code>webpack.common.js</code> 配置方式如下：</p>
-<pre><code class="javascript">module.exports = &#123;
-    resolve: &#123;
-        extensions: [&#39;.tsx&#39;, &#39;.js&#39;], // 因为我的项目只有这两种类型的文件，如果有其他类型，需要添加进去。
-    &#125;
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">resolve</span>: &#123;</span><br><span class="line">        <span class="attr">extensions</span>: [<span class="string">&#x27;.tsx&#x27;</span>, <span class="string">&#x27;.js&#x27;</span>], <span class="comment">// 因为我的项目只有这两种类型的文件，如果有其他类型，需要添加进去。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <h4 id="3-modules"><a href="#3-modules" class="headerlink" title="3. modules"></a>3. modules</h4><p>modules 表示 webpack 解析模块时需要解析的目录。</p>
 <p>指定目录可缩小 webpack 解析范围，加快构建速度。</p>
 <p><code>webpack.common.js</code> 配置方式如下：</p>
-<pre><code class="javascript">module.exports = &#123;
-    modules: [
-      &#39;node_modules&#39;,
-       paths.appSrc,
-    ]
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">modules</span>: [</span><br><span class="line">      <span class="string">&#x27;node_modules&#x27;</span>,</span><br><span class="line">       paths.<span class="property">appSrc</span>,</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h4 id="4-symlinks"><a href="#4-symlinks" class="headerlink" title="4. symlinks"></a>4. symlinks</h4><p>如果项目不使用 symlinks（例如 <code>npm link</code> 或者 <code>yarn link</code>），可以设置 <code>resolve.symlinks: false</code>，减少解析工作量。</p>
 <p><code>webpack.common.js</code> 配置方式如下：</p>
-<pre><code>module.exports = &#123;
-    resolve: &#123;
-        symlinks: false,
-    &#125;,
-&#125;</code></pre><h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">    resolve: &#123;</span><br><span class="line">        symlinks: false,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><blockquote>
 <p>webpack5之前</p>
 <p>利用 <code>cache-loader</code> 将结果缓存中磁盘中；利用 <code>hard-source-webpack-plugin</code> 将结果缓存在 <code>node_modules/.cache</code> 下提升二次打包速度；利用 <code>DllReferencePlugin</code> 将变化不频繁的第三方库<code>提前单独</code>打包成动态链接库，提升真正业务代码的打包速度</p>
 </blockquote>
 <p>然而。。webpack5自带了配置项</p>
 <p>开发环境 <code>webpack.dev.js</code></p>
-<pre><code class="javascript">cache: &#123;
-    type: &#39;memory&#39;
-&#125;,
-复制代码</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cache</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;memory&#x27;</span></span><br><span class="line">&#125;,</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
 <p>生产环境 <code>webpack.pro.js</code></p>
-<pre><code class="javascript">cache: &#123;
-    type: &#39;filesystem&#39;,
-    buildDependencies: &#123;
-      config: [__filename]
-    &#125;
-&#125;,</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cache</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;filesystem&#x27;</span>,</span><br><span class="line">    <span class="attr">buildDependencies</span>: &#123;</span><br><span class="line">      <span class="attr">config</span>: [__filename]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="打包时清除上次构建产物"><a href="#打包时清除上次构建产物" class="headerlink" title="打包时清除上次构建产物"></a>打包时清除上次构建产物</h3><p>打包目录下面可能会存在大量上次打包留下来的产物，时间长了就会有很多无用的代码</p>
 <p>webpack5.20之前这里推荐使用<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/clean-webpack-plugin">CleanWebpackPlugin</a></p>
 <p>之后就可以用<code>output.clean</code>为true清除</p>
 <h3 id="js代码压缩"><a href="#js代码压缩" class="headerlink" title="js代码压缩"></a>js代码压缩</h3><p>webpack5之前我们是需要<code>terser-webpack-plugin</code>这个包的并且需要以下配置</p>
-<pre><code class="js">const TerserPlugin = require(&#39;terser-webpack-plugin&#39;)
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">TerserPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;terser-webpack-plugin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123; </span><br><span class="line"><span class="comment">// ...other config</span></span><br><span class="line"><span class="attr">optimization</span>: &#123;</span><br><span class="line">  <span class="attr">minimize</span>: !isDev,</span><br><span class="line">  <span class="attr">minimizer</span>: [</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">TerserPlugin</span>(&#123;</span><br><span class="line">      <span class="attr">extractComments</span>: <span class="literal">false</span>, </span><br><span class="line">      <span class="attr">terserOptions</span>: &#123; </span><br><span class="line">        <span class="attr">compress</span>: &#123; </span><br><span class="line">          <span class="attr">pure_funcs</span>: [<span class="string">&#x27;console.log&#x27;</span>] </span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;) ]</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
-module.exports = &#123; 
-// ...other config
-optimization: &#123;
-  minimize: !isDev,
-  minimizer: [
-    new TerserPlugin(&#123;
-      extractComments: false, 
-      terserOptions: &#123; 
-        compress: &#123; 
-          pure_funcs: [&#39;console.log&#39;] 
-        &#125;
-      &#125;
-    &#125;) ]
- &#125;</code></pre>
+
+
 <p>但是webpack5自带了代码压缩</p>
-<pre><code class="js">  // webpack.config.js中
-  module.exports = &#123;
-     optimization: &#123;
-       usedExports: true, //只导出被使用的模块
-       minimize : true // 启动压缩
-     &#125;
-  &#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack.config.js中</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">   <span class="attr">optimization</span>: &#123;</span><br><span class="line">     <span class="attr">usedExports</span>: <span class="literal">true</span>, <span class="comment">//只导出被使用的模块</span></span><br><span class="line">     minimize : <span class="literal">true</span> <span class="comment">// 启动压缩</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>当然你如果需要自定义的话也可以安装这个插件，然后自定义配置</p>
-<pre><code class="js">const TerserPlugin = require(&#39;terser-webpack-plugin&#39;);
-module.exports = &#123;
-    optimization: &#123;
-        minimizer: [
-            new TerserPlugin(&#123;
-              parallel: 4,
-              terserOptions: &#123;
-                parse: &#123;
-                  ecma: 8,
-                &#125;,
-                compress: &#123;
-                  ecma: 5,
-                  warnings: false,
-                  comparisons: false,
-                  inline: 2,
-                &#125;,
-                mangle: &#123;
-                  safari10: true,
-                &#125;,
-                output: &#123;
-                  ecma: 5,
-                  comments: false,
-                  ascii_only: true,
-                &#125;,
-              &#125;,
-            &#125;),
-        ]
-    &#125;
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">TerserPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;terser-webpack-plugin&#x27;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">optimization</span>: &#123;</span><br><span class="line">        <span class="attr">minimizer</span>: [</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">TerserPlugin</span>(&#123;</span><br><span class="line">              <span class="attr">parallel</span>: <span class="number">4</span>,</span><br><span class="line">              <span class="attr">terserOptions</span>: &#123;</span><br><span class="line">                <span class="attr">parse</span>: &#123;</span><br><span class="line">                  <span class="attr">ecma</span>: <span class="number">8</span>,</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">compress</span>: &#123;</span><br><span class="line">                  <span class="attr">ecma</span>: <span class="number">5</span>,</span><br><span class="line">                  <span class="attr">warnings</span>: <span class="literal">false</span>,</span><br><span class="line">                  <span class="attr">comparisons</span>: <span class="literal">false</span>,</span><br><span class="line">                  <span class="attr">inline</span>: <span class="number">2</span>,</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">mangle</span>: &#123;</span><br><span class="line">                  <span class="attr">safari10</span>: <span class="literal">true</span>,</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">output</span>: &#123;</span><br><span class="line">                  <span class="attr">ecma</span>: <span class="number">5</span>,</span><br><span class="line">                  <span class="attr">comments</span>: <span class="literal">false</span>,</span><br><span class="line">                  <span class="attr">ascii_only</span>: <span class="literal">true</span>,</span><br><span class="line">                &#125;,</span><br><span class="line">              &#125;,</span><br><span class="line">            &#125;),</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
 <h3 id="合并模块"><a href="#合并模块" class="headerlink" title="合并模块"></a>合并模块</h3><blockquote>
 <p>普通打包只是将一个模块最终放到一个单独的立即执行函数中，如果你有很多模块，那么就有很多立即执行函数。concatenateModules 可以要所有的模块都合并到一个函数里面去。</p>
 </blockquote>
@@ -265,14 +206,15 @@ module.exports = &#123;
 <li><p>热更新<br> 是在不刷新页面的情况下，使新代码生效，整个网面不会刷新，状态也不会丢失</p>
 </li>
 </ul>
-<pre><code class="js">target: &#39;web&#39;,
-plugins: [
-    new webpack.HotModuleReplacementPlugin(&#123;&#125;)
-]</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">target</span>: <span class="string">&#x27;web&#x27;</span>,</span><br><span class="line"><span class="attr">plugins</span>: [</span><br><span class="line">	<span class="keyword">new</span> webpack.<span class="title class_">HotModuleReplacementPlugin</span>(&#123;&#125;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="noParse"><a href="#noParse" class="headerlink" title="noParse"></a>noParse</h3><p> <code>noParse</code>是用来过滤不需要解析的模块，比如<code>jquery</code>,<code>lodash</code>之类的，这些库一般不会再引入其它库，所以不需要<code>webpack</code>去解析其依赖，也不用打包，只是直接引用即可</p>
-<pre><code class="js">module: &#123;
-  noParse: /jquery|lodash/,
-&#125;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">module</span>: &#123;</span><br><span class="line">  <span class="attr">noParse</span>: <span class="regexp">/jquery|lodash/</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="多线程打包"><a href="#多线程打包" class="headerlink" title="多线程打包"></a>多线程打包</h3><p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/thread-loader">thread-loader</a></p>
 <p> 将耗时的 loader 放在一个独立的 worker 池中运行，加快 loader 构建速度。 </p>
 <blockquote>

@@ -23,12 +23,12 @@
   <title>时间分片 - 翁先森的博客</title>
 
   
-    <meta name="description" content="海量数据优化-时间分片时间分片的概念，就是一次性渲染大量数据，初始化的时候会出现卡顿等现象。我们必须要明白的一个道理，js执行永远要比dom渲染快的多。 ，所以对于大量的数据，一次性渲染，容易造成卡顿，卡死的情况。我们先来看一下例子 .&#x2F;Content.tsx import &amp;#123; Button &amp;#125; from &#39;choerodon-ui&#39;; import Icon">
+    <meta name="description" content="海量数据优化-时间分片时间分片的概念，就是一次性渲染大量数据，初始化的时候会出现卡顿等现象。我们必须要明白的一个道理，js执行永远要比dom渲染快的多。 ，所以对于大量的数据，一次性渲染，容易造成卡顿，卡死的情况。我们先来看一下例子 .&#x2F;Content.tsx 123456789101112131415161718192021222324252627282930313233343536373839">
 <meta property="og:type" content="article">
 <meta property="og:title" content="时间分片">
 <meta property="og:url" content="https://github.com/NollieLeo/2020/12/28/%E6%97%B6%E9%97%B4%E5%88%86%E7%89%87/index.html">
 <meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="海量数据优化-时间分片时间分片的概念，就是一次性渲染大量数据，初始化的时候会出现卡顿等现象。我们必须要明白的一个道理，js执行永远要比dom渲染快的多。 ，所以对于大量的数据，一次性渲染，容易造成卡顿，卡死的情况。我们先来看一下例子 .&#x2F;Content.tsx import &amp;#123; Button &amp;#125; from &#39;choerodon-ui&#39;; import Icon">
+<meta property="og:description" content="海量数据优化-时间分片时间分片的概念，就是一次性渲染大量数据，初始化的时候会出现卡顿等现象。我们必须要明白的一个道理，js执行永远要比dom渲染快的多。 ，所以对于大量的数据，一次性渲染，容易造成卡顿，卡死的情况。我们先来看一下例子 .&#x2F;Content.tsx 123456789101112131415161718192021222324252627282930313233343536373839">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://github.com/NollieLeo/2020/12/28/%E6%97%B6%E9%97%B4%E5%88%86%E7%89%87/1.gif">
 <meta property="og:image" content="https://github.com/NollieLeo/2020/12/28/%E6%97%B6%E9%97%B4%E5%88%86%E7%89%87/2.gif">
@@ -54,6 +54,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -75,7 +77,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -91,7 +93,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -106,206 +108,26 @@
 <h1 class="article-title"><span>时间分片</span></h1>
 <h2 id="海量数据优化-时间分片"><a href="#海量数据优化-时间分片" class="headerlink" title="海量数据优化-时间分片"></a>海量数据优化-时间分片</h2><p>时间分片的概念，就是一次性渲染大量数据，初始化的时候会出现卡顿等现象。我们必须要明白的一个道理，<strong>js执行永远要比dom渲染快的多。</strong> ，所以对于大量的数据，一次性渲染，容易造成卡顿，卡死的情况。我们先来看一下例子</p>
 <p><strong>./Content.tsx</strong></p>
-<pre><code class="jsx">import &#123; Button &#125; from &#39;choerodon-ui&#39;;
-import Icon from &#39;choerodon-ui/lib/icon/Icon&#39;;
-import &#123; map &#125; from &#39;lodash&#39;;
-import &#123; observer &#125; from &#39;mobx-react-lite&#39;;
-import React, &#123; useEffect, useRef, useState &#125; from &#39;react&#39;;
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Button</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;choerodon-ui&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Icon</span> <span class="keyword">from</span> <span class="string">&#x27;choerodon-ui/lib/icon/Icon&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; map &#125; <span class="keyword">from</span> <span class="string">&#x27;lodash&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; observer &#125; <span class="keyword">from</span> <span class="string">&#x27;mobx-react-lite&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; useEffect, useRef, useState &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./index.less&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useDemos &#125; <span class="keyword">from</span> <span class="string">&#x27;./stores&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Demos</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123;</span><br><span class="line">    mainStore,</span><br><span class="line">  &#125; = <span class="title function_">useDemos</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> &#123;</span><br><span class="line">    lists,</span><br><span class="line">    setLists,</span><br><span class="line">  &#125; = mainStore;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">add</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">setLists</span>(<span class="keyword">new</span> <span class="title class_">Array</span>(<span class="number">40000</span>).<span class="title function_">fill</span>(<span class="number">0</span>));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">reset</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">setLists</span>([]);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;demos&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Button</span> <span class="attr">funcType</span>=<span class="string">&quot;raised&quot;</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> <span class="attr">onClick</span>=<span class="string">&#123;add&#125;</span>&gt;</span>add +<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Button</span> <span class="attr">funcType</span>=<span class="string">&quot;raised&quot;</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> <span class="attr">onClick</span>=<span class="string">&#123;reset&#125;</span>&gt;</span>reset<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">        &#123;</span></span><br><span class="line"><span class="language-xml">        map(lists, (item:number, i:number) =&gt; (</span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;demos-item&quot;</span> <span class="attr">key</span>=<span class="string">&#123;i&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123;`item-$&#123;i&#125;`&#125;</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">Icon</span> <span class="attr">type</span>=<span class="string">&quot;close&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        ))</span></span><br><span class="line"><span class="language-xml">      &#125;</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">observer</span>(<span class="title class_">Demos</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-import &#39;./index.less&#39;;
-import &#123; useDemos &#125; from &#39;./stores&#39;;
-
-const Demos = () =&gt; &#123;
-  const &#123;
-    mainStore,
-  &#125; = useDemos();
-
-  const &#123;
-    lists,
-    setLists,
-  &#125; = mainStore;
-
-  useEffect(() =&gt; &#123;
-  &#125;, []);
-
-  function add() &#123;
-    setLists(new Array(40000).fill(0));
-  &#125;
-  function reset() &#123;
-    setLists([]);
-  &#125;
-
-  return (
-    &lt;div className=&quot;demos&quot;&gt;
-      &lt;div&gt;
-        &lt;Button funcType=&quot;raised&quot; type=&quot;primary&quot; onClick=&#123;add&#125;&gt;add +&lt;/Button&gt;
-        &lt;Button funcType=&quot;raised&quot; type=&quot;primary&quot; onClick=&#123;reset&#125;&gt;reset&lt;/Button&gt;
-
-        &#123;
-        map(lists, (item:number, i:number) =&gt; (
-          &lt;div className=&quot;demos-item&quot; key=&#123;i&#125;&gt;
-            &#123;`item-$&#123;i&#125;`&#125;
-            &lt;Icon type=&quot;close&quot; /&gt;
-          &lt;/div&gt;
-        ))
-      &#125;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  );
-&#125;;
-
-export default observer(Demos);
-</code></pre>
 <p>./stores/index.tsx</p>
-<pre><code class="tsx">/* eslint-disable max-len */
-import React, &#123;
-  createContext, useCallback, useContext, useMemo,
-&#125; from &#39;react&#39;;
-import &#123; DataSet &#125; from &#39;choerodon-ui/pro&#39;;
-import &#123; injectIntl &#125; from &#39;react-intl&#39;;
-import &#123; inject &#125; from &#39;mobx-react&#39;;
-import useStore from &#39;./useStore&#39;;
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* eslint-disable max-len */</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123;</span><br><span class="line">  createContext, useCallback, useContext, useMemo,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">DataSet</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;choerodon-ui/pro&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; injectIntl &#125; <span class="keyword">from</span> <span class="string">&#x27;react-intl&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; inject &#125; <span class="keyword">from</span> <span class="string">&#x27;mobx-react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> useStore <span class="keyword">from</span> <span class="string">&#x27;./useStore&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">ContextProps</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Store</span> = <span class="title function_">createContext</span>(&#123;&#125; <span class="keyword">as</span> <span class="title class_">ContextProps</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">useDemos</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">useContext</span>(<span class="title class_">Store</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">StoreProvider</span> = <span class="title function_">injectIntl</span>(<span class="title function_">inject</span>(<span class="string">&#x27;AppState&#x27;</span>)(<span class="function">(<span class="params">props: <span class="built_in">any</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123;</span><br><span class="line">    children,</span><br><span class="line">    <span class="attr">intl</span>: &#123; formatMessage &#125;,</span><br><span class="line">    <span class="title class_">AppState</span>: &#123; <span class="attr">currentMenuType</span>: &#123; projectId &#125; &#125;,</span><br><span class="line">  &#125; = props;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> mainStore = <span class="title function_">useStore</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> value = &#123;</span><br><span class="line">    ...props,</span><br><span class="line">    formatMessage,</span><br><span class="line">    projectId,</span><br><span class="line">    mainStore,</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">Store.Provider</span> <span class="attr">value</span>=<span class="string">&#123;value&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;children&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">Store.Provider</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-interface ContextProps &#123;
-
-&#125;
-
-const Store = createContext(&#123;&#125; as ContextProps);
-
-export function useDemos() &#123;
-  return useContext(Store);
-&#125;
-
-export const StoreProvider = injectIntl(inject(&#39;AppState&#39;)((props: any) =&gt; &#123;
-  const &#123;
-    children,
-    intl: &#123; formatMessage &#125;,
-    AppState: &#123; currentMenuType: &#123; projectId &#125; &#125;,
-  &#125; = props;
-
-  const mainStore = useStore();
-
-  const value = &#123;
-    ...props,
-    formatMessage,
-    projectId,
-    mainStore,
-  &#125;;
-  return (
-    &lt;Store.Provider value=&#123;value&#125;&gt;
-      &#123;children&#125;
-    &lt;/Store.Provider&gt;
-  );
-&#125;));
-</code></pre>
 <p>./stores/useStore.tsx</p>
-<pre><code class="tsx">import &#123; useLocalStore &#125; from &#39;mobx-react-lite&#39;;
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useLocalStore &#125; <span class="keyword">from</span> <span class="string">&#x27;mobx-react-lite&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">useStore</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">useLocalStore</span>(<span class="function">() =&gt;</span> (&#123;</span><br><span class="line">    <span class="attr">lists</span>: [],</span><br><span class="line">    <span class="title function_">setLists</span>(<span class="params">value:<span class="built_in">any</span></span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">lists</span> = value;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> <span class="title class_">StoreProps</span> = <span class="title class_">ReturnType</span>&lt;<span class="keyword">typeof</span> useStore&gt;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-export default function useStore() &#123;
-  return useLocalStore(() =&gt; (&#123;
-    lists: [],
-    setLists(value:any) &#123;
-      this.lists = value;
-    &#125;,
-  &#125;));
-&#125;
-
-export type StoreProps = ReturnType&lt;typeof useStore&gt;;
-</code></pre>
 <p>./index.tsx</p>
-<pre><code class="tsx">import React from &#39;react&#39;;
-import &#123; StoreProvider &#125; from &#39;./stores&#39;;
-import Content from &#39;./Content&#39;;
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">StoreProvider</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./stores&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Content</span> <span class="keyword">from</span> <span class="string">&#x27;./Content&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Index</span> = (<span class="params">props: <span class="built_in">any</span></span>) =&gt; (</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">StoreProvider</span> &#123;<span class="attr">...props</span>&#125;&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">Content</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">StoreProvider</span>&gt;</span></span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Index</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-const Index = (props: any) =&gt; (
-  &lt;StoreProvider &#123;...props&#125;&gt;
-    &lt;Content /&gt;
-  &lt;/StoreProvider&gt;
-);
-
-export default Index;
-</code></pre>
 <p>./index.less</p>
-<pre><code class="less">.demos &#123;
-  &amp;-item &#123;
-    border: 1px solid #0fc2e2;
-    background-color: #4adcf0;
-    color: #fff;
-    border-radius: 4px;
-    height: 50px;
-    width: 400px;
-    text-align: center;
-    font-size: 20px;
-    line-height: 50px;
-    &amp; + &amp; &#123;
-      margin-top: 10px;
-    &#125;
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.demos</span> &#123;</span><br><span class="line">  <span class="selector-tag">&amp;</span><span class="selector-tag">-item</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#0fc2e2</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#4adcf0</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">4px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="selector-tag">&amp;</span> + <span class="selector-tag">&amp;</span> &#123;</span><br><span class="line">      <span class="attribute">margin-top</span>: <span class="number">10px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>最主要的代码就是Content.tsx</p>
 <p>演示如下</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1.gif" alt="gif1"></p>
 <p>我们看到 40000 个 简单列表渲染了，将近5秒的时间。为了解决一次性加载大量数据的问题。我们引出了时间分片的概念，就是用<code>setTimeout</code>把任务分割，分成若干次来渲染。一共40000个数据，我们可以每次渲染100个， 分次400渲染。(这里用的是<code>window.requestAnimationFrame()</code>)</p>
-<pre><code class="tsx">import &#123; Button &#125; from &#39;choerodon-ui&#39;;
-import Icon from &#39;choerodon-ui/lib/icon/Icon&#39;;
-import &#123; map &#125; from &#39;lodash&#39;;
-import &#123; observer &#125; from &#39;mobx-react-lite&#39;;
-import React, &#123; useEffect, useRef, useState &#125; from &#39;react&#39;;
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Button</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;choerodon-ui&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Icon</span> <span class="keyword">from</span> <span class="string">&#x27;choerodon-ui/lib/icon/Icon&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; map &#125; <span class="keyword">from</span> <span class="string">&#x27;lodash&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; observer &#125; <span class="keyword">from</span> <span class="string">&#x27;mobx-react-lite&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; useEffect, useRef, useState &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./index.less&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useDemos &#125; <span class="keyword">from</span> <span class="string">&#x27;./stores&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Demos</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123;</span><br><span class="line">    mainStore,</span><br><span class="line">  &#125; = <span class="title function_">useDemos</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> &#123;</span><br><span class="line">    lists,</span><br><span class="line">    setLists,</span><br><span class="line">  &#125; = mainStore;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">handleSlice</span>(<span class="params">list:<span class="built_in">number</span>[], times:<span class="built_in">number</span></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (times === <span class="number">400</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> newLists = list.<span class="title function_">slice</span>(times, (times + <span class="number">1</span>) * <span class="number">10</span>);</span><br><span class="line">      <span class="title function_">setLists</span>(lists.<span class="title function_">concat</span>(newLists));</span><br><span class="line">      <span class="title function_">handleSlice</span>(list, times + <span class="number">1</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">add</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">handleSlice</span>(<span class="keyword">new</span> <span class="title class_">Array</span>(<span class="number">4000</span>).<span class="title function_">fill</span>(<span class="number">0</span>), <span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">reset</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">setLists</span>([]);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;demos&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Button</span> <span class="attr">funcType</span>=<span class="string">&quot;raised&quot;</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> <span class="attr">onClick</span>=<span class="string">&#123;add&#125;</span>&gt;</span>add +<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Button</span> <span class="attr">funcType</span>=<span class="string">&quot;raised&quot;</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> <span class="attr">onClick</span>=<span class="string">&#123;reset&#125;</span>&gt;</span>reset<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">        &#123;</span></span><br><span class="line"><span class="language-xml">        map(lists, (item:number, i:number) =&gt; (</span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;demos-item&quot;</span> <span class="attr">key</span>=<span class="string">&#123;i&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123;`item-$&#123;i&#125;`&#125;</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">Icon</span> <span class="attr">type</span>=<span class="string">&quot;close&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        ))</span></span><br><span class="line"><span class="language-xml">      &#125;</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">observer</span>(<span class="title class_">Demos</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-import &#39;./index.less&#39;;
-import &#123; useDemos &#125; from &#39;./stores&#39;;
-
-const Demos = () =&gt; &#123;
-  const &#123;
-    mainStore,
-  &#125; = useDemos();
-
-  const &#123;
-    lists,
-    setLists,
-  &#125; = mainStore;
-
-  useEffect(() =&gt; &#123;
-  &#125;, []);
-
-  function handleSlice(list:number[], times:number) &#123;
-    if (times === 400) return;
-    window.requestAnimationFrame(() =&gt; &#123;
-      const newLists = list.slice(times, (times + 1) * 10);
-      setLists(lists.concat(newLists));
-      handleSlice(list, times + 1);
-    &#125;);
-  &#125;
-
-  function add() &#123;
-    handleSlice(new Array(4000).fill(0), 0);
-  &#125;
-  function reset() &#123;
-    setLists([]);
-  &#125;
-
-  return (
-    &lt;div className=&quot;demos&quot;&gt;
-      &lt;div&gt;
-        &lt;Button funcType=&quot;raised&quot; type=&quot;primary&quot; onClick=&#123;add&#125;&gt;add +&lt;/Button&gt;
-        &lt;Button funcType=&quot;raised&quot; type=&quot;primary&quot; onClick=&#123;reset&#125;&gt;reset&lt;/Button&gt;
-
-        &#123;
-        map(lists, (item:number, i:number) =&gt; (
-          &lt;div className=&quot;demos-item&quot; key=&#123;i&#125;&gt;
-            &#123;`item-$&#123;i&#125;`&#125;
-            &lt;Icon type=&quot;close&quot; /&gt;
-          &lt;/div&gt;
-        ))
-      &#125;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  );
-&#125;;
-
-export default observer(Demos);
-</code></pre>
 <p>演示:</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="2.gif" alt="gif2"></p>
 

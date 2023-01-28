@@ -55,6 +55,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -76,7 +78,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -92,7 +94,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -123,19 +125,8 @@
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-part5.md" alt="image-20210822181130206"></p>
 <p><code>render阶段</code>开始于<code>performSyncWorkOnRoot</code>或<code>performConcurrentWorkOnRoot</code>方法的调用。这取决于本次更新是同步更新还是异步更新。</p>
 <p>之后调用<code>workSyncLoop</code>或者<code>workLoopConcurrent</code></p>
-<pre><code class="js">// performSyncWorkOnRoot会调用该方法
-function workLoopSync() &#123;
-  while (workInProgress !== null) &#123;
-    performUnitOfWork(workInProgress);
-  &#125;
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// performSyncWorkOnRoot会调用该方法</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">workLoopSync</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">while</span> (workInProgress !== <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="title function_">performUnitOfWork</span>(workInProgress);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// performConcurrentWorkOnRoot会调用该方法</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">workLoopConcurrent</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">while</span> (workInProgress !== <span class="literal">null</span> &amp;&amp; !<span class="title function_">shouldYield</span>()) &#123;</span><br><span class="line">    <span class="title function_">performUnitOfWork</span>(workInProgress);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-// performConcurrentWorkOnRoot会调用该方法
-function workLoopConcurrent() &#123;
-  while (workInProgress !== null &amp;&amp; !shouldYield()) &#123;
-    performUnitOfWork(workInProgress);
-  &#125;
-&#125;</code></pre>
 <p>上面所说的workInProgress tree构建的过程从这里正式开始</p>
 <p>代码中的workInProgress 代表的是当前已经创建的<code>workInProgress Fiber</code></p>
 <p> <code>performUnitOfWork</code>方法会创建下一个<code>Fiber节点</code>并赋值给<code>workInProgress</code>，并将<code>workInProgress</code>与已创建的<code>Fiber节点</code>连接起来构成<code>Fiber树</code>。 </p>
@@ -149,19 +140,10 @@ function workLoopConcurrent() &#123;
 <p>如果不存在<code>兄弟Fiber</code>，会进入<code>父级Fiber</code>的“归”阶段。</p>
 <p>“递”和“归”阶段会交错执行直到“归”到<code>rootFiber</code>。至此，<code>render阶段</code>的工作就结束了。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>总体来说递归阶段是下面这段伪代码描述的一样</p>
-<pre><code class="js">function performUnitOfWork(fiber) &#123;
-  // 执行beginWork
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">performUnitOfWork</span>(<span class="params">fiber</span>) &#123;</span><br><span class="line">  <span class="comment">// 执行beginWork</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (fiber.<span class="property">child</span>) &#123;</span><br><span class="line">    <span class="title function_">performUnitOfWork</span>(fiber.<span class="property">child</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 执行completeWork</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (fiber.<span class="property">sibling</span>) &#123;</span><br><span class="line">    <span class="title function_">performUnitOfWork</span>(fiber.<span class="property">sibling</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-  if (fiber.child) &#123;
-    performUnitOfWork(fiber.child);
-  &#125;
 
-  // 执行completeWork
 
-  if (fiber.sibling) &#123;
-    performUnitOfWork(fiber.sibling);
-  &#125;
-&#125;</code></pre>
 <blockquote>
 <p>根据Fiber的那一讲解咱们可以知道，我们的react中可以最多存在两棵fiber树，一个是workInProgress一个是current，咱们在首次mount的时候是，是没有current的，只是在内存中通过整个应用的根fiberRootNode去构建workinprogess tree</p>
 <p>之后update的时候是存在current的tree的</p>

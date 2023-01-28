@@ -23,12 +23,12 @@
   <title>为何Vue3 Proxy 更快 - 翁先森的博客</title>
 
   
-    <meta name="description" content="相比于Vue2.x Object.defineProperty的响应式原理，Vue3 Proxy的优势在哪里呢。以下我们从两者源码角度分析下使用Proxy的优势。 Proxy优势：  ES6原生Proxy语法，更快的初始化，懒加载，不用递归的定义Object.defineProperty 支持动态的添加object新属性 支持原生array数组操作  假设有如下的响应式对象时： data() &amp;#">
+    <meta name="description" content="相比于Vue2.x Object.defineProperty的响应式原理，Vue3 Proxy的优势在哪里呢。以下我们从两者源码角度分析下使用Proxy的优势。 Proxy优势：  ES6原生Proxy语法，更快的初始化，懒加载，不用递归的定义Object.defineProperty 支持动态的添加object新属性 支持原生array数组操作  假设有如下的响应式对象时： 123456789">
 <meta property="og:type" content="article">
 <meta property="og:title" content="为何Vue3 Proxy 更快">
 <meta property="og:url" content="https://github.com/NollieLeo/2022/04/21/%E4%B8%BA%E4%BD%95Vue3-Proxy-%E6%9B%B4%E5%BF%AB/index.html">
 <meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="相比于Vue2.x Object.defineProperty的响应式原理，Vue3 Proxy的优势在哪里呢。以下我们从两者源码角度分析下使用Proxy的优势。 Proxy优势：  ES6原生Proxy语法，更快的初始化，懒加载，不用递归的定义Object.defineProperty 支持动态的添加object新属性 支持原生array数组操作  假设有如下的响应式对象时： data() &amp;#">
+<meta property="og:description" content="相比于Vue2.x Object.defineProperty的响应式原理，Vue3 Proxy的优势在哪里呢。以下我们从两者源码角度分析下使用Proxy的优势。 Proxy优势：  ES6原生Proxy语法，更快的初始化，懒加载，不用递归的定义Object.defineProperty 支持动态的添加object新属性 支持原生array数组操作  假设有如下的响应式对象时： 123456789">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-21T09:46:14.000Z">
 <meta property="article:modified_time" content="2022-04-21T09:47:18.895Z">
@@ -52,6 +52,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -73,7 +75,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -89,7 +91,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -110,115 +112,21 @@
 <li>支持原生array数组操作</li>
 </ol>
 <p>假设有如下的响应式对象时：</p>
-<pre><code class="js">data() &#123;
-    return &#123; a: &#123; b: &#123; c: &#123; d: &#123; e: 11 &#125; &#125; &#125; &#125; &#125;
-&#125;
-//  以上等价于以下代码
-const data = &#123; a: &#123; b: &#123; c: &#123; d: &#123; e: 11 &#125; &#125; &#125; &#125; &#125;
-// Vue2.x
-Vue.observe(data)
-// Vue3：
-reactive(data)
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">a</span>: &#123; <span class="attr">b</span>: &#123; <span class="attr">c</span>: &#123; <span class="attr">d</span>: &#123; <span class="attr">e</span>: <span class="number">11</span> &#125; &#125; &#125; &#125; &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//  以上等价于以下代码</span></span><br><span class="line"><span class="keyword">const</span> data = &#123; <span class="attr">a</span>: &#123; <span class="attr">b</span>: &#123; <span class="attr">c</span>: &#123; <span class="attr">d</span>: &#123; <span class="attr">e</span>: <span class="number">11</span> &#125; &#125; &#125; &#125; &#125;</span><br><span class="line"><span class="comment">// Vue2.x</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">observe</span>(data)</span><br><span class="line"><span class="comment">// Vue3：</span></span><br><span class="line"><span class="title function_">reactive</span>(data)</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">        <span class="title class_">Copied</span>!</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
 
-
-        Copied!
-</code></pre>
 <h2 id="Vue2-x-Object-defineProperty"><a href="#Vue2-x-Object-defineProperty" class="headerlink" title="#Vue2.x Object.defineProperty"></a><a target="_blank" rel="noopener" href="https://lq782655835.github.io/blogs/vue/vue3-code-4.why-proxy-faster.html#vue2-x-object-defineproperty">#</a>Vue2.x Object.defineProperty</h2><p>vue2初始化时，会递归的调用Object.defineProperty。当第一层对象属性定义后，再会递归调用下一层属性的Object.defineProperty（为了是依赖收集）。所以在初始化时Vue2.x需要更多时间，去同步递归定义Object.defineProperty操作。</p>
 <p>另外一个缺点也可以看出，初始化时把data的属性递归遍历收集了，当data在业务运行过程中，动态新增属性该怎么办？在Vue2.x中由于不是懒加载，所以需要用户主动告诉Vue框架，告诉哪些新增属性是要去依赖收集的，这就是<a target="_blank" rel="noopener" href="https://vuejs.org/v2/api/#Vue-set">Vue.set (opens new window)</a>API的来由。同理<a target="_blank" rel="noopener" href="https://vuejs.org/v2/api/#Vue-delete">Vue.delete (opens new window)</a>。</p>
 <p>以下是精简主流程的源码，Vue2.x中定义响应式对象API是：<code>Vue.observe(data)</code></p>
-<pre><code class="js">// https://github.com/vuejs/vue/blob/dev/src/core/observer/index.js
-export function observe (value: any, asRootData: ?boolean): Observer | void &#123;
-  let ob = new Observer(value)
-  return ob
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://github.com/vuejs/vue/blob/dev/src/core/observer/index.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">observe</span> (<span class="attr">value</span>: any, <span class="attr">asRootData</span>: ?boolean): <span class="title class_">Observer</span> | <span class="keyword">void</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> ob = <span class="keyword">new</span> <span class="title class_">Observer</span>(value)</span><br><span class="line">  <span class="keyword">return</span> ob</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">Observer</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span> (<span class="attr">value</span>: any) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">walk</span>(value)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  walk (<span class="attr">obj</span>: <span class="title class_">Object</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> keys = <span class="title class_">Object</span>.<span class="title function_">keys</span>(obj)</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; keys.<span class="property">length</span>; i++) &#123;</span><br><span class="line">      <span class="title function_">defineReactive</span>(obj, keys[i])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">defineReactive</span> (</span><br><span class="line">  <span class="attr">obj</span>: <span class="title class_">Object</span>,</span><br><span class="line">  <span class="attr">key</span>: string,</span><br><span class="line">  <span class="attr">val</span>: any,</span><br><span class="line">  customSetter?: ?<span class="title class_">Function</span>,</span><br><span class="line">  shallow?: boolean <span class="comment">// default: false</span></span><br><span class="line">) &#123;</span><br><span class="line">  <span class="keyword">const</span> dep = <span class="keyword">new</span> <span class="title class_">Dep</span>()</span><br><span class="line">  <span class="keyword">const</span> getter = property &amp;&amp; property.<span class="property">get</span></span><br><span class="line">  <span class="keyword">const</span> setter = property &amp;&amp; property.<span class="property">setter</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 同步实时：递归子层级</span></span><br><span class="line">  <span class="keyword">let</span> childOb = !shallow &amp;&amp; <span class="title function_">observe</span>(val)</span><br><span class="line">  </span><br><span class="line">  <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, key, &#123;</span><br><span class="line">    <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">get</span>: <span class="keyword">function</span> <span class="title function_">reactiveGetter</span> () &#123;</span><br><span class="line">      <span class="keyword">const</span> value = getter ? getter.<span class="title function_">call</span>(obj) : val</span><br><span class="line">      <span class="comment">// ... dep依赖收集</span></span><br><span class="line">      <span class="keyword">return</span> value</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">set</span>: <span class="keyword">function</span> <span class="title function_">reactiveSetter</span> (newVal) &#123;</span><br><span class="line">      setter.<span class="title function_">call</span>(obj, newVal)</span><br><span class="line">      <span class="comment">// ... dep触发更新</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">        <span class="title class_">Copied</span>!</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
 
-export class Observer &#123;
-  constructor (value: any) &#123;
-      this.walk(value)
-  &#125;
-
-  walk (obj: Object) &#123;
-    const keys = Object.keys(obj)
-    for (let i = 0; i &lt; keys.length; i++) &#123;
-      defineReactive(obj, keys[i])
-    &#125;
-  &#125;
-&#125;
-
-export function defineReactive (
-  obj: Object,
-  key: string,
-  val: any,
-  customSetter?: ?Function,
-  shallow?: boolean // default: false
-) &#123;
-  const dep = new Dep()
-  const getter = property &amp;&amp; property.get
-  const setter = property &amp;&amp; property.setter
-
-  // 同步实时：递归子层级
-  let childOb = !shallow &amp;&amp; observe(val)
-
-  Object.defineProperty(obj, key, &#123;
-    enumerable: true,
-    configurable: true,
-    get: function reactiveGetter () &#123;
-      const value = getter ? getter.call(obj) : val
-      // ... dep依赖收集
-      return value
-    &#125;,
-    set: function reactiveSetter (newVal) &#123;
-      setter.call(obj, newVal)
-      // ... dep触发更新
-    &#125;
-  &#125;)
-&#125;
-
-
-        Copied!
-</code></pre>
 <h2 id="Vue3-Proxy处理"><a href="#Vue3-Proxy处理" class="headerlink" title="#Vue3 Proxy处理"></a><a target="_blank" rel="noopener" href="https://lq782655835.github.io/blogs/vue/vue3-code-4.why-proxy-faster.html#vue3-proxy处理">#</a>Vue3 Proxy处理</h2><p>Vue3中定义响应式对象API是：<code>reactive(data)</code>。</p>
 <p>Proxy提供了对JS的元数据编程，即可以使用JS提供的语法特性，创建新的JS语法。</p>
 <p>可以看到Vue3中定义响应式非常简单，即原生的 new Proxy(target, handlers)。此时这里没有递归调用初始化，即可看成是懒加载去依赖收集（用到才去依赖收集）。</p>
 <p>再看看代理操作baseHandlers中get定义是如何的。</p>
-<pre><code class="js">// https://github.com/vuejs/vue-next/blob/master/packages/reactivity/src/reactive.ts
-export function reactive(target: object) &#123;
-  return createReactiveObject(target)
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://github.com/vuejs/vue-next/blob/master/packages/reactivity/src/reactive.ts</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">reactive</span>(<span class="params">target: object</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">createReactiveObject</span>(target)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createReactiveObject</span>(<span class="params">target: Target</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> observed = <span class="keyword">new</span> <span class="title class_">Proxy</span>(</span><br><span class="line">    target,</span><br><span class="line">    baseHandlers <span class="comment">// &#123;get, set, deleteProperty&#125;</span></span><br><span class="line">  )</span><br><span class="line">  <span class="keyword">return</span> observed</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">        <span class="title class_">Copied</span>!</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
 
-function createReactiveObject(target: Target) &#123;
-  const observed = new Proxy(
-    target,
-    baseHandlers // &#123;get, set, deleteProperty&#125;
-  )
-  return observed
-&#125;
-
-
-        Copied!
-</code></pre>
 <p>get定义，主要用来依赖收集，同时如果属性的value为Object对象时，自定进行Proxy代理。</p>
-<pre><code class="js">// https://github.com/vuejs/vue-next/blob/master/packages/reactivity/src/baseHandlers.ts
-const get = createGetter()
-
-function createGetter(isReadonly = false, shallow = false) &#123;
-  return function get(target: Target, key: string | symbol, receiver: object) &#123;
-    const res = Reflect.get(target, key, receiver)
-
-    // ...依赖收集
-
-    // 懒加载，当访问响应式对象时，再去构造下一个Proxy(res, &#123; getter &#125;)
-    if (isObject(res)) &#123;
-      return reactive(res)
-    &#125;
-
-    return res
-  &#125;
-&#125;
-
-
-        Copied!
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://github.com/vuejs/vue-next/blob/master/packages/reactivity/src/baseHandlers.ts</span></span><br><span class="line"><span class="keyword">const</span> get = <span class="title function_">createGetter</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createGetter</span>(<span class="params">isReadonly = <span class="literal">false</span>, shallow = <span class="literal">false</span></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> <span class="title function_">get</span>(<span class="params">target: Target, key: string | symbol, receiver: object</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> res = <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, key, receiver)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...依赖收集</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 懒加载，当访问响应式对象时，再去构造下一个Proxy(res, &#123; getter &#125;)</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">isObject</span>(res)) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">reactive</span>(res)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">        <span class="title class_">Copied</span>!</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>

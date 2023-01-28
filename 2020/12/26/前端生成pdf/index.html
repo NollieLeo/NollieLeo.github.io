@@ -57,6 +57,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -78,7 +80,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -94,7 +96,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -117,13 +119,8 @@
 <blockquote>
 <p>原理：通过插件js-pdf以及一个html2canvas插件结合，首先通过 html2canvas 可以在浏览器端直接对整个或部分页面进行截屏。脚本通过读取DOM并将不同的样式应用到这些元素上，从而将当页面渲染成一个Canvas图片。 之后利用js-pdf插件添加图片，将生成的canvas图片插入pdf中。 保存导出pdf </p>
 </blockquote>
-<h2 id="1-获取像素比"><a href="#1-获取像素比" class="headerlink" title="1. 获取像素比"></a>1. 获取像素比</h2><pre><code class="js">/* 根据window.devicePixelRatio获取像素比 */
-  function DPR() &#123;
-    if (window.devicePixelRatio &amp;&amp; window.devicePixelRatio &gt; 1) &#123;
-      return window.devicePixelRatio;
-    &#125;
-    return 1;
-  &#125;</code></pre>
+<h2 id="1-获取像素比"><a href="#1-获取像素比" class="headerlink" title="1. 获取像素比"></a>1. 获取像素比</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 根据window.devicePixelRatio获取像素比 */</span></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">DPR</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">devicePixelRatio</span> &amp;&amp; <span class="variable language_">window</span>.<span class="property">devicePixelRatio</span> &gt; <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="variable language_">window</span>.<span class="property">devicePixelRatio</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p> <strong>devicePixelRatio属性是干嘛的</strong><br>window的该属性能够获取到当前显示设备物理分辨率与css的像素分辨率之间的比率。简单说就是告诉浏览器应该使用多少个物理像素来会在单个css像素。 </p>
 </blockquote>
@@ -133,71 +130,35 @@
 <li>element 页面上的dom元素（这里要注意一些<a target="_blank" rel="noopener" href="https://html2canvas.hertzen.com/features/">css</a>样式是不支持的）</li>
 <li>options<a target="_blank" rel="noopener" href="https://html2canvas.hertzen.com/configuration">配置详情看这里</a>下面只是用到项目上需要的需求</li>
 </ol>
-<h3 id="1）获取element"><a href="#1）获取element" class="headerlink" title="1）获取element"></a>1）获取element</h3><pre><code class="jsx">  const pdfRef = React.useRef();
-  return (
-    &lt;div className=&#123;`$&#123;prefixCls&#125;`&#125; ref=&#123;pdfRef&#125;&gt;
-      ......
-    &lt;/div&gt;</code></pre>
-<h3 id="2-配置options"><a href="#2-配置options" class="headerlink" title="2) 配置options"></a>2) 配置options</h3><pre><code class="js">const getOpts = ()=&gt; &#123;
-    const target:any = pdfRef.current;
-    const width = target.offsetWidth; // 获取dom 宽度
-    const height = target.offsetHeight; // 获取dom 高度
-    const scale = DPR();
-    const tempCanvas = document.createElement(&#39;canvas&#39;);
-    tempCanvas.width = width * scale; // 定义canvas 宽度 * 缩放
-    tempCanvas.height = height * scale; // 定义canvas高度 *缩放
+<h3 id="1）获取element"><a href="#1）获取element" class="headerlink" title="1）获取element"></a>1）获取element</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pdfRef = <span class="title class_">React</span>.<span class="title function_">useRef</span>();</span><br><span class="line"><span class="keyword">return</span> (</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&#123;</span>`$&#123;<span class="attr">prefixCls</span>&#125;`&#125; <span class="attr">ref</span>=<span class="string">&#123;pdfRef&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    ......</span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 
-    const opts = &#123;
-      useCORS: true,
-      allowTaint: true,
-      canvas: tempCanvas, // 现有的画布元素用作绘图的基础
-      scale, // 提升画面质量，但是会增加文件大小
-      scrollX: 0,
-      scrollY: 0,
-    &#125;;
-    return opts;
-&#125;</code></pre>
+<h3 id="2-配置options"><a href="#2-配置options" class="headerlink" title="2) 配置options"></a>2) 配置options</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">getOpts</span> = (<span class="params"></span>)=&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="attr">target</span>:any = pdfRef.<span class="property">current</span>;</span><br><span class="line">	<span class="keyword">const</span> width = target.<span class="property">offsetWidth</span>; <span class="comment">// 获取dom 宽度</span></span><br><span class="line">    <span class="keyword">const</span> height = target.<span class="property">offsetHeight</span>; <span class="comment">// 获取dom 高度</span></span><br><span class="line">    <span class="keyword">const</span> scale = <span class="title function_">DPR</span>();</span><br><span class="line">    <span class="keyword">const</span> tempCanvas = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;canvas&#x27;</span>);</span><br><span class="line">    tempCanvas.<span class="property">width</span> = width * scale; <span class="comment">// 定义canvas 宽度 * 缩放</span></span><br><span class="line">    tempCanvas.<span class="property">height</span> = height * scale; <span class="comment">// 定义canvas高度 *缩放</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> opts = &#123;</span><br><span class="line">      <span class="attr">useCORS</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">allowTaint</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">canvas</span>: tempCanvas, <span class="comment">// 现有的画布元素用作绘图的基础</span></span><br><span class="line">      scale, <span class="comment">// 提升画面质量，但是会增加文件大小</span></span><br><span class="line">      <span class="attr">scrollX</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">scrollY</span>: <span class="number">0</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> opts;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p><strong>关于在配置项中设置跨域</strong><br> useCORS和allowTaint两种都可以设置跨域；<br> 为什么要设置跨域：我们图片一般都是放到静态资源服务器上的，资源服务器地址一般和项目地址是不一样的；虽然图片可以在页面上显示，但是用canvas绘图时却绘制不出来；</p>
 </blockquote>
-<h2 id="3-根据生成的canvas生成pdf"><a href="#3-根据生成的canvas生成pdf" class="headerlink" title="3. 根据生成的canvas生成pdf"></a>3. 根据生成的canvas生成pdf</h2><pre><code class="js">html2canvas(target, opts).then(async (canvas) =&gt; &#123;
-     (....处理逻辑)
-&#125;);</code></pre>
+<h2 id="3-根据生成的canvas生成pdf"><a href="#3-根据生成的canvas生成pdf" class="headerlink" title="3. 根据生成的canvas生成pdf"></a>3. 根据生成的canvas生成pdf</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">html2canvas</span>(target, opts).<span class="title function_">then</span>(<span class="keyword">async</span> (canvas) =&gt; &#123;</span><br><span class="line">     (....处理逻辑)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
 <h3 id="1）首先转换图片"><a href="#1）首先转换图片" class="headerlink" title="1）首先转换图片"></a>1）首先转换图片</h3><blockquote>
 <p> <strong><code>HTMLCanvasElement.toDataURL()</code></strong> 方法返回一个包含图片展示的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/data_URIs">data URI</a>  </p>
 </blockquote>
-<pre><code class="js">const contentWidth = canvas.width;
-const contentHeight = canvas.height;
-// 将canvas转为base64图片
-const pageData = canvas.toDataURL(&#39;image/jpeg&#39;, 1);</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> contentWidth = canvas.<span class="property">width</span>;</span><br><span class="line"><span class="keyword">const</span> contentHeight = canvas.<span class="property">height</span>;</span><br><span class="line"><span class="comment">// 将canvas转为base64图片</span></span><br><span class="line"><span class="keyword">const</span> pageData = canvas.<span class="title function_">toDataURL</span>(<span class="string">&#x27;image/jpeg&#x27;</span>, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
 <h3 id="2-设置pdf的大小以及生成的图片大小"><a href="#2-设置pdf的大小以及生成的图片大小" class="headerlink" title="2)  设置pdf的大小以及生成的图片大小"></a>2)  设置pdf的大小以及生成的图片大小</h3><p>因为pdf的像素单位是不一样的，所以需要进行转换;</p>
 <p>已知 1pt/1px = 0.75, pt = (px/scale)*0.75</p>
 <p>这里的<code>scale</code>就是上面的像素比</p>
-<pre><code class="js">// 设置pdf的尺寸，pdf要使用pt单位 已知 1pt/1px = 0.75   pt = (px/scale)* 0.75
-// 2为上面的scale 缩放了2倍
-const pdfX = (contentWidth + 10) / scale * 0.75;
-const pdfY = (contentHeight) / scale * 0.75; // 500为底部留白
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置pdf的尺寸，pdf要使用pt单位 已知 1pt/1px = 0.75   pt = (px/scale)* 0.75</span></span><br><span class="line"><span class="comment">// 2为上面的scale 缩放了2倍</span></span><br><span class="line"><span class="keyword">const</span> pdfX = (contentWidth + <span class="number">10</span>) / scale * <span class="number">0.75</span>;</span><br><span class="line"><span class="keyword">const</span> pdfY = (contentHeight) / scale * <span class="number">0.75</span>; <span class="comment">// 500为底部留白</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置内容图片的尺寸，img是pt单位</span></span><br><span class="line"><span class="keyword">const</span> imgX = pdfX;</span><br><span class="line"><span class="keyword">const</span> imgY = (contentHeight / scale * <span class="number">0.75</span>); <span class="comment">// 内容图片这里不需要留白的距离</span></span><br></pre></td></tr></table></figure>
 
-// 设置内容图片的尺寸，img是pt单位
-const imgX = pdfX;
-const imgY = (contentHeight / scale * 0.75); // 内容图片这里不需要留白的距离</code></pre>
-<h3 id="3）插入图片并生成pdf"><a href="#3）插入图片并生成pdf" class="headerlink" title="3）插入图片并生成pdf"></a>3）插入图片并生成pdf</h3><pre><code class="js">const pdf = new JsPDF(&#39;&#39;, &#39;pt&#39;, [pdfX, pdfY]); // 第一个参数方向：默认&#39;&#39;时为纵向
+<h3 id="3）插入图片并生成pdf"><a href="#3）插入图片并生成pdf" class="headerlink" title="3）插入图片并生成pdf"></a>3）插入图片并生成pdf</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pdf = <span class="keyword">new</span> <span class="title class_">JsPDF</span>(<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;pt&#x27;</span>, [pdfX, pdfY]); <span class="comment">// 第一个参数方向：默认&#x27;&#x27;时为纵向</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 将内容图片添加到pdf中，因为内容宽高和pdf宽高一样，就只需要一页，位置就是 0,0</span></span><br><span class="line"><span class="keyword">await</span> pdf.<span class="title function_">addImage</span>(pageData, <span class="string">&#x27;jpeg&#x27;</span>, <span class="number">0</span>, <span class="number">0</span>, imgX, imgY);</span><br><span class="line">pdf.<span class="title function_">save</span>(<span class="string">`API测试报告（#<span class="subst">$&#123;viewId&#125;</span>）.pdf`</span>);</span><br></pre></td></tr></table></figure>
 
-// 将内容图片添加到pdf中，因为内容宽高和pdf宽高一样，就只需要一页，位置就是 0,0
-await pdf.addImage(pageData, &#39;jpeg&#39;, 0, 0, imgX, imgY);
-pdf.save(`API测试报告（#$&#123;viewId&#125;）.pdf`);</code></pre>
+
+
 <h2 id="4-出现的问题以及解决方法"><a href="#4-出现的问题以及解决方法" class="headerlink" title="4. 出现的问题以及解决方法"></a>4. 出现的问题以及解决方法</h2><h3 id="1）导出的pdf中图片横向位置被截断"><a href="#1）导出的pdf中图片横向位置被截断" class="headerlink" title="1）导出的pdf中图片横向位置被截断"></a>1）导出的pdf中图片横向位置被截断</h3><p>如图：</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="5.jpg" alt="image-20201226181331163"></p>
 <p>这是因为需要生成的dom的宽度大于其高度，生成图片插入pdf的时候由于pdf默认设置的是纵向排列，图片会被撑大以适应pdf的高度；</p>
 <p>按照下方处理</p>
-<pre><code class="js">// 初始化jspdf 第一个参数方向：默认&#39;&#39;时为纵向，第二个参数设置pdf内容图片使用的长度单位为pt，第三个参数为PDF的大小，单位是pt
-  let direct;
-  if (contentHeight &lt; contentWidth) &#123;
-    direct = &#39;l&#39;;
-  &#125; else &#123;
-    direct = &#39;p&#39;;
-  &#125;
-  const pdf = new JsPDF(direct, &#39;pt&#39;, [pdfX, pdfY]);</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化jspdf 第一个参数方向：默认&#x27;&#x27;时为纵向，第二个参数设置pdf内容图片使用的长度单位为pt，第三个参数为PDF的大小，单位是pt</span></span><br><span class="line">  <span class="keyword">let</span> direct;</span><br><span class="line">  <span class="keyword">if</span> (contentHeight &lt; contentWidth) &#123;</span><br><span class="line">    direct = <span class="string">&#x27;l&#x27;</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    direct = <span class="string">&#x27;p&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> pdf = <span class="keyword">new</span> <span class="title class_">JsPDF</span>(direct, <span class="string">&#x27;pt&#x27;</span>, [pdfX, pdfY]);</span><br></pre></td></tr></table></figure>
+
 <p>当高度小于宽度的时候将pdf进行横纵向的调整，以适应插入图片的宽高</p>
 
 

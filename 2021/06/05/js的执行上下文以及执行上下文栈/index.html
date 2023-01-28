@@ -35,9 +35,9 @@
 <meta property="article:author" content="翁先森">
 <meta property="article:tag" content="js">
 <meta property="article:tag" content="面试题">
-<meta property="article:tag" content="作用域">
 <meta property="article:tag" content="执行上下文">
 <meta property="article:tag" content="执行上下文栈">
+<meta property="article:tag" content="作用域">
 <meta name="twitter:card" content="summary">
   
   
@@ -53,6 +53,8 @@
 
   
 
+  
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
   
 
   
@@ -75,7 +77,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -91,7 +93,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -125,94 +127,43 @@
 <p>在所有的情况下，执行js的代码，首先遇到的是全局代码这是毋庸置疑的</p>
 <p>这个时候相当于这个<strong>全局的执行上下文</strong>就是在<strong>栈底</strong>了</p>
 <p>首先我们先模拟一下，创建一个栈表示执行上下文栈</p>
-<pre><code class="js">ECStack = [];</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ECStack</span> = [];</span><br></pre></td></tr></table></figure>
+
 <p>按照上面所说的，执行上下文栈底永远都有一个全局的执行上下文，这里用globalContext表示</p>
-<pre><code class="js">ECStack=[
-    globalContext
-]</code></pre>
-<h2 id="按题分析"><a href="#按题分析" class="headerlink" title="按题分析"></a>按题分析</h2><h3 id="解释执行上下文栈"><a href="#解释执行上下文栈" class="headerlink" title="解释执行上下文栈"></a>解释执行上下文栈</h3><pre><code class="js">function fn3()&#123;
-    console.log(&#39;fn3&#39;)
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ECStack</span>=[</span><br><span class="line">    globalContext</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
-function fn2()&#123;
-    console.log(&#39;fn2&#39;);
-    fn3();
-&#125;
 
-function fn1()&#123;
-    console.log(&#39;fn1&#39;);
-    fn2();
-&#125;
 
-fun1();</code></pre>
+<h2 id="按题分析"><a href="#按题分析" class="headerlink" title="按题分析"></a>按题分析</h2><h3 id="解释执行上下文栈"><a href="#解释执行上下文栈" class="headerlink" title="解释执行上下文栈"></a>解释执行上下文栈</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn3</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;fn3&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn2</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;fn2&#x27;</span>);</span><br><span class="line">    <span class="title function_">fn3</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn1</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;fn1&#x27;</span>);</span><br><span class="line">    <span class="title function_">fn2</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fun1</span>();</span><br></pre></td></tr></table></figure>
+
 <p>当执行一个函数的时候，就会创建一个执行上下文，并且压入执行上下文栈，当函数执行完毕的时候，就会将函数的执行上下文从栈中弹出。</p>
 <p>因此以上的代码执行原理是这样的</p>
-<pre><code class="js">//fn1()
-ECStack.push(&lt;fn1&gt; function1Context);
-// 这时候发现fun1中调用了fn2
-ECStack.push(&lt;fn2&gt; function2Context);
-// fn2中又调用了fn3
-ECStack.puhs(&lt;fn3&gt; function3Context);
-// 此时的ECStack为
-// ECStack = [
-//     globalContext
-//  function1Context
-//    function2Context
-//  function3Context
-// ]
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//fn1()</span></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">push</span>(&lt;fn1&gt; function1Context);</span><br><span class="line"><span class="comment">// 这时候发现fun1中调用了fn2</span></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">push</span>(&lt;fn2&gt; function2Context);</span><br><span class="line"><span class="comment">// fn2中又调用了fn3</span></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">puhs</span>(&lt;fn3&gt; function3Context);</span><br><span class="line"><span class="comment">// 此时的ECStack为</span></span><br><span class="line"><span class="comment">// ECStack = [</span></span><br><span class="line"><span class="comment">// 	globalContext</span></span><br><span class="line"><span class="comment">//  function1Context</span></span><br><span class="line"><span class="comment">//	function2Context</span></span><br><span class="line"><span class="comment">//  function3Context</span></span><br><span class="line"><span class="comment">// ]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//fn3执行完了</span></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">pop</span>(); <span class="comment">// function3Context</span></span><br><span class="line"><span class="comment">// fn2执行完了</span></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">pop</span>(); <span class="comment">// function3Context</span></span><br><span class="line"><span class="comment">// fn1执行完了</span></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">pop</span>(); <span class="comment">// function1Context</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// javascript接着执行下面的代码，但是ECStack底层永远有个globalContext</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-//fn3执行完了
-ECStack.pop(); // function3Context
-// fn2执行完了
-ECStack.pop(); // function3Context
-// fn1执行完了
-ECStack.pop(); // function1Context
 
-// javascript接着执行下面的代码，但是ECStack底层永远有个globalContext
-</code></pre>
+
 <h3 id="根据上下文栈以及作用域链以及VO或者AO分析"><a href="#根据上下文栈以及作用域链以及VO或者AO分析" class="headerlink" title="根据上下文栈以及作用域链以及VO或者AO分析"></a>根据上下文栈以及作用域链以及VO或者AO分析</h3><p>例如</p>
-<pre><code class="js">var scope = &quot;global scope&quot;;
-function checkscope()&#123;
-    var scope = &quot;local scope&quot;;
-    function f()&#123;
-        return scope;
-    &#125;
-    return f();
-&#125;
-checkscope();</code></pre>
-<pre><code class="js">var scope = &quot;global scope&quot;;
-function checkscope()&#123;
-    var scope = &quot;local scope&quot;;
-    function f()&#123;
-        return scope;
-    &#125;
-    return f;
-&#125;
-checkscope()();</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = <span class="string">&quot;global scope&quot;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">checkscope</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> scope = <span class="string">&quot;local scope&quot;</span>;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">f</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> scope;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">f</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">checkscope</span>();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = <span class="string">&quot;global scope&quot;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">checkscope</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> scope = <span class="string">&quot;local scope&quot;</span>;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">f</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> scope;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">checkscope</span>()();</span><br></pre></td></tr></table></figure>
+
 <p>分别输出什么？</p>
 <p>对，都是local scope</p>
 <p>具体分析一下</p>
 <p>先分析第一道</p>
 <h4 id="分析第一道"><a href="#分析第一道" class="headerlink" title="分析第一道"></a>分析第一道</h4><p>执行过程如下</p>
 <p>1.无论如何先执行全局代码，创建全局执行上下文，全局上下文压入栈底</p>
-<pre><code class="js">ECStack = [
-    globalContext
-]</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ECStack</span> = [</span><br><span class="line">    globalContext</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
 <p>2.初始化全局上下文</p>
-<pre><code class="js">globalContext = &#123;
-    VO: [global],
-    Scope: [globalContext.VO],
-    this: globalContext.VO
-&#125;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">globalContext = &#123;</span><br><span class="line">    <span class="attr">VO</span>: [<span class="variable language_">global</span>],</span><br><span class="line">    <span class="title class_">Scope</span>: [globalContext.<span class="property">VO</span>],</span><br><span class="line">    <span class="attr">this</span>: globalContext.<span class="property">VO</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>3.在第2步初始化的过程发现全局的作用域中定义了一个 checkscrope函数，这个函数的作用域链上就会先推入一个全局上下文对象中的Scope</p>
-<pre><code class="js">checkscope.[[scope]]=[
-    globalContext.VO
-]</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">checkscope.[[scope]]=[</span><br><span class="line">    globalContext.<span class="property">VO</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
 <p>4.执行 checkscope 函数，创建 checkscope 函数执行上下文，checkscope 函数执行上下文被压入执行上下文栈 </p>
-<pre><code class="js">ECStack = [
-    globalContext,
-    checkscopeContext,
-]</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ECStack</span> = [</span><br><span class="line">    globalContext,</span><br><span class="line">    checkscopeContext,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
 <p>5.checkscope函数执行上下文的初始化</p>
 <ol>
 <li><p>复制函数的[[scope]]属性创建作用域链，放到checkscopeContext的[[scope]]中</p>
@@ -224,50 +175,27 @@ checkscope()();</code></pre>
 <li><p>将活动对象压入 checkscope 作用域链顶端，也就是checkscope.VO</p>
 </li>
 <li><p>函数f被声明，保存checkscope的作用域链到fn函数的[[scope]]当中</p>
-<pre><code class="js">checkscopeContext = &#123;
-AO:&#123;
-    arguments: &#123;
-        length: 0,
-    &#125;,
-    scope: undefined,
-    f: refrence to function f()&#123;&#125;
-&#125;,
-Scope: [checkscopeContext.AO, globalContext.VO],
-this: undefined
-&#125;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">checkscopeContext = &#123;</span><br><span class="line"> <span class="attr">AO</span>:&#123;</span><br><span class="line">     <span class="attr">arguments</span>: &#123;</span><br><span class="line">         <span class="attr">length</span>: <span class="number">0</span>,</span><br><span class="line">     &#125;,</span><br><span class="line">     <span class="attr">scope</span>: <span class="literal">undefined</span>,</span><br><span class="line">     <span class="attr">f</span>: refrence to <span class="keyword">function</span> <span class="title function_">f</span>(<span class="params"></span>)&#123;&#125;</span><br><span class="line"> &#125;,</span><br><span class="line"> <span class="title class_">Scope</span>: [checkscopeContext.<span class="property">AO</span>, globalContext.<span class="property">VO</span>],</span><br><span class="line"> <span class="attr">this</span>: <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
 <p>​    6. 执行函数f，创建f的执行上下文，f函数的执行上下文被压入栈中</p>
-<pre><code>ECStack= [ 
-    globalContext,
-    checkscopeContext,
-    fnContext
-]</code></pre><ol start="7">
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ECStack= [ </span><br><span class="line">	globalContext,</span><br><span class="line">	checkscopeContext,</span><br><span class="line">	fnContext</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
 <li><p>f函数执行上下文初始化，和第5步一样</p>
-<pre><code class="js">fnContext = &#123;
-    AO = &#123;
-        arguments:&#123;
-            length: 0
-        &#125;
-    &#125;,
-    Scope: [fnContext.AO, checkscopeContext.AO, globalContext.VO],
-    this: undefined
-&#125;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fnContext = &#123;</span><br><span class="line">    <span class="variable constant_">AO</span> = &#123;</span><br><span class="line">    	<span class="attr">arguments</span>:&#123;</span><br><span class="line">    		<span class="attr">length</span>: <span class="number">0</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">    <span class="title class_">Scope</span>: [fnContext.<span class="property">AO</span>, checkscopeContext.<span class="property">AO</span>, globalContext.<span class="property">VO</span>],</span><br><span class="line">    <span class="attr">this</span>: <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>f函数执行之后，沿着<strong>作用域链</strong>查找到scope的值，返回scope值</p>
 </li>
 <li><p>f函数执行完，栈中pop出上下文</p>
-<pre><code class="js">ECStack.pop()</code></pre>
-<pre><code class="js">ECStack = [
-       globalContext,
-    checkscopeContext, 
-]</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">pop</span>()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ECStack</span> = [</span><br><span class="line">   	globalContext,</span><br><span class="line">	checkscopeContext, </span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>checkscope函数执行完毕，checkscope执行上下文pop出栈</p>
-<pre><code class="js">ECStack.pop()
-ECStack = [
-       globalContext,
-]</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">pop</span>()</span><br><span class="line"><span class="title class_">ECStack</span> = [</span><br><span class="line">   	globalContext,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
 

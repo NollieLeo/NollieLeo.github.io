@@ -57,6 +57,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -78,7 +80,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -94,7 +96,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -127,41 +129,16 @@
 <ol start="2">
 <li>之后在useEffect当中去监听<strong>这些</strong>动态渲染的文本域</li>
 </ol>
-<pre><code class="js">useEffect(() =&gt; &#123;
-    const flow = document.getElementsByClassName(&#39;c7n-pOverflow&#39;);
-    if (flow &amp;&amp; flow.length &gt; 0) &#123;
-      for (let i = 0; i &lt; flow.length; i += 1) &#123;
-        new ResizeObserver((entries) =&gt; &#123;
-          entries.forEach((entry) =&gt; &#123;
-            const pDom = entry.target;
-            const scrollW = Math.ceil(pDom.scrollWidth);
-            const width = Math.ceil(pDom.clientWidth);
-            if (scrollW &gt; width) &#123;
-              optsDs.records[i].set(&#39;display&#39;, &#39;block&#39;);
-            &#125;
-          &#125;);
-        &#125;).observe(flow[i]);
-      &#125;
-    &#125;
-  &#125;);</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> flow = <span class="variable language_">document</span>.<span class="title function_">getElementsByClassName</span>(<span class="string">&#x27;c7n-pOverflow&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (flow &amp;&amp; flow.<span class="property">length</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; flow.<span class="property">length</span>; i += <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">ResizeObserver</span>(<span class="function">(<span class="params">entries</span>) =&gt;</span> &#123;</span><br><span class="line">          entries.<span class="title function_">forEach</span>(<span class="function">(<span class="params">entry</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> pDom = entry.<span class="property">target</span>;</span><br><span class="line">            <span class="keyword">const</span> scrollW = <span class="title class_">Math</span>.<span class="title function_">ceil</span>(pDom.<span class="property">scrollWidth</span>);</span><br><span class="line">            <span class="keyword">const</span> width = <span class="title class_">Math</span>.<span class="title function_">ceil</span>(pDom.<span class="property">clientWidth</span>);</span><br><span class="line">            <span class="keyword">if</span> (scrollW &gt; width) &#123;</span><br><span class="line">              optsDs.<span class="property">records</span>[i].<span class="title function_">set</span>(<span class="string">&#x27;display&#x27;</span>, <span class="string">&#x27;block&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;).<span class="title function_">observe</span>(flow[i]);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
 <p>注意，useEffect的最后一个参数不能写。</p>
 <p>通过循环这个请求到list数据的文本数组，去监听每一个文本域的变化，</p>
 <p>通过判定这个文本域的scrollWidth和width去动态地再次改变对应数据中的display属性，就能实现页面的二次渲染。</p>
-<pre><code class="jsx">if (scrollW &gt; width) &#123;
-  optsDs.records[i].set(&#39;display&#39;, &#39;block&#39;);
-&#125;</code></pre>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (scrollW &gt; width) &#123;</span><br><span class="line">  optsDs.<span class="property">records</span>[i].<span class="title function_">set</span>(<span class="string">&#x27;display&#x27;</span>, <span class="string">&#x27;block&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>这是文本域的样式</p>
-<pre><code class="css">p &#123;
-    font-size: .12rem;
-    font-weight: 400;
-    margin: .08rem 0 0 0;
-    color: rgba(58, 52, 95, 0.65);
-    line-height: .2rem;
-    max-width: 4.09rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-&#125;</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: .<span class="number">12rem</span>;</span><br><span class="line">    <span class="attribute">font-weight</span>: <span class="number">400</span>;</span><br><span class="line">    <span class="attribute">margin</span>: .<span class="number">08rem</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="built_in">rgba</span>(<span class="number">58</span>, <span class="number">52</span>, <span class="number">95</span>, <span class="number">0.65</span>);</span><br><span class="line">    <span class="attribute">line-height</span>: .<span class="number">2rem</span>;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">4.09rem</span>;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">    <span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line">    <span class="attribute">white-space</span>: nowrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>这里一定是要设置宽度的，无论是width还是max-width只要能实现它超出溢出就行。</p>
 
 

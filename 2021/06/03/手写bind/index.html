@@ -23,12 +23,12 @@
   <title>手写bind - 翁先森的博客</title>
 
   
-    <meta name="description" content="手写bind原理 bind() 方法会创建一个新函数。当这个新函数被调用时，bind() 的第一个参数将作为它运行时的 this，之后的一序列参数将会在传递的实参前传入作为它的参数。(来自于 MDN )  由此我们可以首先得出 bind 函数的两个特点：  返回一个函数 可以传入参数  实现首先先在Function的原型上挂载一个自定义bind函数 Function.prototype._bind">
+    <meta name="description" content="手写bind原理 bind() 方法会创建一个新函数。当这个新函数被调用时，bind() 的第一个参数将作为它运行时的 this，之后的一序列参数将会在传递的实参前传入作为它的参数。(来自于 MDN )  由此我们可以首先得出 bind 函数的两个特点：  返回一个函数 可以传入参数  实现首先先在Function的原型上挂载一个自定义bind函数 1Function.prototype._bin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="手写bind">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/index.html">
 <meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="手写bind原理 bind() 方法会创建一个新函数。当这个新函数被调用时，bind() 的第一个参数将作为它运行时的 this，之后的一序列参数将会在传递的实参前传入作为它的参数。(来自于 MDN )  由此我们可以首先得出 bind 函数的两个特点：  返回一个函数 可以传入参数  实现首先先在Function的原型上挂载一个自定义bind函数 Function.prototype._bind">
+<meta property="og:description" content="手写bind原理 bind() 方法会创建一个新函数。当这个新函数被调用时，bind() 的第一个参数将作为它运行时的 this，之后的一序列参数将会在传递的实参前传入作为它的参数。(来自于 MDN )  由此我们可以首先得出 bind 函数的两个特点：  返回一个函数 可以传入参数  实现首先先在Function的原型上挂载一个自定义bind函数 1Function.prototype._bin">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/image-20210604110748385.png">
 <meta property="og:image" content="https://github.com/NollieLeo/2021/06/03/%E6%89%8B%E5%86%99bind/image-20210604150133583.png">
@@ -58,6 +58,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+  
 
   
 
@@ -79,7 +81,7 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
 <nav class="menu dis-select"></nav>
 </header>
@@ -95,7 +97,7 @@
 
 
 </div>
-
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -117,167 +119,56 @@
 <li>可以传入参数</li>
 </ol>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>首先先在Function的原型上挂载一个自定义bind函数</p>
-<pre><code class="js">Function.prototype._bind = function()&#123;&#125;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">_bind</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="1-模拟实现返回一个函数"><a href="#1-模拟实现返回一个函数" class="headerlink" title="1. 模拟实现返回一个函数"></a>1. 模拟实现返回一个函数</h3><p>正常的使用bind的时候是返回一个函数，这里返回的函数的引用(this)依旧指向的是调用bind的函数，而不是新得返回函数, 而且 考虑到绑定函数可能是有返回值 ，所以这块还是要处理下</p>
-<pre><code class="js">const obj =&#123;
-    name: &#39;weng&#39;,
-&#125;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj =&#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;weng&#x27;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sayName</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">name</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> a = sayName.<span class="title function_">_bind</span>(obj);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">a</span>()); <span class="comment">//weng</span></span><br></pre></td></tr></table></figure>
 
-function sayName()&#123;
-    return this.name;
-&#125;
-
-const a = sayName._bind(obj);
-console.log(a()); //weng</code></pre>
 <p>所以这块的this指向需要做处理。</p>
-<pre><code class="js">Function.prototype._bind = function(context)&#123;
-    const that = this;
-    return function()&#123;
-      return that.call(context);
-    &#125;
-&#125;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">_bind</span> = <span class="keyword">function</span>(<span class="params">context</span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> that = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">      <span class="keyword">return</span> that.<span class="title function_">call</span>(context);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>这里用that存储this，之后返回一个闭包函数</p>
 <h3 id="2-传参数"><a href="#2-传参数" class="headerlink" title="2. 传参数"></a>2. 传参数</h3><p>在执行bind的时候，bind可以传参数，而且bind返回之后的函数也可以传参数</p>
-<pre><code class="js">const obj =&#123;
-    name: &#39;weng&#39;,
-&#125;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj =&#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;weng&#x27;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sayName</span>(<span class="params">age, address</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>: <span class="subst">$&#123;age&#125;</span> : <span class="subst">$&#123;address&#125;</span>`</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> a = sayName.<span class="title function_">bind</span>(obj, <span class="number">23</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">a</span>(<span class="string">&#x27;fujian&#x27;</span>)); <span class="comment">// weng : 23 : fujian</span></span><br></pre></td></tr></table></figure>
 
-function sayName(age, address)&#123;
-    return `$&#123;this.name&#125;: $&#123;age&#125; : $&#123;address&#125;`;
-&#125;
-
-const a = sayName.bind(obj, 23);
-
-console.log(a(&#39;fujian&#39;)); // weng : 23 : fujian</code></pre>
 <p>这里就相当于内部实现一个函数柯里化用来存储每次传进来的数据，但是没有柯里化那么牛逼，具体可以看实现函数柯里化那那篇文章</p>
 <p>具体实现如下</p>
-<pre><code class="js">Function.prototype._bind = function(context)&#123;
-    const that = this;
-    const outerArgs = Array.prototype.slice.call(arguments, 1); // 存下第一次传的参数， 截掉第一个
-    return function()&#123;
-      const innerArgs = Array.prototype.slice.call(arguments);
-      return that.call(context, ...outerArgs.concat(innerArgs)); // 把外层参数拼接到内层的参数类数组里头
-    &#125;
-&#125;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">_bind</span> = <span class="keyword">function</span>(<span class="params">context</span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> that = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="keyword">const</span> outerArgs = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>, <span class="number">1</span>); <span class="comment">// 存下第一次传的参数， 截掉第一个</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">      <span class="keyword">const</span> innerArgs = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>);</span><br><span class="line">      <span class="keyword">return</span> that.<span class="title function_">call</span>(context, ...outerArgs.<span class="title function_">concat</span>(innerArgs)); <span class="comment">// 把外层参数拼接到内层的参数类数组里头</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="3-构造函数的模拟实现"><a href="#3-构造函数的模拟实现" class="headerlink" title="3. 构造函数的模拟实现"></a>3. 构造函数的模拟实现</h3><blockquote>
 <p>一个绑定函数也能使用new操作符创建对象：这种行为就像把原函数当成构造器。提供的 this 值被忽略，同时调用时的参数被提供给模拟函数。</p>
 </blockquote>
 <p>也就是说当 bind 返回的函数作为构造函数的时候，bind 时指定的 this 值会失效，但传入的参数依然生效。举个例子：</p>
-<pre><code class="js">const obj = &#123;
-    preName: &quot;weng&quot;,
-&#125;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">preName</span>: <span class="string">&quot;weng&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Bar</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Bar</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">sayName</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">MyBar</span> = <span class="title class_">Bar</span>.<span class="title function_">bind</span>(obj, <span class="string">&quot;kaimin&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> o = <span class="keyword">new</span> <span class="title class_">MyBar</span>(<span class="number">12</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(o);</span><br></pre></td></tr></table></figure>
 
-function Bar(name, age) &#123;
-    this.name = name;
-    this.age = age;
-&#125;
-
-Bar.prototype.sayName = function()&#123;
-    console.log(this.name)
-&#125;
-
-const MyBar = Bar.bind(obj, &quot;kaimin&quot;);
-
-const o = new MyBar(12);
-
-console.log(o);</code></pre>
 <p>结果如下</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210604110748385.png" alt="image-20210604110748385"></p>
 <p>可以得知此时Bar函数的this指向的是o对象，就是相当于以new的形式调用了构造函数，这块的原理可以去 手写new那篇文章看看</p>
-<pre><code class="js">Function.prototype._bind = function (context) &#123;
-    const that = this;
-    const outerArgs = Array.prototype.slice.call(arguments, 1);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">_bind</span> = <span class="keyword">function</span> (<span class="params">context</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> that = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="keyword">const</span> outerArgs = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> returnFn = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> innerArgs = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>);</span><br><span class="line">      <span class="keyword">return</span> that.<span class="title function_">call</span>(</span><br><span class="line">        <span class="variable language_">this</span> <span class="keyword">instanceof</span> returnFn ? <span class="variable language_">this</span> : context,</span><br><span class="line">        ...outerArgs.<span class="title function_">concat</span>(innerArgs)</span><br><span class="line">      );</span><br><span class="line">    &#125;;</span><br><span class="line">    returnFn.<span class="property"><span class="keyword">prototype</span></span> = <span class="variable language_">this</span>.<span class="property"><span class="keyword">prototype</span></span>;</span><br><span class="line">    <span class="keyword">return</span> returnFn;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-    const returnFn = function () &#123;
-      const innerArgs = Array.prototype.slice.call(arguments);
-      return that.call(
-        this instanceof returnFn ? this : context,
-        ...outerArgs.concat(innerArgs)
-      );
-    &#125;;
-    returnFn.prototype = this.prototype;
-    return returnFn;
-&#125;;</code></pre>
 <p>以這行代碼来说</p>
-<pre><code class="js">  return that.call(
-    this instanceof returnFn ? this : context,
-    ...outerArgs.concat(innerArgs)
-  );</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> that.<span class="title function_">call</span>(</span><br><span class="line">  <span class="variable language_">this</span> <span class="keyword">instanceof</span> returnFn ? <span class="variable language_">this</span> : context,</span><br><span class="line">  ...outerArgs.<span class="title function_">concat</span>(innerArgs)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <p>当作为构造函数时，this 指向实例，此时<code>this instanceof returnFn</code>结果为 true，将绑定函数的 this 指向该实例，可以让实例获得来自绑定函数的值<br>以上面的是 demo 为例，如果改成 <code>this instanceof returnFn? null : context</code>，实例只是一个空对象，将 null 改成 this<br>当作为普通函数时，this 指向 window，此时结果为 false，将绑定函数的 this 指向 context</p>
 <h3 id="4-构造函数效果的优化实现"><a href="#4-构造函数效果的优化实现" class="headerlink" title="4. 构造函数效果的优化实现"></a>4. 构造函数效果的优化实现</h3><blockquote>
 <p>但是在这个写法中，我们直接将 fBound.prototype = this.prototype，我们直接修改 fBound.prototype 的时候，也会直接修改绑定函数的 prototype。这个时候，我们可以通过一个空函数来进行中转：</p>
 </blockquote>
-<pre><code class="js">Function.prototype._bind = function (context) &#123;
-    const that = this;
-    const outerArgs = Array.prototype.slice.call(arguments, 1);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">_bind</span> = <span class="keyword">function</span> (<span class="params">context</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> that = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="keyword">const</span> outerArgs = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> _Transit = <span class="keyword">function</span>(<span class="params"></span>)&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> returnFn = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> innerArgs = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>);</span><br><span class="line">      <span class="keyword">return</span> that.<span class="title function_">call</span>(</span><br><span class="line">        <span class="variable language_">this</span> <span class="keyword">instanceof</span> returnFn ? <span class="variable language_">this</span> : context,</span><br><span class="line">        ...outerArgs.<span class="title function_">concat</span>(innerArgs)</span><br><span class="line">      );</span><br><span class="line">    &#125;;</span><br><span class="line">    _Transit.<span class="property"><span class="keyword">prototype</span></span> = <span class="variable language_">this</span>.<span class="property"><span class="keyword">prototype</span></span>;</span><br><span class="line">    returnFn.<span class="property"><span class="keyword">prototype</span></span> = <span class="keyword">new</span> <span class="title function_">_Transit</span>();</span><br><span class="line">    <span class="keyword">return</span> returnFn;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-    const _Transit = function()&#123;&#125;;
-
-    const returnFn = function () &#123;
-      const innerArgs = Array.prototype.slice.call(arguments);
-      return that.call(
-        this instanceof returnFn ? this : context,
-        ...outerArgs.concat(innerArgs)
-      );
-    &#125;;
-    _Transit.prototype = this.prototype;
-    returnFn.prototype = new _Transit();
-    return returnFn;
-&#125;;</code></pre>
 <p>这里相当做了个私有变量（匿名构造函数类似的），外部是不能访问到的，所以如果后续做returnFn的原型修改，也只是改在了这个私有构造函数new出来的实例上的，这个实例的<code>[[Prototype]]</code>指向的是真正的this原型。</p>
-<h3 id="5-最后做一个日常判定this是否为函数"><a href="#5-最后做一个日常判定this是否为函数" class="headerlink" title="5. 最后做一个日常判定this是否为函数"></a>5. 最后做一个日常判定this是否为函数</h3><pre><code class="js">if (typeof this !== &quot;function&quot;) &#123;
-  throw new Error(&quot;Function.prototype.bind - what is trying to be bound is not callable&quot;);
-&#125;</code></pre>
-<h3 id="6-最终代码"><a href="#6-最终代码" class="headerlink" title="6.最终代码"></a>6.最终代码</h3><pre><code class="js">Function.prototype._bind = function (context) &#123;
-    if(typeof this !== &#39;function&#39;)&#123;
-      // MDN上的
-      throw new Error(&#39;Function.prototype.bind - what is trying to be bound is not callable&quot;&#39;)
-    &#125;
-    const that = this;
-    const outerArgs = Array.prototype.slice.call(arguments, 1);
+<h3 id="5-最后做一个日常判定this是否为函数"><a href="#5-最后做一个日常判定this是否为函数" class="headerlink" title="5. 最后做一个日常判定this是否为函数"></a>5. 最后做一个日常判定this是否为函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="variable language_">this</span> !== <span class="string">&quot;function&quot;</span>) &#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&quot;Function.prototype.bind - what is trying to be bound is not callable&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    const _Transit = function()&#123;&#125;;
+<h3 id="6-最终代码"><a href="#6-最终代码" class="headerlink" title="6.最终代码"></a>6.最终代码</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">_bind</span> = <span class="keyword">function</span> (<span class="params">context</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> <span class="variable language_">this</span> !== <span class="string">&#x27;function&#x27;</span>)&#123;</span><br><span class="line">      <span class="comment">// MDN上的</span></span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;Function.prototype.bind - what is trying to be bound is not callable&quot;&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> that = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="keyword">const</span> outerArgs = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> _Transit = <span class="keyword">function</span>(<span class="params"></span>)&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> returnFn = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> innerArgs = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>);</span><br><span class="line">      <span class="keyword">return</span> that.<span class="title function_">call</span>(</span><br><span class="line">        <span class="variable language_">this</span> <span class="keyword">instanceof</span> returnFn ? <span class="variable language_">this</span> : context,</span><br><span class="line">        ...outerArgs.<span class="title function_">concat</span>(innerArgs)</span><br><span class="line">      );</span><br><span class="line">    &#125;;</span><br><span class="line">    _Transit.<span class="property"><span class="keyword">prototype</span></span> = <span class="variable language_">this</span>.<span class="property"><span class="keyword">prototype</span></span>;</span><br><span class="line">    returnFn.<span class="property"><span class="keyword">prototype</span></span> = <span class="keyword">new</span> <span class="title function_">_Transit</span>();</span><br><span class="line">    <span class="keyword">return</span> returnFn;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-    const returnFn = function () &#123;
-      const innerArgs = Array.prototype.slice.call(arguments);
-      return that.call(
-        this instanceof returnFn ? this : context,
-        ...outerArgs.concat(innerArgs)
-      );
-    &#125;;
-    _Transit.prototype = this.prototype;
-    returnFn.prototype = new _Transit();
-    return returnFn;
-&#125;;</code></pre>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><pre><code class="js">let o = &#123;
-    address: &#39;fujian&#39;
-&#125;
 
-function Person(name, age)&#123;
-    this.name = name;
-    this.age = age;
-&#125;
 
-const NewPerson = Person._bind(o, &#39;weng&#39;);
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> o = &#123;</span><br><span class="line">    <span class="attr">address</span>: <span class="string">&#x27;fujian&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name, age</span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">NewPerson</span> = <span class="title class_">Person</span>.<span class="title function_">_bind</span>(o, <span class="string">&#x27;weng&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> per1 = <span class="keyword">new</span> <span class="title class_">NewPerson</span>(<span class="number">23</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(per1);</span><br></pre></td></tr></table></figure>
 
-const per1 = new NewPerson(23);
-
-console.log(per1);</code></pre>
 <p>最终打印的是这样的</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210604150133583.png" alt="image-20210604150133583"></p>
 <p>正常打印出来是这样的，差了一个标识的问题， 这个无所谓了</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210604150802371.png" alt="image-20210604150802371"></p>
-<pre><code class="js">let o = &#123;
-    address: &#39;fujian&#39;
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> o = &#123;</span><br><span class="line">    <span class="attr">address</span>: <span class="string">&#x27;fujian&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sayHi</span>(<span class="params">name, age</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span> = name, <span class="variable language_">this</span>.<span class="property">age</span> = age, <span class="variable language_">this</span>.<span class="property">address</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> hi = sayHi.<span class="title function_">bind</span>(o, <span class="string">&#x27;weng&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_">hi</span>(<span class="number">23</span>); <span class="comment">// weng 23 fujian</span></span><br></pre></td></tr></table></figure>
 
-function sayHi(name, age)&#123;
-    console.log(this.name = name, this.age = age, this.address);
-&#125;
-
-const hi = sayHi.bind(o, &#39;weng&#39;);
-
-hi(23); // weng 23 fujian</code></pre>
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
