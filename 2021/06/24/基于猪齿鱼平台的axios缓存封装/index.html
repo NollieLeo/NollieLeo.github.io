@@ -1,239 +1,132 @@
 <!DOCTYPE html>
-<html>
+<html lang='zh-CN'>
+
 <head>
-    
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
 
-    
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
 
-    
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>基于猪齿鱼平台的axios缓存封装 - 翁老师的博客</title>
 
-
-
-    <meta charset="utf-8">
-    
-    
-    
-    
-    <title>基于猪齿鱼平台的axios缓存封装 | 翁老师的博客</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#00abc0">
-    
-    
-    <meta name="keywords" content="js,axios">
-    <meta name="description" content="需求说明情况1：猪齿鱼平台是个相对复杂的多表格多表单数据处理平台，有些模块的数据量庞大，并且有些喜欢嵌入在tab页面当中，如果频繁的去访问这些页面就会频繁的请求，如果数据量庞大，每次访问都会去请求数据，等待时间就变长了，例如下面这个界面：">
+  
+    <meta name="description" content="需求说明情况1：猪齿鱼平台是个相对复杂的多表格多表单数据处理平台，有些模块的数据量庞大，并且有些喜欢嵌入在tab页面当中，如果频繁的去访问这些页面就会频繁的请求，如果数据量庞大，每次访问都会去请求数据，等待时间就变长了，例如下面这个界面：  这个页面相当于是历史的执行记录，因为数据量庞大，我们可以看到这个页面请求过后响应速度较慢，假设我在短时间内切到别的记录又切回来要看，那还得重新再去请求这100">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于猪齿鱼平台的axios缓存封装">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/index.html">
 <meta property="og:site_name" content="翁老师的博客">
-<meta property="og:description" content="需求说明情况1：猪齿鱼平台是个相对复杂的多表格多表单数据处理平台，有些模块的数据量庞大，并且有些喜欢嵌入在tab页面当中，如果频繁的去访问这些页面就会频繁的请求，如果数据量庞大，每次访问都会去请求数据，等待时间就变长了，例如下面这个界面：">
+<meta property="og:description" content="需求说明情况1：猪齿鱼平台是个相对复杂的多表格多表单数据处理平台，有些模块的数据量庞大，并且有些喜欢嵌入在tab页面当中，如果频繁的去访问这些页面就会频繁的请求，如果数据量庞大，每次访问都会去请求数据，等待时间就变长了，例如下面这个界面：  这个页面相当于是历史的执行记录，因为数据量庞大，我们可以看到这个页面请求过后响应速度较慢，假设我在短时间内切到别的记录又切回来要看，那还得重新再去请求这100">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/7.gif">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210624155243688.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/test.gif">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210625112724872.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210625113745262.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210625160815760.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210625173040963.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210625173136449.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210625211727335.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210625210606969.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210625210632981.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210626094315248.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210626094721131.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210626101834505.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210626111840112.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210626111852379.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210627124622241.png">
+<meta property="og:image" content="https://github.com/.com//7.gif">
+<meta property="og:image" content="https://github.com/.com//image-20210624155243688.png">
+<meta property="og:image" content="https://github.com/.com//test.gif">
+<meta property="og:image" content="https://github.com/.com//image-20210625112724872.png">
+<meta property="og:image" content="https://github.com/.com//image-20210625113745262.png">
+<meta property="og:image" content="https://github.com/.com//image-20210625160815760.png">
+<meta property="og:image" content="https://github.com/.com//image-20210625173040963.png">
+<meta property="og:image" content="https://github.com/.com//image-20210625173136449.png">
+<meta property="og:image" content="https://github.com/.com//image-20210625211727335.png">
+<meta property="og:image" content="https://github.com/.com//image-20210625210606969.png">
+<meta property="og:image" content="https://github.com/.com//image-20210625210632981.png">
+<meta property="og:image" content="https://github.com/.com//image-20210626094315248.png">
+<meta property="og:image" content="https://github.com/.com//image-20210626094721131.png">
+<meta property="og:image" content="https://github.com/.com//image-20210626101834505.png">
+<meta property="og:image" content="https://github.com/.com//image-20210626111840112.png">
+<meta property="og:image" content="https://github.com/.com//image-20210626111852379.png">
+<meta property="og:image" content="https://github.com/.com//image-20210627124622241.png">
 <meta property="article:published_time" content="2021-06-24T06:02:44.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.167Z">
 <meta property="article:author" content="Mr.Weng">
 <meta property="article:tag" content="js">
 <meta property="article:tag" content="axios">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/7.gif">
-    
-        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
+<meta name="twitter:image" content="https://github.com/.com//7.gif">
+  
+  
 
-    <!-- custom head -->
-    
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+  
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
 
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.png">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Mr.Weng</h5>
-          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                Categories
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/nollieleo" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">基于猪齿鱼平台的axios缓存封装</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">基于猪齿鱼平台的axios缓存封装</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2021-06-24T06:02:44.000Z" itemprop="datePublished" class="page-time">
-  2021-06-24
-</time>
+  
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
 
-            
-        </h5>
-    </div>
 
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
     
 
+  
 
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+
+<nav class="menu dis-select"></nav>
 </header>
 
 
-<div class="container body-wrap">
-    
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#需求说明"><span class="post-toc-number">1.</span> <span class="post-toc-text">需求说明</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#情况1："><span class="post-toc-number">1.1.</span> <span class="post-toc-text">情况1：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#情况2："><span class="post-toc-number">1.2.</span> <span class="post-toc-text">情况2：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#情况3："><span class="post-toc-number">1.3.</span> <span class="post-toc-text">情况3：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#需求分析"><span class="post-toc-number">2.</span> <span class="post-toc-text">需求分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#缓存分析"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">缓存分析</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多次相同请求处理"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">多次相同请求处理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#切换路由取消pending请求"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">切换路由取消pending请求</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现"><span class="post-toc-number">3.</span> <span class="post-toc-text">实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#axios的实例化"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">axios的实例化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#标识的实现"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">标识的实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#缓存实现"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">缓存实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#存储数据"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">存储数据</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#请求拦截器实现"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">请求拦截器实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#响应拦截器的实现"><span class="post-toc-number">3.3.3.</span> <span class="post-toc-text">响应拦截器的实现</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#切换路由取消pending请求-1"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">切换路由取消pending请求</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#拦截器的实现"><span class="post-toc-number">3.4.1.</span> <span class="post-toc-text">拦截器的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#路由守卫的实现"><span class="post-toc-number">3.4.2.</span> <span class="post-toc-text">路由守卫的实现</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#遗留问题"><span class="post-toc-number">4.</span> <span class="post-toc-text">遗留问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么不用CancelToken去取消重复请求而用缓存原理？"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">为什么不用CancelToken去取消重复请求而用缓存原理？</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#原因一："><span class="post-toc-number">4.1.1.</span> <span class="post-toc-text">原因一：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#原因二"><span class="post-toc-number">4.1.2.</span> <span class="post-toc-text">原因二</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#原因三"><span class="post-toc-number">4.1.3.</span> <span class="post-toc-text">原因三</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么拦截器的添加顺序会影响到缓存？"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">为什么拦截器的添加顺序会影响到缓存？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由取消cancelAllRequest方法中为什么要删除cache中的数据？"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">路由取消cancelAllRequest方法中为什么要删除cache中的数据？</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#难点解决"><span class="post-toc-number">5.</span> <span class="post-toc-text">难点解决</span></a></li></ol>
-        </nav>
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">基于猪齿鱼平台的axios缓存封装</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E8%AF%B4%E6%98%8E"><span class="toc-text">需求说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%83%85%E5%86%B51%EF%BC%9A"><span class="toc-text">情况1：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%83%85%E5%86%B52%EF%BC%9A"><span class="toc-text">情况2：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%83%85%E5%86%B53%EF%BC%9A"><span class="toc-text">情况3：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="toc-text">需求分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E5%88%86%E6%9E%90"><span class="toc-text">缓存分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E6%AC%A1%E7%9B%B8%E5%90%8C%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86"><span class="toc-text">多次相同请求处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E8%B7%AF%E7%94%B1%E5%8F%96%E6%B6%88pending%E8%AF%B7%E6%B1%82"><span class="toc-text">切换路由取消pending请求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#axios%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96"><span class="toc-text">axios的实例化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AF%86%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">标识的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E5%AE%9E%E7%8E%B0"><span class="toc-text">缓存实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE"><span class="toc-text">存储数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%8B%A6%E6%88%AA%E5%99%A8%E5%AE%9E%E7%8E%B0"><span class="toc-text">请求拦截器实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E6%8B%A6%E6%88%AA%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">响应拦截器的实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E8%B7%AF%E7%94%B1%E5%8F%96%E6%B6%88pending%E8%AF%B7%E6%B1%82-1"><span class="toc-text">切换路由取消pending请求</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">拦截器的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">路由守卫的实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%97%E7%95%99%E9%97%AE%E9%A2%98"><span class="toc-text">遗留问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8CancelToken%E5%8E%BB%E5%8F%96%E6%B6%88%E9%87%8D%E5%A4%8D%E8%AF%B7%E6%B1%82%E8%80%8C%E7%94%A8%E7%BC%93%E5%AD%98%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="toc-text">为什么不用CancelToken去取消重复请求而用缓存原理？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%9B%A0%E4%B8%80%EF%BC%9A"><span class="toc-text">原因一：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%9B%A0%E4%BA%8C"><span class="toc-text">原因二</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%9B%A0%E4%B8%89"><span class="toc-text">原因三</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8B%A6%E6%88%AA%E5%99%A8%E7%9A%84%E6%B7%BB%E5%8A%A0%E9%A1%BA%E5%BA%8F%E4%BC%9A%E5%BD%B1%E5%93%8D%E5%88%B0%E7%BC%93%E5%AD%98%EF%BC%9F"><span class="toc-text">为什么拦截器的添加顺序会影响到缓存？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%8F%96%E6%B6%88cancelAllRequest%E6%96%B9%E6%B3%95%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%88%A0%E9%99%A4cache%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%9F"><span class="toc-text">路由取消cancelAllRequest方法中为什么要删除cache中的数据？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%BE%E7%82%B9%E8%A7%A3%E5%86%B3"><span class="toc-text">难点解决</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
     </aside>
+    <div class='l_main'>
+      
+
+      
 
 
-<article id="post-基于猪齿鱼平台的axios缓存封装"
-  class="post-article article-type-post fade" itemprop="blogPost">
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/js/">js</a></div><div id="post-meta">发布于&nbsp;<time datetime="2021-06-24T06:02:44.000Z">2021-06-24</time></div></div>
 
-    <div class="post-card">
-        <h1 class="post-card-title">基于猪齿鱼平台的axios缓存封装</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2021-06-24 14:02:44" datetime="2021-06-24T06:02:44.000Z"  itemprop="datePublished">2021-06-24</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
-
-
-
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="需求说明"><a href="#需求说明" class="headerlink" title="需求说明"></a>需求说明</h2><h3 id="情况1："><a href="#情况1：" class="headerlink" title="情况1："></a>情况1：</h3><p>猪齿鱼平台是个相对复杂的多表格多表单数据处理平台，有些模块的数据量庞大，并且有些喜欢嵌入在tab页面当中，如果频繁的去访问这些页面就会频繁的请求，如果数据量庞大，每次访问都会去请求数据，等待时间就变长了，例如下面这个界面：</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="7.gif" alt="7" title>
-                </div>
-                <div class="image-caption">7</div>
-            </figure>
-
+<article class='md-text content post'>
+<h1 class="article-title"><span>基于猪齿鱼平台的axios缓存封装</span></h1>
+<h2 id="需求说明"><a href="#需求说明" class="headerlink" title="需求说明"></a>需求说明</h2><h3 id="情况1："><a href="#情况1：" class="headerlink" title="情况1："></a>情况1：</h3><p>猪齿鱼平台是个相对复杂的多表格多表单数据处理平台，有些模块的数据量庞大，并且有些喜欢嵌入在tab页面当中，如果频繁的去访问这些页面就会频繁的请求，如果数据量庞大，每次访问都会去请求数据，等待时间就变长了，例如下面这个界面：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//7.gif" alt="7"></p>
 <p>这个页面相当于是历史的执行记录，因为数据量庞大，我们可以看到这个页面请求过后响应速度较慢，假设我在短时间内切到别的记录又切回来要看，那还得重新再去请求这1000多条的数据，这个是没有必要的，用户等待时间就变长了</p>
 <h3 id="情况2："><a href="#情况2：" class="headerlink" title="情况2："></a>情况2：</h3><p>在一个页面渲染的过程中，或者在某些不正当的交互操作中，用户可能频繁的向后台去发送同一个请求（参数url等待都一样），或又是再渲染页面的一瞬间触发了多次同一请求，这样就很浪费带宽，多次请求前端还需要进行多次的响应处理，例如以下情况</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20210624155243688.png" alt="image-20210624155243688" title>
-                </div>
-                <div class="image-caption">image-20210624155243688</div>
-            </figure>
-
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210624155243688.png" alt="image-20210624155243688"></p>
 <p>在渲染页面时，同时发送了多个相同请求，大多时候是页面逻辑处理的有问题，多次向后台获取数据了，或者是我频繁的去点击一个没有做防抖的按钮或者没有节流的一些频繁请求</p>
 <h3 id="情况3："><a href="#情况3：" class="headerlink" title="情况3："></a>情况3：</h3><p>假设我错误的点击了一个菜单的同时又去切到了另外一个菜单，这时候虽然说已经切换到了想要的菜单路由下对应的界面，但是由于你错误的操作，虽然上个页面在切路由瞬间被销毁，但是初始化页面的一些获取后台数据的请求已经发出去了，你访问的当前页面是不需要这些请求的。例如：</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="test.gif" alt="test" title>
-                </div>
-                <div class="image-caption">test</div>
-            </figure>
-
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//test.gif" alt="test"></p>
 <p>这个例子就是，我先点击了代码管理的菜单，代码管理模块组件瞬间被加载出来，并且发送页面请求，这时候一瞬间切换到应用流水线的菜单，这时候我们会看见，代码管理模块的请求很多没必要的都发送出去了，这些请求并不是我们应用流水线模块需要用的到的。</p>
 <p>如果上个页面的请求很慢或者很多情况下，都会占用不必要的资源以及前端处理时间，占用资源。</p>
 <h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><ol>
@@ -245,33 +138,12 @@
 <p><strong>综上所述：</strong>我们要实现一个，能够实现取消，又能实现缓存的，重点是实现相同请求的状态数据的公用以及不影响dataset的使用的东西</p>
 <p>可以想到的是，我们肯定是要对axios的拦截器或者一些特殊属性例如axios的适配器，做处理。</p>
 <h3 id="缓存分析"><a href="#缓存分析" class="headerlink" title="缓存分析"></a>缓存分析</h3><p>参考猪齿鱼lookup的缓存原理，以下放出lookup缓存的部分源码；</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20210625112724872.png" alt="image-20210625112724872" title>
-                </div>
-                <div class="image-caption">image-20210625112724872</div>
-            </figure>
-
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20210625113745262.png" alt="image-20210625113745262" title>
-                </div>
-                <div class="image-caption">image-20210625113745262</div>
-            </figure>
-
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210625112724872.png" alt="image-20210625112724872"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210625113745262.png" alt="image-20210625113745262"></p>
 <p>lookup通过标识确定是否缓存，之后将适配器返回的期约直接给一个新得期约，之后存储这个新得期约，在下次发送相同请求时候直接将这个期约抛给它，从而实现请求的复用</p>
 <p><strong>首先我们要明白axios 的 adpater的原理：</strong></p>
 <p>源码是这样的</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20210625160815760.png" alt="image-20210625160815760" title>
-                </div>
-                <div class="image-caption">image-20210625160815760</div>
-            </figure>
-
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210625160815760.png" alt="image-20210625160815760"></p>
 <p>可以知道的是，axios 的 transformRequest以及他的各个请求拦截器是在return这个期约之前发生的，之后请求完成，adapter将请求后的结果传递给期约，之后期约落定，后面才触发响应数据转换（transformReponse）以及响应拦截器（这个顺序非常的重要）。</p>
 <p>既然要缓存，一定要把第一次落定的请求期约，想办法（包含了响应码数据等等等）存储起来，需要用到的时候才去使用，所以可以确定的是我们缓存需要对adapter进行操作，并且在响应和请求的拦截器中做标识等等操作</p>
 <h3 id="多次相同请求处理"><a href="#多次相同请求处理" class="headerlink" title="多次相同请求处理"></a>多次相同请求处理</h3><p>一开始我想用XMLHttpRequest的abort也就是axios的CancelToken（axios对abort进行了封装）去将页面正在渲染的时候一个个重复的请求cancel掉，但是这样有多种弊端，留到最后一点讲。</p>
@@ -279,31 +151,15 @@
 <p>一瞬间咱们就可以定一个默认时间戳，例如1000ms，这个时间戳表示的是，在这1000ms中进来的请求都共用一个adapter的期约，这样定义一个默认时间戳，就可以做到类似取消重复请求的作用（实际上是用了缓存）。</p>
 <p>当然既然加了缓存，又加了时间戳，灵活应用一下就可以实现一个，在对应时间内不单单是1000ms，我发的相同请求都共用，我们可以将时间戳直接定义在axios默认属性上或者axios创建出来的实例上面，定义默认值1000ms，之后如果想要缓存时间长一点的话直接在dataset的transport对应的方法配置项下面或者是axios实例上添加时间戳，用来覆盖默认的时间戳，因此可以实现长效缓存。</p>
 <p>例如：</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20210625173040963.png" alt="image-20210625173040963" title>
-                </div>
-                <div class="image-caption">image-20210625173040963</div>
-            </figure>
-
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20210625173136449.png" alt="image-20210625173136449" title>
-                </div>
-                <div class="image-caption">image-20210625173136449</div>
-            </figure>
-
-
-
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210625173040963.png" alt="image-20210625173040963"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210625173136449.png" alt="image-20210625173136449"></p>
 <h3 id="切换路由取消pending请求"><a href="#切换路由取消pending请求" class="headerlink" title="切换路由取消pending请求"></a>切换路由取消pending请求</h3><p>这里必须用到axios的CancelToken。上面说到CancelToken的其实就是对<code>XMLhttpRequest</code>的abort方法进行封装， <code>XMLHttpRequest</code> 对象是我们发起一个网络请求的根本，在它底下有怎么一个方法 <code>.abort()</code>，就是中断一个已被发出的请求。 </p>
-<p><img src="image-20210625211727335.png" alt="image-20210625211727335"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210625211727335.png" alt="image-20210625211727335"></p>
 <p> 简单理解就是通过 <code>new axios.CancelToken()</code>给每个请求带上一个专属的CancelToken，之后会接收到一个<code>cancel()</code> 取消方法，用于后续的取消动作。 </p>
 <p>所以，每次请求进来的时候去获取本次请求的CancelToken，之后将其存起来（这里假设用CancelQueue的一个Map数据类型（<code>Object.prototype.toString.call(CancelQueue) = &#39;[object Map]&#39;</code>）），之后假如这个请求落定了，就将这个存储CancelToken的请求标识删除。</p>
 <p>如果这时候切换路由了，我们就去CancelQueue中，遍历一遍所有的请求标识（因为这时候再队列里头的肯定是还在pending的请求），调用其存储的CancelToken调用cancel方法进行请求取消，并删除标识。</p>
 <pre><code class="js">// 1. 获取 axios CancelToken
-const { CancelToken } = axios;
+const &#123; CancelToken &#125; = axios;
 
 // 2. 获取当前请求的source，并且将其cancel方法存储起来
 const source = CancelToken.source();
@@ -312,33 +168,33 @@ const source = CancelToken.source();
 source.cancel();
 </code></pre>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="axios的实例化"><a href="#axios的实例化" class="headerlink" title="axios的实例化"></a>axios的实例化</h3><p>首先实例化axios(这是我们全局封装的axios)，在其中加入缓存标识，标识开启缓存（重复请求共用）</p>
-<pre><code class="js">const instance:AxiosStatic = axios.create({
+<pre><code class="js">const instance:AxiosStatic = axios.create(&#123;
   timeout: 30000,
   baseURL: API_HOST,
-});
+&#125;);
 
 // 这里配置一个缓存请求得标识
 instance.defaults.enabledCancelCache = true;</code></pre>
 <h3 id="标识的实现"><a href="#标识的实现" class="headerlink" title="标识的实现"></a>标识的实现</h3><p>对于每一个请求创建一个标识，标识唯一，标识是通过每一个请求的<code>url</code>, <code>params</code>, <code>method</code>, 以及 <code>data</code>建立标识，只要通过这4者建立的标识相同，那我们就能确定某些请求是相同的，</p>
 <p>如下<code>getMark</code>是建立主标识，<code>getDataMark</code>是对响应体内的data的标识</p>
 <p>params要进行参数拼接，现在主流基本在用<code>application/json</code>形式，Axios默认以这种形式工作，我们给后端接口传递参数也简单 ，但是有时候需要 Content-Type必须以application/x-www-form-urlencoded形式 ，以JSON格式后台是收不到的，而这时候就要进行序列化处理（先前是有前辈在这里做了处理的），但是这里不多说参数序列化</p>
-<pre><code class="js">import { get } from &#39;lodash&#39;;
-import { AxiosRequestConfig } from &#39;axios&#39;;
+<pre><code class="js">import &#123; get &#125; from &#39;lodash&#39;;
+import &#123; AxiosRequestConfig &#125; from &#39;axios&#39;;
 import JSONbig from &#39;json-bigint&#39;;
 import paramsSerializer from &#39;./paramsSerializer&#39;;
 
 // 单独处理data，response里面返回的config.data是个字符串对象
-function getDataMark(data:any) {
+function getDataMark(data:any) &#123;
   let stringifyData = data;
-  if (typeof stringifyData === &#39;string&#39;) {
+  if (typeof stringifyData === &#39;string&#39;) &#123;
     stringifyData = JSONbig.parse(stringifyData);
-  }
+  &#125;
   return stringifyData;
-}
+&#125;
 
 // 区别请求的唯一标识，这里用方法名+请求路径
 // 如果一个项目里有多个不同baseURL的请求 + 参数
-export default function getMark(config:AxiosRequestConfig) {
+export default function getMark(config:AxiosRequestConfig) &#123;
   const getKey = (key:string) =&gt; get(config, key);
 
   // params标识处理，将其处理成?key=value&amp;key2=value的形式
@@ -356,45 +212,17 @@ export default function getMark(config:AxiosRequestConfig) {
   getKey(&#39;params&#39;) &amp;&amp; requestMark.push(tempQueryString);
   getKey(&#39;data&#39;) &amp;&amp; requestMark.push(dataMark);
   return requestMark.join(&#39;&amp;&#39;);
-}</code></pre>
+&#125;</code></pre>
 <p>最终的拼接形式是 <code>method &amp; url &amp; params &amp; data</code>的形式，</p>
 <p>例如下面这个请求</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20210625210606969.png" alt="image-20210625210606969" title>
-                </div>
-                <div class="image-caption">image-20210625210606969</div>
-            </figure>
-
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20210625210632981.png" alt="image-20210625210632981" title>
-                </div>
-                <div class="image-caption">image-20210625210632981</div>
-            </figure>
-
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210625210606969.png" alt="image-20210625210606969"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210625210632981.png" alt="image-20210625210632981"></p>
 <p>最终拼接出来的是</p>
 <p><code>post&amp;http://172.23.16.92:30094/iam/choerodon/v1/permissions/menus/check-permissions&amp;tenantId=2&amp;[&quot;choerodon.code.organization.project.ps.create&quot;]</code></p>
 <h3 id="缓存实现"><a href="#缓存实现" class="headerlink" title="缓存实现"></a>缓存实现</h3><p>这里我们采用拦截器的形式去添加缓存逻辑，以下是添加了请求拦截器</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20210626094315248.png" alt="image-20210626094315248" title>
-                </div>
-                <div class="image-caption">image-20210626094315248</div>
-            </figure>
-
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210626094315248.png" alt="image-20210626094315248"></p>
 <p>下面标红的是添加响应拦截器</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20210626094721131.png" alt="image-20210626094721131" title>
-                </div>
-                <div class="image-caption">image-20210626094721131</div>
-            </figure>
-
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210626094721131.png" alt="image-20210626094721131"></p>
 <p>至于这里拦截器的顺序为什么是这样的，后续再说</p>
 <p>其次，我们要明白请求的几种情况</p>
 <p>假设现在有一个A请求进来了</p>
@@ -404,78 +232,71 @@ export default function getMark(config:AxiosRequestConfig) {
 <li>A请求落定<strong>失败了</strong>，在定义的时间戳范围内又进来了多个一模一样的请求（不缓存）</li>
 </ol>
 <p>最后明确需要存储在缓存实例中的数据格式</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20210626101834505.png" alt="image-20210626101834505" title>
-                </div>
-                <div class="image-caption">image-20210626101834505</div>
-            </figure>
-
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210626101834505.png" alt="image-20210626101834505"></p>
 <h4 id="存储数据"><a href="#存储数据" class="headerlink" title="存储数据"></a>存储数据</h4><p>我们需要以一种键值对的形式去存储，可选项就属Object或者Map。</p>
 <p>但是这里我们需要频繁的对缓存的数据进行查找，插入，赋值，删除操作等等。</p>
 <p>在小数量数据情况下Object的查找数据相对Map来的快，但是涉及更多插入的和删除的情况下都是Map性能来的优势，并且相同内存下Map能够存储更多的键值对，这里显然存在庞大数据的情况</p>
 <p>于是这里封装一个<code>AxiosCache</code>缓存类，然后写一些私有方法在里头</p>
-<pre><code class="js">class AxiosCache {
-  constructor() {
+<pre><code class="js">class AxiosCache &#123;
+  constructor() &#123;
     super();
     this.cacheData = new Map();
-  }
+  &#125;
 
-  get size() {
+  get size() &#123;
     return this.cacheData.size;
-  }
+  &#125;
 
-  get(key) {
+  get(key) &#123;
     return this.cacheData.get(key);
-  }
+  &#125;
 
-  delete(key) {
+  delete(key) &#123;
     this.cacheData.delete(key);
-  }
+  &#125;
 
-  has(key) {
+  has(key) &#123;
     return this.cacheData.has(key);
-  }
+  &#125;
 
-  set(key, value) {
+  set(key, value) &#123;
     this.cacheData.set(key, value);
-  }
+  &#125;
 
-  isEmpty() {
+  isEmpty() &#123;
     return !!this.cacheData.size;
-  }
+  &#125;
 
-  clear() {
+  clear() &#123;
     this.cacheData = new Map();
-  }
-}
+  &#125;
+&#125;
 const axiosCache = new AxiosCache();</code></pre>
 <h4 id="请求拦截器实现"><a href="#请求拦截器实现" class="headerlink" title="请求拦截器实现"></a>请求拦截器实现</h4><ol>
 <li><p>当A请求进来时候发现先前并没有在缓存队列中做过标识，也就是说标识里头不存在以上的那些字段，这时候我们就将A请求做个标识，并且设置它的isPending（正在请求）为<code>true</code></p>
-<pre><code class="ts">axiosCache.set(cancelCacheKey, {
+<pre><code class="ts">axiosCache.set(cancelCacheKey, &#123;
     isPending: true,
-});</code></pre>
+&#125;);</code></pre>
 </li>
 <li><p>当A请求已经做过标识的时候，这时候又进来一个A1请求</p>
 <p>倘若第一次做过标识的A请求已经不是在pending状态并且在这次请求的时间戳的范围内（在后面讲响应拦截器的时候会把A的isPending字段在某种条件下设置为<code>false</code>, 并且存储A请求响应后的数据），A1请求就直接去取A缓存的数据</p>
 <p>这里就涉及到上面所说的适配器的用处，直接在A1请求config的适配器返回一个成功落定的期约，通过标识拿到cache实例中缓存的数据数据。</p>
 <pre><code class="ts">// isPending为false的情况下，并且在时间戳的范围内
-if (expire &amp;&amp; expire &gt; Date.now()) {
-  tempConfig.adapter = () =&gt; {
-    const resolveData: AxiosResponse = {
+if (expire &amp;&amp; expire &gt; Date.now()) &#123;
+  tempConfig.adapter = () =&gt; &#123;
+    const resolveData: AxiosResponse = &#123;
       data,
       headers: tempConfig.headers,
-      config: {
+      config: &#123;
         ...tempConfig,
         useCache: true,
-      },
+      &#125;,
       // @ts-expect-error
       request: tempConfig,
-    };
+    &#125;;
     return Promise.resolve(resolveData);
-  };
-}</code></pre>
+  &#125;;
+&#125;</code></pre>
 <p>这里定义一个<code>useCache</code>的字段表明这个是再用缓存数据，后续的响应拦截器中会讲到</p>
 </li>
 </ol>
@@ -487,30 +308,24 @@ if (expire &amp;&amp; expire &gt; Date.now()) {
 <p>其实这个过程可以有多个A1进来</p>
 </blockquote>
 <p>如果不好理解的这里有流程图</p>
-<p>​    <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20210626111840112.png" alt="image-20210626111840112" title>
-                </div>
-                <div class="image-caption">image-20210626111840112</div>
-            </figure></p>
-<p><img src="image-20210626111852379.png" alt="image-20210626111852379"></p>
+<p>​    <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210626111840112.png" alt="image-20210626111840112"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210626111852379.png" alt="image-20210626111852379"></p>
 <pre><code class="ts"> // 说明找到了请求但是找到的这个缓存的请求还在pending，这时候订阅一个期约待会要用
- tempConfig.adapter = () =&gt; new Promise((resolve) =&gt; {
-     axiosEvent.once(cancelCacheKey, (res:unknown) =&gt; {
-       const resolveData: AxiosResponse = {
+ tempConfig.adapter = () =&gt; new Promise((resolve) =&gt; &#123;
+     axiosEvent.once(cancelCacheKey, (res:unknown) =&gt; &#123;
+       const resolveData: AxiosResponse = &#123;
          data: res,
          headers: tempConfig.headers,
-         config: {
+         config: &#123;
            ...tempConfig,
            useCache: true,
-         },
+         &#125;,
          // @ts-expect-error
          request: tempConfig,
-       };
+       &#125;;
        resolve(resolveData);
-     });
- });</code></pre>
+     &#125;);
+ &#125;);</code></pre>
 <p>这里A1请求订阅了以一个以cancelCacheKey为标识的信号。</p>
 </li>
 </ol>
@@ -519,83 +334,83 @@ if (expire &amp;&amp; expire &gt; Date.now()) {
 <li>如果A请求请求失败怎么办？那这时候我们不做处理，也不做标识，请求失败走的是请求失败的拦截器。</li>
 </ol>
 <p>以下是整个请求拦截器代码</p>
-<pre><code class="ts">import { AxiosRequestConfig, AxiosResponse } from &#39;axios&#39;;
-import { get } from &#39;lodash&#39;;
-import getMark, { transformDataToString } from &#39;../utils/getMark&#39;;
-import { axiosCache, axiosEvent } from &#39;../instances&#39;;
+<pre><code class="ts">import &#123; AxiosRequestConfig, AxiosResponse &#125; from &#39;axios&#39;;
+import &#123; get &#125; from &#39;lodash&#39;;
+import getMark, &#123; transformDataToString &#125; from &#39;../utils/getMark&#39;;
+import &#123; axiosCache, axiosEvent &#125; from &#39;../instances&#39;;
 
-export function handleCancelCacheRequest(config:AxiosRequestConfig) {
+export function handleCancelCacheRequest(config:AxiosRequestConfig) &#123;
   const tempConfig = config;
   // 是否开启了缓存（复用重复请求状态）
   const enabledCancelCache = get(tempConfig, &#39;enabledCancelCache&#39;);
-  if (enabledCancelCache) {
+  if (enabledCancelCache) &#123;
     // 获取标识
     const cancelCacheKey = getMark(tempConfig);
 
-    if (!axiosCache.has(cancelCacheKey)) {
-      axiosCache.set(cancelCacheKey, {});
-    }
+    if (!axiosCache.has(cancelCacheKey)) &#123;
+      axiosCache.set(cancelCacheKey, &#123;&#125;);
+    &#125;
 
-    const {
+    const &#123;
       data, // 缓存的数据
       isPending, // 请求是否是pending状态
       expire, // 时间戳
-    } = axiosCache.get(cancelCacheKey);
+    &#125; = axiosCache.get(cancelCacheKey);
 
-    if (isPending) {
+    if (isPending) &#123;
       // 说明找到了请求但是找到的这个缓存的请求还在pending，这时候订阅一个期约待会要用
-      tempConfig.adapter = () =&gt; new Promise((resolve) =&gt; {
-        axiosEvent.once(cancelCacheKey, (res:unknown) =&gt; {
-          const resolveData: AxiosResponse = {
+      tempConfig.adapter = () =&gt; new Promise((resolve) =&gt; &#123;
+        axiosEvent.once(cancelCacheKey, (res:unknown) =&gt; &#123;
+          const resolveData: AxiosResponse = &#123;
             data: res,
             headers: tempConfig.headers,
-            config: {
+            config: &#123;
               ...tempConfig,
               useCache: true,
-            },
+            &#125;,
             // @ts-expect-error
             request: tempConfig,
-          };
+          &#125;;
           resolve(resolveData);
-        });
-      });
-    } else if (expire &amp;&amp; expire &gt; Date.now()) {
-      tempConfig.adapter = () =&gt; {
-        const resolveData: AxiosResponse = {
+        &#125;);
+      &#125;);
+    &#125; else if (expire &amp;&amp; expire &gt; Date.now()) &#123;
+      tempConfig.adapter = () =&gt; &#123;
+        const resolveData: AxiosResponse = &#123;
           data: transformDataToString(data),
           headers: tempConfig.headers,
-          config: {
+          config: &#123;
             ...tempConfig,
             useCache: true,
-          },
+          &#125;,
           // @ts-expect-error
           request: tempConfig,
-        };
+        &#125;;
         return Promise.resolve(resolveData);
-      };
-    } else {
-      axiosCache.set(cancelCacheKey, {
+      &#125;;
+    &#125; else &#123;
+      axiosCache.set(cancelCacheKey, &#123;
         isPending: true,
-      });
-    }
-  }
+      &#125;);
+    &#125;
+  &#125;
 
   return tempConfig;
-}</code></pre>
+&#125;</code></pre>
 <h4 id="响应拦截器的实现"><a href="#响应拦截器的实现" class="headerlink" title="响应拦截器的实现"></a>响应拦截器的实现</h4><p>实现了请求拦截器之后，我们来处理在先前拦截器中的一些字段，以及请求失败的数据处理</p>
 <ol>
 <li><p>我们先对响应成功的的拦截器做处理</p>
 <p>首先是响应成功的情况下而且也成功拿到想要的数据，假设这个响应成功的请求是上述的A请求，这时候我们就应该记录下A请求最终的所有数据以及它需要的缓存时间，并且设置它isPending字段为false，最重要的是给订阅了cancelCacheKey的信息的请求们发布一个信号，告诉你们可以来拿我的（A请求）数据了！</p>
-<pre><code class="ts">if (enabledCancelCache &amp;&amp; !useCache) {
+<pre><code class="ts">if (enabledCancelCache &amp;&amp; !useCache) &#123;
     const finalData = resData;
-    axiosCache.set(config?.cancelCacheKey || cancelCacheKey, {
+    axiosCache.set(config?.cancelCacheKey || cancelCacheKey, &#123;
       data: finalData,
       isPending: false,
       expire: Date.now() + Number(enabledCancelCache) * 500,
-    });
+    &#125;);
     // 发布这个信号让所有订阅了A的都能接受到信息
     axiosEvent.emit(cancelCacheKey, finalData);
-}</code></pre>
+&#125;</code></pre>
 <p>这里为什么要多一次useCache的判断呢?</p>
 <p>因为我先前在请求拦截器中处理了adapter用来处理缓存, 走完了adapter才会走响应拦截器，也就是说，我在响应拦截器里头还得判断，这次到底是走的缓存，还是第一次需要做缓存呢？所以才知道为什么我在上面的adapter里头加入了useCache的字段。</p>
 <p>简单来说，就是A请求第一次进来，useCache就是false，就得去存值，接下来进来A1，那我就得走缓存，我不再去重新设置新值了。</p>
@@ -604,56 +419,56 @@ export function handleCancelCacheRequest(config:AxiosRequestConfig) {
 <ol start="2">
 <li><p>没有成功拿到想要的数据，也就是后端返回错误信息的情况</p>
 <p>这里我们的后台返回的错误标识是failed字段，就直接将isPending设置为false不做后续处理，并且将在订阅了的请求信号都删除(删除是因为A请求失败就已经报错，其他请求就不必再重复报错)</p>
-<pre><code class="js">axiosCache.set(cancelCacheKey, {
+<pre><code class="js">axiosCache.set(cancelCacheKey, &#123;
   isPending: false,
-});
+&#125;);
 axiosEvent.delete(cancelCacheKey);</code></pre>
 </li>
 <li><p>当然响应失败拦截器中也需要做上述这样的处理</p>
 </li>
 </ol>
 <p>这是最终的响应成功的拦截器代码👇</p>
-<pre><code class="js">import { AxiosResponse } from &#39;axios&#39;;
+<pre><code class="js">import &#123; AxiosResponse &#125; from &#39;axios&#39;;
 import get from &#39;lodash/get&#39;;
-import {
+import &#123;
   prompt,
-} from &#39;@/utils&#39;;
-import { axiosCache, axiosEvent } from &#39;../instances&#39;;
+&#125; from &#39;@/utils&#39;;
+import &#123; axiosCache, axiosEvent &#125; from &#39;../instances&#39;;
 import getMark from &#39;../utils/getMark&#39;;
 
-export default function handleResponseInterceptor(response:AxiosResponse) {
+export default function handleResponseInterceptor(response:AxiosResponse) &#123;
   const resData = get(response, &#39;data&#39;);
-  const config = get(response, &#39;config&#39;) || {};
+  const config = get(response, &#39;config&#39;) || &#123;&#125;;
 
-  const { enabledCancelCache, useCache } = config;
+  const &#123; enabledCancelCache, useCache &#125; = config;
   const cancelCacheKey = getMark(config);
-  if (get(response, &#39;status&#39;) === 204) {
+  if (get(response, &#39;status&#39;) === 204) &#123;
     return response;
-  }
-  if (resData?.failed === true) {
-    axiosCache.set(cancelCacheKey, {
-      ...(axiosCache.get(cancelCacheKey) || {}),
+  &#125;
+  if (resData?.failed === true) &#123;
+    axiosCache.set(cancelCacheKey, &#123;
+      ...(axiosCache.get(cancelCacheKey) || &#123;&#125;),
       isPending: false,
-    });
+    &#125;);
 
-    if (!response?.config?.noPrompt) {
+    if (!response?.config?.noPrompt) &#123;
       prompt(resData.message, &#39;error&#39;);
-    }
+    &#125;
     throw resData;
-  }
+  &#125;
 
-  if (enabledCancelCache &amp;&amp; !useCache) {
+  if (enabledCancelCache &amp;&amp; !useCache) &#123;
     const finalData = resData;
-    axiosCache.set(config?.cancelCacheKey || cancelCacheKey, {
+    axiosCache.set(config?.cancelCacheKey || cancelCacheKey, &#123;
       data: finalData,
       isPending: false,
       expire: Date.now() + Number(enabledCancelCache) * 500,
-    });
+    &#125;);
     axiosEvent.emit(cancelCacheKey, finalData);
-  }
+  &#125;
 
   return resData;
-}
+&#125;
 </code></pre>
 <h3 id="切换路由取消pending请求-1"><a href="#切换路由取消pending请求-1" class="headerlink" title="切换路由取消pending请求"></a>切换路由取消pending请求</h3><p>这里的思路就相对比较简单，按照上面需求分析所说的存储cancelToken给每一个请求，之后切换路由将pending的请求取消掉</p>
 <p>因此我们不单单需要实现存储cancelToken的一个队列，还有处理他的拦截器，我们还需要监听路由的变化，找到这个时机将所有pending请求cancel掉</p>
@@ -662,166 +477,157 @@ export default function handleResponseInterceptor(response:AxiosResponse) {
 instance.interceptors.request.use(routeCancelInterceptor); // 4</code></pre>
 <p>需要一个取消请求的队，列于是封装一个实例用来存储对应的请求，包含相对应的get，set，等方法，最重要的是</p>
 <p>cancelAllRequest方法，用于遍历所有存储的pending请求，之后在切路由的时候，遍历数据取消它。这里为什么还需要引入前面做了缓存的axiosCache，后头会细讲</p>
-<pre><code class="js">import { axiosCache } from &#39;./index&#39;;
+<pre><code class="js">import &#123; axiosCache &#125; from &#39;./index&#39;;
 
-class RouteAxios {
-  constructor() {
+class RouteAxios &#123;
+  constructor() &#123;
     this.pendingRequest = new Map();
-  }
+  &#125;
 
-  get size() {
+  get size() &#123;
     return this.pendingRequest.size;
-  }
+  &#125;
 
-  get(key) {
+  get(key) &#123;
     return this.pendingRequest.get(key);
-  }
+  &#125;
 
-  delete(key) {
+  delete(key) &#123;
     this.pendingRequest.delete(key);
-  }
+  &#125;
 
-  has(key) {
+  has(key) &#123;
     return this.pendingRequest.has(key);
-  }
+  &#125;
 
-  set(key, value) {
+  set(key, value) &#123;
     this.pendingRequest.set(key, value);
-  }
+  &#125;
 
-  isEmpty() {
+  isEmpty() &#123;
     return !!this.pendingRequest.size;
-  }
+  &#125;
 
-  clear() {
+  clear() &#123;
     this.pendingRequest = new Map();
-  }
+  &#125;
 
- cancelAllRequest() {
-    for (const [key, value] of this.pendingRequest) {
-      if (value?.cancel &amp;&amp; typeof value.cancel === &#39;function&#39;) {
+ cancelAllRequest() &#123;
+    for (const [key, value] of this.pendingRequest) &#123;
+      if (value?.cancel &amp;&amp; typeof value.cancel === &#39;function&#39;) &#123;
         value.cancel();
         axiosCache.delete(key); // 这里为什么这么做？后续在说
-      }
-    }
+      &#125;
+    &#125;
     this.clear();
-  }
-}
+  &#125;
+&#125;
 export const axiosRoutesCancel = new RouteAxios();
 
 </code></pre>
 <p>之后要我们就在请求拦截器里头处理cancelToken</p>
 <p>当然首先也是先检测是否有这个<code>enabledCancelRoute</code>字段表明是否要将这个请求加入切换路由取消请求的方案，之后调用source()，获取存储其<code>source.cancel</code>方法，重点是要在config上加入cancelToken，表明这个请求待会可能会被取消（简单来讲这个标识对应这个source.cancel的执行目标）</p>
-<pre><code class="js">import axios, { AxiosRequestConfig } from &#39;axios&#39;;
+<pre><code class="js">import axios, &#123; AxiosRequestConfig &#125; from &#39;axios&#39;;
 import get from &#39;lodash/get&#39;;
-import { axiosRoutesCancel } from &#39;../instances&#39;;
+import &#123; axiosRoutesCancel &#125; from &#39;../instances&#39;;
 import getMark from &#39;../utils/getMark&#39;;
 
-export function routeCancelInterceptor(config:AxiosRequestConfig) {
+export function routeCancelInterceptor(config:AxiosRequestConfig) &#123;
   const tempConfig = config;
   const enabledCancelRoute = get(tempConfig, &#39;enabledCancelRoute&#39;);
-  if (enabledCancelRoute) {
+  if (enabledCancelRoute) &#123;
     const cancelRouteKey = tempConfig?.cancelCacheKey || getMark(config);
-    const { CancelToken } = axios;
+    const &#123; CancelToken &#125; = axios;
     const source = CancelToken.source();
     tempConfig.cancelToken = source.token;
-    axiosRoutesCancel.set(cancelRouteKey, {
+    axiosRoutesCancel.set(cancelRouteKey, &#123;
       cancel: source.cancel,
       name: cancelRouteKey,
-    });
-  }
+    &#125;);
+  &#125;
 
   return tempConfig;
-}
+&#125;
 </code></pre>
 <p>如果请求在还没切换路由的时候就已经响应成功（这里不管是否拿到正确数据），就应该直接删除这个存储的key值</p>
 <p>这里就在响应成功的拦截器中处理，在失败拦截器中也是一样的处理方案</p>
-<pre><code class="js">if (enabledCancelRoute) {
+<pre><code class="js">if (enabledCancelRoute) &#123;
     axiosRoutesCancel.delete(cancelCacheKey);
-}</code></pre>
+&#125;</code></pre>
 <h4 id="路由守卫的实现"><a href="#路由守卫的实现" class="headerlink" title="路由守卫的实现"></a>路由守卫的实现</h4><p>实现了拦截器我们还需要简单的实现一个路由守卫，用来监听路由变化</p>
 <p>在全局，我们封装了一个叫做PermissionRoute的守卫，这守卫是对<code>react-router-dom</code>的route做了变向封装</p>
 <pre><code class="ts">const PermissionRoute: React.FC&lt;PermissionRouteProps&gt; =()=&gt; React.ReactDOM</code></pre>
 <p>给这个组件配置参数，叫做<code>enabledRouteChangedAjaxBlock</code>，默认为true, 标识这个路由下的请求，在切换的时候都会被取消，当然每个请求自己也会标识自己是否在切换路由的时候要被取消，后者的优先级大于前者</p>
 <p>之后我们写一个组件销毁的生命周期函数（路由切换的时候，这个路由对应的路由守卫组件就会被销毁，随之销毁（取消）的也就是当前页面正在pending的请求）</p>
-<pre><code class="js">useEffect(() =&gt; function () {
-    if (enabledRouteChangedAjaxBlock &amp;&amp; axiosRoutesCancel.size) {
+<pre><code class="js">useEffect(() =&gt; function () &#123;
+    if (enabledRouteChangedAjaxBlock &amp;&amp; axiosRoutesCancel.size) &#123;
       axiosRoutesCancel.cancelAllRequest();
-    }
-},
+    &#125;
+&#125;,
 [location]);</code></pre>
 <p>useEffect返回一个销毁的函数，并且cancel掉所有pending请求。</p>
 <p>这里具体可以看看PermissionRoute的封装代码，方便理解</p>
-<pre><code class="ts">import React, { useEffect, useMemo } from &#39;react&#39;;
-import { Route, RouteProps, useLocation } from &#39;react-router-dom&#39;;
-import { noaccess as NoAccess, Permission } from &#39;@/index&#39;;
+<pre><code class="ts">import React, &#123; useEffect, useMemo &#125; from &#39;react&#39;;
+import &#123; Route, RouteProps, useLocation &#125; from &#39;react-router-dom&#39;;
+import &#123; noaccess as NoAccess, Permission &#125; from &#39;@/index&#39;;
 import useQueryString from &#39;@/hooks/useQueryString&#39;;
 import Skeleton from &#39;@/containers/components/c7n/master/skeleton&#39;;
-import { axiosRoutesCancel } from &#39;@/containers/components/c7n/tools/axios/instances&#39;;
+import &#123; axiosRoutesCancel &#125; from &#39;@/containers/components/c7n/tools/axios/instances&#39;;
 
-interface PermissionRouteProps extends RouteProps {
+interface PermissionRouteProps extends RouteProps &#123;
   service: string[] | ((type: &#39;project&#39; | &#39;organization&#39; | &#39;site&#39;) =&gt; string[]),
   enabledRouteChangedAjaxBlock: boolean,
-}
+&#125;
 const isFunction = (something: unknown): something is Function =&gt; typeof something === &#39;function&#39;;
 
-const PermissionRoute: React.FC&lt;PermissionRouteProps&gt; = ({ enabledRouteChangedAjaxBlock = true, service, ...rest }) =&gt; {
-  const { type } = useQueryString();
+const PermissionRoute: React.FC&lt;PermissionRouteProps&gt; = (&#123; enabledRouteChangedAjaxBlock = true, service, ...rest &#125;) =&gt; &#123;
+  const &#123; type &#125; = useQueryString();
   const location = useLocation();
   const codes = useMemo(() =&gt; (isFunction(service) ? service(type) : (service || [])), [service, type]);
   const route = (
     &lt;Route
-      {...rest}
+      &#123;...rest&#125;
     /&gt;
   );
 
-  useEffect(() =&gt; function () {
-    if (enabledRouteChangedAjaxBlock &amp;&amp; axiosRoutesCancel.size) {
+  useEffect(() =&gt; function () &#123;
+    if (enabledRouteChangedAjaxBlock &amp;&amp; axiosRoutesCancel.size) &#123;
       axiosRoutesCancel.cancelAllRequest();
-    }
-  },
+    &#125;
+  &#125;,
   [location]);
 
   return (codes.length &gt; 0)
     ? (
       &lt;Permission
-        service={codes}
-        noAccessChildren={&lt;NoAccess /&gt;}
-        defaultChildren={&lt;Skeleton /&gt;}
+        service=&#123;codes&#125;
+        noAccessChildren=&#123;&lt;NoAccess /&gt;&#125;
+        defaultChildren=&#123;&lt;Skeleton /&gt;&#125;
       &gt;
-        {route}
+        &#123;route&#125;
       &lt;/Permission&gt;
     )
     : (
       &lt;Route
-        {...rest}
+        &#123;...rest&#125;
       /&gt;
     );
-};
+&#125;;
 export default PermissionRoute;
 
 
 // 用法
 &lt;PermissionRoute
-    service={[&#39;choerodon.code.project.project.overview.ps.default&#39;]}
+    service=&#123;[&#39;choerodon.code.project.project.overview.ps.default&#39;]&#125;
     exact
-    path={`${match.url}agile/project-overview`}
-    component={ProjectOverview}
+    path=&#123;`$&#123;match.url&#125;agile/project-overview`&#125;
+    component=&#123;ProjectOverview&#125;
 /&gt;</code></pre>
 <h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><h3 id="为什么不用CancelToken去取消重复请求而用缓存原理？"><a href="#为什么不用CancelToken去取消重复请求而用缓存原理？" class="headerlink" title="为什么不用CancelToken去取消重复请求而用缓存原理？"></a>为什么不用CancelToken去取消重复请求而用缓存原理？</h3><p>我们知道取消重复请求原理是abort，定义是：请求如果发出，则立刻终止请求；</p>
 <h4 id="原因一："><a href="#原因一：" class="headerlink" title="原因一："></a>原因一：</h4><p>这个终止就很微妙，终止之后的请求我们可以知道它走了响应失败的拦截器，也就是说我们前端还是把数据发给了后端，后端还会做数据处理比如（post，put等），只是终止了，但是后端并不知道我们终止了请求，只是前端终止没有在像响应成功拦截器一样对数据做处理</p>
 <p>但是实际上我们要的效果不是这样，我们要的是在那一瞬间的所有相同请求状态复用，重复的请求们是不可以在那一瞬间再发送给后端的，而是只有那个第一次的请求才发出去，如果使用CancelToken这样就没有意义了</p>
 <h4 id="原因二"><a href="#原因二" class="headerlink" title="原因二"></a>原因二</h4><p>abort会导致浏览器中的network中一堆报红，看上去比较不美观。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20210627124622241.png" alt="image-20210627124622241" title>
-                </div>
-                <div class="image-caption">image-20210627124622241</div>
-            </figure>
-
-
-
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210627124622241.png" alt="image-20210627124622241"></p>
 <h4 id="原因三"><a href="#原因三" class="headerlink" title="原因三"></a>原因三</h4><p>如果用了cancelToken我又想做缓存，还不如直接用缓存来，也可以达到效果</p>
 <h3 id="为什么拦截器的添加顺序会影响到缓存？"><a href="#为什么拦截器的添加顺序会影响到缓存？" class="headerlink" title="为什么拦截器的添加顺序会影响到缓存？"></a>为什么拦截器的添加顺序会影响到缓存？</h3><p>这也是在上面讲axios的adapter的时候提及过</p>
 <p>请求拦截器是的执行顺序是后添加的先执行</p>
@@ -844,296 +650,191 @@ instance.interceptors.request.use(addCustomHeader); // 1</code></pre>
 instance.interceptors.response.use(transformResponsePage); // 1
 instance.interceptors.response.use(handleResponseInterceptor, handelResponseError); // 2</code></pre>
 <h3 id="路由取消cancelAllRequest方法中为什么要删除cache中的数据？"><a href="#路由取消cancelAllRequest方法中为什么要删除cache中的数据？" class="headerlink" title="路由取消cancelAllRequest方法中为什么要删除cache中的数据？"></a>路由取消cancelAllRequest方法中为什么要删除cache中的数据？</h3><h2 id="难点解决"><a href="#难点解决" class="headerlink" title="难点解决"></a>难点解决</h2>
-        </div>
 
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2022-02-09T01:45:19.167Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
-</span><br>
-
-
-        
-        Happy Coding
-        
-    </div>
-    
-    <footer>
-        <a href="https://github.com/NollieLeo">
-            <img src="/img/avatar.png" alt="Mr.Weng">
-            Mr.Weng
-        </a>
-    </footer>
-</blockquote>
-
-        
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/axios/" rel="tag">axios</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/&title=《基于猪齿鱼平台的axios缓存封装》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/&title=《基于猪齿鱼平台的axios缓存封装》 — 翁老师的博客&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《基于猪齿鱼平台的axios缓存封装》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/&via=https://github.com/NollieLeo" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-
-
-        </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2021/07/01/js%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">js常见面试题</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2021/06/20/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%89%80%E6%9C%89%E8%B7%AF%E5%BE%84/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">算法之二叉树的所有路径</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
 
 </article>
 
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        谢谢大爷~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/false" alt="打赏二维码">
-        </div>
-        
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2021/07/01/js%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/">js常见面试题</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2021/06/20/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%89%80%E6%9C%89%E8%B7%AF%E5%BE%84/">算法之二叉树的所有路径</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
     </div>
-</div>
-
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>Mr.Weng &copy; 2020 - 2023</span>
-            <span>
-                
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/&title=《基于猪齿鱼平台的axios缓存封装》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/&title=《基于猪齿鱼平台的axios缓存封装》 — 翁老师的博客&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《基于猪齿鱼平台的axios缓存封装》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/&via=https://github.com/NollieLeo" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/" alt="微信分享二维码">
-</div>
-
-
-
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</template>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
-
-
-
-
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '我走了';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '我来了';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
         }
-    });
-})();
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
 </script>
 
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
 
 
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
 </body>
 </html>

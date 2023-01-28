@@ -1,26 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang='zh-CN'>
+
 <head>
-    
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
 
-    
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
 
-    
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>垂直居中的几种方式 - 翁老师的博客</title>
 
-
-
-    <meta charset="utf-8">
-    
-    
-    
-    
-    <title>垂直居中的几种方式 | 翁老师的博客</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#00abc0">
-    
-    
-    <meta name="keywords" content="css,垂直居中">
+  
     <meta name="description" content="在阅读此文章之前要搞明白行内元素和块级元素的区别，和其常用的标签 行内元素和块级元素 行内元素垂直居中1. 设置外层块元素的height，line-height为相同的值适用范围：作用于单行为文字，使文字垂直居中显示 原理：line-height与font-size的计算之差（在css中成为“行间距”）分为两半，分别加到一个文本行内容的顶部和底部。（可以包含这些内容的最小框就是行框）实现了单行文字">
 <meta property="og:type" content="article">
 <meta property="og:title" content="垂直居中的几种方式">
@@ -28,207 +30,110 @@
 <meta property="og:site_name" content="翁老师的博客">
 <meta property="og:description" content="在阅读此文章之前要搞明白行内元素和块级元素的区别，和其常用的标签 行内元素和块级元素 行内元素垂直居中1. 设置外层块元素的height，line-height为相同的值适用范围：作用于单行为文字，使文字垂直居中显示 原理：line-height与font-size的计算之差（在css中成为“行间距”）分为两半，分别加到一个文本行内容的顶部和底部。（可以包含这些内容的最小框就是行框）实现了单行文字">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326102804196.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326103805967.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326110227357.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326113535458.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326142740669.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326143016605.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326145604077.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326145824002.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326150745436.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326151049822.png">
+<meta property="og:image" content="https://github.com/.com//image-20200326102804196.png">
+<meta property="og:image" content="https://github.com/.com//image-20200326103805967.png">
+<meta property="og:image" content="https://github.com/.com//image-20200326110227357.png">
+<meta property="og:image" content="https://github.com/.com//image-20200326113535458.png">
+<meta property="og:image" content="https://github.com/.com//image-20200326142740669.png">
+<meta property="og:image" content="https://github.com/.com//image-20200326143016605.png">
+<meta property="og:image" content="https://github.com/.com//image-20200326145604077.png">
+<meta property="og:image" content="https://github.com/.com//image-20200326145824002.png">
+<meta property="og:image" content="https://github.com/.com//image-20200326150745436.png">
+<meta property="og:image" content="https://github.com/.com//image-20200326151049822.png">
 <meta property="article:published_time" content="2020-03-26T02:09:04.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.166Z">
 <meta property="article:author" content="Mr.Weng">
 <meta property="article:tag" content="css">
 <meta property="article:tag" content="垂直居中">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200326102804196.png">
-    
-        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
+<meta name="twitter:image" content="https://github.com/.com//image-20200326102804196.png">
+  
+  
 
-    <!-- custom head -->
-    
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+  
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
 
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.png">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Mr.Weng</h5>
-          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                Categories
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/nollieleo" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">垂直居中的几种方式</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">垂直居中的几种方式</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2020-03-26T02:09:04.000Z" itemprop="datePublished" class="page-time">
-  2020-03-26
-</time>
+  
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/css/">css</a></li></ul>
 
-            
-        </h5>
-    </div>
 
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
     
 
+  
 
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+
+<nav class="menu dis-select"></nav>
 </header>
 
 
-<div class="container body-wrap">
-    
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#行内元素垂直居中"><span class="post-toc-number">1.</span> <span class="post-toc-text">行内元素垂直居中</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-设置外层块元素的height，line-height为相同的值"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1. 设置外层块元素的height，line-height为相同的值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-vertical-align"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2.  vertical-align</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-外层父元素display-table-cell-vertical-align-middle"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3.  外层父元素display: table-cell;vertical-align: middle</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-display-flex-align-items-center"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">4. display:flex; align-items:center</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-绝对定位-负外边距；"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">5.  绝对定位+负外边距；</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#块级元素垂直居中"><span class="post-toc-number">2.</span> <span class="post-toc-text">块级元素垂直居中</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多行文本垂直居中"><span class="post-toc-number">3.</span> <span class="post-toc-text">多行文本垂直居中</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#未知元素的宽高情况"><span class="post-toc-number">4.</span> <span class="post-toc-text">未知元素的宽高情况</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-组合使用display：table-cell和vertical-align、text-align，"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">1. 组合使用display：table-cell和vertical-align、text-align，</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-display-flex的方法"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">2. display:flex的方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-display-inline-block-伪元素生成content内容"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">3.  display:inline-block +伪元素生成content内容</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-绝对定位-transform反向偏移。"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">4. 绝对定位+transform反向偏移。</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#知道元素宽高的情况下"><span class="post-toc-number">5.</span> <span class="post-toc-text">知道元素宽高的情况下</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-绝对定位相对定位（-绝对定位-margin：auto；position-absolute-left-0-top-0-right-0-bottom-0-margin-auto）"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">1.绝对定位相对定位（ 绝对定位+margin：auto；position:absolute; left:0; top:0; right:0; bottom:0; margin:auto）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-绝对定位-margin反向偏移"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">2. 绝对定位+margin反向偏移</span></a></li></ol></li></ol>
-        </nav>
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">垂直居中的几种方式</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%8C%E5%86%85%E5%85%83%E7%B4%A0%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD"><span class="toc-text">行内元素垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%AE%BE%E7%BD%AE%E5%A4%96%E5%B1%82%E5%9D%97%E5%85%83%E7%B4%A0%E7%9A%84height%EF%BC%8Cline-height%E4%B8%BA%E7%9B%B8%E5%90%8C%E7%9A%84%E5%80%BC"><span class="toc-text">1. 设置外层块元素的height，line-height为相同的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-vertical-align"><span class="toc-text">2.  vertical-align</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%A4%96%E5%B1%82%E7%88%B6%E5%85%83%E7%B4%A0display-table-cell-vertical-align-middle"><span class="toc-text">3.  外层父元素display: table-cell;vertical-align: middle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-display-flex-align-items-center"><span class="toc-text">4. display:flex; align-items:center</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D-%E8%B4%9F%E5%A4%96%E8%BE%B9%E8%B7%9D%EF%BC%9B"><span class="toc-text">5.  绝对定位+负外边距；</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%97%E7%BA%A7%E5%85%83%E7%B4%A0%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD"><span class="toc-text">块级元素垂直居中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E8%A1%8C%E6%96%87%E6%9C%AC%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD"><span class="toc-text">多行文本垂直居中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E7%9F%A5%E5%85%83%E7%B4%A0%E7%9A%84%E5%AE%BD%E9%AB%98%E6%83%85%E5%86%B5"><span class="toc-text">未知元素的宽高情况</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%BB%84%E5%90%88%E4%BD%BF%E7%94%A8display%EF%BC%9Atable-cell%E5%92%8Cvertical-align%E3%80%81text-align%EF%BC%8C"><span class="toc-text">1. 组合使用display：table-cell和vertical-align、text-align，</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-display-flex%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">2. display:flex的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-display-inline-block-%E4%BC%AA%E5%85%83%E7%B4%A0%E7%94%9F%E6%88%90content%E5%86%85%E5%AE%B9"><span class="toc-text">3.  display:inline-block +伪元素生成content内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D-transform%E5%8F%8D%E5%90%91%E5%81%8F%E7%A7%BB%E3%80%82"><span class="toc-text">4. 绝对定位+transform反向偏移。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E9%81%93%E5%85%83%E7%B4%A0%E5%AE%BD%E9%AB%98%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B"><span class="toc-text">知道元素宽高的情况下</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D%E7%9B%B8%E5%AF%B9%E5%AE%9A%E4%BD%8D%EF%BC%88-%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D-margin%EF%BC%9Aauto%EF%BC%9Bposition-absolute-left-0-top-0-right-0-bottom-0-margin-auto%EF%BC%89"><span class="toc-text">1.绝对定位相对定位（ 绝对定位+margin：auto；position:absolute; left:0; top:0; right:0; bottom:0; margin:auto）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D-margin%E5%8F%8D%E5%90%91%E5%81%8F%E7%A7%BB"><span class="toc-text">2. 绝对定位+margin反向偏移</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
     </aside>
+    <div class='l_main'>
+      
+
+      
 
 
-<article id="post-垂直居中的几种方式"
-  class="post-article article-type-post fade" itemprop="blogPost">
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/css/">css</a></div><div id="post-meta">发布于&nbsp;<time datetime="2020-03-26T02:09:04.000Z">2020-03-26</time></div></div>
 
-    <div class="post-card">
-        <h1 class="post-card-title">垂直居中的几种方式</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2020-03-26 10:09:04" datetime="2020-03-26T02:09:04.000Z"  itemprop="datePublished">2020-03-26</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/css/">css</a></li></ul>
-
-
-
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>在阅读此文章之前要搞明白行内元素和块级元素的区别，和其常用的标签</p>
-<p><a href="http://pxc3lp.coding-pages.com/2020/03/26/%E5%9D%97%E7%BA%A7%E5%85%83%E7%B4%A0%EF%BC%8C%E8%A1%8C%E5%86%85%E5%85%83%E7%B4%A0%E5%92%8C%E8%A1%8C%E5%86%85%E5%9D%97%E5%85%83%E7%B4%A0/" target="_blank" rel="noopener">行内元素和块级元素</a></p>
+<article class='md-text content post'>
+<h1 class="article-title"><span>垂直居中的几种方式</span></h1>
+<p>在阅读此文章之前要搞明白行内元素和块级元素的区别，和其常用的标签</p>
+<p><a target="_blank" rel="noopener" href="http://pxc3lp.coding-pages.com/2020/03/26/%E5%9D%97%E7%BA%A7%E5%85%83%E7%B4%A0%EF%BC%8C%E8%A1%8C%E5%86%85%E5%85%83%E7%B4%A0%E5%92%8C%E8%A1%8C%E5%86%85%E5%9D%97%E5%85%83%E7%B4%A0/">行内元素和块级元素</a></p>
 <h2 id="行内元素垂直居中"><a href="#行内元素垂直居中" class="headerlink" title="行内元素垂直居中"></a>行内元素垂直居中</h2><h3 id="1-设置外层块元素的height，line-height为相同的值"><a href="#1-设置外层块元素的height，line-height为相同的值" class="headerlink" title="1. 设置外层块元素的height，line-height为相同的值"></a>1. 设置外层块元素的<code>height</code>，<code>line-height</code>为相同的值</h3><p>适用范围：作用于单行为文字，使文字垂直居中显示</p>
 <p>原理：<code>line-height</code>与<code>font-size</code>的计算之差（在css中成为“行间距”）分为两半，分别加到一个文本行内容的顶部和底部。（可以包含这些内容的最小框就是行框）实现了单行文字居中，代码如下：</p>
 <pre><code class="html">&lt;body&gt;
   &lt;style&gt;
-    .container {
+    .container &#123;
       height: 50px;
       line-height: 50px;
       background:aqua;
-    }
+    &#125;
 
-    .content {
+    .content &#123;
       background-color: bisque;
-    }
+    &#125;
   &lt;/style&gt;
 
   &lt;div class=&quot;container&quot;&gt;
     &lt;span class=&quot;content&quot;&gt;垂直居中&lt;/span&gt;
   &lt;/div&gt;
 &lt;/body&gt;</code></pre>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20200326102804196.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-
-
-
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326102804196.png" alt></p>
 <h3 id="2-vertical-align"><a href="#2-vertical-align" class="headerlink" title="2.  vertical-align"></a>2.  vertical-align</h3><p>适用范围：外层块元素包含<strong>大于一个行内元素</strong>需要垂直居中时 （如图片和文字需要垂直居中显示时），可以通过对图片的标签或文字的标签（行内元素）设置<code>vertical-align</code>，可以达到效果； </p>
 <p>特点：</p>
 <ul>
@@ -240,17 +145,17 @@
 </blockquote>
 <pre><code class="html">&lt;body&gt;
   &lt;style&gt;
-    .container {
+    .container &#123;
       background: aqua;
-    }
+    &#125;
 
-    .content {
+    .content &#123;
       background-color: bisque;
-    }
+    &#125;
 
-    img {
+    img &#123;
       vertical-align: middle;
-    }
+    &#125;
   &lt;/style&gt;
 
   &lt;div class=&quot;container&quot;&gt;
@@ -258,14 +163,7 @@
     &lt;img src=&quot;https://www.baidu.com/img/bd_logo1.png&quot; /&gt;
   &lt;/div&gt;
 &lt;/body&gt;</code></pre>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20200326103805967.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326103805967.png" alt></p>
 <h3 id="3-外层父元素display-table-cell-vertical-align-middle"><a href="#3-外层父元素display-table-cell-vertical-align-middle" class="headerlink" title="3.  外层父元素display: table-cell;vertical-align: middle"></a>3.  外层父元素display: table-cell;vertical-align: middle</h3><p>特点：</p>
 <ul>
 <li>外层元素需要设置高度</li>
@@ -273,28 +171,19 @@
 <p>适用范围： 适用于在块元素内存在单个行内块元素，将它垂直居中； </p>
 <pre><code class="html">&lt;body&gt;
   &lt;style&gt;
-    .container {
+    .container &#123;
       background: aqua;
       height: 300px;
       display: table-cell;
       vertical-align: middle;
-    }
+    &#125;
   &lt;/style&gt;
 
   &lt;div class=&quot;container&quot;&gt;
     &lt;img src=&quot;https://www.baidu.com/img/bd_logo1.png&quot; /&gt;
   &lt;/div&gt;
 &lt;/body&gt;</code></pre>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20200326110227357.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-
-
-
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326110227357.png" alt></p>
 <h3 id="4-display-flex-align-items-center"><a href="#4-display-flex-align-items-center" class="headerlink" title="4. display:flex; align-items:center"></a>4. <code>display:flex;</code> <code>align-items:center</code></h3><p>特点：</p>
 <ul>
 <li>flex布局</li>
@@ -302,16 +191,16 @@
 </ul>
 <pre><code class="html">&lt;body&gt;
   &lt;style&gt;
-    .container {
+    .container &#123;
       height: 300px;
       background: aqua;
       display: flex;
       align-items: center;
-    }
+    &#125;
 
-    img {
+    img &#123;
       max-width: 300px;
-    }
+    &#125;
   &lt;/style&gt;
 
   &lt;div class=&quot;container&quot;&gt;
@@ -320,29 +209,22 @@
   &lt;/div&gt;
 
 &lt;/body&gt;</code></pre>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20200326113535458.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326113535458.png" alt></p>
 <h3 id="5-绝对定位-负外边距；"><a href="#5-绝对定位-负外边距；" class="headerlink" title="5.  绝对定位+负外边距；"></a>5.  绝对定位+负外边距；</h3><p>适用范围：包裹的行内元素必须是可以设置高度的，但是像文本元素是不建议使用这个的，因为文本的内容不确定，除非定高且设置超出溢出</p>
 <pre><code class="html">&lt;body&gt;
   &lt;style&gt;
-    .container {
+    .container &#123;
       height: 300px;
       background: aqua;
       position: relative;
-    }
+    &#125;
 
-    img {
+    img &#123;
       height: 200px;
       margin-top: -100px;
       top: 50%;
       position: absolute;
-    }
+    &#125;
   &lt;/style&gt;
 
   &lt;div class=&quot;container&quot;&gt;
@@ -354,17 +236,17 @@
 <h2 id="多行文本垂直居中"><a href="#多行文本垂直居中" class="headerlink" title="多行文本垂直居中"></a>多行文本垂直居中</h2><p>利用 <code>display：table；</code>和<code>display:table-cell;</code> 来实现多行文本的垂直居中</p>
 <pre><code class="html">&lt;body&gt;
   &lt;style&gt;
-    .container {
+    .container &#123;
       height: 300px;
       background: aqua;
       display: table;
-    }
+    &#125;
 
-    p {
+    p &#123;
       display: table-cell;
       vertical-align: middle;
       background-color: bisque;
-    }
+    &#125;
   &lt;/style&gt;
 
   &lt;div class=&quot;container&quot;&gt;
@@ -383,21 +265,21 @@
 <p>与其他一些display属性类似，table-cell同样会被其他一些css属性破坏，例如float，position：absolute，所以在使用display：table-cell时，尽量不要使用float或者position:absolute（可以考虑为之增加一个父div定义float等属性。）；设置了table-cell的元素对宽度和高度敏感（在父元素上设置table-row等属性，也会使其不感知height。），对margin值无反应，响应padding属性</p>
 <pre><code class="html">&lt;body&gt;
   &lt;style&gt;
-    .father {
+    .father &#123;
       width: 400px;
       height: 200px;
       border: 1px solid #000;
       display: table-cell;
       text-align: center;
       vertical-align: middle;
-    }
+    &#125;
 
-    .son {
+    .son &#123;
       width: 200px;
       height: 100px;
       background: red;
       display: inline-block;
-    }
+    &#125;
   &lt;/style&gt;
 
   &lt;div class=&quot;father&quot;&gt;
@@ -407,45 +289,38 @@
   &lt;/div&gt;
 
 &lt;/body&gt;</code></pre>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20200326142740669.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326142740669.png" alt></p>
 <p>对table-cell元素设置百分比（如100%）的宽高值是无效的，但是可以将元素设置display:table，再将父元素设置百分比跨高，子元素table-cell会自动撑满父元素。这就可以做相对于整个页面的水平垂直居中。嗯，看下面的代码 </p>
 <pre><code class="html">&lt;body&gt;
   &lt;style&gt;
     html,
-    body {
+    body &#123;
       height: 100%;
       margin: 0;
       padding: 0;
-    }
+    &#125;
 
-    #box {
+    #box &#123;
       display: table;
       width: 100%;
       height: 100%;
-    }
+    &#125;
 
-    .father {
+    .father &#123;
       width: 400px;
       height: 200px;
       border: 1px solid #000;
       display: table-cell;
       text-align: center;
       vertical-align: middle;
-    }
+    &#125;
 
-    .son {
+    .son &#123;
       width: 200px;
       height: 100px;
       background: red;
       display: inline-block;
-    }
+    &#125;
   &lt;/style&gt;
   &lt;div id=&quot;box&quot;&gt;
     &lt;div class=&quot;father&quot;&gt;
@@ -456,7 +331,7 @@
   &lt;/div&gt;
 
 &lt;/body&gt;</code></pre>
-<p><img src="image-20200326143016605.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326143016605.png" alt></p>
 <h3 id="2-display-flex的方法"><a href="#2-display-flex的方法" class="headerlink" title="2. display:flex的方法"></a>2. display:flex的方法</h3><p>参考上面所说的行内元素的方法</p>
 <ol>
 <li><p>设置container的display的类型为flex，激活为flexbox模式。</p>
@@ -470,27 +345,27 @@
 <p>(这里子元素加了宽高是为了方便看，去掉也无所谓)</p>
 <pre><code class="html">&lt;body&gt;
   &lt;style&gt;
-    .father {
+    .father &#123;
       width: 400px;
       height: 200px;
       border: 1px solid #000;
       text-align: center;
-    }
+    &#125;
 
-    .father:before {
+    .father:before &#123;
       content: &quot; &quot;;
       display: inline-block;
       vertical-align: middle;
       height: 100%;
-    }
+    &#125;
 
-    .son {
+    .son &#123;
       width: 200px;
       height: 100px;
       background: red;
       display: inline-block;
       vertical-align: middle;
-    }
+    &#125;
   &lt;/style&gt;
 
 
@@ -507,14 +382,14 @@
 <p>(这里子元素加了宽高是为了方便看，去掉也无所谓)</p>
 <pre><code class="html">&lt;body&gt;
   &lt;style&gt;
-    .father {
+    .father &#123;
       width: 400px;
       height: 200px;
       border: 1px solid #000;
       position: relative;
-    }
+    &#125;
 
-    .son {
+    .son &#123;
       width: 200px;
       height: 100px;
       background: red;
@@ -522,7 +397,7 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-    }
+    &#125;
   &lt;/style&gt;
 
   &lt;div class=&quot;father&quot;&gt;
@@ -532,27 +407,18 @@
   &lt;/div&gt;
 
 &lt;/body&gt;</code></pre>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20200326145604077.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-
-
-
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326145604077.png" alt></p>
 <h2 id="知道元素宽高的情况下"><a href="#知道元素宽高的情况下" class="headerlink" title="知道元素宽高的情况下"></a>知道元素宽高的情况下</h2><h3 id="1-绝对定位相对定位（-绝对定位-margin：auto；position-absolute-left-0-top-0-right-0-bottom-0-margin-auto）"><a href="#1-绝对定位相对定位（-绝对定位-margin：auto；position-absolute-left-0-top-0-right-0-bottom-0-margin-auto）" class="headerlink" title="1.绝对定位相对定位（ 绝对定位+margin：auto；position:absolute; left:0; top:0; right:0; bottom:0; margin:auto）"></a>1.绝对定位相对定位（ 绝对定位+margin：auto；position:absolute; left:0; top:0; right:0; bottom:0; margin:auto）</h3><p>一个条件都不能少</p>
 <pre><code class="html">&lt;body&gt;
   &lt;style&gt;
-    .father {
+    .father &#123;
       width: 400px;
       height: 200px;
       position: relative;
       border: 1px solid #000;
-    }
+    &#125;
 
-    .son {
+    .son &#123;
       width: 200px;
       height: 100px;
       background: red;
@@ -562,7 +428,7 @@
       bottom: 0;
       right: 0;
       margin: auto;
-    }
+    &#125;
   &lt;/style&gt;
 
   &lt;div class=&quot;father&quot;&gt;
@@ -571,49 +437,35 @@
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/body&gt;</code></pre>
-<p><img src="image-20200326145824002.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326145824002.png" alt></p>
 <p>原理：</p>
 <p>当一个绝对定位元素，其对立定位方向属性同时有具体定位数值的时候，流体特性就发生了。</p>
 <p>具有流体特性绝对定位元素的margin:auto的填充规则和普通流体元素一模一样：</p>
 <p>如果一侧定值，一侧auto，auto为剩余空间大小；<br>如果两侧均是auto, 则平分剩余空间；<br>例如，下面的CSS代码：</p>
-<pre><code class="css">.father {
+<pre><code class="css">.father &#123;
     width: 300px; height:150px;
     position: relative;
-}
-.son { 
+&#125;
+.son &#123; 
     position: absolute; 
     top: 0; right: 0; bottom: 0; left: 0;
-}</code></pre>
+&#125;</code></pre>
 <p>如图所示流体元素会布满整个父元素，此时<code>.son</code>这个元素的尺寸表现为“格式化宽度和格式化高度”，和的“正常流宽度”一样，同属于外部尺寸，也就是尺寸自动填充父级元素的可用尺寸的</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20200326150745436.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326150745436.png" alt></p>
 <p>然后，此时我们给.son设置尺寸，例如</p>
-<pre><code class="css">.son { 
+<pre><code class="css">.son &#123; 
     position: absolute; 
     top: 0; right: 0; bottom: 0; left: 0;
     width: 200px; height: 100px;
-}</code></pre>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="image-20200326151049822.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-
+&#125;</code></pre>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326151049822.png" alt></p>
 <p>此时宽高被限制，原本应该填充的空间就被多余了出来，这多余的空间就是<code>margin:auto</code>计算的空间，因此，如果这时候，我们再设置一个<code>margin:auto</code>，那么：</p>
-<pre><code class="css">.son { 
+<pre><code class="css">.son &#123; 
     position: absolute; 
     top: 0; right: 0; bottom: 0; left: 0;
     width: 200px; height: 100px;
     margin: auto;
-}</code></pre>
+&#125;</code></pre>
 <p> 我们这个<code>.son</code>元素就水平和垂直方向同时居中了 </p>
 <h3 id="2-绝对定位-margin反向偏移"><a href="#2-绝对定位-margin反向偏移" class="headerlink" title="2. 绝对定位+margin反向偏移"></a>2. 绝对定位+margin反向偏移</h3><p>在上面的行内块元素种有提及到</p>
 <pre><code class="css"> position：absolute; 
@@ -624,296 +476,191 @@
 <p>margin值的设置不能使用百分比，因为margin是基于父元素的宽度来计算百分比的</p>
 <p>这个原理和上面的方案4很相似，由于top、left偏移了父对象的50%宽度高度，所以需要利用margin反向偏移居中块的50%宽高</p>
 
-        </div>
 
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2022-02-09T01:45:19.166Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
-</span><br>
-
-
-        
-        Happy Coding
-        
-    </div>
-    
-    <footer>
-        <a href="https://github.com/NollieLeo">
-            <img src="/img/avatar.png" alt="Mr.Weng">
-            Mr.Weng
-        </a>
-    </footer>
-</blockquote>
-
-        
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/" rel="tag">垂直居中</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/&title=《垂直居中的几种方式》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/&title=《垂直居中的几种方式》 — 翁老师的博客&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《垂直居中的几种方式》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/&via=https://github.com/NollieLeo" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-
-
-        </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2020/03/30/%E5%AE%9E%E7%8E%B0%E8%BE%B9%E6%A1%86loading%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">实现边框loading动画效果</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2020/03/26/%E5%9D%97%E7%BA%A7%E5%85%83%E7%B4%A0%EF%BC%8C%E8%A1%8C%E5%86%85%E5%85%83%E7%B4%A0%E5%92%8C%E8%A1%8C%E5%86%85%E5%9D%97%E5%85%83%E7%B4%A0/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">块级元素，行内元素和行内块元素</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
 
 </article>
 
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        谢谢大爷~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/false" alt="打赏二维码">
-        </div>
-        
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2020/03/30/%E5%AE%9E%E7%8E%B0%E8%BE%B9%E6%A1%86loading%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/">实现边框loading动画效果</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2020/03/26/%E5%9D%97%E7%BA%A7%E5%85%83%E7%B4%A0%EF%BC%8C%E8%A1%8C%E5%86%85%E5%85%83%E7%B4%A0%E5%92%8C%E8%A1%8C%E5%86%85%E5%9D%97%E5%85%83%E7%B4%A0/">块级元素，行内元素和行内块元素</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
     </div>
-</div>
-
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>Mr.Weng &copy; 2020 - 2023</span>
-            <span>
-                
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/&title=《垂直居中的几种方式》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/&title=《垂直居中的几种方式》 — 翁老师的博客&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《垂直居中的几种方式》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/&via=https://github.com/NollieLeo" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/" alt="微信分享二维码">
-</div>
-
-
-
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</template>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
-
-
-
-
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '我走了';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '我来了';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
         }
-    });
-})();
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
 </script>
 
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
 
 
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
 </body>
 </html>

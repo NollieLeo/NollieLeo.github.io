@@ -1,26 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang='zh-CN'>
+
 <head>
-    
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
 
-    
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
 
-    
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>typeScript总结 - 翁老师的博客</title>
 
-
-
-    <meta charset="utf-8">
-    
-    
-    
-    
-    <title>typeScript总结 | 翁老师的博客</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#00abc0">
-    
-    
-    <meta name="keywords" content="ts">
+  
     <meta name="description" content="ts中需要理解的- any vs unknownany 表示任意类型，这个类型会逃离 Typescript 的类型检查，和在 Javascript 中一样，any 类型的变量可以执行任意操作，编译时不会报错。 unknown 也可以表示任意类型，但它同时也告诉 Typescript 开发者对其也是一无所知，做任何操作时需要慎重。这个类型仅可以执行有限的操作（&#x3D;&#x3D;、&#x3D;&#x3D;&#x3D; 、||、&amp;&amp;amp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="typeScript总结">
@@ -33,245 +35,157 @@
 <meta property="article:author" content="Mr.Weng">
 <meta property="article:tag" content="ts">
 <meta name="twitter:card" content="summary">
-    
-        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
+  
+  
 
-    <!-- custom head -->
-    
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+  
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
 
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.png">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Mr.Weng</h5>
-          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                Categories
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/nollieleo" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">typeScript总结</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">typeScript总结</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2020-08-02T14:44:13.000Z" itemprop="datePublished" class="page-time">
-  2020-08-02
-</time>
+  
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ts/">ts</a></li></ul>
 
-            
-        </h5>
-    </div>
 
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
     
 
+  
 
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+
+<nav class="menu dis-select"></nav>
 </header>
 
 
-<div class="container body-wrap">
-    
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ts中需要理解的"><span class="post-toc-number">1.</span> <span class="post-toc-text">ts中需要理解的</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#any-vs-unknown"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">- any vs unknown</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#vs-object-vs-Object"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">- {} vs object vs Object</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Never-类型"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">- Never 类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#type-vs-interface"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">- type vs interface</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#enum-vs-const-enum"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">- enum vs const enum</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#类型运算"><span class="post-toc-number">2.</span> <span class="post-toc-text">类型运算</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#集合运算"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">集合运算</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#索引签名"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">索引签名</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#类型键入"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">类型键入</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#typeof-value"><span class="post-toc-number">2.3.1.</span> <span class="post-toc-text">typeof value</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#keyof-Type"><span class="post-toc-number">2.3.2.</span> <span class="post-toc-text">keyof Type</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#extends"><span class="post-toc-number">2.3.3.</span> <span class="post-toc-text">extends</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#泛型"><span class="post-toc-number">3.</span> <span class="post-toc-text">泛型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#映射类型"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">映射类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#关键字-in"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">关键字 in</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Record"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">Record</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Partial"><span class="post-toc-number">3.1.3.</span> <span class="post-toc-text">Partial</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Required"><span class="post-toc-number">3.1.4.</span> <span class="post-toc-text">Required</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Readonly"><span class="post-toc-number">3.1.5.</span> <span class="post-toc-text">Readonly</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Pick"><span class="post-toc-number">3.1.6.</span> <span class="post-toc-text">Pick</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Omit"><span class="post-toc-number">3.1.7.</span> <span class="post-toc-text">Omit</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#条件类型"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">条件类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#三目运算符"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">三目运算符</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#infer"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">infer</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ReturnType"><span class="post-toc-number">3.2.3.</span> <span class="post-toc-text">ReturnType</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Parameters"><span class="post-toc-number">3.2.4.</span> <span class="post-toc-text">Parameters</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Exclude"><span class="post-toc-number">3.2.5.</span> <span class="post-toc-text">Exclude</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Extract"><span class="post-toc-number">3.2.6.</span> <span class="post-toc-text">Extract</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#NonNullable"><span class="post-toc-number">3.2.7.</span> <span class="post-toc-text">NonNullable</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Event事件对象类型"><span class="post-toc-number">4.</span> <span class="post-toc-text">Event事件对象类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#组件开发"><span class="post-toc-number">5.</span> <span class="post-toc-text">组件开发</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#有状态组件"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">有状态组件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#无状态组件"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">无状态组件</span></a></li></ol></li></ol>
-        </nav>
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">typeScript总结</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ts%E4%B8%AD%E9%9C%80%E8%A6%81%E7%90%86%E8%A7%A3%E7%9A%84"><span class="toc-text">ts中需要理解的</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#any-vs-unknown"><span class="toc-text">- any vs unknown</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vs-object-vs-Object"><span class="toc-text">- {} vs object vs Object</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Never-%E7%B1%BB%E5%9E%8B"><span class="toc-text">- Never 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#type-vs-interface"><span class="toc-text">- type vs interface</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#enum-vs-const-enum"><span class="toc-text">- enum vs const enum</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E8%BF%90%E7%AE%97"><span class="toc-text">类型运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E8%BF%90%E7%AE%97"><span class="toc-text">集合运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E7%AD%BE%E5%90%8D"><span class="toc-text">索引签名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E9%94%AE%E5%85%A5"><span class="toc-text">类型键入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#typeof-value"><span class="toc-text">typeof value</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#keyof-Type"><span class="toc-text">keyof Type</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#extends"><span class="toc-text">extends</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B"><span class="toc-text">泛型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%A0%E5%B0%84%E7%B1%BB%E5%9E%8B"><span class="toc-text">映射类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97-in"><span class="toc-text">关键字 in</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Record"><span class="toc-text">Record</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Partial"><span class="toc-text">Partial</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Required"><span class="toc-text">Required</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Readonly"><span class="toc-text">Readonly</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Pick"><span class="toc-text">Pick</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Omit"><span class="toc-text">Omit</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="toc-text">条件类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">三目运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#infer"><span class="toc-text">infer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ReturnType"><span class="toc-text">ReturnType</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Parameters"><span class="toc-text">Parameters</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Exclude"><span class="toc-text">Exclude</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Extract"><span class="toc-text">Extract</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NonNullable"><span class="toc-text">NonNullable</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Event%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B"><span class="toc-text">Event事件对象类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91"><span class="toc-text">组件开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E7%8A%B6%E6%80%81%E7%BB%84%E4%BB%B6"><span class="toc-text">有状态组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E7%8A%B6%E6%80%81%E7%BB%84%E4%BB%B6"><span class="toc-text">无状态组件</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
     </aside>
+    <div class='l_main'>
+      
+
+      
 
 
-<article id="post-typeScript总结"
-  class="post-article article-type-post fade" itemprop="blogPost">
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/ts/">ts</a></div><div id="post-meta">发布于&nbsp;<time datetime="2020-08-02T14:44:13.000Z">2020-08-02</time></div></div>
 
-    <div class="post-card">
-        <h1 class="post-card-title">typeScript总结</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2020-08-02 22:44:13" datetime="2020-08-02T14:44:13.000Z"  itemprop="datePublished">2020-08-02</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ts/">ts</a></li></ul>
-
-
-
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="ts中需要理解的"><a href="#ts中需要理解的" class="headerlink" title="ts中需要理解的"></a>ts中需要理解的</h2><h3 id="any-vs-unknown"><a href="#any-vs-unknown" class="headerlink" title="- any vs unknown"></a>- any vs unknown</h3><p><code>any</code> 表示任意类型，这个类型会逃离 <code>Typescript</code> 的类型检查，和在 <code>Javascript</code> 中一样，<code>any</code> 类型的变量可以执行任意操作，编译时不会报错。 <code>unknown</code> 也可以表示任意类型，但它同时也告诉 <code>Typescript</code> 开发者对其也是一无所知，做任何操作时需要慎重。这个类型仅可以执行有限的操作（<code>==、=== 、||、&amp;&amp;、?、!、typeof、instanceof</code> 等等），其他操作需要向 <code>Typescript</code> 证明这个值是什么类型，否则会提示异常。</p>
+<article class='md-text content post'>
+<h1 class="article-title"><span>typeScript总结</span></h1>
+<h2 id="ts中需要理解的"><a href="#ts中需要理解的" class="headerlink" title="ts中需要理解的"></a>ts中需要理解的</h2><h3 id="any-vs-unknown"><a href="#any-vs-unknown" class="headerlink" title="- any vs unknown"></a>- any vs unknown</h3><p><code>any</code> 表示任意类型，这个类型会逃离 <code>Typescript</code> 的类型检查，和在 <code>Javascript</code> 中一样，<code>any</code> 类型的变量可以执行任意操作，编译时不会报错。 <code>unknown</code> 也可以表示任意类型，但它同时也告诉 <code>Typescript</code> 开发者对其也是一无所知，做任何操作时需要慎重。这个类型仅可以执行有限的操作（<code>==、=== 、||、&amp;&amp;、?、!、typeof、instanceof</code> 等等），其他操作需要向 <code>Typescript</code> 证明这个值是什么类型，否则会提示异常。</p>
 <pre><code class="tsx">let foo: any
 let bar: unknown
 
 foo.functionNotExist()
 bar.functionNotExist() // 对象的类型为 &quot;unknown&quot;。
 
-if (!!bar) { // ==、=== 、||、&amp;&amp;、?、!、typeof、instanceof
+if (!!bar) &#123; // ==、=== 、||、&amp;&amp;、?、!、typeof、instanceof
   console.log(bar)
-}
+&#125;
 
 bar.toFixed(1) // Error
 
-if (typeof bar=== &#39;number&#39;) {
+if (typeof bar=== &#39;number&#39;) &#123;
   bar.toFixed(1) // OK
-}
+&#125;
 </code></pre>
 <p><code>any</code> 会增加了运行时出错的风险，不到万不得已不要使用。表示【不知道什么类型】的场景下使用 <code>unknown</code>。</p>
 <h3 id="vs-object-vs-Object"><a href="#vs-object-vs-Object" class="headerlink" title="- {} vs object vs Object"></a>- {} vs object vs Object</h3><p><code>object</code> 表示的是常规的 <code>Javascript</code> 对象类型，非基础数据类型。</p>
 <pre><code class="ts">declare function create(o: object): void;
 
-create({ prop: 0 }); // OK
+create(&#123; prop: 0 &#125;); // OK
 create(null); // Error
 create(undefined); // Error
 create(42); // Error
 create(&quot;string&quot;); // Error
 create(false); // Error
-create({
-  toString() {
+create(&#123;
+  toString() &#123;
     return 3;
-  },
-}); // OK
+  &#125;,
+&#125;); // OK
 </code></pre>
-<p><code>{}</code> 表示的非 null，非 undefined 的任意类型。</p>
-<pre><code class="ts">declare function create(o: {}): void;
+<p><code>&#123;&#125;</code> 表示的非 null，非 undefined 的任意类型。</p>
+<pre><code class="ts">declare function create(o: &#123;&#125;): void;
 
-create({ prop: 0 }); // OK
+create(&#123; prop: 0 &#125;); // OK
 create(null); // Error
 create(undefined); // Error
 create(42); // OK
 create(&quot;string&quot;); // OK
 create(false); // OK
-create({
-  toString() {
+create(&#123;
+  toString() &#123;
     return 3;
-  },
-}); // OK
+  &#125;,
+&#125;); // OK
 </code></pre>
-<p><code>Object</code> 和 <code>{}</code> 几乎一致，区别是 <code>Object</code> 类型会对 <code>Object</code> 原型内置的方法（<code>toString/hasOwnPreperty</code>）进行校验。</p>
+<p><code>Object</code> 和 <code>&#123;&#125;</code> 几乎一致，区别是 <code>Object</code> 类型会对 <code>Object</code> 原型内置的方法（<code>toString/hasOwnPreperty</code>）进行校验。</p>
 <pre><code class="ts">declare function create(o: Object): void;
 
-create({ prop: 0 }); // OK
+create(&#123; prop: 0 &#125;); // OK
 create(null); // Error
 create(undefined); // Error
 create(42); // OK
 create(&quot;string&quot;); // OK
 create(false); // OK
-create({
-  toString() {
+create(&#123;
+  toString() &#123;
     return 3;
-  },
-}); // Error
+  &#125;,
+&#125;); // Error
 </code></pre>
 <h3 id="Never-类型"><a href="#Never-类型" class="headerlink" title="- Never 类型"></a>- Never 类型</h3><p><code>never</code> 类型表示的是那些永不存在的值的类型。 例如，<code>never</code> 类型是那些总是会抛出异常或根本就不会有返回值的函数表达式或箭头函数表达式的返回值类型。</p>
 <pre><code class="tsx">// 返回never的函数必须存在无法达到的终点
-function error(message: string): never {
+function error(message: string): never &#123;
   throw new Error(message);
-}
+&#125;
 
-function infiniteLoop(): never {
-  while (true) {}
-}
+function infiniteLoop(): never &#123;
+  while (true) &#123;&#125;
+&#125;
 </code></pre>
 <p>在 TypeScript 中，可以利用 never 类型的特性来实现全面性检查，具体示例如下：</p>
 <pre><code class="tsx">type Foo = string | number;
 
-function controlFlowAnalysisWithNever(foo: Foo) {
-  if (typeof foo === &quot;string&quot;) {
+function controlFlowAnalysisWithNever(foo: Foo) &#123;
+  if (typeof foo === &quot;string&quot;) &#123;
     // 这里 foo 被收窄为 string 类型
-  } else if (typeof foo === &quot;number&quot;) {
+  &#125; else if (typeof foo === &quot;number&quot;) &#123;
     // 这里 foo 被收窄为 number 类型
-  } else {
+  &#125; else &#123;
     // foo 在这里是 never
     const check: never = foo;
-  }
-}
+  &#125;
+&#125;
 </code></pre>
 <p>注意在 else 分支里面，我们把收窄为 never 的 foo 赋值给一个显示声明的 never 变量。如果一切逻辑正确，那么这里应该能够编译通过。但是假如后来有一天你的同事修改了 Foo 的类型：</p>
 <pre><code class="tsx">type Foo = string | number | boolean;
@@ -279,33 +193,33 @@ function controlFlowAnalysisWithNever(foo: Foo) {
 <p> 然而他忘记同时修改 <code>controlFlowAnalysisWithNever</code> 方法中的控制流程，这时候 else 分支的 foo 类型会被收窄为 <code>boolean</code> 类型，导致无法赋值给 never 类型，这时就会产生一个编译错误。通过这个方式，我们可以确保<code>controlFlowAnalysisWithNever</code> 方法总是穷尽了 Foo 的所有可能类型。 通过这个示例，我们可以得出一个结论：<strong>使用 never 避免出现新增了联合类型没有对应的实现，目的就是写出类型绝对安全的代码。</strong> </p>
 <h3 id="type-vs-interface"><a href="#type-vs-interface" class="headerlink" title="- type vs interface"></a>- type vs interface</h3><p>两者都可以用来定义类型。</p>
 <p><code>interface</code>（接口） 只能声明对象类型，支持声明合并（可扩展）。</p>
-<pre><code class="ts">interface User {
+<pre><code class="ts">interface User &#123;
   id: string
-}
+&#125;
 
-interface User {
+interface User &#123;
   name: string
-}
+&#125;
 
-const user = {} as User
+const user = &#123;&#125; as User
 
 console.log(user.id);
 console.log(user.name);
 </code></pre>
 <p><code>type</code>（类型别名）不支持声明合并、行为有点像<code>const</code>, <code>let</code> 有块级作用域。</p>
-<pre><code class="ts">type User = {
+<pre><code class="ts">type User = &#123;
   id: string,
-}
+&#125;
 
-if (true) {
-  type User = {
+if (true) &#123;
+  type User = &#123;
     name: string,
-  }
+  &#125;
 
-  const user = {} as User;
+  const user = &#123;&#125; as User;
   console.log(user.name);
   console.log(user.id) // 类型“User”上不存在属性“id”。
-}
+&#125;
 </code></pre>
 <p><code>type</code> 更为通用，右侧可以是任意类型，包括表达式运算，以及映射类型等等。</p>
 <pre><code class="ts">type A = number
@@ -313,37 +227,37 @@ type B = A | string
 type ValueOf&lt;T&gt; = T[keyof T];</code></pre>
 <p>如果你是在开发一个包，模块，允许别人进行扩展就用 <code>interface</code>，如果需要定义基础数据类型或者需要类型运算，使用 <code>type</code>。</p>
 <h3 id="enum-vs-const-enum"><a href="#enum-vs-const-enum" class="headerlink" title="- enum vs const enum"></a>- enum vs const enum</h3><p>默认情况下 <code>enum</code> 会被编译成 <code>Javascript</code> 对象，并且可以通过 <code>value</code> 反向查找。</p>
-<pre><code class="ts">enum ActiveType {
+<pre><code class="ts">enum ActiveType &#123;
   active = 1,
   inactive = 2,
-}
+&#125;
 
-function isActive(type: ActiveType) {}
+function isActive(type: ActiveType) &#123;&#125;
 isActive(ActiveType.active);
 
 // ============================== compile result:
 // var ActiveType;
-// (function (ActiveType) {
+// (function (ActiveType) &#123;
 //     ActiveType[ActiveType[&quot;active&quot;] = 1] = &quot;active&quot;;
 //     ActiveType[ActiveType[&quot;inactive&quot;] = 2] = &quot;inactive&quot;;
-// })(ActiveType || (ActiveType = {}));
-// function isActive(type) { }
+// &#125;)(ActiveType || (ActiveType = &#123;&#125;));
+// function isActive(type) &#123; &#125;
 // isActive(ActiveType.active);
 
 ActiveType[1]; // OK
 ActiveType[10]; // OK！！！
 </code></pre>
 <p><code>cosnt enum</code> 默认情况下不会生成 <code>Javascript</code> 对象而是把使用到的代码直接输出 <code>value</code>，不支持 <code>value</code> 反向查找。</p>
-<pre><code class="ts">const enum ActiveType {
+<pre><code class="ts">const enum ActiveType &#123;
   active = 1,
   inactive = 2,
-}
+&#125;
 
-function isActive(type: ActiveType) {}
+function isActive(type: ActiveType) &#123;&#125;
 isActive(ActiveType.active);
 
 // ============================== compile result:
-// function isActive(type) { }
+// function isActive(type) &#123; &#125;
 // isActive(1 /* active */);
 
 ActiveType[1]; // Error
@@ -359,26 +273,26 @@ type Type2 = &quot;b&quot; | &quot;c&quot;;
 type Type3 = Type1 | Type2; // &#39;a&#39; &#39;b&#39; &#39;c&#39;
 </code></pre>
 <h3 id="索引签名"><a href="#索引签名" class="headerlink" title="索引签名"></a>索引签名</h3><p>索引签名可以用来定义对象内的属性、值的类型，例如定义一个 <code>React</code> 组件，允许 <code>Props</code> 可以传任意 <code>key</code> 为 <code>string</code>，<code>value</code> 为 <code>number</code> 的 <code>props</code>。</p>
-<pre><code class="tsx">interface Props {
+<pre><code class="tsx">interface Props &#123;
   [key: string]: number
-}
+&#125;
 
-&lt;Component count={1} /&gt; // OK
-&lt;Component count={true} /&gt; // Error
-&lt;Component count={&#39;1&#39;} /&gt; // Error
+&lt;Component count=&#123;1&#125; /&gt; // OK
+&lt;Component count=&#123;true&#125; /&gt; // Error
+&lt;Component count=&#123;&#39;1&#39;&#125; /&gt; // Error
 </code></pre>
 <h3 id="类型键入"><a href="#类型键入" class="headerlink" title="类型键入"></a>类型键入</h3><p>类型键入允许 <code>Typescript</code> 像对象取属性值一样使用类型。</p>
-<pre><code class="tsx">type User = {
+<pre><code class="tsx">type User = &#123;
   userId: string
-  friendList: {
+  friendList: &#123;
     fristName: string
     lastName: string
-  }[]
-}
+  &#125;[]
+&#125;
 
 type UserIdType = User[&#39;userId&#39;] // string
-type FriendList = User[&#39;friendList&#39;] // { fristName: string; lastName: string; }[]
-type Friend = FriendList[number] // { fristName: string; lastName: string; }
+type FriendList = User[&#39;friendList&#39;] // &#123; fristName: string; lastName: string; &#125;[]
+type Friend = FriendList[number] // &#123; fristName: string; lastName: string; &#125;
 </code></pre>
 <p>在上面的例子中，我们利用类型键入的功能从 <code>User</code> 类型中计算出了其他的几种类型。<code>FriendList[number]</code> 这里的 <code>number</code> 是关键字，用来取数组子项的类型。在元组中也可以使用字面量数字得到数组元素的类型。</p>
 <pre><code class="tsx">type Tuple = [number, string]
@@ -393,30 +307,30 @@ type Type2 = typeof str2 // type &quot;fooooo&quot;
 </code></pre>
 <p><code>typeof</code> 在计算变量和常量时有所不同，由于常量时不会变的，所以 <code>Typescript</code> 会使用严格的类型，例如下面 <code>Type2</code> 的例子，<code>str2</code> 的是个 ‘fooooo’ 类型的字符串。而变量会是宽松的字符串类型。</p>
 <h4 id="keyof-Type"><a href="#keyof-Type" class="headerlink" title="keyof Type"></a>keyof Type</h4><p><code>keyof</code> 关键字可以用来获取一个对象类型的所有 <code>key</code> 类型。</p>
-<pre><code class="ts">type User = {
+<pre><code class="ts">type User = &#123;
   id: string;
   name: string;
-};
+&#125;;
 
 type UserKeys = keyof User; //&quot;id&quot; | &quot;name&quot;
 </code></pre>
 <p><code>enum</code> 在 Typescript 中有一定的特殊性（有时表示类型，又是表示值），如果要获取 <code>enum</code> 的 key 类型，需要先把它当成值，用 <code>typeof</code> 再用 <code>keyof</code>。</p>
-<pre><code class="tsx">enum ActiveType {
+<pre><code class="tsx">enum ActiveType &#123;
   Active,
   Inactive
-}
+&#125;
 
 type KeyOfType = keyof typeof ActiveType // &quot;Active&quot; | &quot;Inactive&quot;
 </code></pre>
 <h4 id="extends"><a href="#extends" class="headerlink" title="extends"></a>extends</h4><p><code>extends</code> 关键字同样存在多种用途，在 <code>interface</code> 中表示类型扩展，在条件类型语句中表示布尔运算，在泛型中起到限制的作用，在 <code>class</code> 中表示继承。</p>
 <pre><code class="tsx">// 表示类型扩展
-interface A {
+interface A &#123;
   a: string
-}
+&#125;
 
-interface B extends A { // { a: string, b: string }
+interface B extends A &#123; // &#123; a: string, b: string &#125;
   b: string
-}
+&#125;
 
 // 条件类型中起到布尔运算的功能
 type Bar&lt;T&gt; = T extends string ? &#39;string&#39; : never
@@ -428,11 +342,11 @@ type E = Bar&lt;&#39;fooo&#39;&gt; // string
 type Foo&lt;T extends object&gt; = T
 type F = Foo&lt;number&gt; // 类型“number”不满足约束“object”。
 type G = Foo&lt;string&gt; // 类型“string”不满足约束“object”。
-type H = Foo&lt;{}&gt; // OK
+type H = Foo&lt;&#123;&#125;&gt; // OK
 
 // 类继承
-class I {}
-class J extends I {}
+class I &#123;&#125;
+class J extends I &#123;&#125;
 </code></pre>
 <h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>假设 <code>filter</code> 方法传入一个数字类型的数组，及一个返回布尔值的方法，最终过滤出想要的结果返回，声明大致如下。</p>
 <pre><code class="tsx">declare function filter(
@@ -464,162 +378,162 @@ declare function filter(
 filter([&#39;1&#39;, &#39;2&#39;, &#39;3&#39;], () =&gt; true) // function filter&lt;string&gt;(array: string[], fn: (item: unknown) =&gt; boolean): string[]
 </code></pre>
 <p>把泛型比喻成“方法”之后，很多行为都很好理解。“方法”可以传参，可以有多个参数，可以有默认值，泛型也可以。</p>
-<pre><code class="tsx">type Foo&lt;T, U = string&gt; = { // 多参数、默认值
+<pre><code class="tsx">type Foo&lt;T, U = string&gt; = &#123; // 多参数、默认值
   foo: Array&lt;T&gt; // 可以传递
   bar: U
-}
+&#125;
 
-type A = Foo&lt;number&gt; // type A = { foo: number[]; bar: string; }
-type B = Foo&lt;number, number&gt; // type B = { foo: number[]; bar: number; }
+type A = Foo&lt;number&gt; // type A = &#123; foo: number[]; bar: string; &#125;
+type B = Foo&lt;number, number&gt; // type B = &#123; foo: number[]; bar: number; &#125;
 </code></pre>
 <p>别忘了，泛型参数还可以有限制，例如下面的例子 <code>extends</code> 的作用是限制 <code>T</code> 至少是个 <code>HTMLElement</code> 类型。</p>
-<pre><code class="tsx">type MyEvent&lt;T extends HTMLElement = HTMLElement&gt; = {
+<pre><code class="tsx">type MyEvent&lt;T extends HTMLElement = HTMLElement&gt; = &#123;
    target: T,
    type: string
-}
+&#125;
 </code></pre>
 <h3 id="映射类型"><a href="#映射类型" class="headerlink" title="映射类型"></a>映射类型</h3><h4 id="关键字-in"><a href="#关键字-in" class="headerlink" title="关键字 in"></a>关键字 in</h4><p><code>in</code> 关键字在类型中表示类型映射，和索引签名的写法有些相似。下面的例子中声明一个 <code>Props</code> 的类型，<code>key</code> 类型为 ‘count’ | ‘id’ 类型，<code>value</code> 为 <code>number</code> 类型。</p>
-<pre><code class="tsx">type Props = {
+<pre><code class="tsx">type Props = &#123;
   [key in &#39;count&#39; | &#39;id&#39;]: number
-}
+&#125;
 
-const props1: Props = { // OK
+const props1: Props = &#123; // OK
   count: 1,
   id: 1
-}
+&#125;
 
-const props2: Props = {
+const props2: Props = &#123;
   count: &#39;1&#39;, // ERROR
   id: 1
-}
+&#125;
 
-const props3: Props = {
+const props3: Props = &#123;
   count: 1,
   id: 1,
   name: 1 // ERROR
-}
+&#125;
 </code></pre>
 <h4 id="Record"><a href="#Record" class="headerlink" title="Record"></a>Record</h4><p><code>Record</code> 定义键类型为 <code>Keys</code>、值类型为 <code>Values</code> 的对象类型。</p>
 <p> 示例 :</p>
-<pre><code class="tsx">enum ErrorCodes {
+<pre><code class="tsx">enum ErrorCodes &#123;
   Timeout = 10001,
   ServerBusy = 10002,
 
-}
+&#125;
 
-const ErrorMessageMap: Record&lt;ErrorCodes, string&gt; = {
+const ErrorMessageMap: Record&lt;ErrorCodes, string&gt; = &#123;
   [ErrorCodes.Timeout]: &#39;Timeout, please try again&#39;,
   [ErrorCodes.ServerBusy]: &#39;Server is busy now&#39;
-}
+&#125;
 </code></pre>
 <p>类型映射还可以用来做全面性检查，例如上面的例子中如果漏了某个 ErrorCodes，Typescript 同样会抛出异常。</p>
-<pre><code class="tsx">enum ErrorCodes {
+<pre><code class="tsx">enum ErrorCodes &#123;
   Timeout = 10001,
   ServerBusy = 10002,
   AuthFailed = 10003
-}
+&#125;
 
-// 类型 &quot;{ 10001: string; 10002: string; }&quot; 中缺少属性 &quot;10003&quot;，但类型 &quot;Record&lt;ErrorCodes, string&gt;&quot; 中需要该属性
-const ErrorMessageMap: Record&lt;ErrorCodes, string&gt; = { 
+// 类型 &quot;&#123; 10001: string; 10002: string; &#125;&quot; 中缺少属性 &quot;10003&quot;，但类型 &quot;Record&lt;ErrorCodes, string&gt;&quot; 中需要该属性
+const ErrorMessageMap: Record&lt;ErrorCodes, string&gt; = &#123; 
   [ErrorCodes.Timeout]: &#39;Timeout, please try again&#39;,
   [ErrorCodes.ServerBusy]: &#39;Server is busy now&#39;
-}
+&#125;
 </code></pre>
 <p>代码实现：</p>
-<pre><code class="tsx">type Record&lt;K extends keyof any, T&gt; = {
+<pre><code class="tsx">type Record&lt;K extends keyof any, T&gt; = &#123;
   [P in K]: T;
-};</code></pre>
+&#125;;</code></pre>
 <h4 id="Partial"><a href="#Partial" class="headerlink" title="Partial"></a>Partial</h4><p><code>Partial</code> 可以将类型定义的属性变成可选。</p>
 <p>示例：</p>
-<pre><code class="tsx">type User = {
+<pre><code class="tsx">type User = &#123;
   id?: string,
   gender: &#39;male&#39; | &#39;female&#39;
-}
+&#125;
 
-type PartialUser =  Partial&lt;User&gt;  // { id?: string, gender?: &#39;male&#39; | &#39;female&#39;}
+type PartialUser =  Partial&lt;User&gt;  // &#123; id?: string, gender?: &#39;male&#39; | &#39;female&#39;&#125;
 
-function createUser (user: PartialUser = { gender: &#39;male&#39; }) {}
+function createUser (user: PartialUser = &#123; gender: &#39;male&#39; &#125;) &#123;&#125;
 </code></pre>
 <p><code>User</code> 类型对于 <code>gender</code> 属性是要求必须有的(: 用户必须有性别才行。而在设计 <code>createUser</code> 方法时，为了方便程序会给 <code>gender</code> 赋予默认值。这时候可以将参数修改成 <code>Partial</code>，使用者就可以不用必须传 <code>gender</code> 了。</p>
 <p>代码实现：</p>
-<pre><code class="tsx">type Partial&lt;T&gt; = {
+<pre><code class="tsx">type Partial&lt;T&gt; = &#123;
   [U in keyof T]?: T[U];
-};
+&#125;;
 </code></pre>
 <h4 id="Required"><a href="#Required" class="headerlink" title="Required"></a>Required</h4><p><code>Required</code> 和 <code>Partial</code> 的作用相反，是将对象类型的属性都变成必须。</p>
 <p>示例：</p>
-<pre><code class="tsx">type User = {
+<pre><code class="tsx">type User = &#123;
   id?: string,
   gender: &#39;male&#39; | &#39;female&#39;
-}
+&#125;
 
-type RequiredUser = Required&lt;User&gt; // { readonly id: string, readonly gender: &#39;male&#39; | &#39;female&#39;}
+type RequiredUser = Required&lt;User&gt; // &#123; readonly id: string, readonly gender: &#39;male&#39; | &#39;female&#39;&#125;
 
-function showUserProfile (user: RequiredUser) {
+function showUserProfile (user: RequiredUser) &#123;
   console.log(user.id) // 不需要加 ！
   console.log(user.gender)
-}
+&#125;
 </code></pre>
 <p>任然使用 <code>User</code> 类型，<code>id</code> 属性定义的时候是可选的（要创建了才有 <code>id</code>），而展示的时候 <code>User id</code> 肯定已经存在了，这时候可以使用 <code>Required</code>，那么调用 <code>showUserProfile</code> 时 <code>User</code> 所有属性都必须非 <code>undefined</code>。</p>
 <p>代码实现：</p>
-<pre><code class="tsx">type Required&lt;T&gt; = {
+<pre><code class="tsx">type Required&lt;T&gt; = &#123;
   [U in keyof T]-?: T[U];
-};
+&#125;;
 </code></pre>
 <p><code>-?</code> 符号在这里表示的意思是去掉可选符号 <code>?</code>。</p>
 <h4 id="Readonly"><a href="#Readonly" class="headerlink" title="Readonly"></a>Readonly</h4><p><code>Readonly</code> 是将对象类型的属性都变成只读。</p>
 <p>示例：</p>
-<pre><code class="tsx">type ReadonlyUser = Readonly&lt;User&gt; // { readonly id?: string, readonly gender: &#39;male&#39; | &#39;female&#39;}
+<pre><code class="tsx">type ReadonlyUser = Readonly&lt;User&gt; // &#123; readonly id?: string, readonly gender: &#39;male&#39; | &#39;female&#39;&#125;
 
-const user: ReadonlyUser = {
+const user: ReadonlyUser = &#123;
   id: &#39;1&#39;,
   gender: &#39;male&#39;
-}
+&#125;
 
 user.gender = &#39;femail&#39; // 无法分配到 &quot;gender&quot; ，因为它是只读属性。
 </code></pre>
 <p>代码实现：</p>
-<pre><code class="tsx">type Readonly&lt;T&gt; = {
+<pre><code class="tsx">type Readonly&lt;T&gt; = &#123;
   readonly [U in keyof T]: T[U];
-};
+&#125;;
 </code></pre>
 <h4 id="Pick"><a href="#Pick" class="headerlink" title="Pick"></a>Pick</h4><p>Pick 是挑选类型中的部分属性。</p>
 <p>示例：</p>
-<pre><code class="tsx">type Location = {
+<pre><code class="tsx">type Location = &#123;
   latitude: number
   longitude: number
   city: string
   address: string
   province: string
   district: string
-}
+&#125;
 
-type LatLong = Pick&lt;Location, &#39;latitude&#39; | &#39;longitude&#39;&gt; //  { latitude: number; longitude: number; }
+type LatLong = Pick&lt;Location, &#39;latitude&#39; | &#39;longitude&#39;&gt; //  &#123; latitude: number; longitude: number; &#125;
 
-const region: LatLong = {
+const region: LatLong = &#123;
   latitude: 22.545001,
   longitude: 114.011712
-}
+&#125;
 </code></pre>
 <p>代码实现：</p>
-<pre><code class="tsx">type Pick&lt;T, K extends keyof T&gt; = {
+<pre><code class="tsx">type Pick&lt;T, K extends keyof T&gt; = &#123;
   [P in K]: T[P];
-};
+&#125;;
 </code></pre>
 <h4 id="Omit"><a href="#Omit" class="headerlink" title="Omit"></a>Omit</h4><p><code>Omit</code> 结合了 <code>Pick</code> 和 <code>Exclude</code>，将忽略对象类型中的部分 keys。</p>
 <p>示例：</p>
-<pre><code class="tsx">interface Todo {
+<pre><code class="tsx">interface Todo &#123;
   title: string;
   description: string;
   completed: boolean;
-}
+&#125;
 
-type TodoPreview = Omit&lt;Todo, &quot;description&quot;&gt;; // { title: string; completed: boolean; }
+type TodoPreview = Omit&lt;Todo, &quot;description&quot;&gt;; // &#123; title: string; completed: boolean; &#125;
 
-const todo: TodoPreview = {
+const todo: TodoPreview = &#123;
   title: &quot;Clean room&quot;,
   completed: false,
-};
+&#125;;
 </code></pre>
 <p>代码实现：</p>
 <pre><code class="tsx">type Omit&lt;T, K extends keyof any&gt; = Pick&lt;T, Exclude&lt;keyof T, K&gt;&gt;;
@@ -639,34 +553,34 @@ type B = ToArray2&lt;number | string&gt;; // string[] | number[]
 </code></pre>
 <h4 id="infer"><a href="#infer" class="headerlink" title="infer"></a>infer</h4><p>除了显示声明泛型参数，<code>Typescript</code> 还支持动态推导泛型，用到的是 <code>infer</code> 关键字。什么场景下还需要动态推导？通常是需要通过传入的泛型参数去获取新的类型，这和直接定义一个新的泛型参数不一样。</p>
 <p>例如现在定义了 <code>ApiResponse</code> 的两个具体类型 <code>UserResponse</code> 和 <code>EventResponse</code>，如果想得到 <code>User</code> 实体类型和 <code>Event</code> 实体类型需要怎么做？</p>
-<pre><code class="tsx">type ApiResponse&lt;T&gt; = {
+<pre><code class="tsx">type ApiResponse&lt;T&gt; = &#123;
   code: number
   data: T
-};
+&#125;;
 
-type UserResponse = ApiResponse&lt;{
+type UserResponse = ApiResponse&lt;&#123;
   id: string,
   name: string
-}&gt;
+&#125;&gt;
 
-type EventResponse = ApiResponse&lt;{
+type EventResponse = ApiResponse&lt;&#123;
   id: string,
   title: string
-}&gt;
+&#125;&gt;
 </code></pre>
 <p>当然可以拎出来单独定义新的类型。</p>
-<pre><code class="tsx">type User = {
+<pre><code class="tsx">type User = &#123;
   id: string,
   name: string
-}
+&#125;
 
 type UserResponse = ApiResponse&lt;User&gt;
 </code></pre>
 <p>但如果类型是由其他人提供的就不好处理了。这时可以尝试下使用 <code>infer</code>，代码如下：</p>
 <pre><code class="tsx">type ApiResponseEntity&lt;T&gt; = T extends ApiResponse&lt;infer U&gt; ? U : never;
 
-type User = ApiResponseEntity&lt;UserResponse&gt;; // { id: string; name: string; }
-type Event = ApiResponseEntity&lt;EventResponse&gt;; // { id: string; title: string; }
+type User = ApiResponseEntity&lt;UserResponse&gt;; // &#123; id: string; name: string; &#125;
+type Event = ApiResponseEntity&lt;EventResponse&gt;; // &#123; id: string; title: string; &#125;
 </code></pre>
 <p>示例中，判断传入的类型 <code>T</code> 是不是 <code>T extends ApiResponse</code> 的子集，这里的 <code>infer</code> 既是让 <code>Typescript</code> 尝试去理解 <code>T</code> 具体是那种类型的 <code>ApiResponse</code>，生成新的泛型参数 <code>U</code>。如果满足 <code>extends</code> 条件则将 <code>U</code> 类型返回。</p>
 <p>充分理解了条件类型和 <code>infer</code>关键字之后，<code>Typescript</code> 自带的条件泛型工具也就很好理解了。</p>
@@ -708,9 +622,9 @@ type C = Extract&lt;A, B&gt; // string
 <pre><code class="tsx">type Extract&lt;T, U&gt; = T extends U ? T : never;</code></pre>
 <h4 id="NonNullable"><a href="#NonNullable" class="headerlink" title="NonNullable"></a>NonNullable</h4><p>从类型中排除 <code>null</code> 和 <code>undefined</code></p>
 <p>示例：</p>
-<pre><code class="tsx">type A = {
+<pre><code class="tsx">type A = &#123;
   a?: number | null
-}
+&#125;
 type B = NonNullable(A[&#39;a&#39;]) // number
 </code></pre>
 <p>代码实现：</p>
@@ -736,336 +650,231 @@ type B = NonNullable(A[&#39;a&#39;]) // number
 <li><p><code>TransitionEvent&lt;T =Element&gt;</code> 过渡事件对象</p>
 </li>
 </ul>
-<pre><code class="typescript">import { MouseEvent } from &#39;react&#39;;
+<pre><code class="typescript">import &#123; MouseEvent &#125; from &#39;react&#39;;
 
-interface IProps {
+interface IProps &#123;
   onClick (event: MouseEvent&lt;HTMLDivElement&gt;): void,
-}
+&#125;
 </code></pre>
-<h2 id="组件开发"><a href="#组件开发" class="headerlink" title="组件开发"></a>组件开发</h2><h3 id="有状态组件"><a href="#有状态组件" class="headerlink" title="有状态组件"></a>有状态组件</h3><pre><code class="typescript">export class MyForm extends React.Component&lt;FormProps, FormState&gt; {
+<h2 id="组件开发"><a href="#组件开发" class="headerlink" title="组件开发"></a>组件开发</h2><h3 id="有状态组件"><a href="#有状态组件" class="headerlink" title="有状态组件"></a>有状态组件</h3><pre><code class="typescript">export class MyForm extends React.Component&lt;FormProps, FormState&gt; &#123;
     ...
-}
+&#125;
 </code></pre>
 <p>其中的FormProps和FormState分别代表这状态组件的props和state的interface</p>
 <blockquote>
 <p> <strong>注意：</strong>在只有state而没有props的情况下，props的位置可以用{}或者object占位，这两个值都表示有效的空对象。 </p>
 </blockquote>
 <h3 id="无状态组件"><a href="#无状态组件" class="headerlink" title="无状态组件"></a>无状态组件</h3><p>无状态组件也被称为展示组件，如果一个展示组件没有内部的state可以被写为纯函数组件。 如果写的是函数组件，在<code>@types/react</code>中定义了一个类型<code>type SFC = StatelessComponent;</code>。我们写函数组件的时候，能指定我们的组件为<code>SFC</code>或者<code>StatelessComponent</code>。这个里面已经预定义了<code>children</code>等，所以我们每次就不用指定类型children的类型了。</p>
-<pre><code class="tsx">import React, { ReactNode, SFC } from &#39;react&#39;;
+<pre><code class="tsx">import React, &#123; ReactNode, SFC &#125; from &#39;react&#39;;
 import style from &#39;./step-complete.less&#39;;
 
-export interface IProps  {
+export interface IProps  &#123;
   title: string | ReactNode;
   description: string | ReactNode;
-}
-const StepComplete:SFC&lt;IProps&gt; = ({ title, description, children }) =&gt; {
+&#125;
+const StepComplete:SFC&lt;IProps&gt; = (&#123; title, description, children &#125;) =&gt; &#123;
   return (
-    &lt;div className={style.complete}&gt;
-      &lt;div className={style.completeTitle}&gt;
-        {title}
+    &lt;div className=&#123;style.complete&#125;&gt;
+      &lt;div className=&#123;style.completeTitle&#125;&gt;
+        &#123;title&#125;
       &lt;/div&gt;
-      &lt;div className={style.completeSubTitle}&gt;
-        {description}
+      &lt;div className=&#123;style.completeSubTitle&#125;&gt;
+        &#123;description&#125;
       &lt;/div&gt;
       &lt;div&gt;
-        {children}
+        &#123;children&#125;
       &lt;/div&gt;
     &lt;/div&gt;
   );
-};
+&#125;;
 export default StepComplete;
 </code></pre>
 
-        </div>
 
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2022-02-09T01:45:19.082Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
-</span><br>
-
-
-        
-        Happy Coding
-        
-    </div>
-    
-    <footer>
-        <a href="https://github.com/NollieLeo">
-            <img src="/img/avatar.png" alt="Mr.Weng">
-            Mr.Weng
-        </a>
-    </footer>
-</blockquote>
-
-        
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ts/" rel="tag">ts</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/08/02/typeScript%E6%80%BB%E7%BB%93/&title=《typeScript总结》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/08/02/typeScript%E6%80%BB%E7%BB%93/&title=《typeScript总结》 — 翁老师的博客&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/08/02/typeScript%E6%80%BB%E7%BB%93/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《typeScript总结》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/08/02/typeScript%E6%80%BB%E7%BB%93/&via=https://github.com/NollieLeo" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/08/02/typeScript%E6%80%BB%E7%BB%93/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-
-
-        </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2020/08/23/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">单例模式</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2020/07/24/30-seconds-of-js/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">30-seconds-of-js</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
 
 </article>
 
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        谢谢大爷~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/false" alt="打赏二维码">
-        </div>
-        
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2020/08/23/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">单例模式</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2020/07/24/30-seconds-of-js/">30-seconds-of-js</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
     </div>
-</div>
-
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>Mr.Weng &copy; 2020 - 2023</span>
-            <span>
-                
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/08/02/typeScript%E6%80%BB%E7%BB%93/&title=《typeScript总结》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/08/02/typeScript%E6%80%BB%E7%BB%93/&title=《typeScript总结》 — 翁老师的博客&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/08/02/typeScript%E6%80%BB%E7%BB%93/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《typeScript总结》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/08/02/typeScript%E6%80%BB%E7%BB%93/&via=https://github.com/NollieLeo" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/08/02/typeScript%E6%80%BB%E7%BB%93/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2020/08/02/typeScript%E6%80%BB%E7%BB%93/" alt="微信分享二维码">
-</div>
-
-
-
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</template>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
-
-
-
-
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '我走了';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '我来了';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
         }
-    });
-})();
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
 </script>
 
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
 
 
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
 </body>
 </html>

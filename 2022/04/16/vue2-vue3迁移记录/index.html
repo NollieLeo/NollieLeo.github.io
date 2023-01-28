@@ -1,26 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang='zh-CN'>
+
 <head>
-    
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
 
-    
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
 
-    
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>vue2~vue3迁移记录 - 翁老师的博客</title>
 
-
-
-    <meta charset="utf-8">
-    
-    
-    
-    
-    <title>vue2~vue3迁移记录 | 翁老师的博客</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#00abc0">
-    
-    
-    <meta name="keywords" content="vue,vite">
+  
     <meta name="description" content="记录vue2到vue3版本迁移事项 官方迁移文档  api变化全局api变化new Vue —&gt; createApp 🚩 ➕ vue2中没有app 的概念，通过Vue的统一构造函数进行全局的配置，单页应用中无法创建多个不同全局配置的根应用（会造成全局配置污染） vue3中有了app概念，通过createApp创建返回的实例暴露全局api，解决了vue2中的问题   Vue2 import">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue2~vue3迁移记录">
@@ -29,7 +31,6 @@
 <meta property="og:description" content="记录vue2到vue3版本迁移事项 官方迁移文档  api变化全局api变化new Vue —&gt; createApp 🚩 ➕ vue2中没有app 的概念，通过Vue的统一构造函数进行全局的配置，单页应用中无法创建多个不同全局配置的根应用（会造成全局配置污染） vue3中有了app概念，通过createApp创建返回的实例暴露全局api，解决了vue2中的问题   Vue2 import">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://github.com/Users/leo/Library/Application%20Support/typora-user-images/image-20220416124853316.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2022/04/16/vue2-vue3%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/leo/Desktop/weng">
 <meta property="article:published_time" content="2022-04-16T02:59:12.000Z">
 <meta property="article:modified_time" content="2022-04-24T07:28:36.341Z">
 <meta property="article:author" content="Mr.Weng">
@@ -37,161 +38,77 @@
 <meta property="article:tag" content="vite">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://github.com/Users/leo/Library/Application%20Support/typora-user-images/image-20220416124853316.png">
-    
-        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
+  
+  
 
-    <!-- custom head -->
-    
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+  
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
 
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.png">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Mr.Weng</h5>
-          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                Categories
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/nollieleo" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">vue2~vue3迁移记录</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">vue2~vue3迁移记录</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2022-04-16T02:59:12.000Z" itemprop="datePublished" class="page-time">
-  2022-04-16
-</time>
+  
 
 
-            
-        </h5>
-    </div>
 
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
     
 
+  
 
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+
+<nav class="menu dis-select"></nav>
 </header>
 
 
-<div class="container body-wrap">
-    
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#api变化"><span class="post-toc-number">1.</span> <span class="post-toc-text">api变化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#全局api变化"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">全局api变化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#new-Vue-—-gt-createApp-🚩-➕"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">new Vue —&gt; createApp 🚩 ➕</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#internal-Apis-🚩"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">internal Apis  🚩</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#app-config"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">app.config</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#globalProperties-🚩➕"><span class="post-toc-number">1.1.3.1.</span> <span class="post-toc-text">globalProperties  🚩➕</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#devtools"><span class="post-toc-number">1.1.3.2.</span> <span class="post-toc-text">devtools</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#errorHandler"><span class="post-toc-number">1.1.3.3.</span> <span class="post-toc-text">errorHandler</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#warnHandler"><span class="post-toc-number">1.1.3.4.</span> <span class="post-toc-text">warnHandler</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#isCustomElement-➕"><span class="post-toc-number">1.1.3.5.</span> <span class="post-toc-text">isCustomElement ➕</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#optionMergeStrategies"><span class="post-toc-number">1.1.3.6.</span> <span class="post-toc-text">optionMergeStrategies</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#【自定义选项合并策略】mixin"><span class="post-toc-number">1.1.3.6.1.</span> <span class="post-toc-text">【自定义选项合并策略】mixin</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#performance"><span class="post-toc-number">1.1.3.7.</span> <span class="post-toc-text">performance</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#app-directive"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">app.directive</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#app-unmount-🚩➕"><span class="post-toc-number">1.1.5.</span> <span class="post-toc-text">app.unmount 🚩➕</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#app-component"><span class="post-toc-number">1.1.6.</span> <span class="post-toc-text">app.component</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#watch"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">watch</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#emits-➕"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">emits ➕</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#依赖注入provide-inject"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">依赖注入provide&#x2F;inject</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基础使用方法"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">基础使用方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#响应式方法-🚩➕"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">响应式方法  🚩➕</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#弊端"><span class="post-toc-number">1.4.2.1.</span> <span class="post-toc-text">弊端</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#defineAsyncComponent-异步组件"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">defineAsyncComponent(异步组件)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#生命周期函数"><span class="post-toc-number">2.</span> <span class="post-toc-text">生命周期函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#与-2-x-版本生命周期相对应的组合式-API-🚩➕"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">与 2.x 版本生命周期相对应的组合式 API 🚩➕</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#非组合式api"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">非组合式api</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#内置指令变化"><span class="post-toc-number">3.</span> <span class="post-toc-text">内置指令变化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#v-model-🚩"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">v-model 🚩</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#组件使用"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">组件使用</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#v-is-🚩➕"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">v-is 🚩➕</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#v-slot-🚩➕"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">v-slot 🚩➕</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#自定义指令变化-🚩➕"><span class="post-toc-number">4.</span> <span class="post-toc-text">自定义指令变化 🚩➕</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#内置组件"><span class="post-toc-number">5.</span> <span class="post-toc-text">内置组件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#teleport-🚩➕"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">teleport 🚩➕</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Suspense-🚩➕"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">Suspense 🚩➕</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Fragments-🚩➕"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">Fragments 🚩➕</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#相应式系统-🚩🚩🚩"><span class="post-toc-number">6.</span> <span class="post-toc-text">相应式系统 🚩🚩🚩</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#响应式系统-API"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">响应式系统 API</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#reactive"><span class="post-toc-number">6.1.1.</span> <span class="post-toc-text">reactive</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ref"><span class="post-toc-number">6.1.2.</span> <span class="post-toc-text">ref</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#陷阱"><span class="post-toc-number">6.1.2.1.</span> <span class="post-toc-text">陷阱</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#心智负担上-ref-vs-reactive"><span class="post-toc-number">6.1.2.2.</span> <span class="post-toc-text">心智负担上 ref  vs  reactive</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#readonly"><span class="post-toc-number">6.1.3.</span> <span class="post-toc-text">readonly</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#reactive响应式系统工具集"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">reactive响应式系统工具集</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#isProxy"><span class="post-toc-number">6.2.1.</span> <span class="post-toc-text">isProxy</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#isReactive"><span class="post-toc-number">6.2.2.</span> <span class="post-toc-text">isReactive</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#isReadonly"><span class="post-toc-number">6.2.3.</span> <span class="post-toc-text">isReadonly</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#reactive高级响应式系统API"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">reactive高级响应式系统API</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#toRaw"><span class="post-toc-number">6.3.1.</span> <span class="post-toc-text">toRaw</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#markRaw"><span class="post-toc-number">6.3.2.</span> <span class="post-toc-text">markRaw</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#markRaw注意点"><span class="post-toc-number">6.3.2.1.</span> <span class="post-toc-text">markRaw注意点</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#shallowReactive"><span class="post-toc-number">6.3.3.</span> <span class="post-toc-text">shallowReactive</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#shallowReadonly"><span class="post-toc-number">6.3.4.</span> <span class="post-toc-text">shallowReadonly</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ref-响应式系统工具集"><span class="post-toc-number">6.4.</span> <span class="post-toc-text">ref 响应式系统工具集</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#unref"><span class="post-toc-number">6.4.1.</span> <span class="post-toc-text">unref</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#toRef"><span class="post-toc-number">6.4.2.</span> <span class="post-toc-text">toRef</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#toRefs"><span class="post-toc-number">6.4.3.</span> <span class="post-toc-text">toRefs</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#isRef"><span class="post-toc-number">6.4.4.</span> <span class="post-toc-text">isRef</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ref-高级响应式系统API"><span class="post-toc-number">6.5.</span> <span class="post-toc-text">ref 高级响应式系统API</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#customRef"><span class="post-toc-number">6.5.1.</span> <span class="post-toc-text">customRef</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#shallowRef"><span class="post-toc-number">6.5.2.</span> <span class="post-toc-text">shallowRef</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#triggerRef-【与shallowRef配合】"><span class="post-toc-number">6.5.3.</span> <span class="post-toc-text">triggerRef 【与shallowRef配合】</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Composition-API"><span class="post-toc-number">7.</span> <span class="post-toc-text">Composition API</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#setup"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">setup</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#调用时机"><span class="post-toc-number">7.1.1.</span> <span class="post-toc-text">调用时机</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#参数"><span class="post-toc-number">7.1.2.</span> <span class="post-toc-text">参数</span></a></li></ol></li></ol></li></ol>
-        </nav>
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">vue2~vue3迁移记录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E5%B1%80api%E5%8F%98%E5%8C%96"><span class="toc-text">全局api变化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#new-Vue-%E2%80%94-gt-createApp-%F0%9F%9A%A9-%E2%9E%95"><span class="toc-text">new Vue —&gt; createApp 🚩 ➕</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#internal-Apis-%F0%9F%9A%A9"><span class="toc-text">internal Apis  🚩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app-config"><span class="toc-text">app.config</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#globalProperties-%F0%9F%9A%A9%E2%9E%95"><span class="toc-text">globalProperties  🚩➕</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#devtools"><span class="toc-text">devtools</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#errorHandler"><span class="toc-text">errorHandler</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#warnHandler"><span class="toc-text">warnHandler</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#isCustomElement-%E2%9E%95"><span class="toc-text">isCustomElement ➕</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#optionMergeStrategies"><span class="toc-text">optionMergeStrategies</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%90%E8%87%AA%E5%AE%9A%E4%B9%89%E9%80%89%E9%A1%B9%E5%90%88%E5%B9%B6%E7%AD%96%E7%95%A5%E3%80%91mixin"><span class="toc-text">【自定义选项合并策略】mixin</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#performance"><span class="toc-text">performance</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app-directive"><span class="toc-text">app.directive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app-unmount-%F0%9F%9A%A9%E2%9E%95"><span class="toc-text">app.unmount 🚩➕</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app-component"><span class="toc-text">app.component</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#watch"><span class="toc-text">watch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#emits-%E2%9E%95"><span class="toc-text">emits ➕</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5provide-inject"><span class="toc-text">依赖注入provide&#x2F;inject</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">基础使用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E5%BC%8F%E6%96%B9%E6%B3%95-%F0%9F%9A%A9%E2%9E%95"><span class="toc-text">响应式方法  🚩➕</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%8A%E7%AB%AF"><span class="toc-text">弊端</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#defineAsyncComponent-%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6"><span class="toc-text">defineAsyncComponent(异步组件)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8E-2-x-%E7%89%88%E6%9C%AC%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9B%B8%E5%AF%B9%E5%BA%94%E7%9A%84%E7%BB%84%E5%90%88%E5%BC%8F-API-%F0%9F%9A%A9%E2%9E%95"><span class="toc-text">与 2.x 版本生命周期相对应的组合式 API 🚩➕</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%9E%E7%BB%84%E5%90%88%E5%BC%8Fapi"><span class="toc-text">非组合式api</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#v-model-%F0%9F%9A%A9"><span class="toc-text">v-model 🚩</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E4%BD%BF%E7%94%A8"><span class="toc-text">组件使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#v-is-%F0%9F%9A%A9%E2%9E%95"><span class="toc-text">v-is 🚩➕</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#v-slot-%F0%9F%9A%A9%E2%9E%95"><span class="toc-text">v-slot 🚩➕</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#teleport-%F0%9F%9A%A9%E2%9E%95"><span class="toc-text">teleport 🚩➕</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Suspense-%F0%9F%9A%A9%E2%9E%95"><span class="toc-text">Suspense 🚩➕</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fragments-%F0%9F%9A%A9%E2%9E%95"><span class="toc-text">Fragments 🚩➕</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F-API"><span class="toc-text">响应式系统 API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#reactive"><span class="toc-text">reactive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ref"><span class="toc-text">ref</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%99%B7%E9%98%B1"><span class="toc-text">陷阱</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%83%E6%99%BA%E8%B4%9F%E6%8B%85%E4%B8%8A-ref-vs-reactive"><span class="toc-text">心智负担上 ref  vs  reactive</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#readonly"><span class="toc-text">readonly</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reactive%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7%E9%9B%86"><span class="toc-text">reactive响应式系统工具集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#isProxy"><span class="toc-text">isProxy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isReactive"><span class="toc-text">isReactive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isReadonly"><span class="toc-text">isReadonly</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reactive%E9%AB%98%E7%BA%A7%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9FAPI"><span class="toc-text">reactive高级响应式系统API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#toRaw"><span class="toc-text">toRaw</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#markRaw"><span class="toc-text">markRaw</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#markRaw%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="toc-text">markRaw注意点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shallowReactive"><span class="toc-text">shallowReactive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shallowReadonly"><span class="toc-text">shallowReadonly</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ref-%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7%E9%9B%86"><span class="toc-text">ref 响应式系统工具集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#unref"><span class="toc-text">unref</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#toRef"><span class="toc-text">toRef</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#toRefs"><span class="toc-text">toRefs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isRef"><span class="toc-text">isRef</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ref-%E9%AB%98%E7%BA%A7%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9FAPI"><span class="toc-text">ref 高级响应式系统API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#customRef"><span class="toc-text">customRef</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shallowRef"><span class="toc-text">shallowRef</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#triggerRef-%E3%80%90%E4%B8%8EshallowRef%E9%85%8D%E5%90%88%E3%80%91"><span class="toc-text">triggerRef 【与shallowRef配合】</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setup"><span class="toc-text">setup</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E6%97%B6%E6%9C%BA"><span class="toc-text">调用时机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0"><span class="toc-text">参数</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
     </aside>
+    <div class='l_main'>
+      
+
+      
 
 
-<article id="post-vue2-vue3迁移记录"
-  class="post-article article-type-post fade" itemprop="blogPost">
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2022-04-16T02:59:12.000Z">2022-04-16</time></div></div>
 
-    <div class="post-card">
-        <h1 class="post-card-title">vue2~vue3迁移记录</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2022-04-16 10:59:12" datetime="2022-04-16T02:59:12.000Z"  itemprop="datePublished">2022-04-16</time>
-
-            
-
-
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <blockquote>
+<article class='md-text content post'>
+<h1 class="article-title"><span>vue2~vue3迁移记录</span></h1>
+<blockquote>
 <p>记录vue2到vue3版本迁移事项</p>
-<p><a href="https://v3.cn.vuejs.org/guide/migration/introduction.html" target="_blank" rel="noopener">官方迁移文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/migration/introduction.html">官方迁移文档</a></p>
 </blockquote>
 <h1 id="api变化"><a href="#api变化" class="headerlink" title="api变化"></a>api变化</h1><h2 id="全局api变化"><a href="#全局api变化" class="headerlink" title="全局api变化"></a>全局api变化</h2><h3 id="new-Vue-—-gt-createApp-🚩-➕"><a href="#new-Vue-—-gt-createApp-🚩-➕" class="headerlink" title="new Vue —&gt; createApp 🚩 ➕"></a>new Vue —&gt; createApp 🚩 ➕</h3><blockquote>
-<p>vue2中没有app 的概念，通过<code>Vue</code>的统一构造函数进行全局的配置，单页应用中无法创建多个不同全局配置的根应用（<a href="https://v3.cn.vuejs.org/guide/migration/global-api.html#%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%85%A8%E5%B1%80-api-createapp" target="_blank" rel="noopener">会造成全局配置污染</a>）</p>
+<p>vue2中没有app 的概念，通过<code>Vue</code>的统一构造函数进行全局的配置，单页应用中无法创建多个不同全局配置的根应用（<a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/migration/global-api.html#%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%85%A8%E5%B1%80-api-createapp">会造成全局配置污染</a>）</p>
 <p>vue3中有了app概念，通过<a href="https://github.com/vuejs/core/blob/4951d4352605eb9f4bcbea40ecc68fc6cbc3dce2/packages/runtime-dom/src/index.ts#L53">createApp</a>创建返回的实例<strong>暴露全局api</strong>，解决了vue2中的问题</p>
 </blockquote>
 <ul>
@@ -199,45 +116,38 @@
 <pre><code class="js">import Vue from &quot;vue&quot;;
 import App from &#39;./App.vue&#39;
 
-new Vue({
+new Vue(&#123;
   render: (h) =&gt; h(App)
-}).$mount(&quot;#app&quot;);</code></pre>
+&#125;).$mount(&quot;#app&quot;);</code></pre>
 </li>
 <li><p>Vue3</p>
 <blockquote>
 <p>createApp 生成一个app实例，该实例拥有全局的可配置上下文</p>
 </blockquote>
-<pre><code class="js">import { createApp } from &#39;vue&#39;
+<pre><code class="js">import &#123; createApp &#125; from &#39;vue&#39;
 import App from &#39;./App.vue&#39;
 
 const app = createApp(App).mount(&#39;#app&#39;);</code></pre>
 </li>
 </ul>
 <p>所以现在所有全局会改变Vue行为的api都改到了app应用实例上了</p>
-<img src="/Users/leo/Library/Application Support/typora-user-images/image-20220416124853316.png" alt="image-20220416124853316" style="zoom: 67%;">
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/Users/leo/Library/Application Support/typora-user-images/image-20220416124853316.png" alt="image-20220416124853316" style="zoom: 67%;">
 
 
 
-<h3 id="internal-Apis-🚩"><a href="#internal-Apis-🚩" class="headerlink" title="internal Apis  🚩"></a>internal Apis  🚩</h3><p><a href="https://v3.cn.vuejs.org/guide/migration/global-api-treeshaking.html#_2-x-%E8%AF%AD%E6%B3%95" target="_blank" rel="noopener">文档</a></p>
+<h3 id="internal-Apis-🚩"><a href="#internal-Apis-🚩" class="headerlink" title="internal Apis  🚩"></a>internal Apis  🚩</h3><p><a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/migration/global-api-treeshaking.html#_2-x-%E8%AF%AD%E6%B3%95">文档</a></p>
 <blockquote>
 <p>vue2中不少global-api是作为静态函数直接挂在构造函数上的，例如<code>Vue.nextTick()</code>，如果我们从未在代码中用过它们，就会形成所谓的<code>dead code</code>，这类global-api造成的<code>dead code</code>无法使用webpack的tree-shaking排除掉。</p>
 <p>vue3中做了相应的变化，将它们抽取成为独立函数，这样打包工具的摇树优化可以将这些dead code排除掉。</p>
 </blockquote>
 <p>Vue2</p>
 <pre><code class="js">import Vue from &#39;vue&#39;;
-Vue.nextTick(()=&gt;{})</code></pre>
+Vue.nextTick(()=&gt;&#123;&#125;)</code></pre>
 <p>Vue3</p>
-<pre><code class="js">import { nextTick } from &#39;vue&#39;
-nextTick(() =&gt; {})</code></pre>
+<pre><code class="js">import &#123; nextTick &#125; from &#39;vue&#39;
+nextTick(() =&gt; &#123;&#125;)</code></pre>
 <p>官方文档列出受影响的api</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="leo/Desktop/weng's" alt="image-20220416125617961" title="code/wengblog/NollieLeo.github.io/source/_posts/vue2-vue3迁移记录/image-20220416125617961.png">
-                </div>
-                <div class="image-caption">code/wengblog/NollieLeo.github.io/source/_posts/vue2-vue3迁移记录/image-20220416125617961.png</div>
-            </figure>
-
+<p>![image-20220416125617961](/Users/leo/Desktop/weng’s code/weng’blog/NollieLeo.github.io/source/_posts/vue2-vue3迁移记录/image-20220416125617961.png)</p>
 <h3 id="app-config"><a href="#app-config" class="headerlink" title="app.config"></a><code>app.config</code></h3><h4 id="globalProperties-🚩➕"><a href="#globalProperties-🚩➕" class="headerlink" title="globalProperties  🚩➕"></a><code>globalProperties</code>  🚩➕</h4><blockquote>
 <p>添加可在程序内的任何组件实例中访问的全局属性。</p>
 </blockquote>
@@ -246,7 +156,7 @@ nextTick(() =&gt; {})</code></pre>
 Vue.prototype.$http = axios</code></pre>
 <p>vue3</p>
 <pre><code class="js">// Vue3
-const app = Vue.createApp({})
+const app = Vue.createApp(&#123;&#125;)
 app.config.globalProperties.$http = axios</code></pre>
 <h4 id="devtools"><a href="#devtools" class="headerlink" title="devtools"></a><code>devtools</code></h4><blockquote>
 <p>配置是否允许 <a href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fvuejs%2Fvue-devtools">vue-devtools</a> 检查代码。开发版本默认为 <code>true</code>，生产版本默认为 <code>false</code>。生产版本设为 <code>true</code> 可以启用检查。</p>
@@ -254,16 +164,16 @@ app.config.globalProperties.$http = axios</code></pre>
 <pre><code class="js">- Vue.config.devtools = true
 + app.config.devtools = true    
 </code></pre>
-<h4 id="errorHandler"><a href="#errorHandler" class="headerlink" title="errorHandler"></a><code>errorHandler</code></h4><pre><code class="js">- Vue.config.errorHandler = function (err, vm, info) {
+<h4 id="errorHandler"><a href="#errorHandler" class="headerlink" title="errorHandler"></a><code>errorHandler</code></h4><pre><code class="js">- Vue.config.errorHandler = function (err, vm, info) &#123;
   // handle error
   // `info` 是 Vue 特定的错误信息，比如错误所在的生命周期钩子
   // 只在 2.2.0+ 可用
-}
-+ app.config.errorHandler = (err, vm, info) =&gt; {
+&#125;
++ app.config.errorHandler = (err, vm, info) =&gt; &#123;
   // handle error
   // `info` 是 Vue 特定的错误信息，比如错误所在的生命周期钩子
   // 这里能发现错误
-}
+&#125;
 </code></pre>
 <blockquote>
 <p>指定组件的渲染和观察期间未捕获错误的处理函数。这个处理函数被调用时，可获取错误信息和 Vue 实例。</p>
@@ -271,12 +181,12 @@ app.config.globalProperties.$http = axios</code></pre>
 <blockquote>
 <p>错误追踪服务 <a href="https://link.juejin.cn?target=https%3A%2F%2Fsentry.io%2F">Sentry</a> 和 <a href="https://link.juejin.cn?target=https%3A%2F%2Fdocs.bugsnag.com%2Fplatforms%2Fbrowsers%2Fvue%2F">Bugsnag</a> 都通过此选项提供了官方支持。</p>
 </blockquote>
-<h4 id="warnHandler"><a href="#warnHandler" class="headerlink" title="warnHandler"></a><code>warnHandler</code></h4><pre><code class="js">- Vue.config.warnHandler = function (msg, vm, trace) {
+<h4 id="warnHandler"><a href="#warnHandler" class="headerlink" title="warnHandler"></a><code>warnHandler</code></h4><pre><code class="js">- Vue.config.warnHandler = function (msg, vm, trace) &#123;
   // `trace` 是组件的继承关系追踪
-}
-+ app.config.warnHandler = function(msg, vm, trace) {
+&#125;
++ app.config.warnHandler = function(msg, vm, trace) &#123;
   // `trace` 是组件的继承关系追踪
-}
+&#125;
 </code></pre>
 <blockquote>
 <p>为 Vue 的运行时警告赋予一个自定义处理函数。注意这只会在开发者环境下生效，在生产环境下它会被忽略。</p>
@@ -299,19 +209,19 @@ app.config.globalProperties.$http = axios</code></pre>
 <blockquote>
 <p>注意，这个函数中不需要匹配所有原生HTML和SVG标记—Vue解析器会自动执行此检查</p>
 </blockquote>
-<h4 id="optionMergeStrategies"><a href="#optionMergeStrategies" class="headerlink" title="optionMergeStrategies"></a><code>optionMergeStrategies</code></h4><pre><code class="js">const app = Vue.createApp({
-  mounted() {
+<h4 id="optionMergeStrategies"><a href="#optionMergeStrategies" class="headerlink" title="optionMergeStrategies"></a><code>optionMergeStrategies</code></h4><pre><code class="js">const app = Vue.createApp(&#123;
+  mounted() &#123;
     console.log(this.$options.hello)
-  }
-})
+  &#125;
+&#125;)
 
-app.config.optionMergeStrategies.hello = (parent, child, vm) =&gt; {
-  return `Hello, ${child}`
-}
+app.config.optionMergeStrategies.hello = (parent, child, vm) =&gt; &#123;
+  return `Hello, $&#123;child&#125;`
+&#125;
 
-app.mixin({
+app.mixin(&#123;
   hello: &#39;Vue&#39;
-})
+&#125;)
 
 // &#39;Hello, Vue
 </code></pre>
@@ -319,23 +229,23 @@ app.mixin({
 <p>定义自定义选项的合并策略。</p>
 <p>合并策略接收在<strong>父实例</strong>options和∗∗子实例∗∗options和<strong>子实例</strong>options和∗∗子实例∗∗options，分别作为第一个和第二个参数。上下文Vue实例作为第三个参数传递</p>
 </blockquote>
-<h5 id="【自定义选项合并策略】mixin"><a href="#【自定义选项合并策略】mixin" class="headerlink" title="【自定义选项合并策略】mixin"></a>【自定义选项合并策略】<a href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fvuejs%2Fdocs-next%2Fblob%2Fmaster%2Fsrc%2Fguide%2Fmixins.md%23custom-option-merge-strategies">mixin</a></h5><pre><code class="js">const app = Vue.createApp({
+<h5 id="【自定义选项合并策略】mixin"><a href="#【自定义选项合并策略】mixin" class="headerlink" title="【自定义选项合并策略】mixin"></a>【自定义选项合并策略】<a href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fvuejs%2Fdocs-next%2Fblob%2Fmaster%2Fsrc%2Fguide%2Fmixins.md%23custom-option-merge-strategies">mixin</a></h5><pre><code class="js">const app = Vue.createApp(&#123;
   custom: &#39;hello!&#39;
-})
+&#125;)
 
-app.config.optionMergeStrategies.custom = (toVal, fromVal) =&gt; {
+app.config.optionMergeStrategies.custom = (toVal, fromVal) =&gt; &#123;
   console.log(fromVal, toVal)
   // =&gt; &quot;goodbye!&quot;, undefined
   // =&gt; &quot;hello!&quot;, &quot;goodbye!&quot;
   return fromVal || toVal
-}
+&#125;
 
-app.mixin({
+app.mixin(&#123;
   custom: &#39;goodbye!&#39;,
-  created() {
+  created() &#123;
     console.log(this.$options.custom) // =&gt; &quot;hello!&quot;
-  }
-})
+  &#125;
+&#125;)
 </code></pre>
 <blockquote>
 <ul>
@@ -359,30 +269,30 @@ app.mixin({
 <blockquote>
 <p>注册或获取全局指令。</p>
 </blockquote>
-<pre><code class="js">import { createApp } from &#39;vue&#39;
-const app = createApp({})
+<pre><code class="js">import &#123; createApp &#125; from &#39;vue&#39;
+const app = createApp(&#123;&#125;)
 
 // 注册
-app.directive(&#39;my-directive&#39;, {
+app.directive(&#39;my-directive&#39;, &#123;
   // 指令的生命周期
   // 在绑定元素的父组件被挂载之前调用
-  beforeMount(el, binding, vnode) {},
+  beforeMount(el, binding, vnode) &#123;&#125;,
   // 在挂载绑定元素的父组件时调用
-  mounted(el, binding, vnode) {},
+  mounted(el, binding, vnode) &#123;&#125;,
   // 在更新包含组件的VNode之前调用
-  beforeUpdate(el, binding, vnode, prevNode) {},
+  beforeUpdate(el, binding, vnode, prevNode) &#123;&#125;,
   // 组件的VNode及其子组件的VNode更新之后调用
-  updated(el, binding, vnode, prevNode) {},
+  updated(el, binding, vnode, prevNode) &#123;&#125;,
   // 在卸载绑定元素的父组件之前调用
-  beforeUnmount(el, binding, vnode) {},
+  beforeUnmount(el, binding, vnode) &#123;&#125;,
   // 在卸载绑定元素的父组件时调用
-  unmounted(el, binding, vnode) {}
-})
+  unmounted(el, binding, vnode) &#123;&#125;
+&#125;)
 
 // 注册 (指令函数)
-app.directive(&#39;my-directive&#39;, (el, binding, vnode, prevNode) =&gt; {
+app.directive(&#39;my-directive&#39;, (el, binding, vnode, prevNode) =&gt; &#123;
   // 这里将会被 `mounted` 和 `updated` 调用
-})
+&#125;)
 
 // getter，返回已注册的指令
 const myDirective = app.directive(&#39;my-directive&#39;)
@@ -400,21 +310,21 @@ const myDirective = app.directive(&#39;my-directive&#39;)
 </li>
 <li><p>arg：传给指令的参数，可选。例如 <code>v-my-directive:foo</code> 中，参数为 <code>&quot;foo&quot;</code></p>
 </li>
-<li><p>modifiers：一个包含修饰符的对象。例如：<code>v-my-directive.foo.bar</code> 中，修饰符对象为 <code>{ foo: true, bar: true }</code></p>
+<li><p>modifiers：一个包含修饰符的对象。例如：<code>v-my-directive.foo.bar</code> 中，修饰符对象为 <code>&#123; foo: true, bar: true &#125;</code></p>
 </li>
 <li><p>dir：一个对象，在注册指令时作为参数传递;  举个例子，看下面指令</p>
-<pre><code class="js">app.directive(&#39;focus&#39;, {
-  mounted(el) {
+<pre><code class="js">app.directive(&#39;focus&#39;, &#123;
+  mounted(el) &#123;
     el.focus()
-  }
-})
+  &#125;
+&#125;)
 </code></pre>
 <p>dir就是下面的对象</p>
-<pre><code class="vue">{
-  mounted(el) {
+<pre><code class="vue">&#123;
+  mounted(el) &#123;
     el.focus()
-  }
-}
+  &#125;
+&#125;
 </code></pre>
 </li>
 </ul>
@@ -432,9 +342,9 @@ const myDirective = app.directive(&#39;my-directive&#39;)
 <h3 id="app-unmount-🚩➕"><a href="#app-unmount-🚩➕" class="headerlink" title="app.unmount 🚩➕"></a><code>app.unmount</code> 🚩➕</h3><blockquote>
 <p>在所提供的DOM元素上卸载应用程序实例的根组件</p>
 </blockquote>
-<pre><code class="js">import { createApp } from &#39;vue&#39;
+<pre><code class="js">import &#123; createApp &#125; from &#39;vue&#39;
 
-const app = createApp({})
+const app = createApp(&#123;&#125;)
 // 做一些必要的准备
 app.mount(&#39;#my-app&#39;)
 
@@ -444,7 +354,7 @@ setTimeout(() =&gt; app.unmount(&#39;#my-app&#39;), 5000)</code></pre>
 <li><p>Vue2.x【注册或获取全局组件。注册还会自动使用给定的 <code>id</code> 设置组件的名称】</p>
 <pre><code class="js">// 注册组件，传入一个选项对象 (自动调用 Vue.extend) 
 
-Vue.component(&#39;my-component&#39;, { /* ... */ }) 
+Vue.component(&#39;my-component&#39;, &#123; /* ... */ &#125;) 
 
 // 获取注册的组件 (始终返回构造器) 
 var MyComponent = Vue.component(&#39;my-component&#39;)
@@ -454,34 +364,34 @@ var MyComponent = Vue.component(&#39;my-component&#39;)
 <blockquote>
 <p>基本vue2写法一致</p>
 </blockquote>
-<pre><code class="js">import { createApp } from &#39;vue&#39;
+<pre><code class="js">import &#123; createApp &#125; from &#39;vue&#39;
 
-const app = createApp({})
+const app = createApp(&#123;&#125;)
 
 // 注册组件，传入一个选项对象
-app.component(&#39;my-component&#39;, {
+app.component(&#39;my-component&#39;, &#123;
   /* ... */
-})
+&#125;)
 
 // 获取注册的组件 (始终返回构造器) 
-const MyComponent = app.component(&#39;my-component&#39;, {})</code></pre>
+const MyComponent = app.component(&#39;my-component&#39;, &#123;&#125;)</code></pre>
 </li>
 </ul>
 <h2 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h2><blockquote>
 <p>以<code>.</code>分割的表达式不再被watch支持，可以使用计算函数作为<em>w*</em>a<strong>t</strong>c*<em>h</em>支持，可以使用计算函数作为watch参数实现。</p>
 </blockquote>
 <p><strong>Vue2</strong></p>
-<pre><code class="js">watch: {
-    &quot;data.id&quot;(val) {  
-    },
-},</code></pre>
+<pre><code class="js">watch: &#123;
+    &quot;data.id&quot;(val) &#123;  
+    &#125;,
+&#125;,</code></pre>
 <p><strong>Vue3</strong></p>
-<pre><code class="js">const data = reactive({
+<pre><code class="js">const data = reactive(&#123;
   id:121
-});
-watch(data.id,()=&gt;{})</code></pre>
+&#125;);
+watch(data.id,()=&gt;&#123;&#125;)</code></pre>
 <h2 id="emits-➕"><a href="#emits-➕" class="headerlink" title="emits ➕"></a>emits ➕</h2><blockquote>
-<p><a href="https://v3.cn.vuejs.org/guide/migration/emits-option.html#emits-%E9%80%89%E9%A1%B9" target="_blank" rel="noopener">官方文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/migration/emits-option.html#emits-%E9%80%89%E9%A1%B9">官方文档</a></p>
 </blockquote>
 <ul>
 <li>emits 可以是数组或对象</li>
@@ -493,21 +403,21 @@ watch(data.id,()=&gt;{})</code></pre>
 </blockquote>
 <h3 id="基础使用方法"><a href="#基础使用方法" class="headerlink" title="基础使用方法"></a>基础使用方法</h3><p>看文档</p>
 <h3 id="响应式方法-🚩➕"><a href="#响应式方法-🚩➕" class="headerlink" title="响应式方法  🚩➕"></a>响应式方法  🚩➕</h3><p>例如：</p>
-<pre><code class="js">import { ref, reactive } from &#39;vue&#39;
+<pre><code class="js">import &#123; ref, reactive &#125; from &#39;vue&#39;
 
 // 提供者
-setup() {
-  const book = reactive({
+setup() &#123;
+  const book = reactive(&#123;
     title: &#39;Vue 3 Guide&#39;,
     author: &#39;Vue Team&#39;
-  })
+  &#125;)
   const year = ref(&#39;2020&#39;)
 
  /*提供reactive响应式*/
   provide(&#39;book&#39;, book)
  /*提供ref响应式*/
   provide(&#39;year&#39;, year)
-}</code></pre>
+&#125;</code></pre>
 <h4 id="弊端"><a href="#弊端" class="headerlink" title="弊端"></a>弊端</h4><p>提供相应式的方法之后，子组建就可以尝试对这个引用值进行修改，从而导致单向数据流通的紊乱</p>
 <p>为了避免这种情况，基于provide进行封装</p>
 <pre><code class="js">/*
@@ -518,24 +428,24 @@ setup() {
  * @FilePath: /vue3-vite-test/src/hooks/useProvide.ts
  * @Description: provide （observerable provide）
  */
-import { provide, readonly, reactive, ref, isReactive } from &quot;vue&quot;;
+import &#123; provide, readonly, reactive, ref, isReactive &#125; from &quot;vue&quot;;
 import forEach from &quot;lodash/forEach&quot;;
 
-const useProvide = (shouldReactive: Boolean = true) =&gt; {
-  const handleProvide = (providers: Record&lt;string, any&gt;): void =&gt; {
-    forEach(providers, (value, key) =&gt; {
+const useProvide = (shouldReactive: Boolean = true) =&gt; &#123;
+  const handleProvide = (providers: Record&lt;string, any&gt;): void =&gt; &#123;
+    forEach(providers, (value, key) =&gt; &#123;
       let provideValue;
       const isFunction = typeof value === &quot;function&quot;;
-      if (!isFunction) {
+      if (!isFunction) &#123;
         provideValue =
           shouldReactive &amp;&amp; !isReactive(value) ? ref(value) : value;
-      }
+      &#125;
       provide(key, isFunction ? provideValue : readonly(provideValue));
-    });
-  };
+    &#125;);
+  &#125;;
 
   return handleProvide;
-};
+&#125;;
 
 export default useProvide;</code></pre>
 <h2 id="defineAsyncComponent-异步组件"><a href="#defineAsyncComponent-异步组件" class="headerlink" title="defineAsyncComponent(异步组件)"></a>defineAsyncComponent(异步组件)</h2><h1 id="生命周期函数"><a href="#生命周期函数" class="headerlink" title="生命周期函数"></a>生命周期函数</h1><h2 id="与-2-x-版本生命周期相对应的组合式-API-🚩➕"><a href="#与-2-x-版本生命周期相对应的组合式-API-🚩➕" class="headerlink" title="与 2.x 版本生命周期相对应的组合式 API 🚩➕"></a><strong>与 2.x 版本生命周期相对应的组合式 API</strong> 🚩➕</h2><ul>
@@ -551,7 +461,7 @@ export default useProvide;</code></pre>
 </ul>
 <h2 id="非组合式api"><a href="#非组合式api" class="headerlink" title="非组合式api"></a>非组合式api</h2><p>只是改了名字</p>
 <h1 id="内置指令变化"><a href="#内置指令变化" class="headerlink" title="内置指令变化"></a>内置指令变化</h1><h2 id="v-model-🚩"><a href="#v-model-🚩" class="headerlink" title="v-model 🚩"></a><code>v-model</code> 🚩</h2><blockquote>
-<p><a href="https://v3.cn.vuejs.org/guide/component-basics.html#%E5%9C%A8%E7%BB%84%E4%BB%B6%E4%B8%8A%E4%BD%BF%E7%94%A8-v-model" target="_blank" rel="noopener">官方文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/component-basics.html#%E5%9C%A8%E7%BB%84%E4%BB%B6%E4%B8%8A%E4%BD%BF%E7%94%A8-v-model">官方文档</a></p>
 </blockquote>
 <h3 id="组件使用"><a href="#组件使用" class="headerlink" title="组件使用"></a>组件使用</h3><p><strong>vue2 — v-model</strong></p>
 <pre><code class="jsx">&lt;ChildComponent v-model=&quot;pageTitle&quot; /&gt;
@@ -562,21 +472,21 @@ export default useProvide;</code></pre>
 <pre><code class="jsx">&lt;!-- ParentComponent.vue --&gt;
 &lt;ChildComponent v-model=&quot;pageTitle&quot; /&gt;</code></pre>
 <pre><code class="js">// ChildComponent.vue
-export default {
-  model: {
+export default &#123;
+  model: &#123;
     prop: &#39;title&#39;,
     event: &#39;change&#39;
-  },
-  props: {
+  &#125;,
+  props: &#123;
     // 这将允许 `value` 属性用于其他用途
     value: String,
     // 使用 `title` 代替 `value` 作为 model 的 prop
-    title: {
+    title: &#123;
       type: String,
       default: &#39;Default title&#39;
-    }
-  }
-}</code></pre>
+    &#125;
+  &#125;
+&#125;</code></pre>
 <p>所以，在这个例子中 <code>v-model</code> 的简写如下：</p>
 <pre><code class="jsx">&lt;ChildComponent :title=&quot;pageTitle&quot; @change=&quot;pageTitle = $event&quot; /&gt;</code></pre>
 <p><strong>Vue2 — v-bind.sync</strong></p>
@@ -635,28 +545,28 @@ export default {
 <p>如果我们要<strong>在 slot 上面绑定数据，可以使用作用域插槽</strong>，实现如下：</p>
 <pre><code class="js">// 子组件
 &lt;slot name=&quot;content&quot; :data=&quot;data&quot;&gt;&lt;/slot&gt;
-export default {
-    data(){
-        return{
+export default &#123;
+    data()&#123;
+        return&#123;
             data:[&quot;走过来人来人往&quot;,&quot;不喜欢也得欣赏&quot;,&quot;陪伴是最长情的告白&quot;]
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 
 &lt;!-- 父组件中使用 --&gt;
 &lt;template slot=&quot;content&quot; slot-scope=&quot;scoped&quot;&gt;
-    &lt;div v-for=&quot;item in scoped.data&quot;&gt;{{item}}&lt;/div&gt;
+    &lt;div v-for=&quot;item in scoped.data&quot;&gt;&#123;&#123;item&#125;&#125;&lt;/div&gt;
 &lt;template&gt;</code></pre>
 <p><strong>Vue3</strong></p>
 <p>在 Vue2.x 中具名插槽和作用域插槽分别使用<code>slot</code>和<code>slot-scope</code>来实现， 在 Vue3.0 中将<code>slot</code>和<code>slot-scope</code>进行了合并同意使用。 Vue3.0 中<code>v-slot</code>：</p>
 <pre><code class="vue">&lt;!-- 父组件中使用 --&gt;
  &lt;template v-slot:content=&quot;scoped&quot;&gt;
-   &lt;div v-for=&quot;item in scoped.data&quot;&gt;{{item}}&lt;/div&gt;
+   &lt;div v-for=&quot;item in scoped.data&quot;&gt;&#123;&#123;item&#125;&#125;&lt;/div&gt;
 &lt;/template&gt;
 
 &lt;!-- 也可以简写成： --&gt;
-&lt;template #content=&quot;{data}&quot;&gt;
-    &lt;div v-for=&quot;item in data&quot;&gt;{{item}}&lt;/div&gt;
+&lt;template #content=&quot;&#123;data&#125;&quot;&gt;
+    &lt;div v-for=&quot;item in data&quot;&gt;&#123;&#123;item&#125;&#125;&lt;/div&gt;
 &lt;/template&gt;</code></pre>
 <h1 id="自定义指令变化-🚩➕"><a href="#自定义指令变化-🚩➕" class="headerlink" title="自定义指令变化 🚩➕"></a>自定义指令变化 🚩➕</h1><p>vue3中指令api和组件保持一致，具体表现在：</p>
 <ul>
@@ -692,7 +602,7 @@ export default {
 </li>
 </ul>
 <h2 id="Suspense-🚩➕"><a href="#Suspense-🚩➕" class="headerlink" title="Suspense 🚩➕"></a><code>Suspense</code> 🚩➕</h2><blockquote>
-<p><a href="https://v3.cn.vuejs.org/guide/migration/suspense.html#%E4%BB%8B%E7%BB%8D" target="_blank" rel="noopener">官方文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/migration/suspense.html#%E4%BB%8B%E7%BB%8D">官方文档</a></p>
 </blockquote>
 <blockquote>
 <p>官方文档目前还是标注为试验性</p>
@@ -714,28 +624,28 @@ export default {
 &lt;/template&gt;
 
 &lt;script&gt;
-import { ref, defineAsyncComponent } from &#39;vue&#39;
+import &#123; ref, defineAsyncComponent &#125; from &#39;vue&#39;
 
-export default {
-  components: {
+export default &#123;
+  components: &#123;
     MAsynComp: defineAsyncComponent(() =&gt; import(&#39;./AsynComp.vue&#39;)),
-  },
-  setup() {
+  &#125;,
+  setup() &#123;
     const loadAsync = ref(false)
-    const loadAsyncComponent = () =&gt; {
+    const loadAsyncComponent = () =&gt; &#123;
       loadAsync.value = true
-    }
-    return {
+    &#125;
+    return &#123;
       loadAsync,
       loadAsyncComponent,
-    }
-  },
-}
+    &#125;
+  &#125;,
+&#125;
 &lt;/script&gt;
 
 &lt;style lang=&quot;less&quot; scoped&gt;
 
-button {
+button &#123;
   padding: 12px 12px;
   background-color: #1890ff;
   outline: none;
@@ -743,8 +653,8 @@ button {
   border-radius: 4px;
   color: #fff;
   cursor: pointer;
-}
-.loading {
+&#125;
+.loading &#123;
   position: absolute;
   width: 36px;
   height: 36px;
@@ -754,15 +664,15 @@ button {
   background-image: url(&#39;../assets/loading.png&#39;);
   background-size: 100%;
   animation: rotate 1.4s linear infinite;
-}
-@keyframes rotate {
-  from {
+&#125;
+@keyframes rotate &#123;
+  from &#123;
     transform: rotate(0);
-  }
-  to {
+  &#125;
+  to &#123;
     transform: rotate(360deg);
-  }
-}
+  &#125;
+&#125;
 &lt;/style&gt;
 
 </code></pre>
@@ -772,20 +682,20 @@ button {
 &lt;/template&gt;
 
 &lt;script&gt;
-import { setup } from &#39;vue&#39;
-export default {
+import &#123; setup &#125; from &#39;vue&#39;
+export default &#123;
   name: &#39;AsyncComponent&#39;,
-  async setup() {
-    const sleep = (time) =&gt; {
-      return new Promise((reslove, reject) =&gt; {
-        setTimeout(() =&gt; {
+  async setup() &#123;
+    const sleep = (time) =&gt; &#123;
+      return new Promise((reslove, reject) =&gt; &#123;
+        setTimeout(() =&gt; &#123;
           reslove()
-        }, time)
-      })
-    }
+        &#125;, time)
+      &#125;)
+    &#125;
     await sleep(3000) //模拟数据请求
-  },
-}
+  &#125;,
+&#125;
 &lt;/script&gt;
 
 </code></pre>
@@ -813,32 +723,32 @@ export default {
 <p><code>reactive</code> 类的 api 主要提供了将复杂类型的数据处理成响应式数据的能力，其实这个复杂类型是要在<code>object array map set weakmap weakset</code> 这五种之中</p>
 </blockquote>
 <blockquote>
-<p>因为是组合函数【对象】，所以必须始终保持对这个所返回对象的引用以保持响应性【不能解构该对象或者展开】例如 <code>const { x, y } = useMousePosition()</code>或者<code>return { ...useMousePosition() }</code></p>
+<p>因为是组合函数【对象】，所以必须始终保持对这个所返回对象的引用以保持响应性【不能解构该对象或者展开】例如 <code>const &#123; x, y &#125; = useMousePosition()</code>或者<code>return &#123; ...useMousePosition() &#125;</code></p>
 </blockquote>
-<pre><code class="js">function useMousePosition() {
-    const pos = reactive({
+<pre><code class="js">function useMousePosition() &#123;
+    const pos = reactive(&#123;
         x: 0,
         y: 0,
-      })
+      &#125;)
 
     return pos
-}
+&#125;
 
 
 
 </code></pre>
-<p><a href="https://v3.cn.vuejs.org/guide/composition-api-introduction.html#torefs" target="_blank" rel="noopener"><code>toRefs</code></a> API 用来提供解决此约束的办法——它将响应式对象的每个 property 都转成了相应的 ref【把对象转成了ref】。</p>
+<p><a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/composition-api-introduction.html#torefs"><code>toRefs</code></a> API 用来提供解决此约束的办法——它将响应式对象的每个 property 都转成了相应的 ref【把对象转成了ref】。</p>
 <blockquote>
-<pre><code class="js"> function useMousePosition() {
-    const pos = reactive({
+<pre><code class="js"> function useMousePosition() &#123;
+    const pos = reactive(&#123;
         x: 0,
         y: 0,
-      })
+      &#125;)
     return toRefs(pos)
-}
+&#125;
 
 // x &amp; y 现在是 ref 形式了!
-const { x, y } = useMousePosition()
+const &#123; x, y &#125; = useMousePosition()
 </code></pre>
 </blockquote>
 <h3 id="ref"><a href="#ref" class="headerlink" title="ref"></a><code>ref</code></h3><p>接受一个参数值并返回一个响应式且可改变的 ref 对象。ref 对象拥有一个指向内部值的单一属性 <code>.value</code></p>
@@ -855,9 +765,9 @@ console.log(count.value) // 0
 <li><p>ref 作为 reactive 对象的 property 被访问或修改时，也将自动解套 <code>.value</code></p>
 <pre><code class="js">const count = ref(0)
 /*当做reactive的对象属性----解套*/
-const state = reactive({
+const state = reactive(&#123;
   count,
-})
+&#125;)
 /* 不需要.value*/
 console.log(state.count) // 0
 
@@ -896,14 +806,14 @@ console.log(map.get(&#39;foo&#39;).value)
 <li>所有的地方都用 <code>reactive</code>，然后记得在组合函数返回响应式对象时使用 <code>toRefs</code>。这降低了一些关于 ref 的心智负担</li>
 </ul>
 <h3 id="readonly"><a href="#readonly" class="headerlink" title="readonly"></a><code>readonly</code></h3><p>传入一个对象（响应式或普通）或 ref，返回一个原始对象的<strong>只读</strong>代理。一个只读的代理是“深层的”，对象内部任何嵌套的属性也都是只读的【返回一个永远不会变的只读代理】【场景可以参数比对等】</p>
-<pre><code class="js">const original = reactive({ count: 0 })
+<pre><code class="js">const original = reactive(&#123; count: 0 &#125;)
 
 const copy = readonly(original)
 
-watchEffect(() =&gt; {
+watchEffect(() =&gt; &#123;
   // 依赖追踪
   console.log(copy.count)
-})
+&#125;)
 
 // original 上的修改会触发 copy 上的侦听
 original.count++
@@ -916,23 +826,23 @@ copy.count++ // warning!
 </blockquote>
 <h3 id="isReactive"><a href="#isReactive" class="headerlink" title="isReactive"></a><code>isReactive</code></h3><blockquote>
 <p>检查一个对象是否是由 <code>reactive</code> 创建的响应式代理</p>
-<pre><code class="js">import { reactive, isReactive } from &#39;vue&#39;
-const state = reactive({
+<pre><code class="js">import &#123; reactive, isReactive &#125; from &#39;vue&#39;
+const state = reactive(&#123;
       name: &#39;John&#39;
-    })
+    &#125;)
 console.log(isReactive(state)) // -&gt; true
 </code></pre>
 </blockquote>
 <blockquote>
 <p>如果这个代理是由 <code>readonly</code> 创建的，但是又被 <code>reactive</code> 创建的另一个代理包裹了一层，那么同样也会返回 <code>true</code></p>
-<pre><code class="js">import { reactive, isReactive, readonly } from &#39;vue&#39;
-const state = reactive({
+<pre><code class="js">import &#123; reactive, isReactive, readonly &#125; from &#39;vue&#39;
+const state = reactive(&#123;
       name: &#39;John&#39;
-    })
+    &#125;)
 // 用readonly创建一个只读响应式对象plain
-const plain = readonly({
+const plain = readonly(&#123;
     name: &#39;Mary&#39;
-})
+&#125;)
 //readonly创建的，所以isReactive为false
 console.log(isReactive(plain)) // -&gt; false  
 
@@ -948,7 +858,7 @@ console.log(isReactive(stateCopy)) // -&gt; true
 <p>返回由 <code>reactive</code> 或 <code>readonly</code> 方法转换成响应式代理的普通对象。这是一个还原方法，可用于临时读取，访问不会被代理/跟踪，写入时也不会触发更改。不建议一直持有原始对象的引用【<code>**不建议赋值给任何变量**</code>】。请谨慎使用</p>
 </blockquote>
 <p>被<strong><code>toRaw</code></strong>之后的对象是没有被代理/跟踪的的普通对象</p>
-<pre><code class="js">const foo = {}
+<pre><code class="js">const foo = &#123;&#125;
 const reactiveFoo = reactive(foo)
 
 console.log(toRaw(reactiveFoo) === foo) // true
@@ -957,15 +867,15 @@ console.log(toRaw(reactiveFoo) !== reactiveFoo) // true
 <h3 id="markRaw"><a href="#markRaw" class="headerlink" title="markRaw"></a><code>markRaw</code></h3><p>显式标记一个对象为“永远不会转为响应式代理”，函数返回这个对象本身。</p>
 <blockquote>
 <p>【<code>markRaw</code>传入对象，返回的值是永远不会被转为响应式代理的】</p>
-<pre><code class="js">const foo = markRaw({
+<pre><code class="js">const foo = markRaw(&#123;
     name: &#39;Mary&#39;
-})
+&#125;)
 console.log(isReactive(reactive(foo))) // false
 </code></pre>
 </blockquote>
 <blockquote>
 <p>被 markRaw 标记了，即使在响应式对象中作属性，也依然不是响应式的</p>
-<pre><code class="js">const bar = reactive({ foo })
+<pre><code class="js">const bar = reactive(&#123; foo &#125;)
 console.log(isReactive(bar.foo)) // false
 </code></pre>
 </blockquote>
@@ -979,14 +889,14 @@ console.log(isReactive(bar.foo)) // false
 </ul>
 </li>
 <li><p>这些 API 被认为是高级的，是因为这种特性仅停留在根级别，所以如果你将一个嵌套的，没有 <code>markRaw</code> 的对象设置为 reactive 对象的属性，在重新访问时，你又会得到一个 Proxy 的版本，在使用中最终会导致<strong>标识混淆</strong>的严重问题：执行某个操作同时依赖于某个对象的原始版本和代理版本（标识混淆在一般使用当中应该是非常罕见的，但是要想完全避免这样的问题，必须要对整个响应式系统的工作原理有一个相当清晰的认知）。</p>
-<pre><code class="js">const foo = markRaw({
-  nested: {},
-})
+<pre><code class="js">const foo = markRaw(&#123;
+  nested: &#123;&#125;,
+&#125;)
 
-const bar = reactive({
+const bar = reactive(&#123;
   // 尽管 `foo` 己经被标记为 raw 了, 但 foo.nested 并没有
   nested: foo.nested,
-})
+&#125;)
 
 console.log(foo.nested === bar.nested) // false
 </code></pre>
@@ -996,12 +906,12 @@ console.log(foo.nested === bar.nested) // false
 </li>
 </ul>
 <h3 id="shallowReactive"><a href="#shallowReactive" class="headerlink" title="shallowReactive"></a><code>shallowReactive</code></h3><p>只为某个对象的私有（第一层）属性创建浅层的响应式代理，不会对“属性的属性”做深层次、递归地响应式代理，而只是保留原样【第一层是响应式代理，深层次只保留原样(不具备响应式代理)】</p>
-<pre><code class="js">const state = shallowReactive({
+<pre><code class="js">const state = shallowReactive(&#123;
   foo: 1,
-  nested: {
+  nested: &#123;
     bar: 2,
-  },
-})
+  &#125;,
+&#125;)
 
 // 变更 state 的自有属性是响应式的【第一层次响应式】
 state.foo++
@@ -1014,12 +924,12 @@ state.nested.bar++ // 非响应式
 <li>第一层将会是响应式代理【第一层修改属性会失败】，属性为响应式</li>
 <li>深层次的对象属性可以修改，属性不是响应式</li>
 </ul>
-<pre><code class="js">const state = shallowReadonly({
+<pre><code class="js">const state = shallowReadonly(&#123;
   foo: 1,
-  nested: {
+  nested: &#123;
     bar: 2,
-  },
-})
+  &#125;,
+&#125;)
 
 // 变更 state 的自有属性会失败
 state.foo++
@@ -1030,15 +940,15 @@ state.nested.bar++ // 嵌套属性依然可修改
 <h2 id="ref-响应式系统工具集"><a href="#ref-响应式系统工具集" class="headerlink" title="ref 响应式系统工具集"></a><code>ref</code> 响应式系统工具集</h2><h3 id="unref"><a href="#unref" class="headerlink" title="unref"></a><code>unref</code></h3><p><code>unref</code>是<code>val = isRef(val) ? val.value : val</code> 的语法糖</p>
 <pre><code class="js">unref(ref(0))===unref(0)===0   返回number
 
-function useFoo(x: number | Ref&lt;number&gt;) {
+function useFoo(x: number | Ref&lt;number&gt;) &#123;
   const unwrapped = unref(x) // unwrapped 一定是 number 类型
-}
+&#125;
 </code></pre>
 <h3 id="toRef"><a href="#toRef" class="headerlink" title="toRef"></a><code>toRef</code></h3><p><code>toRef</code> 可以用来为一个 reactive 对象的<code>属性</code>【某个属性区别toRefs每一个属性】创建一个 ref。这个 ref 可以被传递并且能够保持响应性</p>
-<pre><code class="js">const state = reactive({
+<pre><code class="js">const state = reactive(&#123;
   foo: 1,
   bar: 2,
-})
+&#125;)
 
 //reactive获取单个属性转为ref【fooRef只是一个代理】
 const fooRef = toRef(state, &#39;foo&#39;)
@@ -1050,19 +960,19 @@ state.foo++
 console.log(fooRef.value) // 3
 </code></pre>
 <h3 id="toRefs"><a href="#toRefs" class="headerlink" title="toRefs"></a><code>toRefs</code></h3><p>把一个响应式对象转换成普通对象，该普通对象的每个 property 都是一个 ref ，和响应式对象 property 一一对应</p>
-<pre><code class="js">const state = reactive({
+<pre><code class="js">const state = reactive(&#123;
   foo: 1,
   bar: 2,
-})
+&#125;)
 
 const stateAsRefs = toRefs(state)
 /*
 stateAsRefs 的类型如下:
 
-{
+&#123;
   foo: Ref&lt;number&gt;,
   bar: Ref&lt;number&gt;
-}
+&#125;
 */
 
 // ref 对象 与 原属性的引用是 &quot;链接&quot; 上的
@@ -1074,29 +984,29 @@ console.log(state.foo) // 3
 </code></pre>
 <blockquote>
 <p>可以通过<code>toRefs</code>返回可解构的reactive，因为<code>toRefs</code>包裹之后返回一一对应的ref属性</p>
-<pre><code class="js">function useFeatureX() {
-  const state = reactive({
+<pre><code class="js">function useFeatureX() &#123;
+  const state = reactive(&#123;
     foo: 1,
     bar: 2,
-  })
+  &#125;)
 
   // 对 state 的逻辑操作
 
   // 返回时将属性都转为 ref
   return toRefs(state)
-}
+&#125;
 
-export default {
-  setup() {
+export default &#123;
+  setup() &#123;
     // 可以解构，不会丢失响应性
-    const { foo, bar } = useFeatureX()
+    const &#123; foo, bar &#125; = useFeatureX()
 
-    return {
+    return &#123;
       foo,
       bar,
-    }
-  },
-}
+    &#125;
+  &#125;,
+&#125;
 </code></pre>
 </blockquote>
 <h3 id="isRef"><a href="#isRef" class="headerlink" title="isRef"></a><code>isRef</code></h3><p>检查一个值是否为一个 ref 对象</p>
@@ -1104,54 +1014,54 @@ export default {
 <ul>
 <li>以下代码可以使得v-model防抖</li>
 </ul>
-<pre><code class="js">function useDebouncedRef(value, delay = 200) {
+<pre><code class="js">function useDebouncedRef(value, delay = 200) &#123;
   let timeout
-  return customRef((track, trigger) =&gt; {
-    return {
-      get() {
+  return customRef((track, trigger) =&gt; &#123;
+    return &#123;
+      get() &#123;
           /*初始化手动追踪依赖讲究什么时候去触发依赖收集*/
         track()
         return value
-      },
-      set(newValue) {
+      &#125;,
+      set(newValue) &#123;
           /*修改数据的时候会把上一次的定时器清除【防抖】*/
         clearTimeout(timeout)
-        timeout = setTimeout(() =&gt; {
+        timeout = setTimeout(() =&gt; &#123;
             /*把新设置的数据给到ref数据源*/
           value = newValue
             /*再有依赖追踪的前提下触发响应式*/
           trigger()
-        }, delay)
-      },
-    }
-  })
-}
+        &#125;, delay)
+      &#125;,
+    &#125;
+  &#125;)
+&#125;
 
-setup() {
-    return {
+setup() &#123;
+    return &#123;
         /*暴露返回的数据加防抖*/
       text: useDebouncedRef(&#39;hello&#39;),
-    }
-  }
+    &#125;
+  &#125;
 </code></pre>
 <h3 id="shallowRef"><a href="#shallowRef" class="headerlink" title="shallowRef"></a><code>shallowRef</code></h3><p>创建一个 ref ，将会追踪它的 <code>.value</code> 更改操作，但是并不会对变更后的 <code>.value</code> 做响应式代理转换（即变更不会调用 <code>reactive</code>）</p>
 <blockquote>
 <p>前面我们说过如果传入 ref 的是一个对象，将调用 <code>reactive</code> 方法进行深层响应转换,通过<code>shallowRef</code>创建的ref,将不会调用reactive【对象不会是响应式的】</p>
-<pre><code class="js">const refOne = shallowRef({});
-refOne.value = { id: 1 };
+<pre><code class="js">const refOne = shallowRef(&#123;&#125;);
+refOne.value = &#123; id: 1 &#125;;
 refOne.id == 20;
-console.log(isReactive(refOne.value),refOne.value);//false  { id: 1 }
+console.log(isReactive(refOne.value),refOne.value);//false  &#123; id: 1 &#125;
 </code></pre>
 </blockquote>
 <h3 id="triggerRef-【与shallowRef配合】"><a href="#triggerRef-【与shallowRef配合】" class="headerlink" title="triggerRef 【与shallowRef配合】"></a><code>triggerRef</code> 【与<code>shallowRef</code>配合】</h3><p>手动执行与<code>shallowRef</code>相关的任何效果</p>
-<pre><code class="js">const shallow = shallowRef({
+<pre><code class="js">const shallow = shallowRef(&#123;
   greet: &#39;Hello, world&#39;
-})
+&#125;)
 
 // 第一次运行打印 &quot;Hello, world&quot; 
-watchEffect(() =&gt; {
+watchEffect(() =&gt; &#123;
   console.log(shallow.value.greet)
-})
+&#125;)
 
 // 这不会触发效果，因为ref是shallow
 shallow.value.greet = &#39;Hello, universe&#39;
@@ -1173,17 +1083,17 @@ triggerRef(shallow)</code></pre>
 <p>注意 <code>props</code> 对象是响应式的，<code>watchEffect</code> 或 <code>watch</code> 会观察和响应 <code>props</code> 的更新</p>
 <p><strong>不要</strong>解构 <code>props</code> 对象，那样会使其失去响应性</p>
 </blockquote>
-<pre><code class="js">export default {
-  props: {
+<pre><code class="js">export default &#123;
+  props: &#123;
     name: String,
-  },
-  setup(props) {
+  &#125;,
+  setup(props) &#123;
     console.log(props.name)
-     watchEffect(() =&gt; {
+     watchEffect(() =&gt; &#123;
       console.log(`name is: ` + props.name)
-    })
-  },
-}</code></pre>
+    &#125;)
+  &#125;,
+&#125;</code></pre>
 <ul>
 <li><p>第二个参数提供了一个上下文对象【从原来 2.x 中 <code>this</code> 选择性地暴露了一些 property（attrs/emit/slots）】</p>
 <blockquote>
@@ -1197,305 +1107,200 @@ triggerRef(shallow)</code></pre>
 <blockquote>
 <p><strong><code>this</code> 在 <code>setup()</code> 中不可用</strong>。由于 <code>setup()</code> 在解析 2.x 选项前被调用，<code>setup()</code> 中的 <code>this</code> 将与 2.x 选项中的 <code>this</code> 完全不同。同时在 <code>setup()</code> 和 2.x 选项中使用 <code>this</code> 时将造成混乱</p>
 </blockquote>
-<pre><code class="js">setup(props, { attrs }) {
+<pre><code class="js">setup(props, &#123; attrs &#125;) &#123;
     // 一个可能之后回调用的签名
-    function onClick() {
+    function onClick() &#123;
       console.log(attrs.foo) // 一定是最新的引用，没有丢失响应性
-    }
-  }</code></pre>
+    &#125;
+  &#125;</code></pre>
 </li>
 </ul>
 
-        </div>
 
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2022-04-24T07:28:36.341Z" itemprop="dateUpdated">2022-04-24 15:28:36</time>
-</span><br>
-
-
-        
-        Happy Coding
-        
-    </div>
-    
-    <footer>
-        <a href="https://github.com/NollieLeo">
-            <img src="/img/avatar.png" alt="Mr.Weng">
-            Mr.Weng
-        </a>
-    </footer>
-</blockquote>
-
-        
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vite/" rel="tag">vite</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2022/04/16/vue2-vue3%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/&title=《vue2~vue3迁移记录》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2022/04/16/vue2-vue3%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/&title=《vue2~vue3迁移记录》 — 翁老师的博客&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2022/04/16/vue2-vue3%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《vue2~vue3迁移记录》 — 翁老师的博客&url=https://github.com/NollieLeo/2022/04/16/vue2-vue3%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/&via=https://github.com/NollieLeo" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2022/04/16/vue2-vue3%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-
-
-        </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2022/04/21/tsconfig-json%E5%85%A8%E8%A7%A3%E6%9E%90/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">tsconfig.json全解析</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2022/03/26/%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1-electron-node/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">进程通信(electron/node)</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
 
 </article>
 
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        谢谢大爷~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/false" alt="打赏二维码">
-        </div>
-        
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2022/04/21/tsconfig-json%E5%85%A8%E8%A7%A3%E6%9E%90/">tsconfig.json全解析</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2022/03/26/%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1-electron-node/">进程通信(electron/node)</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
     </div>
-</div>
-
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>Mr.Weng &copy; 2020 - 2023</span>
-            <span>
-                
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2022/04/16/vue2-vue3%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/&title=《vue2~vue3迁移记录》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2022/04/16/vue2-vue3%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/&title=《vue2~vue3迁移记录》 — 翁老师的博客&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2022/04/16/vue2-vue3%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《vue2~vue3迁移记录》 — 翁老师的博客&url=https://github.com/NollieLeo/2022/04/16/vue2-vue3%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/&via=https://github.com/NollieLeo" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2022/04/16/vue2-vue3%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2022/04/16/vue2-vue3%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" alt="微信分享二维码">
-</div>
-
-
-
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</template>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
-
-
-
-
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '我走了';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '我来了';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
         }
-    });
-})();
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
 </script>
 
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
 
 
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
 </body>
 </html>

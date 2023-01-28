@@ -1,181 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html lang='zh-CN'>
+
 <head>
-    
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
 
-    
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
 
-    
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>eslint rules常用配置项 - 翁老师的博客</title>
 
-
-
-    <meta charset="utf-8">
-    
-    
-    
-    
-    <title>eslint rules常用配置项 | 翁老师的博客</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#00abc0">
-    
-    
-    <meta name="keywords" content="eslint">
-    <meta name="description" content="{ &quot;no-alert&quot;: 0,&#x2F;&#x2F;禁止使用alert confirm prompt &quot;no-array-constructor&quot;: 2,&#x2F;&#x2F;禁止使用数组构造器 &quot;no-bitwise&quot;: 0,&#x2F;&#x2F;禁止使用按位运算符 &quot;no-caller&quot;: 1,&#x2F;&#x2F;禁止使用arguments.caller或arguments.cal">
+  
+    <meta name="description" content="&amp;#123; &quot;no-alert&quot;: 0,&#x2F;&#x2F;禁止使用alert confirm prompt &quot;no-array-constructor&quot;: 2,&#x2F;&#x2F;禁止使用数组构造器 &quot;no-bitwise&quot;: 0,&#x2F;&#x2F;禁止使用按位运算符 &quot;no-caller&quot;: 1,&#x2F;&#x2F;禁止使用arguments.caller或argument">
 <meta property="og:type" content="article">
 <meta property="og:title" content="eslint rules常用配置项">
 <meta property="og:url" content="https://github.com/NollieLeo/2022/02/27/eslint-rules%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9/index.html">
 <meta property="og:site_name" content="翁老师的博客">
-<meta property="og:description" content="{ &quot;no-alert&quot;: 0,&#x2F;&#x2F;禁止使用alert confirm prompt &quot;no-array-constructor&quot;: 2,&#x2F;&#x2F;禁止使用数组构造器 &quot;no-bitwise&quot;: 0,&#x2F;&#x2F;禁止使用按位运算符 &quot;no-caller&quot;: 1,&#x2F;&#x2F;禁止使用arguments.caller或arguments.cal">
+<meta property="og:description" content="&amp;#123; &quot;no-alert&quot;: 0,&#x2F;&#x2F;禁止使用alert confirm prompt &quot;no-array-constructor&quot;: 2,&#x2F;&#x2F;禁止使用数组构造器 &quot;no-bitwise&quot;: 0,&#x2F;&#x2F;禁止使用按位运算符 &quot;no-caller&quot;: 1,&#x2F;&#x2F;禁止使用arguments.caller或argument">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-27T08:19:53.000Z">
 <meta property="article:modified_time" content="2022-04-16T08:21:49.330Z">
 <meta property="article:author" content="Mr.Weng">
 <meta property="article:tag" content="eslint">
 <meta name="twitter:card" content="summary">
-    
-        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
+  
+  
 
-    <!-- custom head -->
-    
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+  
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
 
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.png">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Mr.Weng</h5>
-          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                Categories
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/nollieleo" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">eslint rules常用配置项</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">eslint rules常用配置项</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2022-02-27T08:19:53.000Z" itemprop="datePublished" class="page-time">
-  2022-02-27
-</time>
+  
 
 
-            
-        </h5>
-    </div>
 
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
     
 
+  
 
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+
+<nav class="menu dis-select"></nav>
 </header>
 
 
-<div class="container body-wrap">
-    
-
-<article id="post-eslint-rules常用配置项"
-  class="post-article article-type-post fade" itemprop="blogPost">
-
-    <div class="post-card">
-        <h1 class="post-card-title">eslint rules常用配置项</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2022-02-27 16:19:53" datetime="2022-02-27T08:19:53.000Z"  itemprop="datePublished">2022-02-27</time>
-
-            
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
+
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/01/28/diff%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%93/"><span class="title">diff算法原理和总结</span></a><a class="item title" href="/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/"><span class="title">vue3渲染器设计与总结</span></a><a class="item title" href="/2022/11/09/%E5%8F%8C%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%8D%95%E6%9C%BA%E4%BA%8B%E4%BB%B6%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"><span class="title">双击事件和单机事件冲突解决方案</span></a><a class="item title" href="/2022/11/03/vite%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><span class="title">vite学习记录</span></a><a class="item title" href="/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/"><span class="title">vue的响应式系统设计总结</span></a></div></widget>
 
 
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <pre><code class="json">{
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2022-02-27T08:19:53.000Z">2022-02-27</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>eslint rules常用配置项</span></h1>
+<pre><code class="json">&#123;
 &quot;no-alert&quot;: 0,//禁止使用alert confirm prompt
 &quot;no-array-constructor&quot;: 2,//禁止使用数组构造器
 &quot;no-bitwise&quot;: 0,//禁止使用按位运算符
@@ -191,7 +118,7 @@
 &quot;no-debugger&quot;: 2,//禁止使用debugger
 &quot;no-delete-var&quot;: 2,//不能对var声明的变量使用delete操作符
 &quot;no-div-regex&quot;: 1,//不能使用看起来像除法的正则表达式/=foo/
-&quot;no-dupe-keys&quot;: 2,//在创建对象字面量时不允许键重复 {a:1,a:1}
+&quot;no-dupe-keys&quot;: 2,//在创建对象字面量时不允许键重复 &#123;a:1,a:1&#125;
 &quot;no-dupe-args&quot;: 2,//函数参数不能重复
 &quot;no-duplicate-case&quot;: 2,//switch中的case标签不能重复
 &quot;no-else-return&quot;: 2,//如果if语句里面有return,后面不能跟else语句
@@ -227,7 +154,7 @@
 &quot;linebreak-style&quot;: [0, &quot;windows&quot;],//换行风格
 &quot;no-multi-spaces&quot;: 1,//不能用多余的空格
 &quot;no-multi-str&quot;: 2,//字符串不能用\换行
-&quot;no-multiple-empty-lines&quot;: [1, {&quot;max&quot;: 2}],//空行最多不能超过2行
+&quot;no-multiple-empty-lines&quot;: [1, &#123;&quot;max&quot;: 2&#125;],//空行最多不能超过2行
 &quot;no-native-reassign&quot;: 2,//不能重写native对象
 &quot;no-negated-in-lhs&quot;: 2,//in 操作符的左边不能有!
 &quot;no-nested-ternary&quot;: 0,//禁止使用嵌套的三目运算
@@ -269,12 +196,12 @@
 &quot;no-unneeded-ternary&quot;: 2,//禁止不必要的嵌套 var isYes = answer === 1 ? true : false;
 &quot;no-unreachable&quot;: 2,//不能有无法执行的代码
 &quot;no-unused-expressions&quot;: 2,//禁止无用的表达式
-&quot;no-unused-vars&quot;: [2, {&quot;vars&quot;: &quot;all&quot;, &quot;args&quot;: &quot;after-used&quot;}],//不能有声明后未被使用的变量或参数
+&quot;no-unused-vars&quot;: [2, &#123;&quot;vars&quot;: &quot;all&quot;, &quot;args&quot;: &quot;after-used&quot;&#125;],//不能有声明后未被使用的变量或参数
 &quot;no-use-before-define&quot;: 2,//未定义前不能使用
 &quot;no-useless-call&quot;: 2,//禁止不必要的call和apply
 &quot;no-void&quot;: 2,//禁用void操作符
 &quot;no-var&quot;: 0,//禁用var，用let和const代替
-&quot;no-warning-comments&quot;: [1, { &quot;terms&quot;: [&quot;todo&quot;, &quot;fixme&quot;, &quot;xxx&quot;], &quot;location&quot;: &quot;start&quot; }],//不能有警告备注
+&quot;no-warning-comments&quot;: [1, &#123; &quot;terms&quot;: [&quot;todo&quot;, &quot;fixme&quot;, &quot;xxx&quot;], &quot;location&quot;: &quot;start&quot; &#125;],//不能有警告备注
 &quot;no-with&quot;: 2,//禁用with
 
 &quot;array-bracket-spacing&quot;: [2, &quot;never&quot;],//是否允许非空数组里面有多余的空格
@@ -293,10 +220,10 @@
 &quot;consistent-return&quot;: 0,//return 后面是否允许省略
 &quot;consistent-this&quot;: [2, &quot;that&quot;],//this别名
 &quot;constructor-super&quot;: 0,//非派生类不能调用super，派生类必须调用super
-&quot;curly&quot;: [2, &quot;all&quot;],//必须使用 if(){} 中的{}
+&quot;curly&quot;: [2, &quot;all&quot;],//必须使用 if()&#123;&#125; 中的&#123;&#125;
 &quot;default-case&quot;: 2,//switch语句最后必须有default
 &quot;dot-location&quot;: 0,//对象访问符的位置，换行的时候在行首还是行尾
-&quot;dot-notation&quot;: [0, { &quot;allowKeywords&quot;: true }],//避免不必要的方括号
+&quot;dot-notation&quot;: [0, &#123; &quot;allowKeywords&quot;: true &#125;],//避免不必要的方括号
 &quot;eol-last&quot;: 0,//文件以单一的换行符结束
 &quot;eqeqeq&quot;: 2,//必须使用全等
 &quot;func-names&quot;: 0,//函数表达式必须有名字
@@ -307,7 +234,7 @@
 &quot;id-length&quot;: 0,//变量名长度
 &quot;indent&quot;: [2, 4],//缩进风格
 &quot;init-declarations&quot;: 0,//声明时必须赋初值
-&quot;key-spacing&quot;: [0, { &quot;beforeColon&quot;: false, &quot;afterColon&quot;: true }],//对象字面量中冒号的前后空格
+&quot;key-spacing&quot;: [0, &#123; &quot;beforeColon&quot;: false, &quot;afterColon&quot;: true &#125;],//对象字面量中冒号的前后空格
 &quot;lines-around-comment&quot;: 0,//行前/行后备注
 &quot;max-depth&quot;: [0, 4],//嵌套块深度
 &quot;max-len&quot;: [0, 80, 4],//字符串最大长度
@@ -332,15 +259,15 @@
 &quot;id-match&quot;: 0,//命名检测
 &quot;require-yield&quot;: 0,//生成器函数必须有yield
 &quot;semi&quot;: [2, &quot;always&quot;],//语句强制分号结尾
-&quot;semi-spacing&quot;: [0, {&quot;before&quot;: false, &quot;after&quot;: true}],//分号前后空格
+&quot;semi-spacing&quot;: [0, &#123;&quot;before&quot;: false, &quot;after&quot;: true&#125;],//分号前后空格
 &quot;sort-vars&quot;: 0,//变量声明时排序
 &quot;space-after-keywords&quot;: [0, &quot;always&quot;],//关键字后面是否要空一格
-&quot;space-before-blocks&quot;: [0, &quot;always&quot;],//不以新行开始的块{前面要不要有空格
+&quot;space-before-blocks&quot;: [0, &quot;always&quot;],//不以新行开始的块&#123;前面要不要有空格
 &quot;space-before-function-paren&quot;: [0, &quot;always&quot;],//函数定义时括号前面要不要有空格
 &quot;space-in-parens&quot;: [0, &quot;never&quot;],//小括号里面要不要有空格
 &quot;space-infix-ops&quot;: 0,//中缀操作符周围要不要有空格
 &quot;space-return-throw-case&quot;: 2,//return throw case后面要不要加空格
-&quot;space-unary-ops&quot;: [0, { &quot;words&quot;: true, &quot;nonwords&quot;: false }],//一元运算符的前/后要不要加空格
+&quot;space-unary-ops&quot;: [0, &#123; &quot;words&quot;: true, &quot;nonwords&quot;: false &#125;],//一元运算符的前/后要不要加空格
 &quot;spaced-comment&quot;: 0,//注释风格要不要有空格什么的
 &quot;strict&quot;: 2,//使用严格模式
 &quot;use-isnan&quot;: 2,//禁止比较时使用NaN，只能用isNaN()
@@ -350,298 +277,193 @@
 &quot;wrap-iife&quot;: [2, &quot;inside&quot;],//立即执行函数表达式的小括号风格
 &quot;wrap-regex&quot;: 0,//正则表达式字面量用小括号包起来
 &quot;yoda&quot;: [2, &quot;never&quot;]//禁止尤达条件
-}</code></pre>
-
-        </div>
-
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2022-04-16T08:21:49.330Z" itemprop="dateUpdated">2022-04-16 16:21:49</time>
-</span><br>
+&#125;</code></pre>
 
 
-        
-        Happy Coding
-        
-    </div>
-    
-    <footer>
-        <a href="https://github.com/NollieLeo">
-            <img src="/img/avatar.png" alt="Mr.Weng">
-            Mr.Weng
-        </a>
-    </footer>
-</blockquote>
-
-        
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eslint/" rel="tag">eslint</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2022/02/27/eslint-rules%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9/&title=《eslint rules常用配置项》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2022/02/27/eslint-rules%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9/&title=《eslint rules常用配置项》 — 翁老师的博客&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2022/02/27/eslint-rules%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《eslint rules常用配置项》 — 翁老师的博客&url=https://github.com/NollieLeo/2022/02/27/eslint-rules%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9/&via=https://github.com/NollieLeo" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2022/02/27/eslint-rules%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-
-
-        </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2022/03/26/%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1-electron-node/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">进程通信(electron/node)</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">electron学习记录</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
 
 </article>
 
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        谢谢大爷~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/false" alt="打赏二维码">
-        </div>
-        
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2022/03/26/%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1-electron-node/">进程通信(electron/node)</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2022/01/12/electron%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">electron学习记录</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
     </div>
-</div>
-
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>Mr.Weng &copy; 2020 - 2023</span>
-            <span>
-                
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2022/02/27/eslint-rules%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9/&title=《eslint rules常用配置项》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2022/02/27/eslint-rules%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9/&title=《eslint rules常用配置项》 — 翁老师的博客&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2022/02/27/eslint-rules%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《eslint rules常用配置项》 — 翁老师的博客&url=https://github.com/NollieLeo/2022/02/27/eslint-rules%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9/&via=https://github.com/NollieLeo" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2022/02/27/eslint-rules%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2022/02/27/eslint-rules%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9/" alt="微信分享二维码">
-</div>
-
-
-
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</template>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
-
-
-
-
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '我走了';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '我来了';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
         }
-    });
-})();
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
 </script>
 
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
 
 
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
 </body>
 </html>

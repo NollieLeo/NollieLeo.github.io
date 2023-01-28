@@ -1,26 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang='zh-CN'>
+
 <head>
-    
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
 
-    
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
 
-    
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>tsconfig.json全解析 - 翁老师的博客</title>
 
-
-
-    <meta charset="utf-8">
-    
-    
-    
-    
-    <title>tsconfig.json全解析 | 翁老师的博客</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#00abc0">
-    
-    
-    <meta name="keywords" content="tsconfig">
+  
     <meta name="description" content="解析 TypeScript带来的类型系统以及强大的IDE支持，让前端开发也变得严谨而流畅。但TypeScript不是原生的Javascript代码，需要进行编译才能转换为Javascript代码。 tsconfig.json是编译TypeScript的配置文件，对书写TypeScript代码十分重要。因为有些选项如果你没配置，则需要严格按照TypeScript的规则来书写，对初期使用TypeScr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tsconfig.json全解析">
@@ -33,184 +35,100 @@
 <meta property="article:author" content="Mr.Weng">
 <meta property="article:tag" content="tsconfig">
 <meta name="twitter:card" content="summary">
-    
-        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
+  
+  
 
-    <!-- custom head -->
-    
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+  
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
 
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.png">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Mr.Weng</h5>
-          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                Categories
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/nollieleo" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">tsconfig.json全解析</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">tsconfig.json全解析</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2022-04-21T09:42:55.000Z" itemprop="datePublished" class="page-time">
-  2022-04-21
-</time>
+  
 
 
-            
-        </h5>
-    </div>
 
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
     
 
+  
 
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+
+<nav class="menu dis-select"></nav>
 </header>
 
 
-<div class="container body-wrap">
-    
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#解析"><span class="post-toc-number">1.</span> <span class="post-toc-text">解析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-experimentalDecorators"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1. experimentalDecorators</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-strictPropertyInitialization"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2. strictPropertyInitialization</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-noImplicitAny"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3. noImplicitAny</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-target"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">4. target</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-module"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">5. module</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-lib"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">6. lib</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7-moduleResolution"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">7. moduleResolution</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-paths"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">8. paths</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-strictNullChecks"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">9. strictNullChecks</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-noUnusedLocals"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">10. noUnusedLocals</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#11-noUnusedParameters"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">11. noUnusedParameters</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#12-allowJs"><span class="post-toc-number">1.12.</span> <span class="post-toc-text">12. allowJs</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#13-typeRoots和types"><span class="post-toc-number">1.13.</span> <span class="post-toc-text">13. typeRoots和types</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#14-files、include和exclude"><span class="post-toc-number">1.14.</span> <span class="post-toc-text">14. files、include和exclude</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#配置项"><span class="post-toc-number">2.</span> <span class="post-toc-text">配置项</span></a></li></ol>
-        </nav>
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">tsconfig.json全解析</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-experimentalDecorators"><span class="toc-text">1. experimentalDecorators</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-strictPropertyInitialization"><span class="toc-text">2. strictPropertyInitialization</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-noImplicitAny"><span class="toc-text">3. noImplicitAny</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-target"><span class="toc-text">4. target</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-module"><span class="toc-text">5. module</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-lib"><span class="toc-text">6. lib</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-moduleResolution"><span class="toc-text">7. moduleResolution</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-paths"><span class="toc-text">8. paths</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-strictNullChecks"><span class="toc-text">9. strictNullChecks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-noUnusedLocals"><span class="toc-text">10. noUnusedLocals</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-noUnusedParameters"><span class="toc-text">11. noUnusedParameters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-allowJs"><span class="toc-text">12. allowJs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-typeRoots%E5%92%8Ctypes"><span class="toc-text">13. typeRoots和types</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-files%E3%80%81include%E5%92%8Cexclude"><span class="toc-text">14. files、include和exclude</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
     </aside>
+    <div class='l_main'>
+      
+
+      
 
 
-<article id="post-tsconfig-json全解析"
-  class="post-article article-type-post fade" itemprop="blogPost">
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2022-04-21T09:42:55.000Z">2022-04-21</time></div></div>
 
-    <div class="post-card">
-        <h1 class="post-card-title">tsconfig.json全解析</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2022-04-21 17:42:55" datetime="2022-04-21T09:42:55.000Z"  itemprop="datePublished">2022-04-21</time>
-
-            
-
-
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><blockquote>
+<article class='md-text content post'>
+<h1 class="article-title"><span>tsconfig.json全解析</span></h1>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><blockquote>
 <p>TypeScript带来的类型系统以及强大的IDE支持，让前端开发也变得严谨而流畅。但TypeScript不是原生的Javascript代码，需要进行编译才能转换为Javascript代码。</p>
 <p>tsconfig.json是编译TypeScript的配置文件，对书写TypeScript代码十分重要。因为有些选项如果你没配置，则需要严格按照TypeScript的规则来书写，对初期使用TypeScript的同学而言，稍不留神就会书写出不符合规则的代码，从而导致编译报错，打击自信心。其实早期可以通过关闭一些规则设置，从而更愉快的从js转为ts开发。笔者根据项目实战经历来解释一些常用的编译选项，文末也会附上笔者整理的所有tsconfig.json选项的解释。</p>
 </blockquote>
-<h2 id="1-experimentalDecorators"><a href="#1-experimentalDecorators" class="headerlink" title="1. experimentalDecorators"></a>1. experimentalDecorators</h2><p><code>是否启用实验性的ES装饰器</code>。boolean类型，默认值：false。<a href="https://www.typescriptlang.org/docs/handbook/decorators.html" target="_blank" rel="noopener">官方解释(opens new window)</a></p>
+<h2 id="1-experimentalDecorators"><a href="#1-experimentalDecorators" class="headerlink" title="1. experimentalDecorators"></a>1. experimentalDecorators</h2><p><code>是否启用实验性的ES装饰器</code>。boolean类型，默认值：false。<a target="_blank" rel="noopener" href="https://www.typescriptlang.org/docs/handbook/decorators.html">官方解释(opens new window)</a></p>
 <p>TypeScript和ES6中引入了Class的概念，同时在<a href="https://github.com/tc39/proposal-decorators">stage 2 proposal (opens new window)</a>提出了Java等服务器端语言早就有的装饰器模式。通过引入装饰器模式，能极大简化书写代码，把一些通用逻辑封装到装饰器中。很多库都有用到该特性，比如vue-class-component 及 vuex-class等库。<strong>当你使用这些库时，必须开启experimentalDecorators</strong>。</p>
-<pre><code class="ts">function f() {
+<pre><code class="ts">function f() &#123;
     console.log(&quot;f(): evaluated&quot;);
-    return function (target, propertyKey: string, descriptor: PropertyDescriptor) {
+    return function (target, propertyKey: string, descriptor: PropertyDescriptor) &#123;
         console.log(&quot;f(): called&quot;);
-    }
-}
+    &#125;
+&#125;
 
-class C {
+class C &#123;
     @f()
-    method() {}
-}   </code></pre>
+    method() &#123;&#125;
+&#125;   </code></pre>
 <blockquote>
 <p>启用 vuex-class同时需要设置<code>strictFunctionTypes</code>选项为false</p>
 </blockquote>
 <h2 id="2-strictPropertyInitialization"><a href="#2-strictPropertyInitialization" class="headerlink" title="2. strictPropertyInitialization"></a>2. strictPropertyInitialization</h2><p><code>是否类的非undefined属性已经在构造函数里初始化</code>。 boolean类型，默认值：false</p>
 <p>直白点，就是所有的属性值，都需要赋有初始值。<strong>建议把strictPropertyInitialization设置为false</strong>，这样就不需要定义一个变量就必须赋有初始值。对使用vuex-class库的同学，建议请把这个值设为false，绝对能省很多事。</p>
-<pre><code class="ts">export default class Home extend Vue{
+<pre><code class="ts">export default class Home extend Vue&#123;
     jobId: string // 如果开启strictPropertyInitialization，则这里会报错，因为没有赋值默认值
 
-    method1() :void {
+    method1() :void &#123;
         console.log(this.jobId)
-    }
-}
+    &#125;
+&#125;
 </code></pre>
 <blockquote>
 <p>如果设置该选项为true，需要同时启用–strictNullChecks或启用–strict</p>
@@ -229,9 +147,9 @@ arr.find((item: any) =&gt; item.name === name) // ok</code></pre>
 <p>通常使用ES6的模块来写ts代码，然而2016年1月以前，基本上没有浏览器原生支持ES6的模块系统，所以需要转换为不同的模块系统，如：CommonJS、AMD、SystemJS等，而module选项就是指定编译使用对应的模块系统。</p>
 <h2 id="6-lib"><a href="#6-lib" class="headerlink" title="6. lib"></a>6. lib</h2><p><code>编译过程中需要引入的库文件的列表</code>。string[]类型，可选的值有很多，常用的有ES5，ES6，ESNext，DOM，DOM.Iterable、WebWorker、ScriptHost等。该值默认值是根据–target选项不同而不同。当target为ES5时，默认值为[‘DOM ‘, ‘ES5’, ‘ScriptHost’];当target为ES6时，默认值为[‘DOM’, ‘ES6’, ‘DOM.Iterable’, ‘ScriptHost’]</p>
 <p>为了在ts代码中使用ES6中的类，比如Array.form、Set、Reflect等，需要设置lib选项，在编译过程中把这些标准库引入。这样在编译过程中，如果遇到属于这些标准库的class或api时，ts编译器不会报错。</p>
-<h2 id="7-moduleResolution"><a href="#7-moduleResolution" class="headerlink" title="7. moduleResolution"></a>7. moduleResolution</h2><p><code>决定如何处理模块</code>。string类型，“node”或者“classic”，默认值：“classic”。<a href="https://www.typescriptlang.org/docs/handbook/module-resolution.html" target="_blank" rel="noopener">官方解释(opens new window)</a></p>
+<h2 id="7-moduleResolution"><a href="#7-moduleResolution" class="headerlink" title="7. moduleResolution"></a>7. moduleResolution</h2><p><code>决定如何处理模块</code>。string类型，“node”或者“classic”，默认值：“classic”。<a target="_blank" rel="noopener" href="https://www.typescriptlang.org/docs/handbook/module-resolution.html">官方解释(opens new window)</a></p>
 <p>说直白点，也就是遇到import { AAA } from ‘./aaa’该如何去找对应文件模块解析。对于工程项目，笔者<strong>建议大家使用node</strong>（vue-cli3 ts模板默认设置为node策略），因为这个更符合平时我们的书写习惯以及认知（平时都是webpack打包，webpack又基于node之上）。</p>
-<pre><code class="text">// 在源文件/root/src/A.ts中import { b } from &quot;./moduleB&quot;
+<pre><code class="text">// 在源文件/root/src/A.ts中import &#123; b &#125; from &quot;./moduleB&quot;
 // 两种解析方式查找文件方式不同
 
 // classic模块解析方式
@@ -249,9 +167,9 @@ arr.find((item: any) =&gt; item.name === name) // ok</code></pre>
 </code></pre>
 <h2 id="8-paths"><a href="#8-paths" class="headerlink" title="8. paths"></a>8. paths</h2><p><code>模块名或路径映射的列表</code>。Object值</p>
 <p>这是一个非常有用的选项，比如我们经常使用‘@/util/help’来代替’./src/util/help’，省的每次在不同层级文件import模块时,都纠结于是’./‘还是’../‘。该选项告诉编译器遇到匹配的值时，去映射的路径下加载模块。</p>
-<pre><code class="ts">{
+<pre><code class="ts">&#123;
     &quot;baseUrl&quot;: &quot;.&quot;, // 注意：baseUrl不可少
-    &quot;paths&quot;: {
+    &quot;paths&quot;: &#123;
       // 映射列表
       &quot;@/*&quot;: [
         &quot;src/*&quot;
@@ -259,8 +177,8 @@ arr.find((item: any) =&gt; item.name === name) // ok</code></pre>
       &quot;moduleA&quot;: [
         &quot;src/libs/moduleA&quot;
       ]
-    }
-}
+    &#125;
+&#125;
 
 // in ts code
 import Setting from &#39;@/components/Setting.vue&#39; // 模块实际位置: src/components/Setting.vue
@@ -285,14 +203,14 @@ foo &amp;&amp; foo.push(&#39;1&#39;) // okay</code></pre>
 <p><strong>建议正式项目开启该选项，设置为true</strong>，理由同上。</p>
 <h2 id="12-allowJs"><a href="#12-allowJs" class="headerlink" title="12. allowJs"></a>12. allowJs</h2><p><code>是否允许编译javascript文件</code>。boolean值，默认值：false</p>
 <p>如果设置为true，js后缀的文件也会被typescript进行编译。</p>
-<h2 id="13-typeRoots和types"><a href="#13-typeRoots和types" class="headerlink" title="13. typeRoots和types"></a>13. typeRoots和types</h2><p>默认所有可见的”@types”包会在编译过程中被包含进来。如果指定了typeRoots，只有typeRoots下面的包才会被包含进来。如果指定了types，只有被列出来的npm包才会被包含进来。<a href="https://www.tslang.cn/docs/handbook/tsconfig-json.html#types-typeroots-and-types" target="_blank" rel="noopener">详细内容可看此处(opens new window)</a></p>
+<h2 id="13-typeRoots和types"><a href="#13-typeRoots和types" class="headerlink" title="13. typeRoots和types"></a>13. typeRoots和types</h2><p>默认所有可见的”@types”包会在编译过程中被包含进来。如果指定了typeRoots，只有typeRoots下面的包才会被包含进来。如果指定了types，只有被列出来的npm包才会被包含进来。<a target="_blank" rel="noopener" href="https://www.tslang.cn/docs/handbook/tsconfig-json.html#types-typeroots-and-types">详细内容可看此处(opens new window)</a></p>
 <blockquote>
 <p>可以指定”types”: []来禁用自动引入@types包</p>
 </blockquote>
 <h2 id="14-files、include和exclude"><a href="#14-files、include和exclude" class="headerlink" title="14. files、include和exclude"></a>14. files、include和exclude</h2><p><code>编译文件包含哪些文件以及排除哪些文件</code>。</p>
 <p>未设置include时，编译器默认包含当前目录和子目录下所有的TypeScript文件（.ts, .d.ts 和 .tsx）。如果allowJs被设置成true，JS文件（.js和.jsx）也被包含进来。exclude排除那些不需要编译的文件或文件夹。</p>
-<pre><code class="ts">{
-    &quot;compilerOptions&quot;: {},
+<pre><code class="ts">&#123;
+    &quot;compilerOptions&quot;: &#123;&#125;,
     &quot;include&quot;: [
         &quot;src/**/*&quot;
     ],
@@ -300,9 +218,9 @@ foo &amp;&amp; foo.push(&#39;1&#39;) // okay</code></pre>
         &quot;node_modules&quot;,
         &quot;**/*.spec.ts&quot;
     ]
-}    </code></pre>
-<h1 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h1><pre><code class="json">{
-  &quot;compilerOptions&quot;: {
+&#125;    </code></pre>
+<h1 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h1><pre><code class="json">&#123;
+  &quot;compilerOptions&quot;: &#123;
     /* 基本选项 */
     &quot;target&quot;: &quot;es5&quot;,                       // 指定 ECMAScript 目标版本: &#39;ES3&#39; (default), &#39;ES5&#39;, &#39;ES2015&#39;, &#39;ES2016&#39;, &#39;ES2017&#39;, or &#39;ESNEXT&#39;（&quot;ESNext&quot;表示最新的ES语法，包括还处在stage X阶段）
     &quot;module&quot;: &quot;commonjs&quot;,                  // 指定使用模块: &#39;commonjs&#39;, &#39;amd&#39;, &#39;system&#39;, &#39;umd&#39; or &#39;es2015&#39;
@@ -336,7 +254,7 @@ foo &amp;&amp; foo.push(&#39;1&#39;) // okay</code></pre>
     /* 模块解析选项 */
     &quot;moduleResolution&quot;: &quot;node&quot;,            // 选择模块解析策略： &#39;node&#39; (Node.js) or &#39;classic&#39; (TypeScript pre-1.6)。默认是classic
     &quot;baseUrl&quot;: &quot;./&quot;,                       // 用于解析非相对模块名称的基目录
-    &quot;paths&quot;: {},                           // 模块名到基于 baseUrl 的路径映射的列表 例如：&quot;@/*&quot;: [&quot;src/*&quot;]
+    &quot;paths&quot;: &#123;&#125;,                           // 模块名到基于 baseUrl 的路径映射的列表 例如：&quot;@/*&quot;: [&quot;src/*&quot;]
     &quot;rootDirs&quot;: [],                        // 根文件夹列表，其组合内容表示项目运行时的结构内容
     &quot;typeRoots&quot;: [],                       // 包含类型声明的文件列表
     &quot;types&quot;: [],                           // 需要包含的类型声明文件名列表
@@ -352,7 +270,7 @@ foo &amp;&amp; foo.push(&#39;1&#39;) // okay</code></pre>
     &quot;experimentalDecorators&quot;: true,        // 启用装饰器
     &quot;emitDecoratorMetadata&quot;: true,         // 为装饰器提供元数据的支持
     &quot;strictFunctionTypes&quot;: false           // 禁用函数参数双向协变检查。
-  },
+  &#125;,
   /* 指定编译文件或排除指定编译文件 */
   &quot;include&quot;: [
       &quot;src/**/*&quot;
@@ -369,299 +287,194 @@ foo &amp;&amp; foo.push(&#39;1&#39;) // okay</code></pre>
   &quot;extends&quot;: &quot;./config/base&quot;,
   // 让IDE在保存文件的时候根据tsconfig.json重新生成文件
   &quot;compileOnSave&quot;: true // 支持这个特性需要Visual Studio 2015， TypeScript1.8.4以上并且安装atom-typescript插件
-}
+&#125;
 </code></pre>
 
-        </div>
 
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2022-04-24T07:10:15.746Z" itemprop="dateUpdated">2022-04-24 15:10:15</time>
-</span><br>
-
-
-        
-        Happy Coding
-        
-    </div>
-    
-    <footer>
-        <a href="https://github.com/NollieLeo">
-            <img src="/img/avatar.png" alt="Mr.Weng">
-            Mr.Weng
-        </a>
-    </footer>
-</blockquote>
-
-        
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tsconfig/" rel="tag">tsconfig</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2022/04/21/tsconfig-json%E5%85%A8%E8%A7%A3%E6%9E%90/&title=《tsconfig.json全解析》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2022/04/21/tsconfig-json%E5%85%A8%E8%A7%A3%E6%9E%90/&title=《tsconfig.json全解析》 — 翁老师的博客&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2022/04/21/tsconfig-json%E5%85%A8%E8%A7%A3%E6%9E%90/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《tsconfig.json全解析》 — 翁老师的博客&url=https://github.com/NollieLeo/2022/04/21/tsconfig-json%E5%85%A8%E8%A7%A3%E6%9E%90/&via=https://github.com/NollieLeo" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2022/04/21/tsconfig-json%E5%85%A8%E8%A7%A3%E6%9E%90/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-
-
-        </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2022/04/21/%E4%B8%BA%E4%BD%95Vue3-Proxy-%E6%9B%B4%E5%BF%AB/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">为何Vue3 Proxy 更快</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2022/04/16/vue2-vue3%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">vue2~vue3迁移记录</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
 
 </article>
 
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        谢谢大爷~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/false" alt="打赏二维码">
-        </div>
-        
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2022/04/21/%E4%B8%BA%E4%BD%95Vue3-Proxy-%E6%9B%B4%E5%BF%AB/">为何Vue3 Proxy 更快</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2022/04/16/vue2-vue3%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/">vue2~vue3迁移记录</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
     </div>
-</div>
-
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>Mr.Weng &copy; 2020 - 2023</span>
-            <span>
-                
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2022/04/21/tsconfig-json%E5%85%A8%E8%A7%A3%E6%9E%90/&title=《tsconfig.json全解析》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2022/04/21/tsconfig-json%E5%85%A8%E8%A7%A3%E6%9E%90/&title=《tsconfig.json全解析》 — 翁老师的博客&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2022/04/21/tsconfig-json%E5%85%A8%E8%A7%A3%E6%9E%90/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《tsconfig.json全解析》 — 翁老师的博客&url=https://github.com/NollieLeo/2022/04/21/tsconfig-json%E5%85%A8%E8%A7%A3%E6%9E%90/&via=https://github.com/NollieLeo" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2022/04/21/tsconfig-json%E5%85%A8%E8%A7%A3%E6%9E%90/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2022/04/21/tsconfig-json%E5%85%A8%E8%A7%A3%E6%9E%90/" alt="微信分享二维码">
-</div>
-
-
-
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</template>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
-
-
-
-
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '我走了';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '我来了';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
         }
-    });
-})();
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
 </script>
 
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
 
 
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
 </body>
 </html>

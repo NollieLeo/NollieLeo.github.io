@@ -1,278 +1,196 @@
 <!DOCTYPE html>
-<html>
+<html lang='zh-CN'>
+
 <head>
-    
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
 
-    
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
 
-    
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>翁老师的博客</title>
 
-
-
-    <meta charset="utf-8">
-    
-    
-    
-    
-    <title>typescript刷题记录 | 翁老师的博客</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#00abc0">
-    
-    
-    <meta name="keywords" content="">
-    <meta name="description" content="typescript刷题记录题目一解决如下错误 type User &#x3D; {     id: number;     kind: string; }; function makeCustomer&lt;T extends User&gt;(u: T): T {   &#x2F;&#x2F; Error（TS 编译器版本：v4.4.2）   &#x2F;&#x2F; Type &#39;{ id: number; kind: string;">
+  
+    <meta name="description" content="typescript刷题记录题目一解决如下错误 type User &#x3D; &amp;#123;     id: number;     kind: string; &amp;#125;; function makeCustomer&lt;T extends User&gt;(u: T): T &amp;#123;   &#x2F;&#x2F; Error（TS 编译器版本：v4.4.2）   &#x2F;&#x2F; Type &#39;&amp;#123; id: n">
 <meta property="og:type" content="article">
-<meta property="og:title" content="typescript刷题记录">
+<meta property="og:title" content="翁老师的博客">
 <meta property="og:url" content="https://github.com/NollieLeo/2022/05/23/typescript%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="翁老师的博客">
-<meta property="og:description" content="typescript刷题记录题目一解决如下错误 type User &#x3D; {     id: number;     kind: string; }; function makeCustomer&lt;T extends User&gt;(u: T): T {   &#x2F;&#x2F; Error（TS 编译器版本：v4.4.2）   &#x2F;&#x2F; Type &#39;{ id: number; kind: string;">
+<meta property="og:description" content="typescript刷题记录题目一解决如下错误 type User &#x3D; &amp;#123;     id: number;     kind: string; &amp;#125;; function makeCustomer&lt;T extends User&gt;(u: T): T &amp;#123;   &#x2F;&#x2F; Error（TS 编译器版本：v4.4.2）   &#x2F;&#x2F; Type &#39;&amp;#123; id: n">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-23T05:56:55.547Z">
 <meta property="article:modified_time" content="2022-07-19T12:17:22.134Z">
 <meta property="article:author" content="Mr.Weng">
 <meta property="article:tag" content="程序猿">
 <meta name="twitter:card" content="summary">
-    
-        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
+  
+  
 
-    <!-- custom head -->
-    
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+  
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
 
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.png">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Mr.Weng</h5>
-          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                Categories
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/nollieleo" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">typescript刷题记录</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">typescript刷题记录</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2022-05-23T05:56:55.547Z" itemprop="datePublished" class="page-time">
-  2022-05-23
-</time>
+  
 
 
-            
-        </h5>
-    </div>
 
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
     
 
+  
 
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+
+<nav class="menu dis-select"></nav>
 </header>
 
 
-<div class="container body-wrap">
-    
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#typescript刷题记录"><span class="post-toc-number">1.</span> <span class="post-toc-text">typescript刷题记录</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目一"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">题目一</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#方法一"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">方法一</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#方法二"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">方法二</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目二（考察函数重载）"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">题目二（考察函数重载）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决方案：函数重载"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">解决方案：函数重载</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目三（SetOptional-SetRequired）"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">题目三（SetOptional || SetRequired）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决方法"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">解决方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目四（ConditionalPick）"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">题目四（ConditionalPick）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决方案"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">解决方案</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目五（追加args）"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">题目五（追加args）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决方案1-（使用泛型工具）"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">解决方案1 （使用泛型工具）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决方案2-（使用infer）"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">解决方案2 （使用infer）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目五（数组类型拍平）"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">题目五（数组类型拍平）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决方案（递归）"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">解决方案（递归）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目六-数组不为空"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">题目六 (数组不为空)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决方案-1"><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">解决方案</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目七"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">题目七</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决方法-1"><span class="post-toc-number">1.8.1.</span> <span class="post-toc-text">解决方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目八"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">题目八</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决方案-2"><span class="post-toc-number">1.9.1.</span> <span class="post-toc-text">解决方案</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目九"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">题目九</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决方案-3"><span class="post-toc-number">1.10.1.</span> <span class="post-toc-text">解决方案</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目十"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">题目十</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目十一"><span class="post-toc-number">1.12.</span> <span class="post-toc-text">题目十一</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现方法"><span class="post-toc-number">1.12.1.</span> <span class="post-toc-text">实现方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目十二"><span class="post-toc-number">1.13.</span> <span class="post-toc-text">题目十二</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现方案"><span class="post-toc-number">1.13.1.</span> <span class="post-toc-text">实现方案</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目十三"><span class="post-toc-number">1.14.</span> <span class="post-toc-text">题目十三</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决方案-4"><span class="post-toc-number">1.14.1.</span> <span class="post-toc-text">解决方案</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目十四"><span class="post-toc-number">1.15.</span> <span class="post-toc-text">题目十四</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决方法-2"><span class="post-toc-number">1.15.1.</span> <span class="post-toc-text">解决方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目十五"><span class="post-toc-number">1.16.</span> <span class="post-toc-text">*题目十五</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决方案-5"><span class="post-toc-number">1.16.1.</span> <span class="post-toc-text">解决方案</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目十六（元组转化为对象）"><span class="post-toc-number">1.17.</span> <span class="post-toc-text">题目十六（元组转化为对象）</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ts内置方法实现"><span class="post-toc-number">2.</span> <span class="post-toc-text">ts内置方法实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Exclude-排除类型"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Exclude 排除类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Pick-获取-key-类型"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Pick 获取 key 类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Omit-排除-key-类型"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">Omit 排除 key 类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Readonly-属性只读"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">Readonly 属性只读</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Required-属性必选"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">Required 属性必选</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Partial-属性可选"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">Partial 属性可选</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ReturnType-获取函数返回类型"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">ReturnType 获取函数返回类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Parameters-获取函数参数类型"><span class="post-toc-number">2.8.</span> <span class="post-toc-text">Parameters 获取函数参数类型</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ts-实用范型工具"><span class="post-toc-number">3.</span> <span class="post-toc-text">ts 实用范型工具</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OptionalRequired-部分属性必选"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">OptionalRequired 部分属性必选</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现一"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">实现一</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现二"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">实现二</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OptionalReadonly-部分属性只读"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">OptionalReadonly 部分属性只读</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现一-1"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">实现一</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现二-1"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">实现二</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OptionalPartial-部分属性可选"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">OptionalPartial 部分属性可选</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现一-2"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">实现一</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现二-2"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">实现二</span></a></li></ol></li></ol></li></ol>
-        </nav>
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">本文目录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E4%B8%80"><span class="toc-text">题目一</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80"><span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="toc-text">方法二</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E4%BA%8C%EF%BC%88%E8%80%83%E5%AF%9F%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%EF%BC%89"><span class="toc-text">题目二（考察函数重载）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9A%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD"><span class="toc-text">解决方案：函数重载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E4%B8%89%EF%BC%88SetOptional-SetRequired%EF%BC%89"><span class="toc-text">题目三（SetOptional || SetRequired）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-text">解决方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%9B%9B%EF%BC%88ConditionalPick%EF%BC%89"><span class="toc-text">题目四（ConditionalPick）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E4%BA%94%EF%BC%88%E8%BF%BD%E5%8A%A0args%EF%BC%89"><span class="toc-text">题目五（追加args）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%881-%EF%BC%88%E4%BD%BF%E7%94%A8%E6%B3%9B%E5%9E%8B%E5%B7%A5%E5%85%B7%EF%BC%89"><span class="toc-text">解决方案1 （使用泛型工具）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882-%EF%BC%88%E4%BD%BF%E7%94%A8infer%EF%BC%89"><span class="toc-text">解决方案2 （使用infer）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E4%BA%94%EF%BC%88%E6%95%B0%E7%BB%84%E7%B1%BB%E5%9E%8B%E6%8B%8D%E5%B9%B3%EF%BC%89"><span class="toc-text">题目五（数组类型拍平）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%88%E9%80%92%E5%BD%92%EF%BC%89"><span class="toc-text">解决方案（递归）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%85%AD-%E6%95%B0%E7%BB%84%E4%B8%8D%E4%B8%BA%E7%A9%BA"><span class="toc-text">题目六 (数组不为空)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E4%B8%83"><span class="toc-text">题目七</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95-1"><span class="toc-text">解决方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%85%AB"><span class="toc-text">题目八</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-2"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E4%B9%9D"><span class="toc-text">题目九</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-3"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%8D%81"><span class="toc-text">题目十</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%8D%81%E4%B8%80"><span class="toc-text">题目十一</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95"><span class="toc-text">实现方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%8D%81%E4%BA%8C"><span class="toc-text">题目十二</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88"><span class="toc-text">实现方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%8D%81%E4%B8%89"><span class="toc-text">题目十三</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-4"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%8D%81%E5%9B%9B"><span class="toc-text">题目十四</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95-2"><span class="toc-text">解决方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%8D%81%E4%BA%94"><span class="toc-text">*题目十五</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-5"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%8D%81%E5%85%AD%EF%BC%88%E5%85%83%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BA%E5%AF%B9%E8%B1%A1%EF%BC%89"><span class="toc-text">题目十六（元组转化为对象）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exclude-%E6%8E%92%E9%99%A4%E7%B1%BB%E5%9E%8B"><span class="toc-text">Exclude 排除类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pick-%E8%8E%B7%E5%8F%96-key-%E7%B1%BB%E5%9E%8B"><span class="toc-text">Pick 获取 key 类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Omit-%E6%8E%92%E9%99%A4-key-%E7%B1%BB%E5%9E%8B"><span class="toc-text">Omit 排除 key 类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Readonly-%E5%B1%9E%E6%80%A7%E5%8F%AA%E8%AF%BB"><span class="toc-text">Readonly 属性只读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Required-%E5%B1%9E%E6%80%A7%E5%BF%85%E9%80%89"><span class="toc-text">Required 属性必选</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Partial-%E5%B1%9E%E6%80%A7%E5%8F%AF%E9%80%89"><span class="toc-text">Partial 属性可选</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ReturnType-%E8%8E%B7%E5%8F%96%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B"><span class="toc-text">ReturnType 获取函数返回类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Parameters-%E8%8E%B7%E5%8F%96%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-text">Parameters 获取函数参数类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OptionalRequired-%E9%83%A8%E5%88%86%E5%B1%9E%E6%80%A7%E5%BF%85%E9%80%89"><span class="toc-text">OptionalRequired 部分属性必选</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%80"><span class="toc-text">实现一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E4%BA%8C"><span class="toc-text">实现二</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OptionalReadonly-%E9%83%A8%E5%88%86%E5%B1%9E%E6%80%A7%E5%8F%AA%E8%AF%BB"><span class="toc-text">OptionalReadonly 部分属性只读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%80-1"><span class="toc-text">实现一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E4%BA%8C-1"><span class="toc-text">实现二</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OptionalPartial-%E9%83%A8%E5%88%86%E5%B1%9E%E6%80%A7%E5%8F%AF%E9%80%89"><span class="toc-text">OptionalPartial 部分属性可选</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%80-2"><span class="toc-text">实现一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E4%BA%8C-2"><span class="toc-text">实现二</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
     </aside>
+    <div class='l_main'>
+      
+
+      
 
 
-<article id="post-typescript刷题记录"
-  class="post-article article-type-post fade" itemprop="blogPost">
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2022-05-23T05:56:55.547Z">2022-05-23</time></div></div>
 
-    <div class="post-card">
-        <h1 class="post-card-title">typescript刷题记录</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2022-05-23 13:56:55" datetime="2022-05-23T05:56:55.547Z"  itemprop="datePublished">2022-05-23</time>
+<article class='md-text content post'>
 
-            
-
-
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="typescript刷题记录"><a href="#typescript刷题记录" class="headerlink" title="typescript刷题记录"></a>typescript刷题记录</h1><h2 id="题目一"><a href="#题目一" class="headerlink" title="题目一"></a>题目一</h2><p><strong>解决如下错误</strong></p>
-<pre><code class="ts">type User = {
+<h1 id="typescript刷题记录"><a href="#typescript刷题记录" class="headerlink" title="typescript刷题记录"></a>typescript刷题记录</h1><h2 id="题目一"><a href="#题目一" class="headerlink" title="题目一"></a>题目一</h2><p><strong>解决如下错误</strong></p>
+<pre><code class="ts">type User = &#123;
     id: number;
     kind: string;
-};
-function makeCustomer&lt;T extends User&gt;(u: T): T {
+&#125;;
+function makeCustomer&lt;T extends User&gt;(u: T): T &#123;
   // Error（TS 编译器版本：v4.4.2）
-  // Type &#39;{ id: number; kind: string; }&#39; is not assignable to type &#39;T&#39;.
-  // &#39;{ id: number; kind: string; }&#39; is assignable to the constraint of type &#39;T&#39;, 
+  // Type &#39;&#123; id: number; kind: string; &#125;&#39; is not assignable to type &#39;T&#39;.
+  // &#39;&#123; id: number; kind: string; &#125;&#39; is assignable to the constraint of type &#39;T&#39;, 
   // but &#39;T&#39; could be instantiated with a different subtype of constraint &#39;User&#39;.
-  return {
+  return &#123;
     id: u.id,
     kind: &#39;customer&#39;
-  }
-}</code></pre>
-<p>因为T受User类型的约束，但是也有可能有其他情况，比如<code>{id:1, kind:&#39;2&#39;,name:&#39;test&#39;}</code>，所以返回值中缺少了name</p>
+  &#125;
+&#125;</code></pre>
+<p>因为T受User类型的约束，但是也有可能有其他情况，比如<code>&#123;id:1, kind:&#39;2&#39;,name:&#39;test&#39;&#125;</code>，所以返回值中缺少了name</p>
 <h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>直接把剩余的u的key返回出去</p>
-<pre><code class="ts">type User = {
+<pre><code class="ts">type User = &#123;
     id: number;
     kind: string;
-};
-function makeCustomer&lt;T extends User&gt;(u: T): T {
-  return {
+&#125;;
+function makeCustomer&lt;T extends User&gt;(u: T): T &#123;
+  return &#123;
     ...u,
     id: u.id,
     kind: &#39;customer&#39;
-  }
-}</code></pre>
-<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><pre><code class="ts">function makeCustomer&lt;T extends User&gt;(u: T): ReturnMake&lt;T, User&gt; {
+  &#125;
+&#125;</code></pre>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><pre><code class="ts">function makeCustomer&lt;T extends User&gt;(u: T): ReturnMake&lt;T, User&gt; &#123;
 // Error（TS 编译器版本：v4.4.2）
-// Type &#39;{ id: number; kind: string; }&#39; is not assignable to type &#39;T&#39;.
-// &#39;{ id: number; kind: string; }&#39; is assignable to the constraint of type &#39;T&#39;, 
+// Type &#39;&#123; id: number; kind: string; &#125;&#39; is not assignable to type &#39;T&#39;.
+// &#39;&#123; id: number; kind: string; &#125;&#39; is assignable to the constraint of type &#39;T&#39;, 
 // but &#39;T&#39; could be instantiated with a different subtype of constraint &#39;User&#39;.
-    return {
+    return &#123;
         id: u.id,
         kind: &#39;customer&#39;
-    }
-}
+    &#125;
+&#125;
 
-type ReturnMake&lt;T extends User, U&gt; = {
+type ReturnMake&lt;T extends User, U&gt; = &#123;
     [K in keyof R as K extends keyof T ? K: never]: U[K]
-}</code></pre>
+&#125;</code></pre>
 <p>遍历 <code>User</code>中的 key ，并使用 <code>as</code> 断言，如果<code>K</code>（也就是 User 类型的 key），约束于 泛型类型的 key 就返回 <code>K</code>，否侧返回 <code>never</code>，<code>U[K]</code> 取键值。</p>
 <h2 id="题目二（考察函数重载）"><a href="#题目二（考察函数重载）" class="headerlink" title="题目二（考察函数重载）"></a>题目二（考察函数重载）</h2><p>本道题我们希望参数 a 和 b 的类型都是一致的，即 a 和 b 同时为 number 或 string 类型。当它们的类型不一致的值，TS 类型检查器能自动提示对应的错误信息。</p>
-<pre><code class="ts">function f(a: string | number, b: string | number) {
-  if (typeof a === &#39;string&#39;) {
+<pre><code class="ts">function f(a: string | number, b: string | number) &#123;
+  if (typeof a === &#39;string&#39;) &#123;
     return a + &#39;:&#39; + b; // no error but b can be number!
-  } else {
+  &#125; else &#123;
     // error: 运算符“+”不能应用于类型“number”和“string | number”。ts(2365)
     return a + b; // error as b can be number | string
-  }
-}</code></pre>
+  &#125;
+&#125;</code></pre>
 <h3 id="解决方案：函数重载"><a href="#解决方案：函数重载" class="headerlink" title="解决方案：函数重载"></a>解决方案：函数重载</h3><pre><code class="ts">function f(a:string, b:string ):string
 function f(a:number, b:number):number;
-function f(a: string | number, b: string | number) {
-    if (typeof a === &#39;string&#39; || typeof b === &#39;string&#39;) {
+function f(a: string | number, b: string | number) &#123;
+    if (typeof a === &#39;string&#39; || typeof b === &#39;string&#39;) &#123;
       return a + &#39;:&#39; + b; // no error but b can be number!
-    } else {
+    &#125; else &#123;
       return a + b; // error as b can be number | string
-    }
-}</code></pre>
+    &#125;
+&#125;</code></pre>
 <h2 id="题目三（SetOptional-SetRequired）"><a href="#题目三（SetOptional-SetRequired）" class="headerlink" title="题目三（SetOptional || SetRequired）"></a>题目三（SetOptional || SetRequired）</h2><p>如何定义一个 <code>SetOptional</code> 工具类型，支持把给定的<code>keys</code>对应的属性变成可选的？对应的使用示例如下所示：</p>
-<pre><code class="ts">type Foo = {
+<pre><code class="ts">type Foo = &#123;
     a: number;
     b?: string;
     c: boolean;
-}
+&#125;
 
 // 测试用例
 type SomeOptional = SetOptional&lt;Foo, &#39;a&#39; | &#39;b&#39;&gt;;
 
-// type SomeOptional = {
+// type SomeOptional = &#123;
 //     a?: number; // 该属性已变成可选的
 //     b?: string; // 保持不变
 //     c: boolean; 
-// }
+// &#125;
 </code></pre>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><pre><code class="ts">type Foo = {
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><pre><code class="ts">type Foo = &#123;
     a: number;
     b?: string;
     c: boolean;
-}
+&#125;
 
 // 测试用例
 type SomeOptional = SetOptional&lt;Foo, &#39;a&#39; | &#39;b&#39;&gt;;
 
-// type SomeOptional = {
+// type SomeOptional = &#123;
 //     a?: number; // 该属性已变成可选的
 //     b?: string; // 保持不变
 //     c: boolean; 
-// }
+// &#125;
 
 type SetOptional&lt;T, R extends keyof T&gt; = Omit&lt;T,R&gt; &amp; Partial&lt;Pick&lt;T,R&gt;&gt;
 </code></pre>
@@ -281,48 +199,48 @@ type SetOptional&lt;T, R extends keyof T&gt; = Omit&lt;T,R&gt; &amp; Partial&lt;
 </blockquote>
 <pre><code class="ts">type SetRequired&lt;T, K extends keyof T&gt; = Omit&lt;T, K&gt; &amp; Required&lt;Pick&lt;T, K&gt;&gt;;</code></pre>
 <h2 id="题目四（ConditionalPick）"><a href="#题目四（ConditionalPick）" class="headerlink" title="题目四（ConditionalPick）"></a>题目四（ConditionalPick）</h2><p><code>Pick&lt;T, K extends keyof T&gt;</code>的作用是将某个类型中的子属性挑出来，变成包含这个类型部分属性的子类型。</p>
-<pre><code class="typescript">interface Todo {
+<pre><code class="typescript">interface Todo &#123;
   title: string;
   description: string;
   completed: boolean;
-}
+&#125;
 
 type TodoPreview = Pick&lt;Todo, &quot;title&quot; | &quot;completed&quot;&gt;;
 
-const todo: TodoPreview = {
+const todo: TodoPreview = &#123;
   title: &quot;Clean room&quot;,
   completed: false
-};
+&#125;;
 </code></pre>
 <p>那么如何定义一个 <code>ConditionalPick</code>工具类型，支持根据指定的 Condition 条件来生成新的类型，对应的使用示例如下：</p>
-<pre><code class="typescript">interface Example {
+<pre><code class="typescript">interface Example &#123;
     a: string;
     b: string | number;
     c: () =&gt; void;
-    d: {};
-}
+    d: &#123;&#125;;
+&#125;
 
 // 测试用例：
 type StringKeysOnly = ConditionalPick&lt;Example, string&gt;;
-//=&gt; {a: string}</code></pre>
+//=&gt; &#123;a: string&#125;</code></pre>
 <h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>1、<code>in keyof</code>遍历 <code>V</code> 泛型；</p>
 <p>2、通过类型断言判断 <code>V[K]</code> 对应键值是否约束于传入的 <code>string</code>如果是 <code>true</code>那么断言成返回遍历的当前 <code>K</code>，否则为 <code>never</code>。</p>
 <p>返回 <code>never</code>在 TypeScript 编译器中，会默认认为这是个用不存在的类型，也相当于没有这个 <code>K</code>会被过滤，对应值则是 <code>V[K]</code> 获取。</p>
 <pre><code class="ts">
-interface Example {
+interface Example &#123;
     a: string;
     b: string | number;
     c: () =&gt; void;
-    d: {};
-}
+    d: &#123;&#125;;
+&#125;
 
 // 测试用例：
 type StringKeysOnly = ConditionalPick&lt;Example, string&gt;;
-//=&gt; {a: string}
+//=&gt; &#123;a: string&#125;
 
-type ConditionalPick&lt;T,R&gt; = {
+type ConditionalPick&lt;T,R&gt; = &#123;
     [K in keyof T as T[K] extends R ? K : never ]: T[K]
-}
+&#125;
 </code></pre>
 <h2 id="题目五（追加args）"><a href="#题目五（追加args）" class="headerlink" title="题目五（追加args）"></a>题目五（追加args）</h2><p>定义一个工具类型 <code>AppendArgument</code>，为已有的函数类型增加指定类型的参数，新增的参数名是<code>x</code>，将作为新函数类型的第一个参数。具体的使用示例如下所示：</p>
 <pre><code class="typescript">type Fn = (a: number, b: string) =&gt; number
@@ -378,9 +296,9 @@ type NamesComma = JoinStrArray&lt;Names, &quot;,&quot;&gt; // &quot;Sem,Lolo,Kaq
 type NamesSpace = JoinStrArray&lt;Names, &quot; &quot;&gt; // &quot;Sem Lolo Kaquko&quot;
 type NamesStars = JoinStrArray&lt;Names, &quot;⭐️&quot;&gt; // &quot;Sem⭐️Lolo⭐️Kaquko&quot;
 
-type JoinStrArray&lt;Arr extends string[], Separator extends string&gt; = Arr extends [infer A,...infer B] ? (`${A extends string ? A : &#39;&#39;}${B extends [string, ...string[]]
-    ? `${Separator}${JoinStrArray&lt;B, Separator&gt;}`
-    : &#39;&#39;}`):&#39;&#39; // 你的实现代码
+type JoinStrArray&lt;Arr extends string[], Separator extends string&gt; = Arr extends [infer A,...infer B] ? (`$&#123;A extends string ? A : &#39;&#39;&#125;$&#123;B extends [string, ...string[]]
+    ? `$&#123;Separator&#125;$&#123;JoinStrArray&lt;B, Separator&gt;&#125;`
+    : &#39;&#39;&#125;`):&#39;&#39; // 你的实现代码
 </code></pre>
 <p><code>JoinStrArray</code>工具方法，<code>Arr</code>泛型必须约束于<code>string[]</code>类型，<code>Separator</code>为分隔符，也必须约束于<code>string</code>类型；</p>
 <p>1、首先<code>Arr</code>约束于后面<code>[infer A, ...infer B]</code>并通过<code>infer</code>关键字推导拿到第一个索引<code>A</code>的类型，以及剩余（rest）数组的类型为<code>B</code>；</p>
@@ -393,8 +311,8 @@ type JoinStrArray&lt;Arr extends string[], Separator extends string&gt; = Arr ex
 // 测试用例
 Trim&lt;&#39; semlinker &#39;&gt;
 //=&gt; &#39;semlinker&#39;</code></pre>
-<h3 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h3><pre><code class="ts">type TrimLeft&lt;V extends string&gt; = V extends ` ${infer R}` ? TrimLeft&lt;R&gt; : V;
-type TrimRight&lt;V extends string&gt; = V extends `${infer R} ` ? TrimRight&lt;R&gt; : V;
+<h3 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h3><pre><code class="ts">type TrimLeft&lt;V extends string&gt; = V extends ` $&#123;infer R&#125;` ? TrimLeft&lt;R&gt; : V;
+type TrimRight&lt;V extends string&gt; = V extends `$&#123;infer R&#125; ` ? TrimRight&lt;R&gt; : V;
 
 type Trim&lt;V extends string&gt; = TrimLeft&lt;TrimRight&lt;V&gt;&gt;;
 
@@ -406,11 +324,11 @@ type Result = Trim&lt;&#39; semlinker &#39;&gt;
 
 // 测试用例
 type E0 = IsEqual&lt;1, 2&gt;; // false
-type E1 = IsEqual&lt;{ a: 1 }, { a: 1 }&gt; // true
+type E1 = IsEqual&lt;&#123; a: 1 &#125;, &#123; a: 1 &#125;&gt; // true
 type E2 = IsEqual&lt;[1], []&gt;; // false</code></pre>
 <h3 id="解决方案-3"><a href="#解决方案-3" class="headerlink" title="解决方案"></a>解决方案</h3><pre><code class="ts">// 测试用例
 type E0 = IsEqual&lt;1, 2&gt;; // false
-type E1 = IsEqual&lt;{ a: 1 }, { a: 1 }&gt; // true
+type E1 = IsEqual&lt;&#123; a: 1 &#125;, &#123; a: 1 &#125;&gt; // true
 type E2 = IsEqual&lt;[1], []&gt;; // false
 type IsEqual&lt;A, B&gt; = [A] extends [B]? ([B] extends [A]? true:false ): false // 你的实现代码</code></pre>
 <h2 id="题目十"><a href="#题目十" class="headerlink" title="题目十"></a>题目十</h2><blockquote>
@@ -481,10 +399,10 @@ type Includes&lt;T extends Array&lt;any&gt;, E&gt; =  E extends T[number] ? true
 
 // 测试用例
 type U0 = UnionToIntersection&lt;string | number&gt; // never
-type U1 = UnionToIntersection&lt;{ name: string } | { age: number }&gt; // { name: string; } &amp; { age: number; }</code></pre>
+type U1 = UnionToIntersection&lt;&#123; name: string &#125; | &#123; age: number &#125;&gt; // &#123; name: string; &#125; &amp; &#123; age: number; &#125;</code></pre>
 <h3 id="解决方案-5"><a href="#解决方案-5" class="headerlink" title="解决方案"></a>解决方案</h3><pre><code class="ts">// 测试用例
 type U0 = UnionToIntersection&lt;string | number&gt; // never
-type U1 = UnionToIntersection&lt;{ name: string } | { age: number }&gt; // { name: string; } &amp; { age: number; }
+type U1 = UnionToIntersection&lt;&#123; name: string &#125; | &#123; age: number &#125;&gt; // &#123; name: string; &#125; &amp; &#123; age: number; &#125;
 
 type UnionToIntersection&lt;U&gt; = (
     U extends unknown ? (props: U)=&gt;void : never
@@ -494,13 +412,13 @@ type UnionToIntersection&lt;U&gt; = (
 <p>3、如果函数<code>A</code>能继承函数<code>B</code>则 返回<code>infer P</code>声明的<code>P</code>，否则返回<code>never</code>，再利用<strong>函数参数类型逆变</strong>，从而实现得到的结果从联合类型到交叉类型的转变。</p>
 <p>这里是也设计到一个知识点：<strong>分布式条件类型，</strong>条件类型的特性：分布式条件类型。在结合联合类型使用时（<strong>只针对\</strong>**extends**<em>\</em>左边的联合类型**），分布式条件类型会被自动分发成联合类型。例如，<code>T extends U ? X : Y</code>，<code>T</code>的类型为<code>A | B | C</code>，会被解析为<code>(A extends U ? X : Y) | (B extends U ? X : Y) | (C extends U ? X : Y)</code>。</p>
 <p>都知道<code>infer</code>声明都是只能出现在<code>extends</code>子语句中。但是，在协变的位置上，同一类型变量的多个候选类型会被推断为联合类型：</p>
-<pre><code class="typescript">type Foo&lt;T&gt; = T extends { a: infer U, b: infer U } ? U : never;
-type T10 = Foo&lt;{ a: string, b: string }&gt;;  // string
-type T11 = Foo&lt;{ a: string, b: number }&gt;;  // string | number</code></pre>
+<pre><code class="typescript">type Foo&lt;T&gt; = T extends &#123; a: infer U, b: infer U &#125; ? U : never;
+type T10 = Foo&lt;&#123; a: string, b: string &#125;&gt;;  // string
+type T11 = Foo&lt;&#123; a: string, b: number &#125;&gt;;  // string | number</code></pre>
 <p>在逆变的位置上，同一个类型多个候选类型会被推断为交叉类型：</p>
-<pre><code class="typescript">type Bar&lt;T&gt; = T extends { a: (x: infer U) =&gt; void, b: (x: infer U) =&gt; void } ? U : never;
-type T20 = Bar&lt;{ a: (x: string) =&gt; void, b: (x: string) =&gt; void }&gt;;  // string
-type T21 = Bar&lt;{ a: (x: string) =&gt; void, b: (x: number) =&gt; void }&gt;;  // string &amp; number</code></pre>
+<pre><code class="typescript">type Bar&lt;T&gt; = T extends &#123; a: (x: infer U) =&gt; void, b: (x: infer U) =&gt; void &#125; ? U : never;
+type T20 = Bar&lt;&#123; a: (x: string) =&gt; void, b: (x: string) =&gt; void &#125;&gt;;  // string
+type T21 = Bar&lt;&#123; a: (x: string) =&gt; void, b: (x: number) =&gt; void &#125;&gt;;  // string &amp; number</code></pre>
 <h2 id="题目十六（元组转化为对象）"><a href="#题目十六（元组转化为对象）" class="headerlink" title="题目十六（元组转化为对象）"></a>题目十六（元组转化为对象）</h2><h1 id="ts内置方法实现"><a href="#ts内置方法实现" class="headerlink" title="ts内置方法实现"></a>ts内置方法实现</h1><h2 id="Exclude-排除类型"><a href="#Exclude-排除类型" class="headerlink" title="Exclude 排除类型"></a>Exclude <strong>排除类型</strong></h2><p>例子：</p>
 <pre><code class="ts">type Dir=&#39;1&#39;|&#39;2&#39;|&#39;3&#39;|&#39;4&#39;
 
@@ -508,36 +426,36 @@ type T21 = Bar&lt;{ a: (x: string) =&gt; void, b: (x: number) =&gt; void }&gt;; 
 type dir1=Exclude&lt;Dir,&#39;1&#39;|&#39;2&#39;&gt;</code></pre>
 <p>实现：</p>
 <pre><code class="ts">type MyExclude&lt;T, R&gt; = T extends R ? never :T</code></pre>
-<h2 id="Pick-获取-key-类型"><a href="#Pick-获取-key-类型" class="headerlink" title="Pick 获取 key 类型"></a>Pick <strong>获取 key 类型</strong></h2><pre><code class="ts">type MyPick&lt;T, R extends keyof T&gt; = {
+<h2 id="Pick-获取-key-类型"><a href="#Pick-获取-key-类型" class="headerlink" title="Pick 获取 key 类型"></a>Pick <strong>获取 key 类型</strong></h2><pre><code class="ts">type MyPick&lt;T, R extends keyof T&gt; = &#123;
     [Key in R]: T[Key]
-}</code></pre>
+&#125;</code></pre>
 <h2 id="Omit-排除-key-类型"><a href="#Omit-排除-key-类型" class="headerlink" title="Omit 排除 key 类型"></a>Omit <strong>排除 key 类型</strong></h2><pre><code class="ts">type MyOmit&lt;T, R extends keyof T&gt; = MyPick&lt;T, MyExclude&lt;keyof T, R&gt;&gt;</code></pre>
-<h2 id="Readonly-属性只读"><a href="#Readonly-属性只读" class="headerlink" title="Readonly 属性只读"></a>Readonly 属性只读</h2><pre><code class="ts">type MyReadonly&lt;T&gt; = {
+<h2 id="Readonly-属性只读"><a href="#Readonly-属性只读" class="headerlink" title="Readonly 属性只读"></a>Readonly 属性只读</h2><pre><code class="ts">type MyReadonly&lt;T&gt; = &#123;
     readonly [Key in keyof T]: T[Key]
-}</code></pre>
-<h2 id="Required-属性必选"><a href="#Required-属性必选" class="headerlink" title="Required 属性必选"></a>Required 属性必选</h2><pre><code class="ts">type MyRequired&lt;T&gt; = {
+&#125;</code></pre>
+<h2 id="Required-属性必选"><a href="#Required-属性必选" class="headerlink" title="Required 属性必选"></a>Required 属性必选</h2><pre><code class="ts">type MyRequired&lt;T&gt; = &#123;
     [Key in keyof T]-?:T[Key]
-}</code></pre>
-<h2 id="Partial-属性可选"><a href="#Partial-属性可选" class="headerlink" title="Partial 属性可选"></a>Partial 属性可选</h2><pre><code class="ts">type MyPartial&lt;T&gt; = {
+&#125;</code></pre>
+<h2 id="Partial-属性可选"><a href="#Partial-属性可选" class="headerlink" title="Partial 属性可选"></a>Partial 属性可选</h2><pre><code class="ts">type MyPartial&lt;T&gt; = &#123;
     [Key in keyof T]?: T[Key]
-}</code></pre>
+&#125;</code></pre>
 <h2 id="ReturnType-获取函数返回类型"><a href="#ReturnType-获取函数返回类型" class="headerlink" title="ReturnType 获取函数返回类型"></a>ReturnType 获取函数返回类型</h2><pre><code class="ts">type MyReturnType&lt;T extends (...args:any[])=&gt;any&gt; = T extends (...args:any[]) =&gt; infer R ? R :never</code></pre>
 <h2 id="Parameters-获取函数参数类型"><a href="#Parameters-获取函数参数类型" class="headerlink" title="Parameters 获取函数参数类型"></a>Parameters 获取函数参数类型</h2><pre><code class="ts">type MyParameters&lt;T extends (...args:any[])=&gt;any&gt; = T extends (...args:infer B) =&gt; any? B:never</code></pre>
 <h1 id="ts-实用范型工具"><a href="#ts-实用范型工具" class="headerlink" title="ts 实用范型工具"></a>ts 实用范型工具</h1><h2 id="OptionalRequired-部分属性必选"><a href="#OptionalRequired-部分属性必选" class="headerlink" title="OptionalRequired 部分属性必选"></a>OptionalRequired 部分属性必选</h2><h3 id="实现一"><a href="#实现一" class="headerlink" title="实现一"></a>实现一</h3><pre><code class="ts">/*
  * @Description: 部分属性必选
  */
 
-export type OptionalRequired&lt;T,R extends keyof T&gt; = {
+export type OptionalRequired&lt;T,R extends keyof T&gt; = &#123;
     [key in R]-?: T[key]
-} &amp; {
+&#125; &amp; &#123;
     [key in Exclude&lt;keyof T, R&gt;]: T[key]
-}
+&#125;
 
-type TestObj = {
+type TestObj = &#123;
     a?:string,
     b:number,
     c?:object
-}
+&#125;
 
 type OptionRequiredObjType = OptionalRequired&lt;TestObj,&#39;a&#39; | &#39;c&#39;&gt;
 </code></pre>
@@ -545,17 +463,17 @@ type OptionRequiredObjType = OptionalRequired&lt;TestObj,&#39;a&#39; | &#39;c&#3
 <h2 id="OptionalReadonly-部分属性只读"><a href="#OptionalReadonly-部分属性只读" class="headerlink" title="OptionalReadonly 部分属性只读"></a>OptionalReadonly 部分属性只读</h2><h3 id="实现一-1"><a href="#实现一-1" class="headerlink" title="实现一"></a>实现一</h3><pre><code class="ts">/*
  * @Description: 部分属性只读
  */
-export type OptionalReadonly&lt;T,R extends keyof T&gt; = {
+export type OptionalReadonly&lt;T,R extends keyof T&gt; = &#123;
     readonly [key in R]: T[key]
-} &amp; {
+&#125; &amp; &#123;
     [key in Exclude&lt;keyof T, R&gt;]: T[key]
-}
+&#125;
 
-type TestObj = {
+type TestObj = &#123;
     a?:string,
     b:number,
     c?:object
-}
+&#125;
 
 type OptionReadonlyObjType = OptionalReadonly&lt;TestObj,&#39;a&#39; | &#39;c&#39;&gt;</code></pre>
 <h3 id="实现二-1"><a href="#实现二-1" class="headerlink" title="实现二"></a>实现二</h3><pre><code class="ts">export type OptionalReadonly&lt;T,R extends keyof T&gt; = Omit&lt;T,R&gt; &amp; Readonly&lt;Pick&lt;T,R&gt;&gt;</code></pre>
@@ -563,309 +481,206 @@ type OptionReadonlyObjType = OptionalReadonly&lt;TestObj,&#39;a&#39; | &#39;c&#3
  * @Description: 部分可选
  */
 
-type OptionalPartial&lt;T, R extends keyof T&gt; = {
+type OptionalPartial&lt;T, R extends keyof T&gt; = &#123;
     [key in R]?: T[key]
-} &amp; {
+&#125; &amp; &#123;
     [key in Exclude&lt;keyof T, R&gt;]: T[key]
-}
+&#125;
 
-type TestObj = {
+type TestObj = &#123;
     a:string,
     b:number,
     c:object
-}
+&#125;
 
 type OptionPartialObjType = OptionalPartial&lt;TestObj,&#39;a&#39; | &#39;c&#39;&gt;</code></pre>
 <h3 id="实现二-2"><a href="#实现二-2" class="headerlink" title="实现二"></a>实现二</h3><pre><code class="ts">type OptionalPartial&lt;T, R extends keyof T&gt; =  Omit&lt;T, R&gt; &amp; Partial&lt;Pick&lt;T,R&gt;&gt;;</code></pre>
 
-        </div>
 
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2022-07-19T12:17:22.134Z" itemprop="dateUpdated">2022-07-19 20:17:22</time>
-</span><br>
-
-
-        
-        Happy Coding
-        
-    </div>
-    
-    <footer>
-        <a href="https://github.com/NollieLeo">
-            <img src="/img/avatar.png" alt="Mr.Weng">
-            Mr.Weng
-        </a>
-    </footer>
-</blockquote>
-
-        
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-
-
-        <div class="post-footer">
-            
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2022/05/23/typescript%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/&title=《typescript刷题记录》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2022/05/23/typescript%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/&title=《typescript刷题记录》 — 翁老师的博客&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2022/05/23/typescript%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《typescript刷题记录》 — 翁老师的博客&url=https://github.com/NollieLeo/2022/05/23/typescript%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/&via=https://github.com/NollieLeo" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2022/05/23/typescript%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-
-
-        </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2022/06/05/ts%E4%B9%8B%E5%8D%8F%E5%8F%98%E5%92%8C%E9%80%86%E5%8F%98/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">ts之协变和逆变</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">vue的响应式系统设计总结</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
 
 </article>
 
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        谢谢大爷~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/false" alt="打赏二维码">
-        </div>
-        
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2022/06/05/ts%E4%B9%8B%E5%8D%8F%E5%8F%98%E5%92%8C%E9%80%86%E5%8F%98/">ts之协变和逆变</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/">vue的响应式系统设计总结</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
     </div>
-</div>
-
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>Mr.Weng &copy; 2020 - 2023</span>
-            <span>
-                
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2022/05/23/typescript%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/&title=《typescript刷题记录》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2022/05/23/typescript%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/&title=《typescript刷题记录》 — 翁老师的博客&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2022/05/23/typescript%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《typescript刷题记录》 — 翁老师的博客&url=https://github.com/NollieLeo/2022/05/23/typescript%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/&via=https://github.com/NollieLeo" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2022/05/23/typescript%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2022/05/23/typescript%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" alt="微信分享二维码">
-</div>
-
-
-
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</template>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
-
-
-
-
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '我走了';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '我来了';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
         }
-    });
-})();
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
 </script>
 
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
 
 
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
 </body>
 </html>

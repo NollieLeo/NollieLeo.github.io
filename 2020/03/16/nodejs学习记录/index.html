@@ -1,26 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang='zh-CN'>
+
 <head>
-    
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
 
-    
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
 
-    
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>nodejs学习记录 - 翁老师的博客</title>
 
-
-
-    <meta charset="utf-8">
-    
-    
-    
-    
-    <title>nodejs学习记录 | 翁老师的博客</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#00abc0">
-    
-    
-    <meta name="keywords" content="nodeJS">
+  
     <meta name="description" content="1.node自带模块fs文件管理nodejs官方文档 1.1 readdir和readdirSync的区别 两者都用与读取文件或者文件夹里的文件有啥   fs.readdir(path[, options], callback)异步函数，需要传入一个回调  path   options encoding 默认值: &#39;utf8&#39;。 withFileTypes  默认值: false。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nodejs学习记录">
@@ -28,175 +30,87 @@
 <meta property="og:site_name" content="翁老师的博客">
 <meta property="og:description" content="1.node自带模块fs文件管理nodejs官方文档 1.1 readdir和readdirSync的区别 两者都用与读取文件或者文件夹里的文件有啥   fs.readdir(path[, options], callback)异步函数，需要传入一个回调  path   options encoding 默认值: &#39;utf8&#39;。 withFileTypes  默认值: false。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1570860020599.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1570865560878.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571021112249.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571021180480.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571145900643.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571152056613.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571152747028.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571152776993.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1571385182120.png">
+<meta property="og:image" content="https://github.com/.com//1570860020599.png">
+<meta property="og:image" content="https://github.com/.com//1570865560878.png">
+<meta property="og:image" content="https://github.com/.com//1571021112249.png">
+<meta property="og:image" content="https://github.com/.com//1571021180480.png">
+<meta property="og:image" content="https://github.com/.com//1571145900643.png">
+<meta property="og:image" content="https://github.com/.com//1571152056613.png">
+<meta property="og:image" content="https://github.com/.com//1571152747028.png">
+<meta property="og:image" content="https://github.com/.com//1571152776993.png">
+<meta property="og:image" content="https://github.com/.com//1571385182120.png">
 <meta property="article:published_time" content="2020-03-16T07:17:47.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.079Z">
 <meta property="article:author" content="Mr.Weng">
 <meta property="article:tag" content="nodeJS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1570860020599.png">
-    
-        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
+<meta name="twitter:image" content="https://github.com/.com//1570860020599.png">
+  
+  
 
-    <!-- custom head -->
-    
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+  
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
 
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.png">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Mr.Weng</h5>
-          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                Categories
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/nollieleo" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">nodejs学习记录</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">nodejs学习记录</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2020-03-16T07:17:47.000Z" itemprop="datePublished" class="page-time">
-  2020-03-16
-</time>
+  
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/nodeJS/">nodeJS</a></li></ul></li></ul>
 
-            
-        </h5>
-    </div>
 
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
     
 
+  
 
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+
+<nav class="menu dis-select"></nav>
 </header>
 
 
-<div class="container body-wrap">
-    
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-node自带模块fs文件管理"><span class="post-toc-number">1.</span> <span class="post-toc-text">1.node自带模块fs文件管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1-readdir和readdirSync的区别"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.1 readdir和readdirSync的区别</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2-mkdir和mkdirSync-创建文件"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">1.2 mkdir和mkdirSync 创建文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3-rename-重命名-和-rmdir删除文件"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">1.3 rename 重命名 和 rmdir删除文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-4-writeFile-覆盖写入-和appendFile添加写入文件"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">1.4 writeFile 覆盖写入 和appendFile添加写入文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-5-readFile-读取文件内容-二进制数据流"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">1.5 readFile 读取文件内容(二进制数据流)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-6-fs-stat-path-options-callback"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">1.6 fs.stat(path[, options], callback)</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-url内置模块"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. url内置模块</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1-url-parse-和url-format"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">2.1 url.parse()和url.format()</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-querystring内置模块"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. querystring内置模块</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1-stringfy-对象转成字符串，parse-根据符号解析querystring"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">3.1 stringfy()对象转成字符串，parse()根据符号解析querystring</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-2-escape-和unescape-编码与解码"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">3.2 escape()和unescape()编码与解码</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-nodemailer-第三方模块"><span class="post-toc-number">4.</span> <span class="post-toc-text">4. nodemailer 第三方模块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-error对象"><span class="post-toc-number">5.</span> <span class="post-toc-text">5. error对象</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-爬虫案例-（方法2待补充）"><span class="post-toc-number">6.</span> <span class="post-toc-text">6. 爬虫案例 （方法2待补充）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#方法1："><span class="post-toc-number">6.0.1.</span> <span class="post-toc-text">方法1：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#方法2："><span class="post-toc-number">6.0.2.</span> <span class="post-toc-text">方法2：</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-express框架（写api）"><span class="post-toc-number">7.</span> <span class="post-toc-text">7. express框架（写api）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-1-简要用法"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">7.1.简要用法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-2-中间件-middlewear"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">7.2 中间件 middlewear</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-3-静态资源目录-static"><span class="post-toc-number">7.3.</span> <span class="post-toc-text">7.3 静态资源目录 static</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-4-路由"><span class="post-toc-number">7.4.</span> <span class="post-toc-text">7.4 路由</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-MongoDB-非关系型数据库"><span class="post-toc-number">8.</span> <span class="post-toc-text">8. MongoDB 非关系型数据库</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#8-1-指令基本"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">8.1 指令基本</span></a></li></ol></li></ol>
-        </nav>
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">nodejs学习记录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-node%E8%87%AA%E5%B8%A6%E6%A8%A1%E5%9D%97fs%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86"><span class="toc-text">1.node自带模块fs文件管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-readdir%E5%92%8CreaddirSync%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">1.1 readdir和readdirSync的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-mkdir%E5%92%8CmkdirSync-%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6"><span class="toc-text">1.2 mkdir和mkdirSync 创建文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-rename-%E9%87%8D%E5%91%BD%E5%90%8D-%E5%92%8C-rmdir%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6"><span class="toc-text">1.3 rename 重命名 和 rmdir删除文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-writeFile-%E8%A6%86%E7%9B%96%E5%86%99%E5%85%A5-%E5%92%8CappendFile%E6%B7%BB%E5%8A%A0%E5%86%99%E5%85%A5%E6%96%87%E4%BB%B6"><span class="toc-text">1.4 writeFile 覆盖写入 和appendFile添加写入文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-readFile-%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="toc-text">1.5 readFile 读取文件内容(二进制数据流)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-6-fs-stat-path-options-callback"><span class="toc-text">1.6 fs.stat(path[, options], callback)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-url%E5%86%85%E7%BD%AE%E6%A8%A1%E5%9D%97"><span class="toc-text">2. url内置模块</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-url-parse-%E5%92%8Curl-format"><span class="toc-text">2.1 url.parse()和url.format()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-querystring%E5%86%85%E7%BD%AE%E6%A8%A1%E5%9D%97"><span class="toc-text">3. querystring内置模块</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-stringfy-%E5%AF%B9%E8%B1%A1%E8%BD%AC%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8Cparse-%E6%A0%B9%E6%8D%AE%E7%AC%A6%E5%8F%B7%E8%A7%A3%E6%9E%90querystring"><span class="toc-text">3.1 stringfy()对象转成字符串，parse()根据符号解析querystring</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-escape-%E5%92%8Cunescape-%E7%BC%96%E7%A0%81%E4%B8%8E%E8%A7%A3%E7%A0%81"><span class="toc-text">3.2 escape()和unescape()编码与解码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-nodemailer-%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97"><span class="toc-text">4. nodemailer 第三方模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-error%E5%AF%B9%E8%B1%A1"><span class="toc-text">5. error对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E7%88%AC%E8%99%AB%E6%A1%88%E4%BE%8B-%EF%BC%88%E6%96%B9%E6%B3%952%E5%BE%85%E8%A1%A5%E5%85%85%EF%BC%89"><span class="toc-text">6. 爬虫案例 （方法2待补充）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E6%B3%951%EF%BC%9A"><span class="toc-text">方法1：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E6%B3%952%EF%BC%9A"><span class="toc-text">方法2：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-express%E6%A1%86%E6%9E%B6%EF%BC%88%E5%86%99api%EF%BC%89"><span class="toc-text">7. express框架（写api）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#7-1-%E7%AE%80%E8%A6%81%E7%94%A8%E6%B3%95"><span class="toc-text">7.1.简要用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-2-%E4%B8%AD%E9%97%B4%E4%BB%B6-middlewear"><span class="toc-text">7.2 中间件 middlewear</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-3-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E7%9B%AE%E5%BD%95-static"><span class="toc-text">7.3 静态资源目录 static</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-4-%E8%B7%AF%E7%94%B1"><span class="toc-text">7.4 路由</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-MongoDB-%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">8. MongoDB 非关系型数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#8-1-%E6%8C%87%E4%BB%A4%E5%9F%BA%E6%9C%AC"><span class="toc-text">8.1 指令基本</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
     </aside>
+    <div class='l_main'>
+      
+
+      
 
 
-<article id="post-nodejs学习记录"
-  class="post-article article-type-post fade" itemprop="blogPost">
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a> <span class="sep"></span> <a class="cap breadcrumb-link" href="/categories/%E5%90%8E%E7%AB%AF/nodeJS/">nodeJS</a></div><div id="post-meta">发布于&nbsp;<time datetime="2020-03-16T07:17:47.000Z">2020-03-16</time></div></div>
 
-    <div class="post-card">
-        <h1 class="post-card-title">nodejs学习记录</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2020-03-16 15:17:47" datetime="2020-03-16T07:17:47.000Z"  itemprop="datePublished">2020-03-16</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/nodeJS/">nodeJS</a></li></ul></li></ul>
-
-
-
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <h3 id="1-node自带模块fs文件管理"><a href="#1-node自带模块fs文件管理" class="headerlink" title="1.node自带模块fs文件管理"></a>1.node自带模块fs文件管理</h3><p><a href="http://nodejs.cn/api/fs.html" target="_blank" rel="noopener">nodejs官方文档</a></p>
+<article class='md-text content post'>
+<h1 class="article-title"><span>nodejs学习记录</span></h1>
+<h3 id="1-node自带模块fs文件管理"><a href="#1-node自带模块fs文件管理" class="headerlink" title="1.node自带模块fs文件管理"></a>1.node自带模块fs文件管理</h3><p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/fs.html">nodejs官方文档</a></p>
 <h4 id="1-1-readdir和readdirSync的区别"><a href="#1-1-readdir和readdirSync的区别" class="headerlink" title="1.1 readdir和readdirSync的区别"></a>1.1 readdir和readdirSync的区别</h4><blockquote>
 <p>两者都用与读取文件或者文件夹里的文件有啥</p>
 </blockquote>
@@ -216,13 +130,13 @@
 </li>
 </ul>
 <p>错误处理代码：</p>
-<pre><code class="javascript">let dirs = fs.readdir(&#39;./hello.txt&#39;, (err, files) =&gt; {
-    if(err){
+<pre><code class="javascript">let dirs = fs.readdir(&#39;./hello.txt&#39;, (err, files) =&gt; &#123;
+    if(err)&#123;
         console.log(err);
-    }else{
+    &#125;else&#123;
         console.log(files);
-    }
-})</code></pre>
+    &#125;
+&#125;)</code></pre>
 <hr>
 <p><code>fs.readdirSync(path[, options])</code> 同步函数</p>
 <ul>
@@ -235,61 +149,40 @@
 <li>返回:</li>
 </ul>
 <p>错误处理代码：</p>
-<pre><code class="javascript">try {
+<pre><code class="javascript">try &#123;
     let dirs = fs.readdirSync(&#39;./node.js&#39;); //异步
-}
-catch (err) {
+&#125;
+catch (err) &#123;
     console.log(&#39;粗ucol&#39;);
     console.log(err)
-}</code></pre>
+&#125;</code></pre>
 <p>因为同步函数没有异步那样的处理错误机制，因此需要配合<code>try catch</code>才能捕获错误的同时又不暂停下面的代码运行。</p>
-<h4 id="1-2-mkdir和mkdirSync-创建文件"><a href="#1-2-mkdir和mkdirSync-创建文件" class="headerlink" title="1.2 mkdir和mkdirSync 创建文件"></a>1.2 mkdir和mkdirSync 创建文件</h4><p><a href="http://nodejs.cn/api/fs.html#fs_fs_mkdir_path_options_callback" target="_blank" rel="noopener">mkdir文档</a></p>
-<h4 id="1-3-rename-重命名-和-rmdir删除文件"><a href="#1-3-rename-重命名-和-rmdir删除文件" class="headerlink" title="1.3 rename 重命名 和 rmdir删除文件"></a>1.3 rename 重命名 和 rmdir删除文件</h4><p><a href="http://nodejs.cn/api/fs.html#fs_fs_rename_oldpath_newpath_callback" target="_blank" rel="noopener">rename</a></p>
-<p><a href="http://nodejs.cn/api/fs.html#fs_fs_rmdir_path_options_callback" target="_blank" rel="noopener">rmdir</a></p>
-<h4 id="1-4-writeFile-覆盖写入-和appendFile添加写入文件"><a href="#1-4-writeFile-覆盖写入-和appendFile添加写入文件" class="headerlink" title="1.4 writeFile 覆盖写入 和appendFile添加写入文件"></a>1.4 writeFile 覆盖写入 和appendFile添加写入文件</h4><h4 id="1-5-readFile-读取文件内容-二进制数据流"><a href="#1-5-readFile-读取文件内容-二进制数据流" class="headerlink" title="1.5 readFile 读取文件内容(二进制数据流)"></a>1.5 readFile 读取文件内容(二进制数据流)</h4><pre><code class="javascript">fs.readFile(&#39;name.txt&#39;,(err,data)=&gt;{
+<h4 id="1-2-mkdir和mkdirSync-创建文件"><a href="#1-2-mkdir和mkdirSync-创建文件" class="headerlink" title="1.2 mkdir和mkdirSync 创建文件"></a>1.2 mkdir和mkdirSync 创建文件</h4><p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/fs.html#fs_fs_mkdir_path_options_callback">mkdir文档</a></p>
+<h4 id="1-3-rename-重命名-和-rmdir删除文件"><a href="#1-3-rename-重命名-和-rmdir删除文件" class="headerlink" title="1.3 rename 重命名 和 rmdir删除文件"></a>1.3 rename 重命名 和 rmdir删除文件</h4><p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/fs.html#fs_fs_rename_oldpath_newpath_callback">rename</a></p>
+<p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/fs.html#fs_fs_rmdir_path_options_callback">rmdir</a></p>
+<h4 id="1-4-writeFile-覆盖写入-和appendFile添加写入文件"><a href="#1-4-writeFile-覆盖写入-和appendFile添加写入文件" class="headerlink" title="1.4 writeFile 覆盖写入 和appendFile添加写入文件"></a>1.4 writeFile 覆盖写入 和appendFile添加写入文件</h4><h4 id="1-5-readFile-读取文件内容-二进制数据流"><a href="#1-5-readFile-读取文件内容-二进制数据流" class="headerlink" title="1.5 readFile 读取文件内容(二进制数据流)"></a>1.5 readFile 读取文件内容(二进制数据流)</h4><pre><code class="javascript">fs.readFile(&#39;name.txt&#39;,(err,data)=&gt;&#123;
     console.log(data.toString(&#39;UTF-8&#39;))
-})</code></pre>
+&#125;)</code></pre>
 <p>可以用toString(‘UTF-8’)的方法将文字提取出来；</p>
 <p>或者直接在配置项中</p>
-<pre><code class="javascript">fs.readFile(&#39;name.txt&#39;, &#39;UTF-8&#39;, (err, data) =&gt; {
+<pre><code class="javascript">fs.readFile(&#39;name.txt&#39;, &#39;UTF-8&#39;, (err, data) =&gt; &#123;
     console.log(data)
-})</code></pre>
-<h4 id="1-6-fs-stat-path-options-callback"><a href="#1-6-fs-stat-path-options-callback" class="headerlink" title="1.6 fs.stat(path[, options], callback)"></a>1.6 fs.stat(path[, options], callback)</h4><p><a href="http://nodejs.cn/api/fs.html#fs_fs_stat_path_options_callback" target="_blank" rel="noopener">fs.stat</a></p>
+&#125;)</code></pre>
+<h4 id="1-6-fs-stat-path-options-callback"><a href="#1-6-fs-stat-path-options-callback" class="headerlink" title="1.6 fs.stat(path[, options], callback)"></a>1.6 fs.stat(path[, options], callback)</h4><p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/fs.html#fs_fs_stat_path_options_callback">fs.stat</a></p>
 <hr>
-<h3 id="2-url内置模块"><a href="#2-url内置模块" class="headerlink" title="2. url内置模块"></a>2. url内置模块</h3><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="1570860020599.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-
-<h4 id="2-1-url-parse-和url-format"><a href="#2-1-url-parse-和url-format" class="headerlink" title="2.1 url.parse()和url.format()"></a>2.1 url.parse()和url.format()</h4><p><a href="http://nodejs.cn/api/url.html#url_url_parse_urlstring_parsequerystring_slashesdenotehost" target="_blank" rel="noopener">url.parse()</a>将其解析成一个url对象，从而可以从url中获取href中的各种值</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="1570865560878.png" alt="1570865560878" title>
-                </div>
-                <div class="image-caption">1570865560878</div>
-            </figure>
-
-<p><a href="http://nodejs.cn/api/url.html#url_url_format_url_options" target="_blank" rel="noopener">url.format()</a>将对象再拼起来</p>
+<h3 id="2-url内置模块"><a href="#2-url内置模块" class="headerlink" title="2. url内置模块"></a>2. url内置模块</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1570860020599.png" alt></p>
+<h4 id="2-1-url-parse-和url-format"><a href="#2-1-url-parse-和url-format" class="headerlink" title="2.1 url.parse()和url.format()"></a>2.1 url.parse()和url.format()</h4><p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/url.html#url_url_parse_urlstring_parsequerystring_slashesdenotehost">url.parse()</a>将其解析成一个url对象，从而可以从url中获取href中的各种值</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1570865560878.png" alt="1570865560878"></p>
+<p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/url.html#url_url_format_url_options">url.format()</a>将对象再拼起来</p>
 <pre><code class="javascript">let url = require(&quot;url&quot;);
 let urlStirng = &#39;https://code.choerodon.com.cn/choerodon-framework?page=2&#39;
 let urlObj = url.parse(urlStirng);
 console.log(urlObj);
 let string = url.format(urlObj);
 console.log(string)</code></pre>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="1571021112249.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1571021112249.png" alt></p>
 <hr>
-<h3 id="3-querystring内置模块"><a href="#3-querystring内置模块" class="headerlink" title="3. querystring内置模块"></a>3. querystring内置模块</h3><p><a href="http://nodejs.cn/api/querystring.html#querystring_query_string" target="_blank" rel="noopener">querystring</a></p>
+<h3 id="3-querystring内置模块"><a href="#3-querystring内置模块" class="headerlink" title="3. querystring内置模块"></a>3. querystring内置模块</h3><p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/querystring.html#querystring_query_string">querystring</a></p>
 <h4 id="3-1-stringfy-对象转成字符串，parse-根据符号解析querystring"><a href="#3-1-stringfy-对象转成字符串，parse-根据符号解析querystring" class="headerlink" title="3.1 stringfy()对象转成字符串，parse()根据符号解析querystring"></a>3.1 stringfy()对象转成字符串，parse()根据符号解析querystring</h4><h4 id="3-2-escape-和unescape-编码与解码"><a href="#3-2-escape-和unescape-编码与解码" class="headerlink" title="3.2 escape()和unescape()编码与解码"></a>3.2 escape()和unescape()编码与解码</h4><pre><code class="javascript">let qs = require(&#39;querystring&#39;)
 // let string = &#39;name=weng&amp;pass=12121&amp;sex=0&amp;hello=111&#39;
 // let obj = qs.parse(string);
@@ -299,54 +192,47 @@ let code = qs.escape(string);
 console.log(code);
 let parseCode = qs.unescape(code);
 console.log(parseCode);</code></pre>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="1571021180480.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1571021180480.png" alt></p>
 <hr>
 <h3 id="4-nodemailer-第三方模块"><a href="#4-nodemailer-第三方模块" class="headerlink" title="4. nodemailer 第三方模块"></a>4. nodemailer 第三方模块</h3><p>基本的发送邮箱代码：</p>
 <pre><code class="javascript">&#39;use strict&#39;;
 const nodemailer = require(&#39;nodemailer&#39;);
 
 // 创建发送邮件的请求对象
-let transporter = nodemailer.createTransport({
+let transporter = nodemailer.createTransport(&#123;
     host: &#39;smtp.qq.com&#39;, //发送方用的邮箱
     port: 465, //端口号
     secure: true, // true for 465, false for other ports
-    auth: {
+    auth: &#123;
         user: &#39;736653759@qq.com&#39;, // 发生方邮箱地址
         pass: &#39;hebnhkaruvzlbfdg&#39; // mtp验证码
-    }
-});
+    &#125;
+&#125;);
 
 // send mail with defined transport object
-let mailObj = {
+let mailObj = &#123;
     from: &#39;&quot;Fred Foo 👻&quot; &lt;736653759@qq.com&gt;&#39;,
     to: &#39;736653759@qq.com&#39;,
     subject: &#39;Hello test nodemailer ✔&#39;, // Subject line
     text: &#39;Hello world of node.js?&#39;, // plain text body
     html: &#39;&lt;b&gt;Hello world?&lt;/b&gt;&#39; // html body
-};
+&#125;;
 
 
 // main().catch(console.error);
-setTimeout(() =&gt; {
-    transporter.sendMail(mailObj, (err, data) =&gt; {
+setTimeout(() =&gt; &#123;
+    transporter.sendMail(mailObj, (err, data) =&gt; &#123;
         console.log(data)
-    })
-}, 2000)</code></pre>
+    &#125;)
+&#125;, 2000)</code></pre>
 <h3 id="5-error对象"><a href="#5-error对象" class="headerlink" title="5. error对象"></a>5. error对象</h3><p>错误对象本身没有终止代码执行，所以你需要throw抛出异常</p>
 <pre><code class="javascript">let err = new Error(&#39;发生错误&#39;);
 throw err;</code></pre>
 <h3 id="6-爬虫案例-（方法2待补充）"><a href="#6-爬虫案例-（方法2待补充）" class="headerlink" title="6. 爬虫案例 （方法2待补充）"></a>6. 爬虫案例 （方法2待补充）</h3><ul>
 <li><p>获取目标网站</p>
 </li>
-<li><p>分析网站内容  <a href="https://cheerio.js.org/" target="_blank" rel="noopener">cheerio</a> 可以用<code>jquery</code>中的选择器进行网页内容分析</p>
-<p><a href="https://www.jianshu.com/p/629a81b4e013" target="_blank" rel="noopener">cheerio中文文档</a></p>
+<li><p>分析网站内容  <a target="_blank" rel="noopener" href="https://cheerio.js.org/">cheerio</a> 可以用<code>jquery</code>中的选择器进行网页内容分析</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/629a81b4e013">cheerio中文文档</a></p>
 <pre><code class="javascript">const cheerio = require(&#39;cheerio&#39;);
 let $ = cheerio.load(&#39;&lt;div&gt;&lt;p&gt;hello&lt;/p&gt;&lt;img src = &quot;http://www.baidu.com&quot;/&gt;&#39;);
 const img = $(&#39;div img&#39;).attr(&#39;src&#39;);
@@ -356,8 +242,8 @@ console.log(img)</code></pre>
 <li><p>获取有效信息，下载或者其他操作 </p>
 </li>
 </ul>
-<p><a href="http://nodejs.cn/api/http.html#http_http_get_url_options_callback" target="_blank" rel="noopener">http</a></p>
-<p><a href="http://nodejs.cn/api/https.html" target="_blank" rel="noopener">https</a></p>
+<p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/http.html#http_http_get_url_options_callback">http</a></p>
+<p><a target="_blank" rel="noopener" href="http://nodejs.cn/api/https.html">https</a></p>
 <p>根据不同的请求选择不同的协议。</p>
 <p><span style="color:red">*爬图片的代码</span></p>
 <h5 id="方法1："><a href="#方法1：" class="headerlink" title="方法1："></a>方法1：</h5><p><strong>downLoad.js文件</strong></p>
@@ -365,66 +251,66 @@ console.log(img)</code></pre>
 const path = require(&#39;path&#39;);
 const request = require(&#39;request&#39;);
 var dirPath = path.join(__dirname, &quot;MarvelImages&quot;); //__dirname当前路径，加上要创建的文件名
-function downloadfile(downloadUrl, index) {
+function downloadfile(downloadUrl, index) &#123;
     // 创建文件夹
-    if (!fs.existsSync(dirPath)) { // 同步查询文件夹是否存在
+    if (!fs.existsSync(dirPath)) &#123; // 同步查询文件夹是否存在
         fs.mkdirSync(dirPath); // 同步创建文件夹
         console.log(dirPath + &#39;文件创建成功&#39;);
-    }
+    &#125;
     let imgUrlArray = downloadUrl.split(&#39;/&#39;);  //分割Url
     let imgUrl = imgUrlArray[imgUrlArray.length - 1]; //获取文件名
     let filename = imgUrl;
     let stream = fs.createWriteStream(path.join(dirPath, filename));
-    if (downloadUrl.indexOf(&#39;http&#39;) !== -1) {
-        request(downloadUrl).pipe(stream).on(&#39;error&#39;, (err) =&gt; {
+    if (downloadUrl.indexOf(&#39;http&#39;) !== -1) &#123;
+        request(downloadUrl).pipe(stream).on(&#39;error&#39;, (err) =&gt; &#123;
             console.log(err);
-        }).on(&#39;close&#39;, () =&gt; {
-            console.log(`文件【${filename}】下载完`);
+        &#125;).on(&#39;close&#39;, () =&gt; &#123;
+            console.log(`文件【$&#123;filename&#125;】下载完`);
             // callback(null, dest);
-        })
-    } else {
-        console.log(`${downloadUrl}文件找不到`);
-    }
-}
+        &#125;)
+    &#125; else &#123;
+        console.log(`$&#123;downloadUrl&#125;文件找不到`);
+    &#125;
+&#125;
 module.exports = downloadfile;</code></pre>
 <p><strong>splider.js</strong></p>
 <pre><code class="javascript">const http = require(&#39;http&#39;);
 const cheerio = require(&#39;cheerio&#39;);
 let downLoad = require(&#39;./downLoad&#39;);
 let mavelUrl = &#39;http://marvel.mtime.com/&#39;
-http.get(mavelUrl, (res) =&gt; {
-    const { statusCode } = res; //状态码
+http.get(mavelUrl, (res) =&gt; &#123;
+    const &#123; statusCode &#125; = res; //状态码
     const contentType = res.headers[&#39;content-type&#39;]; //请求到的文件类型
     console.log(`请求到的文件类型` + contentType);
     // 做安全判断
     let error;
-    if (statusCode !== 200) {
-        error = new Error(&#39;请求失败.&#39; + `Status Code: ${statusCode}错误`);
-    } else if (!/^text\/html/.test(contentType)) {
-        error = new Error(&#39;Invalid content-type.\n&#39; + `Expected text/html but received ${contentType}`)
-    }
-    if (error) { //如果出错的话直接来到这一行
+    if (statusCode !== 200) &#123;
+        error = new Error(&#39;请求失败.&#39; + `Status Code: $&#123;statusCode&#125;错误`);
+    &#125; else if (!/^text\/html/.test(contentType)) &#123;
+        error = new Error(&#39;Invalid content-type.\n&#39; + `Expected text/html but received $&#123;contentType&#125;`)
+    &#125;
+    if (error) &#123; //如果出错的话直接来到这一行
         console.error(error.message);
         res.resume(); //重置缓存
         return false;
-    }
+    &#125;
     // 数据是分段的,每一次接受到一段数据都会触发data事件，chunk就是数据片段
     // 所以必须用一个string来当总chunk，每一次请求一个拼接一个
     let rawData = &#39;&#39;;
-    res.on(&#39;data&#39;, (chunk) =&gt; {
+    res.on(&#39;data&#39;, (chunk) =&gt; &#123;
         rawData += chunk.toString(&#39;UTF-8&#39;);
-    });
-    res.on(&#39;end&#39;, () =&gt; {
+    &#125;);
+    res.on(&#39;end&#39;, () =&gt; &#123;
         let $ = cheerio.load(rawData);
-        $(&#39;img&#39;).each((index, ele) =&gt; {
+        $(&#39;img&#39;).each((index, ele) =&gt; &#123;
             let imgSrc = $(ele).attr(&#39;src&#39;);
             downLoad(&#39;http://marvel.mtime.com/&#39; + imgSrc, index);
-        })
-    })
-}).on(&#39;error&#39;, (err) =&gt; {
+        &#125;)
+    &#125;)
+&#125;).on(&#39;error&#39;, (err) =&gt; &#123;
     console.log(&#39;请求错误&#39;);
-})</code></pre>
-<h5 id="方法2："><a href="#方法2：" class="headerlink" title="方法2："></a>方法2：</h5><h3 id="7-express框架（写api）"><a href="#7-express框架（写api）" class="headerlink" title="7. express框架（写api）"></a>7. express框架（写api）</h3><p><a href="http://www.expressjs.com.cn/4x/api.html" target="_blank" rel="noopener">express中文文档</a></p>
+&#125;)</code></pre>
+<h5 id="方法2："><a href="#方法2：" class="headerlink" title="方法2："></a>方法2：</h5><h3 id="7-express框架（写api）"><a href="#7-express框架（写api）" class="headerlink" title="7. express框架（写api）"></a>7. express框架（写api）</h3><p><a target="_blank" rel="noopener" href="http://www.expressjs.com.cn/4x/api.html">express中文文档</a></p>
 <h4 id="7-1-简要用法"><a href="#7-1-简要用法" class="headerlink" title="7.1.简要用法"></a>7.1.简要用法</h4><p>先明确一点，接口的构成要素有啥</p>
 <ul>
 <li>ip</li>
@@ -436,86 +322,65 @@ http.get(mavelUrl, (res) =&gt; {
 <pre><code class="javascript">const express = require(&#39;express&#39;);
 const app = express() //express实例化
 // 监听3000端口
-app.listen(3000, () =&gt; {
+app.listen(3000, () =&gt; &#123;
     console.log(&#39;server start at localhost://3000&#39;);
-})
+&#125;)
 
 // 写一个get接口
-app.get(&#39;/user/login&#39;, (req, res) =&gt; {
+app.get(&#39;/user/login&#39;, (req, res) =&gt; &#123;
     console.log(req.query); //接受到的值
     console.log(&#39;你好&#39;);
-    res.send({ status: &#39;success&#39; });
-})
+    res.send(&#123; status: &#39;success&#39; &#125;);
+&#125;)
 
 // 协议 http https</code></pre>
-<p>地址栏中输入<a href="http://localhost:3000/user/login?username=wengkaimin&amp;ps=123456" target="_blank" rel="noopener">http://localhost:3000/user/login?username=wengkaimin&amp;ps=123456</a></p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="1571145900643.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-
+<p>地址栏中输入<a target="_blank" rel="noopener" href="http://localhost:3000/user/login?username=wengkaimin&amp;ps=123456">http://localhost:3000/user/login?username=wengkaimin&amp;ps=123456</a></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1571145900643.png" alt></p>
 <p>控制台中就能接受到传过来的数据，通过req.query接受get方法传过来的参数</p>
 <p><strong>写一个post接口</strong></p>
 <blockquote>
 <p><code>express</code>不提供解析消息体的功能，所以req.body是拿不到主体的，这边提供了一个第三方插件</p>
 <p><code>body-parser</code></p>
 </blockquote>
-<p><a href="https://www.npmjs.com/package/body-parser" target="_blank" rel="noopener">body-parser npm</a></p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="1571152056613.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-
+<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/body-parser">body-parser npm</a></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1571152056613.png" alt></p>
 <pre><code class="javascript">const express = require(&#39;express&#39;);
 const app = express() //express实例化
 const bp = require(&#39;body-parser&#39;);
 // express中app.use表示使用一个中间件
 // parse application/x-www-form-urlencoded解析表单格式数据
-app.use(bp.urlencoded({ extended: false }))
+app.use(bp.urlencoded(&#123; extended: false &#125;))
 // parse application/json
 app.use(bp.json());
 // 监听3000端口
-app.listen(3000, () =&gt; {
+app.listen(3000, () =&gt; &#123;
     console.log(&#39;server start at localhost://3000&#39;);
-})
+&#125;)
 
 // 写一个get接口
-app.get(&#39;/user/login&#39;, (request, res) =&gt; {
+app.get(&#39;/user/login&#39;, (request, res) =&gt; &#123;
     console.log(request.query);
     console.log(&#39;你好&#39;);
-    let { username, ps } = request.query;
-    if (username === &#39;weng&#39; &amp;&amp; ps === &#39;1234&#39;) {
-        res.send({ status: &#39;success&#39; });
-    } else {
+    let &#123; username, ps &#125; = request.query;
+    if (username === &#39;weng&#39; &amp;&amp; ps === &#39;1234&#39;) &#123;
+        res.send(&#123; status: &#39;success&#39; &#125;);
+    &#125; else &#123;
         res.send(&#39;登陆失败&#39;)
-    }
-});
+    &#125;
+&#125;);
 
 // 写一个post接口
-app.post(&#39;/user/reg&#39;, (request, result) =&gt; {
+app.post(&#39;/user/reg&#39;, (request, result) =&gt; &#123;
     // request.body获取数据，消息体，请求体
-    // let { us, ps } = request.body;
+    // let &#123; us, ps &#125; = request.body;
     console.log(request.body);
     // express不能直接解析消息体
     // 需要第三方插件 body-parser
-    result.send({ status: 1 })
-})
+    result.send(&#123; status: 1 &#125;)
+&#125;)
 // 协议 http https</code></pre>
-<p><img src="1571152747028.png" alt></p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="1571152776993.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1571152747028.png" alt></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1571152776993.png" alt></p>
 <h4 id="7-2-中间件-middlewear"><a href="#7-2-中间件-middlewear" class="headerlink" title="7.2 中间件 middlewear"></a>7.2 中间件 middlewear</h4><ul>
 <li>内置中间件 static</li>
 <li>自定义中间件（全局）（局部）</li>
@@ -529,29 +394,29 @@ const app = express();
 
 // 中间件
 // 全局中间件,所有请求发送之前都要走这一步
-app.use(&#39;/&#39;, (req, res, next) =&gt; {
-    let { token } = req.query;
-    if (token) {
+app.use(&#39;/&#39;, (req, res, next) =&gt; &#123;
+    let &#123; token &#125; = req.query;
+    if (token) &#123;
         res.send(&quot;OK&quot;);
         next(); //是否继续往下执行
-    } else {
+    &#125; else &#123;
         res.send(&#39;缺少token&#39;);
-    }
+    &#125;
 
-})
+&#125;)
 
-app.get(&#39;/test1&#39;, (requst, result) =&gt; {
+app.get(&#39;/test1&#39;, (requst, result) =&gt; &#123;
     console.log(&#39;test1&#39;)
     console.log(requst.query)
-})
+&#125;)
 
-app.get(&#39;/test2&#39;, (requst, result) =&gt; {
+app.get(&#39;/test2&#39;, (requst, result) =&gt; &#123;
     console.log(&#39;test2&#39;)
-})
+&#125;)
 
-app.listen(3000, () =&gt; {
+app.listen(3000, () =&gt; &#123;
     console.log(&#39;server start at localhost://3000&#39;)
-})</code></pre>
+&#125;)</code></pre>
 <h4 id="7-3-静态资源目录-static"><a href="#7-3-静态资源目录-static" class="headerlink" title="7.3 静态资源目录 static"></a>7.3 静态资源目录 static</h4><blockquote>
 <p>指定一个目录，可以被访问 像apache的www一样</p>
 </blockquote>
@@ -564,17 +429,10 @@ console.log(dirPath);
 
 app.use(express.static(dirPath)); //可以从这个路径直接获取到资源
 
-app.listen(3000, () =&gt; {
+app.listen(3000, () =&gt; &#123;
     console.log(&#39;server start at localhost://3000&#39;)
-})</code></pre>
-<h4 id="7-4-路由"><a href="#7-4-路由" class="headerlink" title="7.4 路由"></a>7.4 路由</h4><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="1571385182120.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-
+&#125;)</code></pre>
+<h4 id="7-4-路由"><a href="#7-4-路由" class="headerlink" title="7.4 路由"></a>7.4 路由</h4><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1571385182120.png" alt></p>
 <p>server.js</p>
 <pre><code class="javascript">const express = require(&#39;express&#39;);
 const app = express();
@@ -586,321 +444,216 @@ app.use(&#39;/user&#39;, userRouter);
 app.use(&#39;/food&#39;, foodRouter)
 
 
-app.listen(3000, () =&gt; {
+app.listen(3000, () =&gt; &#123;
     console.log(&quot;server start localhost:3000&quot;);
-})</code></pre>
+&#125;)</code></pre>
 <p>userRouter.js</p>
 <pre><code class="javascript">const express = require(&#39;express&#39;);
 const router = express.Router();
 
-router.get(&#39;/add&#39;, (req, res) =&gt; {
+router.get(&#39;/add&#39;, (req, res) =&gt; &#123;
     res.send(&#39;user add&#39;)
-})
+&#125;)
 
-router.get(&#39;/del&#39;, () =&gt; {
+router.get(&#39;/del&#39;, () =&gt; &#123;
     console.log(&#39;user delete&#39;)
-})
+&#125;)
 
 module.exports = router</code></pre>
 <h3 id="8-MongoDB-非关系型数据库"><a href="#8-MongoDB-非关系型数据库" class="headerlink" title="8. MongoDB 非关系型数据库"></a>8. MongoDB <strong>非关系型数据库</strong></h3><h4 id="8-1-指令基本"><a href="#8-1-指令基本" class="headerlink" title="8.1 指令基本"></a>8.1 指令基本</h4><ul>
 <li>mongodb 数据库名</li>
 <li>mongod 命令行启动数据库命令</li>
 <li>mongo 命令行操作数据库指令</li>
-<li>mongoose node 操作数据库插件    <a href="http://www.mongoosejs.net/docs/cnhome.html" target="_blank" rel="noopener">中文文档</a></li>
+<li>mongoose node 操作数据库插件    <a target="_blank" rel="noopener" href="http://www.mongoosejs.net/docs/cnhome.html">中文文档</a></li>
 <li>show dbs</li>
 <li>show collections</li>
 </ul>
 
-        </div>
 
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2022-02-09T01:45:19.079Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
-</span><br>
-
-
-        
-        Happy Coding
-        
-    </div>
-    
-    <footer>
-        <a href="https://github.com/NollieLeo">
-            <img src="/img/avatar.png" alt="Mr.Weng">
-            Mr.Weng
-        </a>
-    </footer>
-</blockquote>
-
-        
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodeJS/" rel="tag">nodeJS</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&title=《nodejs学习记录》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&title=《nodejs学习记录》 — 翁老师的博客&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《nodejs学习记录》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&via=https://github.com/NollieLeo" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-
-
-        </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2020/03/16/==%E4%B8%8E===%E5%8C%BA%E5%88%AB/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">==与===区别</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">flex3个属性详解</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
 
 </article>
 
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        谢谢大爷~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/false" alt="打赏二维码">
-        </div>
-        
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2020/03/16/==%E4%B8%8E===%E5%8C%BA%E5%88%AB/">==与===区别</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2020/03/16/flex3%E4%B8%AA%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/">flex3个属性详解</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
     </div>
-</div>
-
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>Mr.Weng &copy; 2020 - 2023</span>
-            <span>
-                
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&title=《nodejs学习记录》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&title=《nodejs学习记录》 — 翁老师的博客&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《nodejs学习记录》 — 翁老师的博客&url=https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&via=https://github.com/NollieLeo" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2020/03/16/nodejs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" alt="微信分享二维码">
-</div>
-
-
-
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</template>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
-
-
-
-
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '我走了';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '我来了';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
         }
-    });
-})();
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
 </script>
 
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
 
 
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
 </body>
 </html>

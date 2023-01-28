@@ -1,32 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang='zh-CN'>
+
 <head>
-    
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
 
-    
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
 
-    
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Proxy代理应用场景 - 翁老师的博客</title>
 
-
-
-    <meta charset="utf-8">
-    
-    
-    
-    
-    <title>Proxy代理应用场景 | 翁老师的博客</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#00abc0">
-    
-    
-    <meta name="keywords" content="js,proxy">
-    <meta name="description" content="Proxy 使用场景1 增强型数组定义 enhancedArray 函数function enhancedArray(arr) {   return new Proxy(arr, {     get(target, property, receiver) {       const range &#x3D; getRange(property);       const indices &#x3D; range ?">
+  
+    <meta name="description" content="Proxy 使用场景1 增强型数组定义 enhancedArray 函数function enhancedArray(arr) &amp;#123;   return new Proxy(arr, &amp;#123;     get(target, property, receiver) &amp;#123;       const range &#x3D; getRange(property);       const ind">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Proxy代理应用场景">
 <meta property="og:url" content="https://github.com/NollieLeo/2021/06/15/Proxy%E4%BB%A3%E7%90%86%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/index.html">
 <meta property="og:site_name" content="翁老师的博客">
-<meta property="og:description" content="Proxy 使用场景1 增强型数组定义 enhancedArray 函数function enhancedArray(arr) {   return new Proxy(arr, {     get(target, property, receiver) {       const range &#x3D; getRange(property);       const indices &#x3D; range ?">
+<meta property="og:description" content="Proxy 使用场景1 增强型数组定义 enhancedArray 函数function enhancedArray(arr) &amp;#123;   return new Proxy(arr, &amp;#123;     get(target, property, receiver) &amp;#123;       const range &#x3D; getRange(property);       const ind">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-15T08:55:27.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.051Z">
@@ -34,187 +36,99 @@
 <meta property="article:tag" content="js">
 <meta property="article:tag" content="proxy">
 <meta name="twitter:card" content="summary">
-    
-        <link rel="alternate" type="application/atom+xml" title="翁老师的博客" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
+  
+  
 
-    <!-- custom head -->
-    
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="翁老师的博客" type="application/atom+xml">
+  
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
 
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.png">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Mr.Weng</h5>
-          <a href="mailto:736653759@qq.com" title="736653759@qq.com" class="mail">736653759@qq.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                Categories
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/nollieleo" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">Proxy代理应用场景</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">Proxy代理应用场景</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2021-06-15T08:55:27.000Z" itemprop="datePublished" class="page-time">
-  2021-06-15
-</time>
+  
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
 
-            
-        </h5>
-    </div>
 
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
     
 
+  
 
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">翁老师的博客</div></a></div>
+
+<nav class="menu dis-select"></nav>
 </header>
 
 
-<div class="container body-wrap">
-    
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Proxy-使用场景"><span class="post-toc-number">1.</span> <span class="post-toc-text">Proxy 使用场景</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-增强型数组"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1 增强型数组</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#定义-enhancedArray-函数"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">定义 enhancedArray 函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#使用-enhancedArray-函数"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">使用 enhancedArray 函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-增强型对象"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2 增强型对象</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#创建-enhancedObject-函数"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">创建 enhancedObject 函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#使用-enhancedObject-函数"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">使用 enhancedObject 函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-创建只读的对象"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3 创建只读的对象</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#创建-Proxy-对象"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">创建 Proxy 对象</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#使用-proxy-对象"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">使用 proxy 对象</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-拦截方法调用"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">4 拦截方法调用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#定义-traceMethodCalls-函数"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">定义 traceMethodCalls 函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#使用-traceMethodCalls-函数"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">使用 traceMethodCalls 函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-隐藏属性"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">5 隐藏属性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#创建-hideProperty-函数"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">创建 hideProperty 函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#使用-hideProperty-函数"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">使用 hideProperty 函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-验证属性值"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">6 验证属性值</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#创建-validatedUser-函数"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">创建 validatedUser 函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#使用-validatedUser-函数"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">使用 validatedUser 函数</span></a></li></ol></li></ol></li></ol>
-        </nav>
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Proxy代理应用场景</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Proxy-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">Proxy 使用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%A2%9E%E5%BC%BA%E5%9E%8B%E6%95%B0%E7%BB%84"><span class="toc-text">1 增强型数组</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-enhancedArray-%E5%87%BD%E6%95%B0"><span class="toc-text">定义 enhancedArray 函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-enhancedArray-%E5%87%BD%E6%95%B0"><span class="toc-text">使用 enhancedArray 函数</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%A2%9E%E5%BC%BA%E5%9E%8B%E5%AF%B9%E8%B1%A1"><span class="toc-text">2 增强型对象</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-enhancedObject-%E5%87%BD%E6%95%B0"><span class="toc-text">创建 enhancedObject 函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-enhancedObject-%E5%87%BD%E6%95%B0"><span class="toc-text">使用 enhancedObject 函数</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%88%9B%E5%BB%BA%E5%8F%AA%E8%AF%BB%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="toc-text">3 创建只读的对象</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-Proxy-%E5%AF%B9%E8%B1%A1"><span class="toc-text">创建 Proxy 对象</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-proxy-%E5%AF%B9%E8%B1%A1"><span class="toc-text">使用 proxy 对象</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%8B%A6%E6%88%AA%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8"><span class="toc-text">4 拦截方法调用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-traceMethodCalls-%E5%87%BD%E6%95%B0"><span class="toc-text">定义 traceMethodCalls 函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-traceMethodCalls-%E5%87%BD%E6%95%B0"><span class="toc-text">使用 traceMethodCalls 函数</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E9%9A%90%E8%97%8F%E5%B1%9E%E6%80%A7"><span class="toc-text">5 隐藏属性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-hideProperty-%E5%87%BD%E6%95%B0"><span class="toc-text">创建 hideProperty 函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-hideProperty-%E5%87%BD%E6%95%B0"><span class="toc-text">使用 hideProperty 函数</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E9%AA%8C%E8%AF%81%E5%B1%9E%E6%80%A7%E5%80%BC"><span class="toc-text">6 验证属性值</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-validatedUser-%E5%87%BD%E6%95%B0"><span class="toc-text">创建 validatedUser 函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-validatedUser-%E5%87%BD%E6%95%B0"><span class="toc-text">使用 validatedUser 函数</span></a></li></ol></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
     </aside>
+    <div class='l_main'>
+      
+
+      
 
 
-<article id="post-Proxy代理应用场景"
-  class="post-article article-type-post fade" itemprop="blogPost">
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/js/">js</a></div><div id="post-meta">发布于&nbsp;<time datetime="2021-06-15T08:55:27.000Z">2021-06-15</time></div></div>
 
-    <div class="post-card">
-        <h1 class="post-card-title">Proxy代理应用场景</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2021-06-15 16:55:27" datetime="2021-06-15T08:55:27.000Z"  itemprop="datePublished">2021-06-15</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/js/">js</a></li></ul>
-
-
-
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <h3 id="Proxy-使用场景"><a href="#Proxy-使用场景" class="headerlink" title="Proxy 使用场景"></a>Proxy 使用场景</h3><h4 id="1-增强型数组"><a href="#1-增强型数组" class="headerlink" title="1 增强型数组"></a>1 增强型数组</h4><h5 id="定义-enhancedArray-函数"><a href="#定义-enhancedArray-函数" class="headerlink" title="定义 enhancedArray 函数"></a>定义 enhancedArray 函数</h5><pre><code class="javascript">function enhancedArray(arr) {
-  return new Proxy(arr, {
-    get(target, property, receiver) {
+<article class='md-text content post'>
+<h1 class="article-title"><span>Proxy代理应用场景</span></h1>
+<h3 id="Proxy-使用场景"><a href="#Proxy-使用场景" class="headerlink" title="Proxy 使用场景"></a>Proxy 使用场景</h3><h4 id="1-增强型数组"><a href="#1-增强型数组" class="headerlink" title="1 增强型数组"></a>1 增强型数组</h4><h5 id="定义-enhancedArray-函数"><a href="#定义-enhancedArray-函数" class="headerlink" title="定义 enhancedArray 函数"></a>定义 enhancedArray 函数</h5><pre><code class="javascript">function enhancedArray(arr) &#123;
+  return new Proxy(arr, &#123;
+    get(target, property, receiver) &#123;
       const range = getRange(property);
       const indices = range ? range : getIndices(property);
-      const values = indices.map(function (index) {
+      const values = indices.map(function (index) &#123;
         const key = index &lt; 0 ? String(target.length + index) : index;
         return Reflect.get(target, key, receiver);
-      });
+      &#125;);
       return values.length === 1 ? values[0] : values;
-    },
-  });
+    &#125;,
+  &#125;);
 
-  function getRange(str) {
+  function getRange(str) &#123;
     var [start, end] = str.split(&quot;:&quot;).map(Number);
     if (typeof end === &quot;undefined&quot;) return false;
 
     let range = [];
-    for (let i = start; i &lt; end; i++) {
+    for (let i = start; i &lt; end; i++) &#123;
       range = range.concat(i);
-    }
+    &#125;
     return range;
-  }
+  &#125;
 
-  function getIndices(str) {
+  function getIndices(str) &#123;
     return str.split(&quot;,&quot;).map(Number);
-  }
-}
+  &#125;
+&#125;
 复制代码</code></pre>
 <h5 id="使用-enhancedArray-函数"><a href="#使用-enhancedArray-函数" class="headerlink" title="使用 enhancedArray 函数"></a>使用 enhancedArray 函数</h5><pre><code class="javascript">const arr = enhancedArray([1, 2, 3, 4, 5]);
 
@@ -226,37 +140,37 @@ console.log(arr[&quot;-2:3&quot;]); //=&gt; [ 4, 5, 1, 2, 3 ]
 复制代码</code></pre>
 <p>由以上的输出结果可知，增强后的数组对象，就可以支持负数索引、分片索引等功能。除了可以增强数组之外，我们也可以使用 Proxy API 来增强普通对象。</p>
 <h4 id="2-增强型对象"><a href="#2-增强型对象" class="headerlink" title="2 增强型对象"></a>2 增强型对象</h4><h5 id="创建-enhancedObject-函数"><a href="#创建-enhancedObject-函数" class="headerlink" title="创建 enhancedObject 函数"></a>创建 enhancedObject 函数</h5><pre><code class="javascript">const enhancedObject = (target) =&gt;
-  new Proxy(target, {
-    get(target, property) {
-      if (property in target) {
+  new Proxy(target, &#123;
+    get(target, property) &#123;
+      if (property in target) &#123;
         return target[property];
-      } else {
+      &#125; else &#123;
         return searchFor(property, target);
-      }
-    },
-  });
+      &#125;
+    &#125;,
+  &#125;);
 
 let value = null;
-function searchFor(property, target) {
-  for (const key of Object.keys(target)) {
-    if (typeof target[key] === &quot;object&quot;) {
+function searchFor(property, target) &#123;
+  for (const key of Object.keys(target)) &#123;
+    if (typeof target[key] === &quot;object&quot;) &#123;
       searchFor(property, target[key]);
-    } else if (typeof target[property] !== &quot;undefined&quot;) {
+    &#125; else if (typeof target[property] !== &quot;undefined&quot;) &#123;
       value = target[property];
       break;
-    }
-  }
+    &#125;
+  &#125;
   return value;
-}
+&#125;
 复制代码</code></pre>
-<h5 id="使用-enhancedObject-函数"><a href="#使用-enhancedObject-函数" class="headerlink" title="使用 enhancedObject 函数"></a>使用 enhancedObject 函数</h5><pre><code class="javascript">const data = enhancedObject({
-  user: {
+<h5 id="使用-enhancedObject-函数"><a href="#使用-enhancedObject-函数" class="headerlink" title="使用 enhancedObject 函数"></a>使用 enhancedObject 函数</h5><pre><code class="javascript">const data = enhancedObject(&#123;
+  user: &#123;
     name: &quot;阿宝哥&quot;,
-    settings: {
+    settings: &#123;
       theme: &quot;dark&quot;,
-    },
-  },
-});
+    &#125;,
+  &#125;,
+&#125;);
 
 console.log(data.user.settings.theme); // dark
 console.log(data.theme); // dark
@@ -266,17 +180,17 @@ console.log(data.theme); // dark
 dark
 复制代码</code></pre>
 <p>通过观察以上的输出结果可知，使用 <code>enhancedObject</code> 函数处理过的对象，我们就可以方便地访问普通对象内部的深层属性。</p>
-<h4 id="3-创建只读的对象"><a href="#3-创建只读的对象" class="headerlink" title="3 创建只读的对象"></a>3 创建只读的对象</h4><h5 id="创建-Proxy-对象"><a href="#创建-Proxy-对象" class="headerlink" title="创建 Proxy 对象"></a>创建 Proxy 对象</h5><pre><code class="javascript">const man = {
+<h4 id="3-创建只读的对象"><a href="#3-创建只读的对象" class="headerlink" title="3 创建只读的对象"></a>3 创建只读的对象</h4><h5 id="创建-Proxy-对象"><a href="#创建-Proxy-对象" class="headerlink" title="创建 Proxy 对象"></a>创建 Proxy 对象</h5><pre><code class="javascript">const man = &#123;
   name: &quot;semlinker&quot;,
-};
+&#125;;
 
-const handler = {
+const handler = &#123;
   set: &quot;Read-Only&quot;,
   defineProperty: &quot;Read-Only&quot;,
   deleteProperty: &quot;Read-Only&quot;,
   preventExtensions: &quot;Read-Only&quot;,
   setPrototypeOf: &quot;Read-Only&quot;,
-};
+&#125;;
 
 const proxy = new Proxy(man, handler);
 复制代码</code></pre>
@@ -290,70 +204,70 @@ proxy.name = &quot;kakuqo&quot;;
 TypeError: &#39;Read-Only&#39; returned for property &#39;set&#39; of object &#39;#&lt;Object&gt;&#39; is not a function
 复制代码</code></pre>
 <p>观察以上的异常信息可知，导致异常的原因是因为 <code>handler</code> 对象的 <code>set</code> 属性值不是一个函数。如果不希望抛出运行时异常，我们可以定义一个 <code>freeze</code> 函数：</p>
-<pre><code class="javascript">function freeze (obj) {
-  return new Proxy(obj, {
-    set () { return true; },
-    deleteProperty () { return false; },
-    defineProperty () { return true; },
-    setPrototypeOf () { return true; }
-  });
-}
+<pre><code class="javascript">function freeze (obj) &#123;
+  return new Proxy(obj, &#123;
+    set () &#123; return true; &#125;,
+    deleteProperty () &#123; return false; &#125;,
+    defineProperty () &#123; return true; &#125;,
+    setPrototypeOf () &#123; return true; &#125;
+  &#125;);
+&#125;
 复制代码</code></pre>
 <p>定义好 <code>freeze</code> 函数，我们使用数组对象来测试一下它的功能：</p>
 <pre><code class="javascript">let frozen = freeze([1, 2, 3]);
 frozen[0] = 6;
 delete frozen[0];
-frozen = Object.defineProperty(frozen, 0, { value: 66 });
+frozen = Object.defineProperty(frozen, 0, &#123; value: 66 &#125;);
 console.log(frozen); // [ 1, 2, 3 ]
 复制代码</code></pre>
 <p>上述代码成功执行后，控制台会输出 <code>[ 1, 2, 3 ]</code>，很明显经过 <code>freeze</code> 函数处理过的数组对象，已经被 “冻结” 了。</p>
-<h4 id="4-拦截方法调用"><a href="#4-拦截方法调用" class="headerlink" title="4 拦截方法调用"></a>4 拦截方法调用</h4><h5 id="定义-traceMethodCalls-函数"><a href="#定义-traceMethodCalls-函数" class="headerlink" title="定义 traceMethodCalls 函数"></a>定义 traceMethodCalls 函数</h5><pre><code class="javascript">function traceMethodCalls(obj) {
-  const handler = {
-    get(target, propKey, receiver) {
+<h4 id="4-拦截方法调用"><a href="#4-拦截方法调用" class="headerlink" title="4 拦截方法调用"></a>4 拦截方法调用</h4><h5 id="定义-traceMethodCalls-函数"><a href="#定义-traceMethodCalls-函数" class="headerlink" title="定义 traceMethodCalls 函数"></a>定义 traceMethodCalls 函数</h5><pre><code class="javascript">function traceMethodCalls(obj) &#123;
+  const handler = &#123;
+    get(target, propKey, receiver) &#123;
       const origMethod = target[propKey]; // 获取原始方法
-      return function (...args) {
+      return function (...args) &#123;
         const result = origMethod.apply(this, args);
         console.log(
           propKey + JSON.stringify(args) + &quot; -&gt; &quot; + JSON.stringify(result)
         );
         return result;
-      };
-    },
-  };
+      &#125;;
+    &#125;,
+  &#125;;
   return new Proxy(obj, handler);
-}
+&#125;
 复制代码</code></pre>
-<h5 id="使用-traceMethodCalls-函数"><a href="#使用-traceMethodCalls-函数" class="headerlink" title="使用 traceMethodCalls 函数"></a>使用 traceMethodCalls 函数</h5><pre><code class="javascript">const obj = {
-  multiply(x, y) {
+<h5 id="使用-traceMethodCalls-函数"><a href="#使用-traceMethodCalls-函数" class="headerlink" title="使用 traceMethodCalls 函数"></a>使用 traceMethodCalls 函数</h5><pre><code class="javascript">const obj = &#123;
+  multiply(x, y) &#123;
     return x * y;
-  },
-};
+  &#125;,
+&#125;;
 
 const tracedObj = traceMethodCalls(obj);
 tracedObj.multiply(2, 5); // multiply[2,5] -&gt; 10
 复制代码</code></pre>
 <p>上述代码成功执行后，控制台会输出 <code>multiply[2,5] -&gt; 10</code>，即我们能够成功跟踪 <code>obj</code> 对象中方法的调用过程。其实，除了能够跟踪方法的调用，我们也可以跟踪对象中属性的访问，具体示例如下：</p>
-<pre><code class="javascript">function tracePropAccess(obj, propKeys) {
+<pre><code class="javascript">function tracePropAccess(obj, propKeys) &#123;
   const propKeySet = new Set(propKeys);
-  return new Proxy(obj, {
-    get(target, propKey, receiver) {
-      if (propKeySet.has(propKey)) {
+  return new Proxy(obj, &#123;
+    get(target, propKey, receiver) &#123;
+      if (propKeySet.has(propKey)) &#123;
         console.log(&quot;GET &quot; + propKey);
-      }
+      &#125;
       return Reflect.get(target, propKey, receiver);
-    },
-    set(target, propKey, value, receiver) {
-      if (propKeySet.has(propKey)) {
+    &#125;,
+    set(target, propKey, value, receiver) &#123;
+      if (propKeySet.has(propKey)) &#123;
         console.log(&quot;SET &quot; + propKey + &quot;=&quot; + value);
-      }
+      &#125;
       return Reflect.set(target, propKey, value, receiver);
-    },
-  });
-}
+    &#125;,
+  &#125;);
+&#125;
 
-const man = {
+const man = &#123;
   name: &quot;semlinker&quot;,
-};
+&#125;;
 const tracedMan = tracePropAccess(man, [&quot;name&quot;]);
 
 console.log(tracedMan.name); // GET name; semlinker
@@ -362,19 +276,19 @@ tracedMan.name = &quot;kakuqo&quot;; // SET name=kakuqo
 复制代码</code></pre>
 <p>在以上示例中，我们定义了一个 <code>tracePropAccess</code> 函数，该函数接收两个参数：obj 和 propKeys，它们分别表示需跟踪的目标和需跟踪的属性列表。调用 <code>tracePropAccess</code> 函数后，会返回一个代理对象，当我们访问被跟踪的属性时，控制台就会输出相应的访问日志。</p>
 <h4 id="5-隐藏属性"><a href="#5-隐藏属性" class="headerlink" title="5 隐藏属性"></a>5 隐藏属性</h4><h5 id="创建-hideProperty-函数"><a href="#创建-hideProperty-函数" class="headerlink" title="创建 hideProperty 函数"></a>创建 hideProperty 函数</h5><pre><code class="javascript">const hideProperty = (target, prefix = &quot;_&quot;) =&gt;
-  new Proxy(target, {
+  new Proxy(target, &#123;
     has: (obj, prop) =&gt; !prop.startsWith(prefix) &amp;&amp; prop in obj,
     ownKeys: (obj) =&gt;
       Reflect.ownKeys(obj).filter(
         (prop) =&gt; typeof prop !== &quot;string&quot; || !prop.startsWith(prefix)
       ),
     get: (obj, prop, rec) =&gt; (prop in rec ? obj[prop] : undefined),
-  });
+  &#125;);
 复制代码</code></pre>
-<h5 id="使用-hideProperty-函数"><a href="#使用-hideProperty-函数" class="headerlink" title="使用 hideProperty 函数"></a>使用 hideProperty 函数</h5><pre><code class="javascript">const man = hideProperty({
+<h5 id="使用-hideProperty-函数"><a href="#使用-hideProperty-函数" class="headerlink" title="使用 hideProperty 函数"></a>使用 hideProperty 函数</h5><pre><code class="javascript">const man = hideProperty(&#123;
   name: &quot;阿宝哥&quot;,
   _pwd: &quot;www.semlinker.com&quot;,
-});
+&#125;);
 
 console.log(man._pwd); // undefined
 console.log(&#39;_pwd&#39; in man); // false
@@ -382,32 +296,32 @@ console.log(Object.keys(man)); // [ &#39;name&#39; ]
 复制代码</code></pre>
 <p>通过观察以上的输出结果，我们可以知道，利用 Proxy API，我们实现了指定前缀属性的隐藏。除了能实现隐藏属性之外，利用 Proxy API，我们还可以实现验证属性值的功能。</p>
 <h4 id="6-验证属性值"><a href="#6-验证属性值" class="headerlink" title="6 验证属性值"></a>6 验证属性值</h4><h5 id="创建-validatedUser-函数"><a href="#创建-validatedUser-函数" class="headerlink" title="创建 validatedUser 函数"></a>创建 validatedUser 函数</h5><pre><code class="javascript">const validatedUser = (target) =&gt;
-  new Proxy(target, {
-    set(target, property, value) {
-      switch (property) {
+  new Proxy(target, &#123;
+    set(target, property, value) &#123;
+      switch (property) &#123;
         case &quot;email&quot;:
-          const regex = /^(([^&lt;&gt;()\[\]\\.,;:\s@&quot;]+(\.[^&lt;&gt;()\[\]\\.,;:\s@&quot;]+)*)|(&quot;.+&quot;))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          if (!regex.test(value)) {
+          const regex = /^(([^&lt;&gt;()\[\]\\.,;:\s@&quot;]+(\.[^&lt;&gt;()\[\]\\.,;:\s@&quot;]+)*)|(&quot;.+&quot;))@((\[[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]&#123;2,&#125;))$/;
+          if (!regex.test(value)) &#123;
             console.error(&quot;The user must have a valid email&quot;);
             return false;
-          }
+          &#125;
           break;
         case &quot;age&quot;:
-          if (value &lt; 20 || value &gt; 80) {
+          if (value &lt; 20 || value &gt; 80) &#123;
             console.error(&quot;A user&#39;s age must be between 20 and 80&quot;);
             return false;
-          }
+          &#125;
           break;
-      }
+      &#125;
 
       return Reflect.set(...arguments);
-    },
-  });
+    &#125;,
+  &#125;);
 复制代码</code></pre>
-<h5 id="使用-validatedUser-函数"><a href="#使用-validatedUser-函数" class="headerlink" title="使用 validatedUser 函数"></a>使用 validatedUser 函数</h5><pre><code class="javascript">let user = {
+<h5 id="使用-validatedUser-函数"><a href="#使用-validatedUser-函数" class="headerlink" title="使用 validatedUser 函数"></a>使用 validatedUser 函数</h5><pre><code class="javascript">let user = &#123;
   email: &quot;&quot;,
   age: 0,
-};
+&#125;;
 
 user = validatedUser(user);
 user.email = &quot;semlinker.com&quot;; // The user must have a valid email
@@ -417,296 +331,191 @@ user.age = 100; // A user&#39;s age must be between 20 and 80
 <pre><code class="shell">The user must have a valid email
 A user&#39;s age must be between 20 and 80</code></pre>
 
-        </div>
 
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2022-02-09T01:45:19.051Z" itemprop="dateUpdated">2022-02-09 09:45:19</time>
-</span><br>
-
-
-        
-        Happy Coding
-        
-    </div>
-    
-    <footer>
-        <a href="https://github.com/NollieLeo">
-            <img src="/img/avatar.png" alt="Mr.Weng">
-            Mr.Weng
-        </a>
-    </footer>
-</blockquote>
-
-        
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/proxy/" rel="tag">proxy</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/06/15/Proxy%E4%BB%A3%E7%90%86%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/&title=《Proxy代理应用场景》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/06/15/Proxy%E4%BB%A3%E7%90%86%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/&title=《Proxy代理应用场景》 — 翁老师的博客&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/06/15/Proxy%E4%BB%A3%E7%90%86%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Proxy代理应用场景》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/06/15/Proxy%E4%BB%A3%E7%90%86%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/&via=https://github.com/NollieLeo" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/06/15/Proxy%E4%BB%A3%E7%90%86%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-
-
-        </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2021/06/15/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%B8%8E%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">垃圾回收与内存泄漏</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2021/06/15/setInterval%E5%92%8CsetTimeout%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">setInterval和setTimeout优化策略</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
 
 </article>
 
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        谢谢大爷~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/false" alt="打赏二维码">
-        </div>
-        
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2021/06/15/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%B8%8E%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">垃圾回收与内存泄漏</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2021/06/15/setInterval%E5%92%8CsetTimeout%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/">setInterval和setTimeout优化策略</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
     </div>
-</div>
-
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>Mr.Weng &copy; 2020 - 2023</span>
-            <span>
-                
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NollieLeo/2021/06/15/Proxy%E4%BB%A3%E7%90%86%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/&title=《Proxy代理应用场景》 — 翁老师的博客&pic=https://github.com/NollieLeo/img/avatar.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NollieLeo/2021/06/15/Proxy%E4%BB%A3%E7%90%86%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/&title=《Proxy代理应用场景》 — 翁老师的博客&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NollieLeo/2021/06/15/Proxy%E4%BB%A3%E7%90%86%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Proxy代理应用场景》 — 翁老师的博客&url=https://github.com/NollieLeo/2021/06/15/Proxy%E4%BB%A3%E7%90%86%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/&via=https://github.com/NollieLeo" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NollieLeo/2021/06/15/Proxy%E4%BB%A3%E7%90%86%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NollieLeo/2021/06/15/Proxy%E4%BB%A3%E7%90%86%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" alt="微信分享二维码">
-</div>
-
-
-
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</template>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
-
-
-
-
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '我走了';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '我来了';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
         }
-    });
-})();
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
 </script>
 
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
 
 
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
 </body>
 </html>
