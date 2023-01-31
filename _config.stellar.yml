@@ -1,21 +1,27 @@
-
 # https://xaoxuu.com/wiki/stellar
 footer:
   social:
     github:
-      icon: '<img src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/>'
+      icon: '<img src="/assets/logo-github.svg"/>'
       url: https://github.com/NollieLeo
 
 style:
   color:
     # 动态颜色（会根据明暗主题重设明度值，只用关心色相和饱和度即可）
-    background: 'hsl(212 16% 98%)' # 浅色背景颜色
-    block: 'hsl(212 8% 95%)' # 块背景颜色
-    code: 'hsl(14 100% 48%)' # 行内代码颜色
-    text: 'hsl(0 0% 20%)' # 文本颜色
+    background: "hsl(212 16% 98%)" # 浅色背景颜色
+    block: "hsl(212 8% 95%)" # 块背景颜色
+    code: "hsl(14 100% 48%)" # 行内代码颜色
+    text: "hsl(0 0% 20%)" # 文本颜色
     # 主题色配置（不会根据明暗动态调整，请设置为通用的颜色）
-    theme: '#0fa0a5' # 主题色
-    accent: '#087f87' # 强调色
-    link: '#39cec9' # 超链接颜色
-    button: '#0fa0a5' # 按钮颜色
-    hover: '#17c2c2' # 按钮高亮颜色
+    theme: "#0fa0a5" # 主题色
+    accent: "#087f87" # 强调色
+    link: "#39cec9" # 超链接颜色
+    button: "#0fa0a5" # 按钮颜色
+    hover: "#17c2c2" # 按钮高亮颜色
+sidebar:
+  menu:
+    post: "[博客](/)"
+    wiki: "[btn.wiki](/wiki/)"
+    notes: "[笔记](/notes/)"
+    more: "[更多](/more/)"
+
