@@ -30,7 +30,7 @@
 <meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="什么是拷贝？123456let arr &#x3D; [1, 2, 3];let newArr &#x3D; arr;newArr[0] &#x3D; 100;console.log(arr);&#x2F;&#x2F;[100, 2, 3]   这是直接赋值的情况，不涉及任何拷贝。当改变newArr的时候，由于是同一个引用，arr指向的值也跟着改变。  浅拷贝上面的那个例子进行浅拷贝 123456let arr &#x3D; [1, 2, 3];let n">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/06/17/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/image-20210619073628733.png">
+<meta property="og:image" content="https://github.com/.com//image-20210619073628733.png">
 <meta property="article:published_time" content="2021-06-17T09:29:37.000Z">
 <meta property="article:modified_time" content="2023-01-28T09:29:14.751Z">
 <meta property="article:author" content="翁先森">
@@ -38,7 +38,7 @@
 <meta property="article:tag" content="面试题">
 <meta property="article:tag" content="深拷贝与浅拷贝">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/NollieLeo/2021/06/17/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/image-20210619073628733.png">
+<meta name="twitter:image" content="https://github.com/.com//image-20210619073628733.png">
   
   
 
@@ -54,7 +54,7 @@
   
 
   
-    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+    <link rel="shortcut icon" href="/assets/avatar.png">
   
 
   
@@ -77,9 +77,9 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
-<nav class="menu dis-select"></nav>
+<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/more/">更多</a></nav>
 </header>
 
 
@@ -93,7 +93,7 @@
 
 
 </div>
-<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/logo-github.svg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -163,7 +163,7 @@
 <p>好了咱们试一下</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;weng&quot;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">12</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">a.<span class="property">target</span> = a;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">deepClone</span>(a));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210619073628733.png" alt="image-20210619073628733"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210619073628733.png" alt="image-20210619073628733"></p>
 <p>好像是没有问题了, 拷贝也完成了。但还是有一个潜在的坑, 就是map 上的 key 和 map 构成了<code>强引用关系</code>，这是相当危险的。我给你解释一下与之相对的弱引用的概念你就明白了：</p>
 <blockquote>
 <p>  在计算机程序设计中，弱引用与强引用相对， </p>

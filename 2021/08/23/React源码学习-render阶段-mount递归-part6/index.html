@@ -30,38 +30,38 @@
 <meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="这里说一下 mount时候的beginWork和completeWork的流程吧  mount递归断点调试render阶段的递阶段起点是beginWork，归阶段的起点是completeWork，那我们就在源码上打断点。   应用demo如下  刷新页面正式进入调试。 1.发现第一次进入页面beginWork中，current有值，并且此时的tag是等于3的，之前说的我们在createFiber">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210823220759254.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210823220834921.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210823223552306.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210823221225561.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210823222916683.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210823223122090.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210823223335090.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210823224738688.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210823233545095.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210823234419849.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210823235701602.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210824000029762.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210826215700516.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210829105504513.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210829110028352.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210829110240512.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210829110319749.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210829110436790.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210829152223028.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210829152900269.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210829153657555.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210829160429387.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210829161632571.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210829161958750.png">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210829162021263.png">
+<meta property="og:image" content="https://github.com/.com//image-20210823220759254.png">
+<meta property="og:image" content="https://github.com/.com//image-20210823220834921.png">
+<meta property="og:image" content="https://github.com/.com//image-20210823223552306.png">
+<meta property="og:image" content="https://github.com/.com//image-20210823221225561.png">
+<meta property="og:image" content="https://github.com/.com//image-20210823222916683.png">
+<meta property="og:image" content="https://github.com/.com//image-20210823223122090.png">
+<meta property="og:image" content="https://github.com/.com//image-20210823223335090.png">
+<meta property="og:image" content="https://github.com/.com//image-20210823224738688.png">
+<meta property="og:image" content="https://github.com/.com//image-20210823233545095.png">
+<meta property="og:image" content="https://github.com/.com//image-20210823234419849.png">
+<meta property="og:image" content="https://github.com/.com//image-20210823235701602.png">
+<meta property="og:image" content="https://github.com/.com//image-20210824000029762.png">
+<meta property="og:image" content="https://github.com/.com//image-20210826215700516.png">
+<meta property="og:image" content="https://github.com/.com//image-20210829105504513.png">
+<meta property="og:image" content="https://github.com/.com//image-20210829110028352.png">
+<meta property="og:image" content="https://github.com/.com//image-20210829110240512.png">
+<meta property="og:image" content="https://github.com/.com//image-20210829110319749.png">
+<meta property="og:image" content="https://github.com/.com//image-20210829110436790.png">
+<meta property="og:image" content="https://github.com/.com//image-20210829152223028.png">
+<meta property="og:image" content="https://github.com/.com//image-20210829152900269.png">
+<meta property="og:image" content="https://github.com/.com//image-20210829153657555.png">
+<meta property="og:image" content="https://github.com/.com//image-20210829160429387.png">
+<meta property="og:image" content="https://github.com/.com//image-20210829161632571.png">
+<meta property="og:image" content="https://github.com/.com//image-20210829161958750.png">
+<meta property="og:image" content="https://github.com/.com//image-20210829162021263.png">
 <meta property="article:published_time" content="2021-08-23T13:53:25.000Z">
 <meta property="article:modified_time" content="2022-02-09T01:45:19.055Z">
 <meta property="article:author" content="翁先森">
 <meta property="article:tag" content="React">
 <meta property="article:tag" content="React render">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/NollieLeo/2021/08/23/React%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-render%E9%98%B6%E6%AE%B5-mount%E9%80%92%E5%BD%92-part6/image-20210823220759254.png">
+<meta name="twitter:image" content="https://github.com/.com//image-20210823220759254.png">
   
   
 
@@ -77,7 +77,7 @@
   
 
   
-    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+    <link rel="shortcut icon" href="/assets/avatar.png">
   
 
   
@@ -100,9 +100,9 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
-<nav class="menu dis-select"></nav>
+<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/more/">更多</a></nav>
 </header>
 
 
@@ -110,13 +110,13 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">React源码学习-render阶段-mount递归-part6</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%AD%E7%82%B9%E8%B0%83%E8%AF%95"><span class="toc-text">断点调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#beginWork%E5%81%9A%E4%BA%86%E5%95%A5%EF%BC%9F"><span class="toc-text">beginWork做了啥？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BE%9D%E7%85%A7tag%E5%88%A4%E6%96%ADcomponent%E7%B1%BB%E5%9E%8B"><span class="toc-text">1. 依照tag判断component类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-updateHostComponents-1"><span class="toc-text">2. updateHostComponents$1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-reconcileChildren"><span class="toc-text">3. reconcileChildren</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%89%93%E4%B8%8A%E4%B8%8D%E4%B8%80%E6%A0%B7%E7%9A%84effectTag%E6%88%96%E8%80%85%E7%9B%B4%E6%8E%A5return"><span class="toc-text">4. 打上不一样的effectTag或者直接return</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8E%A9%E7%A0%81%E6%A0%BC%E5%BC%8F%E7%9A%84flags%E5%91%A2%EF%BC%9F"><span class="toc-text">为什么是二进制掩码格式的flags呢？</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-reconcileChildFibers"><span class="toc-text">5. reconcileChildFibers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#completeWork%E5%81%9A%E4%BA%86%E5%95%A5%EF%BC%9F"><span class="toc-text">completeWork做了啥？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A0%B9%E6%8D%AEfiber%E8%8A%82%E7%82%B9%E7%9A%84tag%E8%BF%9B%E5%85%A5%E4%B8%8D%E5%90%8C%E7%9A%84case"><span class="toc-text">1. 根据fiber节点的tag进入不同的case</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-createInstance"><span class="toc-text">2. createInstance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BF%9D%E5%AD%98%E5%88%9B%E5%BB%BA%E5%87%BA%E6%9D%A5%E7%9A%84dom%E5%88%B0fiber%E8%8A%82%E7%82%B9%E7%9A%84stateNode%E4%B8%AD"><span class="toc-text">3. 保存创建出来的dom到fiber节点的stateNode中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%B0%86%E5%B1%9E%E6%80%A7%E7%BB%91%E5%AE%9A%E5%88%B0%E5%88%9B%E5%BB%BA%E5%87%BA%E6%9D%A5%E7%9A%84dom%E5%85%83%E7%B4%A0%E4%B8%8A"><span class="toc-text">4. 将属性绑定到创建出来的dom元素上</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%AD%90appendAllChildren%E9%80%BB%E8%BE%91"><span class="toc-text">⭐appendAllChildren逻辑</span></a></li></ol></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">React源码学习-render阶段-mount递归-part6</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#mount%E9%80%92%E5%BD%92"><span class="toc-text">mount递归</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%AD%E7%82%B9%E8%B0%83%E8%AF%95"><span class="toc-text">断点调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#beginWork%E5%81%9A%E4%BA%86%E5%95%A5%EF%BC%9F"><span class="toc-text">beginWork做了啥？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BE%9D%E7%85%A7tag%E5%88%A4%E6%96%ADcomponent%E7%B1%BB%E5%9E%8B"><span class="toc-text">1. 依照tag判断component类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-updateHostComponents-1"><span class="toc-text">2. updateHostComponents$1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-reconcileChildren"><span class="toc-text">3. reconcileChildren</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%89%93%E4%B8%8A%E4%B8%8D%E4%B8%80%E6%A0%B7%E7%9A%84effectTag%E6%88%96%E8%80%85%E7%9B%B4%E6%8E%A5return"><span class="toc-text">4. 打上不一样的effectTag或者直接return</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8E%A9%E7%A0%81%E6%A0%BC%E5%BC%8F%E7%9A%84flags%E5%91%A2%EF%BC%9F"><span class="toc-text">为什么是二进制掩码格式的flags呢？</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-reconcileChildFibers"><span class="toc-text">5. reconcileChildFibers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#completeWork%E5%81%9A%E4%BA%86%E5%95%A5%EF%BC%9F"><span class="toc-text">completeWork做了啥？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A0%B9%E6%8D%AEfiber%E8%8A%82%E7%82%B9%E7%9A%84tag%E8%BF%9B%E5%85%A5%E4%B8%8D%E5%90%8C%E7%9A%84case"><span class="toc-text">1. 根据fiber节点的tag进入不同的case</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-createInstance"><span class="toc-text">2. createInstance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BF%9D%E5%AD%98%E5%88%9B%E5%BB%BA%E5%87%BA%E6%9D%A5%E7%9A%84dom%E5%88%B0fiber%E8%8A%82%E7%82%B9%E7%9A%84stateNode%E4%B8%AD"><span class="toc-text">3. 保存创建出来的dom到fiber节点的stateNode中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%B0%86%E5%B1%9E%E6%80%A7%E7%BB%91%E5%AE%9A%E5%88%B0%E5%88%9B%E5%BB%BA%E5%87%BA%E6%9D%A5%E7%9A%84dom%E5%85%83%E7%B4%A0%E4%B8%8A"><span class="toc-text">4. 将属性绑定到创建出来的dom元素上</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%AD%90appendAllChildren%E9%80%BB%E8%BE%91"><span class="toc-text">⭐appendAllChildren逻辑</span></a></li></ol></li></ol></li></ol></div></div></widget>
 
 
 
 
 </div>
-<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/logo-github.svg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -133,46 +133,46 @@
 <p>这里说一下 mount时候的beginWork和completeWork的流程吧</p>
 </blockquote>
 <h1 id="mount递归"><a href="#mount递归" class="headerlink" title="mount递归"></a>mount递归</h1><h2 id="断点调试"><a href="#断点调试" class="headerlink" title="断点调试"></a>断点调试</h2><p>render阶段的递阶段起点是beginWork，归阶段的起点是completeWork，那我们就在源码上打断点。</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210823220759254.png" alt="image-20210823220759254"></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210823220834921.png" alt="image-20210823220834921"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210823220759254.png" alt="image-20210823220759254"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210823220834921.png" alt="image-20210823220834921"></p>
 <p>应用demo如下</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210823223552306.png" alt="image-20210823223552306"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210823223552306.png" alt="image-20210823223552306"></p>
 <p>刷新页面正式进入调试。</p>
 <p>1.发现第一次进入页面<code>beginWork</code>中，current有值，并且此时的tag是等于3的，之前说的我们在createFiberRoot的那个阶段这个tag也等于三，我们不妨猜测这个tag为3指的是 fiberRootNode</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210823221225561.png" alt="image-20210823221225561"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210823221225561.png" alt="image-20210823221225561"></p>
 <p>找到react-reconciler包下的ReactWorkTag，可以看到tag = 3对应的是叫 <code>HostRoot</code>的tag</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210823222916683.png" alt="image-20210823222916683"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210823222916683.png" alt="image-20210823222916683"></p>
 <p>2.点击下一个断点</p>
 <p>我们发现<strong>current</strong>的值为null（之前说过，只有根节点才存在current值，而其他节点只存在<strong>workInProgress</strong>）</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210823223122090.png" alt="image-20210823223122090"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210823223122090.png" alt="image-20210823223122090"></p>
 <p>且当前节点的elementType为function App()，也就是写的一个app函数</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210823223335090.png" alt="image-20210823223335090"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210823223335090.png" alt="image-20210823223335090"></p>
 <p>之后就是div了，然后是div的子节点header</p>
 <p>之后又想走header的子节点title（其实这里算不上是子节点，只是个文本节点，react对文本节点进行了优化，无自己的beginWork，<strong>react会对只有唯一一个文本子节点的节点，做了优化，这样这个文本节点无自己的fiber节点，也就是不走beginWork</strong>）</p>
 <p>因为header的文本节点不算，所以直接进入了header节点的completeWork的阶段</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210823224738688.png" alt="image-20210823224738688"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210823224738688.png" alt="image-20210823224738688"></p>
 <p>之后header 归阶段结束，会去找header的sibling，也就是兄弟节点，兄弟节点进入beginWork（递阶段）</p>
 <p>就这样以此往复<strong>深度优先遍历</strong></p>
 <p>之后走完main，发现main无兄弟了，就开始走main父节点的<strong>completeWork</strong>阶段也就是div，然后就这样一直走，走到了App的completeWork然后走到了 <code>rootFiber</code>结束</p>
 <p>这时候一个render阶段就结束了</p>
 <h2 id="beginWork做了啥？"><a href="#beginWork做了啥？" class="headerlink" title="beginWork做了啥？"></a>beginWork做了啥？</h2><p>这里我们以 走到第二步的div节点举例子</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210823233545095.png" alt="image-20210823233545095"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210823233545095.png" alt="image-20210823233545095"></p>
 <h3 id="1-依照tag判断component类型"><a href="#1-依照tag判断component类型" class="headerlink" title="1. 依照tag判断component类型"></a>1. 依照tag判断component类型</h3><p>首先根据当前的workInProgress的tag进入不同的Component处理逻辑</p>
 <p>这里的div节点，tag为5，进入的是 HostComponent的处理逻辑</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210823234419849.png" alt="image-20210823234419849"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210823234419849.png" alt="image-20210823234419849"></p>
 <h3 id="2-updateHostComponents-1"><a href="#2-updateHostComponents-1" class="headerlink" title="2. updateHostComponents$1"></a>2. updateHostComponents$1</h3><p>首先会对一些参数做赋值操作，之后用isDirectTextChild字段判断当前节点是否只有一个文本节点（上面提到了），如果是，则不会去创建这个文本节点的fiber，算是react的一个优化手段</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210823235701602.png" alt="image-20210823235701602"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210823235701602.png" alt="image-20210823235701602"></p>
 <h3 id="3-reconcileChildren"><a href="#3-reconcileChildren" class="headerlink" title="3. reconcileChildren"></a>3. reconcileChildren</h3><p>从名字可以看出这个玩意应该是reconciler调试器的比较重要的函数。这个函数就是用来创建当前节点的子节点的</p>
 <ul>
 <li>对于<code>mount</code>的组件，他会创建新的<code>子Fiber节点</code></li>
 <li>对于<code>update</code>的组件，他会将当前组件与该组件在上次更新时对应的<code>Fiber节点</code>比较（也就是俗称的<code>Diff</code>算法），将比较的结果生成新<code>Fiber节点</code></li>
 </ul>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210824000029762.png" alt="image-20210824000029762"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210824000029762.png" alt="image-20210824000029762"></p>
 <p>如果当前不存在current就走<code>mountChildFibers</code>，否者就走<code>reconcileChildFibers</code></p>
 <p>也就是说存在current的时候是整个应用的根节点了</p>
 <p>我们找到ReactChildFiber这个文件</p>
 <p>找到<code>reconcileChildFibers</code>和 <code>mountChildFibers</code></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210826215700516.png" alt="image-20210826215700516"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210826215700516.png" alt="image-20210826215700516"></p>
 <blockquote>
 <p>从代码可以看出，和<code>beginWork</code>一样，他也是通过<code>current === null ?</code>区分<code>mount</code>与<code>update</code>。</p>
 </blockquote>
@@ -208,18 +208,18 @@
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;header&gt;</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span>title<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">&lt;/header&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>那他就会去调用 <code>reconcileSingleElement</code>的方法</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210829105504513.png" alt="image-20210829105504513"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210829105504513.png" alt="image-20210829105504513"></p>
 <p>最终这个方法会走到createFiberFromElement</p>
 <p>也就是通过reactElement的数据创建一个fiber节点</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210829110028352.png" alt="image-20210829110028352"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210829110028352.png" alt="image-20210829110028352"></p>
 <p>并且这个方法内部会调用一个方法叫做``createFiberFromTypeAndProps`</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210829110240512.png" alt="image-20210829110240512"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210829110240512.png" alt="image-20210829110240512"></p>
 <p>在这个方法的内部会根据当前的component type去走不同的逻辑</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210829110319749.png" alt="image-20210829110319749"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210829110319749.png" alt="image-20210829110319749"></p>
 <p>这里呢直接将fibertag 赋值为了HostComponent</p>
 <p>接下来去创建对应的fiber节点，调用createFiber，也就是</p>
 <p>new了一个 FiberNode，这里头的属性在Fiber那篇讲了一下。</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210829110436790.png" alt="image-20210829110436790"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210829110436790.png" alt="image-20210829110436790"></p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>最终他会生成新的子<code>Fiber节点</code>并赋值给<code>workInProgress.child</code>，作为本次<code>beginWork</code><a href="https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react-reconciler/src/ReactFiberBeginWork.new.js#L1158">返回值 </a>，并作为下次<code>performUnitOfWork</code>执行时<code>workInProgress</code>的<a href="https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react-reconciler/src/ReactFiberWorkLoop.new.js#L1702">传参</a>。 </p>
 <p>要注意的点是，当你调用<code>reconcileChildFibers</code>时候子节点可能是一个数组，<strong>这种情况react仍然是只针对数组的第一个元素创建fiber</strong></p>
 <p>​    </p>
@@ -228,24 +228,24 @@
 
 
 
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210829152223028.png" alt="image-20210829152223028"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210829152223028.png" alt="image-20210829152223028"></p>
 <p>这里是span 标签所以先进入 HostComponent的case逻辑</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210829152900269.png" alt="image-20210829152900269"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210829152900269.png" alt="image-20210829152900269"></p>
 <p>事先判断current是否是空，首次渲染非fiberRoot不存current</p>
 <p>接下来比较重要的是创建一个dom叫做createInstance</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210829153657555.png" alt="image-20210829153657555"></p>
-<h3 id="2-createInstance"><a href="#2-createInstance" class="headerlink" title="2. createInstance"></a>2. createInstance</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210829160429387.png" alt="image-20210829160429387"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210829153657555.png" alt="image-20210829153657555"></p>
+<h3 id="2-createInstance"><a href="#2-createInstance" class="headerlink" title="2. createInstance"></a>2. createInstance</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210829160429387.png" alt="image-20210829160429387"></p>
 <p>createInstance会去 通过 <code>createElement</code>创建一个dom元素</p>
 <p>这里domElement就是一个span</p>
 <p>之后返回一个instance去执行appendAllChidren函数，由于span是我们第一个创建的元素，所以append会被跳过</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210829161632571.png" alt="image-20210829161632571"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210829161632571.png" alt="image-20210829161632571"></p>
 <h3 id="3-保存创建出来的dom到fiber节点的stateNode中"><a href="#3-保存创建出来的dom到fiber节点的stateNode中" class="headerlink" title="3. 保存创建出来的dom到fiber节点的stateNode中"></a>3. 保存创建出来的dom到fiber节点的stateNode中</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">workInProgress.<span class="property">stateNode</span> = instance;</span><br></pre></td></tr></table></figure>
 
 
 
 <h3 id="4-将属性绑定到创建出来的dom元素上"><a href="#4-将属性绑定到创建出来的dom元素上" class="headerlink" title="4. 将属性绑定到创建出来的dom元素上"></a>4. 将属性绑定到创建出来的dom元素上</h3><p>执行finalizerInitialChildren, 将所有的属性绑到我们新创建的dom元素上面，到这里一个节点span的completework就大致完成了</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210829161958750.png" alt="image-20210829161958750"></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210829162021263.png" alt="image-20210829162021263"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210829161958750.png" alt="image-20210829161958750"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210829162021263.png" alt="image-20210829162021263"></p>
 <h3 id="⭐appendAllChildren逻辑"><a href="#⭐appendAllChildren逻辑" class="headerlink" title="⭐appendAllChildren逻辑"></a>⭐appendAllChildren逻辑</h3><p>appendAllChildren的原理是，主要是将已经创建好的fiber节点挂载到当前的节点下。</p>
 <p>这也就是为什么之前上面的span的标签第一次创建的时候不走这个的逻辑的原因</p>
 <p>走到了APP时候，就构建了一颗完整的fiber树了</p>

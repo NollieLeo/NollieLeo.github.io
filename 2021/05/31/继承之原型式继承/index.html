@@ -30,7 +30,7 @@
 <meta property="og:site_name" content="翁先森的博客">
 <meta property="og:description" content="原型式继承这是一种不涉及严格意义上构造函数的继承方式 这个思路就是，不需要自定义一个类型，就可以通过原型实现对象之间的信息共享 就仍然是为了实现对象之间的信息共享 目标函数如下 12345function object(o)&amp;#123;    function F()&amp;#123;&amp;#125;    F.prototype &#x3D; o;    return new F();&amp;#125;  思路如下：">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%8E%9F%E5%9E%8B%E5%BC%8F%E7%BB%A7%E6%89%BF/image-20210531163110860.png">
+<meta property="og:image" content="https://github.com/.com//image-20210531163110860.png">
 <meta property="article:published_time" content="2021-05-31T08:18:56.000Z">
 <meta property="article:modified_time" content="2023-01-28T09:26:42.983Z">
 <meta property="article:author" content="翁先森">
@@ -40,7 +40,7 @@
 <meta property="article:tag" content="继承">
 <meta property="article:tag" content="原型式继承">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/NollieLeo/2021/05/31/%E7%BB%A7%E6%89%BF%E4%B9%8B%E5%8E%9F%E5%9E%8B%E5%BC%8F%E7%BB%A7%E6%89%BF/image-20210531163110860.png">
+<meta name="twitter:image" content="https://github.com/.com//image-20210531163110860.png">
   
   
 
@@ -56,7 +56,7 @@
   
 
   
-    <link rel="shortcut icon" href="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513">
+    <link rel="shortcut icon" href="/assets/avatar.png">
   
 
   
@@ -79,9 +79,9 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://img1.baidu.com/it/u=2452553924,1428287218&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=513" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
 
-<nav class="menu dis-select"></nav>
+<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/more/">更多</a></nav>
 </header>
 
 
@@ -89,13 +89,13 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">继承之原型式继承</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-create"><span class="toc-text">Object.create()</span></a></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">继承之原型式继承</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E5%BC%8F%E7%BB%A7%E6%89%BF"><span class="toc-text">原型式继承</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-create"><span class="toc-text">Object.create()</span></a></li></ol></li></ol></div></div></widget>
 
 
 
 
 </div>
-<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gd2.alicdn.com/imgextra/i3/2821192582/O1CN01NA0onx1UwbQqbzW4o_!!2821192582.jpg_400x400.jpg"/></a></div></footer>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/logo-github.svg"/></a></div></footer>
 
     </aside>
     <div class='l_main'>
@@ -123,7 +123,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">object</span>(<span class="params">o</span>) &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">F</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">    F.<span class="property"><span class="keyword">prototype</span></span> = o;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title function_">F</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;weng&quot;</span>,</span><br><span class="line">    <span class="attr">numbers</span>: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>],</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> person2 = <span class="title function_">object</span>(person);</span><br><span class="line">person2.<span class="property">name</span> = <span class="string">&quot;kaimin&quot;</span>;</span><br><span class="line">person2.<span class="property">numbers</span>.<span class="title function_">push</span>(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person3 = <span class="title function_">object</span>(person);</span><br><span class="line">person3.<span class="property">name</span> = <span class="string">&quot;helloworld&quot;</span>;</span><br><span class="line">person2.<span class="property">numbers</span>.<span class="title function_">push</span>(<span class="number">6</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(person));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(person2));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(person3));</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person2.<span class="property">name</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person3.<span class="property">name</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person3.<span class="property">numbers</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person.<span class="property">name</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person.<span class="property">numbers</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>这是最终的打印结果</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210531163110860.png" alt="image-20210531163110860"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20210531163110860.png" alt="image-20210531163110860"></p>
 <p>这里的person, person2, person3之间的数据都是共享的</p>
 <h2 id="Object-create"><a href="#Object-create" class="headerlink" title="Object.create()"></a>Object.create()</h2><p>ES5将这种原型式继承的概念规范化了。</p>
 <p>Object.create()接受两个参数</p>
