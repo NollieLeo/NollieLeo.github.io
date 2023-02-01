@@ -1,46 +1,350 @@
-.l_body {
-  display: flex;
-  margin: auto;
-  padding: 0 var(--gap-l);
-  justify-content: center;
-}
-.l_body .l_left {
-  z-index: 8;
-  width: var(--width-left);
-  flex-shrink: 0;
-  position: sticky;
-  position: -webkit-sticky;
-  top: 0;
-}
-.l_body .l_main {
-  flex-shrink: 1;
-  flex-grow: 1;
-  width: 320px;
-  max-width: var(--width-main);
-}
-@media screen and (max-width: $device-mobile-max) {
-  .mobile-only {
-    display: block !important;
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>react何时render呢？ - 翁先森的博客</title>
+
+  
+    <meta name="description" content="对于如下Demo，点击Parent组件的div，触发更新，Son组件会打印child render!么？ 12345678910111213141516171819202122function Son() &amp;#123;      console.log(&amp;#x27;child render!&amp;#x27;);      return &lt;div&gt;Son&lt;&#x2F;div&gt;;&amp;#125;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react何时render呢？">
+<meta property="og:url" content="https://github.com/NollieLeo/2020/12/24/react%E4%BD%95%E6%97%B6render%E5%91%A2%EF%BC%9F/index.html">
+<meta property="og:site_name" content="翁先森的博客">
+<meta property="og:description" content="对于如下Demo，点击Parent组件的div，触发更新，Son组件会打印child render!么？ 12345678910111213141516171819202122function Son() &amp;#123;      console.log(&amp;#x27;child render!&amp;#x27;);      return &lt;div&gt;Son&lt;&#x2F;div&gt;;&amp;#125;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-24T01:50:41.000Z">
+<meta property="article:modified_time" content="2023-01-28T13:27:13.217Z">
+<meta property="article:author" content="翁先森">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="/assets/avatar.png">
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/more/">更多</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">react何时render呢？</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#render%E9%9C%80%E8%A6%81%E6%BB%A1%E8%B6%B3%E7%9A%84%E6%9D%A1%E4%BB%B6"><span class="toc-text">render需要满足的条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bailout%E9%9C%80%E8%A6%81%E6%BB%A1%E8%B6%B3%E7%9A%84%E6%9D%A1%E4%BB%B6"><span class="toc-text">bailout需要满足的条件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-oldProps-newProps-%EF%BC%9F"><span class="toc-text">1. oldProps &#x3D;&#x3D;&#x3D; newProps ？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-context%E6%B2%A1%E6%9C%89%E5%8F%98%E5%8C%96"><span class="toc-text">2. context没有变化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-workInProgress-type-current-type-%EF%BC%9F"><span class="toc-text">3. workInProgress.type &#x3D;&#x3D;&#x3D; current.type ？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-includesSomeLane-renderLanes-updateLanes-%EF%BC%9F"><span class="toc-text">4. !includesSomeLane(renderLanes, updateLanes) ？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo%E7%9A%84%E8%AF%A6%E7%BB%86%E6%89%A7%E8%A1%8C%E9%80%BB%E8%BE%91"><span class="toc-text">Demo的详细执行逻辑</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/logo-github.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/React/">React</a></div><div id="post-meta">发布于&nbsp;<time datetime="2020-12-24T01:50:41.000Z">2020-12-24</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>react何时render呢？</span></h1>
+<p>对于如下Demo，点击<code>Parent</code>组件的<code>div</code>，触发更新，<code>Son</code>组件会打印<code>child render!</code>么？</p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Son</span>(<span class="params"></span>) &#123;  </span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;child render!&#x27;</span>);  </span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Son<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Parent</span>(<span class="params">props</span>) &#123;  </span><br><span class="line">    <span class="keyword">const</span> [count, setCount] = <span class="title class_">React</span>.<span class="title function_">useState</span>(<span class="number">0</span>);  </span><br><span class="line">    <span class="keyword">return</span> (    </span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> &#123;setCount(count + 1)&#125;&#125;&gt;      </span></span><br><span class="line"><span class="language-xml">            count:&#123;count&#125;      </span></span><br><span class="line"><span class="language-xml">            &#123;props.children&#125;    </span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>  </span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">App</span>(<span class="params"></span>) &#123;  </span><br><span class="line">    <span class="keyword">return</span> (    </span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">Parent</span>&gt;</span>      </span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">Son</span>/&gt;</span>    </span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">Parent</span>&gt;</span></span>  </span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> rootEl = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#root&quot;</span>);</span><br><span class="line"><span class="title class_">ReactDOM</span>.<span class="title function_">render</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">App</span>/&gt;</span></span>, rootEl);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">不会    </span><br></pre></td></tr></table></figure>
+
+<h2 id="render需要满足的条件"><a href="#render需要满足的条件" class="headerlink" title="render需要满足的条件"></a>render需要满足的条件</h2><p><code>React</code>创建<code>Fiber树</code>时，每个组件对应的<code>fiber</code>都是通过如下两个逻辑之一创建的：</p>
+<ul>
+<li>render。即调用<code>render</code>函数，根据返回的<code>JSX</code>创建新的<code>fiber</code>。</li>
+<li>bailout。即满足一定条件时，<code>React</code>判断该组件在更新前后没有发生变化，则复用该组件在上一次更新的<code>fiber</code>作为本次更新的<code>fiber</code>。</li>
+</ul>
+<p>可以看到，当命中<code>bailout</code>逻辑时，是不会调用<code>render</code>函数的。</p>
+<p>所以，<code>Son</code>组件不会打印<code>child render!</code>是因为命中了<code>bailout</code>逻辑。</p>
+<h2 id="bailout需要满足的条件"><a href="#bailout需要满足的条件" class="headerlink" title="bailout需要满足的条件"></a>bailout需要满足的条件</h2><p>什么情况下会进入<code>bailout</code>逻辑？当同时满足如下4个条件时：</p>
+<h3 id="1-oldProps-newProps-？"><a href="#1-oldProps-newProps-？" class="headerlink" title="1. oldProps === newProps ？"></a>1. oldProps === newProps ？</h3><p>即本次更新的<code>props</code>（newProps）不等于上次更新的<code>props</code>（oldProps）。</p>
+<p>注意这里是<strong>全等比较</strong>。</p>
+<p>我们知道组件<code>render</code>会返回<code>JSX</code>，<code>JSX</code>是<code>React.createElement</code>的语法糖。</p>
+<p>所以<code>render</code>的返回结果实际上是<code>React.createElement</code>的执行结果，即一个包含<code>props</code>属性的对象。</p>
+<p>即使本次更新与上次更新<code>props</code>中每一项参数都没有变化，但是本次更新是<code>React.createElement</code>的执行结果，是一个全新的<code>props</code>引用，所以<code>oldProps !== newProps</code>。</p>
+<p>如果我们使用了<code>PureComponent</code>或<code>Memo</code>，那么在判断是进入<code>render</code>还是<code>bailout</code>时，不会判断<code>oldProps</code>与<code>newProps</code>是否全等，而是会对<code>props</code>内每个属性进行浅比较。</p>
+<h3 id="2-context没有变化"><a href="#2-context没有变化" class="headerlink" title="2. context没有变化"></a>2. context没有变化</h3><p>即<code>context</code>的<code>value</code>没有变化。</p>
+<h3 id="3-workInProgress-type-current-type-？"><a href="#3-workInProgress-type-current-type-？" class="headerlink" title="3. workInProgress.type === current.type ？"></a>3. workInProgress.type === current.type ？</h3><p>更新前后<code>fiber.type</code>是否变化，比如<code>div</code>是否变为<code>p</code>。</p>
+<h3 id="4-includesSomeLane-renderLanes-updateLanes-？"><a href="#4-includesSomeLane-renderLanes-updateLanes-？" class="headerlink" title="4. !includesSomeLane(renderLanes, updateLanes) ？"></a>4. !includesSomeLane(renderLanes, updateLanes) ？</h3><p>当前<code>fiber</code>上是否存在<code>更新</code>，如果存在那么<code>更新</code>的<code>优先级</code>是否和本次整棵<code>fiber树</code>调度的<code>优先级</code>一致？</p>
+<p>如果一致则进入<code>render</code>逻辑。</p>
+<p>就我们的Demo来说，<code>Parent</code>是整棵树中唯一能触发<code>更新</code>的组件（通过调用<code>setCount</code>）。</p>
+<p>所以<code>Parent</code>对应的<code>fiber</code>是唯一满足条件4的<code>fiber</code>。</p>
+<h2 id="Demo的详细执行逻辑"><a href="#Demo的详细执行逻辑" class="headerlink" title="Demo的详细执行逻辑"></a>Demo的详细执行逻辑</h2><p>所以，Demo中<code>Son</code>进入<code>bailout</code>逻辑，一定是同时满足以上4个条件。我们一个个来看。</p>
+<p>条件2，Demo中没有用到<code>context</code>，满足。</p>
+<p>条件3，更新前后<code>type</code>都为<code>Son</code>对应的函数组件，满足。</p>
+<p>条件4，<code>Son</code>本身无法触发更新，满足。</p>
+<p>所以，重点是条件1。让我们详细来看下。</p>
+<p>本次更新开始时，<code>Fiber树</code>存在如下2个<code>fiber</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FiberRootNode      </span><br><span class="line">	|  </span><br><span class="line">RootFiber      </span><br></pre></td></tr></table></figure>
+
+<p>其中<code>FiberRootNode</code>是整个应用的根节点，<code>RootFiber</code>是调用<code>ReactDOM.render</code>创建的<code>fiber</code>。</p>
+<p>首先，<code>RootFiber</code>会进入<code>bailout</code>的逻辑，所以返回的<code>App fiber</code>和更新前是一致的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FiberRootNode      </span><br><span class="line">	|  </span><br><span class="line">RootFiber           </span><br><span class="line">	| </span><br><span class="line">App fiber</span><br></pre></td></tr></table></figure>
+
+<p>由于<code>App fiber</code>是<code>RootFiber</code>走<code>bailout</code>逻辑返回的，所以对于<code>App fiber</code>，<code>oldProps === newProps</code>。并且<code>bailout</code>剩下3个条件也满足。</p>
+<p>所以<code>App fiber</code>也会走<code>bailout</code>逻辑，返回<code>Parent fiber</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">FiberRootNode      </span><br><span class="line">	|  </span><br><span class="line">RootFiber           </span><br><span class="line">	|   </span><br><span class="line">App fiber      </span><br><span class="line">	| </span><br><span class="line">Parent fiber</span><br></pre></td></tr></table></figure>
+
+<p>由于更新是<code>Parent fiber</code>触发的，所以他不满足条件4，会走<code>render</code>的逻辑。</p>
+<p><strong>接下来是关键</strong></p>
+<p>如果<code>render</code>返回的<code>Son</code>是如下形式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Son/&gt;</span><br></pre></td></tr></table></figure>
+
+<p>会编译为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">React.createElement(Son, null)</span><br></pre></td></tr></table></figure>
+
+<p>执行后返回<code>JSX</code>。</p>
+<p>由于<code>props</code>的引用改变，<code>oldProps !== newProps</code>。会走<code>render</code>逻辑。</p>
+<p>但是在Demo中<code>Son</code>是如下形式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;props.children&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>props.children</code>是<code>Son</code>对应的<code>JSX</code>，而这里的<code>props</code>是<code>App fiber</code>走<code>bailout</code>逻辑后返回的。</p>
+<p>所以<code>Son</code>对应的<code>JSX</code>与上次更新时一致，<code>JSX</code>中保存的<code>props</code>也就一致，满足条件1。</p>
+<p>可以看到，<code>Son</code>满足<code>bailout</code>的所有条件，所以不会<code>render</code>。</p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2020/12/25/undefine%E5%92%8Cvoid-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F/">undefine和void()有什么区别？</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2020/11/08/%E4%BC%98%E9%9B%85%E7%9A%84%E5%A4%84%E7%90%86asnyc-await/">优雅的处理asnyc await</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
   }
-  .l_body {
-    padding: 0;
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
   }
-  .l_body .l_left {
-    position: fixed;
-    transform: translateX(-320px);
-    margin: 0;
-    left: 0;
-    background: var(--site-bg);
-    box-shadow: $boxshadow-card-float;
-    z-index: 9;
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
   }
-  .l_body .l_main {
-    max-width: 100%;
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
   }
-  .l_body.mobile .l_left {
-    transition: transform 0.3s ease-out;
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
   }
-  .l_body.mobile.sidebar .l_left {
-    transform: translateX(0px);
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
   }
-}
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

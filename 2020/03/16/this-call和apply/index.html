@@ -1,46 +1,362 @@
-.l_body {
-  display: flex;
-  margin: auto;
-  padding: 0 var(--gap-l);
-  justify-content: center;
-}
-.l_body .l_left {
-  z-index: 8;
-  width: var(--width-left);
-  flex-shrink: 0;
-  position: sticky;
-  position: -webkit-sticky;
-  top: 0;
-}
-.l_body .l_main {
-  flex-shrink: 1;
-  flex-grow: 1;
-  width: 320px;
-  max-width: var(--width-main);
-}
-@media screen and (max-width: $device-mobile-max) {
-  .mobile-only {
-    display: block !important;
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>this,call和apply - 翁先森的博客</title>
+
+  
+    <meta name="description" content="this, call 和apply1. this JavaScript的 this 总是指向一个对象，而具体指向哪个对象是在运行时基于函数的执行环境动态绑定的，而非函数被声明时的环境  1.1 this指向 作为对象方法调用 作为普通函数调用 构造器调用 Function.prototype.apply或&#96;&#96;Function.prototype.call&#96;  1.1.1 作为对象方法调用12345">
+<meta property="og:type" content="article">
+<meta property="og:title" content="this,call和apply">
+<meta property="og:url" content="https://github.com/NollieLeo/2020/03/16/this-call%E5%92%8Capply/index.html">
+<meta property="og:site_name" content="翁先森的博客">
+<meta property="og:description" content="this, call 和apply1. this JavaScript的 this 总是指向一个对象，而具体指向哪个对象是在运行时基于函数的执行环境动态绑定的，而非函数被声明时的环境  1.1 this指向 作为对象方法调用 作为普通函数调用 构造器调用 Function.prototype.apply或&#96;&#96;Function.prototype.call&#96;  1.1.1 作为对象方法调用12345">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/NollieLeo/2020/03/16/this-call%E5%92%8Capply/1579747558506.png">
+<meta property="article:published_time" content="2020-03-16T09:16:30.000Z">
+<meta property="article:modified_time" content="2023-01-28T13:26:45.543Z">
+<meta property="article:author" content="翁先森">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="Javascript this指向">
+<meta property="article:tag" content="call,apply">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2020/03/16/this-call%E5%92%8Capply/1579747558506.png">
+  
+  
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="/assets/avatar.png">
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/more/">更多</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">this,call和apply</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#this-call-%E5%92%8Capply"><span class="toc-text">this, call 和apply</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-this"><span class="toc-text">1. this</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-this%E6%8C%87%E5%90%91"><span class="toc-text">1.1 this指向</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-1-%E4%BD%9C%E4%B8%BA%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8"><span class="toc-text">1.1.1 作为对象方法调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-2-%E4%BD%9C%E4%B8%BA%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8"><span class="toc-text">1.1.2 作为普通函数调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-3-%E6%9E%84%E9%80%A0%E5%99%A8%E8%B0%83%E7%94%A8"><span class="toc-text">1.1.3 构造器调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-4-Function-prototype-call-%E6%88%96-Function-prototype-apply-%E8%B0%83%E7%94%A8"><span class="toc-text">1.1.4  Function.prototype.call 或 Function.prototype.apply 调用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E4%B8%A2%E5%A4%B1%E7%9A%84this"><span class="toc-text">1.2 丢失的this</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-call-%E5%92%8Capply"><span class="toc-text">2. call 和apply</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%8C%BA%E5%88%AB"><span class="toc-text">2.1 区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-call-%E5%92%8C-apply-%E7%9A%84%E7%94%A8%E9%80%94"><span class="toc-text">2.2 call 和 apply 的用途</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-%E6%94%B9%E5%8F%98-this-%E6%8C%87%E5%90%91"><span class="toc-text">2.2.1 改变 this 指向</span></a></li></ol></li></ol></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/logo-github.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Javascript/">Javascript</a></div><div id="post-meta">发布于&nbsp;<time datetime="2020-03-16T09:16:30.000Z">2020-03-16</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>this,call和apply</span></h1>
+<h1 id="this-call-和apply"><a href="#this-call-和apply" class="headerlink" title="this, call 和apply"></a>this, call 和apply</h1><h2 id="1-this"><a href="#1-this" class="headerlink" title="1. this"></a>1. this</h2><blockquote>
+<p>JavaScript的 this 总是指向一个对象，而具体指向哪个对象是<strong>在运行时基于函数的执行环境动态绑定</strong>的，而非函数被声明时的环境</p>
+</blockquote>
+<h3 id="1-1-this指向"><a href="#1-1-this指向" class="headerlink" title="1.1 this指向"></a>1.1 this指向</h3><ul>
+<li>作为对象方法调用</li>
+<li>作为普通函数调用</li>
+<li>构造器调用</li>
+<li><code>Function.prototype.apply</code>或``Function.prototype.call`</li>
+</ul>
+<h4 id="1-1-1-作为对象方法调用"><a href="#1-1-1-作为对象方法调用" class="headerlink" title="1.1.1 作为对象方法调用"></a>1.1.1 作为对象方法调用</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">a</span>:<span class="number">1</span>,</span><br><span class="line">    <span class="attr">getA</span>:<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="title function_">alert</span>(<span class="variable language_">this</span> === obj);</span><br><span class="line">        <span class="title function_">alert</span>(<span class="variable language_">this</span>.<span class="property">a</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="title function_">getA</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-1-2-作为普通函数调用"><a href="#1-1-2-作为普通函数调用" class="headerlink" title="1.1.2 作为普通函数调用"></a>1.1.2 作为普通函数调用</h4><p>当函数<u>不作为对象的属性</u>被调用时，也就是我们常说的普通函数方式，此时的 <strong>this 总是指向全局</strong>对象。在浏览器的 JavaScript里，这个全局对象是 window 对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">name</span> = <span class="string">&#x27;globalName&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> myObject = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;sven&#x27;</span>,</span><br><span class="line">    <span class="attr">getName</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">name</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> getName = myObject.<span class="property">getName</span>; <span class="comment">//作为普通函数，这时候this指向全局，因为它不是以对象的属性调用的，可以看1.2</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">getName</span>()); <span class="comment">// globalName</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-1-3-构造器调用"><a href="#1-1-3-构造器调用" class="headerlink" title="1.1.3 构造器调用"></a>1.1.3 构造器调用</h4><blockquote>
+<p>JavaScript 中没有类，但是可以从构造器中创建对象，同时也提供了 new 运算符，使得构造器看起来更像一个类</p>
+<p>除了宿主提供的一些内置函数，大部分 JavaScript函数都可以当作构造器使用。构造器的外表跟普通函数一模一样，它们的区别在于被调用的方式。当用 new 运算符调用函数时，该函数总会返回一个对象，通常情况下，构造器里的 this 就指向返回的这个对象</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title class_">MyClass</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;sven&#x27;</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="title class_">MyClass</span>();</span><br><span class="line">alert ( obj.<span class="property">name</span> ); <span class="comment">// 输出：sven</span></span><br></pre></td></tr></table></figure>
+
+<p>但用 new 调用构造器时，还要注意一个问题，如果构造器显式地返回了一个 object 类型的对象，那么此次运算结果最终会返回这个对象，而不是我们之前期待的 this</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title class_">MyClass</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;sven&#x27;</span>;</span><br><span class="line"><span class="keyword">return</span> &#123; <span class="comment">// 显式地返回一个对象</span></span><br><span class="line"><span class="attr">name</span>: <span class="string">&#x27;anne&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="title class_">MyClass</span>();</span><br><span class="line">alert ( obj.<span class="property">name</span> ); <span class="comment">// 输出：anne</span></span><br></pre></td></tr></table></figure>
+
+<p>如果构造器不显式地返回任何数据，或者是返回一个非对象类型的数据，就不会造成上述<br>问题：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var MyClass = function()&#123;</span><br><span class="line">this.name = &#x27;sven&#x27;</span><br><span class="line">return &#x27;anne&#x27;; // 返回 string 类型</span><br><span class="line">&#125;;</span><br><span class="line">var obj = new MyClass();</span><br><span class="line">alert ( obj.name ); // 输出：sven</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-1-4-Function-prototype-call-或-Function-prototype-apply-调用"><a href="#1-1-4-Function-prototype-call-或-Function-prototype-apply-调用" class="headerlink" title="1.1.4  Function.prototype.call 或 Function.prototype.apply 调用"></a>1.1.4  Function.prototype.call 或 Function.prototype.apply 调用</h4><p>跟普通的函数调用相比，用 Function.prototype.call 或 Function.prototype.apply 可以动态地<br>改变传入函数的 this ：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1 = &#123;</span><br><span class="line">	<span class="attr">name</span>: <span class="string">&#x27;sven&#x27;</span>,</span><br><span class="line">	<span class="attr">getName</span>: <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">name</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;</span><br><span class="line">	<span class="attr">name</span>: <span class="string">&#x27;anne&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>( obj1.<span class="title function_">getName</span>() ); <span class="comment">// 输出: sven</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>( obj1.<span class="property">getName</span>.<span class="title function_">call</span>( obj2 ) ); <span class="comment">// 输出：anne</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-丢失的this"><a href="#1-2-丢失的this" class="headerlink" title="1.2 丢失的this"></a>1.2 丢失的this</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line"><span class="attr">myName</span>: <span class="string">&#x27;sven&#x27;</span>,</span><br><span class="line">	<span class="attr">getName</span>: <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">myName</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>( obj.<span class="title function_">getName</span>() ); <span class="comment">// 输出：&#x27;sven&#x27;</span></span><br><span class="line"><span class="keyword">var</span> getName2 = obj.<span class="property">getName</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>( <span class="title function_">getName2</span>() ); <span class="comment">// 输出：undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>当调用 obj.getName 时， getName 方法是作为 obj 对象的属性被调用的，当用<strong>另外一个变量</strong> getName2 来引用 obj.getName ，并且调用getName2 时，此时是以普通函数的形式来调用的， this 是指向全局 window 的</p>
+<p>再来个栗子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="property">getElementById</span> = (<span class="keyword">function</span>(<span class="params"> func </span>)&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> func.<span class="title function_">apply</span>( <span class="variable language_">document</span>, <span class="variable language_">arguments</span> );</span><br><span class="line">&#125;</span><br><span class="line">&#125;)( <span class="variable language_">document</span>.<span class="property">getElementById</span> );</span><br><span class="line"><span class="keyword">var</span> getId = <span class="variable language_">document</span>.<span class="property">getElementById</span>;</span><br><span class="line"><span class="keyword">var</span> div = <span class="title function_">getId</span>( <span class="string">&#x27;div1&#x27;</span> );</span><br><span class="line">alert (div.<span class="property">id</span>); <span class="comment">// 输出： div1</span></span><br></pre></td></tr></table></figure>
+
+<p>利用 apply 把 document 当作 this 传入 getId 函数，帮助“修正” this</p>
+<p>否则如果想要简化document.getElementById单纯的是不可取的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getId = <span class="variable language_">document</span>.<span class="property">getElementById</span>;</span><br><span class="line">       <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">getId</span>(<span class="string">&#x27;hello&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-call-和apply"><a href="#2-call-和apply" class="headerlink" title="2. call 和apply"></a>2. call 和apply</h2><h3 id="2-1-区别"><a href="#2-1-区别" class="headerlink" title="2.1 区别"></a>2.1 区别</h3><p><code>Function.prototype.call</code>和 <code>Function.prototype.apply</code>都是非常常用的方法。它们的作用一模一样，区别仅在于传入参数形式的不同</p>
+<p><strong>apply</strong> 接受两个参数，<strong>第一个参数</strong>指定了函数体内 this 对象的指向，<strong>第二个参数</strong>为一个带下标的集合，这个集合可以为<u>数组</u>，也可以为<u>类数组</u>,apply 方法把这个集合中的元素作为参数传递给被调用的函数</p>
+<p><strong>call</strong> 传入的参数数量不固定，跟 apply 相同的是，第一个参数也是代表函数体内的 this 指向，从<strong>第二个参数</strong>开始往后，每个参数被依次传入函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> func = <span class="keyword">function</span> (<span class="params">a, b, c</span>) &#123;</span><br><span class="line">    <span class="title function_">alert</span>([a, b, c]); <span class="comment">// 输出 [ 1, 2, 3 ]</span></span><br><span class="line">&#125;;</span><br><span class="line">func.<span class="title function_">call</span>(<span class="literal">null</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">func.<span class="title function_">apply</span>(<span class="literal">null</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>当调用一个函数时，JavaScript 的解释器并不会计较形参和实参在数量、类型以及顺序上的区别，JavaScript的参数在内部就是用一个数组来表示的。从这个意义上说， apply 比 call 的使用率更高，我们不必关心具体有多少参数被传入函数，只要用 apply 一股脑地推过去就可以了</p>
+<p><u>当使用 call 或者 apply 的时候，如果我们传入的第一个参数为 null ，函数体内的 this 会指向默认的宿主对象，在浏览器中则是 window</u></p>
+<p>有时候我们使用 call 或者 apply 的目的不在于指定 this 指向，而是另有用途，比如借用其<br>他对象的方法。那么我们可以传入 null 来代替某个具体的对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Math</span>.<span class="property">max</span>.<span class="title function_">apply</span>( <span class="literal">null</span>, [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">4</span> ] ) <span class="comment">// 输出：5</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-call-和-apply-的用途"><a href="#2-2-call-和-apply-的用途" class="headerlink" title="2.2 call 和 apply 的用途"></a>2.2 call 和 apply 的用途</h3><h4 id="2-2-1-改变-this-指向"><a href="#2-2-1-改变-this-指向" class="headerlink" title="2.2.1 改变 this 指向"></a>2.2.1 改变 this 指向</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">name</span> = <span class="string">&#x27;motherfucker&#x27;</span>;</span><br><span class="line">obj1 = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;helloobj1&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line">obj2 = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;hellowobj2&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> getName = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">getName</span>();</span><br><span class="line">getName.<span class="title function_">apply</span>(obj1);</span><br><span class="line">getName.<span class="title function_">apply</span>(obj2);</span><br></pre></td></tr></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1579747558506.png" alt></p>
+<p>实际开发过程中会遇到this指向被不经意改变</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>( <span class="string">&#x27;div1&#x27;</span> ).<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="title function_">alert</span>( <span class="variable language_">this</span>.<span class="property">id</span> ); <span class="comment">// 输出：div1</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>假如该事件函数中有一个内部函数 func ，在事件内部调用 func 函数时， func 函数体内的 this就指向了 window ，而不是我们预期的 div </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>( <span class="string">&#x27;div1&#x27;</span> ).<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="title function_">alert</span>( <span class="variable language_">this</span>.<span class="property">id</span> ); <span class="comment">// 输出：div1</span></span><br><span class="line">	<span class="keyword">var</span> func = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">		alert ( <span class="variable language_">this</span>.<span class="property">id</span> ); <span class="comment">// 输出：undefined</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="title function_">func</span>();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>解决方法有两种，一种是之前提到的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;hello&#x27;</span>).<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> that = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(that.<span class="property">id</span>); <span class="comment">// 输出：hello</span></span><br><span class="line">    <span class="keyword">var</span> func = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(that.<span class="property">id</span>); <span class="comment">// 输出：undefined</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">func</span>();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>第二种就是call和apply</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>( <span class="string">&#x27;div1&#x27;</span> ).<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="keyword">var</span> func = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">		alert ( <span class="variable language_">this</span>.<span class="property">id</span> ); <span class="comment">// 输出：div1</span></span><br><span class="line">	&#125;</span><br><span class="line">	func.<span class="title function_">call</span>( <span class="variable language_">this</span> );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2020/03/16/%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6/">高阶组件</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2020/03/16/%E5%A4%9A%E6%80%81/">多态</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
   }
-  .l_body {
-    padding: 0;
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
   }
-  .l_body .l_left {
-    position: fixed;
-    transform: translateX(-320px);
-    margin: 0;
-    left: 0;
-    background: var(--site-bg);
-    box-shadow: $boxshadow-card-float;
-    z-index: 9;
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
   }
-  .l_body .l_main {
-    max-width: 100%;
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
   }
-  .l_body.mobile .l_left {
-    transition: transform 0.3s ease-out;
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
   }
-  .l_body.mobile.sidebar .l_left {
-    transform: translateX(0px);
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
   }
-}
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

@@ -1,46 +1,502 @@
-.l_body {
-  display: flex;
-  margin: auto;
-  padding: 0 var(--gap-l);
-  justify-content: center;
-}
-.l_body .l_left {
-  z-index: 8;
-  width: var(--width-left);
-  flex-shrink: 0;
-  position: sticky;
-  position: -webkit-sticky;
-  top: 0;
-}
-.l_body .l_main {
-  flex-shrink: 1;
-  flex-grow: 1;
-  width: 320px;
-  max-width: var(--width-main);
-}
-@media screen and (max-width: $device-mobile-max) {
-  .mobile-only {
-    display: block !important;
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>基于猪齿鱼平台的axios缓存封装 - 翁先森的博客</title>
+
+  
+    <meta name="description" content="需求说明情况1：猪齿鱼平台是个相对复杂的多表格多表单数据处理平台，有些模块的数据量庞大，并且有些喜欢嵌入在tab页面当中，如果频繁的去访问这些页面就会频繁的请求，如果数据量庞大，每次访问都会去请求数据，等待时间就变长了，例如下面这个界面：  这个页面相当于是历史的执行记录，因为数据量庞大，我们可以看到这个页面请求过后响应速度较慢，假设我在短时间内切到别的记录又切回来要看，那还得重新再去请求这100">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于猪齿鱼平台的axios缓存封装">
+<meta property="og:url" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/index.html">
+<meta property="og:site_name" content="翁先森的博客">
+<meta property="og:description" content="需求说明情况1：猪齿鱼平台是个相对复杂的多表格多表单数据处理平台，有些模块的数据量庞大，并且有些喜欢嵌入在tab页面当中，如果频繁的去访问这些页面就会频繁的请求，如果数据量庞大，每次访问都会去请求数据，等待时间就变长了，例如下面这个界面：  这个页面相当于是历史的执行记录，因为数据量庞大，我们可以看到这个页面请求过后响应速度较慢，假设我在短时间内切到别的记录又切回来要看，那还得重新再去请求这100">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/7.gif">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210624155243688.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/test.gif">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210625112724872.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210625113745262.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210625160815760.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210625173040963.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210625173136449.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210625211727335.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210625210606969.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210625210632981.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210626094315248.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210626094721131.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210626101834505.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210626111840112.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210626111852379.png">
+<meta property="og:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/image-20210627124622241.png">
+<meta property="article:published_time" content="2021-06-24T06:02:44.000Z">
+<meta property="article:modified_time" content="2023-01-28T09:26:27.436Z">
+<meta property="article:author" content="翁先森">
+<meta property="article:tag" content="Javascript">
+<meta property="article:tag" content="Axios">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/NollieLeo/2021/06/24/%E5%9F%BA%E4%BA%8E%E7%8C%AA%E9%BD%BF%E9%B1%BC%E5%B9%B3%E5%8F%B0%E7%9A%84axios%E7%BC%93%E5%AD%98%E5%B0%81%E8%A3%85/7.gif">
+  
+  
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="/assets/avatar.png">
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/more/">更多</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">基于猪齿鱼平台的axios缓存封装</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E8%AF%B4%E6%98%8E"><span class="toc-text">需求说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%83%85%E5%86%B51%EF%BC%9A"><span class="toc-text">情况1：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%83%85%E5%86%B52%EF%BC%9A"><span class="toc-text">情况2：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%83%85%E5%86%B53%EF%BC%9A"><span class="toc-text">情况3：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="toc-text">需求分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E5%88%86%E6%9E%90"><span class="toc-text">缓存分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E6%AC%A1%E7%9B%B8%E5%90%8C%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86"><span class="toc-text">多次相同请求处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E8%B7%AF%E7%94%B1%E5%8F%96%E6%B6%88pending%E8%AF%B7%E6%B1%82"><span class="toc-text">切换路由取消pending请求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#axios%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96"><span class="toc-text">axios的实例化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AF%86%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">标识的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E5%AE%9E%E7%8E%B0"><span class="toc-text">缓存实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE"><span class="toc-text">存储数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%8B%A6%E6%88%AA%E5%99%A8%E5%AE%9E%E7%8E%B0"><span class="toc-text">请求拦截器实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E6%8B%A6%E6%88%AA%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">响应拦截器的实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E8%B7%AF%E7%94%B1%E5%8F%96%E6%B6%88pending%E8%AF%B7%E6%B1%82-1"><span class="toc-text">切换路由取消pending请求</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">拦截器的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">路由守卫的实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%97%E7%95%99%E9%97%AE%E9%A2%98"><span class="toc-text">遗留问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8CancelToken%E5%8E%BB%E5%8F%96%E6%B6%88%E9%87%8D%E5%A4%8D%E8%AF%B7%E6%B1%82%E8%80%8C%E7%94%A8%E7%BC%93%E5%AD%98%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="toc-text">为什么不用CancelToken去取消重复请求而用缓存原理？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%9B%A0%E4%B8%80%EF%BC%9A"><span class="toc-text">原因一：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%9B%A0%E4%BA%8C"><span class="toc-text">原因二</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%9B%A0%E4%B8%89"><span class="toc-text">原因三</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8B%A6%E6%88%AA%E5%99%A8%E7%9A%84%E6%B7%BB%E5%8A%A0%E9%A1%BA%E5%BA%8F%E4%BC%9A%E5%BD%B1%E5%93%8D%E5%88%B0%E7%BC%93%E5%AD%98%EF%BC%9F"><span class="toc-text">为什么拦截器的添加顺序会影响到缓存？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%8F%96%E6%B6%88cancelAllRequest%E6%96%B9%E6%B3%95%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%88%A0%E9%99%A4cache%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%9F"><span class="toc-text">路由取消cancelAllRequest方法中为什么要删除cache中的数据？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%BE%E7%82%B9%E8%A7%A3%E5%86%B3"><span class="toc-text">难点解决</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/logo-github.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Javascript/">Javascript</a></div><div id="post-meta">发布于&nbsp;<time datetime="2021-06-24T06:02:44.000Z">2021-06-24</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>基于猪齿鱼平台的axios缓存封装</span></h1>
+<h2 id="需求说明"><a href="#需求说明" class="headerlink" title="需求说明"></a>需求说明</h2><h3 id="情况1："><a href="#情况1：" class="headerlink" title="情况1："></a>情况1：</h3><p>猪齿鱼平台是个相对复杂的多表格多表单数据处理平台，有些模块的数据量庞大，并且有些喜欢嵌入在tab页面当中，如果频繁的去访问这些页面就会频繁的请求，如果数据量庞大，每次访问都会去请求数据，等待时间就变长了，例如下面这个界面：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="7.gif" alt="7"></p>
+<p>这个页面相当于是历史的执行记录，因为数据量庞大，我们可以看到这个页面请求过后响应速度较慢，假设我在短时间内切到别的记录又切回来要看，那还得重新再去请求这1000多条的数据，这个是没有必要的，用户等待时间就变长了</p>
+<h3 id="情况2："><a href="#情况2：" class="headerlink" title="情况2："></a>情况2：</h3><p>在一个页面渲染的过程中，或者在某些不正当的交互操作中，用户可能频繁的向后台去发送同一个请求（参数url等待都一样），或又是再渲染页面的一瞬间触发了多次同一请求，这样就很浪费带宽，多次请求前端还需要进行多次的响应处理，例如以下情况</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210624155243688.png" alt="image-20210624155243688"></p>
+<p>在渲染页面时，同时发送了多个相同请求，大多时候是页面逻辑处理的有问题，多次向后台获取数据了，或者是我频繁的去点击一个没有做防抖的按钮或者没有节流的一些频繁请求</p>
+<h3 id="情况3："><a href="#情况3：" class="headerlink" title="情况3："></a>情况3：</h3><p>假设我错误的点击了一个菜单的同时又去切到了另外一个菜单，这时候虽然说已经切换到了想要的菜单路由下对应的界面，但是由于你错误的操作，虽然上个页面在切路由瞬间被销毁，但是初始化页面的一些获取后台数据的请求已经发出去了，你访问的当前页面是不需要这些请求的。例如：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="test.gif" alt="test"></p>
+<p>这个例子就是，我先点击了代码管理的菜单，代码管理模块组件瞬间被加载出来，并且发送页面请求，这时候一瞬间切换到应用流水线的菜单，这时候我们会看见，代码管理模块的请求很多没必要的都发送出去了，这些请求并不是我们应用流水线模块需要用的到的。</p>
+<p>如果上个页面的请求很慢或者很多情况下，都会占用不必要的资源以及前端处理时间，占用资源。</p>
+<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><ol>
+<li>针对情况1, 我们可以做缓存, 类似于DataSet的lookup，但又不完全类似。也可以做类似tab的数据缓存处理， 但是如果页面多起来，我们就需要多次分别对数据进行缓存处理。</li>
+<li>针对第二种的情况，可以将重复的请求给取消掉，或者说在这一瞬间发送的多次相同请求都共用第一次发送的那个请求的响应状态。一些按钮或者频繁请求的操作做节流和防抖处理，这个就不再这次的讨论范围内了</li>
+<li>第三种情况在切换路由的时候可以想办法把上个页面还在pending中的请求给取消掉</li>
+<li>猪齿鱼平台用的是axios + DataSet来进行前后端数据交互以及请求处理的，所以基于他们要如何完美实现呢？</li>
+</ol>
+<p><strong>综上所述：</strong>我们要实现一个，能够实现取消，又能实现缓存的，重点是实现相同请求的状态数据的公用以及不影响dataset的使用的东西</p>
+<p>可以想到的是，我们肯定是要对axios的拦截器或者一些特殊属性例如axios的适配器，做处理。</p>
+<h3 id="缓存分析"><a href="#缓存分析" class="headerlink" title="缓存分析"></a>缓存分析</h3><p>参考猪齿鱼lookup的缓存原理，以下放出lookup缓存的部分源码；</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210625112724872.png" alt="image-20210625112724872"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210625113745262.png" alt="image-20210625113745262"></p>
+<p>lookup通过标识确定是否缓存，之后将适配器返回的期约直接给一个新得期约，之后存储这个新得期约，在下次发送相同请求时候直接将这个期约抛给它，从而实现请求的复用</p>
+<p><strong>首先我们要明白axios 的 adpater的原理：</strong></p>
+<p>源码是这样的</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210625160815760.png" alt="image-20210625160815760"></p>
+<p>可以知道的是，axios 的 transformRequest以及他的各个请求拦截器是在return这个期约之前发生的，之后请求完成，adapter将请求后的结果传递给期约，之后期约落定，后面才触发响应数据转换（transformReponse）以及响应拦截器（这个顺序非常的重要）。</p>
+<p>既然要缓存，一定要把第一次落定的请求期约，想办法（包含了响应码数据等等等）存储起来，需要用到的时候才去使用，所以可以确定的是我们缓存需要对adapter进行操作，并且在响应和请求的拦截器中做标识等等操作</p>
+<h3 id="多次相同请求处理"><a href="#多次相同请求处理" class="headerlink" title="多次相同请求处理"></a>多次相同请求处理</h3><p>一开始我想用XMLHttpRequest的abort也就是axios的CancelToken（axios对abort进行了封装）去将页面正在渲染的时候一个个重复的请求cancel掉，但是这样有多种弊端，留到最后一点讲。</p>
+<p>多次相同请求是一瞬间的事情，要在这一瞬间复用请求必须用到上面缓存所说的存储期约。</p>
+<p>一瞬间咱们就可以定一个默认时间戳，例如1000ms，这个时间戳表示的是，在这1000ms中进来的请求都共用一个adapter的期约，这样定义一个默认时间戳，就可以做到类似取消重复请求的作用（实际上是用了缓存）。</p>
+<p>当然既然加了缓存，又加了时间戳，灵活应用一下就可以实现一个，在对应时间内不单单是1000ms，我发的相同请求都共用，我们可以将时间戳直接定义在axios默认属性上或者axios创建出来的实例上面，定义默认值1000ms，之后如果想要缓存时间长一点的话直接在dataset的transport对应的方法配置项下面或者是axios实例上添加时间戳，用来覆盖默认的时间戳，因此可以实现长效缓存。</p>
+<p>例如：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210625173040963.png" alt="image-20210625173040963"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210625173136449.png" alt="image-20210625173136449"></p>
+<h3 id="切换路由取消pending请求"><a href="#切换路由取消pending请求" class="headerlink" title="切换路由取消pending请求"></a>切换路由取消pending请求</h3><p>这里必须用到axios的CancelToken。上面说到CancelToken的其实就是对<code>XMLhttpRequest</code>的abort方法进行封装， <code>XMLHttpRequest</code> 对象是我们发起一个网络请求的根本，在它底下有怎么一个方法 <code>.abort()</code>，就是中断一个已被发出的请求。 </p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210625211727335.png" alt="image-20210625211727335"></p>
+<p> 简单理解就是通过 <code>new axios.CancelToken()</code>给每个请求带上一个专属的CancelToken，之后会接收到一个<code>cancel()</code> 取消方法，用于后续的取消动作。 </p>
+<p>所以，每次请求进来的时候去获取本次请求的CancelToken，之后将其存起来（这里假设用CancelQueue的一个Map数据类型（<code>Object.prototype.toString.call(CancelQueue) = &#39;[object Map]&#39;</code>）），之后假如这个请求落定了，就将这个存储CancelToken的请求标识删除。</p>
+<p>如果这时候切换路由了，我们就去CancelQueue中，遍历一遍所有的请求标识（因为这时候再队列里头的肯定是还在pending的请求），调用其存储的CancelToken调用cancel方法进行请求取消，并删除标识。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 获取 axios CancelToken</span></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">CancelToken</span> &#125; = axios;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 获取当前请求的source，并且将其cancel方法存储起来</span></span><br><span class="line"><span class="keyword">const</span> source = <span class="title class_">CancelToken</span>.<span class="title function_">source</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 之后调用这个cancel方法</span></span><br><span class="line">source.<span class="title function_">cancel</span>();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="axios的实例化"><a href="#axios的实例化" class="headerlink" title="axios的实例化"></a>axios的实例化</h3><p>首先实例化axios(这是我们全局封装的axios)，在其中加入缓存标识，标识开启缓存（重复请求共用）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="attr">instance</span>:<span class="title class_">AxiosStatic</span> = axios.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">timeout</span>: <span class="number">30000</span>,</span><br><span class="line">  <span class="attr">baseURL</span>: <span class="variable constant_">API_HOST</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里配置一个缓存请求得标识</span></span><br><span class="line">instance.<span class="property">defaults</span>.<span class="property">enabledCancelCache</span> = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="标识的实现"><a href="#标识的实现" class="headerlink" title="标识的实现"></a>标识的实现</h3><p>对于每一个请求创建一个标识，标识唯一，标识是通过每一个请求的<code>url</code>, <code>params</code>, <code>method</code>, 以及 <code>data</code>建立标识，只要通过这4者建立的标识相同，那我们就能确定某些请求是相同的，</p>
+<p>如下<code>getMark</code>是建立主标识，<code>getDataMark</code>是对响应体内的data的标识</p>
+<p>params要进行参数拼接，现在主流基本在用<code>application/json</code>形式，Axios默认以这种形式工作，我们给后端接口传递参数也简单 ，但是有时候需要 Content-Type必须以application/x-www-form-urlencoded形式 ，以JSON格式后台是收不到的，而这时候就要进行序列化处理（先前是有前辈在这里做了处理的），但是这里不多说参数序列化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; get &#125; <span class="keyword">from</span> <span class="string">&#x27;lodash&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">AxiosRequestConfig</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">JSON</span>big <span class="keyword">from</span> <span class="string">&#x27;json-bigint&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> paramsSerializer <span class="keyword">from</span> <span class="string">&#x27;./paramsSerializer&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 单独处理data，response里面返回的config.data是个字符串对象</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getDataMark</span>(<span class="params">data:any</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> stringifyData = data;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> stringifyData === <span class="string">&#x27;string&#x27;</span>) &#123;</span><br><span class="line">    stringifyData = <span class="title class_">JSON</span>big.<span class="title function_">parse</span>(stringifyData);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> stringifyData;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 区别请求的唯一标识，这里用方法名+请求路径</span></span><br><span class="line"><span class="comment">// 如果一个项目里有多个不同baseURL的请求 + 参数</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">getMark</span>(<span class="params">config:AxiosRequestConfig</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">getKey</span> = (<span class="params">key:string</span>) =&gt; <span class="title function_">get</span>(config, key);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// params标识处理，将其处理成?key=value&amp;key2=value的形式</span></span><br><span class="line">  <span class="keyword">const</span> tempQueryString = (<span class="title function_">getKey</span>(<span class="string">&#x27;paramsSerializer&#x27;</span>) ?? paramsSerializer)(<span class="title function_">getKey</span>(<span class="string">&#x27;params&#x27;</span>));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// data标识处理</span></span><br><span class="line">  <span class="keyword">const</span> dataMark = <span class="title class_">JSON</span>big.<span class="title function_">stringify</span>(<span class="title function_">getDataMark</span>(<span class="title function_">getKey</span>(<span class="string">&#x27;data&#x27;</span>)));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// base标识</span></span><br><span class="line">  <span class="keyword">const</span> requestMark = [</span><br><span class="line">    config?.<span class="property">method</span>?.<span class="title function_">toLowerCase</span>() || <span class="string">&#x27;unknownMethod&#x27;</span>,</span><br><span class="line">    config?.<span class="property">url</span>,</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="title function_">getKey</span>(<span class="string">&#x27;params&#x27;</span>) &amp;&amp; requestMark.<span class="title function_">push</span>(tempQueryString);</span><br><span class="line">  <span class="title function_">getKey</span>(<span class="string">&#x27;data&#x27;</span>) &amp;&amp; requestMark.<span class="title function_">push</span>(dataMark);</span><br><span class="line">  <span class="keyword">return</span> requestMark.<span class="title function_">join</span>(<span class="string">&#x27;&amp;&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最终的拼接形式是 <code>method &amp; url &amp; params &amp; data</code>的形式，</p>
+<p>例如下面这个请求</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210625210606969.png" alt="image-20210625210606969"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210625210632981.png" alt="image-20210625210632981"></p>
+<p>最终拼接出来的是</p>
+<p><code>post&amp;http://172.23.16.92:30094/iam/choerodon/v1/permissions/menus/check-permissions&amp;tenantId=2&amp;[&quot;choerodon.code.organization.project.ps.create&quot;]</code></p>
+<h3 id="缓存实现"><a href="#缓存实现" class="headerlink" title="缓存实现"></a>缓存实现</h3><p>这里我们采用拦截器的形式去添加缓存逻辑，以下是添加了请求拦截器</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210626094315248.png" alt="image-20210626094315248"></p>
+<p>下面标红的是添加响应拦截器</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210626094721131.png" alt="image-20210626094721131"></p>
+<p>至于这里拦截器的顺序为什么是这样的，后续再说</p>
+<p>其次，我们要明白请求的几种情况</p>
+<p>假设现在有一个A请求进来了</p>
+<ol>
+<li>还在pending的时候，在默认时间戳内（1000ms）又进来了一个一模一样的A请求（重复了,共用状态）</li>
+<li>A请求已经落定了<strong>成功了</strong>，在定义的时间戳范围内又进来了多个一模一样的请求（缓存）</li>
+<li>A请求落定<strong>失败了</strong>，在定义的时间戳范围内又进来了多个一模一样的请求（不缓存）</li>
+</ol>
+<p>最后明确需要存储在缓存实例中的数据格式</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210626101834505.png" alt="image-20210626101834505"></p>
+<h4 id="存储数据"><a href="#存储数据" class="headerlink" title="存储数据"></a>存储数据</h4><p>我们需要以一种键值对的形式去存储，可选项就属Object或者Map。</p>
+<p>但是这里我们需要频繁的对缓存的数据进行查找，插入，赋值，删除操作等等。</p>
+<p>在小数量数据情况下Object的查找数据相对Map来的快，但是涉及更多插入的和删除的情况下都是Map性能来的优势，并且相同内存下Map能够存储更多的键值对，这里显然存在庞大数据的情况</p>
+<p>于是这里封装一个<code>AxiosCache</code>缓存类，然后写一些私有方法在里头</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AxiosCache</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>();</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">cacheData</span> = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br><span class="line">  &#125;</span><br><span class="line">    </span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">size</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">cacheData</span>.<span class="property">size</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">get</span>(<span class="params">key</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">cacheData</span>.<span class="title function_">get</span>(key);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">delete</span>(<span class="params">key</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">cacheData</span>.<span class="title function_">delete</span>(key);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">has</span>(<span class="params">key</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">cacheData</span>.<span class="title function_">has</span>(key);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">set</span>(<span class="params">key, value</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">cacheData</span>.<span class="title function_">set</span>(key, value);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">isEmpty</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> !!<span class="variable language_">this</span>.<span class="property">cacheData</span>.<span class="property">size</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">clear</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">cacheData</span> = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> axiosCache = <span class="keyword">new</span> <span class="title class_">AxiosCache</span>();</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="请求拦截器实现"><a href="#请求拦截器实现" class="headerlink" title="请求拦截器实现"></a>请求拦截器实现</h4><ol>
+<li><p>当A请求进来时候发现先前并没有在缓存队列中做过标识，也就是说标识里头不存在以上的那些字段，这时候我们就将A请求做个标识，并且设置它的isPending（正在请求）为<code>true</code></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">axiosCache.<span class="title function_">set</span>(cancelCacheKey, &#123;</span><br><span class="line">    <span class="attr">isPending</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当A请求已经做过标识的时候，这时候又进来一个A1请求</p>
+<p>倘若第一次做过标识的A请求已经不是在pending状态并且在这次请求的时间戳的范围内（在后面讲响应拦截器的时候会把A的isPending字段在某种条件下设置为<code>false</code>, 并且存储A请求响应后的数据），A1请求就直接去取A缓存的数据</p>
+<p>这里就涉及到上面所说的适配器的用处，直接在A1请求config的适配器返回一个成功落定的期约，通过标识拿到cache实例中缓存的数据数据。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// isPending为false的情况下，并且在时间戳的范围内</span></span><br><span class="line"><span class="keyword">if</span> (expire &amp;&amp; expire &gt; <span class="title class_">Date</span>.<span class="title function_">now</span>()) &#123;</span><br><span class="line">  tempConfig.<span class="property">adapter</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="attr">resolveData</span>: <span class="title class_">AxiosResponse</span> = &#123;</span><br><span class="line">      data,</span><br><span class="line">      <span class="attr">headers</span>: tempConfig.<span class="property">headers</span>,</span><br><span class="line">      <span class="attr">config</span>: &#123;</span><br><span class="line">        ...tempConfig,</span><br><span class="line">        <span class="attr">useCache</span>: <span class="literal">true</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// @ts-expect-error</span></span><br><span class="line">      <span class="attr">request</span>: tempConfig,</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(resolveData);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里定义一个<code>useCache</code>的字段表明这个是再用缓存数据，后续的响应拦截器中会讲到</p>
+</li>
+</ol>
+<ol start="3">
+<li><p>当A请求已经做过标识的时候，这时候又进来一个A1请求</p>
+<p>倘若第一次做过标识的A请求还在pending的状态，我又想共用缓存数据，但是并不清楚什么时候A请求才会结束。</p>
+<p>这时候我们就想，用一个发布订阅的模式，将A1请求的<strong>期约落定时机</strong>订阅起来，在A请求落定的时候告诉A1你是时候也该落定了就去<strong>发布</strong>信息，这时候缓存的数据就是在A请求落定时候，去发布顺便给A1传递的.</p>
+<blockquote>
+<p>其实这个过程可以有多个A1进来</p>
+</blockquote>
+<p>如果不好理解的这里有流程图</p>
+<p>​    <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210626111840112.png" alt="image-20210626111840112"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210626111852379.png" alt="image-20210626111852379"></p>
+ <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 说明找到了请求但是找到的这个缓存的请求还在pending，这时候订阅一个期约待会要用</span></span><br><span class="line">tempConfig.<span class="property">adapter</span> = <span class="function">() =&gt;</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">    axiosEvent.<span class="title function_">once</span>(cancelCacheKey, <span class="function">(<span class="params">res:<span class="built_in">unknown</span></span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> <span class="attr">resolveData</span>: <span class="title class_">AxiosResponse</span> = &#123;</span><br><span class="line">        <span class="attr">data</span>: res,</span><br><span class="line">        <span class="attr">headers</span>: tempConfig.<span class="property">headers</span>,</span><br><span class="line">        <span class="attr">config</span>: &#123;</span><br><span class="line">          ...tempConfig,</span><br><span class="line">          <span class="attr">useCache</span>: <span class="literal">true</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">// @ts-expect-error</span></span><br><span class="line">        <span class="attr">request</span>: tempConfig,</span><br><span class="line">      &#125;;</span><br><span class="line">      <span class="title function_">resolve</span>(resolveData);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这里A1请求订阅了以一个以cancelCacheKey为标识的信号。</p>
+</li>
+</ol>
+<p>至于A请求落定的时机，到响应拦截器中做处理</p>
+<ol start="4">
+<li>如果A请求请求失败怎么办？那这时候我们不做处理，也不做标识，请求失败走的是请求失败的拦截器。</li>
+</ol>
+<p>以下是整个请求拦截器代码</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">AxiosRequestConfig</span>, <span class="title class_">AxiosResponse</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; get &#125; <span class="keyword">from</span> <span class="string">&#x27;lodash&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> getMark, &#123; transformDataToString &#125; <span class="keyword">from</span> <span class="string">&#x27;../utils/getMark&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; axiosCache, axiosEvent &#125; <span class="keyword">from</span> <span class="string">&#x27;../instances&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">handleCancelCacheRequest</span>(<span class="params">config:AxiosRequestConfig</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> tempConfig = config;</span><br><span class="line">  <span class="comment">// 是否开启了缓存（复用重复请求状态）</span></span><br><span class="line">  <span class="keyword">const</span> enabledCancelCache = <span class="title function_">get</span>(tempConfig, <span class="string">&#x27;enabledCancelCache&#x27;</span>);</span><br><span class="line">  <span class="keyword">if</span> (enabledCancelCache) &#123;</span><br><span class="line">    <span class="comment">// 获取标识</span></span><br><span class="line">    <span class="keyword">const</span> cancelCacheKey = <span class="title function_">getMark</span>(tempConfig);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!axiosCache.<span class="title function_">has</span>(cancelCacheKey)) &#123;</span><br><span class="line">      axiosCache.<span class="title function_">set</span>(cancelCacheKey, &#123;&#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> &#123;</span><br><span class="line">      data, <span class="comment">// 缓存的数据</span></span><br><span class="line">      isPending, <span class="comment">// 请求是否是pending状态</span></span><br><span class="line">      expire, <span class="comment">// 时间戳</span></span><br><span class="line">    &#125; = axiosCache.<span class="title function_">get</span>(cancelCacheKey);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (isPending) &#123;</span><br><span class="line">      <span class="comment">// 说明找到了请求但是找到的这个缓存的请求还在pending，这时候订阅一个期约待会要用</span></span><br><span class="line">      tempConfig.<span class="property">adapter</span> = <span class="function">() =&gt;</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">        axiosEvent.<span class="title function_">once</span>(cancelCacheKey, <span class="function">(<span class="params">res:<span class="built_in">unknown</span></span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">const</span> <span class="attr">resolveData</span>: <span class="title class_">AxiosResponse</span> = &#123;</span><br><span class="line">            <span class="attr">data</span>: res,</span><br><span class="line">            <span class="attr">headers</span>: tempConfig.<span class="property">headers</span>,</span><br><span class="line">            <span class="attr">config</span>: &#123;</span><br><span class="line">              ...tempConfig,</span><br><span class="line">              <span class="attr">useCache</span>: <span class="literal">true</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="comment">// @ts-expect-error</span></span><br><span class="line">            <span class="attr">request</span>: tempConfig,</span><br><span class="line">          &#125;;</span><br><span class="line">          <span class="title function_">resolve</span>(resolveData);</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (expire &amp;&amp; expire &gt; <span class="title class_">Date</span>.<span class="title function_">now</span>()) &#123;</span><br><span class="line">      tempConfig.<span class="property">adapter</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> <span class="attr">resolveData</span>: <span class="title class_">AxiosResponse</span> = &#123;</span><br><span class="line">          <span class="attr">data</span>: <span class="title function_">transformDataToString</span>(data),</span><br><span class="line">          <span class="attr">headers</span>: tempConfig.<span class="property">headers</span>,</span><br><span class="line">          <span class="attr">config</span>: &#123;</span><br><span class="line">            ...tempConfig,</span><br><span class="line">            <span class="attr">useCache</span>: <span class="literal">true</span>,</span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="comment">// @ts-expect-error</span></span><br><span class="line">          <span class="attr">request</span>: tempConfig,</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(resolveData);</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      axiosCache.<span class="title function_">set</span>(cancelCacheKey, &#123;</span><br><span class="line">        <span class="attr">isPending</span>: <span class="literal">true</span>,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> tempConfig;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="响应拦截器的实现"><a href="#响应拦截器的实现" class="headerlink" title="响应拦截器的实现"></a>响应拦截器的实现</h4><p>实现了请求拦截器之后，我们来处理在先前拦截器中的一些字段，以及请求失败的数据处理</p>
+<ol>
+<li><p>我们先对响应成功的的拦截器做处理</p>
+<p>首先是响应成功的情况下而且也成功拿到想要的数据，假设这个响应成功的请求是上述的A请求，这时候我们就应该记录下A请求最终的所有数据以及它需要的缓存时间，并且设置它isPending字段为false，最重要的是给订阅了cancelCacheKey的信息的请求们发布一个信号，告诉你们可以来拿我的（A请求）数据了！</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (enabledCancelCache &amp;&amp; !useCache) &#123;</span><br><span class="line">    <span class="keyword">const</span> finalData = resData;</span><br><span class="line">    axiosCache.<span class="title function_">set</span>(config?.<span class="property">cancelCacheKey</span> || cancelCacheKey, &#123;</span><br><span class="line">      <span class="attr">data</span>: finalData,</span><br><span class="line">      <span class="attr">isPending</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">expire</span>: <span class="title class_">Date</span>.<span class="title function_">now</span>() + <span class="title class_">Number</span>(enabledCancelCache) * <span class="number">500</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 发布这个信号让所有订阅了A的都能接受到信息</span></span><br><span class="line">    axiosEvent.<span class="title function_">emit</span>(cancelCacheKey, finalData);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里为什么要多一次useCache的判断呢?</p>
+<p>因为我先前在请求拦截器中处理了adapter用来处理缓存, 走完了adapter才会走响应拦截器，也就是说，我在响应拦截器里头还得判断，这次到底是走的缓存，还是第一次需要做缓存呢？所以才知道为什么我在上面的adapter里头加入了useCache的字段。</p>
+<p>简单来说，就是A请求第一次进来，useCache就是false，就得去存值，接下来进来A1，那我就得走缓存，我不再去重新设置新值了。</p>
+</li>
+</ol>
+<ol start="2">
+<li><p>没有成功拿到想要的数据，也就是后端返回错误信息的情况</p>
+<p>这里我们的后台返回的错误标识是failed字段，就直接将isPending设置为false不做后续处理，并且将在订阅了的请求信号都删除(删除是因为A请求失败就已经报错，其他请求就不必再重复报错)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">axiosCache.<span class="title function_">set</span>(cancelCacheKey, &#123;</span><br><span class="line">  <span class="attr">isPending</span>: <span class="literal">false</span>,</span><br><span class="line">&#125;);</span><br><span class="line">axiosEvent.<span class="title function_">delete</span>(cancelCacheKey);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当然响应失败拦截器中也需要做上述这样的处理</p>
+</li>
+</ol>
+<p>这是最终的响应成功的拦截器代码👇</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">AxiosResponse</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> get <span class="keyword">from</span> <span class="string">&#x27;lodash/get&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  prompt,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&#x27;@/utils&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; axiosCache, axiosEvent &#125; <span class="keyword">from</span> <span class="string">&#x27;../instances&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> getMark <span class="keyword">from</span> <span class="string">&#x27;../utils/getMark&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">handleResponseInterceptor</span>(<span class="params">response:AxiosResponse</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> resData = <span class="title function_">get</span>(response, <span class="string">&#x27;data&#x27;</span>);</span><br><span class="line">  <span class="keyword">const</span> config = <span class="title function_">get</span>(response, <span class="string">&#x27;config&#x27;</span>) || &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> &#123; enabledCancelCache, useCache &#125; = config;</span><br><span class="line">  <span class="keyword">const</span> cancelCacheKey = <span class="title function_">getMark</span>(config);</span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">get</span>(response, <span class="string">&#x27;status&#x27;</span>) === <span class="number">204</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (resData?.<span class="property">failed</span> === <span class="literal">true</span>) &#123;</span><br><span class="line">    axiosCache.<span class="title function_">set</span>(cancelCacheKey, &#123;</span><br><span class="line">      ...(axiosCache.<span class="title function_">get</span>(cancelCacheKey) || &#123;&#125;),</span><br><span class="line">      <span class="attr">isPending</span>: <span class="literal">false</span>,</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!response?.<span class="property">config</span>?.<span class="property">noPrompt</span>) &#123;</span><br><span class="line">      <span class="title function_">prompt</span>(resData.<span class="property">message</span>, <span class="string">&#x27;error&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> resData;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (enabledCancelCache &amp;&amp; !useCache) &#123;</span><br><span class="line">    <span class="keyword">const</span> finalData = resData;</span><br><span class="line">    axiosCache.<span class="title function_">set</span>(config?.<span class="property">cancelCacheKey</span> || cancelCacheKey, &#123;</span><br><span class="line">      <span class="attr">data</span>: finalData,</span><br><span class="line">      <span class="attr">isPending</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">expire</span>: <span class="title class_">Date</span>.<span class="title function_">now</span>() + <span class="title class_">Number</span>(enabledCancelCache) * <span class="number">500</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">    axiosEvent.<span class="title function_">emit</span>(cancelCacheKey, finalData);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> resData;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="切换路由取消pending请求-1"><a href="#切换路由取消pending请求-1" class="headerlink" title="切换路由取消pending请求"></a>切换路由取消pending请求</h3><p>这里的思路就相对比较简单，按照上面需求分析所说的存储cancelToken给每一个请求，之后切换路由将pending的请求取消掉</p>
+<p>因此我们不单单需要实现存储cancelToken的一个队列，还有处理他的拦截器，我们还需要监听路由的变化，找到这个时机将所有pending请求cancel掉</p>
+<h4 id="拦截器的实现"><a href="#拦截器的实现" class="headerlink" title="拦截器的实现"></a>拦截器的实现</h4><p>这里我们封装一个拦截器<code>routeCancelInterceptor</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加切换路由取消pending请求拦截器</span></span><br><span class="line">instance.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(routeCancelInterceptor); <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+
+<p>需要一个取消请求的队，列于是封装一个实例用来存储对应的请求，包含相对应的get，set，等方法，最重要的是</p>
+<p>cancelAllRequest方法，用于遍历所有存储的pending请求，之后在切路由的时候，遍历数据取消它。这里为什么还需要引入前面做了缓存的axiosCache，后头会细讲</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; axiosCache &#125; <span class="keyword">from</span> <span class="string">&#x27;./index&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RouteAxios</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">pendingRequest</span> = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">size</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">pendingRequest</span>.<span class="property">size</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">get</span>(<span class="params">key</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">pendingRequest</span>.<span class="title function_">get</span>(key);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">delete</span>(<span class="params">key</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">pendingRequest</span>.<span class="title function_">delete</span>(key);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">has</span>(<span class="params">key</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">pendingRequest</span>.<span class="title function_">has</span>(key);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">set</span>(<span class="params">key, value</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">pendingRequest</span>.<span class="title function_">set</span>(key, value);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">isEmpty</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> !!<span class="variable language_">this</span>.<span class="property">pendingRequest</span>.<span class="property">size</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">clear</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">pendingRequest</span> = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> <span class="title function_">cancelAllRequest</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> [key, value] <span class="keyword">of</span> <span class="variable language_">this</span>.<span class="property">pendingRequest</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (value?.<span class="property">cancel</span> &amp;&amp; <span class="keyword">typeof</span> value.<span class="property">cancel</span> === <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">        value.<span class="title function_">cancel</span>();</span><br><span class="line">        axiosCache.<span class="title function_">delete</span>(key); <span class="comment">// 这里为什么这么做？后续在说</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">clear</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> axiosRoutesCancel = <span class="keyword">new</span> <span class="title class_">RouteAxios</span>();</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>之后要我们就在请求拦截器里头处理cancelToken</p>
+<p>当然首先也是先检测是否有这个<code>enabledCancelRoute</code>字段表明是否要将这个请求加入切换路由取消请求的方案，之后调用source()，获取存储其<code>source.cancel</code>方法，重点是要在config上加入cancelToken，表明这个请求待会可能会被取消（简单来讲这个标识对应这个source.cancel的执行目标）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios, &#123; <span class="title class_">AxiosRequestConfig</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> get <span class="keyword">from</span> <span class="string">&#x27;lodash/get&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; axiosRoutesCancel &#125; <span class="keyword">from</span> <span class="string">&#x27;../instances&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> getMark <span class="keyword">from</span> <span class="string">&#x27;../utils/getMark&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">routeCancelInterceptor</span>(<span class="params">config:AxiosRequestConfig</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> tempConfig = config;</span><br><span class="line">  <span class="keyword">const</span> enabledCancelRoute = <span class="title function_">get</span>(tempConfig, <span class="string">&#x27;enabledCancelRoute&#x27;</span>);</span><br><span class="line">  <span class="keyword">if</span> (enabledCancelRoute) &#123;</span><br><span class="line">    <span class="keyword">const</span> cancelRouteKey = tempConfig?.<span class="property">cancelCacheKey</span> || <span class="title function_">getMark</span>(config);</span><br><span class="line">    <span class="keyword">const</span> &#123; <span class="title class_">CancelToken</span> &#125; = axios;</span><br><span class="line">    <span class="keyword">const</span> source = <span class="title class_">CancelToken</span>.<span class="title function_">source</span>();</span><br><span class="line">    tempConfig.<span class="property">cancelToken</span> = source.<span class="property">token</span>;</span><br><span class="line">    axiosRoutesCancel.<span class="title function_">set</span>(cancelRouteKey, &#123;</span><br><span class="line">      <span class="attr">cancel</span>: source.<span class="property">cancel</span>,</span><br><span class="line">      <span class="attr">name</span>: cancelRouteKey,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> tempConfig;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果请求在还没切换路由的时候就已经响应成功（这里不管是否拿到正确数据），就应该直接删除这个存储的key值</p>
+<p>这里就在响应成功的拦截器中处理，在失败拦截器中也是一样的处理方案</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (enabledCancelRoute) &#123;</span><br><span class="line">    axiosRoutesCancel.<span class="title function_">delete</span>(cancelCacheKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="路由守卫的实现"><a href="#路由守卫的实现" class="headerlink" title="路由守卫的实现"></a>路由守卫的实现</h4><p>实现了拦截器我们还需要简单的实现一个路由守卫，用来监听路由变化</p>
+<p>在全局，我们封装了一个叫做PermissionRoute的守卫，这守卫是对<code>react-router-dom</code>的route做了变向封装</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">PermissionRoute</span>: <span class="title class_">React</span>.<span class="property">FC</span>&lt;<span class="title class_">PermissionRouteProps</span>&gt; =<span class="function">()=&gt;</span> <span class="title class_">React</span>.<span class="property">ReactDOM</span></span><br></pre></td></tr></table></figure>
+
+<p>给这个组件配置参数，叫做<code>enabledRouteChangedAjaxBlock</code>，默认为true, 标识这个路由下的请求，在切换的时候都会被取消，当然每个请求自己也会标识自己是否在切换路由的时候要被取消，后者的优先级大于前者</p>
+<p>之后我们写一个组件销毁的生命周期函数（路由切换的时候，这个路由对应的路由守卫组件就会被销毁，随之销毁（取消）的也就是当前页面正在pending的请求）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (enabledRouteChangedAjaxBlock &amp;&amp; axiosRoutesCancel.<span class="property">size</span>) &#123;</span><br><span class="line">      axiosRoutesCancel.<span class="title function_">cancelAllRequest</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">[location]);</span><br></pre></td></tr></table></figure>
+
+<p>useEffect返回一个销毁的函数，并且cancel掉所有pending请求。</p>
+<p>这里具体可以看看PermissionRoute的封装代码，方便理解</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; useEffect, useMemo &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Route</span>, <span class="title class_">RouteProps</span>, useLocation &#125; <span class="keyword">from</span> <span class="string">&#x27;react-router-dom&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; noaccess <span class="keyword">as</span> <span class="title class_">NoAccess</span>, <span class="title class_">Permission</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@/index&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> useQueryString <span class="keyword">from</span> <span class="string">&#x27;@/hooks/useQueryString&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Skeleton</span> <span class="keyword">from</span> <span class="string">&#x27;@/containers/components/c7n/master/skeleton&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; axiosRoutesCancel &#125; <span class="keyword">from</span> <span class="string">&#x27;@/containers/components/c7n/tools/axios/instances&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">PermissionRouteProps</span> <span class="keyword">extends</span> <span class="title class_">RouteProps</span> &#123;</span><br><span class="line">  <span class="attr">service</span>: <span class="built_in">string</span>[] | (<span class="function">(<span class="params"><span class="keyword">type</span>: <span class="string">&#x27;project&#x27;</span> | <span class="string">&#x27;organization&#x27;</span> | <span class="string">&#x27;site&#x27;</span></span>) =&gt;</span> <span class="built_in">string</span>[]),</span><br><span class="line">  <span class="attr">enabledRouteChangedAjaxBlock</span>: <span class="built_in">boolean</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> isFunction = (<span class="attr">something</span>: <span class="built_in">unknown</span>): something is <span class="title class_">Function</span> =&gt; <span class="keyword">typeof</span> something === <span class="string">&#x27;function&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">PermissionRoute</span>: <span class="title class_">React</span>.<span class="property">FC</span>&lt;<span class="title class_">PermissionRouteProps</span>&gt; = <span class="function">(<span class="params">&#123; enabledRouteChangedAjaxBlock = <span class="literal">true</span>, service, ...rest &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; <span class="keyword">type</span> &#125; = <span class="title function_">useQueryString</span>();</span><br><span class="line">  <span class="keyword">const</span> location = <span class="title function_">useLocation</span>();</span><br><span class="line">  <span class="keyword">const</span> codes = <span class="title function_">useMemo</span>(<span class="function">() =&gt;</span> (<span class="title function_">isFunction</span>(service) ? <span class="title function_">service</span>(<span class="keyword">type</span>) : (service || [])), [service, <span class="keyword">type</span>]);</span><br><span class="line">  <span class="keyword">const</span> route = (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">Route</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      &#123;<span class="attr">...rest</span>&#125;</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    /&gt;</span></span></span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (enabledRouteChangedAjaxBlock &amp;&amp; axiosRoutesCancel.<span class="property">size</span>) &#123;</span><br><span class="line">      axiosRoutesCancel.<span class="title function_">cancelAllRequest</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  [location]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (codes.<span class="property">length</span> &gt; <span class="number">0</span>)</span><br><span class="line">    ? (</span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;<span class="name">Permission</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">service</span>=<span class="string">&#123;codes&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">noAccessChildren</span>=<span class="string">&#123;</span>&lt;<span class="attr">NoAccess</span> /&gt;</span>&#125;</span></span><br><span class="line"><span class="language-xml">        defaultChildren=&#123;<span class="tag">&lt;<span class="name">Skeleton</span> /&gt;</span>&#125;</span></span><br><span class="line"><span class="language-xml">      &gt;</span></span><br><span class="line"><span class="language-xml">        &#123;route&#125;</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">Permission</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">    : (</span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;<span class="name">Route</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        &#123;<span class="attr">...rest</span>&#125;</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      /&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">PermissionRoute</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 用法</span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">PermissionRoute</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    <span class="attr">service</span>=<span class="string">&#123;[</span>&#x27;<span class="attr">choerodon.code.project.project.overview.ps.default</span>&#x27;]&#125;</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    <span class="attr">exact</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    <span class="attr">path</span>=<span class="string">&#123;</span>`$&#123;<span class="attr">match.url</span>&#125;<span class="attr">agile</span>/<span class="attr">project-overview</span>`&#125;</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    <span class="attr">component</span>=<span class="string">&#123;ProjectOverview&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">/&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><h3 id="为什么不用CancelToken去取消重复请求而用缓存原理？"><a href="#为什么不用CancelToken去取消重复请求而用缓存原理？" class="headerlink" title="为什么不用CancelToken去取消重复请求而用缓存原理？"></a>为什么不用CancelToken去取消重复请求而用缓存原理？</h3><p>我们知道取消重复请求原理是abort，定义是：请求如果发出，则立刻终止请求；</p>
+<h4 id="原因一："><a href="#原因一：" class="headerlink" title="原因一："></a>原因一：</h4><p>这个终止就很微妙，终止之后的请求我们可以知道它走了响应失败的拦截器，也就是说我们前端还是把数据发给了后端，后端还会做数据处理比如（post，put等），只是终止了，但是后端并不知道我们终止了请求，只是前端终止没有在像响应成功拦截器一样对数据做处理</p>
+<p>但是实际上我们要的效果不是这样，我们要的是在那一瞬间的所有相同请求状态复用，重复的请求们是不可以在那一瞬间再发送给后端的，而是只有那个第一次的请求才发出去，如果使用CancelToken这样就没有意义了</p>
+<h4 id="原因二"><a href="#原因二" class="headerlink" title="原因二"></a>原因二</h4><p>abort会导致浏览器中的network中一堆报红，看上去比较不美观。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="image-20210627124622241.png" alt="image-20210627124622241"></p>
+<h4 id="原因三"><a href="#原因三" class="headerlink" title="原因三"></a>原因三</h4><p>如果用了cancelToken我又想做缓存，还不如直接用缓存来，也可以达到效果</p>
+<h3 id="为什么拦截器的添加顺序会影响到缓存？"><a href="#为什么拦截器的添加顺序会影响到缓存？" class="headerlink" title="为什么拦截器的添加顺序会影响到缓存？"></a>为什么拦截器的添加顺序会影响到缓存？</h3><p>这也是在上面讲axios的adapter的时候提及过</p>
+<p>请求拦截器是的执行顺序是后添加的先执行</p>
+<p>响应拦截器是先添加的先执行</p>
+<p>例如：我们项目的请求拦截器是这样添加的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加切换路由取消pending请求拦截器</span></span><br><span class="line">instance.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(routeCancelInterceptor); <span class="comment">// 4</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加缓存(复用重复请求)请求拦截器</span></span><br><span class="line">instance.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(handleCancelCacheRequest, handleRequestError); <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 分页数据转换拦截器</span></span><br><span class="line">instance.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(transformRequestPage); <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加头部拦截器， 以及请求失败拦截器</span></span><br><span class="line">instance.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(addCustomHeader); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>按顺序是从下到上执行，按照标注的1，2，3，4执行</p>
+<p>响应拦截器是这样的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加响应拦截器</span></span><br><span class="line">instance.<span class="property">interceptors</span>.<span class="property">response</span>.<span class="title function_">use</span>(transformResponsePage); <span class="comment">// 1</span></span><br><span class="line">instance.<span class="property">interceptors</span>.<span class="property">response</span>.<span class="title function_">use</span>(handleResponseInterceptor, handelResponseError); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="路由取消cancelAllRequest方法中为什么要删除cache中的数据？"><a href="#路由取消cancelAllRequest方法中为什么要删除cache中的数据？" class="headerlink" title="路由取消cancelAllRequest方法中为什么要删除cache中的数据？"></a>路由取消cancelAllRequest方法中为什么要删除cache中的数据？</h3><h2 id="难点解决"><a href="#难点解决" class="headerlink" title="难点解决"></a>难点解决</h2>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2021/07/01/js%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/">js常见面试题</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2021/06/20/%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%89%80%E6%9C%89%E8%B7%AF%E5%BE%84/">算法之二叉树的所有路径</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
   }
-  .l_body {
-    padding: 0;
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
   }
-  .l_body .l_left {
-    position: fixed;
-    transform: translateX(-320px);
-    margin: 0;
-    left: 0;
-    background: var(--site-bg);
-    box-shadow: $boxshadow-card-float;
-    z-index: 9;
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
   }
-  .l_body .l_main {
-    max-width: 100%;
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
   }
-  .l_body.mobile .l_left {
-    transition: transform 0.3s ease-out;
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
   }
-  .l_body.mobile.sidebar .l_left {
-    transform: translateX(0px);
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
   }
-}
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

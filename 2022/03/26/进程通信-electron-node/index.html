@@ -1,46 +1,406 @@
-.l_body {
-  display: flex;
-  margin: auto;
-  padding: 0 var(--gap-l);
-  justify-content: center;
-}
-.l_body .l_left {
-  z-index: 8;
-  width: var(--width-left);
-  flex-shrink: 0;
-  position: sticky;
-  position: -webkit-sticky;
-  top: 0;
-}
-.l_body .l_main {
-  flex-shrink: 1;
-  flex-grow: 1;
-  width: 320px;
-  max-width: var(--width-main);
-}
-@media screen and (max-width: $device-mobile-max) {
-  .mobile-only {
-    display: block !important;
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>进程通信(electron/node) - 翁先森的博客</title>
+
+  
+    <meta name="description" content="进程通信不同进程之间因为可用的内存不同，所以要通过一个中间介质通信。 信号量 如果是简单的标记，通过一个数字来表示，放在 PCB 的一个属性里，这叫做信号量，比如锁的实现就可以通过信号量。 这种信号量的思想我们写前端代码也经常用，比如实现节流的时候，也要加一个标记变量。 管道 但是信号量不能传递具体的数据啊，传递具体数据还得用别的方式。比如我们可以通过读写文件的方式来通信，这就是管道，如果是在内存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程通信(electron&#x2F;node)">
+<meta property="og:url" content="https://github.com/NollieLeo/2022/03/26/%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1-electron-node/index.html">
+<meta property="og:site_name" content="翁先森的博客">
+<meta property="og:description" content="进程通信不同进程之间因为可用的内存不同，所以要通过一个中间介质通信。 信号量 如果是简单的标记，通过一个数字来表示，放在 PCB 的一个属性里，这叫做信号量，比如锁的实现就可以通过信号量。 这种信号量的思想我们写前端代码也经常用，比如实现节流的时候，也要加一个标记变量。 管道 但是信号量不能传递具体的数据啊，传递具体数据还得用别的方式。比如我们可以通过读写文件的方式来通信，这就是管道，如果是在内存">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-26T10:51:07.000Z">
+<meta property="article:modified_time" content="2023-01-28T09:27:04.192Z">
+<meta property="article:author" content="翁先森">
+<meta property="article:tag" content="Electron">
+<meta property="article:tag" content="Nodejs">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="/assets/avatar.png">
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/more/">更多</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">进程通信(electron/node)</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1"><span class="toc-text">进程通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ipc%E3%80%81rpc%E3%80%81lpc"><span class="toc-text">ipc、rpc、lpc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#electron-%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1"><span class="toc-text">electron 进程通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nodejs"><span class="toc-text">nodejs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/logo-github.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2022-03-26T10:51:07.000Z">2022-03-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>进程通信(electron/node)</span></h1>
+<h2 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a><strong>进程通信</strong></h2><p>不同进程之间因为可用的内存不同，所以要通过一个中间介质通信。</p>
+<p><strong>信号量</strong></p>
+<p>如果是简单的标记，通过一个数字来表示，放在 PCB 的一个属性里，这叫做<code>信号量</code>，比如锁的实现就可以通过信号量。</p>
+<p>这种信号量的思想我们写前端代码也经常用，比如实现节流的时候，也要加一个标记变量。</p>
+<p><strong>管道</strong></p>
+<p>但是信号量不能传递具体的数据啊，传递具体数据还得用别的方式。比如我们可以通过读写文件的方式来通信，这就是<code>管道</code>，如果是在内存中的文件，叫做匿名管道，没有文件名，如果是真实的硬盘的文件，是有文件名的，叫做命名管道。</p>
+<p>文件需要先打开，然后再读和写，之后再关闭，这也是管道的特点。管道是基于文件的思想封装的，之所以叫管道，是因为只能一个进程读、一个进程写，是单向的（半双工）。而且还需要目标进程同步的消费数据，不然就会阻塞住。</p>
+<p>这种管道的方式实现起来很简单，就是一个文件读写，但是只能用在两个进程之间通信，只能同步的通信。其实管道的同步通信也挺常见的，就是 stream 的 pipe 方法。</p>
+<p><strong>消息队列</strong></p>
+<p>管道实现简单，但是同步的通信比较受限制，那如果想做成异步通信呢？加个队列做缓冲（buffer）不就行了，这就是<code>消息队列</code>。</p>
+<p>消息队列也是两个进程之间的通信，但是不是基于文件那一套思路，虽然也是单向的，但是有了一定的异步性，可以放很多消息，之后一次性消费。</p>
+<p><strong>共享内存</strong></p>
+<p>管道、消息队列都是两个进程之间的，如果多个进程之间呢？</p>
+<p>我们可以通过申请一段多进程都可以操作的内存，叫做<code>共享内存</code>，用这种方式来通信。各进程都可以向该内存读写数据，效率比较高。</p>
+<p>共享内存虽然效率高、也能用于多个进程的通信，但也不全是好处，因为多个进程都可以读写，那么就很容易乱，要自己控制顺序，比如通过进程的信号量（标记变量）来控制。</p>
+<p>共享内存适用于多个进程之间的通信，不需要通过中间介质，所以效率更高，但是使用起来也更复杂。</p>
+<p>上面说的这些几乎就是本地进程通信的全部方式了，为什么要加个本地呢？</p>
+<h2 id="ipc、rpc、lpc"><a href="#ipc、rpc、lpc" class="headerlink" title="ipc、rpc、lpc"></a><strong>ipc、rpc、lpc</strong></h2><p>进程通信就是 ipc（Inter-Process Communication），两个进程可能是一台计算机的，也可能网络上的不同计算机的进程，所以进程通信方式分为两种：</p>
+<p>本地过程调用 LPC（local procedure call）、远程过程调用 RPC（remote procedure call）。</p>
+<p>本地过程调用就是我们上面说的信号量、管道、消息队列、共享内存的通信方式，但是如果是网络上的，那就要通过网络协议来通信了，这个其实我们用的比较多，比如 http、websocket。</p>
+<p>所以，当有人提到 ipc 时就是在说进程通信，可以分为本地的和远程的两种来讨论。</p>
+<p>远程的都是基于网络协议封装的，而本地的都是基于信号量、管道、消息队列、共享内存封装出来的，比如我们接下来要探讨的 electron 和 nodejs。</p>
+<h2 id="electron-进程通信"><a href="#electron-进程通信" class="headerlink" title="electron 进程通信"></a><strong>electron 进程通信</strong></h2><p>electron 会先启动主进程，然后通过 BrowserWindow 创建渲染进程，加载 html 页面实现渲染。这两个进程之间的通信是通过 electron 提供的 ipc 的 api。</p>
+<p><strong>ipcMain、ipcRenderer</strong></p>
+<p>主进程里面通过 ipcMain 的 on 方法监听事件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#123; ipcMain &#125; from ``&#x27;electron&#x27;``;` `ipcMain.on(``&#x27;异步事件&#x27;``, (event, arg) =&gt; &#123;`` ``event.sender.send(``&#x27;异步事件返回&#x27;``, ``&#x27;yyy&#x27;``);``&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>渲染进程里面通过 ipcRenderer 的 on 方法监听事件，通过 send 发送消息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#123; ipcRenderer &#125; from ``&#x27;electron&#x27;``;` `ipcRender.on(``&#x27;异步事件返回&#x27;``, ``function` `(event, arg) &#123;`` ``const message = `异步消息: $&#123;arg&#125;```&#125;)` `ipcRenderer.send(``&#x27;异步事件&#x27;``, ``&#x27;xxx&#x27;``)</span><br></pre></td></tr></table></figure>
+
+<p>api 使用比较简单，这是经过 c++ 层的封装，然后暴露给 js 的事件形式的 api。</p>
+<p>我们可以想一下它是基于哪种机制实现的呢？</p>
+<p>很明显有一定的异步性，而且是父子进程之间的通信，所以是消息队列的方式实现的。</p>
+<p><strong>remote</strong></p>
+<p>除了事件形式的 api 外，electron 还提供了远程方法调用 rmi （remote method invoke）形式的 api。</p>
+<p>其实就是对消息的进一步封装，也就是根据传递的消息，调用不同的方法，形式上就像调用本进程的方法一样，但其实是发消息到另一个进程来做的，和 ipcMain、ipcRenderer 的形式本质上一样。</p>
+<p>比如在渲染进程里面，通过 remote 来直接调用主进程才有的 BrowserWindow 的 api。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const &#123; BrowserWindow &#125; = require(``&#x27;electron&#x27;``).remote;` `let win = ``new` `BrowserWindow(&#123; width: 800, height: 600 &#125;);``win.loadURL(``&#x27;&#x27;``);</span><br></pre></td></tr></table></figure>
+
+<p>小结一下，electron 的父子进程通信方式是基于消息队列封装的，封装形式有两种，一种是事件的方式，通过 ipcMain、ipcRenderer 的 api 使用，另一种则是进一步封装成了不同方法的调用（rmi），底层也是基于消息，执行远程方法但是看上去像执行本地方法一样。</p>
+<h2 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a><strong>nodejs</strong></h2><p>nodejs 提供了创建进程的 api，有两个模块： c 和 cluster。很明显，一个是用于父子进程的创建和通信，一个是用于多个进程。</p>
+<p><strong>child_process</strong></p>
+<p>child_process 提供了 spawn、exec、execFile、fork 的 api，分别用于不同的进程的创建：</p>
+<p><strong>spawn、exec</strong></p>
+<p>如果想通过 shell 执行命令，那就用 spawn 或者 exec。因为一般执行命令是需要返回值的，这俩 api 在返回值的方式上有所不同。</p>
+<p>spawn 返回的是 stream，通过 data 事件来取，exec 进一步分装成了 buffer，使用起来简单一些，但是可能会超过 maxBuffer。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const &#123; spawn &#125; = require(``&#x27;child_process&#x27;``);` `var` `app = spawn(``&#x27;node&#x27;``,``&#x27;main.js&#x27;` `&#123;env:&#123;&#125;&#125;);` `app.stderr.on(``&#x27;data&#x27;``,``function``(data) &#123;`` ``console.log(``&#x27;Error:&#x27;``,data);``&#125;);` `app.stdout.on(``&#x27;data&#x27;``,``function``(data) &#123;`` ``console.log(data);``&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>其实 exec 是基于 spwan 封装出来的，简单场景可以用，有的时候要设置下 maxBuffer。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const &#123; exec &#125; = require(``&#x27;child_process&#x27;``);` `exec(``&#x27;find . -type f&#x27;``, &#123; maxBuffer: 1024*1024 &#125;(err, stdout, stderr) =&gt; &#123;``  ``if` `(err) &#123;``    ``console.error(`exec error: $&#123;err&#125;`); ``return``;``  ``&#125; ``  ``console.log(stdout);``&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>execFile</strong></p>
+<p>除了执行命令外，如果要执行可执行文件就用 execFile 的 api：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const &#123; execFile &#125; = require(``&#x27;child_process&#x27;``);` `const child = execFile(``&#x27;node&#x27;``, [``&#x27;--version&#x27;``], (error, stdout, stderr) =&gt; &#123;``  ``if` `(error) &#123; ``throw` `error; &#125;``  ``console.log(stdout);``&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>fork</strong></p>
+<p>还有如果是想执行 js ，那就用 fork：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const &#123; fork &#125; = require(``&#x27;child_process&#x27;``); ` `const xxxProcess = fork(``&#x27;./xxx.js&#x27;``);  ``xxxProcess.send(``&#x27;111111&#x27;``); ``xxxProcess.on(``&#x27;message&#x27;``, sum =&gt; &#123;  ``  ``res.end(``&#x27;22222&#x27;``); ``&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>小结</strong></p>
+<p>简单小结一下 child_process 的 4 个 api：</p>
+<p>如果想执行 shell 命令，用 spawn 和 exec，spawn 返回一个 stream，而 exec 进一步封装成了 buffer。除了 exec 有的时候需要设置下 maxBuffer，其他没区别。</p>
+<p>如果想执行可执行文件，用 execFile。</p>
+<p>如果想执行 js 文件，用 fork。</p>
+<p><strong>child_process 的进程通信</strong></p>
+<p>说完了 api 我们来说下 child_process 创建的子进程怎么和父进程通信，也就是怎么做 ipc。</p>
+<p><strong>pipe</strong></p>
+<p>首先，支持了 pipe，很明显是通过管道的机制封装出来的，能同步的传输流的数据。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; spawn &#125; = <span class="built_in">require</span>(<span class="string">&#x27;child_process&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> find = <span class="title function_">spawn</span>(<span class="string">&#x27;cat&#x27;</span>, [<span class="string">&#x27;./aaa.js&#x27;</span>]);</span><br><span class="line"><span class="keyword">const</span> wc = <span class="title function_">spawn</span>(<span class="string">&#x27;wc&#x27;</span>, [<span class="string">&#x27;-l&#x27;</span>]); </span><br><span class="line">find.<span class="property">stdout</span>.<span class="title function_">pipe</span>(wc.<span class="property">stdin</span>);</span><br></pre></td></tr></table></figure>
+
+<p>比如上面通过管道把一个进程的输出流传输到了另一个进程的输入流，和下面的 shell 命令效果一样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ./aaa.js | wc -l</span><br></pre></td></tr></table></figure>
+
+<p><strong>message</strong></p>
+<p>spawn 支持 stdio 参数，可以设置和父进程的 stdin、stdout、stderr 的关系，比如指定 pipe 或者 null。还有第四个参数，可以设置 ipc，这时候就是通过事件的方式传递消息了，很明s显，是基于消息队列实现的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; spawn &#125; = <span class="built_in">require</span>(<span class="string">&#x27;child_process&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> child = <span class="title function_">spawn</span>(<span class="string">&#x27;node&#x27;</span>, [<span class="string">&#x27;./child.js&#x27;</span>], &#123; <span class="attr">stdio</span>: [<span class="string">&#x27;pipe&#x27;</span>, <span class="string">&#x27;pipe&#x27;</span>, <span class="string">&#x27;pipe&#x27;</span>, <span class="string">&#x27;ipc&#x27;</span>]&#125;);</span><br><span class="line">child.<span class="title function_">on</span>(<span class="string">&#x27;message&#x27;</span>, <span class="function">(<span class="params">m</span>) =&gt;</span> &#123;  <span class="variable language_">console</span>.<span class="title function_">log</span>(m);&#125;);</span><br><span class="line">child.<span class="title function_">send</span>(<span class="string">&#x27;this is weng&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>而 fork 的 api 创建的子进程自带了 ipc 的传递消息机制，可以直接用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const &#123; fork &#125; = require(``&#x27;child_process&#x27;``); ` `const xxxProcess = fork(``&#x27;./xxx.js&#x27;``);  ``xxxProcess.send(``&#x27;111111&#x27;``); ``xxxProcess.on(``&#x27;message&#x27;``, sum =&gt; &#123;  ``  ``res.end(``&#x27;22222&#x27;``); ``&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>cluster</strong></p>
+<p>cluster 不再是父子进程了，而是更多进程，也提供了 fork 的 api。</p>
+<p>比如 http server 会根据 cpu 数启动多个进程来处理请求。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import cluster from ``&#x27;cluster&#x27;``;``import http from ``&#x27;http&#x27;``;``import &#123; cpus &#125; from ``&#x27;os&#x27;``;``import process from ``&#x27;process&#x27;``;` `const numCPUs = cpus().length;` `if` `(cluster.isPrimary) &#123;`` ``for` `(let i = 0; i &lt; numCPUs; i++) &#123;``  ``cluster.fork();`` ``&#125;``&#125; ``else` `&#123;`` ``const server = http.createServer((req, res) =&gt; &#123;``  ``res.writeHead(200);``  ``res.end(``&#x27;hello worldn&#x27;``);`` ``&#125;)`` ` ` ``server.listen(8000);`` ` ` ``process.on(``&#x27;message&#x27;``, (msg) =&gt; &#123;``  ``if` `(msg === ``&#x27;shutdown&#x27;``) &#123;``    ``server.close();``  ``&#125;`` ``&#125;);``&#125;</span><br></pre></td></tr></table></figure>
+
+<p>它同样支持了事件形式的 api，用于多个进程之间的消息传递，因为多个进程其实也只是多个父子进程的通信，子进程之间不能直接通信，所以还是基于消息队列实现的。</p>
+<p><strong>共享内存</strong></p>
+<p>子进程之间通信还得通过父进程中转一次，要多次读写消息队列，效率太低了，就不能直接共享内存么？</p>
+<blockquote>
+<p>现在 nodejs 还是不支持的，可以通过第三方的包 shm-typed-array 来实现，感兴趣可以看一下。</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>进程包括代码、数据和 PCB，是程序的一次执行的过程，PCB 记录着各种执行过程中的信息，比如分配的资源、执行到的地址、用于通信的数据结构等。</p>
+<p>进程之间需要通信，可以通过信号量、管道、消息队列、共享内存的方式。</p>
+<ul>
+<li>信号量就是一个简单的数字的标记，不能传递具体数据。</li>
+<li>管道是基于文件的思想，一个进程写另一个进程读，是同步的，适用于两个进程。</li>
+<li>消息队列有一定的 buffer，可以异步处理消息，适用于两个进程。</li>
+<li>共享内存是多个进程直接操作同一段内存，适用于多个进程，但是需要控制访问顺序。</li>
+</ul>
+<p>这四种是本地进程的通信方式，而网络进程则基于网络协议的方式也可以做进程通信。</p>
+<p>进程通信叫做 ipc，本地的叫做 lpc，远程的叫 rpc。</p>
+<p>其中，如果把消息再封装一层成具体的方法调用，叫做 rmi，效果就像在本进程执行执行另一个进程的方法一样。</p>
+<p>electron 和 nodejs 都是基于上面的操作系统机制的封装：</p>
+<ul>
+<li>elctron 支持 ipcMain 和 ipcRenderer 的消息传递的方式，还支持了 remote 的 rmi 的方式。</li>
+<li>nodejs 有 child_process 和 cluster 两个模块和进程有关，child_process 是父子进程之间，cluster 是多个进程：<ul>
+<li>child_process 提供了用于执行 shell 命令的 spawn、exec，用于执行可执行文件的 execFile，用于执行 js 的 fork。提供了 pipe 和 message 两种 ipc 方式。</li>
+<li>cluster 也提供了 fork，提供了 message 的方式的通信。</li>
+</ul>
+</li>
+</ul>
+<p>当然，不管封装形式是什么，都离不开操作系统提供的信号量、管道、消息队列、共享内存这四种机制。</p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2022/04/16/vue2-vue3%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/">vue2~vue3迁移记录</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2022/02/27/eslint-rules%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9/">eslint rules常用配置项</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
   }
-  .l_body {
-    padding: 0;
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
   }
-  .l_body .l_left {
-    position: fixed;
-    transform: translateX(-320px);
-    margin: 0;
-    left: 0;
-    background: var(--site-bg);
-    box-shadow: $boxshadow-card-float;
-    z-index: 9;
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
   }
-  .l_body .l_main {
-    max-width: 100%;
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
   }
-  .l_body.mobile .l_left {
-    transition: transform 0.3s ease-out;
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
   }
-  .l_body.mobile.sidebar .l_left {
-    transform: translateX(0px);
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
   }
-}
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
