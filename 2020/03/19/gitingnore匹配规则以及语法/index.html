@@ -1,413 +1,46 @@
-<!DOCTYPE html>
-<html lang='zh-CN'>
-
-<head>
-  <meta name="generator" content="Hexo 6.3.0">
-  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
-  <meta charset="utf-8">
-  
-
-  <meta http-equiv='x-dns-prefetch-control' content='on' />
-  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
-  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
-  <link rel='dns-prefetch' href='//unpkg.com'>
-
-  <meta name="renderer" content="webkit">
-  <meta name="force-rendering" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="HandheldFriendly" content="True" >
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="theme-color" content="#f8f8f8">
-  
-  <title>.gitingnore匹配规则以及语法 - 翁先森的博客</title>
-
-  
-    <meta name="description" content="Git配置 .gitignore文件git 廖雪峰git教程 git官网 一. 忽略规则匹配语法   通配符 说明    空格 仅作为分隔符   # 注释   ! 不忽略某个文件   &#x2F; 开头 仅仅匹配根目录   结束 &#x2F; 匹配该文件夹及该文件夹下的所有内容   * 匹配多个字符   ** 匹配多级目录   ？ 匹配单个字符   [] 匹配包含单个字符的列表   Tips:  当前目录定义的规则优">
-<meta property="og:type" content="article">
-<meta property="og:title" content=".gitingnore匹配规则以及语法">
-<meta property="og:url" content="https://github.com/NollieLeo/2020/03/19/gitingnore%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99%E4%BB%A5%E5%8F%8A%E8%AF%AD%E6%B3%95/index.html">
-<meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="Git配置 .gitignore文件git 廖雪峰git教程 git官网 一. 忽略规则匹配语法   通配符 说明    空格 仅作为分隔符   # 注释   ! 不忽略某个文件   &#x2F; 开头 仅仅匹配根目录   结束 &#x2F; 匹配该文件夹及该文件夹下的所有内容   * 匹配多个字符   ** 匹配多级目录   ？ 匹配单个字符   [] 匹配包含单个字符的列表   Tips:  当前目录定义的规则优">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-03-19T01:17:13.000Z">
-<meta property="article:modified_time" content="2022-02-09T01:45:19.077Z">
-<meta property="article:author" content="翁先森">
-<meta property="article:tag" content="git">
-<meta name="twitter:card" content="summary">
-  
-  
-
-  <!-- feed -->
-  
-    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
-  
-
-  
-    
-<link rel="stylesheet" href="/css/main.css">
-
-  
-
-  
-    <link rel="shortcut icon" href="/assets/avatar.png">
-  
-
-  
-
-  
-
-
-  
-</head>
-
-<body>
-  
-
-
-
-
-  <div class='l_body' id='start'>
-    <aside class='l_left' layout='post'>
-    
-
-  
-
-<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
-
-<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/more/">更多</a></nav>
-</header>
-
-
-<div class="widgets">
-<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
-
-
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">.gitingnore匹配规则以及语法</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git%E9%85%8D%E7%BD%AE-gitignore%E6%96%87%E4%BB%B6"><span class="toc-text">Git配置 .gitignore文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%BF%BD%E7%95%A5%E8%A7%84%E5%88%99%E5%8C%B9%E9%85%8D%E8%AF%AD%E6%B3%95"><span class="toc-text">一. 忽略规则匹配语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E5%8C%B9%E9%85%8D%E7%A4%BA%E4%BE%8B"><span class="toc-text">二. 匹配示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-gitignore%E6%96%87%E4%BB%B6%E4%B8%8D%E7%94%9F%E6%95%88"><span class="toc-text">三.  .gitignore文件不生效</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E6%A8%A1%E6%9D%BF"><span class="toc-text">四. 模板</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#java-%E5%BC%80%E5%8F%91%E9%80%9A%E7%94%A8%E7%89%88%E6%9C%AC%E6%A8%A1%E6%9D%BF"><span class="toc-text">java 开发通用版本模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE"><span class="toc-text">前端项目</span></a></li></ol></li></ol></li></ol></div></div></widget>
-
-
-
-
-</div>
-<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/logo-github.svg"/></a></div></footer>
-
-    </aside>
-    <div class='l_main'>
-      
-
-      
-
-
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/git/">git</a></div><div id="post-meta">发布于&nbsp;<time datetime="2020-03-19T01:17:13.000Z">2020-03-19</time></div></div>
-
-<article class='md-text content post'>
-<h1 class="article-title"><span>.gitingnore匹配规则以及语法</span></h1>
-<h1 id="Git配置-gitignore文件"><a href="#Git配置-gitignore文件" class="headerlink" title="Git配置 .gitignore文件"></a>Git配置 .gitignore文件</h1><p>git <a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600">廖雪峰git教程</a></p>
-<p><a target="_blank" rel="noopener" href="https://git-scm.com/docs/gitignore">git官网</a></p>
-<h2 id="一-忽略规则匹配语法"><a href="#一-忽略规则匹配语法" class="headerlink" title="一. 忽略规则匹配语法"></a>一. 忽略规则匹配语法</h2><table>
-<thead>
-<tr>
-<th>通配符</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>空格</td>
-<td>仅作为分隔符</td>
-</tr>
-<tr>
-<td>#</td>
-<td>注释</td>
-</tr>
-<tr>
-<td>!</td>
-<td>不忽略某个文件</td>
-</tr>
-<tr>
-<td>/ 开头</td>
-<td>仅仅匹配根目录</td>
-</tr>
-<tr>
-<td>结束 /</td>
-<td>匹配该文件夹及该文件夹下的所有内容</td>
-</tr>
-<tr>
-<td>*</td>
-<td>匹配多个字符</td>
-</tr>
-<tr>
-<td>**</td>
-<td>匹配多级目录</td>
-</tr>
-<tr>
-<td>？</td>
-<td>匹配单个字符</td>
-</tr>
-<tr>
-<td>[]</td>
-<td>匹配包含单个字符的列表</td>
-</tr>
-</tbody></table>
-<p>Tips:</p>
-<ul>
-<li>当前目录定义的规则优先级高于父级目录定义的规则</li>
-<li>每行指定一条忽略规则</li>
-<li>如果一行规则不包含“/”，则它匹配当前.gitignore文件所在路径的内容</li>
-</ul>
-<h2 id="二-匹配示例"><a href="#二-匹配示例" class="headerlink" title="二. 匹配示例"></a>二. 匹配示例</h2><table>
-<thead>
-<tr>
-<th align="left">规则</th>
-<th align="left">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">abc/</td>
-<td align="left"># 忽略当前路径下的 abc 文件夹</td>
-</tr>
-<tr>
-<td align="left">/abc</td>
-<td align="left"># 忽略根目录下的 abc 文件</td>
-</tr>
-<tr>
-<td align="left">/*.txt</td>
-<td align="left"># 忽略根目录下的 abc.txt，不忽略 app/abc.txt</td>
-</tr>
-<tr>
-<td align="left">abc/*.txt</td>
-<td align="left"># 忽略 abc/abc.txt，不忽略 abc/def/abc.txt 和 app/abc/abc.txt</td>
-</tr>
-<tr>
-<td align="left">**/abc</td>
-<td align="left"># 忽略 /abc、a/abc、a/b/abc</td>
-</tr>
-<tr>
-<td align="left">a/**/b</td>
-<td align="left"># 忽略 a/b、a/x/y/b</td>
-</tr>
-<tr>
-<td align="left">!/app/abc.txt</td>
-<td align="left"># 不忽略 app 目录下的 abc.txt 文件</td>
-</tr>
-<tr>
-<td align="left">*.log</td>
-<td align="left"># 忽略所有 .log 文件</td>
-</tr>
-<tr>
-<td align="left">abc.txt</td>
-<td align="left">#忽略当前路径下的 abc.txt 文件</td>
-</tr>
-<tr>
-<td align="left">*abc/</td>
-<td align="left">#忽略名词中末尾为abc的文件夹</td>
-</tr>
-<tr>
-<td align="left">* abc */</td>
-<td align="left">#忽略名称中间包含abc的文件夹</td>
-</tr>
-</tbody></table>
-<h2 id="三-gitignore文件不生效"><a href="#三-gitignore文件不生效" class="headerlink" title="三.  .gitignore文件不生效"></a>三.  .gitignore文件不生效</h2><p><code>.gitignore</code>只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改<code>.gitignore</code>是无效的。所以一定要养成在项目开始就创建<code>.gitignore</code>文件的习惯。<br> 解决方法就是先把本地缓存删除(改变成未track状态)，然后再提交：</p>
-<ul>
-<li><p>如果远程仓库原来就已经存在现在.gitignore规则中忽略的内容，那么现在那些规则对那些内容是无效的，必须先删除本地缓存</p>
-<p><code>$ git rm -r --cached</code></p>
-</li>
-<li><p>不过，这样做虽然可以删除远程仓库里被 .gitignore 规则忽略的内容，但是这些内容的 git 压缩版本依然被保存在可回滚记录中以备以后回滚，这会导致 git 仓库过大。虽然有一些办法可以给 git 仓库进行瘦身，但是操作比较繁琐，非常的不推荐。因此，个人觉得还是应该有良好的 git 使用习惯，对于不用提交到仓库的内容，要第一时间用 .gitignore 进行过滤。对于占用空间小的内容，可以不予理会，但如果有较多、较大文件，不光是占了太多的远程仓库空间和本地空间，并且在 clone、push 的时候，也会因为仓库过大，而影响 clone 速度。</p>
-</li>
-</ul>
-<h2 id="四-模板"><a href="#四-模板" class="headerlink" title="四. 模板"></a>四. 模板</h2><h3 id="java-开发通用版本模板"><a href="#java-开发通用版本模板" class="headerlink" title="java 开发通用版本模板"></a>java 开发通用版本模板</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#java</span><br><span class="line">*.class</span><br><span class="line"></span><br><span class="line">#package file</span><br><span class="line">*.war</span><br><span class="line">*.ear</span><br><span class="line">*.zip</span><br><span class="line">*.tar.gz</span><br><span class="line">*.rar</span><br><span class="line">#maven ignore</span><br><span class="line">target/</span><br><span class="line">build/</span><br><span class="line"></span><br><span class="line">#eclipse ignore</span><br><span class="line">.settings/</span><br><span class="line">.project</span><br><span class="line">.classpatch</span><br><span class="line"></span><br><span class="line">#Intellij idea</span><br><span class="line">.idea/</span><br><span class="line">/idea/</span><br><span class="line">*.ipr</span><br><span class="line">*.iml</span><br><span class="line">*.iws</span><br><span class="line"></span><br><span class="line"># temp file</span><br><span class="line">*.log</span><br><span class="line">*.cache</span><br><span class="line">*.diff</span><br><span class="line">*.patch</span><br><span class="line">*.tmp</span><br><span class="line"></span><br><span class="line"># system ignore</span><br><span class="line">.DS_Store</span><br><span class="line">Thumbs.db</span><br></pre></td></tr></table></figure>
-
-<h3 id="前端项目"><a href="#前端项目" class="headerlink" title="前端项目"></a>前端项目</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"># Numerous always-ignore extensions</span><br><span class="line">*.bak</span><br><span class="line">*.patch</span><br><span class="line">*.diff</span><br><span class="line">*.err</span><br><span class="line"> </span><br><span class="line"># temp file for git conflict merging</span><br><span class="line">*.orig</span><br><span class="line">*.log</span><br><span class="line">*.rej</span><br><span class="line">*.swo</span><br><span class="line">*.swp</span><br><span class="line">*.zip</span><br><span class="line">*.vi</span><br><span class="line">*~</span><br><span class="line">*.sass-cache</span><br><span class="line">*.tmp.html</span><br><span class="line">*.dump</span><br><span class="line"> </span><br><span class="line"># OS or Editor folders</span><br><span class="line">.DS_Store</span><br><span class="line">._*</span><br><span class="line">.cache</span><br><span class="line">.project</span><br><span class="line">.settings</span><br><span class="line">.tmproj</span><br><span class="line">*.esproj</span><br><span class="line">*.sublime-project</span><br><span class="line">*.sublime-workspace</span><br><span class="line">nbproject</span><br><span class="line">thumbs.db</span><br><span class="line">*.iml</span><br><span class="line"> </span><br><span class="line"># Folders to ignore</span><br><span class="line">.hg</span><br><span class="line">.svn</span><br><span class="line">.CVS</span><br><span class="line">.idea</span><br><span class="line">node_modules/</span><br><span class="line">jscoverage_lib/</span><br><span class="line">bower_components/</span><br><span class="line">dist/</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
-</div></section></div>
-
-</article>
-
-<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2020/03/23/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2020/03/19/%E5%B8%B8%E7%94%A8%E7%BD%91%E7%AB%99/">常用网站</a></div></section></div>
-
-
-
-
-
-
-
-
-      
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
-</div></footer>
-
-      <div class='float-panel mobile-only blur' style='display:none'>
-  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
-    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
-  </button>
-</div>
-
-    </div>
-  </div>
-  <div class='scripts'>
-    <script type="text/javascript">
-  const stellar = {
-    // 懒加载 css https://github.com/filamentgroup/loadCSS
-    loadCSS: (href, before, media, attributes) => {
-      var doc = window.document;
-      var ss = doc.createElement("link");
-      var ref;
-      if (before) {
-        ref = before;
-      } else {
-        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
-        ref = refs[refs.length - 1];
-      }
-      var sheets = doc.styleSheets;
-      if (attributes) {
-        for (var attributeName in attributes) {
-          if (attributes.hasOwnProperty(attributeName)) {
-            ss.setAttribute(attributeName, attributes[attributeName]);
-          }
-        }
-      }
-      ss.rel = "stylesheet";
-      ss.href = href;
-      ss.media = "only x";
-      function ready(cb) {
-        if (doc.body) {
-          return cb();
-        }
-        setTimeout(function () {
-          ready(cb);
-        });
-      }
-      ready(function () {
-        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
-      });
-      var onloadcssdefined = function (cb) {
-        var resolvedHref = ss.href;
-        var i = sheets.length;
-        while (i--) {
-          if (sheets[i].href === resolvedHref) {
-            return cb();
-          }
-        }
-        setTimeout(function () {
-          onloadcssdefined(cb);
-        });
-      };
-      function loadCB() {
-        if (ss.addEventListener) {
-          ss.removeEventListener("load", loadCB);
-        }
-        ss.media = media || "all";
-      }
-      if (ss.addEventListener) {
-        ss.addEventListener("load", loadCB);
-      }
-      ss.onloadcssdefined = onloadcssdefined;
-      onloadcssdefined(loadCB);
-      return ss;
-    },
-
-    // 从 butterfly 和 volantis 获得灵感
-    loadScript: (src, opt) => new Promise((resolve, reject) => {
-      var script = document.createElement('script');
-      script.src = src;
-      if (opt) {
-        for (let key of Object.keys(opt)) {
-          script[key] = opt[key]
-        }
-      } else {
-        // 默认异步，如果需要同步，第二个参数传入 {} 即可
-        script.async = true
-      }
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    }),
-
-    // https://github.com/jerryc127/hexo-theme-butterfly
-    jQuery: (fn) => {
-      if (typeof jQuery === 'undefined') {
-        stellar.loadScript(stellar.plugins.jQuery).then(fn)
-      } else {
-        fn()
-      }
-    }
-  };
-  stellar.version = '1.18.5';
-  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
-  stellar.config = {
-    date_suffix: {
-      just: '刚刚',
-      min: '分钟前',
-      hour: '小时前',
-      day: '天前',
-      month: '个月前',
-    },
-  };
-
-  // required plugins (only load if needs)
-  stellar.plugins = {
-    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
-  };
-
-  if ('local_search') {
-    stellar.search = {};
-    stellar.search.service = 'local_search';
-    if (stellar.search.service == 'local_search') {
-      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
-      stellar.search[stellar.search.service] = service_obj;
-    }
+.l_body {
+  display: flex;
+  margin: auto;
+  padding: 0 var(--gap-l);
+  justify-content: center;
+}
+.l_body .l_left {
+  z-index: 8;
+  width: var(--width-left);
+  flex-shrink: 0;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+.l_body .l_main {
+  flex-shrink: 1;
+  flex-grow: 1;
+  width: 320px;
+  max-width: var(--width-main);
+}
+@media screen and (max-width: $device-mobile-max) {
+  .mobile-only {
+    display: block !important;
   }
-
-  // stellar js
-  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
-
-  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
-  // optional plugins
-  if ('true' == 'true') {
-    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  .l_body {
+    padding: 0;
   }
-  if ('true' == 'true') {
-    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  .l_body .l_left {
+    position: fixed;
+    transform: translateX(-320px);
+    margin: 0;
+    left: 0;
+    background: var(--site-bg);
+    box-shadow: $boxshadow-card-float;
+    z-index: 9;
   }
-  if ('' == 'true') {
-    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  .l_body .l_main {
+    max-width: 100%;
   }
-  if ('true' == 'true') {
-    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  .l_body.mobile .l_left {
+    transition: transform 0.3s ease-out;
   }
-  if ('true' == 'true') {
-    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  .l_body.mobile.sidebar .l_left {
+    transform: translateX(0px);
   }
-  if ('false' == 'true') {
-    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
-  }
-</script>
-
-<!-- required -->
-
-  
-<script src="/js/main.js" async></script>
-
-
-
-<!-- optional -->
-
-
-
-<!-- inject -->
-
-
-  </div>
-</body>
-</html>
+}

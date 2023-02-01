@@ -1,345 +1,46 @@
-<!DOCTYPE html>
-<html lang='zh-CN'>
-
-<head>
-  <meta name="generator" content="Hexo 6.3.0">
-  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
-  <meta charset="utf-8">
-  
-
-  <meta http-equiv='x-dns-prefetch-control' content='on' />
-  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
-  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
-  <link rel='dns-prefetch' href='//unpkg.com'>
-
-  <meta name="renderer" content="webkit">
-  <meta name="force-rendering" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="HandheldFriendly" content="True" >
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="theme-color" content="#f8f8f8">
-  
-  <title>requestAnimationFrame和一般计时器处理动画区别 - 翁先森的博客</title>
-
-  
-    <meta name="description" content="在Web应用中，实现动画效果的方法比较多，Javascript 中可以通过定时器 setTimeout来实现，css3 可以使用 transition和 animation来实现，html5 中的 canvas 也可以实现。除此之外，html5 还提供一个专门用于请求动画的API，那就是 requestAnimationFrame，顾名思义就是请求动画帧。  编写动画循环的关键是要知道延迟时间多">
-<meta property="og:type" content="article">
-<meta property="og:title" content="requestAnimationFrame和一般计时器处理动画区别">
-<meta property="og:url" content="https://github.com/NollieLeo/2020/12/28/requestAnimationFrame%E5%92%8C%E4%B8%80%E8%88%AC%E8%AE%A1%E6%97%B6%E5%99%A8%E5%A4%84%E7%90%86%E5%8A%A8%E7%94%BB%E5%8C%BA%E5%88%AB/index.html">
-<meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="在Web应用中，实现动画效果的方法比较多，Javascript 中可以通过定时器 setTimeout来实现，css3 可以使用 transition和 animation来实现，html5 中的 canvas 也可以实现。除此之外，html5 还提供一个专门用于请求动画的API，那就是 requestAnimationFrame，顾名思义就是请求动画帧。  编写动画循环的关键是要知道延迟时间多">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-12-28T01:39:12.000Z">
-<meta property="article:modified_time" content="2023-01-28T13:26:45.636Z">
-<meta property="article:author" content="翁先森">
-<meta property="article:tag" content="计时器">
-<meta property="article:tag" content="requestAnimationFrame">
-<meta name="twitter:card" content="summary">
-  
-  
-
-  <!-- feed -->
-  
-    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
-  
-
-  
-    
-<link rel="stylesheet" href="/css/main.css">
-
-  
-
-  
-    <link rel="shortcut icon" href="/assets/avatar.png">
-  
-
-  
-
-  
-
-
-  
-</head>
-
-<body>
-  
-
-
-
-
-  <div class='l_body' id='start'>
-    <aside class='l_left' layout='post'>
-    
-
-  
-
-<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
-
-<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/more/">更多</a></nav>
-</header>
-
-
-<div class="widgets">
-<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
-
-
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">requestAnimationFrame和一般计时器处理动画区别</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="toc-text">相关概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%A1%B5%E9%9D%A2%E6%BF%80%E6%B4%BB%EF%BC%88%E5%8F%AF%E8%A7%81%EF%BC%89"><span class="toc-text">1. 页面激活（可见）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8A%A8%E7%94%BB%E5%B8%A7%E8%AF%B7%E6%B1%82%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E5%88%97%E8%A1%A8"><span class="toc-text">2. 动画帧请求回调函数列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%B1%8F%E5%B9%95%E5%88%B7%E6%96%B0%E9%A2%91%E7%8E%87"><span class="toc-text">3.  屏幕刷新频率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%8A%A8%E7%94%BB%E5%8E%9F%E7%90%86"><span class="toc-text">4. 动画原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%B3%95"><span class="toc-text">用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%86%99%E6%B3%95%EF%BC%9AhandlerId-requestAnimationFrame-callback"><span class="toc-text">1. 写法：handlerId &#x3D; requestAnimationFrame(callback)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-text">2. 浏览器执行过程:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%8F%96%E6%B6%88%E5%8A%A8%E7%94%BB%E5%87%BD%E6%95%B0%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-text">3. 取消动画函数的方法：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setTimeout%E5%92%8CrequestAnimationFrame%E5%8C%BA%E5%88%AB"><span class="toc-text">setTimeout和requestAnimationFrame区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-setTimeout"><span class="toc-text">1. setTimeout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-requestAnimationFrame"><span class="toc-text">2. requestAnimationFrame</span></a></li></ol></li></ol></div></div></widget>
-
-
-
-
-</div>
-<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/logo-github.svg"/></a></div></footer>
-
-    </aside>
-    <div class='l_main'>
-      
-
-      
-
-
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Javascript/">Javascript</a></div><div id="post-meta">发布于&nbsp;<time datetime="2020-12-28T01:39:12.000Z">2020-12-28</time></div></div>
-
-<article class='md-text content post'>
-<h1 class="article-title"><span>requestAnimationFrame和一般计时器处理动画区别</span></h1>
-<p> 在Web应用中，实现动画效果的方法比较多，Javascript 中可以通过定时器 <code>setTimeout</code>来实现，css3 可以使用 <code>transition</code>和 <code>animation</code>来实现，html5 中的 canvas 也可以实现。除此之外，html5 还提供一个专门用于请求动画的API，那就是 <code>requestAnimationFrame</code>，顾名思义就是<strong>请求动画帧。</strong> </p>
-<p>编写动画循环的关键是要知道延迟时间多长合适。一方面，循环间隔必须足够短，这样才能让不同的动画效果显得平滑流畅；另一方面，循环间隔还要足够长，这样才能确保浏览器有能力渲染产生的变化。</p>
-<p>大多数电脑显示器的刷新频率是<code>60Hz</code>，大概相当于每秒钟重绘<code>60</code>次。大多数浏览器都会对重绘操作加以限制，不超过显示器的重绘频率，因为即使超过那个频率用户体验也不会有提升。因此，最平滑动画的最佳循环间隔是<code>1000ms/60</code>，约等于<code>16.6ms</code>。</p>
-<p>而<code>setTimeout</code>和<code>setInterval</code>的问题是，它们都不精确。它们的内在<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaohuochai/p/5773183.html#anchor3">运行机制</a>决定了时间间隔参数实际上只是指定了把动画代码添加到浏览器UI线程队列中以等待执行的时间。如果队列前面已经加入了其他任务，那动画代码就要等前面的任务完成后再执行。</p>
-<p><code>requestAnimationFrame</code>采用系统时间间隔，保持最佳绘制效率，不会因为间隔时间过短，造成过度绘制，增加开销；也不会因为间隔时间太长，使用动画卡顿不流畅，让各种网页动画效果能够有一个统一的刷新机制，从而节省系统资源，提高系统性能，改善视觉效果</p>
-<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><h3 id="1-页面激活（可见）"><a href="#1-页面激活（可见）" class="headerlink" title="1. 页面激活（可见）"></a>1. 页面激活（可见）</h3><p>  当页面被最小化或者被切换成后台标签页时，页面为不可见，浏览器会触发一个 <code>visibilitychange</code>事件,并设置<code>document.hidden</code>属性为<code>true</code>；切换到显示状态时，页面为可见，也同样触发一个 <code>visibilitychange</code>事件，设置<code>document.hidden</code>属性为<code>false</code>。</p>
-<h3 id="2-动画帧请求回调函数列表"><a href="#2-动画帧请求回调函数列表" class="headerlink" title="2. 动画帧请求回调函数列表"></a>2. 动画帧请求回调函数列表</h3><p>  每个Document都有一个动画帧请求回调函数列表，该列表可以看成是由``元组组成的集合。其中<code>handlerId</code>是一个整数，唯一地标识了元组在列表中的位置；<code>callback是</code>回调函数。</p>
-<h3 id="3-屏幕刷新频率"><a href="#3-屏幕刷新频率" class="headerlink" title="3.  屏幕刷新频率"></a>3.  屏幕刷新频率</h3><p>  即图像在屏幕上更新的速度，也即屏幕上的图像每秒钟出现的次数，它的单位是赫兹(Hz)。 对于一般笔记本电脑，这个频率大概是60Hz， 这个值的设定受屏幕分辨率、屏幕尺寸和显卡的影响。</p>
-<h3 id="4-动画原理"><a href="#4-动画原理" class="headerlink" title="4. 动画原理"></a>4. 动画原理</h3><p>根据上面的原理我们知道，你眼前所看到图像正在以每秒60次的频率刷新，由于刷新频率很高，因此你感觉不到它在刷新。而<strong>动画本质就是要让人眼看到图像被刷新而引起变化的视觉效果，这个变化要以连贯的、平滑的方式进行过渡。</strong> 那怎么样才能做到这种效果呢？</p>
-<p>  刷新频率为60Hz的屏幕每16.7ms刷新一次，我们在屏幕每次刷新前，将图像的位置向左移动一个像素，即1px。这样一来，屏幕每次刷出来的图像位置都比前一个要差1px，因此你会看到图像在移动；由于我们人眼的视觉停留效应，当前位置的图像停留在大脑的印象还没消失，紧接着图像又被移到了下一个位置，因此你才会看到图像在流畅的移动，这就是视觉效果上形成的动画。</p>
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p><code>requestAnimationFrame</code>会把每一帧中的所有DOM操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率</p>
-<p>在隐藏或不可见的元素中，<code>requestAnimationFrame</code>将不会进行重绘或回流，这当然就意味着更少的CPU、GPU和内存使用量</p>
-<p><code>requestAnimationFrame</code>是由浏览器专门为动画提供的API，在运行时浏览器会自动优化方法的调用，并且如果页面不是激活状态下的话，动画会自动暂停，有效节省了CPU开销</p>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>异步，传入的函数在重绘之前调用。</p>
-<p> <code>requestAnimationFrame</code>的用法与<code>setTimeout</code>很相似，只是不需要设置时间间隔而已。</p>
-<h3 id="1-写法：handlerId-requestAnimationFrame-callback"><a href="#1-写法：handlerId-requestAnimationFrame-callback" class="headerlink" title="1. 写法：handlerId = requestAnimationFrame(callback)"></a>1. 写法：handlerId = requestAnimationFrame(callback)</h3><p>(1) 传入一个<code>callback</code>函数，即动画函数;</p>
-<p>(2) 返回值<code>handlerId</code>为浏览器定义的、大于0的整数，唯一标识了该回调函数在列表中位置。</p>
-<h3 id="2-浏览器执行过程"><a href="#2-浏览器执行过程" class="headerlink" title="2. 浏览器执行过程:"></a>2. 浏览器执行过程:</h3><p>(1) 首先要判断<code>document.hidden</code>属性是否为<code>true</code>,即页面处于可见状态下才会执行；</p>
-<p>(2) 浏览器清空上一轮的动画函数；</p>
-<p>(3) 这个方法返回的<code>handlerId</code> 值会和动画函数<code>callback</code>，以``  进入到动画帧请求回调函数列；</p>
-<p>(4) 浏览器会遍历动画帧请求回调函数列表，根据<code>handlerId</code> 的值大小，依次去执行相应的动画函数。</p>
-<h3 id="3-取消动画函数的方法："><a href="#3-取消动画函数的方法：" class="headerlink" title="3. 取消动画函数的方法："></a>3. 取消动画函数的方法：</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">cancelAnimationFrame</span>(handlerId)</span><br></pre></td></tr></table></figure>
-
-<h2 id="setTimeout和requestAnimationFrame区别"><a href="#setTimeout和requestAnimationFrame区别" class="headerlink" title="setTimeout和requestAnimationFrame区别"></a>setTimeout和requestAnimationFrame区别</h2><h3 id="1-setTimeout"><a href="#1-setTimeout" class="headerlink" title="1. setTimeout"></a>1. setTimeout</h3><p>  理解了上面的概念以后，我们不难发现，<code>setTimeout</code>其实就是通过设置一个间隔时间来不断的改变图像的位置，从而达到动画效果的。但利用<code>seTimeout</code>实现的动画在某些低端机上会出现卡顿、抖动的现象。 这种现象的产生有两个原因：</p>
-<ul>
-<li><code>setTimeout</code>的执行时间并不是确定的。在Javascript中， <code>setTimeout</code>任务被放进了异步队列中，只有当主线程上的任务执行完以后，才会去检查该队列里的任务是否需要开始执行，因此 <strong>setTimeout 的实际执行时间一般要比其设定的时间晚一些。</strong></li>
-<li>刷新频率受屏幕分辨率和屏幕尺寸的影响，因此不同设备的屏幕刷新频率可能会不同，而 <code>setTimeout</code>只能设置一个固定的时间间隔，这个时间不一定和屏幕的刷新时间相同。</li>
-</ul>
-<p>以上两种情况都会导致<code>setTimeout</code>的执行步调和屏幕的刷新步调不一致，从而引起<strong>丢帧</strong>现象。 那为什么步调不一致就会引起丢帧呢？</p>
-<p>首先要明白，<strong><code>setTimeout</code>的执行只是在内存中对图像属性进行改变，这个变化必须要等到屏幕下次刷新时才会被更新到屏幕上</strong>。如果两者的步调不一致，就可能会导致中间某一帧的操作被跨越过去，而直接更新下一帧的图像。假设屏幕每隔16.7ms刷新一次，而<code>setTimeout</code>每隔10ms设置图像向左移动1px， 就会出现如下绘制过程：</p>
-<ul>
-<li>第0ms: 屏幕未刷新，等待中，<code>setTimeout</code>也未执行，等待中；</li>
-<li>第10ms: 屏幕未刷新，等待中，<code>setTimeout</code>开始执行并设置图像属性left=1px；</li>
-<li>第16.7ms: 屏幕开始刷新，屏幕上的图像向左移动了<strong>1px</strong>， <code>setTimeout</code>未执行，继续等待中；</li>
-<li>第20ms: 屏幕未刷新，等待中，<code>setTimeout</code>开始执行并设置left=2px;</li>
-<li>第30ms: 屏幕未刷新，等待中，<code>setTimeout</code>开始执行并设置left=3px;</li>
-<li>第33.4ms: 屏幕开始刷新，屏幕上的图像向左移动了<strong>3px</strong>， <code>setTimeout</code>未执行，继续等待中；</li>
-<li>…</li>
-</ul>
-<p>从上面的绘制过程中可以看出，屏幕没有更新left=2px的那一帧画面，图像直接从1px的位置跳到了3px的的位置，这就是丢帧现象，这种现象就会引起动画卡顿。</p>
-<h3 id="2-requestAnimationFrame"><a href="#2-requestAnimationFrame" class="headerlink" title="2. requestAnimationFrame"></a>2. requestAnimationFrame</h3><p>与<code>setTimeout</code>相比，<code>requestAnimationFrame</code>最大的优势是<strong>由系统来决定回调函数的执行时机。</strong>具体一点讲，如果屏幕刷新率是60Hz,那么回调函数就每16.7ms被执行一次，如果刷新率是75Hz，那么这个时间间隔就变成了1000/75=13.3ms，换句话说就是，<code>requestAnimationFrame</code>的步伐跟着系统的刷新步伐走。<strong>它能保证回调函数在屏幕每一次的刷新间隔中只被执行一次</strong>，这样就不会引起丢帧现象，也不会导致动画出现卡顿的问题。</p>
-<p>这个API的调用很简单，如下所示：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> progress = <span class="number">0</span>;</span><br><span class="line"><span class="comment">//回调函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">render</span>(<span class="params"></span>) &#123;  </span><br><span class="line">  progress += <span class="number">1</span>; <span class="comment">//修改图像的位置  </span></span><br><span class="line">  <span class="keyword">if</span> (progress &lt; <span class="number">100</span>) &#123;  <span class="comment">//在动画没有结束前，递归渲染    </span></span><br><span class="line">    <span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(render); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//第一帧渲染</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(render);复制代码</span><br></pre></td></tr></table></figure>
-
-<p>除此之外，<code>requestAnimationFrame</code>还有以下两个优势：</p>
-<ul>
-<li><p><strong>CPU节能</strong>：使用<code>setTimeout</code>实现的动画，当页面被隐藏或最小化时，<code>setTimeout</code>仍然在后台执行动画任务，由于此时页面处于不可见或不可用状态，刷新动画是没有意义的，完全是浪费CPU资源。而<code>requestAnimationFrame</code>则完全不同，当页面处理未激活的状态下，该页面的屏幕刷新任务也会被系统暂停，因此跟着系统步伐走的<code>requestAnimationFrame</code>也会停止渲染，当页面被激活时，动画就从上次停留的地方继续执行，有效节省了CPU开销。</p>
-</li>
-<li><p><strong>函数节流</strong>：在高频率事件(<code>resize</code>,<code>scroll</code>等)中，为了防止在一个刷新间隔内发生多次函数执行，使用<code>requestAnimationFrame</code>可保证每个刷新间隔内，函数只被执行一次，这样既能保证流畅性，也能更好的节省函数执行的开销。一个刷新间隔内函数执行多次时没有意义的，因为显示器每16.7ms刷新一次，多次绘制并不会在屏幕上体现出来。</p>
-</li>
-</ul>
-
-
-<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
-</div></section></div>
-
-</article>
-
-<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2021/01/19/%E6%AD%A3%E5%9C%A8%E8%AF%BB%E7%9A%84%E4%B9%A6%E7%B1%8D/">正在读的书籍</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2020/12/28/%E6%97%B6%E9%97%B4%E5%88%86%E7%89%87/">时间分片</a></div></section></div>
-
-
-
-
-
-
-
-
-      
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
-</div></footer>
-
-      <div class='float-panel mobile-only blur' style='display:none'>
-  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
-    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
-  </button>
-</div>
-
-    </div>
-  </div>
-  <div class='scripts'>
-    <script type="text/javascript">
-  const stellar = {
-    // 懒加载 css https://github.com/filamentgroup/loadCSS
-    loadCSS: (href, before, media, attributes) => {
-      var doc = window.document;
-      var ss = doc.createElement("link");
-      var ref;
-      if (before) {
-        ref = before;
-      } else {
-        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
-        ref = refs[refs.length - 1];
-      }
-      var sheets = doc.styleSheets;
-      if (attributes) {
-        for (var attributeName in attributes) {
-          if (attributes.hasOwnProperty(attributeName)) {
-            ss.setAttribute(attributeName, attributes[attributeName]);
-          }
-        }
-      }
-      ss.rel = "stylesheet";
-      ss.href = href;
-      ss.media = "only x";
-      function ready(cb) {
-        if (doc.body) {
-          return cb();
-        }
-        setTimeout(function () {
-          ready(cb);
-        });
-      }
-      ready(function () {
-        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
-      });
-      var onloadcssdefined = function (cb) {
-        var resolvedHref = ss.href;
-        var i = sheets.length;
-        while (i--) {
-          if (sheets[i].href === resolvedHref) {
-            return cb();
-          }
-        }
-        setTimeout(function () {
-          onloadcssdefined(cb);
-        });
-      };
-      function loadCB() {
-        if (ss.addEventListener) {
-          ss.removeEventListener("load", loadCB);
-        }
-        ss.media = media || "all";
-      }
-      if (ss.addEventListener) {
-        ss.addEventListener("load", loadCB);
-      }
-      ss.onloadcssdefined = onloadcssdefined;
-      onloadcssdefined(loadCB);
-      return ss;
-    },
-
-    // 从 butterfly 和 volantis 获得灵感
-    loadScript: (src, opt) => new Promise((resolve, reject) => {
-      var script = document.createElement('script');
-      script.src = src;
-      if (opt) {
-        for (let key of Object.keys(opt)) {
-          script[key] = opt[key]
-        }
-      } else {
-        // 默认异步，如果需要同步，第二个参数传入 {} 即可
-        script.async = true
-      }
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    }),
-
-    // https://github.com/jerryc127/hexo-theme-butterfly
-    jQuery: (fn) => {
-      if (typeof jQuery === 'undefined') {
-        stellar.loadScript(stellar.plugins.jQuery).then(fn)
-      } else {
-        fn()
-      }
-    }
-  };
-  stellar.version = '1.18.5';
-  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
-  stellar.config = {
-    date_suffix: {
-      just: '刚刚',
-      min: '分钟前',
-      hour: '小时前',
-      day: '天前',
-      month: '个月前',
-    },
-  };
-
-  // required plugins (only load if needs)
-  stellar.plugins = {
-    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
-  };
-
-  if ('local_search') {
-    stellar.search = {};
-    stellar.search.service = 'local_search';
-    if (stellar.search.service == 'local_search') {
-      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
-      stellar.search[stellar.search.service] = service_obj;
-    }
+.l_body {
+  display: flex;
+  margin: auto;
+  padding: 0 var(--gap-l);
+  justify-content: center;
+}
+.l_body .l_left {
+  z-index: 8;
+  width: var(--width-left);
+  flex-shrink: 0;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+.l_body .l_main {
+  flex-shrink: 1;
+  flex-grow: 1;
+  width: 320px;
+  max-width: var(--width-main);
+}
+@media screen and (max-width: $device-mobile-max) {
+  .mobile-only {
+    display: block !important;
   }
-
-  // stellar js
-  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
-
-  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
-  // optional plugins
-  if ('true' == 'true') {
-    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  .l_body {
+    padding: 0;
   }
-  if ('true' == 'true') {
-    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  .l_body .l_left {
+    position: fixed;
+    transform: translateX(-320px);
+    margin: 0;
+    left: 0;
+    background: var(--site-bg);
+    box-shadow: $boxshadow-card-float;
+    z-index: 9;
   }
-  if ('' == 'true') {
-    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  .l_body .l_main {
+    max-width: 100%;
   }
-  if ('true' == 'true') {
-    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  .l_body.mobile .l_left {
+    transition: transform 0.3s ease-out;
   }
-  if ('true' == 'true') {
-    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  .l_body.mobile.sidebar .l_left {
+    transform: translateX(0px);
   }
-  if ('false' == 'true') {
-    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
-  }
-</script>
-
-<!-- required -->
-
-  
-<script src="/js/main.js" async></script>
-
-
-
-<!-- optional -->
-
-
-
-<!-- inject -->
-
-
-  </div>
-</body>
-</html>
+}

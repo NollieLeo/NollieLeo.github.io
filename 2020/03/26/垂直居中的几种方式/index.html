@@ -1,411 +1,46 @@
-<!DOCTYPE html>
-<html lang='zh-CN'>
-
-<head>
-  <meta name="generator" content="Hexo 6.3.0">
-  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
-  <meta charset="utf-8">
-  
-
-  <meta http-equiv='x-dns-prefetch-control' content='on' />
-  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
-  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
-  <link rel='dns-prefetch' href='//unpkg.com'>
-
-  <meta name="renderer" content="webkit">
-  <meta name="force-rendering" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="HandheldFriendly" content="True" >
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="theme-color" content="#f8f8f8">
-  
-  <title>垂直居中的几种方式 - 翁先森的博客</title>
-
-  
-    <meta name="description" content="在阅读此文章之前要搞明白行内元素和块级元素的区别，和其常用的标签 行内元素和块级元素 行内元素垂直居中1. 设置外层块元素的height，line-height为相同的值适用范围：作用于单行为文字，使文字垂直居中显示 原理：line-height与font-size的计算之差（在css中成为“行间距”）分为两半，分别加到一个文本行内容的顶部和底部。（可以包含这些内容的最小框就是行框）实现了单行文字">
-<meta property="og:type" content="article">
-<meta property="og:title" content="垂直居中的几种方式">
-<meta property="og:url" content="https://github.com/NollieLeo/2020/03/26/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/index.html">
-<meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="在阅读此文章之前要搞明白行内元素和块级元素的区别，和其常用的标签 行内元素和块级元素 行内元素垂直居中1. 设置外层块元素的height，line-height为相同的值适用范围：作用于单行为文字，使文字垂直居中显示 原理：line-height与font-size的计算之差（在css中成为“行间距”）分为两半，分别加到一个文本行内容的顶部和底部。（可以包含这些内容的最小框就是行框）实现了单行文字">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//image-20200326102804196.png">
-<meta property="og:image" content="https://github.com/.com//image-20200326103805967.png">
-<meta property="og:image" content="https://github.com/.com//image-20200326110227357.png">
-<meta property="og:image" content="https://github.com/.com//image-20200326113535458.png">
-<meta property="og:image" content="https://github.com/.com//image-20200326142740669.png">
-<meta property="og:image" content="https://github.com/.com//image-20200326143016605.png">
-<meta property="og:image" content="https://github.com/.com//image-20200326145604077.png">
-<meta property="og:image" content="https://github.com/.com//image-20200326145824002.png">
-<meta property="og:image" content="https://github.com/.com//image-20200326150745436.png">
-<meta property="og:image" content="https://github.com/.com//image-20200326151049822.png">
-<meta property="article:published_time" content="2020-03-26T02:09:04.000Z">
-<meta property="article:modified_time" content="2023-01-28T09:23:42.492Z">
-<meta property="article:author" content="翁先森">
-<meta property="article:tag" content="Css">
-<meta property="article:tag" content="垂直居中">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//image-20200326102804196.png">
-  
-  
-
-  <!-- feed -->
-  
-    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
-  
-
-  
-    
-<link rel="stylesheet" href="/css/main.css">
-
-  
-
-  
-    <link rel="shortcut icon" href="/assets/avatar.png">
-  
-
-  
-
-  
-
-
-  
-</head>
-
-<body>
-  
-
-
-
-
-  <div class='l_body' id='start'>
-    <aside class='l_left' layout='post'>
-    
-
-  
-
-<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
-
-<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/more/">更多</a></nav>
-</header>
-
-
-<div class="widgets">
-<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
-
-
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">垂直居中的几种方式</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%8C%E5%86%85%E5%85%83%E7%B4%A0%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD"><span class="toc-text">行内元素垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%AE%BE%E7%BD%AE%E5%A4%96%E5%B1%82%E5%9D%97%E5%85%83%E7%B4%A0%E7%9A%84height%EF%BC%8Cline-height%E4%B8%BA%E7%9B%B8%E5%90%8C%E7%9A%84%E5%80%BC"><span class="toc-text">1. 设置外层块元素的height，line-height为相同的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-vertical-align"><span class="toc-text">2.  vertical-align</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%A4%96%E5%B1%82%E7%88%B6%E5%85%83%E7%B4%A0display-table-cell-vertical-align-middle"><span class="toc-text">3.  外层父元素display: table-cell;vertical-align: middle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-display-flex-align-items-center"><span class="toc-text">4. display:flex; align-items:center</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D-%E8%B4%9F%E5%A4%96%E8%BE%B9%E8%B7%9D%EF%BC%9B"><span class="toc-text">5.  绝对定位+负外边距；</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%97%E7%BA%A7%E5%85%83%E7%B4%A0%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD"><span class="toc-text">块级元素垂直居中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E8%A1%8C%E6%96%87%E6%9C%AC%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD"><span class="toc-text">多行文本垂直居中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E7%9F%A5%E5%85%83%E7%B4%A0%E7%9A%84%E5%AE%BD%E9%AB%98%E6%83%85%E5%86%B5"><span class="toc-text">未知元素的宽高情况</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%BB%84%E5%90%88%E4%BD%BF%E7%94%A8display%EF%BC%9Atable-cell%E5%92%8Cvertical-align%E3%80%81text-align%EF%BC%8C"><span class="toc-text">1. 组合使用display：table-cell和vertical-align、text-align，</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-display-flex%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">2. display:flex的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-display-inline-block-%E4%BC%AA%E5%85%83%E7%B4%A0%E7%94%9F%E6%88%90content%E5%86%85%E5%AE%B9"><span class="toc-text">3.  display:inline-block +伪元素生成content内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D-transform%E5%8F%8D%E5%90%91%E5%81%8F%E7%A7%BB%E3%80%82"><span class="toc-text">4. 绝对定位+transform反向偏移。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E9%81%93%E5%85%83%E7%B4%A0%E5%AE%BD%E9%AB%98%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B"><span class="toc-text">知道元素宽高的情况下</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D%E7%9B%B8%E5%AF%B9%E5%AE%9A%E4%BD%8D%EF%BC%88-%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D-margin%EF%BC%9Aauto%EF%BC%9Bposition-absolute-left-0-top-0-right-0-bottom-0-margin-auto%EF%BC%89"><span class="toc-text">1.绝对定位相对定位（ 绝对定位+margin：auto；position:absolute; left:0; top:0; right:0; bottom:0; margin:auto）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D-margin%E5%8F%8D%E5%90%91%E5%81%8F%E7%A7%BB"><span class="toc-text">2. 绝对定位+margin反向偏移</span></a></li></ol></li></ol></div></div></widget>
-
-
-
-
-</div>
-<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/logo-github.svg"/></a></div></footer>
-
-    </aside>
-    <div class='l_main'>
-      
-
-      
-
-
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Css/">Css</a></div><div id="post-meta">发布于&nbsp;<time datetime="2020-03-26T02:09:04.000Z">2020-03-26</time></div></div>
-
-<article class='md-text content post'>
-<h1 class="article-title"><span>垂直居中的几种方式</span></h1>
-<p>在阅读此文章之前要搞明白行内元素和块级元素的区别，和其常用的标签</p>
-<p><a target="_blank" rel="noopener" href="http://pxc3lp.coding-pages.com/2020/03/26/%E5%9D%97%E7%BA%A7%E5%85%83%E7%B4%A0%EF%BC%8C%E8%A1%8C%E5%86%85%E5%85%83%E7%B4%A0%E5%92%8C%E8%A1%8C%E5%86%85%E5%9D%97%E5%85%83%E7%B4%A0/">行内元素和块级元素</a></p>
-<h2 id="行内元素垂直居中"><a href="#行内元素垂直居中" class="headerlink" title="行内元素垂直居中"></a>行内元素垂直居中</h2><h3 id="1-设置外层块元素的height，line-height为相同的值"><a href="#1-设置外层块元素的height，line-height为相同的值" class="headerlink" title="1. 设置外层块元素的height，line-height为相同的值"></a>1. 设置外层块元素的<code>height</code>，<code>line-height</code>为相同的值</h3><p>适用范围：作用于单行为文字，使文字垂直居中显示</p>
-<p>原理：<code>line-height</code>与<code>font-size</code>的计算之差（在css中成为“行间距”）分为两半，分别加到一个文本行内容的顶部和底部。（可以包含这些内容的最小框就是行框）实现了单行文字居中，代码如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.container</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">50px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">line-height</span>: <span class="number">50px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background</span>:aqua;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.content</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background-color</span>: bisque;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;content&quot;</span>&gt;</span>垂直居中<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326102804196.png" alt></p>
-<h3 id="2-vertical-align"><a href="#2-vertical-align" class="headerlink" title="2.  vertical-align"></a>2.  vertical-align</h3><p>适用范围：外层块元素包含<strong>大于一个行内元素</strong>需要垂直居中时 （如图片和文字需要垂直居中显示时），可以通过对图片的标签或文字的标签（行内元素）设置<code>vertical-align</code>，可以达到效果； </p>
-<p>特点：</p>
-<ul>
-<li>父级块元素不需要设置宽高</li>
-<li>只需将基线较高的行内元素设置<code>vertial-align</code>就行</li>
-</ul>
-<blockquote>
-<p>vertical-align属性的定义：该属性定义行内元素的基线相对于该元素所在行的基线的垂直对齐。允许指定负长度值和百分比值。这会使元素降低而不是升高。在表单元格中，这个属性会设置单元格框中的单元格内容的对齐方式。 </p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.container</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background</span>: aqua;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.content</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background-color</span>: bisque;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-tag">img</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">vertical-align</span>: middle;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;content&quot;</span>&gt;</span>垂直居中<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;https://www.baidu.com/img/bd_logo1.png&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326103805967.png" alt></p>
-<h3 id="3-外层父元素display-table-cell-vertical-align-middle"><a href="#3-外层父元素display-table-cell-vertical-align-middle" class="headerlink" title="3.  外层父元素display: table-cell;vertical-align: middle"></a>3.  外层父元素display: table-cell;vertical-align: middle</h3><p>特点：</p>
-<ul>
-<li>外层元素需要设置高度</li>
-</ul>
-<p>适用范围： 适用于在块元素内存在单个行内块元素，将它垂直居中； </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.container</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background</span>: aqua;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: table-cell;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">vertical-align</span>: middle;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;https://www.baidu.com/img/bd_logo1.png&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326110227357.png" alt></p>
-<h3 id="4-display-flex-align-items-center"><a href="#4-display-flex-align-items-center" class="headerlink" title="4. display:flex; align-items:center"></a>4. <code>display:flex;</code> <code>align-items:center</code></h3><p>特点：</p>
-<ul>
-<li>flex布局</li>
-<li>父元素可以不设置高度，宽度由内部行内元素撑起（这里设置高度是为了看的更清楚）</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.container</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background</span>: aqua;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: flex;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">align-items</span>: center;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-tag">img</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">max-width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>12111111111111111111111111111111111111111111111111eeeeeeeeeeee1111111dwaedwqqqqqqqqqqqqqqqqq<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;https://www.baidu.com/img/bd_logo1.png&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326113535458.png" alt></p>
-<h3 id="5-绝对定位-负外边距；"><a href="#5-绝对定位-负外边距；" class="headerlink" title="5.  绝对定位+负外边距；"></a>5.  绝对定位+负外边距；</h3><p>适用范围：包裹的行内元素必须是可以设置高度的，但是像文本元素是不建议使用这个的，因为文本的内容不确定，除非定高且设置超出溢出</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.container</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background</span>: aqua;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">position</span>: relative;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-tag">img</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">margin-top</span>: -<span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">top</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">position</span>: absolute;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;https://www.baidu.com/img/bd_logo1.png&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="块级元素垂直居中"><a href="#块级元素垂直居中" class="headerlink" title="块级元素垂直居中"></a>块级元素垂直居中</h2><p>类似，不解释</p>
-<h2 id="多行文本垂直居中"><a href="#多行文本垂直居中" class="headerlink" title="多行文本垂直居中"></a>多行文本垂直居中</h2><p>利用 <code>display：table；</code>和<code>display:table-cell;</code> 来实现多行文本的垂直居中</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.container</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background</span>: aqua;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: table;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-tag">p</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: table-cell;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">vertical-align</span>: middle;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background-color</span>: bisque;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      dsadwqdssacadseqdsfcdsfsasddsa</span><br><span class="line">      dwqdssacadseqdsfcdsfsasddsadwqd</span><br><span class="line">      ssacadseqdsfcdsfsasddsadwqdssaca</span><br><span class="line">      dseqdsfcdsfsasddsadwqdssacadseqds</span><br><span class="line">      fcdsfsasddsadwqdssacadseqdsfcdsfsasd</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="未知元素的宽高情况"><a href="#未知元素的宽高情况" class="headerlink" title="未知元素的宽高情况"></a>未知元素的宽高情况</h2><p>在前面的实现行内元素的垂直居中中有提到几种方法</p>
-<h3 id="1-组合使用display：table-cell和vertical-align、text-align，"><a href="#1-组合使用display：table-cell和vertical-align、text-align，" class="headerlink" title="1. 组合使用display：table-cell和vertical-align、text-align，"></a>1. 组合使用<code>display：table-cell</code>和<code>vertical-align</code>、<code>text-align</code>，</h3><p>使父元素内的所有行内元素水平垂直居中（内部div设置display：inline-block即可）这在子元素不确定宽度和高度时</p>
-<p>与其他一些display属性类似，table-cell同样会被其他一些css属性破坏，例如float，position：absolute，所以在使用display：table-cell时，尽量不要使用float或者position:absolute（可以考虑为之增加一个父div定义float等属性。）；设置了table-cell的元素对宽度和高度敏感（在父元素上设置table-row等属性，也会使其不感知height。），对margin值无反应，响应padding属性</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.father</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">width</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: table-cell;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">text-align</span>: center;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">vertical-align</span>: middle;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.son</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background</span>: red;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: inline-block;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;father&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span><br><span class="line">      display:table-cell;<span class="tag">&lt;/<span class="name">br</span>&gt;</span>text-align:center;<span class="tag">&lt;/<span class="name">br</span>&gt;</span> vertical-align:middle</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326142740669.png" alt></p>
-<p>对table-cell元素设置百分比（如100%）的宽高值是无效的，但是可以将元素设置display:table，再将父元素设置百分比跨高，子元素table-cell会自动撑满父元素。这就可以做相对于整个页面的水平垂直居中。嗯，看下面的代码 </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-tag">html</span>,</span></span><br><span class="line"><span class="language-css">    <span class="selector-tag">body</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">margin</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">padding</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-id">#box</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: table;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">width</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.father</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">width</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: table-cell;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">text-align</span>: center;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">vertical-align</span>: middle;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.son</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background</span>: red;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: inline-block;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;box&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;father&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span><br><span class="line">        display:table-cell;<span class="tag">&lt;/<span class="name">br</span>&gt;</span>text-align:center;<span class="tag">&lt;/<span class="name">br</span>&gt;</span> vertical-align:middle</span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326143016605.png" alt></p>
-<h3 id="2-display-flex的方法"><a href="#2-display-flex的方法" class="headerlink" title="2. display:flex的方法"></a>2. display:flex的方法</h3><p>参考上面所说的行内元素的方法</p>
-<ol>
-<li><p>设置container的display的类型为flex，激活为flexbox模式。</p>
-</li>
-<li><p>justify-content定义水平方向的元素位置</p>
-</li>
-<li><p>align-items定义垂直方向的元素位置</p>
-</li>
-</ol>
-<h3 id="3-display-inline-block-伪元素生成content内容"><a href="#3-display-inline-block-伪元素生成content内容" class="headerlink" title="3.  display:inline-block +伪元素生成content内容"></a>3.  display:inline-block +伪元素生成content内容</h3><p>实现原理：原理：利用<code>inline-block</code>的<code>vertical-align: middle</code>去对齐before伪元素，before伪元素的高度与父对象一样，就实现了高度方向的对齐。居中块的尺寸可以做包裹性、自适应内容，兼容性也相当好。缺点是水平居中需要考虑inline-block间隔中的留白（代码换行符遗留问题。）。（宽度是已知的，高度可以是未知的）</p>
-<p>(这里子元素加了宽高是为了方便看，去掉也无所谓)</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.father</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">width</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">text-align</span>: center;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.father</span><span class="selector-pseudo">:before</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">content</span>: <span class="string">&quot; &quot;</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: inline-block;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">vertical-align</span>: middle;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.son</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background</span>: red;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: inline-block;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">vertical-align</span>: middle;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;father&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span><br><span class="line">      display:inline-block;<span class="tag">&lt;/<span class="name">br</span>&gt;</span>伪元素生成content内容<span class="tag">&lt;/<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="4-绝对定位-transform反向偏移。"><a href="#4-绝对定位-transform反向偏移。" class="headerlink" title="4. 绝对定位+transform反向偏移。"></a>4. 绝对定位+transform反向偏移。</h3><p>position:absolute; transform:translate(-50%,-50%); </p>
-<p>原理很简单：由于top、left偏移了父对象的50%宽度高度，所以需要利用transform反向偏移居中块的50%宽高</p>
-<p><strong>transform的计算基准是元素本身，所以这里可以用50%来做反向偏移</strong></p>
-<p>(这里子元素加了宽高是为了方便看，去掉也无所谓)</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.father</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">width</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">position</span>: relative;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.son</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background</span>: red;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">position</span>: absolute;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">left</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">top</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">transform</span>: <span class="built_in">translate</span>(-<span class="number">50%</span>, -<span class="number">50%</span>);</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;father&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span><br><span class="line">      position:absolute;<span class="tag">&lt;/<span class="name">br</span>&gt;</span>left:50%;top:50%;<span class="tag">&lt;/<span class="name">br</span>&gt;</span>transform</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326145604077.png" alt></p>
-<h2 id="知道元素宽高的情况下"><a href="#知道元素宽高的情况下" class="headerlink" title="知道元素宽高的情况下"></a>知道元素宽高的情况下</h2><h3 id="1-绝对定位相对定位（-绝对定位-margin：auto；position-absolute-left-0-top-0-right-0-bottom-0-margin-auto）"><a href="#1-绝对定位相对定位（-绝对定位-margin：auto；position-absolute-left-0-top-0-right-0-bottom-0-margin-auto）" class="headerlink" title="1.绝对定位相对定位（ 绝对定位+margin：auto；position:absolute; left:0; top:0; right:0; bottom:0; margin:auto）"></a>1.绝对定位相对定位（ 绝对定位+margin：auto；position:absolute; left:0; top:0; right:0; bottom:0; margin:auto）</h3><p>一个条件都不能少</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.father</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">width</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">position</span>: relative;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.son</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background</span>: red;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">position</span>: absolute;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">left</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">top</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">bottom</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">right</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">margin</span>: auto;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;father&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span><br><span class="line">      position:absolute;<span class="tag">&lt;/<span class="name">br</span>&gt;</span> left:0; top:0;<span class="tag">&lt;/<span class="name">br</span>&gt;</span> right:0; bottom:0; <span class="tag">&lt;/<span class="name">br</span>&gt;</span>margin:auto</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326145824002.png" alt></p>
-<p>原理：</p>
-<p>当一个绝对定位元素，其对立定位方向属性同时有具体定位数值的时候，流体特性就发生了。</p>
-<p>具有流体特性绝对定位元素的margin:auto的填充规则和普通流体元素一模一样：</p>
-<p>如果一侧定值，一侧auto，auto为剩余空间大小；<br>如果两侧均是auto, 则平分剩余空间；<br>例如，下面的CSS代码：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.father</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>; <span class="attribute">height</span>:<span class="number">150px</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.son</span> &#123; </span><br><span class="line">    <span class="attribute">position</span>: absolute; </span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>; <span class="attribute">right</span>: <span class="number">0</span>; <span class="attribute">bottom</span>: <span class="number">0</span>; <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>如图所示流体元素会布满整个父元素，此时<code>.son</code>这个元素的尺寸表现为“格式化宽度和格式化高度”，和的“正常流宽度”一样，同属于外部尺寸，也就是尺寸自动填充父级元素的可用尺寸的</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326150745436.png" alt></p>
-<p>然后，此时我们给.son设置尺寸，例如</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.son</span> &#123; </span><br><span class="line">    <span class="attribute">position</span>: absolute; </span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>; <span class="attribute">right</span>: <span class="number">0</span>; <span class="attribute">bottom</span>: <span class="number">0</span>; <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>; <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//image-20200326151049822.png" alt></p>
-<p>此时宽高被限制，原本应该填充的空间就被多余了出来，这多余的空间就是<code>margin:auto</code>计算的空间，因此，如果这时候，我们再设置一个<code>margin:auto</code>，那么：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.son</span> &#123; </span><br><span class="line">    <span class="attribute">position</span>: absolute; </span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>; <span class="attribute">right</span>: <span class="number">0</span>; <span class="attribute">bottom</span>: <span class="number">0</span>; <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>; <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 我们这个<code>.son</code>元素就水平和垂直方向同时居中了 </p>
-<h3 id="2-绝对定位-margin反向偏移"><a href="#2-绝对定位-margin反向偏移" class="headerlink" title="2. 绝对定位+margin反向偏移"></a>2. 绝对定位+margin反向偏移</h3><p>在上面的行内块元素种有提及到</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">position</span>：absolute; </span><br><span class="line"><span class="attribute">top</span>:<span class="number">50%</span>; </span><br><span class="line"><span class="attribute">left</span>:<span class="number">50%</span>; </span><br><span class="line"><span class="attribute">margin-left</span>:<span class="built_in">-</span>(width+padding)/<span class="number">2</span>+<span class="string">&#x27;px&#x27;</span>; </span><br><span class="line"><span class="attribute">margin-top</span>:<span class="built_in">-</span>(height+padding)/<span class="number">2</span>+<span class="string">&#x27;px&#x27;</span>; </span><br></pre></td></tr></table></figure>
-
-<p>margin值的设置不能使用百分比，因为margin是基于父元素的宽度来计算百分比的</p>
-<p>这个原理和上面的方案4很相似，由于top、left偏移了父对象的50%宽度高度，所以需要利用margin反向偏移居中块的50%宽高</p>
-
-
-<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
-</div></section></div>
-
-</article>
-
-<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2020/03/30/%E5%AE%9E%E7%8E%B0%E8%BE%B9%E6%A1%86loading%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/">实现边框loading动画效果</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2020/03/26/%E5%9D%97%E7%BA%A7%E5%85%83%E7%B4%A0%EF%BC%8C%E8%A1%8C%E5%86%85%E5%85%83%E7%B4%A0%E5%92%8C%E8%A1%8C%E5%86%85%E5%9D%97%E5%85%83%E7%B4%A0/">块级元素，行内元素和行内块元素</a></div></section></div>
-
-
-
-
-
-
-
-
-      
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
-</div></footer>
-
-      <div class='float-panel mobile-only blur' style='display:none'>
-  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
-    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
-  </button>
-</div>
-
-    </div>
-  </div>
-  <div class='scripts'>
-    <script type="text/javascript">
-  const stellar = {
-    // 懒加载 css https://github.com/filamentgroup/loadCSS
-    loadCSS: (href, before, media, attributes) => {
-      var doc = window.document;
-      var ss = doc.createElement("link");
-      var ref;
-      if (before) {
-        ref = before;
-      } else {
-        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
-        ref = refs[refs.length - 1];
-      }
-      var sheets = doc.styleSheets;
-      if (attributes) {
-        for (var attributeName in attributes) {
-          if (attributes.hasOwnProperty(attributeName)) {
-            ss.setAttribute(attributeName, attributes[attributeName]);
-          }
-        }
-      }
-      ss.rel = "stylesheet";
-      ss.href = href;
-      ss.media = "only x";
-      function ready(cb) {
-        if (doc.body) {
-          return cb();
-        }
-        setTimeout(function () {
-          ready(cb);
-        });
-      }
-      ready(function () {
-        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
-      });
-      var onloadcssdefined = function (cb) {
-        var resolvedHref = ss.href;
-        var i = sheets.length;
-        while (i--) {
-          if (sheets[i].href === resolvedHref) {
-            return cb();
-          }
-        }
-        setTimeout(function () {
-          onloadcssdefined(cb);
-        });
-      };
-      function loadCB() {
-        if (ss.addEventListener) {
-          ss.removeEventListener("load", loadCB);
-        }
-        ss.media = media || "all";
-      }
-      if (ss.addEventListener) {
-        ss.addEventListener("load", loadCB);
-      }
-      ss.onloadcssdefined = onloadcssdefined;
-      onloadcssdefined(loadCB);
-      return ss;
-    },
-
-    // 从 butterfly 和 volantis 获得灵感
-    loadScript: (src, opt) => new Promise((resolve, reject) => {
-      var script = document.createElement('script');
-      script.src = src;
-      if (opt) {
-        for (let key of Object.keys(opt)) {
-          script[key] = opt[key]
-        }
-      } else {
-        // 默认异步，如果需要同步，第二个参数传入 {} 即可
-        script.async = true
-      }
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    }),
-
-    // https://github.com/jerryc127/hexo-theme-butterfly
-    jQuery: (fn) => {
-      if (typeof jQuery === 'undefined') {
-        stellar.loadScript(stellar.plugins.jQuery).then(fn)
-      } else {
-        fn()
-      }
-    }
-  };
-  stellar.version = '1.18.5';
-  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
-  stellar.config = {
-    date_suffix: {
-      just: '刚刚',
-      min: '分钟前',
-      hour: '小时前',
-      day: '天前',
-      month: '个月前',
-    },
-  };
-
-  // required plugins (only load if needs)
-  stellar.plugins = {
-    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
-  };
-
-  if ('local_search') {
-    stellar.search = {};
-    stellar.search.service = 'local_search';
-    if (stellar.search.service == 'local_search') {
-      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
-      stellar.search[stellar.search.service] = service_obj;
-    }
+.l_body {
+  display: flex;
+  margin: auto;
+  padding: 0 var(--gap-l);
+  justify-content: center;
+}
+.l_body .l_left {
+  z-index: 8;
+  width: var(--width-left);
+  flex-shrink: 0;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+.l_body .l_main {
+  flex-shrink: 1;
+  flex-grow: 1;
+  width: 320px;
+  max-width: var(--width-main);
+}
+@media screen and (max-width: $device-mobile-max) {
+  .mobile-only {
+    display: block !important;
   }
-
-  // stellar js
-  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
-
-  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
-  // optional plugins
-  if ('true' == 'true') {
-    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  .l_body {
+    padding: 0;
   }
-  if ('true' == 'true') {
-    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  .l_body .l_left {
+    position: fixed;
+    transform: translateX(-320px);
+    margin: 0;
+    left: 0;
+    background: var(--site-bg);
+    box-shadow: $boxshadow-card-float;
+    z-index: 9;
   }
-  if ('' == 'true') {
-    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  .l_body .l_main {
+    max-width: 100%;
   }
-  if ('true' == 'true') {
-    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  .l_body.mobile .l_left {
+    transition: transform 0.3s ease-out;
   }
-  if ('true' == 'true') {
-    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  .l_body.mobile.sidebar .l_left {
+    transform: translateX(0px);
   }
-  if ('false' == 'true') {
-    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
-  }
-</script>
-
-<!-- required -->
-
-  
-<script src="/js/main.js" async></script>
-
-
-
-<!-- optional -->
-
-
-
-<!-- inject -->
-
-
-  </div>
-</body>
-</html>
+}

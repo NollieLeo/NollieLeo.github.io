@@ -1,357 +1,46 @@
-<!DOCTYPE html>
-<html lang='zh-CN'>
-
-<head>
-  <meta name="generator" content="Hexo 6.3.0">
-  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
-  <meta charset="utf-8">
-  
-
-  <meta http-equiv='x-dns-prefetch-control' content='on' />
-  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
-  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
-  <link rel='dns-prefetch' href='//unpkg.com'>
-
-  <meta name="renderer" content="webkit">
-  <meta name="force-rendering" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="HandheldFriendly" content="True" >
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="theme-color" content="#f8f8f8">
-  
-  <title>tsconfig.json全解析 - 翁先森的博客</title>
-
-  
-    <meta name="description" content="解析 TypeScript带来的类型系统以及强大的IDE支持，让前端开发也变得严谨而流畅。但TypeScript不是原生的Javascript代码，需要进行编译才能转换为Javascript代码。 tsconfig.json是编译TypeScript的配置文件，对书写TypeScript代码十分重要。因为有些选项如果你没配置，则需要严格按照TypeScript的规则来书写，对初期使用TypeScr">
-<meta property="og:type" content="article">
-<meta property="og:title" content="tsconfig.json全解析">
-<meta property="og:url" content="https://github.com/NollieLeo/2022/04/21/tsconfig-json%E5%85%A8%E8%A7%A3%E6%9E%90/index.html">
-<meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="解析 TypeScript带来的类型系统以及强大的IDE支持，让前端开发也变得严谨而流畅。但TypeScript不是原生的Javascript代码，需要进行编译才能转换为Javascript代码。 tsconfig.json是编译TypeScript的配置文件，对书写TypeScript代码十分重要。因为有些选项如果你没配置，则需要严格按照TypeScript的规则来书写，对初期使用TypeScr">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-04-21T09:42:55.000Z">
-<meta property="article:modified_time" content="2023-01-28T13:30:57.975Z">
-<meta property="article:author" content="翁先森">
-<meta property="article:tag" content="Typescript">
-<meta name="twitter:card" content="summary">
-  
-  
-
-  <!-- feed -->
-  
-    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
-  
-
-  
-    
-<link rel="stylesheet" href="/css/main.css">
-
-  
-
-  
-    <link rel="shortcut icon" href="/assets/avatar.png">
-  
-
-  
-
-  
-
-
-  
-</head>
-
-<body>
-  
-
-
-
-
-  <div class='l_body' id='start'>
-    <aside class='l_left' layout='post'>
-    
-
-  
-
-<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
-
-<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/more/">更多</a></nav>
-</header>
-
-
-<div class="widgets">
-<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
-
-
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">tsconfig.json全解析</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90"><span class="toc-text">解析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-experimentalDecorators"><span class="toc-text">1. experimentalDecorators</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-strictPropertyInitialization"><span class="toc-text">2. strictPropertyInitialization</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-noImplicitAny"><span class="toc-text">3. noImplicitAny</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-target"><span class="toc-text">4. target</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-module"><span class="toc-text">5. module</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-lib"><span class="toc-text">6. lib</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-moduleResolution"><span class="toc-text">7. moduleResolution</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-paths"><span class="toc-text">8. paths</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-strictNullChecks"><span class="toc-text">9. strictNullChecks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-noUnusedLocals"><span class="toc-text">10. noUnusedLocals</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-noUnusedParameters"><span class="toc-text">11. noUnusedParameters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-allowJs"><span class="toc-text">12. allowJs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-typeRoots%E5%92%8Ctypes"><span class="toc-text">13. typeRoots和types</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-files%E3%80%81include%E5%92%8Cexclude"><span class="toc-text">14. files、include和exclude</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="toc-text">配置项</span></a></li></ol></div></div></widget>
-
-
-
-
-</div>
-<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/logo-github.svg"/></a></div></footer>
-
-    </aside>
-    <div class='l_main'>
-      
-
-      
-
-
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2022-04-21T09:42:55.000Z">2022-04-21</time></div></div>
-
-<article class='md-text content post'>
-<h1 class="article-title"><span>tsconfig.json全解析</span></h1>
-<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><blockquote>
-<p>TypeScript带来的类型系统以及强大的IDE支持，让前端开发也变得严谨而流畅。但TypeScript不是原生的Javascript代码，需要进行编译才能转换为Javascript代码。</p>
-<p>tsconfig.json是编译TypeScript的配置文件，对书写TypeScript代码十分重要。因为有些选项如果你没配置，则需要严格按照TypeScript的规则来书写，对初期使用TypeScript的同学而言，稍不留神就会书写出不符合规则的代码，从而导致编译报错，打击自信心。其实早期可以通过关闭一些规则设置，从而更愉快的从js转为ts开发。笔者根据项目实战经历来解释一些常用的编译选项，文末也会附上笔者整理的所有tsconfig.json选项的解释。</p>
-</blockquote>
-<h2 id="1-experimentalDecorators"><a href="#1-experimentalDecorators" class="headerlink" title="1. experimentalDecorators"></a>1. experimentalDecorators</h2><p><code>是否启用实验性的ES装饰器</code>。boolean类型，默认值：false。<a target="_blank" rel="noopener" href="https://www.typescriptlang.org/docs/handbook/decorators.html">官方解释(opens new window)</a></p>
-<p>TypeScript和ES6中引入了Class的概念，同时在<a href="https://github.com/tc39/proposal-decorators">stage 2 proposal (opens new window)</a>提出了Java等服务器端语言早就有的装饰器模式。通过引入装饰器模式，能极大简化书写代码，把一些通用逻辑封装到装饰器中。很多库都有用到该特性，比如vue-class-component 及 vuex-class等库。<strong>当你使用这些库时，必须开启experimentalDecorators</strong>。</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">f</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;f(): evaluated&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">target, propertyKey: <span class="built_in">string</span>, descriptor: PropertyDescriptor</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;f(): called&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span> &#123;</span><br><span class="line">    <span class="meta">@f</span>()</span><br><span class="line">    <span class="title function_">method</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;   </span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>启用 vuex-class同时需要设置<code>strictFunctionTypes</code>选项为false</p>
-</blockquote>
-<h2 id="2-strictPropertyInitialization"><a href="#2-strictPropertyInitialization" class="headerlink" title="2. strictPropertyInitialization"></a>2. strictPropertyInitialization</h2><p><code>是否类的非undefined属性已经在构造函数里初始化</code>。 boolean类型，默认值：false</p>
-<p>直白点，就是所有的属性值，都需要赋有初始值。<strong>建议把strictPropertyInitialization设置为false</strong>，这样就不需要定义一个变量就必须赋有初始值。对使用vuex-class库的同学，建议请把这个值设为false，绝对能省很多事。</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> <span class="title class_">Home</span> extend <span class="title class_">Vue</span>&#123;</span><br><span class="line">    <span class="attr">jobId</span>: <span class="built_in">string</span> <span class="comment">// 如果开启strictPropertyInitialization，则这里会报错，因为没有赋值默认值</span></span><br><span class="line"></span><br><span class="line">    <span class="title function_">method1</span>() :<span class="built_in">void</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">jobId</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>如果设置该选项为true，需要同时启用–strictNullChecks或启用–strict</p>
-</blockquote>
-<h2 id="3-noImplicitAny"><a href="#3-noImplicitAny" class="headerlink" title="3. noImplicitAny"></a>3. noImplicitAny</h2><p><code>有隐含的 any类型时是否报错</code>。boolean值，默认值：false</p>
-<p>ts是有默认推导的，同时还有any类型，所以不是每个变量或参数定义需要明确告知类型是什么。如果开启该值，当有隐含any类型时，会报错。<strong>建议初次上手TypeScript，把该选项设置为false。</strong></p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当开启noImplicitAny时，需要隐含当any需要明确指出</span></span><br><span class="line">arr.<span class="title function_">find</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="property">name</span> === name) <span class="comment">// error</span></span><br><span class="line">arr.<span class="title function_">find</span>(<span class="function">(<span class="params">item: <span class="built_in">any</span></span>) =&gt;</span> item.<span class="property">name</span> === name) <span class="comment">// ok</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="4-target"><a href="#4-target" class="headerlink" title="4. target"></a>4. target</h2><p><code>指定编译的ECMAScript目标版本</code>。枚举值：”ES3”， “ES5”， “ES6”/ “ES2015”， “ES2016”， “ES2017”，”ESNext”。默认值： “ES3”</p>
-<p>TypeScript是ES6的超集，所以你可以使用ES6来编写ts代码（通常我们也的确这么做）。然而，当编译ts代码时，可以把ts转为ES5或更早的js代码。所以需要选择一个编译的目标版本。vue-cli3的typescript模板，设置为“ESNext”，因为现代大部分应用项目都会使用Webpack（Parcel也很棒）进行打包，Webpack会把你的代码转换成在所有浏览器中可运行的代码。</p>
-<blockquote>
-<p>target: “ESNext” 是指tc39最新的<a href="https://github.com/tc39/proposals">ES proposed features(opens new window)</a></p>
-</blockquote>
-<h2 id="5-module"><a href="#5-module" class="headerlink" title="5. module"></a>5. module</h2><p><code>指定生成哪个模块系统代码</code>。枚举值：”None”， “CommonJS”， “AMD”， “System”， “UMD”， “ES6”， “ES2015”，”ESNext”。默认值根据–target选项不同而不同，当target设置为ES6时，默认module为“ES6”，否则为“commonjs”</p>
-<p>通常使用ES6的模块来写ts代码，然而2016年1月以前，基本上没有浏览器原生支持ES6的模块系统，所以需要转换为不同的模块系统，如：CommonJS、AMD、SystemJS等，而module选项就是指定编译使用对应的模块系统。</p>
-<h2 id="6-lib"><a href="#6-lib" class="headerlink" title="6. lib"></a>6. lib</h2><p><code>编译过程中需要引入的库文件的列表</code>。string[]类型，可选的值有很多，常用的有ES5，ES6，ESNext，DOM，DOM.Iterable、WebWorker、ScriptHost等。该值默认值是根据–target选项不同而不同。当target为ES5时，默认值为[‘DOM ‘, ‘ES5’, ‘ScriptHost’];当target为ES6时，默认值为[‘DOM’, ‘ES6’, ‘DOM.Iterable’, ‘ScriptHost’]</p>
-<p>为了在ts代码中使用ES6中的类，比如Array.form、Set、Reflect等，需要设置lib选项，在编译过程中把这些标准库引入。这样在编译过程中，如果遇到属于这些标准库的class或api时，ts编译器不会报错。</p>
-<h2 id="7-moduleResolution"><a href="#7-moduleResolution" class="headerlink" title="7. moduleResolution"></a>7. moduleResolution</h2><p><code>决定如何处理模块</code>。string类型，“node”或者“classic”，默认值：“classic”。<a target="_blank" rel="noopener" href="https://www.typescriptlang.org/docs/handbook/module-resolution.html">官方解释(opens new window)</a></p>
-<p>说直白点，也就是遇到import { AAA } from ‘./aaa’该如何去找对应文件模块解析。对于工程项目，笔者<strong>建议大家使用node</strong>（vue-cli3 ts模板默认设置为node策略），因为这个更符合平时我们的书写习惯以及认知（平时都是webpack打包，webpack又基于node之上）。</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 在源文件/root/src/A.ts中import &#123; b &#125; from &quot;./moduleB&quot;</span><br><span class="line">// 两种解析方式查找文件方式不同</span><br><span class="line"></span><br><span class="line">// classic模块解析方式</span><br><span class="line">1. /root/src/moduleB.ts</span><br><span class="line">2. /root/src/moduleB.d.ts</span><br><span class="line"></span><br><span class="line">// node模块解析方式</span><br><span class="line">1. /root/src/moduleB.ts</span><br><span class="line">2. /root/src/moduleB.tsx</span><br><span class="line">3. /root/src/moduleB.d.ts</span><br><span class="line">4. /root/src/moduleB/package.json (if it specifies a &quot;types&quot; property)</span><br><span class="line">5. /root/src/moduleB/index.ts</span><br><span class="line">6. /root/src/moduleB/index.tsx</span><br><span class="line">7. /root/src/moduleB/index.d.ts</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="8-paths"><a href="#8-paths" class="headerlink" title="8. paths"></a>8. paths</h2><p><code>模块名或路径映射的列表</code>。Object值</p>
-<p>这是一个非常有用的选项，比如我们经常使用‘@/util/help’来代替’./src/util/help’，省的每次在不同层级文件import模块时,都纠结于是’./‘还是’../‘。该选项告诉编译器遇到匹配的值时，去映射的路径下加载模块。</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;baseUrl&quot;</span>: <span class="string">&quot;.&quot;</span>, <span class="comment">// 注意：baseUrl不可少</span></span><br><span class="line">    <span class="string">&quot;paths&quot;</span>: &#123;</span><br><span class="line">      <span class="comment">// 映射列表</span></span><br><span class="line">      <span class="string">&quot;@/*&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;src/*&quot;</span></span><br><span class="line">      ],</span><br><span class="line">      <span class="string">&quot;moduleA&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;src/libs/moduleA&quot;</span></span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// in ts code</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Setting</span> <span class="keyword">from</span> <span class="string">&#x27;@/components/Setting.vue&#x27;</span> <span class="comment">// 模块实际位置: src/components/Setting.vue</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">TestModule</span> <span class="keyword">from</span> <span class="string">&#x27;moduleA/index.js&#x27;</span> <span class="comment">// 模块实际位置: src/libs/moduleA/index.js</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="9-strictNullChecks"><a href="#9-strictNullChecks" class="headerlink" title="9. strictNullChecks"></a>9. strictNullChecks</h2><p><code>是否启用严格的 null检查模式</code>。boolean值，默认值：false</p>
-<p>未处理的null和undefined经常会导致BUG的产生，所以TypeScript包含了strictNullChecks选项来帮助我们减少对这种情况的担忧。当启用了strictNullChecks，null和undefined获得了它们自己各自的类型null和undefined。开启该模式有助于发现并处理可能为undefined的赋值。<strong>如果是正式项目，笔者建议开启该选项；如果只是练手TypeScirpt，可以关闭该选项</strong>，不然所有可能为null/undefined的赋值，都需要写联合类型。</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 未开启strictNullChecks，number类型包含了null和undefined类型</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">foo</span>: <span class="built_in">number</span> = <span class="number">123</span>;</span><br><span class="line">foo = <span class="literal">null</span>; <span class="comment">// Okay</span></span><br><span class="line">foo = <span class="literal">undefined</span>; <span class="comment">// Okay</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 开启strictNullChecks</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">foo</span>: <span class="built_in">string</span>[] | <span class="literal">undefined</span> = arr.<span class="title function_">find</span>(<span class="function"><span class="params">key</span> =&gt;</span> key === <span class="string">&#x27;test&#x27;</span>)</span><br><span class="line"><span class="comment">// foo.push(&#x27;1&#x27;) // error - &#x27;foo&#x27; is possibly &#x27;undefined&#x27;</span></span><br><span class="line">foo &amp;&amp; foo.<span class="title function_">push</span>(<span class="string">&#x27;1&#x27;</span>) <span class="comment">// okay</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意：启用 –strict相当于启用 –noImplicitAny, –noImplicitThis, –alwaysStrict, –strictNullChecks, –strictFunctionTypes和–strictPropertyInitialization</p>
-</blockquote>
-<h2 id="10-noUnusedLocals"><a href="#10-noUnusedLocals" class="headerlink" title="10. noUnusedLocals"></a>10. noUnusedLocals</h2><p><code>有未使用的变量时，是否抛出错误</code>。boolean值，默认值： false</p>
-<p>顾名思义，当发现变量定义但没有使用时，编译不报错。eslint的rule中也有该条，<strong>建议正式项目将该选项开启，设置为true</strong>，使得代码干净整洁。</p>
-<h2 id="11-noUnusedParameters"><a href="#11-noUnusedParameters" class="headerlink" title="11. noUnusedParameters"></a>11. noUnusedParameters</h2><p><code>有未使用的参数时，是否抛出错误</code>。boolean值，默认值： false</p>
-<p><strong>建议正式项目开启该选项，设置为true</strong>，理由同上。</p>
-<h2 id="12-allowJs"><a href="#12-allowJs" class="headerlink" title="12. allowJs"></a>12. allowJs</h2><p><code>是否允许编译javascript文件</code>。boolean值，默认值：false</p>
-<p>如果设置为true，js后缀的文件也会被typescript进行编译。</p>
-<h2 id="13-typeRoots和types"><a href="#13-typeRoots和types" class="headerlink" title="13. typeRoots和types"></a>13. typeRoots和types</h2><p>默认所有可见的”@types”包会在编译过程中被包含进来。如果指定了typeRoots，只有typeRoots下面的包才会被包含进来。如果指定了types，只有被列出来的npm包才会被包含进来。<a target="_blank" rel="noopener" href="https://www.tslang.cn/docs/handbook/tsconfig-json.html#types-typeroots-and-types">详细内容可看此处(opens new window)</a></p>
-<blockquote>
-<p>可以指定”types”: []来禁用自动引入@types包</p>
-</blockquote>
-<h2 id="14-files、include和exclude"><a href="#14-files、include和exclude" class="headerlink" title="14. files、include和exclude"></a>14. files、include和exclude</h2><p><code>编译文件包含哪些文件以及排除哪些文件</code>。</p>
-<p>未设置include时，编译器默认包含当前目录和子目录下所有的TypeScript文件（.ts, .d.ts 和 .tsx）。如果allowJs被设置成true，JS文件（.js和.jsx）也被包含进来。exclude排除那些不需要编译的文件或文件夹。</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;compilerOptions&quot;</span>: &#123;&#125;,</span><br><span class="line">    <span class="string">&quot;include&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;src/**/*&quot;</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&quot;exclude&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;node_modules&quot;</span>,</span><br><span class="line">        <span class="string">&quot;**/*.spec.ts&quot;</span></span><br><span class="line">    ]</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h1><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;compilerOptions&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="comment">/* 基本选项 */</span></span><br><span class="line">    <span class="attr">&quot;target&quot;</span><span class="punctuation">:</span> <span class="string">&quot;es5&quot;</span><span class="punctuation">,</span>                       <span class="comment">// 指定 ECMAScript 目标版本: &#x27;ES3&#x27; (default), &#x27;ES5&#x27;, &#x27;ES2015&#x27;, &#x27;ES2016&#x27;, &#x27;ES2017&#x27;, or &#x27;ESNEXT&#x27;（&quot;ESNext&quot;表示最新的ES语法，包括还处在stage X阶段）</span></span><br><span class="line">    <span class="attr">&quot;module&quot;</span><span class="punctuation">:</span> <span class="string">&quot;commonjs&quot;</span><span class="punctuation">,</span>                  <span class="comment">// 指定使用模块: &#x27;commonjs&#x27;, &#x27;amd&#x27;, &#x27;system&#x27;, &#x27;umd&#x27; or &#x27;es2015&#x27;</span></span><br><span class="line">    <span class="attr">&quot;lib&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span>                             <span class="comment">// 指定要包含在编译中的库文件</span></span><br><span class="line">    <span class="attr">&quot;allowJs&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>                       <span class="comment">// 允许编译 javascript 文件</span></span><br><span class="line">    <span class="attr">&quot;checkJs&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>                       <span class="comment">// 报告 javascript 文件中的错误</span></span><br><span class="line">    <span class="attr">&quot;jsx&quot;</span><span class="punctuation">:</span> <span class="string">&quot;preserve&quot;</span><span class="punctuation">,</span>                     <span class="comment">// 指定 jsx 代码的生成: &#x27;preserve&#x27;, &#x27;react-native&#x27;, or &#x27;react&#x27;</span></span><br><span class="line">    <span class="attr">&quot;declaration&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>                   <span class="comment">// 生成相应的 &#x27;.d.ts&#x27; 文件</span></span><br><span class="line">    <span class="attr">&quot;sourceMap&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>                     <span class="comment">// 生成相应的 &#x27;.map&#x27; 文件</span></span><br><span class="line">    <span class="attr">&quot;outFile&quot;</span><span class="punctuation">:</span> <span class="string">&quot;./&quot;</span><span class="punctuation">,</span>                       <span class="comment">// 将输出文件合并为一个文件</span></span><br><span class="line">    <span class="attr">&quot;outDir&quot;</span><span class="punctuation">:</span> <span class="string">&quot;./&quot;</span><span class="punctuation">,</span>                        <span class="comment">// 指定输出目录</span></span><br><span class="line">    <span class="attr">&quot;rootDir&quot;</span><span class="punctuation">:</span> <span class="string">&quot;./&quot;</span><span class="punctuation">,</span>                       <span class="comment">// 用来控制输出目录结构 --outDir.</span></span><br><span class="line">    <span class="attr">&quot;removeComments&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>                <span class="comment">// 删除编译后的所有的注释</span></span><br><span class="line">    <span class="attr">&quot;noEmit&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>                        <span class="comment">// 不生成输出文件</span></span><br><span class="line">    <span class="attr">&quot;importHelpers&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>                 <span class="comment">// 从 tslib 导入辅助工具函数</span></span><br><span class="line">    <span class="attr">&quot;isolatedModules&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>               <span class="comment">// 将每个文件做为单独的模块 （与 &#x27;ts.transpileModule&#x27; 类似）.</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 严格的类型检查选项 */</span></span><br><span class="line">    <span class="attr">&quot;strict&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>                        <span class="comment">// 启用所有严格类型检查选项</span></span><br><span class="line">    <span class="attr">&quot;noImplicitAny&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>                 <span class="comment">// 在表达式和声明上有隐含的 any类型时报错</span></span><br><span class="line">    <span class="attr">&quot;strictNullChecks&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>              <span class="comment">// 启用严格的 null 检查</span></span><br><span class="line">    <span class="attr">&quot;noImplicitThis&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>                <span class="comment">// 当 this 表达式值为 any 类型的时候，生成一个错误</span></span><br><span class="line">    <span class="attr">&quot;alwaysStrict&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>                  <span class="comment">// 以严格模式检查每个模块，并在每个文件里加入 &#x27;use strict&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 额外的检查 */</span></span><br><span class="line">    <span class="attr">&quot;noUnusedLocals&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>                <span class="comment">// 有未使用的变量时，抛出错误</span></span><br><span class="line">    <span class="attr">&quot;noUnusedParameters&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>            <span class="comment">// 有未使用的参数时，抛出错误</span></span><br><span class="line">    <span class="attr">&quot;noImplicitReturns&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>             <span class="comment">// 并不是所有函数里的代码都有返回值时，抛出错误</span></span><br><span class="line">    <span class="attr">&quot;noFallthroughCasesInSwitch&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>    <span class="comment">// 报告 switch 语句的 fallthrough 错误。（即，不允许 switch 的 case 语句贯穿）</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 模块解析选项 */</span></span><br><span class="line">    <span class="attr">&quot;moduleResolution&quot;</span><span class="punctuation">:</span> <span class="string">&quot;node&quot;</span><span class="punctuation">,</span>            <span class="comment">// 选择模块解析策略： &#x27;node&#x27; (Node.js) or &#x27;classic&#x27; (TypeScript pre-1.6)。默认是classic</span></span><br><span class="line">    <span class="attr">&quot;baseUrl&quot;</span><span class="punctuation">:</span> <span class="string">&quot;./&quot;</span><span class="punctuation">,</span>                       <span class="comment">// 用于解析非相对模块名称的基目录</span></span><br><span class="line">    <span class="attr">&quot;paths&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span>                           <span class="comment">// 模块名到基于 baseUrl 的路径映射的列表 例如：&quot;@/*&quot;: [&quot;src/*&quot;]</span></span><br><span class="line">    <span class="attr">&quot;rootDirs&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span>                        <span class="comment">// 根文件夹列表，其组合内容表示项目运行时的结构内容</span></span><br><span class="line">    <span class="attr">&quot;typeRoots&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span>                       <span class="comment">// 包含类型声明的文件列表</span></span><br><span class="line">    <span class="attr">&quot;types&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span>                           <span class="comment">// 需要包含的类型声明文件名列表</span></span><br><span class="line">    <span class="attr">&quot;allowSyntheticDefaultImports&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>  <span class="comment">// 允许从没有设置默认导出的模块中默认导入。</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Source Map Options */</span></span><br><span class="line">    <span class="attr">&quot;sourceRoot&quot;</span><span class="punctuation">:</span> <span class="string">&quot;./&quot;</span><span class="punctuation">,</span>                    <span class="comment">// 指定调试器应该找到 TypeScript 文件而不是源文件的位置</span></span><br><span class="line">    <span class="attr">&quot;mapRoot&quot;</span><span class="punctuation">:</span> <span class="string">&quot;./&quot;</span><span class="punctuation">,</span>                       <span class="comment">// 指定调试器应该找到映射文件而不是生成文件的位置</span></span><br><span class="line">    <span class="attr">&quot;inlineSourceMap&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>               <span class="comment">// 生成单个 soucemaps 文件，而不是将 sourcemaps 生成不同的文件</span></span><br><span class="line">    <span class="attr">&quot;inlineSources&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>                 <span class="comment">// 将代码与 sourcemaps 生成到一个文件中，要求同时设置了 --inlineSourceMap 或 --sourceMap 属性</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 其他选项 */</span></span><br><span class="line">    <span class="attr">&quot;experimentalDecorators&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>        <span class="comment">// 启用装饰器</span></span><br><span class="line">    <span class="attr">&quot;emitDecoratorMetadata&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>         <span class="comment">// 为装饰器提供元数据的支持</span></span><br><span class="line">    <span class="attr">&quot;strictFunctionTypes&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span>           <span class="comment">// 禁用函数参数双向协变检查。</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="comment">/* 指定编译文件或排除指定编译文件 */</span></span><br><span class="line">  <span class="attr">&quot;include&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="string">&quot;src/**/*&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;exclude&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="string">&quot;node_modules&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="string">&quot;**/*.spec.ts&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;files&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;core.ts&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;sys.ts&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="comment">// 从另一个配置文件里继承配置</span></span><br><span class="line">  <span class="attr">&quot;extends&quot;</span><span class="punctuation">:</span> <span class="string">&quot;./config/base&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="comment">// 让IDE在保存文件的时候根据tsconfig.json重新生成文件</span></span><br><span class="line">  <span class="attr">&quot;compileOnSave&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span> <span class="comment">// 支持这个特性需要Visual Studio 2015， TypeScript1.8.4以上并且安装atom-typescript插件</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
-
-
-
-<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
-</div></section></div>
-
-</article>
-
-<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2022/04/21/%E4%B8%BA%E4%BD%95Vue3-Proxy-%E6%9B%B4%E5%BF%AB/">为何Vue3 Proxy 更快</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2022/04/16/vue2-vue3%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/">vue2~vue3迁移记录</a></div></section></div>
-
-
-
-
-
-
-
-
-      
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
-</div></footer>
-
-      <div class='float-panel mobile-only blur' style='display:none'>
-  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
-    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
-  </button>
-</div>
-
-    </div>
-  </div>
-  <div class='scripts'>
-    <script type="text/javascript">
-  const stellar = {
-    // 懒加载 css https://github.com/filamentgroup/loadCSS
-    loadCSS: (href, before, media, attributes) => {
-      var doc = window.document;
-      var ss = doc.createElement("link");
-      var ref;
-      if (before) {
-        ref = before;
-      } else {
-        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
-        ref = refs[refs.length - 1];
-      }
-      var sheets = doc.styleSheets;
-      if (attributes) {
-        for (var attributeName in attributes) {
-          if (attributes.hasOwnProperty(attributeName)) {
-            ss.setAttribute(attributeName, attributes[attributeName]);
-          }
-        }
-      }
-      ss.rel = "stylesheet";
-      ss.href = href;
-      ss.media = "only x";
-      function ready(cb) {
-        if (doc.body) {
-          return cb();
-        }
-        setTimeout(function () {
-          ready(cb);
-        });
-      }
-      ready(function () {
-        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
-      });
-      var onloadcssdefined = function (cb) {
-        var resolvedHref = ss.href;
-        var i = sheets.length;
-        while (i--) {
-          if (sheets[i].href === resolvedHref) {
-            return cb();
-          }
-        }
-        setTimeout(function () {
-          onloadcssdefined(cb);
-        });
-      };
-      function loadCB() {
-        if (ss.addEventListener) {
-          ss.removeEventListener("load", loadCB);
-        }
-        ss.media = media || "all";
-      }
-      if (ss.addEventListener) {
-        ss.addEventListener("load", loadCB);
-      }
-      ss.onloadcssdefined = onloadcssdefined;
-      onloadcssdefined(loadCB);
-      return ss;
-    },
-
-    // 从 butterfly 和 volantis 获得灵感
-    loadScript: (src, opt) => new Promise((resolve, reject) => {
-      var script = document.createElement('script');
-      script.src = src;
-      if (opt) {
-        for (let key of Object.keys(opt)) {
-          script[key] = opt[key]
-        }
-      } else {
-        // 默认异步，如果需要同步，第二个参数传入 {} 即可
-        script.async = true
-      }
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    }),
-
-    // https://github.com/jerryc127/hexo-theme-butterfly
-    jQuery: (fn) => {
-      if (typeof jQuery === 'undefined') {
-        stellar.loadScript(stellar.plugins.jQuery).then(fn)
-      } else {
-        fn()
-      }
-    }
-  };
-  stellar.version = '1.18.5';
-  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
-  stellar.config = {
-    date_suffix: {
-      just: '刚刚',
-      min: '分钟前',
-      hour: '小时前',
-      day: '天前',
-      month: '个月前',
-    },
-  };
-
-  // required plugins (only load if needs)
-  stellar.plugins = {
-    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
-  };
-
-  if ('local_search') {
-    stellar.search = {};
-    stellar.search.service = 'local_search';
-    if (stellar.search.service == 'local_search') {
-      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
-      stellar.search[stellar.search.service] = service_obj;
-    }
+.l_body {
+  display: flex;
+  margin: auto;
+  padding: 0 var(--gap-l);
+  justify-content: center;
+}
+.l_body .l_left {
+  z-index: 8;
+  width: var(--width-left);
+  flex-shrink: 0;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+.l_body .l_main {
+  flex-shrink: 1;
+  flex-grow: 1;
+  width: 320px;
+  max-width: var(--width-main);
+}
+@media screen and (max-width: $device-mobile-max) {
+  .mobile-only {
+    display: block !important;
   }
-
-  // stellar js
-  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
-
-  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
-  // optional plugins
-  if ('true' == 'true') {
-    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  .l_body {
+    padding: 0;
   }
-  if ('true' == 'true') {
-    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  .l_body .l_left {
+    position: fixed;
+    transform: translateX(-320px);
+    margin: 0;
+    left: 0;
+    background: var(--site-bg);
+    box-shadow: $boxshadow-card-float;
+    z-index: 9;
   }
-  if ('' == 'true') {
-    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  .l_body .l_main {
+    max-width: 100%;
   }
-  if ('true' == 'true') {
-    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  .l_body.mobile .l_left {
+    transition: transform 0.3s ease-out;
   }
-  if ('true' == 'true') {
-    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  .l_body.mobile.sidebar .l_left {
+    transform: translateX(0px);
   }
-  if ('false' == 'true') {
-    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
-  }
-</script>
-
-<!-- required -->
-
-  
-<script src="/js/main.js" async></script>
-
-
-
-<!-- optional -->
-
-
-
-<!-- inject -->
-
-
-  </div>
-</body>
-</html>
+}

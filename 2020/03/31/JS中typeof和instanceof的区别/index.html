@@ -1,333 +1,46 @@
-<!DOCTYPE html>
-<html lang='zh-CN'>
-
-<head>
-  <meta name="generator" content="Hexo 6.3.0">
-  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
-  <meta charset="utf-8">
-  
-
-  <meta http-equiv='x-dns-prefetch-control' content='on' />
-  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
-  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
-  <link rel='dns-prefetch' href='//unpkg.com'>
-
-  <meta name="renderer" content="webkit">
-  <meta name="force-rendering" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="HandheldFriendly" content="True" >
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="theme-color" content="#f8f8f8">
-  
-  <title>JS中typeof和instanceof的区别 - 翁先森的博客</title>
-
-  
-    <meta name="description" content="undefined, number, string, boolean属于简单的值类型，不是对象。剩下的几种情况——函数、数组、对象、null、new Number(10)都是对象。他们都是引用类型。  基本数据类型和引用类型 typeof1234567891011console.log(typeof (x)); &#x2F;&#x2F; &amp;#x27;undefined&amp;#x27;console.log(typeof">
-<meta property="og:type" content="article">
-<meta property="og:title" content="JS中typeof和instanceof的区别">
-<meta property="og:url" content="https://github.com/NollieLeo/2020/03/31/JS%E4%B8%ADtypeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
-<meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="undefined, number, string, boolean属于简单的值类型，不是对象。剩下的几种情况——函数、数组、对象、null、new Number(10)都是对象。他们都是引用类型。  基本数据类型和引用类型 typeof1234567891011console.log(typeof (x)); &#x2F;&#x2F; &amp;#x27;undefined&amp;#x27;console.log(typeof">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//20180203152226402.png">
-<meta property="article:published_time" content="2020-03-31T01:29:49.000Z">
-<meta property="article:modified_time" content="2023-01-28T13:26:45.525Z">
-<meta property="article:author" content="翁先森">
-<meta property="article:tag" content="ES6">
-<meta property="article:tag" content="基本数据类型和引用类型">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//20180203152226402.png">
-  
-  
-
-  <!-- feed -->
-  
-    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
-  
-
-  
-    
-<link rel="stylesheet" href="/css/main.css">
-
-  
-
-  
-    <link rel="shortcut icon" href="/assets/avatar.png">
-  
-
-  
-
-  
-
-
-  
-</head>
-
-<body>
-  
-
-
-
-
-  <div class='l_body' id='start'>
-    <aside class='l_left' layout='post'>
-    
-
-  
-
-<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
-
-<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/more/">更多</a></nav>
-</header>
-
-
-<div class="widgets">
-<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
-
-
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">JS中typeof和instanceof的区别</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#typeof"><span class="toc-text">typeof</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#instanceof"><span class="toc-text">instanceof</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E4%BB%A5%E7%94%A8%E4%BA%8E%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E5%8F%98%E9%87%8F%E6%98%AF%E5%90%A6%E6%98%AF%E6%9F%90%E4%B8%AA%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B"><span class="toc-text">可以用于判断一个变量是否是某个对象的实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E4%BB%A5%E5%9C%A8%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB%E4%B8%AD%E7%94%A8%E6%9D%A5%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E5%AE%9E%E4%BE%8B%E6%98%AF%E5%90%A6%E5%B1%9E%E4%BA%8E%E5%AE%83%E7%9A%84%E7%88%B6%E7%B1%BB%E5%9E%8B"><span class="toc-text">可以在继承关系中用来判断一个实例是否属于它的父类型</span></a></li></ol></li></ol></div></div></widget>
-
-
-
-
-</div>
-<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/logo-github.svg"/></a></div></footer>
-
-    </aside>
-    <div class='l_main'>
-      
-
-      
-
-
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Javascript/">Javascript</a></div><div id="post-meta">发布于&nbsp;<time datetime="2020-03-31T01:29:49.000Z">2020-03-31</time></div></div>
-
-<article class='md-text content post'>
-<h1 class="article-title"><span>JS中typeof和instanceof的区别</span></h1>
-<p> <code>undefined</code>, <code>number</code>, <code>string</code>, <code>boolean</code>属于简单的<strong>值类型</strong>，不是对象。剩下的几种情况——函数、数组、对象、<code>null</code>、<code>new Number(10)</code>都是对象。他们都是引用类型。 </p>
-<p><a target="_blank" rel="noopener" href="http://pxc3lp.coding-pages.com/2020/03/16/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">基本数据类型和引用类型</a></p>
-<h2 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> (x)); <span class="comment">// &#x27;undefined&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> (<span class="number">10</span>)); <span class="comment">// &#x27;number&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> (<span class="string">&#x27;abc&#x27;</span>)); <span class="comment">// &#x27;string&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> (<span class="literal">true</span>)); <span class="comment">// &#x27;boolean&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> (<span class="keyword">function</span> (<span class="params"></span>) &#123; &#125;)); <span class="comment">// &#x27;function&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> ([<span class="number">1</span>, <span class="string">&#x27;dsa&#x27;</span>, <span class="literal">true</span>])); <span class="comment">// &#x27;object&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> (&#123; <span class="attr">a</span>: <span class="number">123</span>, <span class="attr">b</span>: <span class="literal">true</span> &#125;)); <span class="comment">// &#x27;object&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> (<span class="literal">null</span>)); <span class="comment">// &#x27;object&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> (<span class="keyword">new</span> <span class="title class_">Number</span>(<span class="number">0</span>))); <span class="comment">// &#x27;object&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">typeof</span>(<span class="keyword">new</span> <span class="title class_">Date</span>())); <span class="comment">// &#x27;object&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">typeof</span>(<span class="regexp">/a/g</span>)); <span class="comment">// &#x27;object&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>我们可以用typeof判断一个变量是否存在</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span> a !==<span class="string">&#x27;undefined&#x27;</span>)&#123;</span><br><span class="line">	<span class="title function_">alert</span>(<span class="string">&#x27;OK&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>而不是<code>if(a)</code>这样的用法，因为如果这样a为定义就会报错。</p>
-<p>简单的<strong>值类型</strong>直接用<code>typeof</code>就能够判断出来</p>
-<p>但是引用类型使用 <code>typeof</code> 判断就不太准确。如上代码所示，例如数组，正则表达式，日期，对象等<code>typeof</code>返回值都是为 <code>object</code> 函数的返回值则是<code>function</code></p>
-<p><strong>在 JavaScript 中，判断一个变量的类型尝尝会用 <code>typeof</code> 运算符，在使用 <code>typeof</code> 运算符时采用引用类型存储值会出现一个问题，无论引用的是什么类型的对象，它都返回 “object”。这就需要用到<code>instanceof</code>来检测某个对象是不是另一个对象的实例。</strong></p>
-<h2 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">语法：object <span class="keyword">instanceof</span> constructor</span><br></pre></td></tr></table></figure>
-
-<p>参数：<code>object</code>（要检测的对象.）<code>constructor</code>（某个构造函数）</p>
-<p>描述：<code>instanceof</code>运算符用来检测<code>constructor.prototype</code>是否存在于参数object的原型链上</p>
-<p><strong>对象与函数的关系</strong>： 函数是一种对象，但函数不像数组正则日期这些对象。其他的对象（函数除外）都是对象的一个子集，但是函数却可以创造出对象来</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">People</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;hello world&#x27;</span>;</span><br><span class="line">	<span class="variable language_">this</span>.<span class="property">birth</span> - <span class="number">1998</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> people = <span class="keyword">new</span> <span class="title class_">People</span>();</span><br></pre></td></tr></table></figure>
-
-<p>people这个对象是由People的构造函数创建出来的，</p>
-<p><code>instanceof</code>的使用规则：<code>A instanceof B</code></p>
-<p> A沿着<strong>proto</strong>这条线来找，同时B沿着prototype这条线来找，如果两条线能找到同一个引用，即同一个对象，那么就返回true。如果找到终点还未重合，则返回false。 </p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//20180203152226402.png" alt></p>
-<p>例如：</p>
-<h3 id="可以用于判断一个变量是否是某个对象的实例"><a href="#可以用于判断一个变量是否是某个对象的实例" class="headerlink" title="可以用于判断一个变量是否是某个对象的实例"></a>可以用于判断一个变量是否是某个对象的实例</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(people <span class="keyword">instanceof</span> <span class="title class_">People</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(people <span class="keyword">instanceof</span> <span class="title class_">Object</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<p>因为people是由 People构造函数搞出来的，而People又是object的子类</p>
-<h3 id="可以在继承关系中用来判断一个实例是否属于它的父类型"><a href="#可以在继承关系中用来判断一个实例是否属于它的父类型" class="headerlink" title="可以在继承关系中用来判断一个实例是否属于它的父类型"></a>可以在继承关系中用来判断一个实例是否属于它的父类型</h3><p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">People</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;hello world&#x27;</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">birth</span> = <span class="number">1998</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Male</span>(<span class="params"></span>)&#123;&#125;</span><br><span class="line"><span class="title class_">Male</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="keyword">new</span> <span class="title class_">People</span>();</span><br><span class="line"><span class="keyword">const</span> man = <span class="keyword">new</span> <span class="title class_">Male</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(man <span class="keyword">instanceof</span> <span class="title class_">Male</span>); <span class="comment">// true </span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(man <span class="keyword">instanceof</span> <span class="title class_">People</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<p>又如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义构造函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">C</span>(<span class="params"></span>)&#123;&#125; </span><br><span class="line"><span class="keyword">function</span> <span class="title function_">D</span>(<span class="params"></span>)&#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="title function_">C</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// true，因为 Object.getPrototypeOf(o) === C.prototype</span></span><br><span class="line">o <span class="keyword">instanceof</span> C; </span><br><span class="line"></span><br><span class="line"><span class="comment">// false，因为 D.prototype不在o的原型链上</span></span><br><span class="line">o <span class="keyword">instanceof</span> D; </span><br><span class="line"></span><br><span class="line">o <span class="keyword">instanceof</span> <span class="title class_">Object</span>; <span class="comment">// true,因为Object.prototype.isPrototypeOf(o)返回true</span></span><br><span class="line">C.<span class="property"><span class="keyword">prototype</span></span> <span class="keyword">instanceof</span> <span class="title class_">Object</span> <span class="comment">// true,同上</span></span><br><span class="line"></span><br><span class="line">C.<span class="property"><span class="keyword">prototype</span></span> = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> o2 = <span class="keyword">new</span> <span class="title function_">C</span>();</span><br><span class="line"></span><br><span class="line">o2 <span class="keyword">instanceof</span> C; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">o <span class="keyword">instanceof</span> C; <span class="comment">// false,C.prototype指向了一个空对象,这个空对象不在o的原型链上.</span></span><br><span class="line"></span><br><span class="line">D.<span class="property"><span class="keyword">prototype</span></span> = <span class="keyword">new</span> <span class="title function_">C</span>(); <span class="comment">// 继承</span></span><br><span class="line"><span class="keyword">var</span> o3 = <span class="keyword">new</span> <span class="title function_">D</span>();</span><br><span class="line">o3 <span class="keyword">instanceof</span> D; <span class="comment">// true</span></span><br><span class="line">o3 <span class="keyword">instanceof</span> C; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<p>需要注意的是，如果表达式 <code>obj instanceof Foo</code> 返回true，则并不意味着该表达式会永远返回true，因为<code>Foo.prototype</code>属性的值有可能会改变，改变之后的值很有可能不存在于<code>obj</code>的原型链上，这时原表达式的值就会成为<code>false</code>。另外一种情况下，原表达式的值也会改变，就是改变对象<code>obj</code>的原型链的情况，虽然在目前的ES规范中，我们只能读取对象的原型而不能改变它，但借助于非标准的<code>__proto__</code>魔法属性，是可以实现的。比如执行<code>obj.__proto__ = &#123;&#125;</code>之后，<code>obj instanceof Foo</code>就会返回<code>false</code>了。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">People</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;hello&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> a = <span class="keyword">new</span> <span class="title class_">People</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a <span class="keyword">instanceof</span> <span class="title class_">People</span>); <span class="comment">// true</span></span><br><span class="line">a.<span class="property">__proto__</span> = &#123;&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a <span class="keyword">instanceof</span> <span class="title class_">People</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-
-
-
-<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
-</div></section></div>
-
-</article>
-
-<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2020/04/07/%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E6%96%87%E6%9C%AC%E5%9F%9F%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%96%87%E6%9C%AC%E6%98%AF%E5%90%A6%E8%B6%85%E5%87%BA%E6%89%80%E5%9C%A8%E5%AE%B9%E5%99%A8/">动态创建文本域如何判断文本是否超出所在容器</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2020/03/30/%E5%AE%9E%E7%8E%B0%E8%BE%B9%E6%A1%86loading%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/">实现边框loading动画效果</a></div></section></div>
-
-
-
-
-
-
-
-
-      
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
-</div></footer>
-
-      <div class='float-panel mobile-only blur' style='display:none'>
-  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
-    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
-  </button>
-</div>
-
-    </div>
-  </div>
-  <div class='scripts'>
-    <script type="text/javascript">
-  const stellar = {
-    // 懒加载 css https://github.com/filamentgroup/loadCSS
-    loadCSS: (href, before, media, attributes) => {
-      var doc = window.document;
-      var ss = doc.createElement("link");
-      var ref;
-      if (before) {
-        ref = before;
-      } else {
-        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
-        ref = refs[refs.length - 1];
-      }
-      var sheets = doc.styleSheets;
-      if (attributes) {
-        for (var attributeName in attributes) {
-          if (attributes.hasOwnProperty(attributeName)) {
-            ss.setAttribute(attributeName, attributes[attributeName]);
-          }
-        }
-      }
-      ss.rel = "stylesheet";
-      ss.href = href;
-      ss.media = "only x";
-      function ready(cb) {
-        if (doc.body) {
-          return cb();
-        }
-        setTimeout(function () {
-          ready(cb);
-        });
-      }
-      ready(function () {
-        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
-      });
-      var onloadcssdefined = function (cb) {
-        var resolvedHref = ss.href;
-        var i = sheets.length;
-        while (i--) {
-          if (sheets[i].href === resolvedHref) {
-            return cb();
-          }
-        }
-        setTimeout(function () {
-          onloadcssdefined(cb);
-        });
-      };
-      function loadCB() {
-        if (ss.addEventListener) {
-          ss.removeEventListener("load", loadCB);
-        }
-        ss.media = media || "all";
-      }
-      if (ss.addEventListener) {
-        ss.addEventListener("load", loadCB);
-      }
-      ss.onloadcssdefined = onloadcssdefined;
-      onloadcssdefined(loadCB);
-      return ss;
-    },
-
-    // 从 butterfly 和 volantis 获得灵感
-    loadScript: (src, opt) => new Promise((resolve, reject) => {
-      var script = document.createElement('script');
-      script.src = src;
-      if (opt) {
-        for (let key of Object.keys(opt)) {
-          script[key] = opt[key]
-        }
-      } else {
-        // 默认异步，如果需要同步，第二个参数传入 {} 即可
-        script.async = true
-      }
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    }),
-
-    // https://github.com/jerryc127/hexo-theme-butterfly
-    jQuery: (fn) => {
-      if (typeof jQuery === 'undefined') {
-        stellar.loadScript(stellar.plugins.jQuery).then(fn)
-      } else {
-        fn()
-      }
-    }
-  };
-  stellar.version = '1.18.5';
-  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
-  stellar.config = {
-    date_suffix: {
-      just: '刚刚',
-      min: '分钟前',
-      hour: '小时前',
-      day: '天前',
-      month: '个月前',
-    },
-  };
-
-  // required plugins (only load if needs)
-  stellar.plugins = {
-    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
-  };
-
-  if ('local_search') {
-    stellar.search = {};
-    stellar.search.service = 'local_search';
-    if (stellar.search.service == 'local_search') {
-      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
-      stellar.search[stellar.search.service] = service_obj;
-    }
+.l_body {
+  display: flex;
+  margin: auto;
+  padding: 0 var(--gap-l);
+  justify-content: center;
+}
+.l_body .l_left {
+  z-index: 8;
+  width: var(--width-left);
+  flex-shrink: 0;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+.l_body .l_main {
+  flex-shrink: 1;
+  flex-grow: 1;
+  width: 320px;
+  max-width: var(--width-main);
+}
+@media screen and (max-width: $device-mobile-max) {
+  .mobile-only {
+    display: block !important;
   }
-
-  // stellar js
-  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
-
-  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
-  // optional plugins
-  if ('true' == 'true') {
-    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  .l_body {
+    padding: 0;
   }
-  if ('true' == 'true') {
-    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  .l_body .l_left {
+    position: fixed;
+    transform: translateX(-320px);
+    margin: 0;
+    left: 0;
+    background: var(--site-bg);
+    box-shadow: $boxshadow-card-float;
+    z-index: 9;
   }
-  if ('' == 'true') {
-    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  .l_body .l_main {
+    max-width: 100%;
   }
-  if ('true' == 'true') {
-    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  .l_body.mobile .l_left {
+    transition: transform 0.3s ease-out;
   }
-  if ('true' == 'true') {
-    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  .l_body.mobile.sidebar .l_left {
+    transform: translateX(0px);
   }
-  if ('false' == 'true') {
-    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
-  }
-</script>
-
-<!-- required -->
-
-  
-<script src="/js/main.js" async></script>
-
-
-
-<!-- optional -->
-
-
-
-<!-- inject -->
-
-
-  </div>
-</body>
-</html>
+}

@@ -1,351 +1,46 @@
-<!DOCTYPE html>
-<html lang='zh-CN'>
-
-<head>
-  <meta name="generator" content="Hexo 6.3.0">
-  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
-  <meta charset="utf-8">
-  
-
-  <meta http-equiv='x-dns-prefetch-control' content='on' />
-  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
-  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
-  <link rel='dns-prefetch' href='//unpkg.com'>
-
-  <meta name="renderer" content="webkit">
-  <meta name="force-rendering" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="HandheldFriendly" content="True" >
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="theme-color" content="#f8f8f8">
-  
-  <title>前端生成pdf - 翁先森的博客</title>
-
-  
-    <meta name="description" content="项目上要求，能够根据页面上所展示的测试报告，生成一份pdf。 根据模板：   最终生成的效果：    原理：通过插件js-pdf以及一个html2canvas插件结合，首先通过 html2canvas 可以在浏览器端直接对整个或部分页面进行截屏。脚本通过读取DOM并将不同的样式应用到这些元素上，从而将当页面渲染成一个Canvas图片。 之后利用js-pdf插件添加图片，将生成的canvas图片插入">
-<meta property="og:type" content="article">
-<meta property="og:title" content="前端生成pdf">
-<meta property="og:url" content="https://github.com/NollieLeo/2020/12/26/%E5%89%8D%E7%AB%AF%E7%94%9F%E6%88%90pdf/index.html">
-<meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="项目上要求，能够根据页面上所展示的测试报告，生成一份pdf。 根据模板：   最终生成的效果：    原理：通过插件js-pdf以及一个html2canvas插件结合，首先通过 html2canvas 可以在浏览器端直接对整个或部分页面进行截屏。脚本通过读取DOM并将不同的样式应用到这些元素上，从而将当页面渲染成一个Canvas图片。 之后利用js-pdf插件添加图片，将生成的canvas图片插入">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//1.jpg">
-<meta property="og:image" content="https://github.com/.com//2.jpg">
-<meta property="og:image" content="https://github.com/.com//3.jpg">
-<meta property="og:image" content="https://github.com/.com//4.jpg">
-<meta property="og:image" content="https://github.com/.com//5.jpg">
-<meta property="article:published_time" content="2020-12-26T07:52:39.000Z">
-<meta property="article:modified_time" content="2023-01-28T09:29:07.320Z">
-<meta property="article:author" content="翁先森">
-<meta property="article:tag" content="Javascript">
-<meta property="article:tag" content="PDF">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//1.jpg">
-  
-  
-
-  <!-- feed -->
-  
-    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
-  
-
-  
-    
-<link rel="stylesheet" href="/css/main.css">
-
-  
-
-  
-    <link rel="shortcut icon" href="/assets/avatar.png">
-  
-
-  
-
-  
-
-
-  
-</head>
-
-<body>
-  
-
-
-
-
-  <div class='l_body' id='start'>
-    <aside class='l_left' layout='post'>
-    
-
-  
-
-<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
-
-<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/more/">更多</a></nav>
-</header>
-
-
-<div class="widgets">
-<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
-
-
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">前端生成pdf</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%8E%B7%E5%8F%96%E5%83%8F%E7%B4%A0%E6%AF%94"><span class="toc-text">1. 获取像素比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%BB%98%E5%88%B6canvas"><span class="toc-text">2. 绘制canvas</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%89%E8%8E%B7%E5%8F%96element"><span class="toc-text">1）获取element</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%85%8D%E7%BD%AEoptions"><span class="toc-text">2) 配置options</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%A0%B9%E6%8D%AE%E7%94%9F%E6%88%90%E7%9A%84canvas%E7%94%9F%E6%88%90pdf"><span class="toc-text">3. 根据生成的canvas生成pdf</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%89%E9%A6%96%E5%85%88%E8%BD%AC%E6%8D%A2%E5%9B%BE%E7%89%87"><span class="toc-text">1）首先转换图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%AE%BE%E7%BD%AEpdf%E7%9A%84%E5%A4%A7%E5%B0%8F%E4%BB%A5%E5%8F%8A%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E5%A4%A7%E5%B0%8F"><span class="toc-text">2)  设置pdf的大小以及生成的图片大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%89%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%E5%B9%B6%E7%94%9F%E6%88%90pdf"><span class="toc-text">3）插入图片并生成pdf</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-text">4. 出现的问题以及解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%89%E5%AF%BC%E5%87%BA%E7%9A%84pdf%E4%B8%AD%E5%9B%BE%E7%89%87%E6%A8%AA%E5%90%91%E4%BD%8D%E7%BD%AE%E8%A2%AB%E6%88%AA%E6%96%AD"><span class="toc-text">1）导出的pdf中图片横向位置被截断</span></a></li></ol></li></ol></div></div></widget>
-
-
-
-
-</div>
-<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/logo-github.svg"/></a></div></footer>
-
-    </aside>
-    <div class='l_main'>
-      
-
-      
-
-
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Javascript/">Javascript</a></div><div id="post-meta">发布于&nbsp;<time datetime="2020-12-26T07:52:39.000Z">2020-12-26</time></div></div>
-
-<article class='md-text content post'>
-<h1 class="article-title"><span>前端生成pdf</span></h1>
-<p>项目上要求，能够根据页面上所展示的测试报告，生成一份pdf。</p>
-<p>根据模板：</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1.jpg" alt="image-20201226160741507"></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//2.jpg" alt="image-20201226160741507"></p>
-<p>最终生成的效果：</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//3.jpg" alt="image-20201226160741507"></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//4.jpg" alt="image-20201226160741507"></p>
-<blockquote>
-<p>原理：通过插件js-pdf以及一个html2canvas插件结合，首先通过 html2canvas 可以在浏览器端直接对整个或部分页面进行截屏。脚本通过读取DOM并将不同的样式应用到这些元素上，从而将当页面渲染成一个Canvas图片。 之后利用js-pdf插件添加图片，将生成的canvas图片插入pdf中。 保存导出pdf </p>
-</blockquote>
-<h2 id="1-获取像素比"><a href="#1-获取像素比" class="headerlink" title="1. 获取像素比"></a>1. 获取像素比</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 根据window.devicePixelRatio获取像素比 */</span></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">DPR</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">devicePixelRatio</span> &amp;&amp; <span class="variable language_">window</span>.<span class="property">devicePixelRatio</span> &gt; <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="variable language_">window</span>.<span class="property">devicePixelRatio</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p> <strong>devicePixelRatio属性是干嘛的</strong><br>window的该属性能够获取到当前显示设备物理分辨率与css的像素分辨率之间的比率。简单说就是告诉浏览器应该使用多少个物理像素来会在单个css像素。 </p>
-</blockquote>
-<h2 id="2-绘制canvas"><a href="#2-绘制canvas" class="headerlink" title="2. 绘制canvas"></a>2. 绘制canvas</h2><p>首先要看绘制canvas需要的一些参数需要配置</p>
-<p><code>html2canvas(element, options);</code>返回一个promise</p>
-<ol>
-<li>element 页面上的dom元素（这里要注意一些<a target="_blank" rel="noopener" href="https://html2canvas.hertzen.com/features/">css</a>样式是不支持的）</li>
-<li>options<a target="_blank" rel="noopener" href="https://html2canvas.hertzen.com/configuration">配置详情看这里</a>下面只是用到项目上需要的需求</li>
-</ol>
-<h3 id="1）获取element"><a href="#1）获取element" class="headerlink" title="1）获取element"></a>1）获取element</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pdfRef = <span class="title class_">React</span>.<span class="title function_">useRef</span>();</span><br><span class="line"><span class="keyword">return</span> (</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&#123;</span>`$&#123;<span class="attr">prefixCls</span>&#125;`&#125; <span class="attr">ref</span>=<span class="string">&#123;pdfRef&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    ......</span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<h3 id="2-配置options"><a href="#2-配置options" class="headerlink" title="2) 配置options"></a>2) 配置options</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">getOpts</span> = (<span class="params"></span>)=&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="attr">target</span>:any = pdfRef.<span class="property">current</span>;</span><br><span class="line">	<span class="keyword">const</span> width = target.<span class="property">offsetWidth</span>; <span class="comment">// 获取dom 宽度</span></span><br><span class="line">    <span class="keyword">const</span> height = target.<span class="property">offsetHeight</span>; <span class="comment">// 获取dom 高度</span></span><br><span class="line">    <span class="keyword">const</span> scale = <span class="title function_">DPR</span>();</span><br><span class="line">    <span class="keyword">const</span> tempCanvas = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;canvas&#x27;</span>);</span><br><span class="line">    tempCanvas.<span class="property">width</span> = width * scale; <span class="comment">// 定义canvas 宽度 * 缩放</span></span><br><span class="line">    tempCanvas.<span class="property">height</span> = height * scale; <span class="comment">// 定义canvas高度 *缩放</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> opts = &#123;</span><br><span class="line">      <span class="attr">useCORS</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">allowTaint</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">canvas</span>: tempCanvas, <span class="comment">// 现有的画布元素用作绘图的基础</span></span><br><span class="line">      scale, <span class="comment">// 提升画面质量，但是会增加文件大小</span></span><br><span class="line">      <span class="attr">scrollX</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">scrollY</span>: <span class="number">0</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> opts;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><strong>关于在配置项中设置跨域</strong><br> useCORS和allowTaint两种都可以设置跨域；<br> 为什么要设置跨域：我们图片一般都是放到静态资源服务器上的，资源服务器地址一般和项目地址是不一样的；虽然图片可以在页面上显示，但是用canvas绘图时却绘制不出来；</p>
-</blockquote>
-<h2 id="3-根据生成的canvas生成pdf"><a href="#3-根据生成的canvas生成pdf" class="headerlink" title="3. 根据生成的canvas生成pdf"></a>3. 根据生成的canvas生成pdf</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">html2canvas</span>(target, opts).<span class="title function_">then</span>(<span class="keyword">async</span> (canvas) =&gt; &#123;</span><br><span class="line">     (....处理逻辑)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="1）首先转换图片"><a href="#1）首先转换图片" class="headerlink" title="1）首先转换图片"></a>1）首先转换图片</h3><blockquote>
-<p> <strong><code>HTMLCanvasElement.toDataURL()</code></strong> 方法返回一个包含图片展示的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/data_URIs">data URI</a>  </p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> contentWidth = canvas.<span class="property">width</span>;</span><br><span class="line"><span class="keyword">const</span> contentHeight = canvas.<span class="property">height</span>;</span><br><span class="line"><span class="comment">// 将canvas转为base64图片</span></span><br><span class="line"><span class="keyword">const</span> pageData = canvas.<span class="title function_">toDataURL</span>(<span class="string">&#x27;image/jpeg&#x27;</span>, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-设置pdf的大小以及生成的图片大小"><a href="#2-设置pdf的大小以及生成的图片大小" class="headerlink" title="2)  设置pdf的大小以及生成的图片大小"></a>2)  设置pdf的大小以及生成的图片大小</h3><p>因为pdf的像素单位是不一样的，所以需要进行转换;</p>
-<p>已知 1pt/1px = 0.75, pt = (px/scale)*0.75</p>
-<p>这里的<code>scale</code>就是上面的像素比</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置pdf的尺寸，pdf要使用pt单位 已知 1pt/1px = 0.75   pt = (px/scale)* 0.75</span></span><br><span class="line"><span class="comment">// 2为上面的scale 缩放了2倍</span></span><br><span class="line"><span class="keyword">const</span> pdfX = (contentWidth + <span class="number">10</span>) / scale * <span class="number">0.75</span>;</span><br><span class="line"><span class="keyword">const</span> pdfY = (contentHeight) / scale * <span class="number">0.75</span>; <span class="comment">// 500为底部留白</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置内容图片的尺寸，img是pt单位</span></span><br><span class="line"><span class="keyword">const</span> imgX = pdfX;</span><br><span class="line"><span class="keyword">const</span> imgY = (contentHeight / scale * <span class="number">0.75</span>); <span class="comment">// 内容图片这里不需要留白的距离</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="3）插入图片并生成pdf"><a href="#3）插入图片并生成pdf" class="headerlink" title="3）插入图片并生成pdf"></a>3）插入图片并生成pdf</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pdf = <span class="keyword">new</span> <span class="title class_">JsPDF</span>(<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;pt&#x27;</span>, [pdfX, pdfY]); <span class="comment">// 第一个参数方向：默认&#x27;&#x27;时为纵向</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 将内容图片添加到pdf中，因为内容宽高和pdf宽高一样，就只需要一页，位置就是 0,0</span></span><br><span class="line"><span class="keyword">await</span> pdf.<span class="title function_">addImage</span>(pageData, <span class="string">&#x27;jpeg&#x27;</span>, <span class="number">0</span>, <span class="number">0</span>, imgX, imgY);</span><br><span class="line">pdf.<span class="title function_">save</span>(<span class="string">`API测试报告（#<span class="subst">$&#123;viewId&#125;</span>）.pdf`</span>);</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="4-出现的问题以及解决方法"><a href="#4-出现的问题以及解决方法" class="headerlink" title="4. 出现的问题以及解决方法"></a>4. 出现的问题以及解决方法</h2><h3 id="1）导出的pdf中图片横向位置被截断"><a href="#1）导出的pdf中图片横向位置被截断" class="headerlink" title="1）导出的pdf中图片横向位置被截断"></a>1）导出的pdf中图片横向位置被截断</h3><p>如图：</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//5.jpg" alt="image-20201226181331163"></p>
-<p>这是因为需要生成的dom的宽度大于其高度，生成图片插入pdf的时候由于pdf默认设置的是纵向排列，图片会被撑大以适应pdf的高度；</p>
-<p>按照下方处理</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化jspdf 第一个参数方向：默认&#x27;&#x27;时为纵向，第二个参数设置pdf内容图片使用的长度单位为pt，第三个参数为PDF的大小，单位是pt</span></span><br><span class="line">  <span class="keyword">let</span> direct;</span><br><span class="line">  <span class="keyword">if</span> (contentHeight &lt; contentWidth) &#123;</span><br><span class="line">    direct = <span class="string">&#x27;l&#x27;</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    direct = <span class="string">&#x27;p&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> pdf = <span class="keyword">new</span> <span class="title class_">JsPDF</span>(direct, <span class="string">&#x27;pt&#x27;</span>, [pdfX, pdfY]);</span><br></pre></td></tr></table></figure>
-
-<p>当高度小于宽度的时候将pdf进行横纵向的调整，以适应插入图片的宽高</p>
-
-
-<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
-</div></section></div>
-
-</article>
-
-<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2020/12/28/%E6%97%B6%E9%97%B4%E5%88%86%E7%89%87/">时间分片</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2020/12/25/undefine%E5%92%8Cvoid-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F/">undefine和void()有什么区别？</a></div></section></div>
-
-
-
-
-
-
-
-
-      
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
-</div></footer>
-
-      <div class='float-panel mobile-only blur' style='display:none'>
-  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
-    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
-  </button>
-</div>
-
-    </div>
-  </div>
-  <div class='scripts'>
-    <script type="text/javascript">
-  const stellar = {
-    // 懒加载 css https://github.com/filamentgroup/loadCSS
-    loadCSS: (href, before, media, attributes) => {
-      var doc = window.document;
-      var ss = doc.createElement("link");
-      var ref;
-      if (before) {
-        ref = before;
-      } else {
-        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
-        ref = refs[refs.length - 1];
-      }
-      var sheets = doc.styleSheets;
-      if (attributes) {
-        for (var attributeName in attributes) {
-          if (attributes.hasOwnProperty(attributeName)) {
-            ss.setAttribute(attributeName, attributes[attributeName]);
-          }
-        }
-      }
-      ss.rel = "stylesheet";
-      ss.href = href;
-      ss.media = "only x";
-      function ready(cb) {
-        if (doc.body) {
-          return cb();
-        }
-        setTimeout(function () {
-          ready(cb);
-        });
-      }
-      ready(function () {
-        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
-      });
-      var onloadcssdefined = function (cb) {
-        var resolvedHref = ss.href;
-        var i = sheets.length;
-        while (i--) {
-          if (sheets[i].href === resolvedHref) {
-            return cb();
-          }
-        }
-        setTimeout(function () {
-          onloadcssdefined(cb);
-        });
-      };
-      function loadCB() {
-        if (ss.addEventListener) {
-          ss.removeEventListener("load", loadCB);
-        }
-        ss.media = media || "all";
-      }
-      if (ss.addEventListener) {
-        ss.addEventListener("load", loadCB);
-      }
-      ss.onloadcssdefined = onloadcssdefined;
-      onloadcssdefined(loadCB);
-      return ss;
-    },
-
-    // 从 butterfly 和 volantis 获得灵感
-    loadScript: (src, opt) => new Promise((resolve, reject) => {
-      var script = document.createElement('script');
-      script.src = src;
-      if (opt) {
-        for (let key of Object.keys(opt)) {
-          script[key] = opt[key]
-        }
-      } else {
-        // 默认异步，如果需要同步，第二个参数传入 {} 即可
-        script.async = true
-      }
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    }),
-
-    // https://github.com/jerryc127/hexo-theme-butterfly
-    jQuery: (fn) => {
-      if (typeof jQuery === 'undefined') {
-        stellar.loadScript(stellar.plugins.jQuery).then(fn)
-      } else {
-        fn()
-      }
-    }
-  };
-  stellar.version = '1.18.5';
-  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
-  stellar.config = {
-    date_suffix: {
-      just: '刚刚',
-      min: '分钟前',
-      hour: '小时前',
-      day: '天前',
-      month: '个月前',
-    },
-  };
-
-  // required plugins (only load if needs)
-  stellar.plugins = {
-    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
-  };
-
-  if ('local_search') {
-    stellar.search = {};
-    stellar.search.service = 'local_search';
-    if (stellar.search.service == 'local_search') {
-      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
-      stellar.search[stellar.search.service] = service_obj;
-    }
+.l_body {
+  display: flex;
+  margin: auto;
+  padding: 0 var(--gap-l);
+  justify-content: center;
+}
+.l_body .l_left {
+  z-index: 8;
+  width: var(--width-left);
+  flex-shrink: 0;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+.l_body .l_main {
+  flex-shrink: 1;
+  flex-grow: 1;
+  width: 320px;
+  max-width: var(--width-main);
+}
+@media screen and (max-width: $device-mobile-max) {
+  .mobile-only {
+    display: block !important;
   }
-
-  // stellar js
-  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
-
-  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
-  // optional plugins
-  if ('true' == 'true') {
-    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  .l_body {
+    padding: 0;
   }
-  if ('true' == 'true') {
-    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  .l_body .l_left {
+    position: fixed;
+    transform: translateX(-320px);
+    margin: 0;
+    left: 0;
+    background: var(--site-bg);
+    box-shadow: $boxshadow-card-float;
+    z-index: 9;
   }
-  if ('' == 'true') {
-    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  .l_body .l_main {
+    max-width: 100%;
   }
-  if ('true' == 'true') {
-    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  .l_body.mobile .l_left {
+    transition: transform 0.3s ease-out;
   }
-  if ('true' == 'true') {
-    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  .l_body.mobile.sidebar .l_left {
+    transform: translateX(0px);
   }
-  if ('false' == 'true') {
-    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
-  }
-</script>
-
-<!-- required -->
-
-  
-<script src="/js/main.js" async></script>
-
-
-
-<!-- optional -->
-
-
-
-<!-- inject -->
-
-
-  </div>
-</body>
-</html>
+}

@@ -1,400 +1,46 @@
-<!DOCTYPE html>
-<html lang='zh-CN'>
-
-<head>
-  <meta name="generator" content="Hexo 6.3.0">
-  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
-  <meta charset="utf-8">
-  
-
-  <meta http-equiv='x-dns-prefetch-control' content='on' />
-  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
-  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
-  <link rel='dns-prefetch' href='//unpkg.com'>
-
-  <meta name="renderer" content="webkit">
-  <meta name="force-rendering" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="HandheldFriendly" content="True" >
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="theme-color" content="#f8f8f8">
-  
-  <title>js的精度运算 - 翁先森的博客</title>
-
-  
-    <meta name="description" content="前言0.1 + 0.2 是否等于 0.3 作为一道经典的面试题，已经广外熟知，说起原因，大家能回答出这是浮点数精度问题导致，也能辩证的看待这并非是 ECMAScript 这门语言的问题，今天就是具体看一下背后的原因。 数字类型ECMAScript 中的 Number 类型使用 IEEE754 标准来表示整数和浮点数值。所谓 IEEE754 标准，全称 IEEE 二进制浮点数算术标准，这个标准定义了">
-<meta property="og:type" content="article">
-<meta property="og:title" content="js的精度运算">
-<meta property="og:url" content="https://github.com/NollieLeo/2021/06/06/js%E7%9A%84%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/index.html">
-<meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="前言0.1 + 0.2 是否等于 0.3 作为一道经典的面试题，已经广外熟知，说起原因，大家能回答出这是浮点数精度问题导致，也能辩证的看待这并非是 ECMAScript 这门语言的问题，今天就是具体看一下背后的原因。 数字类型ECMAScript 中的 Number 类型使用 IEEE754 标准来表示整数和浮点数值。所谓 IEEE754 标准，全称 IEEE 二进制浮点数算术标准，这个标准定义了">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/.com//1.png">
-<meta property="article:published_time" content="2021-06-06T02:17:48.000Z">
-<meta property="article:modified_time" content="2023-01-28T13:26:45.636Z">
-<meta property="article:author" content="翁先森">
-<meta property="article:tag" content="Javascript">
-<meta property="article:tag" content="面试题">
-<meta property="article:tag" content="浮点数">
-<meta property="article:tag" content="精度运算">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/.com//1.png">
-  
-  
-
-  <!-- feed -->
-  
-    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
-  
-
-  
-    
-<link rel="stylesheet" href="/css/main.css">
-
-  
-
-  
-    <link rel="shortcut icon" href="/assets/avatar.png">
-  
-
-  
-
-  
-
-
-  
-</head>
-
-<body>
-  
-
-
-
-
-  <div class='l_body' id='start'>
-    <aside class='l_left' layout='post'>
-    
-
-  
-
-<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
-
-<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/more/">更多</a></nav>
-</header>
-
-
-<div class="widgets">
-<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
-
-
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">js的精度运算</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8B"><span class="toc-text">数字类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E8%BD%AC%E4%BA%8C%E8%BF%9B%E5%88%B6"><span class="toc-text">浮点数转二进制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E5%AD%98%E5%82%A8"><span class="toc-text">浮点数的存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-text">浮点数的运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol></div></div></widget>
-
-
-
-
-</div>
-<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/logo-github.svg"/></a></div></footer>
-
-    </aside>
-    <div class='l_main'>
-      
-
-      
-
-
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Javascript/">Javascript</a></div><div id="post-meta">发布于&nbsp;<time datetime="2021-06-06T02:17:48.000Z">2021-06-06</time></div></div>
-
-<article class='md-text content post'>
-<h1 class="article-title"><span>js的精度运算</span></h1>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>0.1 + 0.2 是否等于 0.3 作为一道经典的面试题，已经广外熟知，说起原因，大家能回答出这是浮点数精度问题导致，也能辩证的看待这并非是 ECMAScript 这门语言的问题，今天就是具体看一下背后的原因。</p>
-<h2 id="数字类型"><a href="#数字类型" class="headerlink" title="数字类型"></a>数字类型</h2><p>ECMAScript 中的 Number 类型使用 IEEE754 标准来表示整数和浮点数值。所谓 IEEE754 标准，全称 IEEE 二进制浮点数算术标准，这个标准定义了表示浮点数的格式等内容。</p>
-<p>在 IEEE754 中，规定了四种表示浮点数值的方式：单精确度（32位）、双精确度（64位）、延伸单精确度、与延伸双精确度。像 ECMAScript 采用的就是双精确度，也就是说，会用 64 位字节来储存一个浮点数。</p>
-<h2 id="浮点数转二进制"><a href="#浮点数转二进制" class="headerlink" title="浮点数转二进制"></a>浮点数转二进制</h2><p>我们来看下 1020 用十进制的表示：</p>
-<blockquote>
-<p>1020 = <strong>1</strong> * 10^3 + <strong>0</strong> * 10^2 + <strong>2</strong> * 10^1 + <strong>0</strong> * 10^0</p>
-</blockquote>
-<p>所以 1020 用十进制表示就是 1020……(哈哈)</p>
-<p>如果 1020 用二进制来表示呢？</p>
-<blockquote>
-<p>1020 = <strong>1</strong> * 2^9 + <strong>1</strong> * 2^8 + <strong>1</strong> * 2^7 + <strong>1</strong> * 2^6 + <strong>1</strong> * 2^5 + <strong>1</strong> * 2^4 + <strong>1</strong> * 2^3 + <strong>1</strong> * 2^2 + <strong>0</strong> * 2^1 + <strong>0</strong> * 2^0</p>
-</blockquote>
-<p>所以 1020 的二进制为 <code>1111111100</code></p>
-<p>那如果是 0.75 用二进制表示呢？同理应该是：</p>
-<blockquote>
-<p>0.75 = a * 2^-1 + b * 2^-2 + c * 2^-3 + d * 2^-4 + …</p>
-</blockquote>
-<p>因为使用的是二进制，这里的 abcd……的值的要么是 0 要么是 1。</p>
-<p>那怎么算出 abcd…… 的值呢，我们可以两边不停的乘以 2 算出来，解法如下：</p>
-<blockquote>
-<p>0.75 = a * 2^-1 + b * 2^-2 + c * 2^-3 + d * 2^-4…</p>
-</blockquote>
-<p>两边同时乘以 2</p>
-<blockquote>
-<p>1 + 0.5 = a * 2^0 + b * 2^-1 + c * 2^-2 + d * 2^-3… (所以 a = 1)</p>
-</blockquote>
-<p>剩下的：</p>
-<blockquote>
-<p>0.5 = b * 2^-1 + c * 2^-2 + d * 2^-3…</p>
-</blockquote>
-<p>再同时乘以 2</p>
-<blockquote>
-<p>1 + 0 = b * 2^0 + c * 2^-2 + d * 2^-3… (所以 b = 1)</p>
-</blockquote>
-<p>所以 0.75 用二进制表示就是 0.ab，也就是 0.11</p>
-<p>然而不是所有的数都像 0.75 这么好算，我们来算下 0.1：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">0.1 = a * 2^-1 + b * 2^-2 + c * 2^-3 + d * 2^-4 + ...</span><br><span class="line"></span><br><span class="line">0 + 0.2 = a * 2^0 + b * 2^-1 + c * 2^-2 + ...   (a = 0)</span><br><span class="line">0 + 0.4 = b * 2^0 + c * 2^-1 + d * 2^-2 + ...   (b = 0)</span><br><span class="line">0 + 0.8 = c * 2^0 + d * 2^-1 + e * 2^-2 + ...   (c = 0)</span><br><span class="line">1 + 0.6 = d * 2^0 + e * 2^-1 + f * 2^-2 + ...   (d = 1)</span><br><span class="line">1 + 0.2 = e * 2^0 + f * 2^-1 + g * 2^-2 + ...   (e = 1)</span><br><span class="line">0 + 0.4 = f * 2^0 + g * 2^-1 + h * 2^-2 + ...   (f = 0)</span><br><span class="line">0 + 0.8 = g * 2^0 + h * 2^-1 + i * 2^-2 + ...   (g = 0)</span><br><span class="line">1 + 0.6 = h * 2^0 + i * 2^-1 + j * 2^-2 + ...   (h = 1)</span><br><span class="line">....</span><br></pre></td></tr></table></figure>
-
-<p>然后你就会发现，这个计算在不停的循环，所以 0.1 用二进制表示就是 0.00011001100110011……</p>
-<h2 id="浮点数的存储"><a href="#浮点数的存储" class="headerlink" title="浮点数的存储"></a>浮点数的存储</h2><p>虽然 0.1 转成二进制时是一个无限循环的数，但计算机总要储存吧，我们知道 ECMAScript 使用 64 位字节来储存一个浮点数，那具体是怎么储存的呢？这就要说回 IEEE754 这个标准了，毕竟是这个标准规定了存储的方式。</p>
-<p>这个标准认为，一个浮点数 (Value) 可以这样表示：</p>
-<blockquote>
-<p>Value = sign * exponent * fraction</p>
-</blockquote>
-<p>看起来很抽象的样子，简单理解就是科学计数法……</p>
-<p>比如 -1020，用科学计数法表示就是:</p>
-<blockquote>
-<p>-1 * 10^3 * 1.02</p>
-</blockquote>
-<p>sign 就是 -1，exponent 就是 10^3，fraction 就是 1.02</p>
-<p>对于二进制也是一样，以 0.1 的二进制 0.00011001100110011…… 这个数来说：</p>
-<p>可以表示为：</p>
-<blockquote>
-<p>1 * 2^-4 * 1.1001100110011……</p>
-</blockquote>
-<p>其中 sign 就是 1，exponent 就是 2^-4，fraction 就是 1.1001100110011……</p>
-<p>而当只做二进制科学计数法的表示时，这个 Value 的表示可以再具体一点变成：</p>
-<blockquote>
-<p>V = (-1)^S * (1 + Fraction) * 2^E</p>
-</blockquote>
-<p>(如果所有的浮点数都可以这样表示，那么我们存储的时候就把这其中会变化的一些值存储起来就好了)</p>
-<p>我们来一点点看：</p>
-<p><code>(-1)^S</code> 表示符号位，当 S = 0，V 为正数；当 S = 1，V 为负数。</p>
-<p>再看 <code>(1 + Fraction)</code>，这是因为所有的浮点数都可以表示为 1.xxxx * 2^xxx 的形式，前面的一定是 1.xxx，那干脆我们就不存储这个 1 了，直接存后面的 xxxxx 好了，这也就是 Fraction 的部分。</p>
-<p>最后再看 <code>2^E</code></p>
-<p>如果是 1020.75，对应二进制数就是 1111111100.11，对应二进制科学计数法就是 1 * 1.11111110011 * 2^9，E 的值就是 9，而如果是 0.1 ，对应二进制是 1 * 1.1001100110011…… * 2^-4， E 的值就是 -4，也就是说，E 既可能是负数，又可能是正数，那问题就来了，那我们该怎么储存这个 E 呢？</p>
-<p>我们这样解决，假如我们用 8 位字节来存储 E 这个数，如果只有正数的话，储存的值的范围是 0 ~ 254，而如果要储存正负数的话，值的范围就是 -127~127，我们在存储的时候，把要存储的数字加上 127，这样当我们存 -127 的时候，我们存 0，当存 127 的时候，存 254，这样就解决了存负数的问题。对应的，当取值的时候，我们再减去 127。</p>
-<p>所以呢，真到实际存储的时候，我们并不会直接存储 E，而是会存储 E + bias，当用 8 个字节的时候，这个 bias 就是 127。</p>
-<p>所以，如果要存储一个浮点数，我们存 S 和 Fraction 和 E + bias 这三个值就好了，那具体要分配多少个字节位来存储这些数呢？IEEE754 给出了标准：</p>
-<p>[<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/.com//1.png" alt="IEEE754">]</p>
-<p>在这个标准下：</p>
-<p>我们会用 1 位存储 S，0 表示正数，1 表示负数。</p>
-<p>用 11 位存储 E + bias，对于 11 位来说，bias 的值是 2^(11-1) - 1，也就是 1023。</p>
-<p>用 52 位存储 Fraction。</p>
-<p>举个例子，就拿 0.1 来看，对应二进制是 1 * 1.1001100110011…… * 2^-4， Sign 是 0，E + bias 是 -4 + 1023 = 1019，1019 用二进制表示是 1111111011，Fraction 是 1001100110011……</p>
-<p>对应 64 个字节位的完整表示就是：</p>
-<blockquote>
-<p>0 01111111011 1001100110011001100110011001100110011001100110011010</p>
-</blockquote>
-<p>同理, 0.2 表示的完整表示是：</p>
-<blockquote>
-<p>0 01111111100 1001100110011001100110011001100110011001100110011010</p>
-</blockquote>
-<p>所以当 0.1 存下来的时候，就已经发生了精度丢失，当我们用浮点数进行运算的时候，使用的其实是精度丢失后的数。</p>
-<h2 id="浮点数的运算"><a href="#浮点数的运算" class="headerlink" title="浮点数的运算"></a>浮点数的运算</h2><p>关于浮点数的运算，一般由以下五个步骤完成：对阶、尾数运算、规格化、舍入处理、溢出判断。我们来简单看一下 0.1 和 0.2 的计算。</p>
-<p>首先是对阶，所谓对阶，就是把阶码调整为相同，比如 0.1 是 <code>1.1001100110011…… * 2^-4</code>，阶码是 -4，而 0.2 就是 <code>1.10011001100110...* 2^-3</code>，阶码是 -3，两个阶码不同，所以先调整为相同的阶码再进行计算，调整原则是小阶对大阶，也就是 0.1 的 -4 调整为 -3，对应变成 <code>0.11001100110011…… * 2^-3</code></p>
-<p>接下来是尾数计算:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  0.1100110011001100110011001100110011001100110011001101</span><br><span class="line">+ 1.1001100110011001100110011001100110011001100110011010</span><br><span class="line">————————————————————————————————————————————————————————</span><br><span class="line"> 10.0110011001100110011001100110011001100110011001100111</span><br></pre></td></tr></table></figure>
-
-<p>我们得到结果为 <code>10.0110011001100110011001100110011001100110011001100111 * 2^-3</code></p>
-<p>将这个结果处理一下，即结果规格化，变成 <code>1.0011001100110011001100110011001100110011001100110011(1) * 2^-2</code></p>
-<p>括号里的 1 意思是说计算后这个 1 超出了范围，所以要被舍弃了。</p>
-<p>再然后是舍入，四舍五入对应到二进制中，就是 0 舍 1 入，因为我们要把括号里的 1 丢了，所以这里会进一，结果变成</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.0011001100110011001100110011001100110011001100110100 * 2^-2</span><br></pre></td></tr></table></figure>
-
-<p>本来还有一个溢出判断，因为这里不涉及，就不讲了。</p>
-<p>所以最终的结果存成 64 位就是</p>
-<blockquote>
-<p>0 01111111101 0011001100110011001100110011001100110011001100110100</p>
-</blockquote>
-<p>将它转换为10进制数就得到 <code>0.30000000000000004440892098500626</code></p>
-<p>因为两次存储时的精度丢失加上一次运算时的精度丢失，最终导致了 0.1 + 0.2 !== 0.3</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 十进制转二进制</span><br><span class="line">parseFloat(0.1).toString(2);</span><br><span class="line">=&gt; &quot;0.0001100110011001100110011001100110011001100110011001101&quot;</span><br><span class="line"></span><br><span class="line">// 二进制转十进制</span><br><span class="line">parseInt(1100100,2)</span><br><span class="line">=&gt; 100</span><br><span class="line"></span><br><span class="line">// 以指定的精度返回该数值对象的字符串表示</span><br><span class="line">(0.1 + 0.2).toPrecision(21)</span><br><span class="line">=&gt; &quot;0.300000000000000044409&quot;</span><br><span class="line">(0.3).toPrecision(21)</span><br><span class="line">=&gt; &quot;0.299999999999999988898&quot;</span><br></pre></td></tr></table></figure>
-
-<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
-</div></section></div>
-
-</article>
-
-<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2021/06/06/react%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/">react相关面试知识点</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2021/06/06/js%E7%9A%84%E9%97%AD%E5%8C%85/">js的闭包</a></div></section></div>
-
-
-
-
-
-
-
-
-      
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
-</div></footer>
-
-      <div class='float-panel mobile-only blur' style='display:none'>
-  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
-    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
-  </button>
-</div>
-
-    </div>
-  </div>
-  <div class='scripts'>
-    <script type="text/javascript">
-  const stellar = {
-    // 懒加载 css https://github.com/filamentgroup/loadCSS
-    loadCSS: (href, before, media, attributes) => {
-      var doc = window.document;
-      var ss = doc.createElement("link");
-      var ref;
-      if (before) {
-        ref = before;
-      } else {
-        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
-        ref = refs[refs.length - 1];
-      }
-      var sheets = doc.styleSheets;
-      if (attributes) {
-        for (var attributeName in attributes) {
-          if (attributes.hasOwnProperty(attributeName)) {
-            ss.setAttribute(attributeName, attributes[attributeName]);
-          }
-        }
-      }
-      ss.rel = "stylesheet";
-      ss.href = href;
-      ss.media = "only x";
-      function ready(cb) {
-        if (doc.body) {
-          return cb();
-        }
-        setTimeout(function () {
-          ready(cb);
-        });
-      }
-      ready(function () {
-        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
-      });
-      var onloadcssdefined = function (cb) {
-        var resolvedHref = ss.href;
-        var i = sheets.length;
-        while (i--) {
-          if (sheets[i].href === resolvedHref) {
-            return cb();
-          }
-        }
-        setTimeout(function () {
-          onloadcssdefined(cb);
-        });
-      };
-      function loadCB() {
-        if (ss.addEventListener) {
-          ss.removeEventListener("load", loadCB);
-        }
-        ss.media = media || "all";
-      }
-      if (ss.addEventListener) {
-        ss.addEventListener("load", loadCB);
-      }
-      ss.onloadcssdefined = onloadcssdefined;
-      onloadcssdefined(loadCB);
-      return ss;
-    },
-
-    // 从 butterfly 和 volantis 获得灵感
-    loadScript: (src, opt) => new Promise((resolve, reject) => {
-      var script = document.createElement('script');
-      script.src = src;
-      if (opt) {
-        for (let key of Object.keys(opt)) {
-          script[key] = opt[key]
-        }
-      } else {
-        // 默认异步，如果需要同步，第二个参数传入 {} 即可
-        script.async = true
-      }
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    }),
-
-    // https://github.com/jerryc127/hexo-theme-butterfly
-    jQuery: (fn) => {
-      if (typeof jQuery === 'undefined') {
-        stellar.loadScript(stellar.plugins.jQuery).then(fn)
-      } else {
-        fn()
-      }
-    }
-  };
-  stellar.version = '1.18.5';
-  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
-  stellar.config = {
-    date_suffix: {
-      just: '刚刚',
-      min: '分钟前',
-      hour: '小时前',
-      day: '天前',
-      month: '个月前',
-    },
-  };
-
-  // required plugins (only load if needs)
-  stellar.plugins = {
-    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
-  };
-
-  if ('local_search') {
-    stellar.search = {};
-    stellar.search.service = 'local_search';
-    if (stellar.search.service == 'local_search') {
-      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
-      stellar.search[stellar.search.service] = service_obj;
-    }
+.l_body {
+  display: flex;
+  margin: auto;
+  padding: 0 var(--gap-l);
+  justify-content: center;
+}
+.l_body .l_left {
+  z-index: 8;
+  width: var(--width-left);
+  flex-shrink: 0;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+.l_body .l_main {
+  flex-shrink: 1;
+  flex-grow: 1;
+  width: 320px;
+  max-width: var(--width-main);
+}
+@media screen and (max-width: $device-mobile-max) {
+  .mobile-only {
+    display: block !important;
   }
-
-  // stellar js
-  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
-
-  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
-  // optional plugins
-  if ('true' == 'true') {
-    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  .l_body {
+    padding: 0;
   }
-  if ('true' == 'true') {
-    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  .l_body .l_left {
+    position: fixed;
+    transform: translateX(-320px);
+    margin: 0;
+    left: 0;
+    background: var(--site-bg);
+    box-shadow: $boxshadow-card-float;
+    z-index: 9;
   }
-  if ('' == 'true') {
-    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  .l_body .l_main {
+    max-width: 100%;
   }
-  if ('true' == 'true') {
-    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  .l_body.mobile .l_left {
+    transition: transform 0.3s ease-out;
   }
-  if ('true' == 'true') {
-    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  .l_body.mobile.sidebar .l_left {
+    transform: translateX(0px);
   }
-  if ('false' == 'true') {
-    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
-  }
-</script>
-
-<!-- required -->
-
-  
-<script src="/js/main.js" async></script>
-
-
-
-<!-- optional -->
-
-
-
-<!-- inject -->
-
-
-  </div>
-</body>
-</html>
+}

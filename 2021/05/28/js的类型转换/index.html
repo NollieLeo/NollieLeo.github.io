@@ -1,422 +1,46 @@
-<!DOCTYPE html>
-<html lang='zh-CN'>
-
-<head>
-  <meta name="generator" content="Hexo 6.3.0">
-  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
-  <meta charset="utf-8">
-  
-
-  <meta http-equiv='x-dns-prefetch-control' content='on' />
-  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
-  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
-  <link rel='dns-prefetch' href='//unpkg.com'>
-
-  <meta name="renderer" content="webkit">
-  <meta name="force-rendering" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="HandheldFriendly" content="True" >
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="theme-color" content="#f8f8f8">
-  
-  <title>js的类型转换 - 翁先森的博客</title>
-
-  
-    <meta name="description" content="自我检测1[] &#x3D;&#x3D; ![] &#x2F;&#x2F; -&gt; true  D部分有答案 显式类型转换和隐式类型转换强制转换经常发生在动态类型语言运行时。我们经常会写类型转换，如： 123var a&#x3D;1 var b&#x3D;a+&amp;#x27;&amp;#x27; &#x2F;&#x2F; 隐式 &amp;#x27;1&amp;#x27;var c&#x3D;String(a) &#x2F;&#x2F; 显式 &amp;#x27;1&amp;#x27;  这里的隐式和显式是相对于开发者而言的。可以从代码中看出来类">
-<meta property="og:type" content="article">
-<meta property="og:title" content="js的类型转换">
-<meta property="og:url" content="https://github.com/NollieLeo/2021/05/28/js%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/index.html">
-<meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="自我检测1[] &#x3D;&#x3D; ![] &#x2F;&#x2F; -&gt; true  D部分有答案 显式类型转换和隐式类型转换强制转换经常发生在动态类型语言运行时。我们经常会写类型转换，如： 123var a&#x3D;1 var b&#x3D;a+&amp;#x27;&amp;#x27; &#x2F;&#x2F; 隐式 &amp;#x27;1&amp;#x27;var c&#x3D;String(a) &#x2F;&#x2F; 显式 &amp;#x27;1&amp;#x27;  这里的隐式和显式是相对于开发者而言的。可以从代码中看出来类">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-05-28T02:55:50.000Z">
-<meta property="article:modified_time" content="2023-01-28T13:26:45.461Z">
-<meta property="article:author" content="翁先森">
-<meta property="article:tag" content="类型转换">
-<meta property="article:tag" content="&#x3D;&#x3D;">
-<meta property="article:tag" content="&#x3D;&#x3D;&#x3D;">
-<meta name="twitter:card" content="summary">
-  
-  
-
-  <!-- feed -->
-  
-    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
-  
-
-  
-    
-<link rel="stylesheet" href="/css/main.css">
-
-  
-
-  
-    <link rel="shortcut icon" href="/assets/avatar.png">
-  
-
-  
-
-  
-
-
-  
-</head>
-
-<body>
-  
-
-
-
-
-  <div class='l_body' id='start'>
-    <aside class='l_left' layout='post'>
-    
-
-  
-
-<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
-
-<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/more/">更多</a></nav>
-</header>
-
-
-<div class="widgets">
-<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
-
-
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">js的类型转换</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E6%88%91%E6%A3%80%E6%B5%8B"><span class="toc-text">自我检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%BE%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%92%8C%E9%9A%90%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">显式类型转换和隐式类型转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-%E6%8A%BD%E8%B1%A1%E5%80%BC%E6%93%8D%E4%BD%9C"><span class="toc-text">A.抽象值操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-ToString"><span class="toc-text">1.ToString</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B"><span class="toc-text">基本类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E7%B1%BB%E5%9E%8B"><span class="toc-text">复杂类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JSON%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%96"><span class="toc-text">JSON字符串化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-ToNumber"><span class="toc-text">2.ToNumber</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B-1"><span class="toc-text">基本类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E7%B1%BB%E5%9E%8B-1"><span class="toc-text">复杂类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-ToBoolean"><span class="toc-text">3.ToBoolean</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%81%87%E5%80%BC%EF%BC%88falsy-value%EF%BC%89"><span class="toc-text">假值（falsy value）</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-%E6%98%BE%E5%BC%8F%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">B.显式强制类型转换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E6%95%B0%E5%AD%97%E4%B9%8B%E9%97%B4%E7%9A%84%E6%98%BE%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="toc-text">字符串和数字之间的显式转换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A5%E6%9C%9F%E6%98%BE%E7%A4%BA%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%95%B0%E5%AD%97"><span class="toc-text">日期显示转换为数字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-text">位操作符~</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%BE%E5%BC%8F%E8%A7%A3%E6%9E%90%E6%95%B0%E5%AD%97%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">显式解析数字字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90%E5%92%8C%E8%BD%AC%E6%8D%A2%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">解析和转换的区别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%BE%E5%BC%8F%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%B8%83%E5%B0%94%E5%80%BC"><span class="toc-text">显式转换为布尔值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E9%9A%90%E5%BC%8F%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">C.隐式强制类型转换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E6%95%B0%E5%AD%97%E4%B9%8B%E9%97%B4%E7%9A%84%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="toc-text">1.字符串和数字之间的隐式转换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-text">+&#x2F;-操作符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%9A%90%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%B8%83%E5%B0%94%E5%80%BC"><span class="toc-text">2.隐式类型转换为布尔值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Symbol%E7%9A%84%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">3.Symbol的强制类型转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#D-%E5%AE%BD%E6%9D%BE%E7%9B%B8%E7%AD%89%EF%BC%88-%EF%BC%89%E5%92%8C%E4%B8%A5%E6%A0%BC%E7%9B%B8%E7%AD%89%EF%BC%88-%EF%BC%89"><span class="toc-text">D.宽松相等（ &#x3D;&#x3D; ）和严格相等（ &#x3D;&#x3D;&#x3D; ）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%BD%E6%9D%BE%E7%9B%B8%E7%AD%89%E7%9A%84%E8%BD%AC%E6%8D%A2%E8%A7%84%E5%88%99%EF%BC%88-%EF%BC%89"><span class="toc-text">宽松相等的转换规则（&#x3D;&#x3D;）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E6%95%B0%E5%AD%97%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9B%B8%E7%AD%89%E6%AF%94%E8%BE%83"><span class="toc-text">字符串和数字之间的相等比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%B8%83%E5%B0%94%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9B%B8%E7%AD%89%E6%AF%94%E8%BE%83"><span class="toc-text">其它类型和布尔类型之间的相等比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null%E5%92%8Cundefined%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9B%B8%E7%AD%89%E6%AF%94%E8%BE%83"><span class="toc-text">null和undefined之间的相等比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E5%92%8C%E9%9D%9E%E5%AF%B9%E8%B1%A1%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9B%B8%E7%AD%89%E6%AF%94%E8%BE%83"><span class="toc-text">对象和非对象之间的相等比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%A0%E4%B8%AA%E5%85%B8%E5%9E%8B%E7%9A%84%E5%9D%91"><span class="toc-text">几个典型的坑</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#E-%E6%8A%BD%E8%B1%A1%E5%85%B3%E7%B3%BB%E6%AF%94%E8%BE%83"><span class="toc-text">E.抽象关系比较</span></a></li></ol></div></div></widget>
-
-
-
-
-</div>
-<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/logo-github.svg"/></a></div></footer>
-
-    </aside>
-    <div class='l_main'>
-      
-
-      
-
-
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Javascript/">Javascript</a> <span class="sep"></span> <a class="cap breadcrumb-link" href="/categories/Javascript/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a></div><div id="post-meta">发布于&nbsp;<time datetime="2021-05-28T02:55:50.000Z">2021-05-28</time></div></div>
-
-<article class='md-text content post'>
-<h1 class="article-title"><span>js的类型转换</span></h1>
-<h2 id="自我检测"><a href="#自我检测" class="headerlink" title="自我检测"></a>自我检测</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[] == ![] <span class="comment">// -&gt; true</span></span><br></pre></td></tr></table></figure>
-
-<p>D部分有答案</p>
-<h2 id="显式类型转换和隐式类型转换"><a href="#显式类型转换和隐式类型转换" class="headerlink" title="显式类型转换和隐式类型转换"></a>显式类型转换和隐式类型转换</h2><p>强制转换经常发生在动态类型语言运行时。我们经常会写类型转换，如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a=<span class="number">1</span> </span><br><span class="line"><span class="keyword">var</span> b=a+<span class="string">&#x27;&#x27;</span> <span class="comment">// 隐式 &#x27;1&#x27;</span></span><br><span class="line"><span class="keyword">var</span> c=<span class="title class_">String</span>(a) <span class="comment">// 显式 &#x27;1&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>这里的隐式和显式是相对于开发者而言的。可以从代码中看出来类型转换的是显式，反则为隐式。</p>
-<h2 id="A-抽象值操作"><a href="#A-抽象值操作" class="headerlink" title="A.抽象值操作"></a>A.抽象值操作</h2><h3 id="1-ToString"><a href="#1-ToString" class="headerlink" title="1.ToString"></a>1.ToString</h3><p>非字符串-&gt;字符串。</p>
-<h4 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h4><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">null <span class="punctuation">-&gt;</span> <span class="symbol">&#x27;null</span>&#x27;</span><br><span class="line">undefined <span class="punctuation">-&gt;</span> <span class="symbol">&#x27;undefined</span>&#x27;</span><br><span class="line"><span class="literal">true</span> <span class="punctuation">-&gt;</span> <span class="symbol">&#x27;true</span>&#x27;</span><br><span class="line"><span class="number">1</span> <span class="punctuation">-&gt;</span> <span class="string">&#x27;1&#x27;</span></span><br><span class="line"><span class="number">1</span> * <span class="number">1</span> <span class="number">000</span> <span class="number">000</span> <span class="number">000</span> <span class="number">000</span> <span class="number">000</span> <span class="number">000</span> <span class="number">000</span> <span class="punctuation">-&gt;</span> &#x27;<span class="number">1e+21</span>&#x27;</span><br></pre></td></tr></table></figure>
-
-<h4 id="复杂类型"><a href="#复杂类型" class="headerlink" title="复杂类型"></a>复杂类型</h4><p>当对象有自己的<code>toString()</code>方法，字符串化时就会调用该方法，使用其返回值。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj=&#123;</span><br><span class="line">    <span class="attr">a</span>:<span class="string">&#x27;test&#x27;</span>,</span><br><span class="line">    <span class="title function_">toString</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;yeah~~&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//没有自定义的toString()方法应该返回[object Object]111，</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj+<span class="string">&#x27;111&#x27;</span>) <span class="comment">// yeah~~111</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="JSON字符串化"><a href="#JSON字符串化" class="headerlink" title="JSON字符串化"></a>JSON字符串化</h4><p>对于大多数简单值来说，<code>JSON.stringify()</code>和<code>toString()</code>的效果基本相同，序列化的结果总是字符串。有一个比较特殊的情况：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">JSON</span>.<span class="title function_">stringify</span>(<span class="string">&#x27;hello&#x27;</span>) <span class="comment">// &quot;&quot;hello&quot;&quot;  含有双引号的字符串</span></span><br></pre></td></tr></table></figure>
-
-<p>对于undefined、function、symbol来说会返回undefined，在数组中返回null、在对象中自动忽略。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">JSON</span>.<span class="title function_">stringify</span>(<span class="literal">undefined</span>) <span class="comment">// undefined</span></span><br><span class="line"><span class="title class_">JSON</span>.<span class="title function_">stringify</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;&#125;) <span class="comment">// undefined</span></span><br><span class="line"><span class="title class_">JSON</span>.<span class="title function_">stringify</span>([<span class="keyword">function</span>(<span class="params"></span>)&#123;&#125;,<span class="number">2</span>]) <span class="comment">// &quot;[null,2]&quot;</span></span><br><span class="line"><span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;<span class="attr">a</span>:<span class="keyword">function</span>(<span class="params"></span>)&#123;&#125;,<span class="attr">b</span>:<span class="number">2</span>&#125;) <span class="comment">// &quot;&#123;&quot;b&quot;:2&#125;&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj=&#123;</span><br><span class="line">    <span class="attr">a</span>:<span class="string">&#x27;test&#x27;</span>,</span><br><span class="line">    <span class="title function_">toJSON</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;yeah~~&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(obj))</span><br></pre></td></tr></table></figure>
-
-<p>答案：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;yeah~~&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="2-ToNumber"><a href="#2-ToNumber" class="headerlink" title="2.ToNumber"></a>2.ToNumber</h3><h4 id="基本类型-1"><a href="#基本类型-1" class="headerlink" title="基本类型"></a>基本类型</h4><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span> <span class="punctuation">-&gt;</span> <span class="number">1</span></span><br><span class="line"><span class="literal">false</span> <span class="punctuation">-&gt;</span> <span class="number">0</span></span><br><span class="line">undefined <span class="punctuation">-&gt;</span> NaN</span><br><span class="line">null <span class="punctuation">-&gt;</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<p>处理字符串失败时返回NaN。</p>
-<h4 id="复杂类型-1"><a href="#复杂类型-1" class="headerlink" title="复杂类型"></a>复杂类型</h4><p>对象（包括数组），先被转换为相应的基本类型值，如果返回的是非数字的基本类型值，则按照上面的规则强制转换为数字。</p>
-<blockquote>
-<p>将值转换为相应的基本类型值，先检查该值是否有valueOf()方法，有并且返回基本类型值，则使用该值进行强制类型转换；没有就使用toString()的返回值进行强制转换。如果以上都不返回基类型值，产生TypeError错误。</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj=&#123;</span><br><span class="line">    <span class="title function_">toString</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;1&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(&#123;&#125;) <span class="comment">// NaN</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>(obj)) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>注意</strong>使用<code>Object.create(null)</code>创建的对象，无法进行强制转换！是因为其<code>[[Prototype]]</code>为空，没有<code>valueOf()</code>和<code>toString()</code>方法。</p>
-<h3 id="3-ToBoolean"><a href="#3-ToBoolean" class="headerlink" title="3.ToBoolean"></a>3.ToBoolean</h3><h5 id="假值（falsy-value）"><a href="#假值（falsy-value）" class="headerlink" title="假值（falsy value）"></a>假值（falsy value）</h5><p>js中的值可被分为两类：可被强制转换为false的值，和其他（可以被强制转换为true的值）。</p>
-<p>以下这些为假值：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">undefined</span></span><br><span class="line"><span class="literal">null</span></span><br><span class="line">fasle</span><br><span class="line">+<span class="number">0</span> -<span class="number">0</span> <span class="title class_">NaN</span></span><br><span class="line"><span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>虽然没有明确规定，我们可以默认除了这些值以外的所有值为真值。</p>
-<h2 id="B-显式强制类型转换"><a href="#B-显式强制类型转换" class="headerlink" title="B.显式强制类型转换"></a>B.显式强制类型转换</h2><h3 id="字符串和数字之间的显式转换"><a href="#字符串和数字之间的显式转换" class="headerlink" title="字符串和数字之间的显式转换"></a>字符串和数字之间的显式转换</h3><p>一般通过<code>String()</code>和<code>Number()</code>这两个内建函数实现的。如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">String</span>(<span class="number">1</span>) <span class="comment">// &quot;1&quot;</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="string">&#x27;1.25&#x27;</span>) <span class="comment">// 1.25</span></span><br></pre></td></tr></table></figure>
-
-<p>通过一元运算符以及<code>toString()</code>也被认为是显示强制类型转换。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+<span class="string">&#x27;25&#x27;</span> <span class="comment">// 25</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="日期显示转换为数字"><a href="#日期显示转换为数字" class="headerlink" title="日期显示转换为数字"></a>日期显示转换为数字</h4><p>一元运算符有一个常用的用途是，将Date对象强制转换为Unix时间戳，如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+<span class="keyword">new</span> <span class="title class_">Date</span>() <span class="comment">// 1516625381333</span></span><br></pre></td></tr></table></figure>
-
-<p>我们也可以使用更显式的方法：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">getTime</span>() <span class="comment">// 1516625518125</span></span><br></pre></td></tr></table></figure>
-
-<p>最好还是使用<code>Date.now()</code>来获得当前的时间戳。</p>
-<h4 id="位操作符"><a href="#位操作符" class="headerlink" title="位操作符~"></a>位操作符~</h4><p>~运算符，按位非，反转操作符的比特位。位操作符会强制操作数使用32位格式，通过ToInt32实现（ToInt32先执行ToNUmber强制转换，之后再执行ToInt32）。如果你不太明白他的运算机制，请记住一个公式：</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~<span class="number">4</span> -&gt; -<span class="number">5</span></span><br><span class="line">~<span class="function"><span class="params">x</span>  =&gt;</span>  -(x+<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-<p>~在日常开发中很少会用到，但在我们处理<code>indexOf()</code>时，可以将结果强制转换为真/假值。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str=<span class="string">&#x27;hello&#x27;</span></span><br><span class="line">str.<span class="title function_">indexOf</span>(<span class="string">&#x27;a&#x27;</span>) <span class="comment">// -1</span></span><br><span class="line">~str.<span class="title function_">indexOf</span>(<span class="string">&#x27;a&#x27;</span>) <span class="comment">//0  -&gt; 假值</span></span><br></pre></td></tr></table></figure>
-
-<p>~~x还可以用来截除小数部分，如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~~-<span class="number">22.8</span> -&gt; -<span class="number">22</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="显式解析数字字符串"><a href="#显式解析数字字符串" class="headerlink" title="显式解析数字字符串"></a>显式解析数字字符串</h3><h4 id="解析和转换的区别"><a href="#解析和转换的区别" class="headerlink" title="解析和转换的区别"></a>解析和转换的区别</h4><p>使用<code>parseInt()</code>将字符串解析为数字，它与<code>Number</code>的作用并不一样：</p>
-<ol>
-<li>parseInt只能解析字符串，传入其他类型参数，如true、function(){}等，返回NaN。</li>
-<li>parseInt可以解析含有非数字字符的字符串，如<code>parseInt(&#39;2px&#39;)</code>将会解析为2，Number则会返回NaN。</li>
-</ol>
-<p>对于parseInt有一个经典的例子，</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">parseInt</span>(<span class="number">1</span>/<span class="number">0</span>,<span class="number">19</span>) -&gt; <span class="number">18</span></span><br></pre></td></tr></table></figure>
-
-<p>这是因为1/0为Infinity，先被转化为字符串<code>&#39;Infinity&#39;</code>，第一个字符为i，在js中有效数字为09和0i，所以之后的n不会被解析，只解析到i为止，i为第18位，所以输出为18.</p>
-<h3 id="显式转换为布尔值"><a href="#显式转换为布尔值" class="headerlink" title="显式转换为布尔值"></a>显式转换为布尔值</h3><p>和上面的Number(),String()一样，Boolean()为显式的ToBoolean强制类型转换。但这个在开发中并不常用，通常使用<code>!!</code>来进行强制类型转换。</p>
-<p>在<code>if()...</code>上下文中，如没有使用<code>Boolean()</code>或<code>!!</code>转成布尔值，则会进行隐式转换。但还是建议使用显式转换，让代码可读性更高。</p>
-<h2 id="C-隐式强制类型转换"><a href="#C-隐式强制类型转换" class="headerlink" title="C.隐式强制类型转换"></a>C.隐式强制类型转换</h2><h3 id="1-字符串和数字之间的隐式转换"><a href="#1-字符串和数字之间的隐式转换" class="headerlink" title="1.字符串和数字之间的隐式转换"></a>1.字符串和数字之间的隐式转换</h3><h4 id="操作符"><a href="#操作符" class="headerlink" title="+/-操作符"></a>+/-操作符</h4><p>+如何判断是进行字符串拼接，还是数值加法呢？</p>
-<blockquote>
-<p>+的其中一个操作符为字符串（或是通过ToPrimitive抽象操作后转换为字符串的值）则进行字符串拼接，否则执行数字加法。</p>
-</blockquote>
-<p>所以，通常上我们将空字符串与数值进行拼接，将其转换为字符串。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a=<span class="string">&#x27;2&#x27;</span></span><br><span class="line"><span class="keyword">const</span> b=a-<span class="number">0</span></span><br><span class="line">b <span class="comment">// -&gt; 2</span></span><br></pre></td></tr></table></figure>
-
-<p>通过<code>-</code>也可将a强制转换为数字，或者使用<code>a*1</code>或<code>a/1</code>，因为这两个运算符只适用于数字，所以比较少见。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a=[<span class="number">1</span>]</span><br><span class="line"><span class="keyword">const</span> b=[<span class="number">3</span>]</span><br><span class="line">a-b <span class="comment">// -&gt; -2</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="2-隐式类型转换为布尔值"><a href="#2-隐式类型转换为布尔值" class="headerlink" title="2.隐式类型转换为布尔值"></a>2.隐式类型转换为布尔值</h3><p>在以下情况中，非布尔值会被隐式转换为布尔值。</p>
-<ol>
-<li>if()中的判断表达式</li>
-<li>for(;;)中的条件判断表达式</li>
-<li>while(…)和do..while(..)循环中的条件表达式</li>
-<li>? : 中的条件判断表达式</li>
-<li>逻辑运算符 || 和 &amp;&amp; 左边的操作数。</li>
-</ol>
-<p>但&amp;&amp;和||返回的值并不一定是布尔值，而是两个操作书中其中的一个。如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">123</span>||<span class="string">&#x27;hello&#x27;</span> <span class="comment">// 123</span></span><br><span class="line"><span class="number">42</span>&amp;&amp;<span class="string">&#x27;abc&#x27;</span> <span class="comment">// &#x27;abc&#x27;</span></span><br><span class="line"><span class="literal">null</span> || <span class="string">&#x27;hello&#x27;</span> <span class="comment">// -&gt;&#x27;hello&#x27;</span></span><br><span class="line"><span class="literal">null</span> &amp;&amp; <span class="string">&#x27;hello&#x27;</span> <span class="comment">// -&gt;null</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-Symbol的强制类型转换"><a href="#3-Symbol的强制类型转换" class="headerlink" title="3.Symbol的强制类型转换"></a>3.Symbol的强制类型转换</h3><p>ES6允许从符号到字符串得显示类型转换，但使用隐式转换会报错。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> s1=<span class="title class_">Symbol</span>(<span class="string">&#x27;test&#x27;</span>)</span><br><span class="line"><span class="title class_">String</span>(s1) -&gt; <span class="string">&quot;Symbol(test)&quot;</span></span><br><span class="line"><span class="string">&#x27;&#x27;</span>+s1 -&gt; <span class="title class_">Uncaught</span> <span class="title class_">TypeError</span>: <span class="title class_">Cannot</span> convert a <span class="title class_">Symbol</span> value to a string</span><br></pre></td></tr></table></figure>
-
-<p>同时，Symbol类型也不能被转换为数字（无论是显式还是隐式），但可以被转换为布尔值。</p>
-<h2 id="D-宽松相等（-）和严格相等（-）"><a href="#D-宽松相等（-）和严格相等（-）" class="headerlink" title="D.宽松相等（ == ）和严格相等（ === ）"></a>D.宽松相等（ == ）和严格相等（ === ）</h2><p><code>==</code>允许在相等比较中进行强制类型转换，但<code>===</code>则不允许。</p>
-<h3 id="宽松相等的转换规则（-）"><a href="#宽松相等的转换规则（-）" class="headerlink" title="宽松相等的转换规则（==）"></a>宽松相等的转换规则（==）</h3><ol>
-<li>对于基本类型：两个值的类型相同，则比较是否相等。<br> 除了NaN（NaN是js中唯一不等于自身的值）和+0/-0（+0 === -0）。类型不同的两个值参考第三条。</li>
-<li>对于对象（包括函数和数组）：他们指向同一引用时，即视为相等，不发生强制转换。</li>
-<li>在比较两个不同类型的值时，会发生隐式类型转换，将其转为相同的类型后再比较。</li>
-</ol>
-<h4 id="字符串和数字之间的相等比较"><a href="#字符串和数字之间的相等比较" class="headerlink" title="字符串和数字之间的相等比较"></a>字符串和数字之间的相等比较</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a=<span class="string">&#x27;12&#x27;</span></span><br><span class="line"><span class="keyword">const</span> b=<span class="number">12</span></span><br><span class="line">a==b <span class="comment">//true</span></span><br><span class="line">a===b <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
-
-<p>规则为：<code>==</code>两边，哪边为数值类型，则另一边转为数值类型。</p>
-<h4 id="其它类型和布尔类型之间的相等比较"><a href="#其它类型和布尔类型之间的相等比较" class="headerlink" title="其它类型和布尔类型之间的相等比较"></a>其它类型和布尔类型之间的相等比较</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a=<span class="string">&#x27;12&#x27;</span></span><br><span class="line"><span class="keyword">const</span> b=<span class="literal">true</span></span><br><span class="line">a==b <span class="comment">// false  a为真值，为什么返回false</span></span><br></pre></td></tr></table></figure>
-
-<p>因为在<code>==</code>两边，哪边为布尔类型，哪边转为数值类型！！<br> 同样，<code>a==false</code>也会返回<code>false</code>，因为这里的布尔值会被强制转换为数字0.</p>
-<h4 id="null和undefined之间的相等比较"><a href="#null和undefined之间的相等比较" class="headerlink" title="null和undefined之间的相等比较"></a>null和undefined之间的相等比较</h4><p>只要记住：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span> <span class="comment">//true</span></span><br><span class="line"><span class="literal">null</span> === <span class="literal">undefined</span> <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="对象和非对象之间的相等比较"><a href="#对象和非对象之间的相等比较" class="headerlink" title="对象和非对象之间的相等比较"></a>对象和非对象之间的相等比较</h4><p>对于布尔值和对象之间的比较，先把布尔值转换为数值类型。<br> 数值或字符串与对象之间的比较，对象先会调用<code>ToPromitive</code>抽象操作，之后再转为数值进行比较。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a=<span class="number">12</span></span><br><span class="line"><span class="keyword">const</span> b=[<span class="number">12</span>]</span><br><span class="line">a==b <span class="comment">//true</span></span><br><span class="line">b-&gt;<span class="string">&#x27;12&#x27;</span>-&gt;<span class="number">12</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> c=<span class="title class_">Object</span>(<span class="literal">null</span>)</span><br><span class="line">c==<span class="literal">null</span> <span class="comment">//fasle 这里c被转换为空对象&#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> d=<span class="title class_">Object</span>(<span class="literal">undefined</span>)</span><br><span class="line">d==<span class="literal">undefined</span> <span class="comment">// fasle 这里d被转换为空对象&#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> e=<span class="title class_">Object</span>(<span class="title class_">NaN</span>)</span><br><span class="line">e==<span class="title class_">NaN</span> <span class="comment">// fasle 这里e被转换为Number(NaN) -&gt; NaN 但NaN不等于自身，所以为false</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="几个典型的坑"><a href="#几个典型的坑" class="headerlink" title="几个典型的坑"></a>几个典型的坑</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 小坑</span></span><br><span class="line"><span class="string">&quot;0&quot;</span> == <span class="literal">false</span> <span class="comment">// -&gt; true  这里false先被转为0，&quot;0&quot;也会转为0，所以为true</span></span><br><span class="line"><span class="string">&quot;0&quot;</span> == <span class="string">&quot;&quot;</span> <span class="comment">// -&gt; false 两个都是字符串类型，直接比较</span></span><br><span class="line"><span class="number">0</span> == <span class="string">&#x27;&#x27;</span> <span class="comment">// -&gt; true 空字符串直接转为0</span></span><br><span class="line"><span class="literal">false</span> == [] <span class="comment">// -&gt; true false先转为0；[]空数组转为&#x27;&#x27;，之后ToNumber操作转为0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 大坑</span></span><br><span class="line">[] == ![] <span class="comment">// -&gt; true []  这里![]先被强制转换为false，变成[]与fasle的比较，之后fasle-&gt;0；[]-&gt;&#x27;&#x27;-&gt;0，所以为true。</span></span><br><span class="line"><span class="number">2</span>=[<span class="number">2</span>] <span class="comment">// -&gt; true [2]-&gt;&#x27;2&#x27;-&gt;2 所以为true</span></span><br><span class="line"><span class="string">&#x27;&#x27;</span>==[<span class="literal">null</span>] <span class="comment">// true [null]-&gt;&#x27;&#x27;</span></span><br><span class="line"><span class="number">0</span>==<span class="string">&#x27;\n&#x27;</span> <span class="comment">// -&gt; true &#x27;\n&#x27;-&gt;&#x27;&#x27;-&gt;0</span></span><br><span class="line"><span class="string">&#x27;true&#x27;</span>==<span class="literal">true</span> <span class="comment">// -&gt; false true-&gt;0;&#x27;true&#x27;-&gt;NaN，所以为false</span></span><br></pre></td></tr></table></figure>
-
-<p>如果你还是一头雾水的话，请仔细阅读D部分这几种相互比较的规则和C部分的隐式类型转换。只要记住，遇到两个不同类型的值，转换优先顺序为布尔值&gt;对象&gt;字符串&gt;数字；每一步的转换到相同类型的值即停止转换，进行比较判断。</p>
-<h2 id="E-抽象关系比较"><a href="#E-抽象关系比较" class="headerlink" title="E.抽象关系比较"></a>E.抽象关系比较</h2><p>出现非字符串就先转为数字类型；如果两者都为字符串，按照字母顺序来比较，如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&#x27;22&#x27;</span>]&lt;[<span class="string">&#x27;023&#x27;</span>] <span class="comment">// -&gt; false 这里并不转为数字，0在字母顺序上小于2，所以为false</span></span><br><span class="line"><span class="number">22</span>&lt;[<span class="string">&#x27;023&#x27;</span>] <span class="comment">// -&gt; true</span></span><br></pre></td></tr></table></figure>
-
-<p>对于对象来说，也同样是转换成字符串，再进行比较，如:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a=&#123;<span class="attr">a</span>:<span class="number">1</span>&#125;</span><br><span class="line"><span class="keyword">const</span> b=&#123;<span class="attr">a</span>:<span class="number">2</span>&#125;</span><br><span class="line">a&gt;b <span class="comment">// -&gt; false</span></span><br><span class="line">a&lt;b <span class="comment">// -&gt; false</span></span><br><span class="line">a==b <span class="comment">// -&gt; false</span></span><br><span class="line">a&lt;=b <span class="comment">// -&gt; true</span></span><br><span class="line">a&gt;=b <span class="comment">// -&gt; true</span></span><br></pre></td></tr></table></figure>
-
-<p>这个例子比较奇怪，虽然他们转成字符串都为<code>[Object Object]</code>，但两个对象的比较并不是转为字符串，而是看他们的引用是否指向同一值。这里<code>&lt;=</code>被处理为<code>!&gt;</code>，所以为<code>true</code>； <code>&gt;=</code>同理。</p>
-
-
-<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
-</div></section></div>
-
-</article>
-
-<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2021/05/28/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E6%A8%A1%E5%BC%8F/">创建对象之构造函数模式</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2021/05/28/%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%82%B9/">面试需要知道点</a></div></section></div>
-
-
-
-
-
-
-
-
-      
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
-</div></footer>
-
-      <div class='float-panel mobile-only blur' style='display:none'>
-  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
-    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
-  </button>
-</div>
-
-    </div>
-  </div>
-  <div class='scripts'>
-    <script type="text/javascript">
-  const stellar = {
-    // 懒加载 css https://github.com/filamentgroup/loadCSS
-    loadCSS: (href, before, media, attributes) => {
-      var doc = window.document;
-      var ss = doc.createElement("link");
-      var ref;
-      if (before) {
-        ref = before;
-      } else {
-        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
-        ref = refs[refs.length - 1];
-      }
-      var sheets = doc.styleSheets;
-      if (attributes) {
-        for (var attributeName in attributes) {
-          if (attributes.hasOwnProperty(attributeName)) {
-            ss.setAttribute(attributeName, attributes[attributeName]);
-          }
-        }
-      }
-      ss.rel = "stylesheet";
-      ss.href = href;
-      ss.media = "only x";
-      function ready(cb) {
-        if (doc.body) {
-          return cb();
-        }
-        setTimeout(function () {
-          ready(cb);
-        });
-      }
-      ready(function () {
-        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
-      });
-      var onloadcssdefined = function (cb) {
-        var resolvedHref = ss.href;
-        var i = sheets.length;
-        while (i--) {
-          if (sheets[i].href === resolvedHref) {
-            return cb();
-          }
-        }
-        setTimeout(function () {
-          onloadcssdefined(cb);
-        });
-      };
-      function loadCB() {
-        if (ss.addEventListener) {
-          ss.removeEventListener("load", loadCB);
-        }
-        ss.media = media || "all";
-      }
-      if (ss.addEventListener) {
-        ss.addEventListener("load", loadCB);
-      }
-      ss.onloadcssdefined = onloadcssdefined;
-      onloadcssdefined(loadCB);
-      return ss;
-    },
-
-    // 从 butterfly 和 volantis 获得灵感
-    loadScript: (src, opt) => new Promise((resolve, reject) => {
-      var script = document.createElement('script');
-      script.src = src;
-      if (opt) {
-        for (let key of Object.keys(opt)) {
-          script[key] = opt[key]
-        }
-      } else {
-        // 默认异步，如果需要同步，第二个参数传入 {} 即可
-        script.async = true
-      }
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    }),
-
-    // https://github.com/jerryc127/hexo-theme-butterfly
-    jQuery: (fn) => {
-      if (typeof jQuery === 'undefined') {
-        stellar.loadScript(stellar.plugins.jQuery).then(fn)
-      } else {
-        fn()
-      }
-    }
-  };
-  stellar.version = '1.18.5';
-  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
-  stellar.config = {
-    date_suffix: {
-      just: '刚刚',
-      min: '分钟前',
-      hour: '小时前',
-      day: '天前',
-      month: '个月前',
-    },
-  };
-
-  // required plugins (only load if needs)
-  stellar.plugins = {
-    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
-  };
-
-  if ('local_search') {
-    stellar.search = {};
-    stellar.search.service = 'local_search';
-    if (stellar.search.service == 'local_search') {
-      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
-      stellar.search[stellar.search.service] = service_obj;
-    }
+.l_body {
+  display: flex;
+  margin: auto;
+  padding: 0 var(--gap-l);
+  justify-content: center;
+}
+.l_body .l_left {
+  z-index: 8;
+  width: var(--width-left);
+  flex-shrink: 0;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+.l_body .l_main {
+  flex-shrink: 1;
+  flex-grow: 1;
+  width: 320px;
+  max-width: var(--width-main);
+}
+@media screen and (max-width: $device-mobile-max) {
+  .mobile-only {
+    display: block !important;
   }
-
-  // stellar js
-  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
-
-  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
-  // optional plugins
-  if ('true' == 'true') {
-    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  .l_body {
+    padding: 0;
   }
-  if ('true' == 'true') {
-    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  .l_body .l_left {
+    position: fixed;
+    transform: translateX(-320px);
+    margin: 0;
+    left: 0;
+    background: var(--site-bg);
+    box-shadow: $boxshadow-card-float;
+    z-index: 9;
   }
-  if ('' == 'true') {
-    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  .l_body .l_main {
+    max-width: 100%;
   }
-  if ('true' == 'true') {
-    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  .l_body.mobile .l_left {
+    transition: transform 0.3s ease-out;
   }
-  if ('true' == 'true') {
-    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  .l_body.mobile.sidebar .l_left {
+    transform: translateX(0px);
   }
-  if ('false' == 'true') {
-    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
-  }
-</script>
-
-<!-- required -->
-
-  
-<script src="/js/main.js" async></script>
-
-
-
-<!-- optional -->
-
-
-
-<!-- inject -->
-
-
-  </div>
-</body>
-</html>
+}

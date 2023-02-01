@@ -1,415 +1,46 @@
-<!DOCTYPE html>
-<html lang='zh-CN'>
-
-<head>
-  <meta name="generator" content="Hexo 6.3.0">
-  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
-  <meta charset="utf-8">
-  
-
-  <meta http-equiv='x-dns-prefetch-control' content='on' />
-  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
-  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
-  <link rel='dns-prefetch' href='//unpkg.com'>
-
-  <meta name="renderer" content="webkit">
-  <meta name="force-rendering" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="HandheldFriendly" content="True" >
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="theme-color" content="#f8f8f8">
-  
-  <title>webpack记录 - 翁先森的博客</title>
-
-  
-    <meta name="description" content="前置包webpack-clihttps:&#x2F;&#x2F;github.com&#x2F;webpack&#x2F;webpack-cli&#x2F;issues webpack-dev-server将 webpack 与提供实时重新加载的开发服务器一起使用。这应该仅用于开发。它在底层使用 webpack-dev-middleware，它提供对 webpack 资产的快速内存访问。 source map 配置详情   优化手段output浏">
-<meta property="og:type" content="article">
-<meta property="og:title" content="webpack记录">
-<meta property="og:url" content="https://github.com/NollieLeo/2021/08/05/webpack%E8%AE%B0%E5%BD%95/index.html">
-<meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="前置包webpack-clihttps:&#x2F;&#x2F;github.com&#x2F;webpack&#x2F;webpack-cli&#x2F;issues webpack-dev-server将 webpack 与提供实时重新加载的开发服务器一起使用。这应该仅用于开发。它在底层使用 webpack-dev-middleware，它提供对 webpack 资产的快速内存访问。 source map 配置详情   优化手段output浏">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b6d1ed68645848688ab9cb5a5790724d~tplv-k3u1fbpfcp-watermark.awebp">
-<meta property="article:published_time" content="2021-08-05T12:24:49.000Z">
-<meta property="article:modified_time" content="2022-02-09T01:45:19.082Z">
-<meta property="article:author" content="翁先森">
-<meta property="article:tag" content="webpack">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b6d1ed68645848688ab9cb5a5790724d~tplv-k3u1fbpfcp-watermark.awebp">
-  
-  
-
-  <!-- feed -->
-  
-    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
-  
-
-  
-    
-<link rel="stylesheet" href="/css/main.css">
-
-  
-
-  
-    <link rel="shortcut icon" href="/assets/avatar.png">
-  
-
-  
-
-  
-
-
-  
-</head>
-
-<body>
-  
-
-
-
-
-  <div class='l_body' id='start'>
-    <aside class='l_left' layout='post'>
-    
-
-  
-
-<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
-
-<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/more/">更多</a></nav>
-</header>
-
-
-<div class="widgets">
-<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
-
-
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">webpack记录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E5%8C%85"><span class="toc-text">前置包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack-cli"><span class="toc-text">webpack-cli</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack-dev-server"><span class="toc-text">webpack-dev-server</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#source-map-%E9%85%8D%E7%BD%AE%E8%AF%A6%E6%83%85"><span class="toc-text">source map 配置详情</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E6%89%8B%E6%AE%B5"><span class="toc-text">优化手段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#output"><span class="toc-text">output</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tree-shaking"><span class="toc-text">tree shaking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#loader%E4%BC%98%E5%8C%96"><span class="toc-text">loader优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9-css-%E6%96%87%E4%BB%B6"><span class="toc-text">压缩 css 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C%E4%B8%8D%E6%90%BA%E5%B8%A6%E8%B7%AF%E5%BE%84%E4%BF%A1%E6%81%AF"><span class="toc-text">输出结果不携带路径信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#React%E7%9A%84%E4%BC%98%E5%8C%96"><span class="toc-text">React的优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96-resolve-%E9%85%8D%E7%BD%AE"><span class="toc-text">优化 resolve 配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-alias"><span class="toc-text">1. alias</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-extensions"><span class="toc-text">2. extensions</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-modules"><span class="toc-text">3. modules</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-symlinks"><span class="toc-text">4. symlinks</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%AD%98"><span class="toc-text">缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E6%97%B6%E6%B8%85%E9%99%A4%E4%B8%8A%E6%AC%A1%E6%9E%84%E5%BB%BA%E4%BA%A7%E7%89%A9"><span class="toc-text">打包时清除上次构建产物</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js%E4%BB%A3%E7%A0%81%E5%8E%8B%E7%BC%A9"><span class="toc-text">js代码压缩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%88%E5%B9%B6%E6%A8%A1%E5%9D%97"><span class="toc-text">合并模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E6%9B%B4%E6%96%B0"><span class="toc-text">热更新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#noParse"><span class="toc-text">noParse</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%89%93%E5%8C%85"><span class="toc-text">多线程打包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E5%9B%BE%E7%89%87"><span class="toc-text">优化图片</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%89%93%E5%8C%85%E5%A4%A7%E5%B0%8F%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7"><span class="toc-text">使用打包大小分析工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%87%E7%BA%A7webpack5%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">升级webpack5遇到的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#node%E7%9A%84%E4%B8%80%E4%BA%9B%E6%A8%A1%E5%9D%97webpack%E4%B8%8D%E8%87%AA%E5%B8%A6%E4%BA%86"><span class="toc-text">node的一些模块webpack不自带了</span></a></li></ol></li></ol></div></div></widget>
-
-
-
-
-</div>
-<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/logo-github.svg"/></a></div></footer>
-
-    </aside>
-    <div class='l_main'>
-      
-
-      
-
-
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/webpack/">webpack</a></div><div id="post-meta">发布于&nbsp;<time datetime="2021-08-05T12:24:49.000Z">2021-08-05</time></div></div>
-
-<article class='md-text content post'>
-<h1 class="article-title"><span>webpack记录</span></h1>
-<h2 id="前置包"><a href="#前置包" class="headerlink" title="前置包"></a>前置包</h2><h3 id="webpack-cli"><a href="#webpack-cli" class="headerlink" title="webpack-cli"></a>webpack-cli</h3><p><a href="https://github.com/webpack/webpack-cli/issues">https://github.com/webpack/webpack-cli/issues</a></p>
-<h3 id="webpack-dev-server"><a href="#webpack-dev-server" class="headerlink" title="webpack-dev-server"></a>webpack-dev-server</h3><p>将 webpack 与提供实时重新加载的开发服务器一起使用。这应该仅用于开发。它在底层使用 webpack-dev-middleware，它提供对 webpack 资产的快速内存访问。</p>
-<h2 id="source-map-配置详情"><a href="#source-map-配置详情" class="headerlink" title="source map 配置详情"></a>source map 配置详情</h2><p> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b6d1ed68645848688ab9cb5a5790724d~tplv-k3u1fbpfcp-watermark.awebp" alt="img"> </p>
-<h2 id="优化手段"><a href="#优化手段" class="headerlink" title="优化手段"></a>优化手段</h2><h3 id="output"><a href="#output" class="headerlink" title="output"></a>output</h3><p>浏览器缓存，就是进入某个网站后，加载的静态资源被浏览器缓存，再次进入该网站后，将直接拉取缓存资源，加快加载速度。</p>
-<p>webpack 支持根据资源内容，创建 hash id，当资源内容发生变化时，将会创建新的 hash id。</p>
-<p>配置 JS bundle hash，<code>webpack.js</code> 配置方式如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// 输出</span></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="comment">// 仅在生产环境添加 hash</span></span><br><span class="line">    <span class="attr">filename</span>: ctx.<span class="property">isEnvProduction</span> ? <span class="string">&#x27;[name].[contenthash].bundle.js&#x27;</span> : <span class="string">&#x27;[name].bundle.js&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="tree-shaking"><a href="#tree-shaking" class="headerlink" title="tree shaking"></a>tree shaking</h3><ul>
-<li>js的shaking看这个 <a target="_blank" rel="noopener" href="https://juejin.cn/post/6993275177647751182">原理</a></li>
-</ul>
-<h3 id="loader优化"><a href="#loader优化" class="headerlink" title="loader优化"></a>loader优化</h3><ol>
-<li>使用<code>babel-loader</code>可以开启缓存，在第2次编译时，直接使用<strong>缓存</strong>，不用重新编译，缓存一般只适用于开发环境</li>
-<li>使用<code>include</code>或<code>exclude</code>适当缩小<code>loader</code>的适用范围，让其更快找到要解析的文件，开发和生产环境皆适用</li>
-</ol>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">module<span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">     rules<span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">       <span class="punctuation">&#123;</span></span><br><span class="line">         test<span class="punctuation">:</span> /\.(js|jsx|ts|tsx)$/i<span class="punctuation">,</span></span><br><span class="line">         use<span class="punctuation">:</span> <span class="punctuation">[</span>&#x27;babel-loader?cacheDirectory&#x27;<span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">         exclude<span class="punctuation">:</span> /node_modules/<span class="punctuation">,</span></span><br><span class="line">         include<span class="punctuation">:</span> /src/<span class="punctuation">,</span></span><br><span class="line">       <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">     <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="压缩-css-文件"><a href="#压缩-css-文件" class="headerlink" title="压缩 css 文件"></a>压缩 css 文件</h3><p>使用css-minimizer-webpack-plugin</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">CssMinimizerPlugin</span> = <span class="built_in">require</span>(<span class="string">&quot;css-minimizer-webpack-plugin&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">optimization</span>: &#123;</span><br><span class="line">    <span class="attr">minimizer</span>: [</span><br><span class="line">      <span class="keyword">new</span> <span class="title class_">CssMinimizerPlugin</span>(&#123;</span><br><span class="line">          <span class="attr">parallel</span>: <span class="number">4</span>,</span><br><span class="line">        &#125;),</span><br><span class="line">    ],</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-<h3 id="输出结果不携带路径信息"><a href="#输出结果不携带路径信息" class="headerlink" title="输出结果不携带路径信息"></a>输出结果不携带路径信息</h3><p>默认 webpack 会在输出的 bundle 中生成路径信息，将路径信息删除可小幅提升构建速度。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">    output: &#123;</span><br><span class="line">        pathinfo: false,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="React的优化"><a href="#React的优化" class="headerlink" title="React的优化"></a>React的优化</h3><ul>
-<li>可以使用  <a href="https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fpmmmwh%2Freact-refresh-webpack-plugin">react-refresh-webpack-plugin</a> 这个plugin来实现react组件的热更新</li>
-</ul>
-<h3 id="优化-resolve-配置"><a href="#优化-resolve-配置" class="headerlink" title="优化 resolve 配置"></a>优化 resolve 配置</h3><h4 id="1-alias"><a href="#1-alias" class="headerlink" title="1. alias"></a>1. alias</h4><p>alias 可以创建 <code>import</code> 或 <code>require</code> 的别名，用来简化模块引入。</p>
-<h4 id="2-extensions"><a href="#2-extensions" class="headerlink" title="2. extensions"></a>2. extensions</h4><p>根据项目中的文件类型，定义 extensions，以覆盖 webpack 默认的 extensions，加快解析速度。</p>
-<p>由于 webpack 的解析顺序是从左到右，因此要将使用频率高的文件类型放在左侧，如下我将 <code>tsx</code> 放在最左侧。</p>
-<p><code>webpack.common.js</code> 配置方式如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">resolve</span>: &#123;</span><br><span class="line">        <span class="attr">extensions</span>: [<span class="string">&#x27;.tsx&#x27;</span>, <span class="string">&#x27;.js&#x27;</span>], <span class="comment">// 因为我的项目只有这两种类型的文件，如果有其他类型，需要添加进去。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="3-modules"><a href="#3-modules" class="headerlink" title="3. modules"></a>3. modules</h4><p>modules 表示 webpack 解析模块时需要解析的目录。</p>
-<p>指定目录可缩小 webpack 解析范围，加快构建速度。</p>
-<p><code>webpack.common.js</code> 配置方式如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">modules</span>: [</span><br><span class="line">      <span class="string">&#x27;node_modules&#x27;</span>,</span><br><span class="line">       paths.<span class="property">appSrc</span>,</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-symlinks"><a href="#4-symlinks" class="headerlink" title="4. symlinks"></a>4. symlinks</h4><p>如果项目不使用 symlinks（例如 <code>npm link</code> 或者 <code>yarn link</code>），可以设置 <code>resolve.symlinks: false</code>，减少解析工作量。</p>
-<p><code>webpack.common.js</code> 配置方式如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">    resolve: &#123;</span><br><span class="line">        symlinks: false,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-<h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><blockquote>
-<p>webpack5之前</p>
-<p>利用 <code>cache-loader</code> 将结果缓存中磁盘中；利用 <code>hard-source-webpack-plugin</code> 将结果缓存在 <code>node_modules/.cache</code> 下提升二次打包速度；利用 <code>DllReferencePlugin</code> 将变化不频繁的第三方库<code>提前单独</code>打包成动态链接库，提升真正业务代码的打包速度</p>
-</blockquote>
-<p>然而。。webpack5自带了配置项</p>
-<p>开发环境 <code>webpack.dev.js</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cache</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;memory&#x27;</span></span><br><span class="line">&#125;,</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>生产环境 <code>webpack.pro.js</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cache</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;filesystem&#x27;</span>,</span><br><span class="line">    <span class="attr">buildDependencies</span>: &#123;</span><br><span class="line">      <span class="attr">config</span>: [__filename]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="打包时清除上次构建产物"><a href="#打包时清除上次构建产物" class="headerlink" title="打包时清除上次构建产物"></a>打包时清除上次构建产物</h3><p>打包目录下面可能会存在大量上次打包留下来的产物，时间长了就会有很多无用的代码</p>
-<p>webpack5.20之前这里推荐使用<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/clean-webpack-plugin">CleanWebpackPlugin</a></p>
-<p>之后就可以用<code>output.clean</code>为true清除</p>
-<h3 id="js代码压缩"><a href="#js代码压缩" class="headerlink" title="js代码压缩"></a>js代码压缩</h3><p>webpack5之前我们是需要<code>terser-webpack-plugin</code>这个包的并且需要以下配置</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">TerserPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;terser-webpack-plugin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123; </span><br><span class="line"><span class="comment">// ...other config</span></span><br><span class="line"><span class="attr">optimization</span>: &#123;</span><br><span class="line">  <span class="attr">minimize</span>: !isDev,</span><br><span class="line">  <span class="attr">minimizer</span>: [</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">TerserPlugin</span>(&#123;</span><br><span class="line">      <span class="attr">extractComments</span>: <span class="literal">false</span>, </span><br><span class="line">      <span class="attr">terserOptions</span>: &#123; </span><br><span class="line">        <span class="attr">compress</span>: &#123; </span><br><span class="line">          <span class="attr">pure_funcs</span>: [<span class="string">&#x27;console.log&#x27;</span>] </span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;) ]</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>但是webpack5自带了代码压缩</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack.config.js中</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">   <span class="attr">optimization</span>: &#123;</span><br><span class="line">     <span class="attr">usedExports</span>: <span class="literal">true</span>, <span class="comment">//只导出被使用的模块</span></span><br><span class="line">     minimize : <span class="literal">true</span> <span class="comment">// 启动压缩</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>当然你如果需要自定义的话也可以安装这个插件，然后自定义配置</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">TerserPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;terser-webpack-plugin&#x27;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">optimization</span>: &#123;</span><br><span class="line">        <span class="attr">minimizer</span>: [</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">TerserPlugin</span>(&#123;</span><br><span class="line">              <span class="attr">parallel</span>: <span class="number">4</span>,</span><br><span class="line">              <span class="attr">terserOptions</span>: &#123;</span><br><span class="line">                <span class="attr">parse</span>: &#123;</span><br><span class="line">                  <span class="attr">ecma</span>: <span class="number">8</span>,</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">compress</span>: &#123;</span><br><span class="line">                  <span class="attr">ecma</span>: <span class="number">5</span>,</span><br><span class="line">                  <span class="attr">warnings</span>: <span class="literal">false</span>,</span><br><span class="line">                  <span class="attr">comparisons</span>: <span class="literal">false</span>,</span><br><span class="line">                  <span class="attr">inline</span>: <span class="number">2</span>,</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">mangle</span>: &#123;</span><br><span class="line">                  <span class="attr">safari10</span>: <span class="literal">true</span>,</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">output</span>: &#123;</span><br><span class="line">                  <span class="attr">ecma</span>: <span class="number">5</span>,</span><br><span class="line">                  <span class="attr">comments</span>: <span class="literal">false</span>,</span><br><span class="line">                  <span class="attr">ascii_only</span>: <span class="literal">true</span>,</span><br><span class="line">                &#125;,</span><br><span class="line">              &#125;,</span><br><span class="line">            &#125;),</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-<h3 id="合并模块"><a href="#合并模块" class="headerlink" title="合并模块"></a>合并模块</h3><blockquote>
-<p>普通打包只是将一个模块最终放到一个单独的立即执行函数中，如果你有很多模块，那么就有很多立即执行函数。concatenateModules 可以要所有的模块都合并到一个函数里面去。</p>
-</blockquote>
-<h3 id="热更新"><a href="#热更新" class="headerlink" title="热更新"></a>热更新</h3><ul>
-<li><p>自动刷新<br> 是指在修改模块内存时，浏览器会自动刷新页面来更新视图内容，是整个页面刷新，速度较慢；刷新页面还会导致临时状态丢失（比如表单内容）</p>
-</li>
-<li><p>热更新<br> 是在不刷新页面的情况下，使新代码生效，整个网面不会刷新，状态也不会丢失</p>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">target</span>: <span class="string">&#x27;web&#x27;</span>,</span><br><span class="line"><span class="attr">plugins</span>: [</span><br><span class="line">	<span class="keyword">new</span> webpack.<span class="title class_">HotModuleReplacementPlugin</span>(&#123;&#125;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="noParse"><a href="#noParse" class="headerlink" title="noParse"></a>noParse</h3><p> <code>noParse</code>是用来过滤不需要解析的模块，比如<code>jquery</code>,<code>lodash</code>之类的，这些库一般不会再引入其它库，所以不需要<code>webpack</code>去解析其依赖，也不用打包，只是直接引用即可</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">module</span>: &#123;</span><br><span class="line">  <span class="attr">noParse</span>: <span class="regexp">/jquery|lodash/</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="多线程打包"><a href="#多线程打包" class="headerlink" title="多线程打包"></a>多线程打包</h3><p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/thread-loader">thread-loader</a></p>
-<p> 将耗时的 loader 放在一个独立的 worker 池中运行，加快 loader 构建速度。 </p>
-<blockquote>
-<p><a href="https://link.juejin.cn/?target=https%3A%2F%2Fwebpack.docschina.org%2Fguides%2Fbuild-performance%2F%23sass">webpack 官网</a> 提到 <code>node-sass</code> 中有个来自 Node.js 线程池的阻塞线程的 bug。 当使用 <code>thread-loader</code> 时，需要设置 <code>workerParallelJobs: 2</code>。</p>
-</blockquote>
-<p>由于 thread-loader 引入后，需要 0.6s 左右的时间开启新的 node 进程，如果项目代码量小，引入 thread-loader就没什么必要了</p>
-<p> 我们应该仅在非常耗时的 loader 前引入 thread-loader。 </p>
-<h3 id="优化图片"><a href="#优化图片" class="headerlink" title="优化图片"></a>优化图片</h3><h2 id="使用打包大小分析工具"><a href="#使用打包大小分析工具" class="headerlink" title="使用打包大小分析工具"></a>使用打包大小分析工具</h2><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/50260262/how-to-run-webpack-bundle-analyzer/50260397">how to use webpack-bundle-analyzer</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/webpack-bundle-analyzer">webpack-bundle-analyzer</a></p>
-<h2 id="升级webpack5遇到的问题"><a href="#升级webpack5遇到的问题" class="headerlink" title="升级webpack5遇到的问题"></a>升级webpack5遇到的问题</h2><h3 id="node的一些模块webpack不自带了"><a href="#node的一些模块webpack不自带了" class="headerlink" title="node的一些模块webpack不自带了"></a>node的一些模块webpack不自带了</h3>
-
-<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
-</div></section></div>
-
-</article>
-
-<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2021/08/05/%E5%B8%B8%E7%94%A8loader/">常用loader</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2021/08/04/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E6%95%B4%E7%90%86/">学习资料整理</a></div></section></div>
-
-
-
-
-
-
-
-
-      
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
-</div></footer>
-
-      <div class='float-panel mobile-only blur' style='display:none'>
-  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
-    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
-  </button>
-</div>
-
-    </div>
-  </div>
-  <div class='scripts'>
-    <script type="text/javascript">
-  const stellar = {
-    // 懒加载 css https://github.com/filamentgroup/loadCSS
-    loadCSS: (href, before, media, attributes) => {
-      var doc = window.document;
-      var ss = doc.createElement("link");
-      var ref;
-      if (before) {
-        ref = before;
-      } else {
-        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
-        ref = refs[refs.length - 1];
-      }
-      var sheets = doc.styleSheets;
-      if (attributes) {
-        for (var attributeName in attributes) {
-          if (attributes.hasOwnProperty(attributeName)) {
-            ss.setAttribute(attributeName, attributes[attributeName]);
-          }
-        }
-      }
-      ss.rel = "stylesheet";
-      ss.href = href;
-      ss.media = "only x";
-      function ready(cb) {
-        if (doc.body) {
-          return cb();
-        }
-        setTimeout(function () {
-          ready(cb);
-        });
-      }
-      ready(function () {
-        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
-      });
-      var onloadcssdefined = function (cb) {
-        var resolvedHref = ss.href;
-        var i = sheets.length;
-        while (i--) {
-          if (sheets[i].href === resolvedHref) {
-            return cb();
-          }
-        }
-        setTimeout(function () {
-          onloadcssdefined(cb);
-        });
-      };
-      function loadCB() {
-        if (ss.addEventListener) {
-          ss.removeEventListener("load", loadCB);
-        }
-        ss.media = media || "all";
-      }
-      if (ss.addEventListener) {
-        ss.addEventListener("load", loadCB);
-      }
-      ss.onloadcssdefined = onloadcssdefined;
-      onloadcssdefined(loadCB);
-      return ss;
-    },
-
-    // 从 butterfly 和 volantis 获得灵感
-    loadScript: (src, opt) => new Promise((resolve, reject) => {
-      var script = document.createElement('script');
-      script.src = src;
-      if (opt) {
-        for (let key of Object.keys(opt)) {
-          script[key] = opt[key]
-        }
-      } else {
-        // 默认异步，如果需要同步，第二个参数传入 {} 即可
-        script.async = true
-      }
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    }),
-
-    // https://github.com/jerryc127/hexo-theme-butterfly
-    jQuery: (fn) => {
-      if (typeof jQuery === 'undefined') {
-        stellar.loadScript(stellar.plugins.jQuery).then(fn)
-      } else {
-        fn()
-      }
-    }
-  };
-  stellar.version = '1.18.5';
-  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
-  stellar.config = {
-    date_suffix: {
-      just: '刚刚',
-      min: '分钟前',
-      hour: '小时前',
-      day: '天前',
-      month: '个月前',
-    },
-  };
-
-  // required plugins (only load if needs)
-  stellar.plugins = {
-    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
-  };
-
-  if ('local_search') {
-    stellar.search = {};
-    stellar.search.service = 'local_search';
-    if (stellar.search.service == 'local_search') {
-      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
-      stellar.search[stellar.search.service] = service_obj;
-    }
+.l_body {
+  display: flex;
+  margin: auto;
+  padding: 0 var(--gap-l);
+  justify-content: center;
+}
+.l_body .l_left {
+  z-index: 8;
+  width: var(--width-left);
+  flex-shrink: 0;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+.l_body .l_main {
+  flex-shrink: 1;
+  flex-grow: 1;
+  width: 320px;
+  max-width: var(--width-main);
+}
+@media screen and (max-width: $device-mobile-max) {
+  .mobile-only {
+    display: block !important;
   }
-
-  // stellar js
-  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
-
-  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
-  // optional plugins
-  if ('true' == 'true') {
-    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  .l_body {
+    padding: 0;
   }
-  if ('true' == 'true') {
-    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  .l_body .l_left {
+    position: fixed;
+    transform: translateX(-320px);
+    margin: 0;
+    left: 0;
+    background: var(--site-bg);
+    box-shadow: $boxshadow-card-float;
+    z-index: 9;
   }
-  if ('' == 'true') {
-    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  .l_body .l_main {
+    max-width: 100%;
   }
-  if ('true' == 'true') {
-    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  .l_body.mobile .l_left {
+    transition: transform 0.3s ease-out;
   }
-  if ('true' == 'true') {
-    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  .l_body.mobile.sidebar .l_left {
+    transform: translateX(0px);
   }
-  if ('false' == 'true') {
-    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
-  }
-</script>
-
-<!-- required -->
-
-  
-<script src="/js/main.js" async></script>
-
-
-
-<!-- optional -->
-
-
-
-<!-- inject -->
-
-
-  </div>
-</body>
-</html>
+}

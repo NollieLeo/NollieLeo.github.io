@@ -1,389 +1,46 @@
-<!DOCTYPE html>
-<html lang='zh-CN'>
-
-<head>
-  <meta name="generator" content="Hexo 6.3.0">
-  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
-  <meta charset="utf-8">
-  
-
-  <meta http-equiv='x-dns-prefetch-control' content='on' />
-  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
-  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
-  <link rel='dns-prefetch' href='//unpkg.com'>
-
-  <meta name="renderer" content="webkit">
-  <meta name="force-rendering" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="HandheldFriendly" content="True" >
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="theme-color" content="#f8f8f8">
-  
-  <title>js的执行上下文以及执行上下文栈 - 翁先森的博客</title>
-
-  
-    <meta name="description" content="js的执行上下文以及执行上下文栈可执行代码js的可执行代码（executable code）有哪些？只有可执行代码会创建执行上下文  全局代码 函数代码 eval代码  执行上下文只有可执行代码会创建执行上下文 当执行到一个函数的时候这里会进行准备工作， 这个准备工作用专业点的话讲就是 执行上下文（execution context） 这里一定是！函数执行的时候才会去创建执行上下文！ 对于每一个执">
-<meta property="og:type" content="article">
-<meta property="og:title" content="js的执行上下文以及执行上下文栈">
-<meta property="og:url" content="https://github.com/NollieLeo/2021/06/05/js%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BB%A5%E5%8F%8A%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88/index.html">
-<meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="js的执行上下文以及执行上下文栈可执行代码js的可执行代码（executable code）有哪些？只有可执行代码会创建执行上下文  全局代码 函数代码 eval代码  执行上下文只有可执行代码会创建执行上下文 当执行到一个函数的时候这里会进行准备工作， 这个准备工作用专业点的话讲就是 执行上下文（execution context） 这里一定是！函数执行的时候才会去创建执行上下文！ 对于每一个执">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-06-05T07:37:38.000Z">
-<meta property="article:modified_time" content="2023-01-28T13:26:45.478Z">
-<meta property="article:author" content="翁先森">
-<meta property="article:tag" content="Javascript">
-<meta property="article:tag" content="面试题">
-<meta property="article:tag" content="作用域">
-<meta property="article:tag" content="执行上下文">
-<meta property="article:tag" content="执行上下文栈">
-<meta name="twitter:card" content="summary">
-  
-  
-
-  <!-- feed -->
-  
-    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
-  
-
-  
-    
-<link rel="stylesheet" href="/css/main.css">
-
-  
-
-  
-    <link rel="shortcut icon" href="/assets/avatar.png">
-  
-
-  
-
-  
-
-
-  
-</head>
-
-<body>
-  
-
-
-
-
-  <div class='l_body' id='start'>
-    <aside class='l_left' layout='post'>
-    
-
-  
-
-<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
-
-<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/more/">更多</a></nav>
-</header>
-
-
-<div class="widgets">
-<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
-
-
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">js的执行上下文以及执行上下文栈</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#js%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BB%A5%E5%8F%8A%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88"><span class="toc-text">js的执行上下文以及执行上下文栈</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E6%89%A7%E8%A1%8C%E4%BB%A3%E7%A0%81"><span class="toc-text">可执行代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-text">执行上下文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88"><span class="toc-text">执行上下文栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%89%E9%A2%98%E5%88%86%E6%9E%90"><span class="toc-text">按题分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88"><span class="toc-text">解释执行上下文栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88%E4%BB%A5%E5%8F%8A%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE%E4%BB%A5%E5%8F%8AVO%E6%88%96%E8%80%85AO%E5%88%86%E6%9E%90"><span class="toc-text">根据上下文栈以及作用域链以及VO或者AO分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E7%AC%AC%E4%B8%80%E9%81%93"><span class="toc-text">分析第一道</span></a></li></ol></li></ol></li></ol></li></ol></div></div></widget>
-
-
-
-
-</div>
-<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/logo-github.svg"/></a></div></footer>
-
-    </aside>
-    <div class='l_main'>
-      
-
-      
-
-
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Javascript/">Javascript</a></div><div id="post-meta">发布于&nbsp;<time datetime="2021-06-05T07:37:38.000Z">2021-06-05</time></div></div>
-
-<article class='md-text content post'>
-<h1 class="article-title"><span>js的执行上下文以及执行上下文栈</span></h1>
-<h1 id="js的执行上下文以及执行上下文栈"><a href="#js的执行上下文以及执行上下文栈" class="headerlink" title="js的执行上下文以及执行上下文栈"></a>js的执行上下文以及执行上下文栈</h1><h2 id="可执行代码"><a href="#可执行代码" class="headerlink" title="可执行代码"></a>可执行代码</h2><p>js的可执行代码（executable code）有哪些？只有可执行代码会创建执行上下文</p>
-<ol>
-<li>全局代码</li>
-<li>函数代码</li>
-<li>eval代码</li>
-</ol>
-<h2 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h2><p>只有可执行代码会创建执行上下文</p>
-<p>当执行到一个函数的时候这里会进行准备工作，</p>
-<p>这个准备工作用专业点的话讲就是 <strong>执行上下文</strong>（execution context）</p>
-<p><strong>这里一定是！函数执行的时候才会去创建执行上下文！</strong></p>
-<p>对于每一个执行上下文，都有三个重要属性</p>
-<ul>
-<li>变量对象（Variable object） 俗称VO</li>
-<li>作用域链（Scope chain）</li>
-<li>this</li>
-</ul>
-<p>这些属性可以去对应的文章中看</p>
-<h2 id="执行上下文栈"><a href="#执行上下文栈" class="headerlink" title="执行上下文栈"></a>执行上下文栈</h2><p>js以执行上下文栈的方式去创建一个执行上下文栈，来进行各个上下文之间的管理</p>
-<p>在所有的情况下，执行js的代码，首先遇到的是全局代码这是毋庸置疑的</p>
-<p>这个时候相当于这个<strong>全局的执行上下文</strong>就是在<strong>栈底</strong>了</p>
-<p>首先我们先模拟一下，创建一个栈表示执行上下文栈</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ECStack</span> = [];</span><br></pre></td></tr></table></figure>
-
-<p>按照上面所说的，执行上下文栈底永远都有一个全局的执行上下文，这里用globalContext表示</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ECStack</span>=[</span><br><span class="line">    globalContext</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="按题分析"><a href="#按题分析" class="headerlink" title="按题分析"></a>按题分析</h2><h3 id="解释执行上下文栈"><a href="#解释执行上下文栈" class="headerlink" title="解释执行上下文栈"></a>解释执行上下文栈</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn3</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;fn3&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn2</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;fn2&#x27;</span>);</span><br><span class="line">    <span class="title function_">fn3</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn1</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;fn1&#x27;</span>);</span><br><span class="line">    <span class="title function_">fn2</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fun1</span>();</span><br></pre></td></tr></table></figure>
-
-<p>当执行一个函数的时候，就会创建一个执行上下文，并且压入执行上下文栈，当函数执行完毕的时候，就会将函数的执行上下文从栈中弹出。</p>
-<p>因此以上的代码执行原理是这样的</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//fn1()</span></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">push</span>(&lt;fn1&gt; function1Context);</span><br><span class="line"><span class="comment">// 这时候发现fun1中调用了fn2</span></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">push</span>(&lt;fn2&gt; function2Context);</span><br><span class="line"><span class="comment">// fn2中又调用了fn3</span></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">puhs</span>(&lt;fn3&gt; function3Context);</span><br><span class="line"><span class="comment">// 此时的ECStack为</span></span><br><span class="line"><span class="comment">// ECStack = [</span></span><br><span class="line"><span class="comment">// 	globalContext</span></span><br><span class="line"><span class="comment">//  function1Context</span></span><br><span class="line"><span class="comment">//	function2Context</span></span><br><span class="line"><span class="comment">//  function3Context</span></span><br><span class="line"><span class="comment">// ]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//fn3执行完了</span></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">pop</span>(); <span class="comment">// function3Context</span></span><br><span class="line"><span class="comment">// fn2执行完了</span></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">pop</span>(); <span class="comment">// function3Context</span></span><br><span class="line"><span class="comment">// fn1执行完了</span></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">pop</span>(); <span class="comment">// function1Context</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// javascript接着执行下面的代码，但是ECStack底层永远有个globalContext</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="根据上下文栈以及作用域链以及VO或者AO分析"><a href="#根据上下文栈以及作用域链以及VO或者AO分析" class="headerlink" title="根据上下文栈以及作用域链以及VO或者AO分析"></a>根据上下文栈以及作用域链以及VO或者AO分析</h3><p>例如</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = <span class="string">&quot;global scope&quot;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">checkscope</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> scope = <span class="string">&quot;local scope&quot;</span>;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">f</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> scope;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">f</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">checkscope</span>();</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = <span class="string">&quot;global scope&quot;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">checkscope</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> scope = <span class="string">&quot;local scope&quot;</span>;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">f</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> scope;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">checkscope</span>()();</span><br></pre></td></tr></table></figure>
-
-<p>分别输出什么？</p>
-<p>对，都是local scope</p>
-<p>具体分析一下</p>
-<p>先分析第一道</p>
-<h4 id="分析第一道"><a href="#分析第一道" class="headerlink" title="分析第一道"></a>分析第一道</h4><p>执行过程如下</p>
-<p>1.无论如何先执行全局代码，创建全局执行上下文，全局上下文压入栈底</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ECStack</span> = [</span><br><span class="line">    globalContext</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<p>2.初始化全局上下文</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">globalContext = &#123;</span><br><span class="line">    <span class="attr">VO</span>: [<span class="variable language_">global</span>],</span><br><span class="line">    <span class="title class_">Scope</span>: [globalContext.<span class="property">VO</span>],</span><br><span class="line">    <span class="attr">this</span>: globalContext.<span class="property">VO</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>3.在第2步初始化的过程发现全局的作用域中定义了一个 checkscrope函数，这个函数的作用域链上就会先推入一个全局上下文对象中的Scope</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">checkscope.[[scope]]=[</span><br><span class="line">    globalContext.<span class="property">VO</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<p>4.执行 checkscope 函数，创建 checkscope 函数执行上下文，checkscope 函数执行上下文被压入执行上下文栈 </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ECStack</span> = [</span><br><span class="line">    globalContext,</span><br><span class="line">    checkscopeContext,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<p>5.checkscope函数执行上下文的初始化</p>
-<ol>
-<li><p>复制函数的[[scope]]属性创建作用域链，放到checkscopeContext的[[scope]]中</p>
-</li>
-<li><p>用arguments创建活动对象</p>
-</li>
-<li><p>初始化活动对象，加入形参，内部函数声明，变量声明</p>
-</li>
-<li><p>将活动对象压入 checkscope 作用域链顶端，也就是checkscope.VO</p>
-</li>
-<li><p>函数f被声明，保存checkscope的作用域链到fn函数的[[scope]]当中</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">checkscopeContext = &#123;</span><br><span class="line"> <span class="attr">AO</span>:&#123;</span><br><span class="line">     <span class="attr">arguments</span>: &#123;</span><br><span class="line">         <span class="attr">length</span>: <span class="number">0</span>,</span><br><span class="line">     &#125;,</span><br><span class="line">     <span class="attr">scope</span>: <span class="literal">undefined</span>,</span><br><span class="line">     <span class="attr">f</span>: refrence to <span class="keyword">function</span> <span class="title function_">f</span>(<span class="params"></span>)&#123;&#125;</span><br><span class="line"> &#125;,</span><br><span class="line"> <span class="title class_">Scope</span>: [checkscopeContext.<span class="property">AO</span>, globalContext.<span class="property">VO</span>],</span><br><span class="line"> <span class="attr">this</span>: <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>​    6. 执行函数f，创建f的执行上下文，f函数的执行上下文被压入栈中</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ECStack= [ </span><br><span class="line">	globalContext,</span><br><span class="line">	checkscopeContext,</span><br><span class="line">	fnContext</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<ol start="7">
-<li><p>f函数执行上下文初始化，和第5步一样</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fnContext = &#123;</span><br><span class="line">    <span class="variable constant_">AO</span> = &#123;</span><br><span class="line">    	<span class="attr">arguments</span>:&#123;</span><br><span class="line">    		<span class="attr">length</span>: <span class="number">0</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">    <span class="title class_">Scope</span>: [fnContext.<span class="property">AO</span>, checkscopeContext.<span class="property">AO</span>, globalContext.<span class="property">VO</span>],</span><br><span class="line">    <span class="attr">this</span>: <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>f函数执行之后，沿着<strong>作用域链</strong>查找到scope的值，返回scope值</p>
-</li>
-<li><p>f函数执行完，栈中pop出上下文</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">pop</span>()</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ECStack</span> = [</span><br><span class="line">   	globalContext,</span><br><span class="line">	checkscopeContext, </span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>checkscope函数执行完毕，checkscope执行上下文pop出栈</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">pop</span>()</span><br><span class="line"><span class="title class_">ECStack</span> = [</span><br><span class="line">   	globalContext,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-
-
-<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
-</div></section></div>
-
-</article>
-
-<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2021/06/06/js%E7%9A%84%E9%97%AD%E5%8C%85/">js的闭包</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2021/06/05/js%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/">js的作用域链</a></div></section></div>
-
-
-
-
-
-
-
-
-      
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
-</div></footer>
-
-      <div class='float-panel mobile-only blur' style='display:none'>
-  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
-    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
-  </button>
-</div>
-
-    </div>
-  </div>
-  <div class='scripts'>
-    <script type="text/javascript">
-  const stellar = {
-    // 懒加载 css https://github.com/filamentgroup/loadCSS
-    loadCSS: (href, before, media, attributes) => {
-      var doc = window.document;
-      var ss = doc.createElement("link");
-      var ref;
-      if (before) {
-        ref = before;
-      } else {
-        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
-        ref = refs[refs.length - 1];
-      }
-      var sheets = doc.styleSheets;
-      if (attributes) {
-        for (var attributeName in attributes) {
-          if (attributes.hasOwnProperty(attributeName)) {
-            ss.setAttribute(attributeName, attributes[attributeName]);
-          }
-        }
-      }
-      ss.rel = "stylesheet";
-      ss.href = href;
-      ss.media = "only x";
-      function ready(cb) {
-        if (doc.body) {
-          return cb();
-        }
-        setTimeout(function () {
-          ready(cb);
-        });
-      }
-      ready(function () {
-        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
-      });
-      var onloadcssdefined = function (cb) {
-        var resolvedHref = ss.href;
-        var i = sheets.length;
-        while (i--) {
-          if (sheets[i].href === resolvedHref) {
-            return cb();
-          }
-        }
-        setTimeout(function () {
-          onloadcssdefined(cb);
-        });
-      };
-      function loadCB() {
-        if (ss.addEventListener) {
-          ss.removeEventListener("load", loadCB);
-        }
-        ss.media = media || "all";
-      }
-      if (ss.addEventListener) {
-        ss.addEventListener("load", loadCB);
-      }
-      ss.onloadcssdefined = onloadcssdefined;
-      onloadcssdefined(loadCB);
-      return ss;
-    },
-
-    // 从 butterfly 和 volantis 获得灵感
-    loadScript: (src, opt) => new Promise((resolve, reject) => {
-      var script = document.createElement('script');
-      script.src = src;
-      if (opt) {
-        for (let key of Object.keys(opt)) {
-          script[key] = opt[key]
-        }
-      } else {
-        // 默认异步，如果需要同步，第二个参数传入 {} 即可
-        script.async = true
-      }
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    }),
-
-    // https://github.com/jerryc127/hexo-theme-butterfly
-    jQuery: (fn) => {
-      if (typeof jQuery === 'undefined') {
-        stellar.loadScript(stellar.plugins.jQuery).then(fn)
-      } else {
-        fn()
-      }
-    }
-  };
-  stellar.version = '1.18.5';
-  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
-  stellar.config = {
-    date_suffix: {
-      just: '刚刚',
-      min: '分钟前',
-      hour: '小时前',
-      day: '天前',
-      month: '个月前',
-    },
-  };
-
-  // required plugins (only load if needs)
-  stellar.plugins = {
-    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
-  };
-
-  if ('local_search') {
-    stellar.search = {};
-    stellar.search.service = 'local_search';
-    if (stellar.search.service == 'local_search') {
-      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
-      stellar.search[stellar.search.service] = service_obj;
-    }
+.l_body {
+  display: flex;
+  margin: auto;
+  padding: 0 var(--gap-l);
+  justify-content: center;
+}
+.l_body .l_left {
+  z-index: 8;
+  width: var(--width-left);
+  flex-shrink: 0;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+.l_body .l_main {
+  flex-shrink: 1;
+  flex-grow: 1;
+  width: 320px;
+  max-width: var(--width-main);
+}
+@media screen and (max-width: $device-mobile-max) {
+  .mobile-only {
+    display: block !important;
   }
-
-  // stellar js
-  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
-
-  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
-  // optional plugins
-  if ('true' == 'true') {
-    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  .l_body {
+    padding: 0;
   }
-  if ('true' == 'true') {
-    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  .l_body .l_left {
+    position: fixed;
+    transform: translateX(-320px);
+    margin: 0;
+    left: 0;
+    background: var(--site-bg);
+    box-shadow: $boxshadow-card-float;
+    z-index: 9;
   }
-  if ('' == 'true') {
-    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  .l_body .l_main {
+    max-width: 100%;
   }
-  if ('true' == 'true') {
-    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  .l_body.mobile .l_left {
+    transition: transform 0.3s ease-out;
   }
-  if ('true' == 'true') {
-    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  .l_body.mobile.sidebar .l_left {
+    transform: translateX(0px);
   }
-  if ('false' == 'true') {
-    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
-  }
-</script>
-
-<!-- required -->
-
-  
-<script src="/js/main.js" async></script>
-
-
-
-<!-- optional -->
-
-
-
-<!-- inject -->
-
-
-  </div>
-</body>
-</html>
+}

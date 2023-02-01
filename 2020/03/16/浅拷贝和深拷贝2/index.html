@@ -1,351 +1,46 @@
-<!DOCTYPE html>
-<html lang='zh-CN'>
-
-<head>
-  <meta name="generator" content="Hexo 6.3.0">
-  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
-  <meta charset="utf-8">
-  
-
-  <meta http-equiv='x-dns-prefetch-control' content='on' />
-  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
-  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
-  <link rel='dns-prefetch' href='//unpkg.com'>
-
-  <meta name="renderer" content="webkit">
-  <meta name="force-rendering" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="HandheldFriendly" content="True" >
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="theme-color" content="#f8f8f8">
-  
-  <title>深拷贝与浅拷贝 - 翁先森的博客</title>
-
-  
-    <meta name="description" content="深拷贝与浅拷贝一下部分参照知乎中的提问： javascript中的深拷贝和浅拷贝 浅拷贝赋值（&#x3D;）和浅拷贝的区别那么赋值和浅拷贝有什么区别呢，我们看下面这个例子： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546var obj1 &#x3D; &amp;#123;    &amp;#x27;name&amp;#x2">
-<meta property="og:type" content="article">
-<meta property="og:title" content="深拷贝与浅拷贝">
-<meta property="og:url" content="https://github.com/NollieLeo/2020/03/16/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D2/index.html">
-<meta property="og:site_name" content="翁先森的博客">
-<meta property="og:description" content="深拷贝与浅拷贝一下部分参照知乎中的提问： javascript中的深拷贝和浅拷贝 浅拷贝赋值（&#x3D;）和浅拷贝的区别那么赋值和浅拷贝有什么区别呢，我们看下面这个例子： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546var obj1 &#x3D; &amp;#123;    &amp;#x27;name&amp;#x2">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-03-16T14:02:38.000Z">
-<meta property="article:modified_time" content="2023-01-28T09:29:18.151Z">
-<meta property="article:author" content="翁先森">
-<meta property="article:tag" content="ES6">
-<meta property="article:tag" content="Javascript">
-<meta property="article:tag" content="深拷贝与浅拷贝">
-<meta name="twitter:card" content="summary">
-  
-  
-
-  <!-- feed -->
-  
-    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
-  
-
-  
-    
-<link rel="stylesheet" href="/css/main.css">
-
-  
-
-  
-    <link rel="shortcut icon" href="/assets/avatar.png">
-  
-
-  
-
-  
-
-
-  
-</head>
-
-<body>
-  
-
-
-
-
-  <div class='l_body' id='start'>
-    <aside class='l_left' layout='post'>
-    
-
-  
-
-<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
-
-<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/more/">更多</a></nav>
-</header>
-
-
-<div class="widgets">
-<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
-
-
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">深拷贝与浅拷贝</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="toc-text">深拷贝与浅拷贝</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="toc-text">浅拷贝</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%8B%E5%80%BC%EF%BC%88-%EF%BC%89%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">赋值（&#x3D;）和浅拷贝的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="toc-text">深拷贝</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8weakMap%E5%AE%9E%E7%8E%B0%E9%80%92%E5%BD%92clone"><span class="toc-text">利用weakMap实现递归clone</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88%E2%80%A6%EF%BC%89-%E6%98%AF%E4%BB%80%E4%B9%88%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%8B%B7%E8%B4%9D%EF%BC%9F"><span class="toc-text">扩展运算符（…） 是什么类型的拷贝？</span></a></li></ol></li></ol></div></div></widget>
-
-
-
-
-</div>
-<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/logo-github.svg"/></a></div></footer>
-
-    </aside>
-    <div class='l_main'>
-      
-
-      
-
-
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Javascript/">Javascript</a></div><div id="post-meta">发布于&nbsp;<time datetime="2020-03-16T14:02:38.000Z">2020-03-16</time></div></div>
-
-<article class='md-text content post'>
-<h1 class="article-title"><span>深拷贝与浅拷贝</span></h1>
-<h1 id="深拷贝与浅拷贝"><a href="#深拷贝与浅拷贝" class="headerlink" title="深拷贝与浅拷贝"></a>深拷贝与浅拷贝</h1><p>一下部分参照知乎中的提问： <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23031215">javascript中的深拷贝和浅拷贝</a></p>
-<h2 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h2><h3 id="赋值（-）和浅拷贝的区别"><a href="#赋值（-）和浅拷贝的区别" class="headerlink" title="赋值（=）和浅拷贝的区别"></a>赋值（=）和浅拷贝的区别</h3><p>那么赋值和浅拷贝有什么区别呢，我们看下面这个例子：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1 = &#123;</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span> : <span class="string">&#x27;zhangsan&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;age&#x27;</span> :  <span class="string">&#x27;18&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;language&#x27;</span> : [<span class="number">1</span>,[<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>]],</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj2 = obj1;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj3 = <span class="title function_">shallowCopy</span>(obj1);</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">shallowCopy</span>(<span class="params">src</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> dst = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> prop <span class="keyword">in</span> src) &#123;</span><br><span class="line">        <span class="keyword">if</span> (src.<span class="title function_">hasOwnProperty</span>(prop)) &#123;</span><br><span class="line">            dst[prop] = src[prop];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dst;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj2.<span class="property">name</span> = <span class="string">&quot;lisi&quot;</span>;</span><br><span class="line">obj3.<span class="property">age</span> = <span class="string">&quot;20&quot;</span>;</span><br><span class="line"></span><br><span class="line">obj2.<span class="property">language</span>[<span class="number">1</span>] = [<span class="string">&quot;二&quot;</span>,<span class="string">&quot;三&quot;</span>];</span><br><span class="line">obj3.<span class="property">language</span>[<span class="number">2</span>] = [<span class="string">&quot;四&quot;</span>,<span class="string">&quot;五&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj1);  </span><br><span class="line"><span class="comment">//obj1 = &#123;</span></span><br><span class="line"><span class="comment">//    &#x27;name&#x27; : &#x27;lisi&#x27;,</span></span><br><span class="line"><span class="comment">//    &#x27;age&#x27; :  &#x27;18&#x27;,</span></span><br><span class="line"><span class="comment">//    &#x27;language&#x27; : [1,[&quot;二&quot;,&quot;三&quot;],[&quot;四&quot;,&quot;五&quot;]],</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2);</span><br><span class="line"><span class="comment">//obj2 = &#123;</span></span><br><span class="line"><span class="comment">//    &#x27;name&#x27; : &#x27;lisi&#x27;,</span></span><br><span class="line"><span class="comment">//    &#x27;age&#x27; :  &#x27;18&#x27;,</span></span><br><span class="line"><span class="comment">//    &#x27;language&#x27; : [1,[&quot;二&quot;,&quot;三&quot;],[&quot;四&quot;,&quot;五&quot;]],</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj3);</span><br><span class="line"><span class="comment">//obj3 = &#123;</span></span><br><span class="line"><span class="comment">//    &#x27;name&#x27; : &#x27;zhangsan&#x27;,</span></span><br><span class="line"><span class="comment">//    &#x27;age&#x27; :  &#x27;20&#x27;,</span></span><br><span class="line"><span class="comment">//    &#x27;language&#x27; : [1,[&quot;二&quot;,&quot;三&quot;],[&quot;四&quot;,&quot;五&quot;]],</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br></pre></td></tr></table></figure>
-
-<p>先定义个一个原始的对象 <code>obj1</code>，然后使用赋值得到第二个对象 <code>obj2</code>，然后通过浅拷贝，将 <code>obj1</code> 里面的属性都赋值到 <code>obj3</code> 中。也就是说：</p>
-<ul>
-<li><code>obj1</code>：原始数据</li>
-<li><code>obj2</code>：赋值操作得到</li>
-<li><code>obj3</code>：浅拷贝得到</li>
-</ul>
-<p>然后我们改变 <code>obj2</code> 的 <code>name</code> 属性和 <code>obj3</code> 的 <code>name</code> 属性，可以看到，改变赋值得到的对象 <code>obj2</code> 同时也会改变原始值 <code>obj1</code>，而改变浅拷贝得到的的 <code>obj3</code> 则不会改变原始对象 <code>obj1</code>。这就可以说明赋值得到的对象 <code>obj2</code> 只是将指针改变，其引用的仍然是同一个对象，而浅拷贝得到的的 <code>obj3</code> 则是重新创建了新对象。</p>
-<p>然而，我们接下来来看一下改变引用类型会是什么情况呢，我又改变了赋值得到的对象 <code>obj2</code> 和浅拷贝得到的 <code>obj3</code> 中的 <code>language</code> 属性的第二个值和第三个值（<code>language</code> 是一个数组，也就是引用类型）。结果见输出，可以看出来，无论是修改赋值得到的对象 <code>obj2</code> 和浅拷贝得到的 <code>obj3</code> 都会改变原始数据。</p>
-<p>这是因为浅拷贝只复制一层对象的属性，并不包括对象里面的为引用类型的数据。所以就会出现改变浅拷贝得到的 <code>obj3</code> 中的引用类型时，会使原始数据得到改变。</p>
-<p>深拷贝：将 B 对象拷贝到 A 对象中，包括 B 里面的子对象，</p>
-<p>浅拷贝：将 B 对象拷贝到 A 对象中，但不包括 B 里面的子对象</p>
-<table>
-<thead>
-<tr>
-<th>–</th>
-<th>和原数据是否指向同一对象</th>
-<th>第一层数据为基本数据类型</th>
-<th>原数据中包含子对象</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>赋值</td>
-<td>是</td>
-<td>改变会使原数据一同改变</td>
-<td>改变会使原数据一同改变</td>
-</tr>
-<tr>
-<td>浅拷贝</td>
-<td>否</td>
-<td>改变<strong>不</strong>会使原数据一同改变</td>
-<td>改变会使原数据一同改变</td>
-</tr>
-<tr>
-<td>深拷贝</td>
-<td>否</td>
-<td>改变<strong>不</strong>会使原数据一同改变</td>
-<td>改变<strong>不</strong>会使原数据一同改变</td>
-</tr>
-</tbody></table>
-<h2 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h2><p>看了这么半天，你也应该清楚什么是深拷贝了吧，如果还不清楚，我就剖腹自尽(ಥ_ಥ)</p>
-<p>深拷贝是对对象以及对象的所有子对象进行拷贝。</p>
-<p>那么问题来了，怎么进行深拷贝呢？</p>
-<p>思路就是递归调用刚刚的浅拷贝，把所有属于对象的属性类型都遍历赋给另一个对象即可。我们直接来看一下 Zepto 中深拷贝的代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 内部方法：用户合并一个或多个对象到第一个对象</span></span><br><span class="line"><span class="comment">// 参数：</span></span><br><span class="line"><span class="comment">// target 目标对象  对象都合并到target里</span></span><br><span class="line"><span class="comment">// source 合并对象</span></span><br><span class="line"><span class="comment">// deep 是否执行深度合并</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">extend</span>(<span class="params">target, source, deep</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (key <span class="keyword">in</span> source)</span><br><span class="line">        <span class="keyword">if</span> (deep &amp;&amp; (<span class="title function_">isPlainObject</span>(source[key]) || <span class="title function_">isArray</span>(source[key]))) &#123;</span><br><span class="line">            <span class="comment">// source[key] 是对象，而 target[key] 不是对象， 则 target[key] = &#123;&#125; 初始化一下，否则递归会出错的</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="title function_">isPlainObject</span>(source[key]) &amp;&amp; !<span class="title function_">isPlainObject</span>(target[key]))</span><br><span class="line">                target[key] = &#123;&#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// source[key] 是数组，而 target[key] 不是数组，则 target[key] = [] 初始化一下，否则递归会出错的</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="title function_">isArray</span>(source[key]) &amp;&amp; !<span class="title function_">isArray</span>(target[key]))</span><br><span class="line">                target[key] = []</span><br><span class="line">            <span class="comment">// 执行递归</span></span><br><span class="line">            <span class="title function_">extend</span>(target[key], source[key], deep)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 不满足以上条件，说明 source[key] 是一般的值类型，直接赋值给 target 就是了</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (source[key] !== <span class="literal">undefined</span>) target[key] = source[key]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Copy all but undefined properties from one or more</span></span><br><span class="line"><span class="comment">// objects to the `target` object.</span></span><br><span class="line">$.extend = <span class="keyword">function</span>(<span class="params">target</span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> deep, args = slice.<span class="title function_">call</span>(<span class="variable language_">arguments</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//第一个参数为boolean值时，表示是否深度合并</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> target == <span class="string">&#x27;boolean&#x27;</span>) &#123;</span><br><span class="line">        deep = target;</span><br><span class="line">        <span class="comment">//target取第二个参数</span></span><br><span class="line">        target = args.<span class="title function_">shift</span>()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 遍历后面的参数，都合并到target上</span></span><br><span class="line">    args.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">arg</span>)&#123; <span class="title function_">extend</span>(target, arg, deep) &#125;)</span><br><span class="line">    <span class="keyword">return</span> target</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="利用weakMap实现递归clone"><a href="#利用weakMap实现递归clone" class="headerlink" title="利用weakMap实现递归clone"></a>利用weakMap实现递归clone</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">clone</span>(<span class="params">target, weakMap = <span class="keyword">new</span> weakMap</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> ((<span class="keyword">typeof</span> target === <span class="string">&#x27;object&#x27;</span>)) &#123;</span><br><span class="line">        <span class="keyword">let</span> cloneTarget = <span class="title class_">Array</span>.<span class="property">isArray</span>.<span class="title function_">call</span>(target) ? [] : &#123;&#125;;</span><br><span class="line">        <span class="keyword">if</span> (weakMap.<span class="title function_">get</span>(target)) &#123;</span><br><span class="line">            <span class="keyword">return</span> weakMap.<span class="title function_">get</span>(target);</span><br><span class="line">        &#125;</span><br><span class="line">        weakMap.<span class="title function_">set</span>(target, cloneTarget);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> target) &#123;</span><br><span class="line">            cloneTarget[key] = <span class="title function_">clone</span>(target[key], weakMap);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cloneTarget;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> target;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="扩展运算符（…）-是什么类型的拷贝？"><a href="#扩展运算符（…）-是什么类型的拷贝？" class="headerlink" title="扩展运算符（…） 是什么类型的拷贝？"></a>扩展运算符（…） 是什么类型的拷贝？</h2><blockquote>
-<p>浅拷贝</p>
-</blockquote>
-
-
-<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
-</div></section></div>
-
-</article>
-
-<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2020/03/16/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/">鸭子类型</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2020/03/16/%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E8%AF%AD%E8%A8%80%E4%B8%8E%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E8%AF%AD%E8%A8%80%E5%8C%BA%E5%88%AB/">静态类型语言与动态类型语言区别</a></div></section></div>
-
-
-
-
-
-
-
-
-      
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
-</div></footer>
-
-      <div class='float-panel mobile-only blur' style='display:none'>
-  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
-    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
-  </button>
-</div>
-
-    </div>
-  </div>
-  <div class='scripts'>
-    <script type="text/javascript">
-  const stellar = {
-    // 懒加载 css https://github.com/filamentgroup/loadCSS
-    loadCSS: (href, before, media, attributes) => {
-      var doc = window.document;
-      var ss = doc.createElement("link");
-      var ref;
-      if (before) {
-        ref = before;
-      } else {
-        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
-        ref = refs[refs.length - 1];
-      }
-      var sheets = doc.styleSheets;
-      if (attributes) {
-        for (var attributeName in attributes) {
-          if (attributes.hasOwnProperty(attributeName)) {
-            ss.setAttribute(attributeName, attributes[attributeName]);
-          }
-        }
-      }
-      ss.rel = "stylesheet";
-      ss.href = href;
-      ss.media = "only x";
-      function ready(cb) {
-        if (doc.body) {
-          return cb();
-        }
-        setTimeout(function () {
-          ready(cb);
-        });
-      }
-      ready(function () {
-        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
-      });
-      var onloadcssdefined = function (cb) {
-        var resolvedHref = ss.href;
-        var i = sheets.length;
-        while (i--) {
-          if (sheets[i].href === resolvedHref) {
-            return cb();
-          }
-        }
-        setTimeout(function () {
-          onloadcssdefined(cb);
-        });
-      };
-      function loadCB() {
-        if (ss.addEventListener) {
-          ss.removeEventListener("load", loadCB);
-        }
-        ss.media = media || "all";
-      }
-      if (ss.addEventListener) {
-        ss.addEventListener("load", loadCB);
-      }
-      ss.onloadcssdefined = onloadcssdefined;
-      onloadcssdefined(loadCB);
-      return ss;
-    },
-
-    // 从 butterfly 和 volantis 获得灵感
-    loadScript: (src, opt) => new Promise((resolve, reject) => {
-      var script = document.createElement('script');
-      script.src = src;
-      if (opt) {
-        for (let key of Object.keys(opt)) {
-          script[key] = opt[key]
-        }
-      } else {
-        // 默认异步，如果需要同步，第二个参数传入 {} 即可
-        script.async = true
-      }
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    }),
-
-    // https://github.com/jerryc127/hexo-theme-butterfly
-    jQuery: (fn) => {
-      if (typeof jQuery === 'undefined') {
-        stellar.loadScript(stellar.plugins.jQuery).then(fn)
-      } else {
-        fn()
-      }
-    }
-  };
-  stellar.version = '1.18.5';
-  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
-  stellar.config = {
-    date_suffix: {
-      just: '刚刚',
-      min: '分钟前',
-      hour: '小时前',
-      day: '天前',
-      month: '个月前',
-    },
-  };
-
-  // required plugins (only load if needs)
-  stellar.plugins = {
-    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
-  };
-
-  if ('local_search') {
-    stellar.search = {};
-    stellar.search.service = 'local_search';
-    if (stellar.search.service == 'local_search') {
-      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
-      stellar.search[stellar.search.service] = service_obj;
-    }
+.l_body {
+  display: flex;
+  margin: auto;
+  padding: 0 var(--gap-l);
+  justify-content: center;
+}
+.l_body .l_left {
+  z-index: 8;
+  width: var(--width-left);
+  flex-shrink: 0;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+.l_body .l_main {
+  flex-shrink: 1;
+  flex-grow: 1;
+  width: 320px;
+  max-width: var(--width-main);
+}
+@media screen and (max-width: $device-mobile-max) {
+  .mobile-only {
+    display: block !important;
   }
-
-  // stellar js
-  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
-
-  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
-  // optional plugins
-  if ('true' == 'true') {
-    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  .l_body {
+    padding: 0;
   }
-  if ('true' == 'true') {
-    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  .l_body .l_left {
+    position: fixed;
+    transform: translateX(-320px);
+    margin: 0;
+    left: 0;
+    background: var(--site-bg);
+    box-shadow: $boxshadow-card-float;
+    z-index: 9;
   }
-  if ('' == 'true') {
-    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  .l_body .l_main {
+    max-width: 100%;
   }
-  if ('true' == 'true') {
-    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  .l_body.mobile .l_left {
+    transition: transform 0.3s ease-out;
   }
-  if ('true' == 'true') {
-    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  .l_body.mobile.sidebar .l_left {
+    transform: translateX(0px);
   }
-  if ('false' == 'true') {
-    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
-  }
-</script>
-
-<!-- required -->
-
-  
-<script src="/js/main.js" async></script>
-
-
-
-<!-- optional -->
-
-
-
-<!-- inject -->
-
-
-  </div>
-</body>
-</html>
+}
