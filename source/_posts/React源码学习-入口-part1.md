@@ -4,7 +4,7 @@ date: 2021-08-16 13:52:58
 tags:
 - React
 categories:
-- React源码学习
+- React
 ---
 
 > 官方： React 是用 JavaScript 构建**快速响应**的大型 Web 应用程序的首选方式 

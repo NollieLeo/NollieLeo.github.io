@@ -62,6 +62,7 @@ pnpm create vite
   ```html
   <script type="module" src="/src/main.tsx"></script>
   ```
+
 - main.tsx: 入口文件引用的脚本文件
 
 ## 修改入口文件位置
@@ -139,6 +140,7 @@ export default defineConfig({
         },
     }
     ```
+  
   - 在vue的项目中，我们就得使用到 `vue-tsc`
 
 - "preview": 预览打包产物的执行效果。
@@ -197,10 +199,6 @@ export default defineConfig({
 5. **CSS 原子化框架**，如Tailwind CSS、Windi CSS，通过类名来指定样式，大大简化了样式写法，提高了样式开发的效率，主要解决了原生 CSS 开发体验的问题。
 
 不过，各种方案没有孰优孰劣，各自解决的方案有重叠的部分，但也有一定的差异
-
-
-
-
 
 ## css预处理器
 
@@ -274,10 +272,6 @@ css: {
 })
 ```
 
-
-
-
-
 ## css modules
 
 > CSS Modules 在 Vite 也是一个开箱即用的能力，Vite 会对后缀带有`.module`的样式文件自动应用 CSS Modules。
@@ -320,7 +314,6 @@ css: {
   }
   
   export default PageHeader;
-  
   ```
 
 - 修改配置，生成的hash
@@ -360,8 +353,6 @@ css: {
 ## postcss
 
 > 一般你可以通过 `postcss.config.js` 来配置 postcss ，不过在 Vite 配置文件中已经提供了 PostCSS 的配置入口，我们可以直接在 Vite 配置文件中进行操作。
-
-
 
 ### autoprefixer
 
@@ -403,14 +394,11 @@ export default defineConfig({
     }
   }
 })
-
 ```
 
 之后打包生成的文件中就能自动添加前缀了
 
 ![](/Users/leo/Library/Application%20Support/marktext/images/2022-11-06-16-20-23-image.png)
-
-
 
 ### 其他插件
 
@@ -419,8 +407,6 @@ export default defineConfig({
 - [postcss-pxtorem](https://github.com/cuth/postcss-pxtorem)： 用来将 px 转换为 rem 单位，在适配移动端的场景下很常用。
 - [postcss-preset-env](https://github.com/csstools/postcss-preset-env): 通过它，你可以编写最新的 CSS 语法，不用担心兼容性问题。
 - [cssnano](https://github.com/cssnano/cssnano): 主要用来压缩 CSS 代码，跟常规的代码压缩工具不一样，它能做得更加智能，比如提取一些公共样式进行复用、缩短一些常见的属性值等等。
-
-
 
 ## css in js
 
@@ -439,8 +425,6 @@ export default defineConfig({
 - `服务端渲染(SSR)`
 
 而`styled-components`和`emotion`已经提供了对应的 babel 插件来解决这些问题，我们在 Vite 中要做的就是集成这些 babel 插件。
-
-
 
 ### 配置
 
@@ -471,5 +455,3 @@ export default defineConfig({
   ]
 })
 ```
-
-

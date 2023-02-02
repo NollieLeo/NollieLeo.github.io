@@ -4,7 +4,7 @@ date: 2020-03-23 10:50:27
 tags:
 - http
 categories:
-- 服务器端
+- http
 ---
 
 ## 常用请求头

@@ -3,8 +3,8 @@ title: 手写JS并发控制（asyncPool）
 date: 2021-12-13 13:57:51
 tags:
 - Primise
-- all
-- race
+- Primise all
+- Primise race
 
 categories:
 - Javascript

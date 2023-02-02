@@ -1063,8 +1063,4 @@ function patchKeyedChildren(n1, n2, container) {
 
 到这里就都处理完了
 
-
-
-
-
 ## 快速diff算法

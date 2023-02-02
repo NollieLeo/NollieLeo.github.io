@@ -2,8 +2,8 @@
 title: 原型模式和基于原型继承的Javascript对象系统
 date: 2020-03-16 22:28:09
 tags:
-- javascript
-- js设计模式
+- Javascript
+- 设计模式
 - 原型链
 categories:
 - Javascript

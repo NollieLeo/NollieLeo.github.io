@@ -3,7 +3,7 @@ title: 手写Promise
 date: 2021-06-13 13:20:58
 tags:
 - Javascript
-- promise
+- Promise
 - 面试题
 categories:
 - Javascript

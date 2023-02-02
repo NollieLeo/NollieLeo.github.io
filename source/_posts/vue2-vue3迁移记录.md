@@ -4,6 +4,8 @@ date: 2022-04-16 10:59:12
 tags:
 - Vue
 - Vite
+categories:
+- Vue
 ---
 
 > 记录vue2到vue3版本迁移事项

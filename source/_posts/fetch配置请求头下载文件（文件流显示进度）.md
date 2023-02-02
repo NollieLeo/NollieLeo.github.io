@@ -3,7 +3,6 @@ title: fetch配置请求头下载文件（文件流显示进度）
 date: 2021-04-14 10:24:33
 tags:
 - fetch
-- auth认证
 categories:
 - fetch
 ---

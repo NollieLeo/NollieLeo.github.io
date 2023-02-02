@@ -3,6 +3,7 @@ title: 手写curry
 date: 2021-12-13 11:02:58
 tags:
 - curry
+- Javascript
 
 categories:
 - Javascript

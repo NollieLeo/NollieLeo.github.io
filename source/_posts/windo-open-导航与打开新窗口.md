@@ -1,5 +1,5 @@
 ---
-title: windo.open(导航与打开新窗口)
+title: window.open(导航与打开新窗口)
 date: 2021-05-26 15:59:48
 tags:
 - Javascript

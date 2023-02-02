@@ -4,7 +4,7 @@ date: 2020-07-18 15:26:14
 tags:
 - React-router
 categories:
-- React
+- React-router
 ---
 
  https://medium.com/@michaelchan_13570/using-react-router-v4-prompt-with-custom-modal-component-ca839f5faf39 

@@ -4,6 +4,8 @@ date: 2022-12-03 19:39:37
 tags:
 - Vue
 - diff
+categories:
+- Vue
 ---
 
 # 前置概念

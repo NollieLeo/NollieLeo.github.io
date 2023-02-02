@@ -3,7 +3,7 @@ title: 进程通信(electron/node)
 date: 2022-03-26 18:51:07
 tags:
 - Electron
-- Nodejs
+- nodeJS
 ---
 
 ## **进程通信**

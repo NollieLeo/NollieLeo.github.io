@@ -3,7 +3,8 @@ title: tsconfig.json全解析
 date: 2022-04-21 17:42:55
 tags:
 - Typescript
-
+categories:
+- Typescript
 
 ---
 

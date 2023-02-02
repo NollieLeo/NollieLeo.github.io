@@ -7,7 +7,7 @@ tags:
 - onbeforeunload
 - onunload
 categories:
-- 面试题
+- 面试
 
 ---
 
