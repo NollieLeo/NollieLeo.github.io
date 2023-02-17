@@ -50,8 +50,6 @@ Fn.call(obj, ...args);
 Fn.apply(obj, args);
 ```
 
-
-
 ## 实现
 
 首先先写一个_call的方法
@@ -75,8 +73,6 @@ Function.prototype._call = function(target, ...args){
 }
 ```
 
-
-
 ### 2. 判断传进来的target是否为基本数据类型
 
 如果target是基本数据类型，是无法将函数附加到target上面的，通过instanceof可以顺着原型链找到Object的构造函数的数据类型才可以被附加函数。否者就直接把这个数据返回，因为我看call就是这样做的
@@ -92,12 +88,9 @@ Function.prototype._call = function(target, ...args){
 }
 ```
 
-
-
 ### 3. 对象是否是被冻结或者封闭的状态
 
 这里的对象如果被冻结或者处于封闭的状态那么，后续调用函数给对象做赋值操作也会失效，所以这里还需要判断一层，具体的对象冻结和对象封闭可以看看这[Object.freeze()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze) 和 [Object.seal()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/seal)
-
 
 ```js
 Function.prototype._call = function(target, ...args){
@@ -112,8 +105,6 @@ Function.prototype._call = function(target, ...args){
     }
 }
 ```
-
-
 
 ### 3. target必须是目标对象，如果不传值，默认为window
 
@@ -132,7 +123,7 @@ Function.prototype._call = function(target, ...args){
 }
 ```
 
-### 4.  隐式绑定，改变构造函数的调用者间接改变 this 指向 
+### 4.  隐式绑定，改变构造函数的调用者间接改变 this 指向
 
 ```js
 Function.prototype._call = function(target, ...args){
@@ -177,8 +168,6 @@ Function.prototype._call = function(target, ...args){
     return result;
 }
 ```
-
-
 
 ## 测试
 
@@ -228,7 +217,6 @@ console.log(booleanObj);
 
 ![image-20210602161119496](image-20210602161119496.png)
 
-
 ### 传基本数据类型数据
 
 ```js
@@ -253,8 +241,6 @@ console.log(symb, num, str, isNull, isUndefined, isBoolean);
 最终打印出来的是酱紫的
 
 ![image-20210602162033860](image-20210602162033860.png)
-
-
 
 ### 传一个冻结或者封闭的对象
 
@@ -284,8 +270,6 @@ Person.call();
 ```
 
 那这时候作用对象在浏览器里头就是window了，构造函数里头的赋值操作可以在window对象里头体现。
-
-
 
 ## 最终代码
 
