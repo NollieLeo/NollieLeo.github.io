@@ -24,6 +24,8 @@ import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
 
+import mermaid from 'astro-mermaid';
+
 // https://astro.build/config
 export default defineConfig({
 	site: "https://NollieLeo.github.io/",
@@ -38,6 +40,10 @@ export default defineConfig({
 		},
 	},
 	integrations: [
+		mermaid({
+			autoTheme: true,
+			darkTheme: 'dark',
+		}),
 		tailwind({
 			nesting: true,
 		}),
