@@ -23,6 +23,35 @@ tags:
 
 CanvasPro 的整体架构在设计上遵循 **状态与视图解耦**、**按需渲染**、**事件驱动分层** 的理念。
 
+```mermaid
+graph TD
+    subgraph 核心数据层 (State Management)
+        A[CanvasStore] -->|依赖| B(扁平化组件树 metas)
+        A -->|依赖| C(断点记录 breakpointRecord)
+        A -->|管理| D(状态突变 CanvasAction)
+    end
+
+    subgraph 渲染引擎层 (Render Engine)
+        E[MetaRenderTree] --> F{递归解析}
+        F -->|编辑态| G[MetaEditableRenderTree]
+        F -->|预览态| H[MetaPreviewRenderTree]
+        G -.监听.-> B
+    end
+
+    subgraph 无限画布与事件层 (Viewport & Event)
+        I[react-infinite-viewer] --> J(缩放与平移矩阵)
+        K[CanvasEventEmitter] -->|分发| L[DOM Transform 直接修改]
+        K -.绕过 React Diff.-> J
+    end
+
+    subgraph 拖拽与碰撞层 (DnD Engine)
+        M[DndContextWrapper] --> N(碰撞检测算法 Collision Detection)
+        N --> O(useInsertTarget 落点计算)
+        O --> P[DOM 高亮占位指示]
+        G -->|注入| M
+    end
+```
+
 - **核心状态驱动 (State Management)**：基于 **MobX** (`mobx-react`) 构建核心状态库 `CanvasStore`。所有页面组件数据（`metas`）、画板路由（`boards`）、选中状态（`selectedMetaConfigs`）、断点信息等均收敛于此。
 - **渲染引擎 (Render Engine)**：基于 React 递归渲染，通过 `MetaRenderTree`（衍生为 `MetaEditableRenderTree` 和 `MetaPreviewRenderTree`）动态解析元数据并生成真实的 DOM 节点。
 - **拖拽引擎 (DnD Engine)**：基于 `@dnd-kit/core` 二次封装，提供了组件级别的拖拽节点映射（`DndBox`）。
@@ -40,12 +69,46 @@ CanvasPro 的整体架构在设计上遵循 **状态与视图解耦**、**按需
 
 ### 2.2 渲染树引擎 (MetaRenderTree & Hooks)
 渲染树是画布的“血肉”。入口通过传入 `rootId` 开始，进行组件级别的递归渲染。
+
+**引擎层渲染策略与虚拟化伪代码示例：**
+```tsx
+const childTrees = useMemo(() => {
+  if (!childMetas || !childMetas.length) {
+    return <MetaPlaceholder meta={meta} />;
+  }
+  return map(childMetas, (childMeta) => (
+    <MetaEditableRenderTree meta={childMeta} key={childMeta.id} />
+  ));
+}, [childMetas, meta]);
+
+// 核心：基于可视区进行裁剪
+const showShadow = useMemo(() => {
+  if (isForceVisible) return false;
+  return isOutOfView && type !== CONDITIONAL_VIEW; // 如果越界则显示 Shadow
+}, [isOutOfView, isForceVisible]);
+
+if (showShadow) {
+  return <MetaShadow size={sizeRef.current} />;
+}
+```
+
 - **编辑态特化的 DndHooks**：在 `MetaEditableRenderTree.tsx` 中，引擎为每个叶子节点实时注入了 `useDraggableConfig` 和 `useDroppableConfig`。它们根据当前的模式（如 `CROSS_LEVEL`, `ABS_OR_FIXED_MOVE`）自动推断拖拽策略。
 - **HTML Dataset 映射锚点**：在递归时，系统调用 `genMetaDataSet` 方法，将组件 ID、Type 以及业务 Feature 强绑定至真实的 DOM Dataset (`data-meta-id` 等)。这使得在碰撞检测、元素拾取时，底层仅需通过原生 `element.dataset` 即可快速反查元信息，这是实现高性能框选、辅助线测量的基石。
 - **动态样式合成机制 (`useComputedMetaStyles`)**：应对低代码系统中错综复杂的 Breakpoint (断点) 以及 Variants (变体)。渲染引擎在运行时通过 `mergeDeep` 将当前变体样式实时叠加至主样式表，并输出给 React 层。
 
 ### 2.3 无限视口与高性能事件 (Viewport & EventEmitter)
 画布场景下，**缩放（Zoom）和平移（Pan）** 是最高频的操作。如果在这一层频繁修改 React State（哪怕是最外层的 State），会导致整个画布（几千个节点）进入 Diff 流程，这绝对是一场灾难。
+
+**完全绕过 VDOM 的神仙操作思路**：
+```typescript
+// 触发缩放时，不调用 setState，而是通过全局单例的 EventBus 抛出
+const onZoomIn = useCallback(() => {
+  const newZoom = getViewportLegalZoom(curZoom + rate);
+  // ✨ 这里直接操作闭包事件，原生修改 DOM Transform！
+  CanvasEventEmitter.emit(CanvasEmitterEventType.VIEWPORT_SET_ZOOM, newZoom);
+}, []);
+```
+
 - **引擎接管偏移矩阵**：CanvasPro 引入了强大的 `react-infinite-viewer` 承接底层的缩放偏移矩阵计算。
 - **无状态的纯净总线 (CanvasEventEmitter)**：通过深度拆解 `usePanZoom.ts` 与 `InfiniteView/index.tsx` 可以发现，当用户触发滚动/缩放时，代码并没有去 `setState`。它仅仅是发出了一条 `CanvasEventEmitter.emit(CanvasEmitterEventType.VIEWPORT_SET_ZOOM, newZoom)`。该事件通过单例的闭包被 DOM 层直接截获并修改 Transform，完美绕过了 React 的 VDOM Diff 阶段，这正是其能在海量节点下依然保持 60fps (丝滑) 的秘密！
 
@@ -67,6 +130,26 @@ CanvasPro 的整体架构在设计上遵循 **状态与视图解耦**、**按需
 **CanvasPro 的解法**：**细粒度 Diff 补丁分发机制 (`useDiffApply`)**。
 - 抛弃了粗暴的 DeepClone 覆盖，单独抽象了 `useDiffApply` 机制作为增量构建引擎。
 - 服务端传入的并非整棵树，而是属性操作快照（如 `operation: 'add'`, 或指明修改了 `DESIGN_KEY`）。
+
+**基于 MobX 事务的无闪烁补丁机制**：
+```typescript
+// useAddOrDeleteComponentDiffApply.ts 中处理服务端发来的 Add 补丁
+case 'add': {
+  // 1. 获取服务器最新的组件描述信息
+  const targetComponent = getComponent(id);
+  // 2. Transpile转译器：将原始 Schema 基于当前端点翻译为合法的 Meta 对象
+  const pendingTasks = map(canvasStore.breakpoints, (bp) => transpile(targetComponent, bp));
+  const metas = await Promise.all(pendingTasks);
+  
+  // 3. 通过 transaction 将生成好的 metas 直接打入 Store 字典中
+  return async () => {
+    forEach(metas, (newMeta) => {
+      canvasStore.addMeta(newMeta);
+    });
+  };
+}
+```
+
 - 拆分了大量的局部 Hooks (例如 `useAddOrDeleteComponentDiffApply`, `usePropertiesDiffApply`)。当判定是 `add` 操作时，会先通过 `useTranspile` (转译层) 结合当前断点将 Schema 翻译为符合运行时规范的 Meta 结构，最后在一个 MobX 的 `transaction` (事务) 中打入状态字典，彻底杜绝了状态不同步引发的白屏。
 
 ### 🎯 难点 3：多维度灾难恢复机制 (Crash Recovery)
