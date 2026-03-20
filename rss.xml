@@ -1,4 +1,197 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>翁先森的博客</title><description>乌拉</description><link>https://nollieleo.github.io/</link><language>zh_CN</language><item><title>TubeWidget YouTube 双语字幕插件架构设计与实现</title><link>https://nollieleo.github.io/posts/tubewidget-architecture/</link><guid isPermaLink="true">https://nollieleo.github.io/posts/tubewidget-architecture/</guid><description>深度解析已上架 Chrome 商店的 TubeWidget (Dual Subtitles) 插件架构。探讨如何通过 Plasmo 的 Main World 注入突破 YouTube 严苛的 API 签名防爬虫机制，以及高精度时间轴同步、滑动窗口预加载流水线和零冲突 Shadow DOM 渲染方案。</description><pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;1. 背景与项目概述&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>翁先森的博客</title><description>乌拉</description><link>https://nollieleo.github.io/</link><language>zh_CN</language><item><title>高性能 JSON 工具 (JsonTools) 的架构设计与实现</title><link>https://nollieleo.github.io/posts/json-tools-architecture/</link><guid isPermaLink="true">https://nollieleo.github.io/posts/json-tools-architecture/</guid><description>深度剖析 JsonTools项目。探讨在处理前端数以十兆计的抓包数据与巨型接口返回时，如何利用 Web Worker 离线计算、虚拟列表 (Virtual List) 降维渲染、以及自定义 JSON Diff 乱序比对引擎，彻底解决主线程卡死问题。</description><pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;1. 背景与痛点：苦涩的“JSON”自由&lt;/h2&gt;
+&lt;p&gt;在前端开发、接口联调或生产环境排查的日常中，我每天都在和无数的 JSON 数据打交道。
+市面上并不缺 JSON 格式化工具（比如普通的浏览器插件、或者在线的 JSON Editor），但当系统越来越庞大、微服务拆分越来越细时，我们抓包拿到的&lt;strong&gt;接口返回值动辄大几兆、甚至包含几十万个节点的巨型 JSON 树&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;传统的 JSON 工具在面对这类“巨物”时，常常暴露出致命的缺陷：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;渲染主线程卡死 (UI Freezing)&lt;/strong&gt;：直接将几十万行的 JSON 塞进页面渲染，浏览器会瞬间假死，滚动条甚至无法拖动。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;极其糟糕的搜索体验&lt;/strong&gt;：在浏览器原生 &lt;code&gt;Ctrl+F&lt;/code&gt; 搜索百万级数据时，每按一个字母都会导致长达数秒的页面无响应。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;结构比对 (Diff) 的伪智能&lt;/strong&gt;：普通的 Diff 工具只会做极其死板的“字符串”比对。如果接口返回的数据只是更换了对象 Key 的排列顺序，或是末尾多了一个逗号，传统工具就会标红报错，这让排查排错变得极其痛苦。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;为了彻底解决这一系列开发痛点，我独立主导并孵化了 &lt;strong&gt;JsonTools&lt;/strong&gt; 这个专为硬核开发者打造的 Chrome 扩展。它融合了极高的性能优化和深度的前端计算逻辑，本文将对它的架构实现进行详细拆解。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;2. 核心架构设计：多线程离线计算与虚拟化渲染的联姻&lt;/h2&gt;
+&lt;p&gt;处理超大型 JSON 渲染的唯一解，就是&lt;strong&gt;不在主线程里做繁重的运算&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在 JsonTools 的架构中，我严格遵守了“展示与计算彻底分离”的原则。UI 层 (React) 只负责展现当前屏幕能看到的几十行代码，而将 JSON 的反序列化、节点的折叠/展开运算、以及搜索的高亮计算全部丢进了后端的 Web Worker 中。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;flowchart TD
+    subgraph UI [&quot;主线程 (React + virtua)&quot;]
+        Input[&quot;用户输入/粘贴巨型 JSON&quot;] --&amp;gt;|postMessage| WorkerProxy
+        Scroll[&quot;用户滚动视窗 (Viewport)&quot;] --&amp;gt; Virtua[&quot;virtua 虚拟列表&quot;]
+        Virtua --&amp;gt; Render[&quot;仅渲染可见的 50 个 DOM 节点&quot;]
+        
+        WorkerProxy --&amp;gt;|接收 1D VirtualLine 数组| Virtua
+    end
+
+    subgraph WORKER [&quot;子线程计算核心 (Web Worker)&quot;]
+        Parse[&quot;JSON.parse / 安全 Eval 兜底&quot;] --&amp;gt; Flattener{&quot;Transformer (降维打击)&quot;}
+        
+        Flattener --&amp;gt;|检查展开/折叠状态| Filter[&quot;Regex / Path 搜索匹配&quot;]
+        Filter --&amp;gt;|拍平为一维数组| Result[&quot;VirtualLine[]&quot;]
+        Result --&amp;gt;|postMessage 回传| UI
+    end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这种架构彻底释放了浏览器的渲染压力。无论用户输入的 JSON 是一百行还是一百万行，主线程始终只维护当前视窗内的轻量级 DOM 结构，做到了极致的毫秒级无延迟反馈。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;3. 攻克难题一：百万级 JSON 树的极致展平 (Transformer)&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;业务痛点&lt;/strong&gt;：
+JSON 本质上是一棵极其庞大、无限嵌套的多叉树（Tree）。而基于虚拟列表 (&lt;code&gt;virtua&lt;/code&gt;) 的渲染器，只能接受一维的数组。如何把“树”拍平成“线”，并且要完美支持用户随时随地的“展开”与“折叠”交互？&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;攻克方案&lt;/strong&gt;：
+我在 Worker 内部编写了一个非常核心的 &lt;code&gt;transformer.ts&lt;/code&gt; 引擎。它不是简单地调用 &lt;code&gt;JSON.stringify&lt;/code&gt;，而是结合了 DFS（深度优先遍历）算法，配合一个维护用户交互状态的 &lt;code&gt;expandedPaths&lt;/code&gt; / &lt;code&gt;collapsedPaths&lt;/code&gt; 集合（Set）。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;flowchart TD
+    Start([&quot;输入: 当前 JSON 节点 (value, path, depth)&quot;]) --&amp;gt; CheckState{&quot;查询 expandedPaths: 当前节点是否已展开?&quot;}
+    CheckState --&amp;gt;|&quot;否 (已折叠)&quot;| Collapsed[&quot;生成单行 VirtualLine (如 &apos;{...}&apos;)&quot;]
+    Collapsed --&amp;gt; End([&quot;回溯 (剪枝，不再遍历子节点)&quot;])
+    
+    CheckState --&amp;gt;|&quot;是 (已展开)&quot;| GenerateStart[&quot;生成起始符 VirtualLine (如 &apos;{&apos;)&quot;]
+    GenerateStart --&amp;gt; IsObject{&quot;节点类型?&quot;}
+    IsObject --&amp;gt;|&quot;Object/Array&quot;| Loop[&quot;遍历 Object.keys() 或 Array 元素&quot;]
+    Loop --&amp;gt; Recursive[&quot;递归调用 jsonToVirtualLines (depth + 1)&quot;]
+    Recursive --&amp;gt; Loop
+    Loop --&amp;gt; GenerateEnd[&quot;生成闭合符 VirtualLine (如 &apos;}&apos;)&quot;]
+    GenerateEnd --&amp;gt; End
+    
+    IsObject --&amp;gt;|&quot;Primitive (string/number)&quot;| Primitive[&quot;生成基础类型 VirtualLine&quot;]
+    Primitive --&amp;gt; End
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;核心降维代码 (&lt;code&gt;src/utils/transformer.ts&lt;/code&gt;)&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;export const jsonToVirtualLines = (
+  key: string | undefined,
+  value: JsonValue,
+  depth: number,
+  path: string,
+  idPath: (string | number)[],
+  onLine: (line: VirtualLine) =&amp;gt; void,
+  isExpanded: (path: string, depth: number) =&amp;gt; boolean
+) =&amp;gt; {
+  // 判断当前节点的折叠状态
+  const expanded = isExpanded(path, depth)
+  const isCollapsed = !expanded
+
+  const isObj = isPlainObject(value)
+  const isArr = Array.isArray(value)
+
+  // 1. 如果当前节点是折叠状态，直接放弃对其子节点的递归遍历，节约海量算力
+  if (isCollapsed &amp;amp;&amp;amp; (isObj || isArr)) {
+    onLine({
+      id: `${path}__start`,
+      path, depth,
+      type: &quot;collapsed&quot;,
+      content: key ? `&quot;${key}&quot;: ${isArr ? &quot;[...]&quot; : &quot;{...}&quot;}` : (isArr ? &quot;[...]&quot; : &quot;{...}&quot;),
+    })
+    return
+  }
+
+  // 2. 否则，生成起始行 ({ 或 [)，并递归下钻子节点
+  if (isObj || isArr) {
+    onLine({
+      id: `${path}__start`,
+      path, depth,
+      type: isArr ? &quot;array_start&quot; : &quot;object_start&quot;,
+      content: key ? `&quot;${key}&quot;: ${isArr ? &quot;[&quot; : &quot;{&quot;}` : (isArr ? &quot;[&quot; : &quot;{&quot;),
+    })
+    
+    // ... 遍历 Object.keys 或 Array 递归调用 jsonToVirtualLines
+    
+    // 生成闭合行 (} 或 ])
+    onLine({ /* ... */ type: &quot;object_end&quot;, content: &quot;}&quot; })
+  } else {
+    // 3. 压平基本数据类型节点 (string, number, boolean)
+    onLine({ /* ... */ type: &quot;primitive&quot;, content: `&quot;${key}&quot;: ${JSON.stringify(value)}` })
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;利用这套在 Web Worker 中的高速递归算法，&lt;strong&gt;一百万行的 JSON 树只需几十毫秒即可被降维映射成一维数组 (&lt;code&gt;VirtualLine[]&lt;/code&gt;)&lt;/strong&gt;。当用户点击“折叠”某个对象时，只需更新状态，再进行一次轻量级的离线重算，主线程 UI 会瞬间完成无缝更替。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;4. 攻克难题二：基于语义的真·结构化 JSON Diff 引擎&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;业务痛点&lt;/strong&gt;：
+平时排查接口问题时，最常见的场景就是把两段 JSON 数据扔进 Diff 工具。
+但普通的 Diff 工具（包括 Github 的比对）通常只会傻乎乎地对比&lt;strong&gt;纯字符串&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果接口 A 返回的是 &lt;code&gt;{&quot;id&quot;: 1, &quot;name&quot;: &quot;foo&quot;}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;接口 B 返回的是 &lt;code&gt;{&quot;name&quot;: &quot;foo&quot;, &quot;id&quot;: 1}&lt;/code&gt;
+这两个 JSON 在业务语义上是&lt;strong&gt;完全等价&lt;/strong&gt;的，但纯文本 Diff 会将它们整块标红。甚至在某些换行处多了一个无足轻重的尾部逗号（&lt;code&gt;,&lt;/code&gt;），也会被强行标红，让排查者眼花缭乱。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;攻克方案&lt;/strong&gt;：
+我在 &lt;code&gt;jsonDiff.worker.ts&lt;/code&gt; 中，借助底层的 &lt;code&gt;diff&lt;/code&gt; 库，重新实现了一个&lt;strong&gt;高定版、懂 JSON 语义的乱序比对引擎 (&lt;code&gt;DiffJsonNoSort&lt;/code&gt;)&lt;/strong&gt;。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;flowchart LR
+    subgraph Input [&quot;输入层&quot;]
+        Left[&quot;Left JSON (旧数据)&quot;]
+        Right[&quot;Right JSON (新数据)&quot;]
+    end
+    
+    subgraph Preprocess [&quot;预处理层 (Worker 内)&quot;]
+        Parse[&quot;JSON.parse 解析为 AST 对象&quot;]
+        Sort[&quot;递归执行 sortObjectKeys() (字母序重排)&quot;]
+        Stringify[&quot;JSON.stringify 重新序列化&quot;]
+    end
+    
+    subgraph DiffEngine [&quot;自定义语义化 Diff 引擎&quot;]
+        Tokenize[&quot;按行切片 (tokenize)&quot;]
+        Equals{&quot;重写 equals() 判断逻辑&quot;}
+        Regex[&quot;正则忽略尾部逗号和换行: replace(/,([\\r\\n])/g, &apos;$1&apos;)&quot;]
+    end
+    
+    Input --&amp;gt; Parse
+    Parse --&amp;gt; Sort
+    Sort --&amp;gt; Stringify
+    Stringify --&amp;gt; Tokenize
+    Tokenize --&amp;gt; Equals
+    Equals --&amp;gt; Regex
+    Regex --&amp;gt; Output([&quot;输出精准的增删改差异块&quot;])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;乱序对比洗牌&lt;/strong&gt;：在传给 Diff 引擎之前，利用深拷贝递归方法 &lt;code&gt;sortObjectKeys&lt;/code&gt;，强行将所有 Object 内部的 Keys 按照字母顺序重新排列，抹平服务端因序列化产生的无序性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;重写底层容错规则&lt;/strong&gt;：我继承了原始的 &lt;code&gt;Diff&lt;/code&gt; 类，修改了它的核心 &lt;code&gt;equals&lt;/code&gt; 方法，巧妙地利用正则表达式剥离了碍眼的尾部换行逗号，还开发者一个最纯净的比对视图。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;核心定制代码 (&lt;code&gt;src/workers/jsonDiff.worker.ts&lt;/code&gt;)&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import * as Diff from &quot;diff&quot;
+
+// 递归洗牌函数：将所有对象的 key 强行排序，解决乱序 Diff 痛点
+function sortObjectKeys(obj: unknown): unknown {
+  if (obj === null || typeof obj !== &quot;object&quot;) return obj;
+  if (Array.isArray(obj)) return obj.map(sortObjectKeys);
+  
+  const sortedKeys = Object.keys(obj).sort();
+  const result: Record&amp;lt;string, unknown&amp;gt; = {};
+  for (const key of sortedKeys) {
+    result[key] = sortObjectKeys((obj as Record&amp;lt;string, unknown&amp;gt;)[key]);
+  }
+  return result;
+}
+
+// 继承底层引擎，重写高阶匹配法则
+class DiffJsonNoSort extends Diff.Diff {
+  tokenize(value: string) {
+    return value.split(/^/m) // 按行切片
+  }
+  castInput(value: unknown) {
+    return typeof value === &quot;string&quot; ? value : JSON.stringify(value, null, 2)
+  }
+  // 核心魔法：判定两行是否一致时，无视掉末尾的逗号 (trailing commas)
+  equals(left: string, right: string) {
+    return (
+      left.replace(/,([\r\n])/g, &quot;$1&quot;) === right.replace(/,([\r\n])/g, &quot;$1&quot;)
+    )
+  }
+}
+export const diffJsonNoSort = new DiffJsonNoSort()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;通过这套降维和重组，前端同学在排查 Diff 时，看到的不再是杂乱无章的红绿代码块，而是极其精准、真正发生变动的核心字段。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;5. 交互层点睛：不仅要快，还要极具扩展性&lt;/h2&gt;
+&lt;p&gt;作为一个独立的开发者工具，JsonTools 还内置了一套极高水准的查询引擎（Query Engine）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;全方位搜索&lt;/strong&gt;：支持正则表达式 (Regex)、全词匹配 (Whole Word) 以及精准的&lt;strong&gt;对象路径搜索 (Path Search)&lt;/strong&gt;。所有查询都在子线程离线执行完毕并生成包含高亮边界的 &lt;code&gt;VirtualLine&lt;/code&gt; 节点。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;独立窗口体验&lt;/strong&gt;：摒弃了小气的弹窗 &lt;code&gt;Popup&lt;/code&gt;，JsonTools 被设计成了利用 &lt;code&gt;chrome.tabs.create&lt;/code&gt; 开启在独立专属的 Tab 页 (&lt;code&gt;tabs/json-preview.html&lt;/code&gt; / &lt;code&gt;json-diff.html&lt;/code&gt;) 中运行，最大化利用开发者的超宽屏幕和排查体验。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;开发者体验拉满&lt;/strong&gt;：配合 &lt;code&gt;CopiableText&lt;/code&gt; 提供了一键拷贝任意深层路径的值的能力；结合 &lt;code&gt;HighlightText&lt;/code&gt; 让匹配字符如同自带发光特效。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;6. 总结&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;JsonTools&lt;/code&gt; 并非只是一个把别人的库缝合起来的小玩具，它是一次关于浏览器渲染极限和并发计算能力深挖的工程实践。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;面对海量数据渲染瓶颈&lt;/strong&gt;，果断引入 Web Worker 多线程离线递归与 Virtua 虚拟列表切片渲染，把主线程从沉重的 DOM 负担中解放出来。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;面对僵化的纯文本比对&lt;/strong&gt;，深入到底层 Diff AST 引擎重写匹配规则并增加递归乱序洗牌。&lt;/li&gt;
+&lt;/ul&gt;
+</content:encoded></item><item><title>TubeWidget YouTube 双语字幕插件架构设计与实现</title><link>https://nollieleo.github.io/posts/tubewidget-architecture/</link><guid isPermaLink="true">https://nollieleo.github.io/posts/tubewidget-architecture/</guid><description>深度解析已上架 Chrome 商店的 TubeWidget (Dual Subtitles) 插件架构。探讨如何通过 Plasmo 的 Main World 注入突破 YouTube 严苛的 API 签名防爬虫机制，以及高精度时间轴同步、滑动窗口预加载流水线和零冲突 Shadow DOM 渲染方案。</description><pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;1. 背景与项目概述&lt;/h2&gt;
 &lt;p&gt;在海外视频学习和日常娱乐中，原生的 YouTube 播放器只能单选一种字幕，这对于非母语学习者来说是一个巨大的痛点。为了解决这个问题，我从零到一独立设计、开发并开源了 &lt;strong&gt;TubeWidget - Dual Subtitles&lt;/strong&gt;（目前已成功上架 Chrome 应用商店）。&lt;/p&gt;
 &lt;p&gt;在项目架构上，TubeWidget 隶属于我的 &lt;code&gt;YTranslater&lt;/code&gt; Turborepo Monorepo 仓库下。整个项目采用了当今最前沿的现代浏览器插件技术栈：&lt;/p&gt;
 &lt;ul&gt;
