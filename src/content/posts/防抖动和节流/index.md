@@ -1,0 +1,218 @@
+---
+title: 防抖动和节流
+published: 2020-05-03T14:27:27.000Z
+description: >-
+  场景：  在页面中很多的事件是会频繁执行的、如：  1. window的resize，scroll事件 2. 拖拽过程中的 mousemove事件 3.
+  文字输入过程中的keyup等事件  这些事件一旦触发会频繁执行、但是实际上我们可能只需要在特定的时候去执行绑定了这些事件的函数  例如：我需要检测...
+tags:
+  - 防抖动
+  - 节流
+  - Javascript
+category: Javascript
+---
+**场景：**
+
+在页面中很多的事件是会频繁执行的、如：
+
+1. window的resize，scroll事件
+2. 拖拽过程中的 mousemove事件
+3. 文字输入过程中的keyup等事件
+
+这些事件一旦触发会频繁执行、但是实际上我们可能只需要在特定的时候去执行绑定了这些事件的函数
+
+例如：我需要检测一次拖拉浏览器，移动过程中都算是一次，知道最后鼠标抬起来了，才算是完成了一次拉伸窗口；有比如，我们输入搜索框内的文字的时候，需要发ajax 到后台去请求数据，实际上我们并不需要每一次的输入都发送一个请求，而是在用户已经输完了一整段话或者是几个文字之后再去发送一个ajax，这样会节省很多的资源开销 。等等的这些问题都需要函数防抖动或者函数节流来解决
+
+## 防抖（debounce）
+
+原理： 当我们调用一个动作的时候，会设置在n毫秒后才执行，而在这n毫秒内，如果这个动作再次被调用的话则将重新在计算n毫秒，采取执行这个东西。 
+
+> 当一次事件发生后，事件处理器要等一定阈值的时间，如果这段时间过去后 再也没有 事件发生，就处理最后一次发生的事件。假设还差 `0.01` 秒就到达指定时间，这时又来了一个事件，那么之前的等待作废，需要重新再等待指定时间。
+
+例如：
+
+```html
+<body>
+  <style>
+    #container {
+      width: 200px;
+      height: 300px;
+      background-color: aquamarine;
+    }
+  </style>
+  <div id="container">
+
+  </div>
+  <script>
+    var count = 1;
+    var containerDom = document.getElementById('container');
+    function addNumber() {
+      containerDom.innerHTML = count++;
+    }
+    containerDom.onmousemove = addNumber;
+
+  </script>
+</body>
+
+```
+
+鼠标只要移动那么就会频繁的去触发addNumber的函数
+
+ ![debounce](./debounce.gif) 
+
+这个时候我们对他进行防抖动
+
+先写我们的第一版函数
+
+```javascript
+function debounce(fun, wait) {
+  var time;
+  return function () {
+    clearTimeout(time);
+    time = setTimeout(fun, wait);
+  }
+}
+```
+
+之后包裹住这个addnumber的函数
+
+现在随你怎么移动，反正你移动完 1000ms 内不再触发，我才执行事件。看看使用效果：
+
+ ![debounce 第一版](./debounce-1.gif) 
+
+ 顿时就从 165 次降低成了 1 次! 
+
+之后我们对他优化
+
+### this指向优化
+
+如果我们再addNumber函数中加入`console.log(this)`，没有再addNumber外层包裹debounce的时候this指向是
+
+```html
+<div id="container"></div>
+```
+
+但是包裹了debounce之后this就会指向windows对象
+
+所以需要对它进行修改
+
+```javascript
+var count = 0;
+var containerDom = document.getElementById('container');
+function addNumber() {
+  containerDom.innerHTML = `<div>
+  值为${++count}
+  </div>`;
+  console.log(this);
+}
+function debounce(fun, wait) {
+  var time;
+  return function () {
+    var that = this;
+    clearTimeout(time);
+    time = setTimeout(fun.bind(that), wait);
+  }
+}
+containerDom.onmousemove = debounce(addNumber, 1000);
+```
+
+但是这里又有一个问题，就是这样包裹debounce的时候，onmousemove自带的事件对象event就会丢失，没有将参数传进去，故我们需要修改一哈，这样再我们需要用到event对象的时候就能拿得到
+
+![image-20200503153245577](./image-20200503153245577.png)
+
+```javascript
+var count = 0;
+var containerDom = document.getElementById('container');
+function addNumber(e) {
+  containerDom.innerHTML = `<div>
+  值为${++count}
+  </div>`;
+  console.log(this);
+  console.log(e);
+}
+function debounce(fun, wait) {
+  var time;
+  return function () {
+    var that = this, args = arguments;
+    clearTimeout(time);
+    time = setTimeout(fn.bind(that, ...args), wait);
+  }
+}
+containerDom.onmousemove = debounce(addNumber, 1000);
+```
+
+这个时候我们函数就非常的完善了。
+
+### 第一次立刻执行
+
+假设我需要立即触发这个函数，但是又想防抖，就是相当于先执行函数再N秒内如果再此触发这个函数，就给他重新计算等待值。
+
+```javascript
+function debounce(fun, wait, immediate) {
+  var time;
+  return function () {
+    var that = this, args = arguments;
+    if (time) clearTimeout(time);
+    if (immediate) {
+      // 如果已经执行过，不再执行
+      var callNow = !time;
+      time = setTimeout(function () {
+        time = null
+      }, wait);
+      if (callNow) fun.apply(that, args);
+    } else {
+      time = setTimeout(function () {
+        fun.apply(that, args);
+      }, wait);
+    }
+  }
+}
+```
+
+ *[Image missing: debounce 第四版]* 
+
+完~
+
+
+
+## 节流
+
+> 可以理解为事件在一个管道中传输，加上这个节流阀以后，事件的流速就会减慢。实际上这个函数的作用就是如此，它可以将一个函数的调用频率限制在一定阈值内，例如 1s，那么 1s 内这个函数一定不会被调用两次
+
+以下是一个简版的节流,这里的this和argument处理方式和上面的防抖是一样的处理方式
+
+```js
+function throttle(fn, wait) {
+	let prev = new Date();
+	return function() { 
+	    const args = arguments;
+		const now = new Date();
+		if (now - prev > wait) {
+			fn.apply(this, args);
+			prev = new Date();
+		}
+	}
+}
+```
+
+按照以上的实现，第一次进入的时候就立马执行事件，但是如果最后一次的时间和pre的时间插值小于我们的wait时间，这时候的函数是不执行的，但是我们想要让它执行，这时候加入定时器，让他在最后一次调用执行函数的时候，算出它距离wait的时间还剩多少，然后让他在剩余时间内再执行；
+
+最终的代码是这样
+
+```js
+function throttle(fn, wait) {
+    let prev = new Date();
+    let time;
+    return function () {
+      const args = arguments;
+      const now = new Date();
+      clearTimeout(time);
+      if (now - prev >= wait) {
+        fn.apply(this, args);
+        prev = new Date();
+      } else {
+        time = setTimeout(fn.bind(this, args), wait - (prev - now));
+      }
+    };
+}
+```
+

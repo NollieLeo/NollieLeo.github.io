@@ -1,0 +1,59 @@
+---
+title: 算法之滑动窗口
+published: 2021-05-30T20:58:43.000Z
+description: >-
+  leetcode第209道题目    题目是      题解    js /   @param {number} target   @param
+  {number[]} nums   @return {number}  / var minSubArrayLen = function (target,
+  ...
+tags:
+  - 算法
+  - 面试题
+  - 滑动窗口
+  - Javascript
+category: 算法
+---
+
+
+
+leetcode第209道题目
+
+[链接](https://leetcode-cn.com/problems/minimum-size-subarray-sum/)
+
+题目是
+
+![image-20210530205955854](./image-20210530205955854.png)
+
+
+
+题解
+
+![image-20210530210433266](./image-20210530210433266.png)
+
+```js
+/**
+ * @param {number} target
+ * @param {number[]} nums
+ * @return {number}
+ */
+var minSubArrayLen = function (target, nums) {
+    let left = 0;
+    let right = 0;
+    let minL = Infinity;
+    let sum = 0;
+    while (right < nums.length) {
+        sum += nums[right];
+        while (sum >= target) {
+            minL = Math.min(minL, right - left + 1);
+            sum -= nums[left];
+            left++;
+            if (sum < target) {
+                break;
+            }
+        }
+        right++;
+    }
+    return minL === Infinity ? 0 : minL
+};
+
+```
+

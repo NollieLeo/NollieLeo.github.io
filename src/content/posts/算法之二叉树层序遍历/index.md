@@ -1,0 +1,80 @@
+---
+title: 算法之二叉树层序遍历
+published: 2021-06-19T14:16:29.000Z
+description: >-
+  从上到下按层打印二叉树，同一层的节点按从左到右的顺序打印，每一层打印到一行。      思路： 
+  稍微改变一下对队列的使用，就可以在遍历过程中体现出层次，大致过程如下：  - 初始化 queue，用于存储当前层的节点 - 检查 queue 是否为空  
+  - 如果不为空：依次遍历当前 queue 内的...
+tags:
+  - 算法
+  - 面试题
+  - 二叉树
+  - 二叉树层序遍历
+  - Javascript
+category: 算法
+---
+
+#### [剑指 Offer 32 - II. 从上到下打印二叉树 II](https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof/)
+
+从上到下按层打印二叉树，同一层的节点按从左到右的顺序打印，每一层打印到一行。
+
+![image-20210619141848957](./image-20210619141848957.png)
+
+
+
+思路：
+
+稍微改变一下对队列的使用，就可以在遍历过程中体现出层次，大致过程如下：
+
+- 初始化 queue，用于存储当前层的节点
+- 检查 queue 是否为空
+  - 如果不为空：依次遍历当前 queue 内的所有节点，检查每个节点的左右子节点，将不为空的子节点放入 queue，继续循环
+  - 如果为空：跳出循环
+
+```js
+/**
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var levelOrder = function(root) {
+    if (!root) return [];
+    const queue = [root];
+    const res = []; // 存放遍历结果
+    let level = 0; // 代表当前层数
+    while (queue.length) {
+        res[level] = []; // 第level层的遍历结果
+        // 这里一开始我以为每层节点数量都是满的。。。然后就每层乘以2了。。。
+        let levelNum = queue.length; // 第level层的节点数量
+        while (levelNum--) {
+            const front = queue.shift();
+            res[level].push(front.val);
+            if (front.left) queue.push(front.left);
+            if (front.right) queue.push(front.right);
+        }
+
+        level++;
+    }
+    return res;
+};
+```
+
+
+
+思路2：递归
+
+```js
+var levelOrder = function (root) {
+    let res = [];
+    const traversal = (root, level = 0) => {
+        if (root) {
+            if (!res[level]) res[level] = [];
+            res[level].push(root.val);
+            traversal(root.left, level + 1)
+            traversal(root.right, level + 1)
+        }
+    }
+    traversal(root);
+    return res;
+};
+```
+
