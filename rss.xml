@@ -1,4 +1,430 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>翁先森的博客</title><description>乌拉</description><link>https://nollieleo.github.io/</link><language>zh_CN</language><item><title>Zion DevTools 架构设计与技术分析</title><link>https://nollieleo.github.io/posts/zed-devtools-architecture/</link><guid isPermaLink="true">https://nollieleo.github.io/posts/zed-devtools-architecture/</guid><description>深度解析为 Zion Editor 量身定制的 Chrome 开发者工具 zed-devtools 的架构设计。涵盖跨隔离世界的 React Fiber 劫持、基于 Web Worker 的百万级 JSON 虚拟化渲染，以及基于 CRDT 架构的 Time Travel 时间漫游技术。</description><pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;1. 背景与概述&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>翁先森的博客</title><description>乌拉</description><link>https://nollieleo.github.io/</link><language>zh_CN</language><item><title>TubeWidget YouTube 双语字幕插件架构设计与实现</title><link>https://nollieleo.github.io/posts/tubewidget-architecture/</link><guid isPermaLink="true">https://nollieleo.github.io/posts/tubewidget-architecture/</guid><description>深度解析已上架 Chrome 商店的 TubeWidget (Dual Subtitles) 插件架构。探讨如何通过 Plasmo 的 Main World 注入突破 YouTube 严苛的 API 签名防爬虫机制，以及高精度时间轴同步、滑动窗口预加载流水线和零冲突 Shadow DOM 渲染方案。</description><pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;1. 背景与项目概述&lt;/h2&gt;
+&lt;p&gt;在海外视频学习和日常娱乐中，原生的 YouTube 播放器只能单选一种字幕，这对于非母语学习者来说是一个巨大的痛点。为了解决这个问题，我从零到一独立设计、开发并开源了 &lt;strong&gt;TubeWidget - Dual Subtitles&lt;/strong&gt;（目前已成功上架 Chrome 应用商店）。&lt;/p&gt;
+&lt;p&gt;在项目架构上，TubeWidget 隶属于我的 &lt;code&gt;YTranslater&lt;/code&gt; Turborepo Monorepo 仓库下。整个项目采用了当今最前沿的现代浏览器插件技术栈：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心框架&lt;/strong&gt;：&lt;strong&gt;Plasmo&lt;/strong&gt;（完美支持 Manifest V3，拥有极佳的开发者体验）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;UI 与样式&lt;/strong&gt;：&lt;strong&gt;React 18&lt;/strong&gt; + &lt;strong&gt;TailwindCSS&lt;/strong&gt; + &lt;strong&gt;Ant Design&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;状态与数据&lt;/strong&gt;：&lt;strong&gt;Zustand&lt;/strong&gt; (响应式状态) + &lt;strong&gt;Dexie.js&lt;/strong&gt; (IndexedDB 本地高频缓存)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;翻译引擎路由&lt;/strong&gt;：支持 Google 免费版、DeepL、Microsoft 以及 Google Cloud 等多通道分发。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这不是一个简单的 DOM 爬虫工具，而是一个深入视频播放器骨髓的工程化产品。本文将详细拆解该插件底层极其硬核的拦截架构与优化细节。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;2. 核心痛点一：突破隔离沙箱，强行拦截官方网络请求&lt;/h2&gt;
+&lt;h3&gt;业务痛点与技术封锁&lt;/h3&gt;
+&lt;p&gt;YouTube 具有极其严苛的防爬虫机制。其官方的字幕数据接口（&lt;code&gt;/api/timedtext&lt;/code&gt;）强依赖于前端播放器动态生成的加密签名（Signature）。如果我们像普通的插件那样，在 Content Script 中手动发起 &lt;code&gt;fetch&lt;/code&gt; 请求去拉取字幕数据，必然会遭遇 &lt;code&gt;403 Forbidden&lt;/code&gt; 的无情拦截。&lt;/p&gt;
+&lt;p&gt;同时，Chrome 插件的 Content Script 默认运行在安全隔离的 &lt;strong&gt;ISOLATED World&lt;/strong&gt; 中，根本无法触碰或修改宿主页面的 &lt;code&gt;window.fetch&lt;/code&gt; 或 &lt;code&gt;XMLHttpRequest&lt;/code&gt;，这就断绝了“普通抓包”的可能。&lt;/p&gt;
+&lt;h3&gt;架构攻坚：Main World 注入与底层 Hook&lt;/h3&gt;
+&lt;p&gt;为了拿到带有官方合法签名的字幕数据，我利用了 Plasmo 提供的 &lt;code&gt;world: &quot;MAIN&quot;&lt;/code&gt; 能力，在页面加载的第一时间（&lt;code&gt;run_at: &quot;document_start&quot;&lt;/code&gt;），将一段名为 &lt;code&gt;youtube-main-world.ts&lt;/code&gt; 的探针脚本&lt;strong&gt;强行打入 YouTube 真实的主执行环境&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在这个没有沙箱限制的世界里，我直接重写了原生的 &lt;code&gt;window.fetch&lt;/code&gt;，并在不破坏官方请求的前提下，将返回的 JSON 字幕流通过 &lt;code&gt;clone()&lt;/code&gt; 偷渡出来，最后使用一个安全的 Token 握手机制，通过 &lt;code&gt;postMessage&lt;/code&gt; 传递回插件的隔离上下文中。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;flowchart TD
+    subgraph MAIN [&quot;YouTube 真实页面环境 (MAIN World)&quot;]
+        YT[&quot;YouTube 原生播放器&quot;] --&amp;gt;|&quot;发起带签名的请求&quot;| FetchHook[&quot;被劫持的 window.fetch&quot;]
+        FetchHook --&amp;gt;|&quot;发送真实网络请求&quot;| Server[(&quot;YouTube Backend&quot;)]
+        Server --&amp;gt;|&quot;返回 JSON 字幕数据&quot;| FetchHook
+        FetchHook --&amp;gt;|&quot;Response.clone() 偷渡数据&quot;| Dispatcher[&quot;postMessage (附带 Token)&quot;]
+    end
+
+    subgraph ISOLATED [&quot;插件沙箱环境 (ISOLATED World)&quot;]
+        Dispatcher --&amp;gt;|&quot;监听 window message&quot;| CS[&quot;Content Script 中枢&quot;]
+        CS --&amp;gt;|&quot;解析字幕流存入 Zustand&quot;| Store[(&quot;Zustand Store&quot;)]
+    end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;核心注入代码 (&lt;code&gt;src/contents/main-world/hook-fetch.ts&lt;/code&gt;)&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;export function setupFetchHook(getHandshakeToken: () =&amp;gt; string) {
+  const originalFetch = window.fetch
+
+  // 强行重写宿主环境的 fetch
+  window.fetch = async function (...args) {
+    const url = args[0] instanceof Request ? args[0].url : args[0]?.toString() || &quot;&quot;
+    const response = await originalFetch.apply(this, args)
+
+    try {
+      // 如果拦截到的是目标 timedtext (字幕) 接口
+      if (isTimedTextUrl(url)) {
+        // 规避掉贴片广告的无关字幕
+        if (!isAdVideo(url)) {
+          const clone = response.clone()
+          clone.json().then((data) =&amp;gt;
+            // 通过握手 Token 将原汁原味的官方数据派发回插件沙箱
+            dispatchCaptionEvent(url, data, getHandshakeToken())
+          ).catch(() =&amp;gt; {})
+        }
+      }
+    } catch {}
+
+    // 将毫无篡改的 Response 返回给 YouTube 官方逻辑，保证播放器不出错
+    return response
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;此外，为了保证 YouTube &lt;strong&gt;必然会发起字幕请求&lt;/strong&gt;，我还编写了 &lt;code&gt;ensureCCEnabled&lt;/code&gt; 轮询方法，模拟真实的物理点击，去自动点亮原生播放器上的 &lt;code&gt;CC&lt;/code&gt; 按钮。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;3. 核心痛点二：零冲突的 UI 渲染与原生字幕“隐形”&lt;/h2&gt;
+&lt;h3&gt;业务痛点&lt;/h3&gt;
+&lt;p&gt;YouTube 原生播放器的 DOM 极其复杂且动态变化。如果我们贸然删除其原生的字幕节点，会导致官方内部的代码逻辑（如位置计算、重绘机制）报出 TypeError 并导致播放器崩溃。
+同时，我们自己用 Tailwind 编写的 React 双语字幕 UI，绝不能被宿主页面（YouTube）原有的全局 CSS 污染，也不能去污染宿主。&lt;/p&gt;
+&lt;h3&gt;架构攻坚：Shadow DOM 与动态 Class 屏蔽&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;绝对隔离的 Shadow DOM&lt;/strong&gt;：
+我利用 Plasmo 的 &lt;code&gt;getInlineAnchor&lt;/code&gt; 特性，将整个 React 渲染树挂载在 &lt;code&gt;#movie_player&lt;/code&gt; 内部的影子节点中（Shadow Root）。这样外部的 CSS 穿透不进插件，插件的 Tailwind 工具类也不会泄露到外部。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;原生降级策略（“隐形”而非“抹杀”）&lt;/strong&gt;：
+我没有去删除原生的 CC 节点，而是在全局动态注入了一段高优先级的脱离流样式 &lt;code&gt;&amp;lt;style&amp;gt;&lt;/code&gt;。当用户开启了 TubeWidget 双语字幕时，通过赋予宿主播放器 &lt;code&gt;.tube-widget-active&lt;/code&gt; 标志，&lt;strong&gt;彻底将原生字幕在视觉和交互上隐形，但保留其在 DOM 树中的物理存在&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;// 动态隐藏 YouTube 原生字幕渲染（配合 UI 层控制）
+function injectDynamicSubtitleHider() {
+  if (document.getElementById(&quot;ytranslater-dynamic-cc-hider&quot;)) return
+
+  const style = document.createElement(&quot;style&quot;)
+  style.id = &quot;ytranslater-dynamic-cc-hider&quot;
+  // 当播放器具有 tube-widget-active 标志时，彻底隐藏所有原生字幕容器及指针事件
+  style.textContent = `
+    .tube-widget-active .ytp-caption-window-container { opacity: 0 !important; pointer-events: none !important; }
+    .tube-widget-active .caption-window { opacity: 0 !important; pointer-events: none !important; }
+  `
+  document.head.appendChild(style)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2&gt;4. 核心痛点三：高精度时间同步与翻译预加载流水线&lt;/h2&gt;
+&lt;h3&gt;业务痛点&lt;/h3&gt;
+&lt;p&gt;调用外部的大模型或 DeepL API 翻译一句话存在不可忽视的网络延迟（通常在几百毫秒到一两秒不等）。如果在字幕出现的那一瞬间才去触发 &lt;code&gt;translate&lt;/code&gt; 请求，双语字幕必然会严重脱节，用户体验极差。&lt;/p&gt;
+&lt;h3&gt;架构攻坚：Look-ahead Prefetch Pipeline (滑动窗口预加载)&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;毫秒级时间帧同步&lt;/strong&gt;：
+我抛弃了粗糙的 &lt;code&gt;setInterval&lt;/code&gt; 定时器，自定义了 &lt;code&gt;useVideoTime&lt;/code&gt; Hook，通过浏览器的 &lt;code&gt;requestAnimationFrame&lt;/code&gt; 将 &lt;code&gt;&amp;lt;video&amp;gt;.currentTime&lt;/code&gt; 以极其恐怖的精度实时同步到 Zustand Store 中。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;超前滑动窗口翻译&lt;/strong&gt;：
+在 UI 渲染的骨干 &lt;code&gt;Overlay&lt;/code&gt; 组件中，我设计了一个超前滑动窗口流水线。当前视频播放到某一句字幕时，程序会自动向前探知之后的 &lt;strong&gt;5 句字幕 (&lt;code&gt;PREFETCH_COUNT = 5&lt;/code&gt;)&lt;/strong&gt;，并在后台静默派发翻译任务。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;flowchart LR
+    CurrentTime[&quot;当前播放时间轴 (currentTime)&quot;] --&amp;gt; SubtitleN[&quot;当前渲染: 句子 N&quot;]
+    SubtitleN --&amp;gt; Window{&quot;触发预加载机制&quot;}
+    Window --&amp;gt;|&quot;预发网络请求&quot;| PrefetchN1[&quot;预发网络请求: 句子 N+1&quot;]
+    Window --&amp;gt;|&quot;预发网络请求&quot;| PrefetchN2[&quot;预发网络请求: 句子 N+2&quot;]
+    Window --&amp;gt;|&quot;预发网络请求&quot;| PrefetchN3[&quot;预发网络请求: 句子 N+3...&quot;]
+    
+    PrefetchN1 --&amp;gt; Cache[(&quot;IndexedDB 本地缓存&quot;)]
+    PrefetchN2 --&amp;gt; Cache
+    
+    TimelineMove[&quot;时间轴推进到 N+1&quot;] --&amp;gt; ReadCache[&quot;直接从本地缓存读取译文，实现 0 毫秒渲染延迟&quot;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;核心预加载引擎代码 (&lt;code&gt;src/contents/overlay/index.tsx&lt;/code&gt;)&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;useEffect(() =&amp;gt; {
+  // ...省略环境与边界判断
+
+  // 找到当前时间轴对应的基准字幕下标
+  let baseIndex = currentSegment 
+    ? segments.findIndex((s) =&amp;gt; s.id === currentSegment.id)
+    : segments.findIndex((s) =&amp;gt; s.tStartMs &amp;gt;= currentTimeMs);
+
+  if (baseIndex === -1) return;
+
+  const PREFETCH_COUNT = 5; // 永远提前预加载后续的 5 句字幕
+  
+  for (let i = 0; i &amp;lt;= PREFETCH_COUNT; i++) {
+    const nextIndex = baseIndex + i;
+    // 如果该片段尚未被预加载过，则推入预加载队列
+    if (nextIndex &amp;lt; segments.length &amp;amp;&amp;amp; nextIndex &amp;gt; maxPrefetchedIndexRef.current) {
+      const nextSegment = segments[nextIndex];
+      // 底层自动查库/发起网络请求，并缓存到 IndexedDB
+      prefetchTranslation(nextSegment.text, settings.targetLang);
+      maxPrefetchedIndexRef.current = nextIndex;
+    }
+  }
+}, [currentSegment?.id, segments.length, settings?.targetLang, currentTimeMs]);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;配合传递到打字机 UI 组件 (&lt;code&gt;Subtitle&lt;/code&gt;) 上的 &lt;code&gt;durationMs&lt;/code&gt;（该段字幕的物理寿命），实现了原生般丝滑、绝不卡顿的双语同轨显示。&lt;/p&gt;
+&lt;h2&gt;5. 极致体验：动态打字机特效 (Typewriter Effect) 与 UI 隔离&lt;/h2&gt;
+&lt;p&gt;除了后端的预加载和底层拦截，TubeWidget 在 UI 表现上也下足了功夫，特别是字幕的呈现方式。&lt;/p&gt;
+&lt;p&gt;如果我们直接把外部模型翻译好的长句子“啪”地一下怼到屏幕上，会对用户的视觉产生强烈的突兀感，并且和原生 YouTube 字幕那种随语音节奏出现的感觉完全脱节。&lt;/p&gt;
+&lt;p&gt;为此，我在 &lt;code&gt;Subtitle&lt;/code&gt; 组件中实现了一套&lt;strong&gt;基于真实物理寿命的自适应打字机特效&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;核心算法 (&lt;code&gt;src/contents/overlay/components/Subtitle/index.tsx&lt;/code&gt;)&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;export const Subtitle = ({ text, translation, durationMs }: SubtitleProps) =&amp;gt; {
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  useEffect(() =&amp;gt; {
+    if (!translation) return
+    setCurrentIndex(0)
+
+    // durationMs 是底层从拦截到的官方字幕时间轴提取出的这句字幕的总存活时间
+    // 我们强制打字机特效在字幕总寿命的 75% 内播放完毕，留下 25% 的时间让用户阅读全句
+    const targetTypingTime = durationMs * 0.75
+    let speed = targetTypingTime / translation.length
+    
+    // 限制单字敲击的物理速度，最快 15ms，最慢 50ms 防止像树懒一样慢
+    speed = Math.max(15, Math.min(speed, 50))
+
+    const interval = setInterval(() =&amp;gt; {
+      setCurrentIndex((prev) =&amp;gt; {
+        if (prev &amp;lt; translation.length) return prev + 1
+        clearInterval(interval)
+        return prev
+      })
+    }, speed)
+
+    return () =&amp;gt; clearInterval(interval)
+  }, [translation, durationMs])
+
+  return (
+    // 渲染时：已敲击出的文字不透明，未敲击的保留占位但透明，防止容器疯狂抖动
+    &amp;lt;&amp;gt;
+      &amp;lt;span&amp;gt;{translation.slice(0, currentIndex)}&amp;lt;/span&amp;gt;
+      &amp;lt;span style={{ opacity: 0 }}&amp;gt;{translation.slice(currentIndex)}&amp;lt;/span&amp;gt;
+    &amp;lt;/&amp;gt;
+  )
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这套自适应速率算法，保证了不管一句话有多长或者语速有多快，双语字幕的出现节奏始终能和视频发音的起伏保持着极其舒适的同步律动感。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;6. 成本与性能优化：Dexie.js 的本地缓存降频&lt;/h2&gt;
+&lt;p&gt;作为一款支持多翻译引擎（包括付费调用的 OpenAI 和 Google Cloud）的插件，重播同一视频或遇到极高频出现的语句（如 &quot;Subscribe to my channel&quot;）时，如果每次都发起真实的 API 调用，将会烧毁大量的 Token 额度。&lt;/p&gt;
+&lt;p&gt;我在插件的底层接入了基于 IndexedDB 封装的 &lt;strong&gt;Dexie.js&lt;/strong&gt;。所有经由 &lt;code&gt;TranslateRouter&lt;/code&gt; 的请求，都会对 &lt;code&gt;[源文本 + 目标语言]&lt;/code&gt; 生成唯一的 Hash。在真正发起 HTTP 请求前，先拦截并查询本地数据库，若命中则极速返回。
+这个策略在用户反复拖拽进度条、或者是重温某一段精彩英语对话的场景下，做到了 &lt;strong&gt;100% 的缓存击中率与零网络开销&lt;/strong&gt;。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;6. 总结&lt;/h2&gt;
+&lt;p&gt;YouTube 的环境犹如一个庞大的、充满了代码混淆和动态防御黑盒。&lt;/p&gt;
+&lt;p&gt;从利用 &lt;code&gt;world: &quot;MAIN&quot;&lt;/code&gt; 打破隔离沙箱窃取原生接口流，到极其克制的原生 CSS “隐形降级”，再到结合 &lt;code&gt;requestAnimationFrame&lt;/code&gt; 和&lt;strong&gt;超前滑动窗口&lt;/strong&gt;打造的零延迟翻译预加载体系——TubeWidget 完美跨越了扩展开发的深水区，呈现出了极其成熟、稳定且性能爆表的双语字幕产品体验。&lt;/p&gt;
+</content:encoded></item><item><title>Zion 定制化 ESLint 规则设计与实现</title><link>https://nollieleo.github.io/posts/zed-custom-eslint-rules/</link><guid isPermaLink="true">https://nollieleo.github.io/posts/zed-custom-eslint-rules/</guid><description>在数百万行代码的大型前端单体仓库中，如何通过 ESLint 自定义规则实现架构分层、模块黑盒化解耦，以及彻底消除 MobX 响应式状态遗漏的神出鬼没 Bug？本文详细解读了为 Zion Editor 量身定制的三大硬核 AST 分析规则。</description><pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;1. 背景与初衷&lt;/h2&gt;
+&lt;p&gt;随着 Zion Editor (&lt;code&gt;zed&lt;/code&gt;) 前端工程体量的不断爆炸，传统的业界开源 ESLint 规则集（如 &lt;code&gt;eslint-config-airbnb&lt;/code&gt;、&lt;code&gt;plugin:react/recommended&lt;/code&gt;）已经远远无法满足我们对大型项目&lt;strong&gt;架构分层、模块解耦以及状态响应安全性&lt;/strong&gt;的极其苛刻的要求。&lt;/p&gt;
+&lt;p&gt;在团队数十人的日常协作中，经常会遇到以下令人头疼的架构腐化问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;跨模块深度引用&lt;/strong&gt;：A 模块图方便，绕过了 B 模块暴露的公共 &lt;code&gt;index.ts&lt;/code&gt;，直接长驱直入 &lt;code&gt;import&lt;/code&gt; 了 B 模块内部极深层级的一个私有组件或函数。导致 B 模块重构时牵一发而动全身。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;架构反向依赖（下克上）&lt;/strong&gt;：底层的 &lt;code&gt;utils&lt;/code&gt; 或 &lt;code&gt;hooks&lt;/code&gt; 模块，为了方便，竟然 import 了最顶层的 &lt;code&gt;views&lt;/code&gt; 模块里的常量，导致底层代码彻底失去独立性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;响应式状态遗漏的灵异 Bug&lt;/strong&gt;：开发者在 React 组件里通过 Hook 取出了 MobX 的 Store，却忘记用 &lt;code&gt;observer&lt;/code&gt; 包裹该组件。导致数据发生变化时，UI 死活不更新，极其难排查。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;借着构建系统（Webpack 到 Rsbuild）及 ESLint 引擎（升级至 v9 Flat Config）大升级的契机，我在 &lt;code&gt;config/eslint-rules/&lt;/code&gt; 目录下&lt;strong&gt;从零自研了一套专属于 zed 的定制化 ESLint AST 规则集&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;本文将详细剖析这三大硬核规则的设计思想与实现细节。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;2. 规则一：跨模块深度引用限制 (no-cross-module-deep-import)&lt;/h2&gt;
+&lt;h3&gt;痛点与设计目标&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;zed&lt;/code&gt; 各个业务模块（如 &lt;code&gt;views/AF&lt;/code&gt;、&lt;code&gt;components/LegendaryTable&lt;/code&gt;、&lt;code&gt;mobx/stores/FileStore&lt;/code&gt;）在设计上应该像黑盒一样，外部只能通过其根目录的 &lt;code&gt;index.ts&lt;/code&gt; 访问公共 API。
+如果放任跨模块深度引用，会产生极强的、不可控的网状耦合，并极易引发循环依赖。&lt;/p&gt;
+&lt;p&gt;我的目标是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;防范私有 API 泄露&lt;/strong&gt;：确保模块内部重构（修改私有组件名、移动目录）安全。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;白名单豁免机制&lt;/strong&gt;：允许跨模块引用纯类型（&lt;code&gt;import type&lt;/code&gt;），因为类型在编译后会被抹除，不造成实际运行时耦合；允许特定公共出口（如 &lt;code&gt;constants&lt;/code&gt;, &lt;code&gt;types&lt;/code&gt;）的深度引用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;核心实现思路与 AST 拦截&lt;/h3&gt;
+&lt;p&gt;该规则的核心是拦截所有的模块导入途径，包括普通 &lt;code&gt;import&lt;/code&gt;、重导出 (&lt;code&gt;export {x} from&lt;/code&gt;) 甚至动态按需加载 (&lt;code&gt;await import()&lt;/code&gt;)。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;flowchart TD
+    Start([&quot;拦截 Import 语句&quot;]) --&amp;gt; Parse[&quot;提取并格式化目标路径&quot;]
+    Parse --&amp;gt; CheckRoot{&quot;目标是否属于受保护的目录?&quot;}
+    
+    CheckRoot --&amp;gt;|&quot;是 (如 zed/views)&quot;| CheckDepth{&quot;引用深度 &amp;gt; 根目录深度?&quot;}
+    CheckRoot --&amp;gt;|&quot;否&quot;| End((&quot;放行&quot;))
+    
+    CheckDepth --&amp;gt;|&quot;是 (跨界了)&quot;| CheckWhiteList{&quot;是否在白名单出口?&quot;}
+    CheckDepth --&amp;gt;|&quot;否 (合法的根级引入)&quot;| End
+    
+    CheckWhiteList --&amp;gt;|&quot;是 (如 /index, /constants)&quot;| End
+    CheckWhiteList --&amp;gt;|&quot;否&quot;| CheckSameModule{&quot;当前文件与目标文件属于同模块?&quot;}
+    
+    CheckSameModule --&amp;gt;|&quot;是 (模块内互相引用)&quot;| End
+    CheckSameModule --&amp;gt;|&quot;否&quot;| Report([&quot;抛出 Lint 报错&quot;])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// config/eslint-rules/no-cross-module-deep-import.mjs (节选片段)
+create(context) {
+  const checkImport = (node, importPath, isTypeOnly = false) =&amp;gt; {
+    // 1. 纯类型导入直接豁免，不造成运行时耦合
+    if (isTypeOnly) return;
+    
+    // 2. 解析与格式化路径
+    const normalizedImportPath = targetImportPath.replace(/^@src\//, &apos;&apos;);
+    const importParts = normalizedImportPath.split(&apos;/&apos;).filter(Boolean);
+
+    // 3. 动态配置各核心目录的合法深度阈值
+    const protectedRoots = {
+      views: { depth: 3 },       // e.g. zed/views/AF (允许的根深度为3)
+      components: { depth: 3 },  // e.g. zed/components/Button
+      mobx: { depth: 4, subName: &apos;stores&apos; }, // e.g. zed/mobx/stores/FileStore
+    };
+    const config = protectedRoots[importParts[1]];
+    if (!config) return;
+
+    // 4. 判定引入是否越界（深度大于根目录深度）
+    if (importParts.length &amp;lt;= config.depth) return;
+
+    // 5. 白名单放行：允许深入引入暴露的公共出口
+    const extraPath = importParts.slice(config.depth).join(&apos;/&apos;);
+    const allowedDeepPaths = /^((index(\.(tsx|ts|js|jsx))?)|constants(\.(ts|js))?|types(\/.*)?)$/;
+    if (allowedDeepPaths.test(extraPath)) return;
+
+    // 6. 模块内同源放行：属于同一个模块内部的代码可以随意互相引入
+    if (currentModuleName === importedModuleName) return;
+
+    // 7. 越界且非同源，触发红牌警告！
+    context.report({
+      node,
+      messageId: &apos;deepImportForbidden&apos;,
+      data: { sourceModule: currentModuleName, targetModule: importedModuleName, internalPath: extraPath }
+    });
+  };
+
+  return {
+    ImportDeclaration(node) { checkImport(node.source, node.source.value, node.importKind === &apos;type&apos;); },
+    ExportNamedDeclaration(node) { /* ... */ },
+    ImportExpression(node) { /* ... */ }
+  };
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2&gt;3. 规则二：架构反向依赖限制 (no-reverse-dependency)&lt;/h2&gt;
+&lt;h3&gt;痛点与设计目标&lt;/h3&gt;
+&lt;p&gt;标准的分层架构数据流应当是单向的：上层（视图）可以依赖下层（组件/工具），下层绝不能依赖上层。但在历史长河中，常出现底层 &lt;code&gt;utils&lt;/code&gt; 贪图方便引入了顶层 &lt;code&gt;views&lt;/code&gt; 的情况。
+这会导致底层逻辑被顶层业务“污染”，破坏了 &lt;code&gt;hooks&lt;/code&gt;、&lt;code&gt;utils&lt;/code&gt; 等通用代码被抽离为独立 NPM 包的可能性（严重影响我们后续引入 Turborepo 的架构演进）。&lt;/p&gt;
+&lt;h3&gt;核心实现思路与架构防腐&lt;/h3&gt;
+&lt;p&gt;我在 AST 规则中硬编码了整个项目的&lt;strong&gt;架构层级秩序表（数字越小层级越高，权限越高）&lt;/strong&gt;。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;flowchart TD
+    subgraph Layer1 [&quot;Layer 1: 业务顶层&quot;]
+        V[&quot;views / App&quot;]
+    end
+    subgraph Layer2 [&quot;Layer 2: 视图组件层&quot;]
+        C[&quot;components&quot;]
+    end
+    subgraph Layer3 [&quot;Layer 3: 状态模型层&quot;]
+        M[&quot;mobx / models&quot;]
+    end
+    subgraph Layer4 [&quot;Layer 4: 工具与逻辑层&quot;]
+        H[&quot;hooks / utils&quot;]
+    end
+    subgraph Layer5 [&quot;Layer 5: 基础定义层&quot;]
+        T[&quot;types / constants&quot;]
+    end
+
+    V --&amp;gt; C
+    C --&amp;gt; M
+    M --&amp;gt; H
+    H --&amp;gt; T
+    
+    H -.-&amp;gt;|&quot;禁止反向依赖&quot;| V
+    M -.-&amp;gt;|&quot;禁止反向依赖&quot;| C
+    C -.-&amp;gt;|&quot;禁止越级向上&quot;| V
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// config/eslint-rules/no-reverse-dependency.mjs (节选片段)
+create(context) {
+  // 维护了一份硬编码的绝对秩序架构层级表
+  const layerConfig = {
+    views: 1,      App: 1,
+    components: 2,
+    mobx: 3,       models: 3,
+    hooks: 4,      utils: 4,
+    types: 5,      constants: 5,
+  };
+
+  return {
+    ImportDeclaration(node) {
+      // 1. 获取当前文件所在的层级
+      const sourceLayer = layerConfig[sourceModule];
+      
+      // 2. 获取试图 import 的目标文件层级
+      const targetLayer = layerConfig[targetModule];
+
+      // 3. 防腐判定：一旦当前层级数字大于目标层级（意味着底层的低权限模块引入了高层级模块）
+      if (sourceLayer &amp;gt; 0 &amp;amp;&amp;amp; targetLayer &amp;gt; 0 &amp;amp;&amp;amp; sourceLayer &amp;gt; targetLayer) {
+        context.report({
+          node,
+          message: `💩 架构规范：禁止反向依赖。 [${sourceModule}] 属于底层模块，不能直接依赖上层的 [${targetModule}]。`,
+        });
+      }
+    }
+  };
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;这套规则就像一道单向阀，从根本上杜绝了“下克上”的代码腐化。&lt;/em&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;4. 规则三：MobX 响应式遗漏检测 (mobx-require-observer)&lt;/h2&gt;
+&lt;h3&gt;痛点与设计目标&lt;/h3&gt;
+&lt;p&gt;Zion 高度依赖 MobX 进行响应式状态管理。最愚蠢但也最折磨人的 Bug 是：开发者在组件里使用了 &lt;code&gt;useStores()&lt;/code&gt; 提取了数据，却忘记用 &lt;code&gt;observer()&lt;/code&gt; 包裹组件。这导致底层数据变了，但 React 组件根本不更新！&lt;/p&gt;
+&lt;p&gt;以前这种问题只能靠肉眼 Code Review，现在我将其写成了一套极其复杂的&lt;strong&gt;多重 AST 分析器&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3&gt;核心实现思路与 AST 攀爬探测&lt;/h3&gt;
+&lt;p&gt;这个规则的难点在于：Store 是怎么取出来的？组件是怎么被包裹的？包裹的方式可能是在导出时，也可能是在定义时。&lt;/p&gt;
+&lt;h4&gt;第一步：多维度 Store 提取捕获&lt;/h4&gt;
+&lt;p&gt;我们通过监听 AST 的 &lt;code&gt;VariableDeclarator&lt;/code&gt; (变量声明)，利用正则智能推导是否在提取局部/全局 Store：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;监听特定 Hook：&lt;code&gt;useStores()&lt;/code&gt;, &lt;code&gt;useLocalStore()&lt;/code&gt;, &lt;code&gt;useXxxStore()&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;监听变量名暗示：&lt;code&gt;const canvasStore = useContext()&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;监听解构行为：&lt;code&gt;const { afStore } = useAFContext()&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;第二步：AST 上卷作用域攀爬，精准定位 React 组件&lt;/h4&gt;
+&lt;p&gt;一旦确认某行代码提取了响应式数据，规则会&lt;strong&gt;沿着 AST 树不断向上层父节点 (&lt;code&gt;node.parent&lt;/code&gt;) 攀爬&lt;/strong&gt;，直到找到包含该逻辑的 React 函数组件主体（通过首字母大写等特征判定）。如果攀爬过程中发现父节点名字是以 &lt;code&gt;use&lt;/code&gt; 开头（自定义 Hook），则认为不需要包裹，安全放行。&lt;/p&gt;
+&lt;h4&gt;第三步：跨级包裹校验兜底&lt;/h4&gt;
+&lt;p&gt;找到组件后，不仅要检查它是是不是直接写了 &lt;code&gt;observer(Comp)&lt;/code&gt;，还要去应对 &lt;code&gt;export default memoWithObserver(Comp)&lt;/code&gt; 甚至被隔空包裹的场景。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;flowchart TD
+    Start([&quot;拦截 VariableDeclarator&quot;]) --&amp;gt; CheckStore{&quot;匹配到 Store 提取?&quot;}
+    CheckStore --&amp;gt;|&quot;是 (如 useStores)&quot;| Climb[&quot;AST 向上作用域攀爬 (node.parent)&quot;]
+    CheckStore --&amp;gt;|&quot;否&quot;| End((&quot;放行&quot;))
+    
+    Climb --&amp;gt; CheckComp{&quot;遇到 React 组件或Hook?&quot;}
+    CheckComp --&amp;gt;|&quot;是 Hook (use开头)&quot;| End
+    CheckComp --&amp;gt;|&quot;是 React 组件 (首字母大写)&quot;| CheckWrap{&quot;父级是否被 observer 包裹?&quot;}
+    CheckComp --&amp;gt;|&quot;未找到&quot;| End
+    
+    CheckWrap --&amp;gt;|&quot;已包裹&quot;| End
+    CheckWrap --&amp;gt;|&quot;未被显式包裹&quot;| RegexCheck{&quot;源码正则兜底校验&quot;}
+    
+    RegexCheck --&amp;gt;|&quot;匹配成功&quot;| End
+    RegexCheck --&amp;gt;|&quot;匹配失败&quot;| Report([&quot;抛出 Lint 报错&quot;])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// config/eslint-rules/mobx-require-observer.mjs (节选逻辑展示)
+// 1. 向上攀爬寻找父级 React 组件
+let currentNode = node;
+let componentNode = null;
+while (currentNode) {
+  if (currentNode.type === &apos;FunctionDeclaration&apos; &amp;amp;&amp;amp; /^[A-Z]/.test(currentNode.id.name)) {
+    componentNode = currentNode;
+    break;
+  }
+  currentNode = currentNode.parent;
+}
+
+// 2. 检查 AST 结构是否被 observer 显式包裹
+let isWrappedDirectly = false;
+let checkParent = componentNode.parent;
+while (checkParent) {
+  if (checkParent.callee &amp;amp;&amp;amp; (checkParent.callee.name === &apos;observer&apos; || checkParent.callee.name === &apos;memoWithObserver&apos;)) {
+    isWrappedDirectly = true;
+    break;
+  }
+  checkParent = checkParent.parent;
+}
+
+// 3. 终极兜底：剥离所有注释的纯净源码正则扫描
+if (!isWrappedDirectly) {
+  const cleanText = context.getSourceCode().text.replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, &apos;&apos;);
+  const observerRegex = new RegExp(`(observer|memoWithObserver)\\s*\\(\\s*${compName}`);
+  if (!observerRegex.test(cleanText)) {
+    context.report({ node, messageId: &apos;requireObserver&apos; });
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这套规则的落地，彻底根治了我们在日常迭代中因为漏写 &lt;code&gt;observer&lt;/code&gt; 导致的“灵异”刷新 Bug，节省了大量的排查时间。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;5. “暗坑”排雷：老版本 ESLint 的字节数限制 Bug&lt;/h2&gt;
+&lt;p&gt;在这些自定义规则刚推上测试流水线时，我们遇到了一个非常诡异的 Bug。在我们公司内部使用的基于 Phabricator 的代码审查系统 (&lt;code&gt;arc lint&lt;/code&gt;) 结合老版本的 lint 检查器时，抛出了如下异常：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Exception: Parameter (...) passed to &quot;setCode()&quot; when constructing a lint message must be a scalar with a maximum string length of 128 bytes, but is 163 bytes in length.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;原因分析&lt;/strong&gt;：
+这是因为我在自定义 ESLint 报错信息中，附带了异常代码的物理路径作为错误追踪，导致单条 Lint Message 的内容长度超出了当时 &lt;code&gt;arc&lt;/code&gt; 校验工具硬编码的 128 bytes 的极限阈值，直接导致流水线崩溃。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：
+如果你所在的基础架构组也遇到了此类报错，不用怀疑自己写的 ESLint 规则有问题，这是基础设施的历史技术债。你需要做的是去重新拉取更新（拉取新的 arc 相关仓库代码）来打破这个老旧的版本限制。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;6. 总结与落地推广&lt;/h2&gt;
+&lt;p&gt;为了让这些阻断性规则在不打断团队当前开发节奏的前提下平滑落地，我们将这些自定义规则默认配置为了 &lt;code&gt;warn&lt;/code&gt; 级别。&lt;/p&gt;
+&lt;p&gt;并在 CI 和日常脚本中加入了专属的可视化检测命令：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 生成一份专门展示不规范代码架构的可视化 HTML 报告
+npm run lint:report
+
+# 修复所有可以自动修复的规则
+npm run lint-fix
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded></item><item><title>Zion DevTools 架构设计与技术分析</title><link>https://nollieleo.github.io/posts/zed-devtools-architecture/</link><guid isPermaLink="true">https://nollieleo.github.io/posts/zed-devtools-architecture/</guid><description>深度解析为 Zion Editor 量身定制的 Chrome 开发者工具 zed-devtools 的架构设计。涵盖跨隔离世界的 React Fiber 劫持、基于 Web Worker 的百万级 JSON 虚拟化渲染，以及基于 CRDT 架构的 Time Travel 时间漫游技术。</description><pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;1. 背景与概述&lt;/h2&gt;
 &lt;p&gt;在复杂的大型前端项目中，特别是像 &lt;strong&gt;Zion Editor&lt;/strong&gt; 这种低代码/无代码可视化编辑器，传统的 React DevTools 或 Redux DevTools 往往显得力不从心。Zion Editor 底层包含了庞大的项目配置树（Project Store）、基于 CRDT（冲突无关复制数据类型）的协作数据流（Schema Store），以及复杂的可视化画布渲染逻辑。&lt;/p&gt;
 &lt;p&gt;为了解决日常开发和调试中的痛点，我从零到一独立设计并开发了 &lt;strong&gt;Zion DevTools&lt;/strong&gt; (&lt;code&gt;zed-devtools&lt;/code&gt;)。这是一个基于 Plasmo 和 React 构建的定制化 Chrome 浏览器插件，它通过“桥接”（Bridge）与 Zion 的运行时内核 (&lt;code&gt;zed&lt;/code&gt;) 深度绑定，实现了三大核心能力：&lt;/p&gt;
 &lt;ol&gt;
