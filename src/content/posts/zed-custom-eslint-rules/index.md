@@ -191,6 +191,19 @@ Zion 高度依赖 MobX 进行响应式状态管理。最愚蠢但也最折磨人
 * 监听变量名暗示：`const canvasStore = useContext()`。
 * 监听解构行为：`const { afStore } = useAFContext()`。
 
+*真实的 AST 语法树解剖视角（以 `useStores()` 为例）*：
+```json
+{
+  "type": "VariableDeclarator",
+  "id": { "type": "ObjectPattern", "properties": [{ "key": { "name": "canvasStore" } }] },
+  "init": {
+    "type": "CallExpression",
+    "callee": { "type": "Identifier", "name": "useStores" }
+  }
+}
+```
+通过比对 AST 节点特征：`node.init.type === 'CallExpression'` 且 `callee.name.includes('Store')`，我们就能像外科医生一样，在编译阶段精准定位到响应式数据的挂载点。
+
 #### 第二步：AST 上卷作用域攀爬，精准定位 React 组件
 一旦确认某行代码提取了响应式数据，规则会**沿着 AST 树不断向上层父节点 (`node.parent`) 攀爬**，直到找到包含该逻辑的 React 函数组件主体（通过首字母大写等特征判定）。如果攀爬过程中发现父节点名字是以 `use` 开头（自定义 Hook），则认为不需要包裹，安全放行。
 
@@ -250,6 +263,13 @@ if (!isWrappedDirectly) {
 ```
 
 这套规则的落地，彻底根治了我们在日常迭代中因为漏写 `observer` 导致的“灵异”刷新 Bug，节省了大量的排查时间。
+
+### 性能防劣化 (Early Return / Bailout)
+自定义 ESLint 规则如果写得不够收敛，会在开发者每次按下 `Cmd+S` 时触发全量的 AST 深层遍历，导致 VSCode 的 Lint 提示严重卡顿（甚至耗时几秒钟）。
+为了保障极致的研发体验，我在所有自定义规则的入口处都做了 **尽早退出 (Bailout)** 优化：
+* **特征预检**：在进入昂贵的 AST 树遍历之前，先通过 `context.getSourceCode().text` 获取全文的纯字符串。利用高效率的正则表达式粗筛（例如 `if (!/Store|use[A-Z]/i.test(text)) return {}`），如果文件内压根没有相关的关键字，直接跳过整棵 AST 的解析。
+
+这种极客级的性能防劣化处理，确保了即便在极其庞大的单体仓库中，Lint 进程也始终保持在毫秒级响应。
 
 ---
 

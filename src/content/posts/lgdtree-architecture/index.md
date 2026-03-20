@@ -114,6 +114,21 @@ function onDragOver({ over, active }: DragOverEvent) {
 
 结合高频节流 (`throttle`)，我们把繁重的坐标解算和防腐校验从 UI 线程解耦，确保拖拽时依然能保持 60 FPS 的黄油级顺滑体验。
 
+### 微交互容错：防抖传感器与“点击/拖拽”冲突隔离 (Activation Constraints)
+在真实的复杂树形组件交互中，有一个极其隐蔽的深坑：**点击与拖拽的冲突**。
+用户的鼠标往往是不精确的。当他们只想“单击”选中某一行时，手部轻微的抖动会产生 `1~2px` 的偏移，导致系统误判为“拖拽开始”，瞬间打断了选中逻辑并闪烁出拖拽占位符。
+为了解决这个微交互痛点，我深度定制了 `@dnd-kit/core` 的 `PointerSensor`（指针传感器）：
+```typescript
+const sensors = useSensors(
+  useSensor(PointerSensor, {
+    activationConstraint: {
+      distance: 5, // 核心防抖：必须按住并实际移动超过 5 像素，才正式激活拖拽引擎
+    },
+  })
+);
+```
+仅仅是加了这一个 `distance: 5` 的激活约束阈值，就完美隔离了“轻微手抖的点击”和“明确意图的拖放”，从极其微小的细节处保障了低代码平台“稳如泰山”的交互质感。
+
 ---
 
 ## 4. 核心难点突破：领域解耦与数据双向同步 (`useNodeDnd`)

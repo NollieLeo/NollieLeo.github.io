@@ -48,6 +48,10 @@ flowchart TD
 
 这种架构彻底释放了浏览器的渲染压力。无论用户输入的 JSON 是一百行还是一百万行，主线程始终只维护当前视窗内的轻量级 DOM 结构，做到了极致的毫秒级无延迟反馈。
 
+**架构思考：跨线程通信的“结构化克隆”损耗**
+把一个几十 MB 的庞大 JSON 字符串通过 `postMessage` 扔给 Web Worker，底层其实会触发浏览器的 [Structured Clone Algorithm (结构化克隆算法)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm)。这种序列化与反序列化确实会带来几十到上百毫秒的开销。
+**但这种取舍是完全值得的**。这笔微小的算力开销发生在异步的子线程中，主线程的 Event Loop 完全不受影响。在这几十毫秒里，用户的页面滚动、按钮点击甚至 CSS 动画依然保持着 60FPS 的完美顺滑，这正是现代前端性能优化的核心理念——**不要阻塞主线程**。
+
 ---
 
 ## 3. 攻克难题一：百万级 JSON 树的极致展平 (Transformer)
@@ -126,6 +130,10 @@ export const jsonToVirtualLines = (
 ```
 
 利用这套在 Web Worker 中的高速递归算法，**一百万行的 JSON 树只需几十毫秒即可被降维映射成一维数组 (`VirtualLine[]`)**。当用户点击“折叠”某个对象时，只需更新状态，再进行一次轻量级的离线重算，主线程 UI 会瞬间完成无缝更替。
+
+**极致渲染的隐秘基石：等宽字体与 O(1) 物理模型**
+虚拟列表 (`virtua` 或 `react-window`) 最怕的是“动态高度”。如果每一行 JSON 的高度不固定，系统在滚动时就需要实时计算布局重排 (Reflow)，这在百万级数据下依然是灾难。
+为了彻底榨干性能，我在 JsonTools 的渲染层强制使用了 **等宽字体 (Monospace)** 和 **绝对固定的行高 (Fixed Item Height)**。这个极客级的物理设定，把原本极其复杂的 DOM 高度测量全部变成了极速的 `O(1)` 数学乘法（`scrollTop = index * 20px`），构筑了巨量数据滚动丝滑的最终防线。
 
 ---
 

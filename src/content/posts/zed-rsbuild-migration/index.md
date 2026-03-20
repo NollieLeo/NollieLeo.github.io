@@ -186,6 +186,11 @@ export default defineConfig({
 
 *说明：Rsbuild 的 CPU 利用率更高，意味着它在底层（Rust）拥有更加优秀的并行多线程调度能力，从而在更短的实际时间 (real) 内榨干了机器的算力（比如 M4 Pro 的多核性能）。*
 
+### 深度原理解析：为什么 Rsbuild 能够彻底终结 OOM 崩溃？
+在 Webpack 时代，无论我们怎么优化 `thread-loader` 或 `cache`，底层依然受限于 Node.js 的单线程 Event Loop 以及 V8 引擎对老生代内存（Heap Limit，通常默认限制在 1.4GB 左右）的严格管控。当 Zion 这样包含数十万个模块的巨型应用在 CI 流水线进行 AST 解析、依赖收集和压缩时，极易触碰 V8 的垃圾回收（GC）红线，导致频繁的 “Stop-the-World” 甚至直接抛出 `JavaScript heap out of memory`。
+
+而 **Rsbuild/Rspack 的底层是用 Rust 编写的**。它不仅脱离了 V8 的内存分配与 GC 限制（由 Rust 原生的所有权机制管理内存，占用极低且确定），还实现了真正的 OS 级别多线程架构（这也是为什么监控中 CPU 利用率能狂飙到 338% 的原因）。这种底层运行时的效率，能够把构建时间压缩 75% 。
+
 ---
 
 ## 5. 迁移过程中的“暗坑”与遗留问题
