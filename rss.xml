@@ -225,7 +225,8 @@ export const diffJsonNoSort = new DiffJsonNoSort()
 &lt;li&gt;引擎会自动对所有对象进行&lt;strong&gt;深层递归洗牌（排序）&lt;/strong&gt;，并智能忽略掉末尾多余的逗号差异。&lt;/li&gt;
 &lt;li&gt;你看到的，将是&lt;strong&gt;真正发生变动的业务字段&lt;/strong&gt;，而不是被无意义的乱序干扰的红绿代码块。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2&gt;&lt;img src=&quot;./json-diff-preview.png&quot; alt=&quot;差异字段精准标红&quot; /&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;./json-diff-preview.png&quot; alt=&quot;差异字段精准标红&quot; /&gt;&lt;/p&gt;
+&lt;hr /&gt;
 &lt;h2&gt;4. 全方位检索引擎 (Query Engine)&lt;/h2&gt;
 &lt;p&gt;在几十万行的 JSON 中找一个特定的值无异于大海捞针，且使用浏览器原生的 &lt;code&gt;Ctrl+F&lt;/code&gt; 会导致严重的页面卡顿。JsonTools 为此重写了整套检索机制：&lt;/p&gt;
 &lt;ul&gt;
@@ -239,7 +240,8 @@ export const diffJsonNoSort = new DiffJsonNoSort()
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;&lt;img src=&quot;./json-search-preview.png&quot; alt=&quot;右上角搜索&quot; /&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;./json-search-preview.png&quot; alt=&quot;右上角搜索&quot; /&gt;&lt;/p&gt;
+&lt;hr /&gt;
 &lt;h2&gt;5. 个性化设置与语言支持&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;多语言切换&lt;/strong&gt;：点击插件主面板右上角的翻译图标，可以一键在中文（简体）和英文之间自由切换界面语言。&lt;/li&gt;
@@ -2109,13 +2111,6 @@ function queueJob(job){
     }
 }
 &lt;/code&gt;&lt;/pre&gt;
-</content:encoded></item><item><title>2023年面试需要准备</title><link>https://nollieleo.github.io/posts/2023%E5%B9%B4%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E5%87%86%E5%A4%87/</link><guid isPermaLink="true">https://nollieleo.github.io/posts/2023%E5%B9%B4%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E5%87%86%E5%A4%87/</guid><description>html   框架   算法 1. 栈，树，队列，链表，动态规划等 2. 最长递增子序列...</description><pubDate>Wed, 01 Feb 2023 14:55:26 GMT</pubDate><content:encoded>&lt;h1&gt;html&lt;/h1&gt;
-&lt;h1&gt;框架&lt;/h1&gt;
-&lt;h1&gt;算法&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;栈，树，队列，链表，动态规划等&lt;/li&gt;
-&lt;li&gt;最长递增子序列&lt;/li&gt;
-&lt;/ol&gt;
 </content:encoded></item><item><title>diff算法原理和总结</title><link>https://nollieleo.github.io/posts/diff%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%93/</link><guid isPermaLink="true">https://nollieleo.github.io/posts/diff%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%93/</guid><description>这里举例采用 vue 的框架设计进行解释 diff   diff 算法的核心其实是都是只关心新旧的虚拟节点都存在一组子节点的情况。目的都是达到减少性能的开销，其中有比较直观的就是--减少 dom 节点的操作  在中 当涉及到两组子节点的更新的时候，我们采用的是全量卸载并且重新挂载的形式去进行子节点的...</description><pubDate>Sat, 28 Jan 2023 13:45:24 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;这里举例采用 vue 的框架设计进行解释 diff&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -13020,33 +13015,6 @@ plugins: [
 &lt;p&gt;&lt;a href=&quot;https://www.npmjs.com/package/webpack-bundle-analyzer&quot;&gt;webpack-bundle-analyzer&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;升级webpack5遇到的问题&lt;/h2&gt;
 &lt;h3&gt;node的一些模块webpack不自带了&lt;/h3&gt;
-</content:encoded></item><item><title>学习资料整理</title><link>https://nollieleo.github.io/posts/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E6%95%B4%E7%90%86/</link><guid isPermaLink="true">https://nollieleo.github.io/posts/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E6%95%B4%E7%90%86/</guid><description>TypeScript         NPM       React                   前端核心知识            规范  husky      conversion-log             云原生  https://fuckcloudnative.io/...</description><pubDate>Wed, 04 Aug 2021 22:29:08 GMT</pubDate><content:encoded>&lt;h2&gt;TypeScript&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/c_206498766&quot;&gt;来玩TypeScript啊，机都给你开好了！&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html#const-assertions&quot;&gt;官方文档（英文）&lt;/a&gt;&lt;/p&gt;
-&lt;h3&gt;NPM&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.conardli.top/blog/article/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96-%E5%89%96%E6%9E%90npm%E7%9A%84%E5%8C%85%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%EF%BC%88%E5%AE%8C%E6%95%B4%E7%89%88%EF%BC%89.html#_1-4-%E5%8D%8F%E8%AE%AE&quot;&gt;这个讲了好多&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;React&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://react.iamkasong.com/#%E7%AB%A0%E8%8A%82%E5%88%97%E8%A1%A8&quot;&gt;核心文章（一定要看完，卡颂大佬的）&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://react.jokcy.me/&quot;&gt;源码讲解&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/7kms/react-illustration-series&quot;&gt;git上的一个react讲解挺不错的&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/facebook/react/tree/v17.0.2&quot;&gt;react源码&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://juejin.cn/post/6950063294270930980&quot;&gt;所有api解读&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/puxiao/react-hook-tutorial&quot;&gt;react hooks用法&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=cF2lQ_gZeA8&amp;amp;list=PLC3y8-rFHvwisvxhZ135pogtX7_Oe3Q3A&amp;amp;index=1&quot;&gt;Youtube上的视频讲解&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://alexsidorenko.com/&quot;&gt;一个国外大佬的react知识库&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;前端核心知识&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;http://obkoro1.com/web_accumulate/accumulate/tool/koroFileHeader.html#%E7%AE%80%E4%BB%8B&quot;&gt;前端进阶积累&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.conardli.top/blog/article/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96-%E5%89%96%E6%9E%90npm%E7%9A%84%E5%8C%85%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%EF%BC%88%E5%AE%8C%E6%95%B4%E7%89%88%EF%BC%89.html#_1-5-%E7%9B%AE%E5%BD%95%E3%80%81%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3&quot;&gt;前端到服务工程详细&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://shanyue.tech/frontend-engineering/npm-install.html#%E5%8F%AA%E5%AE%89%E8%A3%85%E6%9C%89%E5%BF%85%E8%A6%81%E7%9A%84%E5%BA%93&quot;&gt;山月行&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;规范&lt;/h2&gt;
-&lt;h3&gt;husky&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/366786798&quot;&gt;husky使用总结&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;conversion-log&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/weixin_34326179/article/details/91382865&quot;&gt;整合commitlint + conversion-log&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/mengfangui/p/12634845.html&quot;&gt;第二篇&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/weixin_33890526/article/details/91393527?utm_medium=distribute.pc_relevant_t0.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control&amp;amp;depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control&quot;&gt;angular配合&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;云原生&lt;/h2&gt;
-&lt;p&gt;https://fuckcloudnative.io/&lt;/p&gt;
 </content:encoded></item><item><title>useRef能做啥？</title><link>https://nollieleo.github.io/posts/useref%E8%83%BD%E5%81%9A%E5%95%A5/</link><guid isPermaLink="true">https://nollieleo.github.io/posts/useref%E8%83%BD%E5%81%9A%E5%95%A5/</guid><description>useRef  &lt;uuseRef主要的功能就是。&lt;/u  1. 帮助我们获取到DOM元素或者组件实例 2. 保存在组件生命周期内不会变化的值  如下：  jsx function TextInputWithFocusButton() {   const inputEl = useRef(null);...</description><pubDate>Tue, 03 Aug 2021 15:29:45 GMT</pubDate><content:encoded>&lt;h2&gt;useRef&lt;/h2&gt;
 &lt;p&gt;&amp;lt;u&amp;gt;&lt;strong&gt;&lt;code&gt;useRef&lt;/code&gt;主要的功能就是。&lt;/strong&gt;&amp;lt;/u&amp;gt;&lt;/p&gt;
 &lt;ol&gt;
@@ -21341,7 +21309,6 @@ export function convertRes2Blob(response) {
 &lt;li&gt;download请求方法与convertRes2Blob处理文件下载的方法，需要分开调用&lt;/li&gt;
 &lt;li&gt;download使用独立的实例，不能公用一个axios，基础配置需要单独维护&lt;/li&gt;
 &lt;/ul&gt;
-</content:encoded></item><item><title>正在读的书籍</title><link>https://nollieleo.github.io/posts/%E6%AD%A3%E5%9C%A8%E8%AF%BB%E7%9A%84%E4%B9%A6%E7%B1%8D/</link><guid isPermaLink="true">https://nollieleo.github.io/posts/%E6%AD%A3%E5%9C%A8%E8%AF%BB%E7%9A%84%E4%B9%A6%E7%B1%8D/</guid><description>《深入浅出webpack》：https://webpack.wuhaolin.cn/%E5%89%8D%E8%A8%80.html...</description><pubDate>Tue, 19 Jan 2021 10:21:41 GMT</pubDate><content:encoded>&lt;p&gt;《深入浅出webpack》：https://webpack.wuhaolin.cn/%E5%89%8D%E8%A8%80.html&lt;/p&gt;
 </content:encoded></item><item><title>requestAnimationFrame和一般计时器处理动画区别</title><link>https://nollieleo.github.io/posts/requestanimationframe%E5%92%8C%E4%B8%80%E8%88%AC%E8%AE%A1%E6%97%B6%E5%99%A8%E5%A4%84%E7%90%86%E5%8A%A8%E7%94%BB%E5%8C%BA%E5%88%AB/</link><guid isPermaLink="true">https://nollieleo.github.io/posts/requestanimationframe%E5%92%8C%E4%B8%80%E8%88%AC%E8%AE%A1%E6%97%B6%E5%99%A8%E5%A4%84%E7%90%86%E5%8A%A8%E7%94%BB%E5%8C%BA%E5%88%AB/</guid><description>在Web应用中，实现动画效果的方法比较多，Javascript 中可以通过定时器 setTimeout 来实现，css3 可以使用 transition 和 animation 来实现，html5 中的 canvas 也可以实现。除此之外，html5 还提供一个专门用于请求动画的API，那就是 re...</description><pubDate>Mon, 28 Dec 2020 09:39:12 GMT</pubDate><content:encoded>&lt;p&gt;在Web应用中，实现动画效果的方法比较多，Javascript 中可以通过定时器 &lt;code&gt;setTimeout &lt;/code&gt;来实现，css3 可以使用 &lt;code&gt;transition &lt;/code&gt;和 &lt;code&gt;animation &lt;/code&gt;来实现，html5 中的 canvas 也可以实现。除此之外，html5 还提供一个专门用于请求动画的API，那就是 &lt;code&gt;requestAnimationFrame&lt;/code&gt;，顾名思义就是&lt;strong&gt;请求动画帧。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;编写动画循环的关键是要知道延迟时间多长合适。一方面，循环间隔必须足够短，这样才能让不同的动画效果显得平滑流畅；另一方面，循环间隔还要足够长，这样才能确保浏览器有能力渲染产生的变化。&lt;/p&gt;
 &lt;p&gt;大多数电脑显示器的刷新频率是&lt;code&gt;60Hz&lt;/code&gt;，大概相当于每秒钟重绘&lt;code&gt;60&lt;/code&gt;次。大多数浏览器都会对重绘操作加以限制，不超过显示器的重绘频率，因为即使超过那个频率用户体验也不会有提升。因此，最平滑动画的最佳循环间隔是&lt;code&gt;1000ms/60&lt;/code&gt;，约等于&lt;code&gt;16.6ms&lt;/code&gt;。&lt;/p&gt;
@@ -25403,31 +25370,6 @@ jscoverage_lib/
 bower_components/
 dist/
 &lt;/code&gt;&lt;/pre&gt;
-</content:encoded></item><item><title>常用网站</title><link>https://nollieleo.github.io/posts/%E5%B8%B8%E7%94%A8%E7%BD%91%E7%AB%99/</link><guid isPermaLink="true">https://nollieleo.github.io/posts/%E5%B8%B8%E7%94%A8%E7%BD%91%E7%AB%99/</guid><description>1. react     react官方文档](https://reactjs.org/docs/getting-started.html)  2. git            3. JavaScript        4. webpack  5. NPM  https://www.npmjs.c...</description><pubDate>Thu, 19 Mar 2020 09:03:44 GMT</pubDate><content:encoded>&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;react&lt;/p&gt;
-&lt;p&gt;react官方文档](https://reactjs.org/docs/getting-started.html)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;git&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.liaoxuefeng.com/wiki/896043488029600&quot;&gt;廖雪峰git教程&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://git-scm.com/docs/gitignore&quot;&gt;git官网&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;JavaScript&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.runoob.com/jsref/jsref-tutorial.html&quot;&gt;菜鸟教程JS参考手册&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;webpack&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;NPM  https://www.npmjs.com/&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;秦枫的git blog:  https://github.com/mqyqingfeng/Blog&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;/ol&gt;
 </content:encoded></item><item><title>项目初始化-HTML模板</title><link>https://nollieleo.github.io/posts/%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%8C%96-html%E6%A8%A1%E6%9D%BF/</link><guid isPermaLink="true">https://nollieleo.github.io/posts/%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%8C%96-html%E6%A8%A1%E6%9D%BF/</guid><description>我们在项目初始化的时候，都会有一个html的模板，里面会做各种兼容和声明等工作。PC端如果需要适配IE8需要加入很多垫片，而且还要做好双核浏览器的优先选择配置等；M端更是需要做到不同分辨率屏幕的适配，另外还有300ms延迟问题。这里送上笔者在项目当中整理的两个模板，已经经过了一定项目的考验，供大家参...</description><pubDate>Wed, 18 Mar 2020 22:56:11 GMT</pubDate><content:encoded>&lt;p&gt;我们在项目初始化的时候，都会有一个html的模板，里面会做各种兼容和声明等工作。PC端如果需要适配IE8需要加入很多垫片，而且还要做好双核浏览器的优先选择配置等；M端更是需要做到不同分辨率屏幕的适配，另外还有300ms延迟问题。这里送上笔者在项目当中整理的两个模板，已经经过了一定项目的考验，供大家参考。&lt;/p&gt;
 &lt;p&gt;另外，本文中涉及的M端适配并非rem，而是修改viewport的显示比例，这个方案相较rem来说起码有2个优点：一是省字符，二是不用计算，设计稿是多少就是多少。不过在实践当中，UC浏览器貌似不认user-scalabe=0，还是会被双击放大，不过笔者认为还是可以接受的。如果还遇到了其他bug，请反馈，谢谢。&lt;/p&gt;
 &lt;h2&gt;PC模板&lt;/h2&gt;
