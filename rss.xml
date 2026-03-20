@@ -198,6 +198,13 @@ if (variantStyles) {
 &lt;h3&gt;难点 1：巨型 DOM 树下的渲染性能 (Visibility Optimization)&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;场景&lt;/strong&gt;：当用户搭建了上千个组件，画布渲染将变得极其卡顿，拖拽也会存在巨大的延迟。
 &lt;strong&gt;解法&lt;/strong&gt;：&lt;strong&gt;视口外节点裁剪（虚拟化画布）&lt;/strong&gt;。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;graph TD
+    A[滚动或拖拽事件] --&amp;gt; B[IntersectionObserver 检测交叉状态]
+    B --&amp;gt; C{是否在可视区域内 isOutOfView?}
+    C -- Yes --&amp;gt; D[截断递归，渲染 MetaShadow 占位符]
+    C -- No --&amp;gt; E[正常递归渲染真实 DOM 树]
+    D --&amp;gt; F[保留 sizeRef 防止父容器塌陷]
+&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;在 &lt;code&gt;MetaEditableRenderTree&lt;/code&gt; 中，深度应用了 &lt;code&gt;useMetaVisibilityState&lt;/code&gt; 技术。&lt;/li&gt;
 &lt;li&gt;采用 &lt;code&gt;startTransition&lt;/code&gt; 降级判断优先级。基于底层的 &lt;code&gt;IntersectionObserver&lt;/code&gt; 监控元素的交叉状态。如果为 &lt;code&gt;isOutOfView&lt;/code&gt;（不在可视区），就立刻&lt;strong&gt;斩断子树的递归渲染&lt;/strong&gt;。&lt;/li&gt;
@@ -206,6 +213,13 @@ if (variantStyles) {
 &lt;h3&gt;难点 2：极其复杂的协同与撤销重做 (Diff Apply)&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;场景&lt;/strong&gt;：多人协同编辑或 Undo/Redo 时，全量替换 Meta 树代价极其高昂，会导致焦点丢失。
 &lt;strong&gt;解法&lt;/strong&gt;：&lt;strong&gt;细粒度 Diff 补丁分发机制 (&lt;code&gt;useDiffApply&lt;/code&gt;)&lt;/strong&gt;。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;graph LR
+    A[协同事件 / Undo指令] --&amp;gt; B(解析 Diff 快照 operation: &apos;add&apos;)
+    B --&amp;gt; C[useAddOrDeleteComponentDiffApply]
+    C --&amp;gt; D[useTranspile 转译为 Meta]
+    D --&amp;gt; E[MobX Transaction 开启]
+    E --&amp;gt; F[定点更新 CanvasStore.metas]
+&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;单独抽象了 &lt;code&gt;useDiffApply&lt;/code&gt; 机制作为增量构建引擎。服务端传入的并非整棵树，而是属性操作快照（如 &lt;code&gt;operation: &apos;add&apos;&lt;/code&gt;）。&lt;/li&gt;
 &lt;/ul&gt;
@@ -234,26 +248,66 @@ case &apos;add&apos;: {
 &lt;h3&gt;难点 3：多维度灾难恢复机制 (Crash Recovery)&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;场景&lt;/strong&gt;：浏览器内存溢出（OOM）或网络异常退出，会导致用户数小时心血付之东流。
 &lt;strong&gt;解法&lt;/strong&gt;：&lt;strong&gt;低廉成本的本地快照容灾&lt;/strong&gt;。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;graph TD
+    A(编辑画布中) -.静默.-&amp;gt; B[useRecoveryRecord 定时防抖备份]
+    B --&amp;gt; C[序列化关键状态 metas/viewport]
+    C --&amp;gt; D[(写入 IndexedDB / LocalStorage)]
+    E[异常崩溃 / 重新打开页面] --&amp;gt; F[RecoveryMonitor 挂载]
+    F --&amp;gt; G{检测到新于服务端的快照碎片?}
+    G -- Yes --&amp;gt; H[弹窗提示用户无缝重载恢复]
+&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;采用了 &lt;code&gt;useRecoveryRecord&lt;/code&gt; 机制，这套代码深埋在核心链路外。&lt;/li&gt;
 &lt;li&gt;以极低的性能损耗，通过 &lt;code&gt;ahooks&lt;/code&gt; 的 &lt;code&gt;useLocalStorageState&lt;/code&gt; 定期对关键状态（Metas、Viewport等）序列化并写入 LocalStorage。&lt;/li&gt;
 &lt;li&gt;重启时平台通过 &lt;code&gt;RecoveryMonitor&lt;/code&gt; 捕获上次遗留的数据碎片，并无缝重载恢复。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;定时快照备份示例：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const [localRecord, setLocalRecord] = useLocalStorageState(&apos;CANVAS_RECOVERY_DATA&apos;, { defaultValue: null });
+
+useDebounceEffect(() =&amp;gt; {
+  if (!isCanvasDirty) return;
+  // 在帧空闲时执行深度序列化，避免阻塞主线程交互
+  const snapshot = serializeCanvasState(canvasStore);
+  setLocalRecord({ timestamp: Date.now(), data: snapshot });
+}, [canvasStore.metas], { wait: 5000 });
+&lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;难点 4：拖拽的自由度与严谨性 (DnD Collision &amp;amp; Insert Target)&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;场景&lt;/strong&gt;：组件间嵌套规则复杂（如模态框内不允许插入页面组件），需要灵活处理 Drop 边界与精准高亮框。
 &lt;strong&gt;解法&lt;/strong&gt;：&lt;strong&gt;极致解耦的碰撞算法引擎&lt;/strong&gt;。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;graph TD
+    A[拖拽移动 DragMove] --&amp;gt; B{DnD Context 碰撞检测}
+    B --&amp;gt;|收集指针下方所有相交的 Dataset ID| C(过滤非法父级白名单)
+    C --&amp;gt; D(获取合法容器 containerId)
+    D --&amp;gt; E[useInsertTarget 落点算法计算]
+    E --&amp;gt; F{判定位置坐标区间}
+    F -- 靠上/左 --&amp;gt; G[INSERT_BEFORE]
+    F -- 居中 --&amp;gt; H[INSERT_INNER]
+    F -- 靠下/右 --&amp;gt; I[INSERT_AFTER]
+    G &amp;amp; H &amp;amp; I --&amp;gt; J[更新 Store dispatch 并渲染辅助线]
+&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;拖拽事件 &lt;code&gt;Listeners&lt;/code&gt; 完全与业务组件解耦。组件仅仅透传自身的 &lt;code&gt;id&lt;/code&gt;，真正的碰撞检测（Collision Detection）由顶层的 &lt;code&gt;DndContextWrapper&lt;/code&gt; 统一代理结算。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;useInsertTarget&lt;/code&gt; 预计算落点（基于鼠标指针矩阵的偏移量计算出上插、下插、内嵌），实时派发事件渲染 &lt;code&gt;DropHighlight&lt;/code&gt; 或特定的虚线占位符。这保证了底层组件依然纯净无副作用，拖拽体感极其丝滑严谨。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;拖拽锚点挂载代码:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;// Meta.ts: 生成锚点信息用于碰撞反查
+&lt;p&gt;&lt;strong&gt;碰撞检测与锚点挂载代码:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 1. Meta.ts: 生成锚点信息用于碰撞反查
 export const genMetaDataSet = (metaId: string, type: Meta[&apos;type&apos;]) =&amp;gt; {
   return {
     &apos;data-meta-id&apos;: metaId,
     &apos;data-meta-type&apos;: type,
   };
 };
+
+// 2. 算法核心：结合当前指针位置与容器盒模型计算精准落点
+export function calculateInsertTarget(pointerY: number, containerRect: DOMRect) {
+  const { top, height } = containerRect;
+  // 如果处于容器上部20%区域 -&amp;gt; 前插
+  if (pointerY &amp;lt; top + height * 0.2) return InsertPosition.BEFORE;
+  // 处于中间60%区域 -&amp;gt; 内嵌
+  if (pointerY &amp;lt; top + height * 0.8) return InsertPosition.INNER;
+  // 处于下部20%区域 -&amp;gt; 后插
+  return InsertPosition.AFTER;
+}
 &lt;/code&gt;&lt;/pre&gt;
 &lt;hr /&gt;
 &lt;h2&gt;4. 总结&lt;/h2&gt;
