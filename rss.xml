@@ -4,6 +4,33 @@
 &lt;hr /&gt;
 &lt;h2&gt;1. 整体架构概览&lt;/h2&gt;
 &lt;p&gt;CanvasPro 的整体架构在设计上遵循 &lt;strong&gt;状态与视图解耦&lt;/strong&gt;、&lt;strong&gt;按需渲染&lt;/strong&gt;、&lt;strong&gt;事件驱动分层&lt;/strong&gt; 的理念。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;graph TD
+    subgraph 核心数据层 (State Management)
+        A[CanvasStore] --&amp;gt;|依赖| B(扁平化组件树 metas)
+        A --&amp;gt;|依赖| C(断点记录 breakpointRecord)
+        A --&amp;gt;|管理| D(状态突变 CanvasAction)
+    end
+
+    subgraph 渲染引擎层 (Render Engine)
+        E[MetaRenderTree] --&amp;gt; F{递归解析}
+        F --&amp;gt;|编辑态| G[MetaEditableRenderTree]
+        F --&amp;gt;|预览态| H[MetaPreviewRenderTree]
+        G -.监听.-&amp;gt; B
+    end
+
+    subgraph 无限画布与事件层 (Viewport &amp;amp; Event)
+        I[react-infinite-viewer] --&amp;gt; J(缩放与平移矩阵)
+        K[CanvasEventEmitter] --&amp;gt;|分发| L[DOM Transform 直接修改]
+        K -.绕过 React Diff.-&amp;gt; J
+    end
+
+    subgraph 拖拽与碰撞层 (DnD Engine)
+        M[DndContextWrapper] --&amp;gt; N(碰撞检测算法 Collision Detection)
+        N --&amp;gt; O(useInsertTarget 落点计算)
+        O --&amp;gt; P[DOM 高亮占位指示]
+        G --&amp;gt;|注入| M
+    end
+&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;核心状态驱动 (State Management)&lt;/strong&gt;：基于 &lt;strong&gt;MobX&lt;/strong&gt; (&lt;code&gt;mobx-react&lt;/code&gt;) 构建核心状态库 &lt;code&gt;CanvasStore&lt;/code&gt;。所有页面组件数据（&lt;code&gt;metas&lt;/code&gt;）、画板路由（&lt;code&gt;boards&lt;/code&gt;）、选中状态（&lt;code&gt;selectedMetaConfigs&lt;/code&gt;）、断点信息等均收敛于此。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;渲染引擎 (Render Engine)&lt;/strong&gt;：基于 React 递归渲染，通过 &lt;code&gt;MetaRenderTree&lt;/code&gt;（衍生为 &lt;code&gt;MetaEditableRenderTree&lt;/code&gt; 和 &lt;code&gt;MetaPreviewRenderTree&lt;/code&gt;）动态解析元数据并生成真实的 DOM 节点。&lt;/li&gt;
@@ -21,6 +48,26 @@
 &lt;/ul&gt;
 &lt;h3&gt;2.2 渲染树引擎 (MetaRenderTree &amp;amp; Hooks)&lt;/h3&gt;
 &lt;p&gt;渲染树是画布的“血肉”。入口通过传入 &lt;code&gt;rootId&lt;/code&gt; 开始，进行组件级别的递归渲染。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;引擎层渲染策略与虚拟化伪代码示例：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const childTrees = useMemo(() =&amp;gt; {
+  if (!childMetas || !childMetas.length) {
+    return &amp;lt;MetaPlaceholder meta={meta} /&amp;gt;;
+  }
+  return map(childMetas, (childMeta) =&amp;gt; (
+    &amp;lt;MetaEditableRenderTree meta={childMeta} key={childMeta.id} /&amp;gt;
+  ));
+}, [childMetas, meta]);
+
+// 核心：基于可视区进行裁剪
+const showShadow = useMemo(() =&amp;gt; {
+  if (isForceVisible) return false;
+  return isOutOfView &amp;amp;&amp;amp; type !== CONDITIONAL_VIEW; // 如果越界则显示 Shadow
+}, [isOutOfView, isForceVisible]);
+
+if (showShadow) {
+  return &amp;lt;MetaShadow size={sizeRef.current} /&amp;gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;编辑态特化的 DndHooks&lt;/strong&gt;：在 &lt;code&gt;MetaEditableRenderTree.tsx&lt;/code&gt; 中，引擎为每个叶子节点实时注入了 &lt;code&gt;useDraggableConfig&lt;/code&gt; 和 &lt;code&gt;useDroppableConfig&lt;/code&gt;。它们根据当前的模式（如 &lt;code&gt;CROSS_LEVEL&lt;/code&gt;, &lt;code&gt;ABS_OR_FIXED_MOVE&lt;/code&gt;）自动推断拖拽策略。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;HTML Dataset 映射锚点&lt;/strong&gt;：在递归时，系统调用 &lt;code&gt;genMetaDataSet&lt;/code&gt; 方法，将组件 ID、Type 以及业务 Feature 强绑定至真实的 DOM Dataset (&lt;code&gt;data-meta-id&lt;/code&gt; 等)。这使得在碰撞检测、元素拾取时，底层仅需通过原生 &lt;code&gt;element.dataset&lt;/code&gt; 即可快速反查元信息，这是实现高性能框选、辅助线测量的基石。&lt;/li&gt;
@@ -28,6 +75,14 @@
 &lt;/ul&gt;
 &lt;h3&gt;2.3 无限视口与高性能事件 (Viewport &amp;amp; EventEmitter)&lt;/h3&gt;
 &lt;p&gt;画布场景下，&lt;strong&gt;缩放（Zoom）和平移（Pan）&lt;/strong&gt; 是最高频的操作。如果在这一层频繁修改 React State（哪怕是最外层的 State），会导致整个画布（几千个节点）进入 Diff 流程，这绝对是一场灾难。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;完全绕过 VDOM 的神仙操作思路&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 触发缩放时，不调用 setState，而是通过全局单例的 EventBus 抛出
+const onZoomIn = useCallback(() =&amp;gt; {
+  const newZoom = getViewportLegalZoom(curZoom + rate);
+  // ✨ 这里直接操作闭包事件，原生修改 DOM Transform！
+  CanvasEventEmitter.emit(CanvasEmitterEventType.VIEWPORT_SET_ZOOM, newZoom);
+}, []);
+&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;引擎接管偏移矩阵&lt;/strong&gt;：CanvasPro 引入了强大的 &lt;code&gt;react-infinite-viewer&lt;/code&gt; 承接底层的缩放偏移矩阵计算。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;无状态的纯净总线 (CanvasEventEmitter)&lt;/strong&gt;：通过深度拆解 &lt;code&gt;usePanZoom.ts&lt;/code&gt; 与 &lt;code&gt;InfiniteView/index.tsx&lt;/code&gt; 可以发现，当用户触发滚动/缩放时，代码并没有去 &lt;code&gt;setState&lt;/code&gt;。它仅仅是发出了一条 &lt;code&gt;CanvasEventEmitter.emit(CanvasEmitterEventType.VIEWPORT_SET_ZOOM, newZoom)&lt;/code&gt;。该事件通过单例的闭包被 DOM 层直接截获并修改 Transform，完美绕过了 React 的 VDOM Diff 阶段，这正是其能在海量节点下依然保持 60fps (丝滑) 的秘密！&lt;/li&gt;
@@ -49,6 +104,25 @@
 &lt;ul&gt;
 &lt;li&gt;抛弃了粗暴的 DeepClone 覆盖，单独抽象了 &lt;code&gt;useDiffApply&lt;/code&gt; 机制作为增量构建引擎。&lt;/li&gt;
 &lt;li&gt;服务端传入的并非整棵树，而是属性操作快照（如 &lt;code&gt;operation: &apos;add&apos;&lt;/code&gt;, 或指明修改了 &lt;code&gt;DESIGN_KEY&lt;/code&gt;）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;基于 MobX 事务的无闪烁补丁机制&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// useAddOrDeleteComponentDiffApply.ts 中处理服务端发来的 Add 补丁
+case &apos;add&apos;: {
+  // 1. 获取服务器最新的组件描述信息
+  const targetComponent = getComponent(id);
+  // 2. Transpile转译器：将原始 Schema 基于当前端点翻译为合法的 Meta 对象
+  const pendingTasks = map(canvasStore.breakpoints, (bp) =&amp;gt; transpile(targetComponent, bp));
+  const metas = await Promise.all(pendingTasks);
+  
+  // 3. 通过 transaction 将生成好的 metas 直接打入 Store 字典中
+  return async () =&amp;gt; {
+    forEach(metas, (newMeta) =&amp;gt; {
+      canvasStore.addMeta(newMeta);
+    });
+  };
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
 &lt;li&gt;拆分了大量的局部 Hooks (例如 &lt;code&gt;useAddOrDeleteComponentDiffApply&lt;/code&gt;, &lt;code&gt;usePropertiesDiffApply&lt;/code&gt;)。当判定是 &lt;code&gt;add&lt;/code&gt; 操作时，会先通过 &lt;code&gt;useTranspile&lt;/code&gt; (转译层) 结合当前断点将 Schema 翻译为符合运行时规范的 Meta 结构，最后在一个 MobX 的 &lt;code&gt;transaction&lt;/code&gt; (事务) 中打入状态字典，彻底杜绝了状态不同步引发的白屏。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;🎯 难点 3：多维度灾难恢复机制 (Crash Recovery)&lt;/h3&gt;
