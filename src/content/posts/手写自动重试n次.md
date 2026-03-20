@@ -6,7 +6,7 @@ description: >-
   0;    function handleRetry(res, rej) {     return new Promise((resolve =...
 tags:
   - JavaScript
-category: 前端开发
+category: "前端开发"
 ---
 
 请求失败的时候自动重试，这里默认2次重试

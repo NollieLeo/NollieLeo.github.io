@@ -2,7 +2,7 @@
 title: Zion无代码画布核心架构技术总结
 description: 个人独立自研高性能无代码画布架构 CanvasPro 的深度剖析，包含状态管理、渲染引擎与性能优化实践。
 published: 2024-03-20T10:00:00.000Z
-category: 前端开发
+category: "工程化与架构"
 tags:
   - 架构设计
   - 无代码

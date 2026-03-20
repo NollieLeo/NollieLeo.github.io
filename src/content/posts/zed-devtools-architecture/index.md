@@ -3,7 +3,7 @@ title: "Zion DevTools 架构设计与技术分析"
 published: 2026-03-20
 description: "深度解析为 Zion Editor 量身定制的 Chrome 开发者工具 zed-devtools 的架构设计。涵盖跨隔离世界的 React Fiber 劫持、基于 Web Worker 的百万级 JSON 虚拟化渲染，以及基于 CRDT 架构的 Time Travel 时间漫游技术。"
 tags: ["Chrome Extension", "React", "架构设计", "CRDT", "Web Worker"]
-category: "前端开发"
+category: "工程化与架构"
 draft: false
 ---
 

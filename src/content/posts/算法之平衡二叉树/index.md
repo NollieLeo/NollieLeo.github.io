@@ -10,7 +10,7 @@ tags:
   - 平衡二叉树
   - 面试题
   - JavaScript
-category: 计算机基础
+category: "算法与基础"
 ---
 
 #### [110. 平衡二叉树](https://leetcode-cn.com/problems/balanced-binary-tree/)

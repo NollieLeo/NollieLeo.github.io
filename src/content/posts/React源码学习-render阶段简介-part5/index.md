@@ -8,7 +8,7 @@ description: >-
 tags:
   - React
   - React render
-category: 前端框架
+category: "前端开发"
 ---
 
 > 之前fiber那边说过，当我们第一次创建完了整个应用的根节点（fiberRootNode的时候，我们就进入首屏渲染的阶段）

@@ -10,7 +10,7 @@ tags:
   - 算法
   - 面试题
   - JavaScript
-category: 计算机基础
+category: "算法与基础"
 ---
 
 #### [257. 二叉树的所有路径](https://leetcode-cn.com/problems/binary-tree-paths/)

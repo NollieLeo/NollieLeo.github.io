@@ -10,7 +10,7 @@ tags:
   - 面试题
   - 滑动窗口
   - JavaScript
-category: 计算机基础
+category: "算法与基础"
 ---
 
 

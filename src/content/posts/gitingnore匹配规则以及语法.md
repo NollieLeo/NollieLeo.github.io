@@ -7,7 +7,7 @@ description: >-
   ---------------------------------- | | 空格   | 仅作为分隔符  ...
 tags:
   - git
-category: 工程化
+category: "工程化与架构"
 ---
 
 # Git配置 .gitignore文件

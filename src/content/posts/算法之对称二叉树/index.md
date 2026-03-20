@@ -11,7 +11,7 @@ tags:
   - 算法
   - 面试题
   - JavaScript
-category: 计算机基础
+category: "算法与基础"
 ---
 
 #### [剑指 Offer 28. 对称的二叉树](https://leetcode-cn.com/problems/dui-cheng-de-er-cha-shu-lcof/)

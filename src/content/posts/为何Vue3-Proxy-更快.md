@@ -10,7 +10,7 @@ tags:
   - Proxy
   - Object.defineProperty
   - JavaScript
-category: 前端开发
+category: "前端开发"
 ---
 
 相比于Vue2.x Object.defineProperty的响应式原理，Vue3 Proxy的优势在哪里呢。以下我们从两者源码角度分析下使用Proxy的优势。

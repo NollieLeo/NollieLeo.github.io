@@ -10,7 +10,7 @@ tags:
   - 继承
   - 原型链
   - JavaScript
-category: 前端开发
+category: "前端开发"
 ---
 
 # 继承之原型链

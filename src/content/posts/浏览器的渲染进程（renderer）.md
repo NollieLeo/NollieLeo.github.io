@@ -9,7 +9,7 @@ tags:
   - 进程和线程
   - 浏览器
   - js引擎
-category: 计算机基础
+category: "前端开发"
 ---
 
 # 简述渲染进程Renderer

@@ -10,7 +10,7 @@ tags:
   - JavaScript
   - 作用域
   - 面试题
-category: 前端开发
+category: "算法与基础"
 ---
 
 # js的执行上下文以及执行上下文栈

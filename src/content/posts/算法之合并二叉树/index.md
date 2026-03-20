@@ -11,7 +11,7 @@ tags:
   - 合并二叉树
   - 面试题
   - JavaScript
-category: 计算机基础
+category: "算法与基础"
 ---
 
 #### [617. 合并二叉树](https://leetcode-cn.com/problems/merge-two-binary-trees/)

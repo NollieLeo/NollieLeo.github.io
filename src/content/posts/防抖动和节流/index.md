@@ -8,7 +8,7 @@ tags:
   - 防抖动
   - 节流
   - JavaScript
-category: 前端开发
+category: "工程化与架构"
 ---
 **场景：**
 

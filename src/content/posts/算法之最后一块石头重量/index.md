@@ -10,7 +10,7 @@ tags:
   - 面试题
   - 栈
   - JavaScript
-category: 计算机基础
+category: "算法与基础"
 ---
 
 #### [1046. 最后一块石头的重量](https://leetcode-cn.com/problems/last-stone-weight/)

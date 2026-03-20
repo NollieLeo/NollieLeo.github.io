@@ -8,7 +8,7 @@ description: >-
 tags:
   - CSS
   - 垂直居中
-category: 前端开发
+category: "前端开发"
 ---
 
 在阅读此文章之前要搞明白行内元素和块级元素的区别，和其常用的标签

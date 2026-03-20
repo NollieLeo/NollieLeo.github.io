@@ -9,7 +9,7 @@ tags:
   - 链表
   - 面试题
   - JavaScript
-category: 计算机基础
+category: "算法与基础"
 ---
 
 

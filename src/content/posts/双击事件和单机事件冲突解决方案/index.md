@@ -6,7 +6,7 @@ description: >-
   事件绑定中，执行双击事件(dblclick)时能触发两次单击事件(click)。即一个标签元素（如button等），如果元素同时绑定了单击事件(click)和双击事件(dblclick),那么执行单击事件(click)时，不会触发双击事件...
 tags:
   - JavaScript
-category: 前端开发
+category: "复盘与随笔"
 ---
 
 # 双击事件（dblclick）时，不触发单击事件(click)

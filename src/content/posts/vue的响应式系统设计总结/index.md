@@ -7,7 +7,7 @@ description: >-
   effect函数会直接或者间接的影响到其他地方函数的执行，也就是说...
 tags:
   - Vue
-category: 前端框架
+category: "前端开发"
 ---
 
 # vue3 - 响应式学习

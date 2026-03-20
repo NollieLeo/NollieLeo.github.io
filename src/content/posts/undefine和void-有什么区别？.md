@@ -6,7 +6,7 @@ description: >-
   return input === void 0; }   为什么要使用 void 0 呢？  void 是 JS 中的一个运算符，语法是：  ...
 tags:
   - JavaScript
-category: 前端开发
+category: "前端开发"
 ---
 
 在 JavaScript 中，判断是否是 undefined，一般都这样写：

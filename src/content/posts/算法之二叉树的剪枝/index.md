@@ -9,7 +9,7 @@ tags:
   - 算法
   - 面试题
   - JavaScript
-category: 计算机基础
+category: "算法与基础"
 ---
 
 #### [814. 二叉树剪枝](https://leetcode-cn.com/problems/binary-tree-pruning/)

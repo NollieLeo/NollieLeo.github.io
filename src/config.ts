@@ -60,6 +60,16 @@ export const profileConfig: ProfileConfig = {
 			icon: "fa6-brands:github",
 			url: "https://github.com/NollieLeo",
 		},
+		{
+			name: "LinkedIn",
+			icon: "fa6-brands:linkedin",
+			url: "https://www.linkedin.com/in/%E6%81%BA%E6%95%8F-%E7%BF%81-a169543b1/",
+		},
+		{
+			name: "Email",
+			icon: "fa6-solid:envelope",
+			url: "mailto:shaneleoproto@gmail.com",
+		},
 	],
 };
 

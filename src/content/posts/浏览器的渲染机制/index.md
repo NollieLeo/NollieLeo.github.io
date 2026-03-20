@@ -8,7 +8,7 @@ description: >-
 tags:
   - 浏览器相关
   - 浏览器
-category: 计算机基础
+category: "前端开发"
 ---
 
 # 浏览器的渲染过程

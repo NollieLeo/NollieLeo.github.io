@@ -8,7 +8,7 @@ description: >-
 tags:
   - TypeScript
   - 协变和逆变
-category: 未分类
+category: "前端开发"
 ---
 
 

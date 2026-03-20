@@ -8,7 +8,7 @@ description: >-
 tags:
   - React
   - React render
-category: 前端框架
+category: "前端开发"
 ---
 
 对于如下Demo，点击`Parent`组件的`div`，触发更新，`Son`组件会打印`child render!`么？

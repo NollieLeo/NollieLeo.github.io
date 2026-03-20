@@ -8,7 +8,7 @@ description: >-
 tags:
   - JavaScript
   - PDF
-category: 前端开发
+category: "工程化与架构"
 ---
 
 项目上要求，能够根据页面上所展示的测试报告，生成一份pdf。

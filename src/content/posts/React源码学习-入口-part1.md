@@ -7,7 +7,7 @@ description: >-
   React的快速响应是什么意思呢？  - 遇到...
 tags:
   - React
-category: 前端框架
+category: "前端开发"
 ---
 
 > 官方： React 是用 JavaScript 构建**快速响应**的大型 Web 应用程序的首选方式 

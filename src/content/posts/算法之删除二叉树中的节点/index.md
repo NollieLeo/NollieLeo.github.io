@@ -11,7 +11,7 @@ tags:
   - 算法
   - 面试
   - JavaScript
-category: 计算机基础
+category: "算法与基础"
 ---
 
 #### [450. 删除二叉搜索树中的节点](https://leetcode-cn.com/problems/delete-node-in-a-bst/)

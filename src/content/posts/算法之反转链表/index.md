@@ -9,7 +9,7 @@ tags:
   - 面试题
   - 算法
   - JavaScript
-category: 计算机基础
+category: "算法与基础"
 ---
 
 206.给你单链表的头节点 `head`,请你反转链表，并返回反转后的链表

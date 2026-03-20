@@ -7,7 +7,7 @@ description: >-
 tags:
   - Node.js
   - 后端
-category: 计算机基础
+category: "前端开发"
 ---
 
 ### 1.node自带模块fs文件管理

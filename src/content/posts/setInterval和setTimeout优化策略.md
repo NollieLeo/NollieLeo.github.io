@@ -11,7 +11,7 @@ tags:
   - setTimeout
   - 异步
   - requestAnimationFrame
-category: 前端开发
+category: "前端开发"
 ---
 
 异步编程当然少不了定时器了，常见的定时器函数有 `setTimeout`、`setInterval`、`requestAnimationFrame`。最常用的是`setTimeout`，很多人认为 `setTimeout` 是延时多久，那就应该是多久后执行。

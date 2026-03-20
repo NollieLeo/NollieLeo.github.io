@@ -7,7 +7,7 @@ description: >-
   是一种常用的页面置换算法，选择最近最久未使用的页面予以淘汰。该算法赋予每个页面一个访问字段，...
 tags:
   - JavaScript
-category: 前端开发
+category: "算法与基础"
 ---
 
 ## 1.什么是 LRU？

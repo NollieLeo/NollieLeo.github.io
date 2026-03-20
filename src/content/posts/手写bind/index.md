@@ -11,7 +11,7 @@ tags:
   - 面试题
   - 原型
   - 原型链
-category: 前端开发
+category: "前端开发"
 ---
 
 # 手写bind

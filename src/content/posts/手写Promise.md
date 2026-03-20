@@ -9,7 +9,7 @@ tags:
   - JavaScript
   - Promise
   - 面试题
-category: 前端开发
+category: "前端开发"
 ---
 
 暂未整理，先附上代码

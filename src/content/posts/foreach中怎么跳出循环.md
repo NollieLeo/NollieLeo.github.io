@@ -9,7 +9,7 @@ tags:
   - forEach
   - JavaScript
   - trycatch
-category: 前端开发
+category: "前端开发"
 ---
 
 总所周知：forEach是不可以跳出循环的，所以应该想办法给他跳出去

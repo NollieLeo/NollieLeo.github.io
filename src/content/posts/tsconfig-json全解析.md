@@ -7,7 +7,7 @@ description: >-
   tsconfig.json是编译TypeScript的配置文件，对书写TypeScript代码...
 tags:
   - TypeScript
-category: 前端开发
+category: "工程化与架构"
 ---
 
 # 解析

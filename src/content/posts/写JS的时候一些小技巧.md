@@ -4,7 +4,7 @@ published: 2020-07-11T00:27:18.000Z
 description: "记录一些平时开发过程或者编写JS过程小技巧或者注意事项\r \r  关于数组\r \r  - 变量赋值\r \r javascript\r const array = new Array();  // 一般不这样搞一个数组\r \r const array = [];  // 这样搞才棒\r \r \r \r \r  - 数组..."
 tags:
   - JavaScript
-category: 前端开发
+category: "前端开发"
 ---
 
 >  记录一些平时开发过程或者编写JS过程小技巧或者注意事项

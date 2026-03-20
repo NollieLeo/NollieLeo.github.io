@@ -8,7 +8,7 @@ tags:
   - onbeforeunload
   - onunload
   - 面试
-category: 面试与总结
+category: "前端开发"
 ---
 
 

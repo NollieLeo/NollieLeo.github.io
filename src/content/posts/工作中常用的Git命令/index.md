@@ -6,7 +6,7 @@ description: >-
   git clone 远程地址[url]  通过git clone命令从远程地址下载出来，这个也不用过多描述。     git status  g...
 tags:
   - git
-category: 工程化
+category: "效率与工具"
 ---
 
 ## 常用的基本操作

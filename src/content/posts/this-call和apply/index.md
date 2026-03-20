@@ -9,7 +9,7 @@ tags:
   - JavaScript
   - call
   - apply
-category: 前端开发
+category: "前端开发"
 ---
 
 # this, call 和apply

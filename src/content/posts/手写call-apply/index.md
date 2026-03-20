@@ -9,7 +9,7 @@ tags:
   - apply
   - JavaScript
   - 面试题
-category: 前端开发
+category: "前端开发"
 ---
 
 # 手写call，apply

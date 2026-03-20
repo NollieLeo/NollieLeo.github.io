@@ -11,7 +11,7 @@ tags:
   - 浏览器
   - Event Loop
   - JavaScript
-category: 前端开发
+category: "前端开发"
 ---
 
 ### 宏任务(macrotask)

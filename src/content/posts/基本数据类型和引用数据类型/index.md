@@ -6,7 +6,7 @@ tags:
   - JavaScript
   - ES6
   - 基本数据类型和引用类型
-category: 前端开发
+category: "前端开发"
 ---
 
 

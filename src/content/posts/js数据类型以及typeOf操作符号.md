@@ -7,7 +7,7 @@ description: >-
 tags:
   - JavaScript
   - typeOf
-category: 前端开发
+category: "前端开发"
 ---
 
 > ES6有6中 **简单数据类型**（**原始类型**）和一种复杂数据类型

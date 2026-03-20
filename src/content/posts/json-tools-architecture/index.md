@@ -3,7 +3,7 @@ title: "高性能 JSON 工具 (JsonTools) 的架构设计与实现"
 published: 2026-03-20
 description: "深度剖析 JsonTools项目。探讨在处理前端数以十兆计的抓包数据与巨型接口返回时，如何利用 Web Worker 离线计算、虚拟列表 (Virtual List) 降维渲染、以及自定义 JSON Diff 乱序比对引擎，彻底解决主线程卡死问题。"
 tags: ["Chrome Extension", "React", "性能优化", "Web Worker", "JSON"]
-category: "前端开发"
+category: "工程化与架构"
 draft: false
 ---
 

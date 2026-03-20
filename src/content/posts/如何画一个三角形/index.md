@@ -6,7 +6,7 @@ description: >-
   border-top: 10px solid green;       border-bottom: 10px solid transparent;...
 tags:
   - CSS
-category: 前端开发
+category: "前端开发"
 ---
 
 ## 用css如何画一个三角形？

@@ -9,7 +9,7 @@ tags:
   - 面试题
   - 双指针
   - JavaScript
-category: 计算机基础
+category: "算法与基础"
 ---
 
 15.三数之和

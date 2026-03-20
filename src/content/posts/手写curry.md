@@ -7,7 +7,7 @@ description: >-
 tags:
   - curry
   - JavaScript
-category: 前端开发
+category: "前端开发"
 ---
 
 要求实现如下

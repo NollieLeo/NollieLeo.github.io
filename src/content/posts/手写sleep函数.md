@@ -6,7 +6,7 @@ description: >-
   Date.now();    while (Date.now() - startTime < time) {     continue;   } ...
 tags:
   - JavaScript
-category: 前端开发
+category: "前端开发"
 ---
 
 手动实现一个 sleep 函数

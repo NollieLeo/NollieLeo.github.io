@@ -10,7 +10,7 @@ tags:
   - 原型链
   - instanceof
   - 面试题
-category: 前端开发
+category: "前端开发"
 ---
 
 # 手写instanceof

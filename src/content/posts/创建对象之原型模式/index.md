@@ -9,7 +9,7 @@ tags:
   - JavaScript
   - 原型模式
   - 面试题
-category: 前端开发
+category: "前端开发"
 ---
 
 # 原型模式

@@ -3,7 +3,7 @@ title: "高性能 JSON 终极处理工具 JsonTools 使用指南"
 published: 2026-03-20
 description: "还在为超大型接口返回值卡死浏览器而苦恼吗？JsonTools 是一款专为硬核开发者打造的 Chrome 扩展，基于 Web Worker 和虚拟列表技术，支持百万级数据秒开、乱序 Diff 比对以及深度路径检索。本文将带你全面了解它的强大功能。"
 tags: ["Chrome Extension", "JsonTools", "效率工具", "JSON", "产品手册"]
-category: "效率工具"
+category: "前端开发"
 draft: false
 ---
 
@@ -54,6 +54,7 @@ draft: false
 4. 你看到的，将是**真正发生变动的业务字段**，而不是被无意义的乱序干扰的红绿代码块。
 
 ![差异字段精准标红](./json-diff-preview.png)
+
 ---
 
 ## 4. 全方位检索引擎 (Query Engine)
@@ -68,6 +69,7 @@ draft: false
   * **路径穿透搜索 (Path Search)**：你可以直接搜索像 `user.*.id` 这样的深层路径键名，快速定位嵌套极深的特定结构。
 
 ![右上角搜索](./json-search-preview.png)
+
 ---
 
 ## 5. 个性化设置与语言支持

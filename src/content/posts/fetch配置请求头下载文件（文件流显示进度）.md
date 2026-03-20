@@ -7,7 +7,7 @@ description: >-
   const handleFileD...
 tags:
   - fetch
-category: 计算机基础
+category: "前端开发"
 ---
 
 上代码，到时候再写为什么这么做，因为懒
