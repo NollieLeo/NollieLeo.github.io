@@ -11,7 +11,7 @@ draft: false
 
 在海外视频学习和日常娱乐中，原生的 YouTube 播放器只能单选一种字幕，这对于非母语学习者来说是一个巨大的痛点。为了解决这个问题，我从零到一独立设计、开发并开源了 **TubeWidget - Dual Subtitles**（目前已成功上架 Chrome 应用商店）。
 
-在项目架构上，TubeWidget 隶属于我的 `YTranslater` Turborepo Monorepo 仓库下。整个项目采用了当今最前沿的现代浏览器插件技术栈：
+整个项目采用了当今最前沿的现代浏览器插件技术栈：
 * **核心框架**：**Plasmo**（完美支持 Manifest V3，拥有极佳的开发者体验）。
 * **UI 与样式**：**React 18** + **TailwindCSS** + **Ant Design**。
 * **状态与数据**：**Zustand** (响应式状态) + **Dexie.js** (IndexedDB 本地高频缓存)。
