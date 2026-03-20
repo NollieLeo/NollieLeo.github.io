@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>翁先森的博客</title><description>乌拉</description><link>https://nollieleo.github.io/</link><language>zh_CN</language><item><title>Zion无代码画布核心架构技术总结</title><link>https://nollieleo.github.io/posts/zion%E6%97%A0%E4%BB%A3%E7%A0%81%E7%94%BB%E5%B8%83%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/</link><guid isPermaLink="true">https://nollieleo.github.io/posts/zion%E6%97%A0%E4%BB%A3%E7%A0%81%E7%94%BB%E5%B8%83%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/</guid><description>个人独立自研高性能无代码画布架构 CanvasPro 的深度剖析，包含状态管理、渲染引擎与性能优化实践。</description><pubDate>Wed, 20 Mar 2024 10:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Zion无代码画布核心架构技术总结文档&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;CanvasPro&lt;/strong&gt; 是由我个人独立从零设计并研发的一套高性能无代码画布架构，致力于解决复杂组件树的渲染性能、复杂的拖拽交互、以及画布无限缩放/平移等一系列无代码/低代码平台的核心难题。&lt;/p&gt;
-&lt;p&gt;本文档将从整体架构、核心模块设计、关键链路实现以及重点与难点（Performance &amp;amp; Architecture Challenges）四个维度，深度剖析 CanvasPro 的架构设计。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;线上体验地址&lt;/strong&gt;: &lt;a href=&quot;https://zion.functorz.com&quot;&gt;https://zion.functorz.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Zion无代码画布&lt;/strong&gt; 是由我个人独立从零设计并研发的一套高性能无代码画布架构，致力于解决复杂组件树的渲染性能、复杂的拖拽交互、以及画布无限缩放/平移等一系列无代码/低代码平台的核心难题。&lt;/p&gt;
+&lt;p&gt;为了让您对画布有一个直观的体感，以下是我独立设计研发的画布整体界面（支持多层级嵌套、自由拖拽、悬浮辅助线与响应式属性配置）：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;./hero.png&quot; alt=&quot;画布全局一览&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;本文档将从整体架构、核心模块设计、关键链路实现以及重点与难点（Performance &amp;amp; Architecture Challenges）四个维度，深度剖析 Zion无代码 的架构设计。&lt;/p&gt;
 &lt;hr /&gt;
 &lt;h2&gt;1. 整体架构概览&lt;/h2&gt;
 &lt;p&gt;CanvasPro 的整体架构在设计上遵循 &lt;strong&gt;状态与视图解耦&lt;/strong&gt;、&lt;strong&gt;按需渲染&lt;/strong&gt;、&lt;strong&gt;事件驱动分层&lt;/strong&gt; 的理念。&lt;/p&gt;
