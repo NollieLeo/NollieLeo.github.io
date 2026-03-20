@@ -120,11 +120,12 @@ function injectDynamicSubtitleHider() {
 
 ### 架构攻坚：Look-ahead Prefetch Pipeline (滑动窗口预加载)
 
-1. **毫秒级时间帧同步**：
-   我抛弃了粗糙的 `setInterval` 定时器，自定义了 `useVideoTime` Hook，通过浏览器的 `requestAnimationFrame` 将 `<video>.currentTime` 以极其恐怖的精度实时同步到 Zustand Store 中。
+1. **毫秒级时间帧同步与跳变阻断 (Seek Handling)**：
+   除了抛弃粗糙的 `setInterval` 改用 `requestAnimationFrame` 同步 `<video>.currentTime`，这里还有一个极其复杂的边界场景（Edge Case）：如果用户突然在进度条上拖拽跳跃了 30 分钟呢？
+   我的底层状态机能够精准侦测到这类**非线性的时间跳变 (Time Seek)**。当检测到 `currentTime` 与上一帧的差值大于设定的阈值时，系统会立刻中断旧的预加载队列，废弃掉正在路上的无关网络请求，并在跳跃后的新基准线上重新建立 `baseIndex` 的 5 句缓存流水线。
 
 2. **超前滑动窗口翻译**：
-   在 UI 渲染的骨干 `Overlay` 组件中，我设计了一个超前滑动窗口流水线。当前视频播放到某一句字幕时，程序会自动向前探知之后的 **5 句字幕 (`PREFETCH_COUNT = 5`)**，并在后台静默派发翻译任务。
+   在 UI 渲染的骨干 `Overlay` 组件中，我设计了一个超前滑动窗口流水线。当前视频线性播放到某一句字幕时，程序会自动向前探知之后的 **5 句字幕 (`PREFETCH_COUNT = 5`)**，并在后台静默派发翻译任务。
 
 ```mermaid
 flowchart LR
@@ -218,16 +219,18 @@ export const Subtitle = ({ text, translation, durationMs }: SubtitleProps) => {
 
 ---
 
-## 6. 成本与性能优化：Dexie.js 的本地缓存降频
+## 7. 成本与性能优化：Dexie.js 的本地缓存降频
 
-作为一款支持多翻译引擎（包括付费调用的 OpenAI 和 Google Cloud）的插件，重播同一视频或遇到极高频出现的语句（如 "Subscribe to my channel"）时，如果每次都发起真实的 API 调用，将会烧毁大量的 Token 额度。
+作为一款支持多翻译引擎（包括付费调用的 OpenAI 和 Google Cloud）的插件，重播同一视频或遇到极高频出现的语句（如 "Subscribe to my channel" 或 "Thank you for watching"）时，如果每次都发起真实的 API 调用，将会烧毁大量的 Token 额度。
 
-我在插件的底层接入了基于 IndexedDB 封装的 **Dexie.js**。所有经由 `TranslateRouter` 的请求，都会对 `[源文本 + 目标语言]` 生成唯一的 Hash。在真正发起 HTTP 请求前，先拦截并查询本地数据库，若命中则极速返回。
-这个策略在用户反复拖拽进度条、或者是重温某一段精彩英语对话的场景下，做到了 **100% 的缓存击中率与零网络开销**。
+我在插件的底层接入了基于 IndexedDB 封装的 **Dexie.js**。所有经由 `TranslateRouter` 的请求，都会通过 `MD5(sourceText + targetLanguage)` 算法生成一个极短且唯一的 Hash 摘要（Digest）作为主键。
+在真正发起 HTTP 请求前，路由会先拦截并查询本地 IndexedDB 数据库：
+*   **同视频击中**：用户反复拖拽进度条、或者是重温某一段精彩对话时，100% 缓存击中，零网络开销、零延迟。
+*   **跨视频击中**：不同 YouTuber 说的相同打招呼日常用语，只要语种一致，Hash 就一致。即使用户看的是一个全新的视频，只要这句话曾经被翻译过，同样能瞬间从本地提库！这种跨域（Cross-Pollination）的缓存策略，把使用付费大模型 API 的成本压缩到了物理极限。
 
 ---
 
-## 6. 总结
+## 8. 总结
 
 YouTube 的环境犹如一个庞大的、充满了代码混淆和动态防御黑盒。
 

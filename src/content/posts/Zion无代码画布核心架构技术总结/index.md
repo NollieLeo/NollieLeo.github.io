@@ -86,9 +86,36 @@ graph TB
 在无代码应用中，组件树的层级往往极其深邃。若采用传统的 React Context 或纯层级 State，任何叶子节点的修改都会引发自顶向下的重渲染。
 - **结构解耦的强类型分层**：在 `CanvasStore/types/index.ts` 中，Store 被严格划分为 `CanvasState` (核心源数据)、`CanvasComputedState` (派生与缓存数据，如 `metaByComponentId` 索引字典) 以及 `CanvasAction` (状态突变接口)。
 - **平面化存储 (Flattening)**：组件树被扁平化，以 `id` 为键存放在 `Record<Meta['id'], Meta>` (`metas`) 中，彻底避免了深度嵌套引发的更新困难。
+
+**Before vs After: 状态降维的视觉直观对比**
+如果不做扁平化，一个组件树的更新是灾难性的（需要层层递归寻找节点）：
+```json
+// ❌ 传统树形 State (深层嵌套，更新困难)
+{
+  "id": "root",
+  "children": [
+    {
+      "id": "container_1",
+      "children": [ { "id": "button_1", "text": "Click" } ]
+    }
+  ]
+}
+```
+但在 Zion 的 `CanvasStore` 中，我们将其彻底拍平，所有的节点无论层级多深，都变成了 O(1) 复杂度的字典寻址：
+```json
+// ✅ Zion 的扁平化 State (O(1) 更新与读取)
+{
+  "metas": {
+    "root": { "id": "root", "childIds": ["container_1"] },
+    "container_1": { "id": "container_1", "childIds": ["button_1"], "parentId": "root" },
+    "button_1": { "id": "button_1", "text": "Click", "parentId": "container_1" }
+  }
+}
+```
+
 - **精确粒度订阅 (Granular Reactivity)**：结合底层通用的 `memoWithObserver` 高阶组件。通过闭包按需读取具体的 Meta 数据，只有当该 Meta 对应的数据变更时，才会触发对应 DOM 的 Re-render。
 
-**平面化存储查询示例：**
+**平面化存储缓存字典示例：**
 ```typescript
 export interface CanvasComputedState {
   metaKeys: Array<Meta['id']>;
@@ -269,18 +296,24 @@ const draggableOrigin = useMemo(() => {
 **场景**：当用户搭建了上千个组件，画布渲染将变得极其卡顿，拖拽也会存在巨大的延迟。
 **解法**：**视口外节点裁剪（虚拟化画布）**。
 
+在无代码编辑器的无限画板中，节点并不是排列成一维数组的，无法使用常规的虚拟列表。因此，我引入了基于 `IntersectionObserver` 和 `MetaShadow` (影子占位符) 的递归剔除算法。
+
 ```mermaid
 graph TD
-    A[滚动或拖拽事件] --> B[IntersectionObserver 检测交叉状态]
-    B --> C{是否在可视区域内 isOutOfView?}
-    C -- Yes --> D[截断递归，渲染 MetaShadow 占位符]
-    C -- No --> E[正常递归渲染真实 DOM 树]
-    D --> F[保留 sizeRef 防止父容器塌陷]
+    subgraph Browser_Window ["用户可见视窗 (Viewport)"]
+        A["[真实的 React 节点] Container"] --> B["[真实的 React 节点] Image"]
+        A --> C["[真实的 React 节点] List"]
+    end
+    
+    subgraph Out_Of_View ["视窗之外的不可见区域"]
+        C -.->|"斩断递归树，卸载真实 DOM"| D("👻 MetaShadow 占位符")
+        D -.->|"保留 sizeRef (width/height)"| E("防止父级容器高度塌陷")
+    end
 ```
 
 - 在 `MetaEditableRenderTree` 中，深度应用了 `useMetaVisibilityState` 技术。
-- 采用 `startTransition` 降级判断优先级。基于底层的 `IntersectionObserver` 监控元素的交叉状态。如果为 `isOutOfView`（不在可视区），就立刻**斩断子树的递归渲染**。
-- 为了防止剔除渲染导致父容器塌陷，利用闭包中的 `sizeRef` 记录退出可视区前的宽高，并用 `MetaShadow` 组件去撑开原本的骨架尺寸。这使得滚动条和内部定位完全不会错乱。
+- 采用 `startTransition` 降级判断优先级。基于底层的 `IntersectionObserver` 监控元素的交叉状态。如果为 `isOutOfView`（不在可视区），就立刻**斩断子树的递归渲染**，这意味着藏在某个超长列表底部的成百上千个复杂组件，在滚出视口的一瞬间就会被彻底卸载。
+- 为了防止剔除渲染导致父容器塌陷，利用闭包中的 `sizeRef` 记录退出可视区前的宽高，并用轻量级的 `MetaShadow` 幽灵组件去撑开原本的物理骨架尺寸。这使得滚动条、绝对定位和 Flex 布局等都完全不会因为 DOM 树的卸载而错乱。
 
 ### 难点 2：极其复杂的协同与撤销重做 (Diff Apply)
 **场景**：多人协同编辑或 Undo/Redo 时，全量替换 Meta 树代价极其高昂，会导致焦点丢失。
