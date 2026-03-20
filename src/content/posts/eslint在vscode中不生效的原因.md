@@ -7,7 +7,7 @@ description: >-
   setting.json里是否有eslint的配...
 tags:
   - Eslint
-category: Eslint
+category: 工程化
 ---
 
 #### 检查是否配置以下内容

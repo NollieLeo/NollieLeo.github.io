@@ -7,7 +7,7 @@ description: >-
 tags:
   - React
   - 面试题
-category: React
+category: 前端框架
 ---
 
 

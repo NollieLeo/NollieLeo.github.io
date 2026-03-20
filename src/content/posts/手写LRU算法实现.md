@@ -6,8 +6,8 @@ description: >-
   它是页面置换算法中的一种，我们先来看一段百度百科的解释。   百度百科：   LRU
   是一种常用的页面置换算法，选择最近最久未使用的页面予以淘汰。该算法赋予每个页面一个访问字段，...
 tags:
-  - Javascript
-category: Javascript
+  - JavaScript
+category: 前端开发
 ---
 
 ## 1.什么是 LRU？

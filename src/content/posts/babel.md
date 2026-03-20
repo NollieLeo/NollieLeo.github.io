@@ -5,8 +5,9 @@ description: >-
   @babel/plugin-transform-runtime  babel官方提供的一个插件，作用是减少冗余的代码。  例如：  class extend
   的语法在转换后会在ES5的代码里头注入_extend辅助函数用于实现继承  这导致每个使用class extend语法的文件都会被注入重复的_...
 tags:
-  - webpack
-category: Babel
+  - Webpack
+  - Babel
+category: 工程化
 ---
 
 

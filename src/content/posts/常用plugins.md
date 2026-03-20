@@ -6,8 +6,9 @@ description: >-
   mini-css-extract-plugin    这个插件将 CSS 提取到单独的文件中。它为每个包含 CSS 的 JS 文件创建一个 CSS
   文件。它支持按需加载 CSS 和 So...
 tags:
-  - webpack
-category: webpack-plugins
+  - Webpack
+  - webpack-plugins
+category: 工程化
 ---
 
 

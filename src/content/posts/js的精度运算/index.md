@@ -5,11 +5,11 @@ description: >-
   前言  0.1 + 0.2 是否等于 0.3 作为一道经典的面试题，已经广外熟知，说起原因，大家能回答出这是浮点数精度问题导致，也能辩证的看待这并非是
   ECMAScript 这门语言的问题，今天就是具体看一下背后的原因。   数字类型  ECMAScript 中的 Number 类型使用 IEEE7...
 tags:
-  - Javascript
+  - JavaScript
   - 浮点数
   - 面试题
   - 精度运算
-category: Javascript
+category: 前端开发
 ---
 
 ## 前言

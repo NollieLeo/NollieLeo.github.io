@@ -6,9 +6,9 @@ description: >-
   inline-block;       position: relative;       width: 220px;       height:
   100px;      ...
 tags:
-  - Css
+  - CSS
   - loading动画
-category: Css
+category: 前端开发
 ---
 
 效果图如下

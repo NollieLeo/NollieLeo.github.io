@@ -6,12 +6,12 @@ description: >-
   setTimeout、setInterval、requestAnimationFrame。最常用的是setTimeout，很多人认为 setTimeout
   是延时多久，那就应该是多久后执行。  其实这个观点是错误的，因为 JS 是单线程执行的，如果前面...
 tags:
-  - Javascript
+  - JavaScript
   - setInterval
   - setTimeout
   - 异步
   - requestAnimationFrame
-category: Javascript
+category: 前端开发
 ---
 
 异步编程当然少不了定时器了，常见的定时器函数有 `setTimeout`、`setInterval`、`requestAnimationFrame`。最常用的是`setTimeout`，很多人认为 `setTimeout` 是延时多久，那就应该是多久后执行。

@@ -9,7 +9,8 @@ tags:
   - 类型转换
   - '=='
   - '==='
-category: Javascript
+  - JavaScript
+category: 前端开发
 ---
 
 

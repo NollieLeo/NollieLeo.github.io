@@ -7,7 +7,8 @@ description: >-
   taskArr)...
 tags:
   - Promise
-category: Javascript
+  - JavaScript
+category: 前端开发
 ---
 
 

@@ -5,9 +5,9 @@ description: >-
   上代码  js  const errorCaptured = async (asyncFunc) = {   try {     const res =
   await asyncFunc();     return [null, res];   } catch (error) {     return...
 tags:
-  - Javascript
+  - JavaScript
   - async await
-category: Javascript
+category: 前端开发
 ---
 
 

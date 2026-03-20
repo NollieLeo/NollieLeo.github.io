@@ -7,9 +7,9 @@ description: >-
   这是直接赋值的情况，不涉及任何拷贝。当改变newArr的时候，由于是同一个引用，arr指向的值...
 tags:
   - 深拷贝与浅拷贝
-  - Javascript
+  - JavaScript
   - 面试题
-category: Javascript
+category: 前端开发
 ---
 
 

@@ -7,11 +7,11 @@ description: >-
   2. 可以传...
 tags:
   - bind
-  - Javascript
+  - JavaScript
   - 面试题
   - 原型
   - 原型链
-category: Javascript
+category: 前端开发
 ---
 
 # 手写bind

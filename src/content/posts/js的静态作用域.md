@@ -6,11 +6,11 @@ description: >-
   作用域是指程序源代码中定义变量的区域    作用域规定了如何查找变量，也就是确定当前执行代码对变量的访问权限。   JavaScript 采用词法...
 tags:
   - 作用域
-  - Javascript
+  - JavaScript
   - 作用域链
   - 执行上下文
   - 面试题
-category: Javascript
+category: 前端开发
 ---
 
 

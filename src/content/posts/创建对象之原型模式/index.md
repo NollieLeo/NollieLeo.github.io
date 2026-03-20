@@ -6,10 +6,10 @@ description: >-
   Person.prototype.name = 'weng'; Person.prototype.age = 23; Person.sayName =
   function(){  ...
 tags:
-  - Javascript
+  - JavaScript
   - 原型模式
   - 面试题
-category: Javascript
+category: 前端开发
 ---
 
 # 原型模式

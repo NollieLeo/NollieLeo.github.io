@@ -10,8 +10,8 @@ tags:
   - 面试题
   - 二叉树
   - 二叉树层序遍历
-  - Javascript
-category: 算法
+  - JavaScript
+category: 计算机基础
 ---
 
 #### [剑指 Offer 32 - II. 从上到下打印二叉树 II](https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof/)

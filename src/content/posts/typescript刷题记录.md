@@ -6,8 +6,8 @@ description: >-
   string; }; function makeCustomer<T extends User(u: T): T {   // Error（TS
   编译器...
 tags:
-  - Typescript
-category: Typescript
+  - TypeScript
+category: 前端开发
 ---
 #  typescript刷题记录
 

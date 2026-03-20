@@ -5,8 +5,8 @@ description: >-
   ts中需要理解的   - any vs unknown  any 表示任意类型，这个类型会逃离 Typescript 的类型检查，和在 Javascript
   中一样，any 类型的变量可以执行任意操作，编译时不会报错。 unknown 也可以表示任意类型，但它同时也告诉 Typescript 开发者...
 tags:
-  - Typescript
-category: Typescript
+  - TypeScript
+category: 前端开发
 ---
 
 ## ts中需要理解的

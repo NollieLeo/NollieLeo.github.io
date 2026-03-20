@@ -6,8 +6,8 @@ description: >-
   TypeScript带来的类型系统以及强大的IDE支持，让前端开发也变得严谨而流畅。但TypeScript不是原生的Javascript代码，需要进行编译才能转换为Javascript代码。  
   tsconfig.json是编译TypeScript的配置文件，对书写TypeScript代码...
 tags:
-  - Typescript
-category: Typescript
+  - TypeScript
+category: 前端开发
 ---
 
 # 解析

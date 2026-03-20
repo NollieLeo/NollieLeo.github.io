@@ -3,10 +3,10 @@ title: 基本数据类型和引用数据类型
 published: 2020-03-16T22:28:09.000Z
 description: "ECMA script中的数据类型\r \r \r \r  1. 基本数据类型\r \r  （undefined，boolean，number，string，null）\r \r 基本数据类型主要是：undefined，boolean，number，string，null。\r \r  1.1 基本数据类型存放在栈中\r..."
 tags:
-  - Javascript
+  - JavaScript
   - ES6
   - 基本数据类型和引用类型
-category: Javascript
+category: 前端开发
 ---
 
 

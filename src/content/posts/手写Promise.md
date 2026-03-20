@@ -6,10 +6,10 @@ description: >-
   "pending";    this.resolveInfo = undefined;   this.rejectInfo = undefined;   
   th...
 tags:
-  - Javascript
+  - JavaScript
   - Promise
   - 面试题
-category: Javascript
+category: 前端开发
 ---
 
 暂未整理，先附上代码

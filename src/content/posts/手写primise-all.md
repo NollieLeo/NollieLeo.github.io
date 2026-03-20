@@ -6,7 +6,8 @@ description: >-
   new Promise((resolve, reject) = {     if (!tasks || !tasks.length) {   ...
 tags:
   - Promise
-category: Javascript
+  - JavaScript
+category: 前端开发
 ---
 
 

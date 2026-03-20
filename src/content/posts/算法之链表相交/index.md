@@ -9,8 +9,8 @@ tags:
   - 算法
   - 面试题
   - 快慢指针
-  - Javascript
-category: 算法
+  - JavaScript
+category: 计算机基础
 ---
 
 面试题 02.07.链表相交

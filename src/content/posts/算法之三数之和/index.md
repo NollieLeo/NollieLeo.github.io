@@ -8,8 +8,8 @@ tags:
   - 算法
   - 面试题
   - 双指针
-  - Javascript
-category: 算法
+  - JavaScript
+category: 计算机基础
 ---
 
 15.三数之和

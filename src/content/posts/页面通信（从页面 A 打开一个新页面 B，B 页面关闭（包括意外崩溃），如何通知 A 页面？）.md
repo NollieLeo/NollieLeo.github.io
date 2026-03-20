@@ -3,11 +3,12 @@ title: 从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃
 published: 2021-05-26T16:23:49.000Z
 description: "从页面 A 打开一个新页面 B，B 页面关闭（包括意外崩溃），如何通知 A 页面？\r \r 首先能够拆解一下这个题意\r \r 1. B手动关闭，如何通知A页面\r 2. B意外关闭，被线程杀死奔溃的时候如何通知A页面\r \r \r \r  1. B页面正常关闭的时候\r \r 1. 首先要回答出页面关闭时会触发的事..."
 tags:
-  - Javascript
+  - JavaScript
   - 面试题
   - onbeforeunload
   - onunload
-category: 面试
+  - 面试
+category: 面试与总结
 ---
 
 

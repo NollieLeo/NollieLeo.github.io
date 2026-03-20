@@ -8,8 +8,8 @@ tags:
   - 栈
   - 算法
   - 面试题
-  - Javascript
-category: Javascript
+  - JavaScript
+category: 前端开发
 ---
 
 

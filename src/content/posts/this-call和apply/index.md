@@ -6,10 +6,10 @@ description: >-
   总是指向一个对象，而具体指向哪个对象是在运行时基于函数的执行环境动态绑定的，而非函数被声明时的环境   1.1 this指向  - 作为对象方法调用 -
   作为普通函数调用 - 构造器调用 - Function...
 tags:
-  - Javascript
+  - JavaScript
   - call
   - apply
-category: Javascript
+category: 前端开发
 ---
 
 # this, call 和apply

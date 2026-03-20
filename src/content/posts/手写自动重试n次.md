@@ -5,8 +5,8 @@ description: >-
   请求失败的时候自动重试，这里默认2次重试  js function retry(promiseFn, times = 2) {   let count =
   0;    function handleRetry(res, rej) {     return new Promise((resolve =...
 tags:
-  - Javascript
-category: Javascript
+  - JavaScript
+category: 前端开发
 ---
 
 请求失败的时候自动重试，这里默认2次重试

@@ -7,8 +7,8 @@ description: >-
   弹性尺寸使用fr尺寸单位，其来自 “fract...
 tags:
   - grid
-  - Css
-category: Css
+  - CSS
+category: 前端开发
 ---
 
 在网格布局中的运用

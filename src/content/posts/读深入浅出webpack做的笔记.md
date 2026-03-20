@@ -5,7 +5,8 @@ description: 第一章   1.2 常见构建工具对比...
 tags:
   - 书籍
   - 深入浅出webpack
-category: webpack
+  - Webpack
+category: 工程化
 ---
 
 ## 第一章

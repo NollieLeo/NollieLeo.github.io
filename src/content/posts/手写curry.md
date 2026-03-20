@@ -6,8 +6,8 @@ description: >-
   const a2 = a1(2); console.log(a2(3)) // 6     js // curry pro function curr...
 tags:
   - curry
-  - Javascript
-category: Javascript
+  - JavaScript
+category: 前端开发
 ---
 
 要求实现如下

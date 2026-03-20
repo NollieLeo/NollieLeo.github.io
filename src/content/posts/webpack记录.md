@@ -6,8 +6,8 @@ description: >-
   webpack-dev-server  将 webpack 与提供实时重新加载的开发服务器一起使用。这应该仅用于开发。它在底层使用
   webpack-dev-middl...
 tags:
-  - webpack
-category: webpack
+  - Webpack
+category: 工程化
 ---
 
 

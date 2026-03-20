@@ -7,7 +7,8 @@ description: >-
   Webkit...
 tags:
   - 浏览器相关
-category: 浏览器
+  - 浏览器
+category: 计算机基础
 ---
 
 # 浏览器的渲染过程

@@ -7,8 +7,8 @@ description: >-
   一个块格式化上下文（block formatting contex...
 tags:
   - BFC
-  - Css
-category: Css
+  - CSS
+category: 前端开发
 ---
 
 [参考文章](https://www.jianshu.com/p/0d713b32cd0d)

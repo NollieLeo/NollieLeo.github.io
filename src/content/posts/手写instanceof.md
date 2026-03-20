@@ -5,12 +5,12 @@ description: >-
   手写instanceof   instanceof 运算符用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上。   原理 
   instanceof 运算符用来检测 constructor.prototype 是否存在于参数 object 的原型链上。  就是找对象原型链上是否...
 tags:
-  - Javascript
+  - JavaScript
   - 原型
   - 原型链
   - instanceof
   - 面试题
-category: Javascript
+category: 前端开发
 ---
 
 # 手写instanceof

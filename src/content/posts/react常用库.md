@@ -8,7 +8,7 @@ description: >-
 tags:
   - Npm
   - React
-category: React
+category: 前端框架
 ---
 
 1. [griddle-react](https://github.com/GriddleGriddle/Griddle)

@@ -5,8 +5,8 @@ description: >-
   用css如何画一个三角形？  html <style     div {       width: 0;       height: 0;      
   border-top: 10px solid green;       border-bottom: 10px solid transparent;...
 tags:
-  - Css
-category: Css
+  - CSS
+category: 前端开发
 ---
 
 ## 用css如何画一个三角形？

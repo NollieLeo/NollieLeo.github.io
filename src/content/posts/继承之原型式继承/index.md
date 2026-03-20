@@ -6,12 +6,12 @@ description: >-
   就仍然是为了实现对象之间的信息共享  目标函数如下  js function object(o){     function F(){}    
   F.prototy...
 tags:
-  - Javascript
+  - JavaScript
   - 继承
   - 原型式继承
   - 原型
   - 原型链
-category: Javascript
+category: 前端开发
 ---
 
 # 原型式继承

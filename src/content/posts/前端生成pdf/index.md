@@ -6,9 +6,9 @@ description: >-
   原理：通过插件js-pdf以及一个html2canvas插件结合，首先通过 html2canvas
   可以在浏览器端直接对整个或部分页面进行截屏。脚本通过读取DOM并将不同的样式应用...
 tags:
-  - Javascript
+  - JavaScript
   - PDF
-category: Javascript
+category: 前端开发
 ---
 
 项目上要求，能够根据页面上所展示的测试报告，生成一份pdf。

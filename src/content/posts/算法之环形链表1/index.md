@@ -10,8 +10,8 @@ tags:
   - 环形链表
   - 算法
   - 面试题
-  - Javascript
-category: 算法
+  - JavaScript
+category: 计算机基础
 ---
 
 

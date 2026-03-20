@@ -3,8 +3,8 @@ title: 30-seconds-of-js
 published: 2020-07-24T14:07:43.000Z
 description: "方法\r  - 对象转queryStrings\r \r 通过Object.entries以及reduce进行queryString的累加，只能将对象中值为string的转进去，可以改进\r \r javascript\r const objectToQuerystring = (queryParams) = ..."
 tags:
-  - Javascript
-category: Javascript
+  - JavaScript
+category: 前端开发
 ---
 
 

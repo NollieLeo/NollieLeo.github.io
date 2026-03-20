@@ -7,8 +7,8 @@ description: >-
   receiver) {  ...
 tags:
   - proxy
-  - Javascript
-category: Javascript
+  - JavaScript
+category: 前端开发
 ---
 
 

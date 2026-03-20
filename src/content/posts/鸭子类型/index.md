@@ -8,7 +8,8 @@ description: >-
 tags:
   - 设计模式
   - 鸭子类型
-category: Javascript
+  - JavaScript
+category: 前端开发
 ---
 
 我们可以通过一个小故事来更深刻地了解鸭子类型。

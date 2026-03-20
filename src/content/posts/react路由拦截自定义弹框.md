@@ -5,7 +5,7 @@ description: >-
   https://medium.com/@michaelchan_13570/using-react-router-v4-prompt-with-custom-modal-component-ca839f5faf39...
 tags:
   - React-router
-category: React-router
+category: 前端框架
 ---
 
  https://medium.com/@michaelchan_13570/using-react-router-v4-prompt-with-custom-modal-component-ca839f5faf39 

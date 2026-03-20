@@ -6,10 +6,10 @@ description: >-
   接受4个参数，指定URL，目标窗口（名字），特性字符串，表示新窗口在浏览器历史记录中是否替代当前加载页面的布尔值（一般在不打开新窗口的时候使用）  js
   window.open("https:/...
 tags:
-  - Javascript
+  - JavaScript
   - window.open
   - 导航
-category: Javascript
+category: 前端开发
 ---
 
 

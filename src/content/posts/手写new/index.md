@@ -7,10 +7,10 @@ description: >-
   执行构造函数中的代码(为这个新对象添加属性和方法); ...
 tags:
   - new
-  - Javascript
+  - JavaScript
   - 构造函数
   - 面试题
-category: Javascript
+category: 前端开发
 ---
 
 

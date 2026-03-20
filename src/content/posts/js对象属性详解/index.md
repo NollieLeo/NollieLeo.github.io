@@ -5,9 +5,9 @@ description: >-
   ECMA-262使用一些内部特性来描述属性的特征。这些特征是由为js实现引擎的规范定义的，开发者在js中不能直接访问这些特性，描述内部特性，一般会把这个特性括起来类似这样[[Enumerable]]  
   属性的类型  属性分两种   1. 数据属性 2. 访问器属性   1. 数据属性  数值属性包...
 tags:
-  - Javascript
+  - JavaScript
   - object
-category: Javascript
+category: 前端开发
 ---
 
 

@@ -10,8 +10,8 @@ tags:
   - 算法
   - 面试题
   - 环形链表
-  - Javascript
-category: 算法
+  - JavaScript
+category: 计算机基础
 ---
 
 202.快乐数

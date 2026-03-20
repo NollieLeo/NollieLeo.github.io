@@ -10,8 +10,8 @@ tags:
   - 二叉树
   - 算法
   - 面试
-  - Javascript
-category: 算法
+  - JavaScript
+category: 计算机基础
 ---
 
 #### [450. 删除二叉搜索树中的节点](https://leetcode-cn.com/problems/delete-node-in-a-bst/)

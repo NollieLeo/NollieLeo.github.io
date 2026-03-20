@@ -6,8 +6,8 @@ description: >-
   按照这个步骤配置完会生成一个.vscode文件夹下面有个launch.json文件      然后替换它  js {   "version": "0....
 tags:
   - webpack-loader
-  - webpack
-category: webpack-loader
+  - Webpack
+category: 工程化
 ---
 
 ## 调试loader

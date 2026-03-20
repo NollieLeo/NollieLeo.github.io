@@ -9,9 +9,9 @@ tags:
   - 闭包
   - 作用域
   - 作用域链
-  - Javascript
+  - JavaScript
   - 面试题
-category: Javascript
+category: 前端开发
 ---
 
 ## 定义

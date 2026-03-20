@@ -7,7 +7,7 @@ description: >-
   ...
 tags:
   - Bug
-category: Bug
+category: 踩坑记录
 ---
 
 

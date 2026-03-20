@@ -9,8 +9,8 @@ tags:
   - 算法
   - 面试题
   - 滑动窗口
-  - Javascript
-category: 算法
+  - JavaScript
+category: 计算机基础
 ---
 
 

@@ -9,8 +9,8 @@ tags:
   - 链表
   - 算法
   - 快慢指针
-  - Javascript
-category: 算法
+  - JavaScript
+category: 计算机基础
 ---
 
 19.给你一个链表，删除链表的倒数第 `n` 个结点，并且返回链表的头结点。

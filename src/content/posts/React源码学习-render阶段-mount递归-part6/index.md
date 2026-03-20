@@ -8,7 +8,7 @@ description: >-
 tags:
   - React
   - React render
-category: React
+category: 前端框架
 ---
 
 > 这里说一下 mount时候的beginWork和completeWork的流程吧

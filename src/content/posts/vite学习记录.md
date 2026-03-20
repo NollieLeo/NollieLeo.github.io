@@ -7,7 +7,7 @@ description: >-
   初始化模板   这里我们采用pnpm和vite，当...
 tags:
   - Vite
-category: Vite
+category: 工程化
 ---
 
 # vite前置知识

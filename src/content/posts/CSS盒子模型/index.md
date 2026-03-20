@@ -6,9 +6,9 @@ description: >-
   400px;       border: 5px solid ccc;       background-color: aqua;      
   padd...
 tags:
-  - Css
+  - CSS
   - 盒子模型
-category: Css
+category: 前端开发
 ---
 
 # css盒子模型

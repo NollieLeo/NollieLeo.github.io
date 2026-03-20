@@ -5,9 +5,9 @@ description: >-
   如题 用 js 实现英文字母大小写的切换，也就是将字符串中的大写字母变成小写，小写字母变成大小。 示例：'123aBc' = '123AbC'  直接用
   ASCII 码来做  js  function switchLetterCase2(s) {   let res = "";    s.split...
 tags:
-  - Javascript
+  - JavaScript
   - ASCII
-category: Javascript
+category: 前端开发
 ---
 
 如题

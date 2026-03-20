@@ -5,10 +5,10 @@ description: >-
   在项目上开发的时候碰到了一个这样的需求   
   每一个操作记录都是动态创建出来的，包括文本域，后端返回一个content表示文本的内容；每个文本都是定宽的（当然必须在这个容器内部），一旦content数据超出了文本域的定宽就会以省略号的形式表示还有更多文本，并且重点来了：超出的每个模块必须在头部展现出...
 tags:
-  - Javascript
+  - JavaScript
   - useEffect
   - React Hooks
-category: Javascript
+category: 前端开发
 ---
 
 在项目上开发的时候碰到了一个这样的需求

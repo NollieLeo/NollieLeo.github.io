@@ -5,13 +5,13 @@ description: >-
   组合继承（伪经典继承）  组合继承综合了原型链和盗用构造函数，将两者的优点集中起来了。  基本思路是：  1. 使用原型链继承原型上的属性和方法  2.
   再通过盗用构造函数继承实例属性    如下例子：  js function SuperType(name){     this.name = na...
 tags:
-  - Javascript
+  - JavaScript
   - 继承
   - 组合式继承
   - 原型
   - 原型链
   - 构造函数
-category: Javascript
+category: 前端开发
 ---
 
 # 组合继承（伪经典继承）

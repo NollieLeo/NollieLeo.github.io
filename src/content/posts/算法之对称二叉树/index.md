@@ -10,8 +10,8 @@ tags:
   - 二叉树
   - 算法
   - 面试题
-  - Javascript
-category: 算法
+  - JavaScript
+category: 计算机基础
 ---
 
 #### [剑指 Offer 28. 对称的二叉树](https://leetcode-cn.com/problems/dui-cheng-de-er-cha-shu-lcof/)

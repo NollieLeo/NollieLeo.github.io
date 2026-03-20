@@ -6,9 +6,9 @@ description: >-
   设置外层块元素的height，line-height为相同的值  适用范围：作用于单行为文字，使文字垂直居中显示 
   原理：line-height与font-size的计算之差（在css中成为“行间距...
 tags:
-  - Css
+  - CSS
   - 垂直居中
-category: Css
+category: 前端开发
 ---
 
 在阅读此文章之前要搞明白行内元素和块级元素的区别，和其常用的标签

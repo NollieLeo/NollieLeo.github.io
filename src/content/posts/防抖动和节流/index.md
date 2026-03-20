@@ -7,8 +7,8 @@ description: >-
 tags:
   - 防抖动
   - 节流
-  - Javascript
-category: Javascript
+  - JavaScript
+category: 前端开发
 ---
 **场景：**
 

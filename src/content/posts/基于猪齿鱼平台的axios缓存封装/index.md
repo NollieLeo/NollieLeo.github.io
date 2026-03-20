@@ -7,8 +7,8 @@ description: >-
   这个页面相当于是历史的执行记录，因为数据量庞...
 tags:
   - Axios
-  - Javascript
-category: Javascript
+  - JavaScript
+category: 前端开发
 ---
 
 ## 需求说明

@@ -5,8 +5,9 @@ description: >-
   1.node自带模块fs文件管理     1.1 readdir和readdirSync的区别   两者都用与读取文件或者文件夹里的文件有啥  --- 
   fs.readdir(path[, options], callback)异步函数，需要传入一个回调  - path <string <buffe...
 tags:
-  - nodeJS
-category: 后端
+  - Node.js
+  - 后端
+category: 计算机基础
 ---
 
 ### 1.node自带模块fs文件管理

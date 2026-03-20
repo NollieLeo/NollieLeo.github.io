@@ -5,9 +5,9 @@ description: >-
   海量数据优化-时间分片  时间分片的概念，就是一次性渲染大量数据，初始化的时候会出现卡顿等现象。我们必须要明白的一个道理，js执行永远要比dom渲染快的多。
   ，所以对于大量的数据，一次性渲染，容易造成卡顿，卡死的情况。我们先来看一下例子  ./Content.tsx  jsx import { Bu...
 tags:
-  - Javascript
+  - JavaScript
   - 大数据处理
-category: Javascript
+category: 前端开发
 ---
 
 ## 海量数据优化-时间分片

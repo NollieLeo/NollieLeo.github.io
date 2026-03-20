@@ -10,8 +10,8 @@ tags:
   - 环形链表
   - 面试题
   - 哈希表
-  - Javascript
-category: 算法
+  - JavaScript
+category: 计算机基础
 ---
 
 

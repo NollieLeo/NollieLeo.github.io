@@ -7,10 +7,10 @@ description: >-
 tags:
   - 执行上下文
   - 执行上下文栈
-  - Javascript
+  - JavaScript
   - 作用域
   - 面试题
-category: Javascript
+category: 前端开发
 ---
 
 # js的执行上下文以及执行上下文栈

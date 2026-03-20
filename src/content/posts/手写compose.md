@@ -7,8 +7,8 @@ description: >-
   compose在函数式编程中是一...
 tags:
   - compose
-  - Javascript
-category: Javascript
+  - JavaScript
+category: 前端开发
 ---
 
 ## compose简介

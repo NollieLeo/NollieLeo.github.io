@@ -8,8 +8,8 @@ tags:
   - 二叉树
   - 算法
   - 面试题
-  - Javascript
-category: 算法
+  - JavaScript
+category: 计算机基础
 ---
 
 #### [剑指 Offer 07. 重建二叉树](https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/)

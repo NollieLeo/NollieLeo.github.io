@@ -5,9 +5,9 @@ description: >-
   ES6有6中 简单数据类型（原始类型）和一种复杂数据类型   简单：Undifined, Null, Boolean, Number, String,
   Symbol   复杂：object  所有的值都可以用以上7种来表示   typeof操作符  ES的类型系统是松散的，typeof可以确定任意变...
 tags:
-  - Javascript
+  - JavaScript
   - typeOf
-category: Javascript
+category: 前端开发
 ---
 
 > ES6有6中 **简单数据类型**（**原始类型**）和一种复杂数据类型

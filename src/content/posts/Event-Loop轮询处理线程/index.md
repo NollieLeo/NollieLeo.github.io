@@ -10,7 +10,7 @@ tags:
   - 进程和线程
   - 浏览器
   - js引擎
-category: 浏览器
+category: 计算机基础
 ---
 
 首先要明白， 

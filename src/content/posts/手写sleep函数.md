@@ -5,8 +5,8 @@ description: >-
   手动实现一个 sleep 函数   通过 while 实现  js function sleep(time) {   const startTime =
   Date.now();    while (Date.now() - startTime < time) {     continue;   } ...
 tags:
-  - Javascript
-category: Javascript
+  - JavaScript
+category: 前端开发
 ---
 
 手动实现一个 sleep 函数

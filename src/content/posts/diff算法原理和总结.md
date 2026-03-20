@@ -9,7 +9,7 @@ tags:
   - diff
   - Vue
   - React
-category: Vue
+category: 前端框架
 ---
 
 > 这里举例采用 vue 的框架设计进行解释 diff

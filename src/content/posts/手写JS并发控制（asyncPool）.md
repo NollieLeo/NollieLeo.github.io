@@ -8,7 +8,8 @@ tags:
   - Primise
   - Primise all
   - Primise race
-category: Javascript
+  - JavaScript
+category: 前端开发
 ---
 
 

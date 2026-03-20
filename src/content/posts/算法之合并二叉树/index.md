@@ -10,8 +10,8 @@ tags:
   - 二叉树
   - 合并二叉树
   - 面试题
-  - Javascript
-category: 算法
+  - JavaScript
+category: 计算机基础
 ---
 
 #### [617. 合并二叉树](https://leetcode-cn.com/problems/merge-two-binary-trees/)

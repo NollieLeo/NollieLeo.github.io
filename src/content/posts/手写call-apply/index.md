@@ -7,9 +7,9 @@ description: >-
 tags:
   - call
   - apply
-  - Javascript
+  - JavaScript
   - 面试题
-category: Javascript
+category: 前端开发
 ---
 
 # 手写call，apply

@@ -9,8 +9,8 @@ tags:
   - 算法
   - 滑动窗口
   - 哈希表
-  - Javascript
-category: 算法
+  - JavaScript
+category: 计算机基础
 ---
 
 #### [3. 无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)

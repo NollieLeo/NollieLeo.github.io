@@ -5,9 +5,9 @@ description: >-
   手写篇              7.     数据类型  1. js有哪些数据类型 2. js有哪些内置对象 3. 数据类型的检测方式（typeof,
   intanceof, Object.prototype.toString三者区分） 4. null， undefined区别 5. 0.1+0.2...
 tags:
-  - Javascript
+  - JavaScript
   - 面试题
-category: Javascript
+category: 前端开发
 ---
 
 

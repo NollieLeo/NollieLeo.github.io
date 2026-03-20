@@ -9,7 +9,8 @@ tags:
   - Reflect
   - 响应式
   - Vue
-category: Javascript
+  - JavaScript
+category: 前端开发
 ---
 
 # 理解Proxy

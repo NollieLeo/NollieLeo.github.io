@@ -5,8 +5,8 @@ description: >-
   就如下:  js function urlHandler(url) {   const idx = url.indexOf("?");    let
   result = {};    if (idx  -1) {     const params = url.slice(idx + 1).split(...
 tags:
-  - Javascript
-category: Javascript
+  - JavaScript
+category: 前端开发
 ---
 
 就如下:

@@ -6,8 +6,8 @@ description: >-
   (taskArr) {   return new Promise((resolve, reject) = {     const result ...
 tags:
   - Promise
-  - Javascript
-category: Javascript
+  - JavaScript
+category: 前端开发
 ---
 
 

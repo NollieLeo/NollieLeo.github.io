@@ -3,9 +3,9 @@ title: 'var, let, const声明变量'
 published: 2021-03-14T15:39:55.000Z
 description: "ECMAscript中变量是松散类型的，意思就是可以用于保存任何类型的数据   有3个关键字可以声明变量 var, const, let   var 在所有版本ECMAscript中都能用，let const只能在ES6中使用   var 关键字  js var a = 11212\t    1. v..."
 tags:
-  - Javascript
+  - JavaScript
   - 变量
-category: Javascript
+category: 前端开发
 ---
 
 > ECMAscript中变量是松散类型的，意思就是可以用于保存任何类型的数据

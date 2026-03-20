@@ -6,7 +6,8 @@ description: >-
   一个数字，规定项目将相对于其他灵活的项目进行扩展的量（放大属性） - flex-shrink 一个数字，规定项目将相对于其他灵活的项目进行收缩的量（...
 tags:
   - flex
-category: Css
+  - CSS
+category: 前端开发
 ---
 
 # Flex 3个属性详解

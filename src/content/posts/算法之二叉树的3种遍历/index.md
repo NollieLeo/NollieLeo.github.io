@@ -12,8 +12,8 @@ tags:
   - 迭代
   - 面试题
   - 算法
-  - Javascript
-category: 算法
+  - JavaScript
+category: 计算机基础
 ---
 
 ## 一. 前序遍历（中左右）

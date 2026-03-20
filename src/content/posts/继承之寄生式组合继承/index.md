@@ -6,14 +6,14 @@ description: >-
   本质上，子类原型最终式要包含超类的所有实例属性，子类的构造函数只要在执行适合重写原型就行了  再看看组合式继承的例子  js function
   SuperType(name){     this.name = ...
 tags:
-  - Javascript
+  - JavaScript
   - 继承
   - 组合式继承
   - 寄生式组合继承
   - 原型
   - 原型链
   - 构造函数
-category: Javascript
+category: 前端开发
 ---
 
 # 寄生式组合继承

@@ -6,10 +6,10 @@ description: >-
   属性含义                                     |
   属性可能的值                                               ...
 tags:
-  - Css
+  - CSS
   - flex
   - grid
-category: Css
+category: 前端开发
 ---
 
 ## flex布局深入了解

@@ -10,7 +10,8 @@ tags:
   - 事件循环
   - 浏览器
   - Event Loop
-category: Javascript
+  - JavaScript
+category: 前端开发
 ---
 
 ### 宏任务(macrotask)

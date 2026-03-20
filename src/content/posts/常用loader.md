@@ -6,9 +6,9 @@ description: >-
   webpack识别不了css的代码，所以需要一个css-loader去加载css的文件     style-loader   
   将css（以字符串形式）注入到js的代码当中（相当于做了存储），不会额外生成一个C...
 tags:
-  - webpack
+  - Webpack
   - webpack-loader
-category: webpack-loader
+category: 工程化
 ---
 
 以下讲的都是针对webpack5版本的
