@@ -262,6 +262,16 @@ const draggableOrigin = useMemo(() => {
 ### 难点 1：巨型 DOM 树下的渲染性能 (Visibility Optimization)
 **场景**：当用户搭建了上千个组件，画布渲染将变得极其卡顿，拖拽也会存在巨大的延迟。
 **解法**：**视口外节点裁剪（虚拟化画布）**。
+
+```mermaid
+graph TD
+    A[滚动或拖拽事件] --> B[IntersectionObserver 检测交叉状态]
+    B --> C{是否在可视区域内 isOutOfView?}
+    C -- Yes --> D[截断递归，渲染 MetaShadow 占位符]
+    C -- No --> E[正常递归渲染真实 DOM 树]
+    D --> F[保留 sizeRef 防止父容器塌陷]
+```
+
 - 在 `MetaEditableRenderTree` 中，深度应用了 `useMetaVisibilityState` 技术。
 - 采用 `startTransition` 降级判断优先级。基于底层的 `IntersectionObserver` 监控元素的交叉状态。如果为 `isOutOfView`（不在可视区），就立刻**斩断子树的递归渲染**。
 - 为了防止剔除渲染导致父容器塌陷，利用闭包中的 `sizeRef` 记录退出可视区前的宽高，并用 `MetaShadow` 组件去撑开原本的骨架尺寸。这使得滚动条和内部定位完全不会错乱。
@@ -269,6 +279,16 @@ const draggableOrigin = useMemo(() => {
 ### 难点 2：极其复杂的协同与撤销重做 (Diff Apply)
 **场景**：多人协同编辑或 Undo/Redo 时，全量替换 Meta 树代价极其高昂，会导致焦点丢失。
 **解法**：**细粒度 Diff 补丁分发机制 (`useDiffApply`)**。
+
+```mermaid
+graph LR
+    A[协同事件 / Undo指令] --> B(解析 Diff 快照 operation: 'add')
+    B --> C[useAddOrDeleteComponentDiffApply]
+    C --> D[useTranspile 转译为 Meta]
+    D --> E[MobX Transaction 开启]
+    E --> F[定点更新 CanvasStore.metas]
+```
+
 - 单独抽象了 `useDiffApply` 机制作为增量构建引擎。服务端传入的并非整棵树，而是属性操作快照（如 `operation: 'add'`）。
 
 **基于 MobX 事务的无闪烁补丁机制**：
@@ -296,25 +316,73 @@ case 'add': {
 ### 难点 3：多维度灾难恢复机制 (Crash Recovery)
 **场景**：浏览器内存溢出（OOM）或网络异常退出，会导致用户数小时心血付之东流。
 **解法**：**低廉成本的本地快照容灾**。
+
+```mermaid
+graph TD
+    A(编辑画布中) -.静默.-> B[useRecoveryRecord 定时防抖备份]
+    B --> C[序列化关键状态 metas/viewport]
+    C --> D[(写入 IndexedDB / LocalStorage)]
+    E[异常崩溃 / 重新打开页面] --> F[RecoveryMonitor 挂载]
+    F --> G{检测到新于服务端的快照碎片?}
+    G -- Yes --> H[弹窗提示用户无缝重载恢复]
+```
+
 - 采用了 `useRecoveryRecord` 机制，这套代码深埋在核心链路外。
 - 以极低的性能损耗，通过 `ahooks` 的 `useLocalStorageState` 定期对关键状态（Metas、Viewport等）序列化并写入 LocalStorage。
 - 重启时平台通过 `RecoveryMonitor` 捕获上次遗留的数据碎片，并无缝重载恢复。
 
+**定时快照备份示例：**
+```typescript
+const [localRecord, setLocalRecord] = useLocalStorageState('CANVAS_RECOVERY_DATA', { defaultValue: null });
+
+useDebounceEffect(() => {
+  if (!isCanvasDirty) return;
+  // 在帧空闲时执行深度序列化，避免阻塞主线程交互
+  const snapshot = serializeCanvasState(canvasStore);
+  setLocalRecord({ timestamp: Date.now(), data: snapshot });
+}, [canvasStore.metas], { wait: 5000 });
+```
+
 ### 难点 4：拖拽的自由度与严谨性 (DnD Collision & Insert Target)
 **场景**：组件间嵌套规则复杂（如模态框内不允许插入页面组件），需要灵活处理 Drop 边界与精准高亮框。
 **解法**：**极致解耦的碰撞算法引擎**。
+
+```mermaid
+graph TD
+    A[拖拽移动 DragMove] --> B{DnD Context 碰撞检测}
+    B -->|收集指针下方所有相交的 Dataset ID| C(过滤非法父级白名单)
+    C --> D(获取合法容器 containerId)
+    D --> E[useInsertTarget 落点算法计算]
+    E --> F{判定位置坐标区间}
+    F -- 靠上/左 --> G[INSERT_BEFORE]
+    F -- 居中 --> H[INSERT_INNER]
+    F -- 靠下/右 --> I[INSERT_AFTER]
+    G & H & I --> J[更新 Store dispatch 并渲染辅助线]
+```
+
 - 拖拽事件 `Listeners` 完全与业务组件解耦。组件仅仅透传自身的 `id`，真正的碰撞检测（Collision Detection）由顶层的 `DndContextWrapper` 统一代理结算。
 - `useInsertTarget` 预计算落点（基于鼠标指针矩阵的偏移量计算出上插、下插、内嵌），实时派发事件渲染 `DropHighlight` 或特定的虚线占位符。这保证了底层组件依然纯净无副作用，拖拽体感极其丝滑严谨。
 
-**拖拽锚点挂载代码:**
+**碰撞检测与锚点挂载代码:**
 ```typescript
-// Meta.ts: 生成锚点信息用于碰撞反查
+// 1. Meta.ts: 生成锚点信息用于碰撞反查
 export const genMetaDataSet = (metaId: string, type: Meta['type']) => {
   return {
     'data-meta-id': metaId,
     'data-meta-type': type,
   };
 };
+
+// 2. 算法核心：结合当前指针位置与容器盒模型计算精准落点
+export function calculateInsertTarget(pointerY: number, containerRect: DOMRect) {
+  const { top, height } = containerRect;
+  // 如果处于容器上部20%区域 -> 前插
+  if (pointerY < top + height * 0.2) return InsertPosition.BEFORE;
+  // 处于中间60%区域 -> 内嵌
+  if (pointerY < top + height * 0.8) return InsertPosition.INNER;
+  // 处于下部20%区域 -> 后插
+  return InsertPosition.AFTER;
+}
 ```
 
 ---
