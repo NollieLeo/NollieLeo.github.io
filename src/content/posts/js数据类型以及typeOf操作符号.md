@@ -168,7 +168,7 @@ if(0.1 + 0.2==0.3){
 
 该函数会将传入得值尝试去转换为数值，任何不能转换为数值得值都会导致这个函数返回true
 
-``` JS
+```javascript
 isNaN(NaN) // true
 isNaN(10) // false
 isNaN('10') // false
