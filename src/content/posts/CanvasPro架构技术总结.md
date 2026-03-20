@@ -23,42 +23,45 @@ tags:
 
 CanvasPro 的整体架构在设计上遵循 **状态与视图解耦**、**按需渲染**、**事件驱动分层** 的理念。
 
+为了更清晰地展示庞大的架构体系，以下分别呈现“状态-渲染核心流”与“外围辅助与控制流”两张图解：
+
+### 1.1 核心数据与渲染管道
 ```mermaid
-graph TD
-    subgraph State_Management ["核心数据层 (State Management)"]
-        A["CanvasStore (MobX)"] -->|"依赖"| B("扁平化组件树 metas")
-        A -->|"依赖"| C("断点记录 breakpointRecord")
-        A -->|"管理"| D("状态突变 CanvasAction")
-        A -->|"存储"| E("画板路由栈 boardsRecord")
+graph TB
+    subgraph State_Management ["数据层 (State Management)"]
+        direction TB
+        A["CanvasStore (MobX)"] -->|"扁平化存储"| B("metas: Record<ID, Meta>")
+        A -->|"路由状态"| C("boardsRecord 路由栈")
+        A -->|"派生与变异"| D("CanvasAction 接口")
     end
 
-    subgraph Render_Engine ["渲染引擎层 (Render Engine)"]
-        F["MetaRenderTree"] --> G{"递归解析与按需渲染"}
-        G -->|"编辑态"| H["MetaEditableRenderTree"]
-        G -->|"预览态"| I["MetaPreviewRenderTree"]
-        H -.监听.-> B
-        H -->|"异常隔离"| J["CanvasErrorBoundary"]
+    subgraph Render_Engine ["渲染引擎 (Render Engine)"]
+        direction TB
+        E["MetaRenderTree"] -->|"递归入口"| F{"按需解析"}
+        F -->|"编辑态"| G["MetaEditableRenderTree"]
+        F -->|"预览态"| H["MetaPreviewRenderTree"]
+        G -.精确订阅.-> B
+        G -->|"异常隔离"| J["CanvasErrorBoundary"]
     end
 
-    subgraph Viewport_Event ["无限画布与事件层 (Viewport & Event)"]
-        K["react-infinite-viewer"] --> L("缩放与平移矩阵")
-        M["CanvasEventEmitter"] -->|"分发"| N["DOM Transform 直接修改"]
-        M -.绕过 React Diff.-> L
-        O["GlobalEventMonitor"] -->|"拦截"| M
-        P["ShortcutMonitor"] -->|"触发快捷键"| M
+    A -.- E
+```
+
+### 1.2 视口事件与拖拽碰撞体系
+```mermaid
+graph TB
+    subgraph Viewport_Event ["无限画布与事件层 (Viewport)"]
+        direction LR
+        K["react-infinite-viewer"] --> L("Transform 偏移矩阵")
+        M["CanvasEventEmitter"] -->|"无状态分发"| L
+        O["GlobalEventMonitor"] -->|"统一拦截"| M
     end
 
-    subgraph DnD_Engine ["拖拽与碰撞层 (DnD Engine)"]
-        Q["DndContextWrapper"] --> R("碰撞检测算法 Collision Detection")
-        R --> S("useInsertTarget 落点预计算")
-        S --> T["DOM 高亮与辅助线指示"]
-        H -->|"注入 Draggable/Droppable"| Q
-    end
-
-    subgraph Auxiliary_System ["辅助与外围系统"]
-        U["RecoveryMonitor"] -.定时快照.-> B
-        V["ContextMenus (右键菜单)"] -.操作.-> D
-        W["Tools Overlay (悬浮框选层)"] -.读取.-> B
+    subgraph DnD_Engine ["拖拽引擎 (DnD Engine)"]
+        direction LR
+        Q["DndContextWrapper"] --> R("碰撞检测 (Collision Detection)")
+        R --> S("useInsertTarget 计算落点")
+        S --> T["触发 DOM 高亮占位"]
     end
 ```
 
@@ -79,10 +82,19 @@ graph TD
 - **平面化存储 (Flattening)**：组件树被扁平化，以 `id` 为键存放在 `Record<Meta['id'], Meta>` (`metas`) 中，彻底避免了深度嵌套引发的更新困难。
 - **精确粒度订阅 (Granular Reactivity)**：结合底层通用的 `memoWithObserver` 高阶组件。通过闭包按需读取具体的 Meta 数据，只有当该 Meta 对应的数据变更时，才会触发对应 DOM 的 Re-render。
 
+**平面化存储查询示例：**
+```typescript
+export interface CanvasComputedState {
+  metaKeys: Array<Meta['id']>;
+  // O(1) 复杂度的组件反查字典
+  metaByComponentId: Record<Component['id'], Record<string, Meta>>;
+}
+```
+
 ### 2.2 渲染树引擎 (MetaRenderTree & Hooks)
 渲染树是画布的“血肉”。入口通过传入 `rootId` 开始，进行组件级别的递归渲染。
 
-**引擎层渲染策略与虚拟化伪代码示例：**
+**引擎层渲染策略与可视区裁剪（虚拟化）伪代码：**
 ```tsx
 const childTrees = useMemo(() => {
   if (!childMetas || !childMetas.length) {
@@ -100,6 +112,7 @@ const showShadow = useMemo(() => {
 }, [isOutOfView, isForceVisible]);
 
 if (showShadow) {
+  // 退化渲染以保证滚动条高度不塌陷
   return <MetaShadow size={sizeRef.current} />;
 }
 ```
@@ -107,48 +120,108 @@ if (showShadow) {
 ### 2.3 无限视口与高性能事件 (Viewport & EventEmitter)
 画布场景下，缩放和平移是最高频的操作。如果在这一层频繁修改 React State，会导致整个画布（几千个节点）进入 Diff 流程。
 
-**完全绕过 VDOM 的处理思路**：
+**完全绕过 VDOM 的高性能处理方案**：
 ```typescript
 // 触发缩放时，不调用 setState，而是通过全局单例的 EventBus 抛出
 const onZoomIn = useCallback(() => {
   const newZoom = getViewportLegalZoom(curZoom + rate);
-  // 这里直接操作闭包事件，原生修改 DOM Transform！
+  // 这里直接操作单例事件总线，原生修改 DOM Transform，彻底切断 React Render 管线！
   CanvasEventEmitter.emit(CanvasEmitterEventType.VIEWPORT_SET_ZOOM, newZoom);
 }, []);
 ```
 - 通过 `CanvasEventEmitter.emit` 分发事件，单例闭包直接截获并修改底层节点 Transform 矩阵，保障了 60fps 的交互体验。
 
 ### 2.4 独立的高亮与辅助线层 (Tools Overlay)
-为了防止业务组件被画布的编辑器状态污染，所有的选中高亮（Select）、悬浮边框（Hover）、以及拖拽插入的辅助线（InsertGuideLine），均被抽离至 `Tools/views` 下独立渲染。它们通过绝对定位浮于渲染树之上，监听 Store 中的 `selectedMetaIds` 进行坐标跟随。
+为了防止业务组件被画布的编辑器状态污染，所有的选中高亮（Select）、悬浮边框（Hover）、以及拖拽插入的辅助线（InsertGuideLine），均被抽离至 `Tools/views` 下独立渲染。
+
+```mermaid
+graph LR
+    A[用户操作] --> B(CanvasStore 更新 selectedMetaIds)
+    B --> C[Tools Overlay]
+    C -->|计算绝对坐标| D(绘制高亮边框/辅助线)
+```
 
 ### 2.5 事件监控与快捷键系统 (Shortcut Monitor)
-利用 `ShortcutMonitor` 在全局顶层拦截键盘事件。无论是复制（Cmd+C）、粘贴（Cmd+V）、撤销重做（Cmd+Z），还是利用方向键微调绝对定位元素，都在该系统内统一转化为 `CanvasAction`，防止浏览器的默认行为与画布内部逻辑发生冲突。
+利用 `ShortcutMonitor` 在全局顶层拦截键盘事件。无论是复制（Cmd+C）、撤销重做（Cmd+Z），都在该系统内统一转化为 `CanvasAction`，防止浏览器的默认行为与画布内部逻辑发生冲突。
+
+```typescript
+// 统一监听与事件代理
+useEventEmitterSubscription(CanvasEmitterEventType.SHORTCUT_TRIGGERED, (param) => {
+  const { event, type, target } = param;
+  event.preventDefault(); 
+  executeShortcutAction(type); // 派发至专门的处理管线
+});
+```
 
 ### 2.6 组件元数据转译管道 (Transpile Pipeline)
-不同类型的组件拥有不同的 Schema 结构。在 `useTranspile` 系列钩子中（如 `useListViewTranspile`、`usePageTranspile`），服务端下发的基础 JSON 会根据当前的视口断点（Breakpoint）被动态转译成标准的 `Meta` 数据结构，确保运行时数据格式的绝对统一。
+不同类型的组件拥有不同的 Schema 结构。在 `useTranspile` 系列钩子中，服务端下发的基础 JSON 会根据当前的视口断点（Breakpoint）被动态转译成标准的 `Meta` 数据结构。
+
+```mermaid
+graph LR
+    A[服务端 Component JSON] -->|匹配 Breakpoint| B(useTranspile 管道)
+    B -->|动态挂载特定属性| C(规范化 Meta 结构)
+    C --> D[存入 CanvasStore]
+```
 
 ### 2.7 多层级画板路由栈 (Boards & Routing)
-无代码搭建经常需要“下钻”编辑（例如双击一个列表组件，进入列表项的独立编辑环境）。通过维护 `boardsRecord` 路由栈，画布支持无缝的上下文切换。每个 Board 记录了当前的 `componentId` 和 `viewConfig`，退出时可以完美回放至上一级视角。
+无代码搭建经常需要“下钻”编辑（例如双击一个列表组件，进入列表项的独立编辑环境）。通过维护 `boardsRecord` 路由栈，画布支持无缝的上下文切换。
+
+```typescript
+// 记录进入下钻模式前的状态
+export interface BoardConfig {
+  type: BoardConfigType;
+  componentId: string;
+  viewConfig: BoardViewConfig; // 包含此层级记录的视角和缩放比例
+}
+```
 
 ### 2.8 动态上下文菜单体系 (Context Menu System)
-封装了 `MetaContextMenu` 与 `PageContextMenu`，在用户右键点击不同节点时，通过计算触发位置的 DOM Dataset 信息，动态唤起菜单。支持基于当前组件类型呈现不同的操作项（如：对列表触发绑定数据源、对普通容器触发组合/拆解）。
+封装了 `MetaContextMenu` 与 `PageContextMenu`，在用户右键点击不同节点时，通过计算触发位置的 DOM Dataset 信息，动态唤起不同的菜单项。
+
+```tsx
+// 右键菜单按需判定策略
+const isIllegalType = includes(
+  [ComponentRefactorComponentType.TAB_VIEW, ComponentRefactorComponentType.CONDITIONAL_VIEW],
+  meta.type,
+);
+if (isIllegalType) return false;
+// 根据不同类型的 meta 唤起对应的操作组（组合、分离、绑定数据源等）
+```
 
 ### 2.9 异步组件与渲染沙箱 (Canvas Error Boundary)
-无代码平台中的配置数据常常存在脏数据。通过在树节点的特定层级包裹 `CanvasErrorBoundary`，一旦某个子组件因为异常参数崩溃，错误边界会将其捕获并渲染为错误提示块（ErrorTips），确保整个画布进程不会“白屏死亡”。
+无代码平台中的配置数据常常存在脏数据。通过在树节点的特定层级包裹 `CanvasErrorBoundary`，一旦某个子组件因为异常参数崩溃，错误边界会将其捕获并渲染为错误提示块（ErrorTips）。
 
 ### 2.10 响应式与变体样式合成 (Responsive & Variants)
-通过 `useComputedMetaStyles` Hook，在渲染管线中实时对基础样式（Styles）和变体样式（Variants）进行深度合并（`mergeDeep`）。当用户切换画布断点时，对应的变体属性会无缝覆盖原有属性，完美还原 CSS 媒体查询的效果。
+通过 `useComputedMetaStyles` Hook，在渲染管线中实时对基础样式（Styles）和变体样式（Variants）进行深度合并。
+
+```typescript
+// 核心：基于当前环境动态混合样式表
+let targetStyles = toJS(styles);
+if (variantStyles) {
+  // 当命中变体时（如断点/状态变化），将变体样式覆盖至基础样式之上
+  targetStyles = mergeDeep(targetStyles, variantStyles);
+}
+```
 
 ### 2.11 只读模式与沙箱拦截 (Readonly & Permission)
 通过底层的 `ReadonlyMonitor` 与状态树的 `readonly` 标识，可以在查看历史版本、无权限访问时，彻底锁死拖拽引擎（设置 Dnd 为 disabled）、拦截双击以及右键菜单，实现查看与编辑态的同构复用。
 
 ### 2.12 拖拽物料抽象与起源判定 (Drag Origin Calculation)
 并非所有的拖拽行为都是相同的。在 `useDraggableConfig` 中，系统会根据组件的 CSS 定位属性预计算出 `DragOrigin`：
-- 若为绝对定位（Absolute/Fixed），则为自由移动（`ABS_OR_FIXED_MOVE`）。
-- 若为标准文档流，则判定为弹性流式排序（`FLEX_SORT`）或跨层级拖拽（`CROSS_LEVEL`）。
+
+```typescript
+const draggableOrigin = useMemo(() => {
+  if (recordedShortcut?.mode === RecordedShortcutType.CROSS_LEVEL) {
+    return DragOrigin.CROSS_LEVEL; // 跨层级降维打击拖拽
+  }
+  const isWrapperAbsOrFixed = isAbsoluteOrFixed(wrapperStyle);
+  // 如果是绝对定位，其拖拽逻辑为单纯移动；如果是文档流，则判定为弹性流式排序
+  return isWrapperAbsOrFixed ? DragOrigin.ABS_OR_FIXED_MOVE : DragOrigin.FLEX_SORT;
+}, [wrapperStyle, recordedShortcut?.mode]);
+```
 
 ### 2.13 批量选取与框选机制 (Canvas Selecto)
-深度整合了 `Selecto.js`，用户在画布空白处拖动鼠标可拉出多选框。通过几何交集算法匹配节点坐标，将多选的 ID 批量写入 `selectedMetaConfigs`，实现对多个组件的一键群组、统一修改样式或批量删除。
+深度整合了 `Selecto.js`，用户在画布空白处拖动鼠标可拉出多选框。通过几何交集算法匹配节点坐标，将多选的 ID 批量写入 `selectedMetaConfigs`。
 
 ---
 
