@@ -144,6 +144,11 @@ if (isIllegalType) return false;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;2.9 异步组件与渲染沙箱 (Canvas Error Boundary)&lt;/h3&gt;
 &lt;p&gt;无代码平台中的配置数据常常存在脏数据。通过在树节点的特定层级包裹 &lt;code&gt;CanvasErrorBoundary&lt;/code&gt;，一旦某个子组件因为异常参数崩溃，错误边界会将其捕获并渲染为错误提示块（ErrorTips）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;沙箱隔离机制:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;CanvasErrorBoundary fallbackRender={({ error }) =&amp;gt; &amp;lt;ErrorTips error={error} /&amp;gt;}&amp;gt;
+  &amp;lt;MetaEditableRenderTree meta={childMeta} /&amp;gt;
+&amp;lt;/CanvasErrorBoundary&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;2.10 响应式与变体样式合成 (Responsive &amp;amp; Variants)&lt;/h3&gt;
 &lt;p&gt;通过 &lt;code&gt;useComputedMetaStyles&lt;/code&gt; Hook，在渲染管线中实时对基础样式（Styles）和变体样式（Variants）进行深度合并。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;// 核心：基于当前环境动态混合样式表
@@ -155,6 +160,16 @@ if (variantStyles) {
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;2.11 只读模式与沙箱拦截 (Readonly &amp;amp; Permission)&lt;/h3&gt;
 &lt;p&gt;通过底层的 &lt;code&gt;ReadonlyMonitor&lt;/code&gt; 与状态树的 &lt;code&gt;readonly&lt;/code&gt; 标识，可以在查看历史版本、无权限访问时，彻底锁死拖拽引擎（设置 Dnd 为 disabled）、拦截双击以及右键菜单，实现查看与编辑态的同构复用。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;只读态锁定示例：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const draggableConfig = useMemo&amp;lt;UseDraggableArguments&amp;gt;(
+  () =&amp;gt; ({
+    id,
+    disabled: readonly || !isDraggable(id), // 核心鉴权拦截
+    data: draggableData,
+  }),
+  [id, readonly, isDraggable, draggableData],
+);
+&lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;2.12 拖拽物料抽象与起源判定 (Drag Origin Calculation)&lt;/h3&gt;
 &lt;p&gt;并非所有的拖拽行为都是相同的。在 &lt;code&gt;useDraggableConfig&lt;/code&gt; 中，系统会根据组件的 CSS 定位属性预计算出 &lt;code&gt;DragOrigin&lt;/code&gt;：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;const draggableOrigin = useMemo(() =&amp;gt; {
@@ -168,6 +183,15 @@ if (variantStyles) {
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;2.13 批量选取与框选机制 (Canvas Selecto)&lt;/h3&gt;
 &lt;p&gt;深度整合了 &lt;code&gt;Selecto.js&lt;/code&gt;，用户在画布空白处拖动鼠标可拉出多选框。通过几何交集算法匹配节点坐标，将多选的 ID 批量写入 &lt;code&gt;selectedMetaConfigs&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;框选算法代理事件:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;Selecto
+  dragContainer={`#${VIEWPORT_ID}`}
+  selectableTargets={selectedTargets}
+  hitRate={0}
+  selectByClick={false}
+  {...selectoEvents} // 将框选边界事件代理回 Store
+/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;hr /&gt;
 &lt;h2&gt;3. 重点与难点突破 (Key Challenges &amp;amp; Solutions)&lt;/h2&gt;
 &lt;p&gt;在开发过程中，我成功攻克了以下几个业界公认的“无代码画布难题”：&lt;/p&gt;
@@ -222,6 +246,15 @@ case &apos;add&apos;: {
 &lt;li&gt;拖拽事件 &lt;code&gt;Listeners&lt;/code&gt; 完全与业务组件解耦。组件仅仅透传自身的 &lt;code&gt;id&lt;/code&gt;，真正的碰撞检测（Collision Detection）由顶层的 &lt;code&gt;DndContextWrapper&lt;/code&gt; 统一代理结算。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;useInsertTarget&lt;/code&gt; 预计算落点（基于鼠标指针矩阵的偏移量计算出上插、下插、内嵌），实时派发事件渲染 &lt;code&gt;DropHighlight&lt;/code&gt; 或特定的虚线占位符。这保证了底层组件依然纯净无副作用，拖拽体感极其丝滑严谨。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;拖拽锚点挂载代码:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// Meta.ts: 生成锚点信息用于碰撞反查
+export const genMetaDataSet = (metaId: string, type: Meta[&apos;type&apos;]) =&amp;gt; {
+  return {
+    &apos;data-meta-id&apos;: metaId,
+    &apos;data-meta-type&apos;: type,
+  };
+};
+&lt;/code&gt;&lt;/pre&gt;
 &lt;hr /&gt;
 &lt;h2&gt;4. 总结&lt;/h2&gt;
 &lt;p&gt;CanvasPro 是一套&lt;strong&gt;工程化成熟、深思熟虑度极高&lt;/strong&gt;的前端基石架构。它通过 &lt;strong&gt;MobX 扁平化数据&lt;/strong&gt; 解决了状态层级深的痛点，通过 &lt;strong&gt;视区不可见裁剪 (Out-of-view Pruning)&lt;/strong&gt; 解决了巨量组件渲染的性能瓶颈，再结合 &lt;strong&gt;基于事件总线的矩阵操作&lt;/strong&gt; 与 &lt;strong&gt;细粒度的 Diff 同步机制&lt;/strong&gt;，最终打造出了一个具备极客级协同能力、无限拓展视野且交互极致顺滑的无代码基座。&lt;/p&gt;
