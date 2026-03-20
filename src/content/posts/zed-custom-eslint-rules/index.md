@@ -1,7 +1,7 @@
 ---
 title: "Zion 定制化 ESLint 规则设计与实现"
 published: 2026-03-18
-description: "在数百万行代码的大型前端单体仓库中，如何通过 ESLint 自定义规则实现架构分层、模块黑盒化解耦，以及彻底消除 MobX 响应式状态遗漏的神出鬼没 Bug？本文详细解读了为 Zion Editor 量身定制的三大硬核 AST 分析规则。"
+description: "在数百万行代码的大型前端单体仓库中，如何通过 ESLint 自定义规则实现架构分层、模块黑盒化解耦，以及彻底消除 MobX 响应式状态遗漏的神出鬼没 Bug？本文详细解读了为 Zion Editor 量身定制的三大底层 AST 分析规则。"
 tags: ["ESLint", "AST", "前端架构", "MobX", "React", "工程化"]
 category: "工程化与架构"
 draft: false
@@ -9,16 +9,16 @@ draft: false
 
 ## 1. 背景与初衷
 
-随着 Zion Editor (`zed`) 前端工程体量的不断爆炸，传统的业界开源 ESLint 规则集（如 `eslint-config-airbnb`、`plugin:react/recommended`）已经远远无法满足我们对大型项目**架构分层、模块解耦以及状态响应安全性**的极其苛刻的要求。
+随着 Zion Editor (`zed`) 前端工程体量的不断溢出，传统的业界开源 ESLint 规则集（如 `eslint-config-airbnb`、`plugin:react/recommended`）已经远远无法满足我们对大型项目**架构分层、模块解耦以及状态响应安全性**的非常苛刻的要求。
 
 在团队数十人的日常协作中，经常会遇到以下令人头疼的架构腐化问题：
-1. **跨模块深度引用**：A 模块图方便，绕过了 B 模块暴露的公共 `index.ts`，直接长驱直入 `import` 了 B 模块内部极深层级的一个私有组件或函数。导致 B 模块重构时牵一发而动全身。
-2. **架构反向依赖（下克上）**：底层的 `utils` 或 `hooks` 模块，为了方便，竟然 import 了最顶层的 `views` 模块里的常量，导致底层代码彻底失去独立性。
-3. **响应式状态遗漏的灵异 Bug**：开发者在 React 组件里通过 Hook 取出了 MobX 的 Store，却忘记用 `observer` 包裹该组件。导致数据发生变化时，UI 死活不更新，极其难排查。
+1. **跨模块深度引用**：A 模块图方便，绕过了 B 模块暴露的公共 `index.ts`，直接 `import` 了 B 模块内部极深层级的一个私有组件或函数。导致 B 模块重构时牵一发而动全身。
+2. **架构反向依赖（反向依赖）**：底层的 `utils` 或 `hooks` 模块，为了方便，竟然 import 了最顶层的 `views` 模块里的常量，导致底层代码彻底失去独立性。
+3. **响应式状态遗漏的难以排查的 Bug**：开发者在 React 组件里通过 Hook 取出了 MobX 的 Store，却忘记用 `observer` 包裹该组件。导致数据发生变化时，UI 死活不更新，非常难排查。
 
 借着构建系统（Webpack 到 Rsbuild）及 ESLint 引擎（升级至 v9 Flat Config）大升级的契机，我在 `config/eslint-rules/` 目录下**从零自研了一套专属于 zed 的定制化 ESLint AST 规则集**。
 
-本文将详细剖析这三大硬核规则的设计思想与实现细节。
+本文将详细剖析这三大底层规则的设计思想与实现细节。
 
 ---
 
@@ -170,7 +170,7 @@ create(context) {
   };
 }
 ```
-*这套规则就像一道单向阀，从根本上杜绝了“下克上”的代码腐化。*
+*这套规则就像一道单向阀，从根本上杜绝了“反向依赖”的代码腐化。*
 
 ---
 
@@ -179,7 +179,7 @@ create(context) {
 ### 痛点与设计目标
 Zion 高度依赖 MobX 进行响应式状态管理。最愚蠢但也最折磨人的 Bug 是：开发者在组件里使用了 `useStores()` 提取了数据，却忘记用 `observer()` 包裹组件。这导致底层数据变了，但 React 组件根本不更新！
 
-以前这种问题只能靠肉眼 Code Review，现在我将其写成了一套极其复杂的**多重 AST 分析器**。
+以前这种问题只能靠肉眼 Code Review，现在我将其写成了一套非常复杂的**多重 AST 分析器**。
 
 ### 核心实现思路与 AST 攀爬探测
 
@@ -202,7 +202,7 @@ Zion 高度依赖 MobX 进行响应式状态管理。最愚蠢但也最折磨人
   }
 }
 ```
-通过比对 AST 节点特征：`node.init.type === 'CallExpression'` 且 `callee.name.includes('Store')`，我们就能像外科医生一样，在编译阶段精准定位到响应式数据的挂载点。
+通过比对 AST 节点特征：`node.init.type === 'CallExpression'` 且 `callee.name.includes('Store')`，我们就能像精准定位一样，在编译阶段精准定位到响应式数据的挂载点。
 
 #### 第二步：AST 上卷作用域攀爬，精准定位 React 组件
 一旦确认某行代码提取了响应式数据，规则会**沿着 AST 树不断向上层父节点 (`node.parent`) 攀爬**，直到找到包含该逻辑的 React 函数组件主体（通过首字母大写等特征判定）。如果攀爬过程中发现父节点名字是以 `use` 开头（自定义 Hook），则认为不需要包裹，安全放行。
@@ -262,20 +262,20 @@ if (!isWrappedDirectly) {
 }
 ```
 
-这套规则的落地，彻底根治了我们在日常迭代中因为漏写 `observer` 导致的“灵异”刷新 Bug，节省了大量的排查时间。
+这套规则的落地，彻底根治了我们在日常迭代中因为漏写 `observer` 导致的“难以排查的”刷新 Bug，节省了大量的排查时间。
 
 ### 性能防劣化 (Early Return / Bailout)
 自定义 ESLint 规则如果写得不够收敛，会在开发者每次按下 `Cmd+S` 时触发全量的 AST 深层遍历，导致 VSCode 的 Lint 提示严重卡顿（甚至耗时几秒钟）。
 为了保障极致的研发体验，我在所有自定义规则的入口处都做了 **尽早退出 (Bailout)** 优化：
 * **特征预检**：在进入昂贵的 AST 树遍历之前，先通过 `context.getSourceCode().text` 获取全文的纯字符串。利用高效率的正则表达式粗筛（例如 `if (!/Store|use[A-Z]/i.test(text)) return {}`），如果文件内压根没有相关的关键字，直接跳过整棵 AST 的解析。
 
-这种极客级的性能防劣化处理，确保了即便在极其庞大的单体仓库中，Lint 进程也始终保持在毫秒级响应。
+这种深度的性能防劣化处理，确保了即便在非常庞大的单体仓库中，Lint 进程也始终保持在毫秒级响应。
 
 ---
 
-## 5. “暗坑”排雷：老版本 ESLint 的字节数限制 Bug
+## 5. “潜在问题”问题排查：老版本 ESLint 的字节数限制 Bug
 
-在这些自定义规则刚推上测试流水线时，我们遇到了一个非常诡异的 Bug。在我们公司内部使用的基于 Phabricator 的代码审查系统 (`arc lint`) 结合老版本的 lint 检查器时，抛出了如下异常：
+在这些自定义规则刚推上测试流水线时，我们遇到了一个非常异常的 Bug。在我们公司内部使用的基于 Phabricator 的代码审查系统 (`arc lint`) 结合老版本的 lint 检查器时，抛出了如下异常：
 
 ```text
 Exception: Parameter (...) passed to "setCode()" when constructing a lint message must be a scalar with a maximum string length of 128 bytes, but is 163 bytes in length.

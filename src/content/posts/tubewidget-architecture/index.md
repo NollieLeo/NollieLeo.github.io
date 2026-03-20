@@ -17,29 +17,29 @@ draft: false
 * **状态与数据**：**Zustand** (响应式状态) + **Dexie.js** (IndexedDB 本地高频缓存)。
 * **翻译引擎路由**：支持 Google 免费版、DeepL、Microsoft 以及 Google Cloud 等多通道分发。
 
-这不是一个简单的 DOM 爬虫工具，而是一个深入视频播放器骨髓的工程化产品。本文将详细拆解该插件底层极其硬核的拦截架构与优化细节。
+这不是一个简单的 DOM 爬虫工具，而是一个深入视频播放器骨髓的工程化产品。本文将详细拆解该插件底层非常底层的拦截架构与优化细节。
 
 ---
 
 ## 2. 核心痛点一：突破隔离沙箱，强行拦截官方网络请求
 
 ### 业务痛点与技术封锁
-YouTube 具有极其严苛的防爬虫机制。其官方的字幕数据接口（`/api/timedtext`）强依赖于前端播放器动态生成的加密签名（Signature）。如果我们像普通的插件那样，在 Content Script 中手动发起 `fetch` 请求去拉取字幕数据，必然会遭遇 `403 Forbidden` 的无情拦截。
+YouTube 具有非常严苛的防爬虫机制。其官方的字幕数据接口（`/api/timedtext`）强依赖于前端播放器动态生成的加密签名（Signature）。如果我们像普通的插件那样，在 Content Script 中手动发起 `fetch` 请求去拉取字幕数据，必然会遭遇 `403 Forbidden` 的无情拦截。
 
 同时，Chrome 插件的 Content Script 默认运行在安全隔离的 **ISOLATED World** 中，根本无法触碰或修改宿主页面的 `window.fetch` 或 `XMLHttpRequest`，这就断绝了“普通抓包”的可能。
 
 ### 架构攻坚：Main World 注入与底层 Hook
-为了拿到带有官方合法签名的字幕数据，我利用了 Plasmo 提供的 `world: "MAIN"` 能力，在页面加载的第一时间（`run_at: "document_start"`），将一段名为 `youtube-main-world.ts` 的探针脚本**强行打入 YouTube 真实的主执行环境**。
+为了拿到带有官方合法签名的字幕数据，我利用了 Plasmo 提供的 `world: "MAIN"` 能力，在页面加载的第一时间（`run_at: "document_start"`），将一段名为 `youtube-main-world.ts` 的探针脚本**注入 YouTube 真实的主执行环境**。
 
-在这个没有沙箱限制的世界里，我直接重写了原生的 `window.fetch`，并在不破坏官方请求的前提下，将返回的 JSON 字幕流通过 `clone()` 偷渡出来，最后使用一个安全的 Token 握手机制，通过 `postMessage` 传递回插件的隔离上下文中。
+在这个没有沙箱限制的世界里，我直接重写了原生的 `window.fetch`，并在不破坏官方请求的前提下，将返回的 JSON 字幕流通过 `clone()` 提取出来，最后使用一个安全的 Token 握手机制，通过 `postMessage` 传递回插件的隔离上下文中。
 
 ```mermaid
 flowchart TD
     subgraph MAIN ["YouTube 真实页面环境 (MAIN World)"]
-        YT["YouTube 原生播放器"] -->|"发起带签名的请求"| FetchHook["被劫持的 window.fetch"]
+        YT["YouTube 原生播放器"] -->|"发起带签名的请求"| FetchHook["被拦截的 window.fetch"]
         FetchHook -->|"发送真实网络请求"| Server[("YouTube Backend")]
         Server -->|"返回 JSON 字幕数据"| FetchHook
-        FetchHook -->|"Response.clone() 偷渡数据"| Dispatcher["postMessage (附带 Token)"]
+        FetchHook -->|"Response.clone() 提取数据"| Dispatcher["postMessage (附带 Token)"]
     end
 
     subgraph ISOLATED ["插件沙箱环境 (ISOLATED World)"]
@@ -85,7 +85,7 @@ export function setupFetchHook(getHandshakeToken: () => string) {
 ## 3. 核心痛点二：零冲突的 UI 渲染与原生字幕“隐形”
 
 ### 业务痛点
-YouTube 原生播放器的 DOM 极其复杂且动态变化。如果我们贸然删除其原生的字幕节点，会导致官方内部的代码逻辑（如位置计算、重绘机制）报出 TypeError 并导致播放器崩溃。
+YouTube 原生播放器的 DOM 非常复杂且动态变化。如果我们贸然删除其原生的字幕节点，会导致官方内部的代码逻辑（如位置计算、重绘机制）报出 TypeError 并导致播放器崩溃。
 同时，我们自己用 Tailwind 编写的 React 双语字幕 UI，绝不能被宿主页面（YouTube）原有的全局 CSS 污染，也不能去污染宿主。
 
 ### 架构攻坚：Shadow DOM 与动态 Class 屏蔽
@@ -121,7 +121,7 @@ function injectDynamicSubtitleHider() {
 ### 架构攻坚：Look-ahead Prefetch Pipeline (滑动窗口预加载)
 
 1. **毫秒级时间帧同步与跳变阻断 (Seek Handling)**：
-   除了抛弃粗糙的 `setInterval` 改用 `requestAnimationFrame` 同步 `<video>.currentTime`，这里还有一个极其复杂的边界场景（Edge Case）：如果用户突然在进度条上拖拽跳跃了 30 分钟呢？
+   除了抛弃粗糙的 `setInterval` 改用 `requestAnimationFrame` 同步 `<video>.currentTime`，这里还有一个非常复杂的边界场景（Edge Case）：如果用户突然在进度条上拖拽跳跃了 30 分钟呢？
    我的底层状态机能够精准侦测到这类**非线性的时间跳变 (Time Seek)**。当检测到 `currentTime` 与上一帧的差值大于设定的阈值时，系统会立刻中断旧的预加载队列，废弃掉正在路上的无关网络请求，并在跳跃后的新基准线上重新建立 `baseIndex` 的 5 句缓存流水线。
 
 2. **超前滑动窗口翻译**：
@@ -168,7 +168,7 @@ useEffect(() => {
 }, [currentSegment?.id, segments.length, settings?.targetLang, currentTimeMs]);
 ```
 
-配合传递到打字机 UI 组件 (`Subtitle`) 上的 `durationMs`（该段字幕的物理寿命），实现了原生般丝滑、绝不卡顿的双语同轨显示。
+配合传递到打字机 UI 组件 (`Subtitle`) 上的 `durationMs`（该段字幕的物理寿命），实现了原生般流畅、绝不卡顿的双语同轨显示。
 
 ## 5. 极致体验：动态打字机特效 (Typewriter Effect) 与 UI 隔离
 
@@ -192,7 +192,7 @@ export const Subtitle = ({ text, translation, durationMs }: SubtitleProps) => {
     const targetTypingTime = durationMs * 0.75
     let speed = targetTypingTime / translation.length
     
-    // 限制单字敲击的物理速度，最快 15ms，最慢 50ms 防止像树懒一样慢
+    // 限制单字敲击的物理速度，最快 15ms，最慢 50ms 防止过于缓慢
     speed = Math.max(15, Math.min(speed, 50))
 
     const interval = setInterval(() => {
@@ -215,7 +215,7 @@ export const Subtitle = ({ text, translation, durationMs }: SubtitleProps) => {
   )
 }
 ```
-这套自适应速率算法，保证了不管一句话有多长或者语速有多快，双语字幕的出现节奏始终能和视频发音的起伏保持着极其舒适的同步律动感。
+这套自适应速率算法，保证了不管一句话有多长或者语速有多快，双语字幕的出现节奏始终能和视频发音的起伏保持着非常舒适的同步律动感。
 
 ---
 
@@ -234,4 +234,4 @@ export const Subtitle = ({ text, translation, durationMs }: SubtitleProps) => {
 
 YouTube 的环境犹如一个庞大的、充满了代码混淆和动态防御黑盒。
 
-从利用 `world: "MAIN"` 打破隔离沙箱窃取原生接口流，到极其克制的原生 CSS “隐形降级”，再到结合 `requestAnimationFrame` 和**超前滑动窗口**打造的零延迟翻译预加载体系——TubeWidget 完美跨越了扩展开发的深水区，呈现出了极其成熟、稳定且性能爆表的双语字幕产品体验。
+从利用 `world: "MAIN"` 打破隔离沙箱窃取原生接口流，到非常克制的原生 CSS “隐形降级”，再到结合 `requestAnimationFrame` 和**超前滑动窗口**打造的零延迟翻译预加载体系——TubeWidget 完美跨越了扩展开发的深水区，呈现出了非常成熟、稳定且高性能的双语字幕产品体验。
