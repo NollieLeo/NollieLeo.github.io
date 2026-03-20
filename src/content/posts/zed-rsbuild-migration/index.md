@@ -1,6 +1,6 @@
 ---
 title: "构建提效：Zion 编辑器从 Webpack 到 Rsbuild 的架构迁移实践"
-published: 2026-03-20
+published: 2026-02-20
 description: "深度解析 Zion Editor 巨型前端单体仓库从 Webpack 迁移至 Rsbuild (基于 Rspack) 的架构升级之路。探讨百万行代码级应用的构建瓶颈、Babel/TS-Loader 的剥离策略、AST 级别自定义 Loader 的重构，以及深度 Webpack 优化的降级兼容方案。"
 tags: ["Rsbuild", "Rspack", "Webpack", "工程化", "前端架构", "性能优化"]
 category: "工程化与架构"

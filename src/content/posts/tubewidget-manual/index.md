@@ -1,6 +1,6 @@
 ---
 title: "沉浸式 YouTube 翻译插件：TubeWidget 使用手册"
-published: 2026-03-20
+published: 2026-03-10
 description: "TubeWidget 是一款强大的 YouTube 原生双语字幕与点词翻译插件。本文是 TubeWidget 的官方完全使用指南，教你如何配置多款翻译引擎（DeepL/Google/OpenAI），自定义打字机特效字幕，以及利用沉浸式交互字典进行外语学习。"
 tags: ["Chrome Extension", "TubeWidget", "效率工具", "外语学习", "产品手册"]
 category: "效率与工具"

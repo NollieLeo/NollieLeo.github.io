@@ -1,6 +1,6 @@
 ---
 title: "Zion 定制化 ESLint 规则设计与实现"
-published: 2026-03-20
+published: 2026-03-18
 description: "在数百万行代码的大型前端单体仓库中，如何通过 ESLint 自定义规则实现架构分层、模块黑盒化解耦，以及彻底消除 MobX 响应式状态遗漏的神出鬼没 Bug？本文详细解读了为 Zion Editor 量身定制的三大硬核 AST 分析规则。"
 tags: ["ESLint", "AST", "前端架构", "MobX", "React", "工程化"]
 category: "工程化与架构"

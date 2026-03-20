@@ -1,6 +1,6 @@
 ---
 title: "TubeWidget YouTube 双语字幕插件架构设计与实现"
-published: 2026-03-20
+published: 2026-03-10
 description: "深度解析已上架 Chrome 商店的 TubeWidget (Dual Subtitles) 插件架构。探讨如何通过 Plasmo 的 Main World 注入突破 YouTube 严苛的 API 签名防爬虫机制，以及高精度时间轴同步、滑动窗口预加载流水线和零冲突 Shadow DOM 渲染方案。"
 tags: ["Chrome Extension", "Plasmo", "React", "架构设计", "拦截技术"]
 category: "工程化与架构"
