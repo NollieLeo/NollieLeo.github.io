@@ -191,6 +191,13 @@ if (isIllegalType) return false;
 ### 2.9 异步组件与渲染沙箱 (Canvas Error Boundary)
 无代码平台中的配置数据常常存在脏数据。通过在树节点的特定层级包裹 `CanvasErrorBoundary`，一旦某个子组件因为异常参数崩溃，错误边界会将其捕获并渲染为错误提示块（ErrorTips）。
 
+**沙箱隔离机制:**
+```tsx
+<CanvasErrorBoundary fallbackRender={({ error }) => <ErrorTips error={error} />}>
+  <MetaEditableRenderTree meta={childMeta} />
+</CanvasErrorBoundary>
+```
+
 ### 2.10 响应式与变体样式合成 (Responsive & Variants)
 通过 `useComputedMetaStyles` Hook，在渲染管线中实时对基础样式（Styles）和变体样式（Variants）进行深度合并。
 
@@ -205,6 +212,18 @@ if (variantStyles) {
 
 ### 2.11 只读模式与沙箱拦截 (Readonly & Permission)
 通过底层的 `ReadonlyMonitor` 与状态树的 `readonly` 标识，可以在查看历史版本、无权限访问时，彻底锁死拖拽引擎（设置 Dnd 为 disabled）、拦截双击以及右键菜单，实现查看与编辑态的同构复用。
+
+**只读态锁定示例：**
+```typescript
+const draggableConfig = useMemo<UseDraggableArguments>(
+  () => ({
+    id,
+    disabled: readonly || !isDraggable(id), // 核心鉴权拦截
+    data: draggableData,
+  }),
+  [id, readonly, isDraggable, draggableData],
+);
+```
 
 ### 2.12 拖拽物料抽象与起源判定 (Drag Origin Calculation)
 并非所有的拖拽行为都是相同的。在 `useDraggableConfig` 中，系统会根据组件的 CSS 定位属性预计算出 `DragOrigin`：
@@ -222,6 +241,17 @@ const draggableOrigin = useMemo(() => {
 
 ### 2.13 批量选取与框选机制 (Canvas Selecto)
 深度整合了 `Selecto.js`，用户在画布空白处拖动鼠标可拉出多选框。通过几何交集算法匹配节点坐标，将多选的 ID 批量写入 `selectedMetaConfigs`。
+
+**框选算法代理事件:**
+```typescript
+<Selecto
+  dragContainer={`#${VIEWPORT_ID}`}
+  selectableTargets={selectedTargets}
+  hitRate={0}
+  selectByClick={false}
+  {...selectoEvents} // 将框选边界事件代理回 Store
+/>
+```
 
 ---
 
@@ -275,6 +305,17 @@ case 'add': {
 **解法**：**极致解耦的碰撞算法引擎**。
 - 拖拽事件 `Listeners` 完全与业务组件解耦。组件仅仅透传自身的 `id`，真正的碰撞检测（Collision Detection）由顶层的 `DndContextWrapper` 统一代理结算。
 - `useInsertTarget` 预计算落点（基于鼠标指针矩阵的偏移量计算出上插、下插、内嵌），实时派发事件渲染 `DropHighlight` 或特定的虚线占位符。这保证了底层组件依然纯净无副作用，拖拽体感极其丝滑严谨。
+
+**拖拽锚点挂载代码:**
+```typescript
+// Meta.ts: 生成锚点信息用于碰撞反查
+export const genMetaDataSet = (metaId: string, type: Meta['type']) => {
+  return {
+    'data-meta-id': metaId,
+    'data-meta-type': type,
+  };
+};
+```
 
 ---
 
