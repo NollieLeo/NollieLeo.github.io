@@ -1,348 +1,343 @@
-<!DOCTYPE html>
-<html lang='zh-CN'>
+<!DOCTYPE html><html lang="zh-CN" class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]" data-overlayscrollbars-initialize data-astro-cid-sckkx6r4 style="--bannerOffset: 15vh;--banner-height-home: 65vh;--banner-height: 35vh;--configHue: 250;--page-width: 75rem;"> <head><title>翁先森的博客 - 乌拉</title><meta charset="UTF-8"><meta name="description" content="翁先森的博客 - 乌拉"><meta name="author" content="翁先森"><meta property="og:site_name" content="翁先森的博客"><meta property="og:url" content="https://nollieleo.github.io/"><meta property="og:title" content="翁先森的博客 - 乌拉"><meta property="og:description" content="翁先森的博客 - 乌拉"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://nollieleo.github.io/"><meta name="twitter:title" content="翁先森的博客 - 乌拉"><meta name="twitter:description" content="翁先森的博客 - 乌拉"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v5.13.10"><link rel="icon" href="/assets/avatar.png"><!-- Set the theme before the page is rendered to avoid a flash --><script>(function(){const DEFAULT_THEME = "auto";
+const LIGHT_MODE = "light";
+const DARK_MODE = "dark";
+const AUTO_MODE = "auto";
+const BANNER_HEIGHT_EXTEND = 30;
+const PAGE_WIDTH = 75;
+const configHue = 250;
 
-<head>
-  <meta name="generator" content="Hexo 6.3.0">
-  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
-  <meta charset="utf-8">
-  
+			// Load the theme from local storage
+			const theme = localStorage.getItem('theme') || DEFAULT_THEME;
+			switch (theme) {
+				case LIGHT_MODE:
+					document.documentElement.classList.remove('dark');
+					break
+				case DARK_MODE:
+					document.documentElement.classList.add('dark');
+					break
+				case AUTO_MODE:
+					if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+						document.documentElement.classList.add('dark');
+					} else {
+						document.documentElement.classList.remove('dark');
+					}
+			}
 
-  <meta http-equiv='x-dns-prefetch-control' content='on' />
-  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
-  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
-  <link rel='dns-prefetch' href='//unpkg.com'>
+			// Load the hue from local storage
+			const hue = localStorage.getItem('hue') || configHue;
+			document.documentElement.style.setProperty('--hue', hue);
 
-  <meta name="renderer" content="webkit">
-  <meta name="force-rendering" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="HandheldFriendly" content="True" >
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="theme-color" content="#f8f8f8">
-  
-  <title>翁先森的博客</title>
+			// calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
+			let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
+			offset = offset - offset % 4;
+			document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
+		})();</script><!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why --><link rel="alternate" type="application/rss+xml" title="翁先森" href="https://nollieleo.github.io/rss.xml"><link rel="stylesheet" href="/_astro/Layout.DSulWsr7.css">
+<link rel="stylesheet" href="/_astro/Layout.y4KPJ9hc.css">
+<link rel="stylesheet" href="/_astro/_page_.CxF7s7nh.css">
+<link rel="stylesheet" href="/_astro/_page_.ZlghMKVQ.css">
+<link rel="stylesheet" href="/_astro/about.BtniRLn_.css">
+<style>input.svelte-1wah7ro:focus{outline:0}.search-panel.svelte-1wah7ro{max-height:calc(100vh - 100px);overflow-y:auto}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k){-webkit-appearance:none;height:1.5rem;background-image:var(--color-selection-bar);transition:background-image .15s ease-in-out}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-webkit-slider-thumb{-webkit-appearance:none;height:1rem;width:.5rem;border-radius:.125rem;background:#ffffffb3;box-shadow:none}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-webkit-slider-thumb:hover{background:#fffc}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-webkit-slider-thumb:active{background:#fff9}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-moz-range-thumb{-webkit-appearance:none;height:1rem;width:.5rem;border-radius:.125rem;border-width:0;background:#ffffffb3;box-shadow:none}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-moz-range-thumb:hover{background:#fffc}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-moz-range-thumb:active{background:#fff9}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-ms-thumb{-webkit-appearance:none;height:1rem;width:.5rem;border-radius:.125rem;background:#ffffffb3;box-shadow:none}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-ms-thumb:hover{background:#fffc}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-ms-thumb:active{background:#fff9}
+</style><script type="module" src="/_astro/page.Z8IJTFqj.js"></script></head> <body class=" min-h-screen transition  lg:is-home" data-overlayscrollbars-initialize data-astro-cid-sckkx6r4 style="--bannerOffset: 15vh;--banner-height-home: 65vh;--banner-height: 35vh;--configHue: 250;--page-width: 75rem;"> <div id="config-carrier" data-hue="250"></div>    <div id="top-row" class="z-50 pointer-events-none relative transition-all duration-700 max-w-[var(--page-width)] px-0 md:px-4 mx-auto"> <div id="navbar-wrapper" class="pointer-events-auto sticky top-0 transition-all"> <div id="navbar" class="z-50 onload-animation"> <div class="absolute h-8 left-0 right-0 -top-8 bg-[var(--card-bg)] transition"></div> <!-- used for onload animation --> <div class="card-base !overflow-visible max-w-[var(--page-width)] h-[4.5rem] !rounded-t-none mx-auto flex items-center justify-between px-4"> <a href="/" class="btn-plain scale-animation rounded-lg h-[3.25rem] px-5 font-bold active:scale-95"> <div class="flex flex-row text-[var(--primary)] items-center text-md"> <svg width="1em" height="1em" class="text-[1.75rem] mb-1 mr-2" data-icon="material-symbols:home-outline-rounded">   <symbol id="ai:material-symbols:home-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M6 19h3v-5q0-.425.288-.712T10 13h4q.425 0 .713.288T15 14v5h3v-9l-6-4.5L6 10zm-2 0v-9q0-.475.213-.9t.587-.7l6-4.5q.525-.4 1.2-.4t1.2.4l6 4.5q.375.275.588.7T20 10v9q0 .825-.588 1.413T18 21h-4q-.425 0-.712-.288T13 20v-5h-2v5q0 .425-.288.713T10 21H6q-.825 0-1.412-.587T4 19m8-6.75"/></symbol><use href="#ai:material-symbols:home-outline-rounded"></use>  </svg> 翁先森的博客 </div> </a> <div class="hidden md:flex"> <a aria-label="主页" href="/" class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95"> <div class="flex items-center"> 主页  </div> </a><a aria-label="归档" href="/archive/" class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95"> <div class="flex items-center"> 归档  </div> </a><a aria-label="关于" href="/about/" class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95"> <div class="flex items-center"> 关于  </div> </a><a aria-label="GitHub" href="https://github.com/NollieLeo" target="_blank" class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95"> <div class="flex items-center"> GitHub <svg width="1em" height="1em" class="text-[0.875rem] transition -translate-y-[1px] ml-1 text-black/[0.2] dark:text-white/[0.2]" data-icon="fa6-solid:arrow-up-right-from-square">   <symbol id="ai:fa6-solid:arrow-up-right-from-square" viewBox="0 0 512 512"><path fill="currentColor" d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 32C35.8 32 0 67.8 0 112v320c0 44.2 35.8 80 80 80h320c44.2 0 80-35.8 80-80V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v112c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16h112c17.7 0 32-14.3 32-32s-14.3-32-32-32z"/></symbol><use href="#ai:fa6-solid:arrow-up-right-from-square"></use>  </svg> </div> </a> </div> <div class="flex"> <!--<SearchPanel client:load>--> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).only=e;window.dispatchEvent(new Event("astro:only"));})();</script><script>(()=>{var A=Object.defineProperty;var g=(i,o,a)=>o in i?A(i,o,{enumerable:!0,configurable:!0,writable:!0,value:a}):i[o]=a;var d=(i,o,a)=>g(i,typeof o!="symbol"?o+"":o,a);{let i={0:t=>m(t),1:t=>a(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(a(t)),5:t=>new Set(a(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>1/0*t},o=t=>{let[l,e]=t;return l in i?i[l](e):void 0},a=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([l,e])=>[l,o(e)]));class y extends HTMLElement{constructor(){super(...arguments);d(this,"Component");d(this,"hydrator");d(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},h=this.querySelectorAll("template[data-astro-template]");for(let r of h){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("name")||"default"]=r.innerHTML)}let p;try{p=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let u;await this.hydrator(this)(this.Component,p,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});d(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro[c](async()=>{let n=this.getAttribute("renderer-url"),[h,{default:p}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),u=this.getAttribute("component-export")||"default";if(!u.includes("."))this.Component=h[u];else{this.Component=h;for(let f of u.split("."))this.Component=this.Component[f]}return this.hydrator=p,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}d(y,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",y)}})();</script><astro-island uid="28dGDx" component-url="/_astro/Search.yc_mQQIJ.js" component-export="default" renderer-url="/_astro/client.svelte.BtEbdPyR.js" props="{}" ssr client="only" opts="{&quot;name&quot;:&quot;Search&quot;,&quot;value&quot;:&quot;svelte&quot;}"></astro-island> <button aria-label="Display Settings" class="btn-plain scale-animation rounded-lg h-11 w-11 active:scale-90" id="display-settings-switch"> <svg width="1em" height="1em" class="text-[1.25rem]" data-icon="material-symbols:palette-outline">   <symbol id="ai:material-symbols:palette-outline" viewBox="0 0 24 24"><path fill="currentColor" d="M12 22q-2.05 0-3.875-.788t-3.187-2.15t-2.15-3.187T2 12q0-2.075.813-3.9t2.2-3.175T8.25 2.788T12.2 2q2 0 3.775.688t3.113 1.9t2.125 2.875T22 11.05q0 2.875-1.75 4.413T16 17h-1.85q-.225 0-.312.125t-.088.275q0 .3.375.863t.375 1.287q0 1.25-.687 1.85T12 22m-5.5-9q.65 0 1.075-.425T8 11.5t-.425-1.075T6.5 10t-1.075.425T5 11.5t.425 1.075T6.5 13m3-4q.65 0 1.075-.425T11 7.5t-.425-1.075T9.5 6t-1.075.425T8 7.5t.425 1.075T9.5 9m5 0q.65 0 1.075-.425T16 7.5t-.425-1.075T14.5 6t-1.075.425T13 7.5t.425 1.075T14.5 9m3 4q.65 0 1.075-.425T19 11.5t-.425-1.075T17.5 10t-1.075.425T16 11.5t.425 1.075T17.5 13M12 20q.225 0 .363-.125t.137-.325q0-.35-.375-.825T11.75 17.3q0-1.05.725-1.675T14.25 15H16q1.65 0 2.825-.962T20 11.05q0-3.025-2.312-5.038T12.2 4Q8.8 4 6.4 6.325T4 12q0 3.325 2.338 5.663T12 20"/></symbol><use href="#ai:material-symbols:palette-outline"></use>  </svg> </button> <astro-island uid="1ztwo4" component-url="/_astro/LightDarkSwitch.8mqMqUAQ.js" component-export="default" renderer-url="/_astro/client.svelte.BtEbdPyR.js" props="{}" ssr client="only" opts="{&quot;name&quot;:&quot;LightDarkSwitch&quot;,&quot;value&quot;:&quot;svelte&quot;}"></astro-island> <button aria-label="Menu" name="Nav Menu" class="btn-plain scale-animation rounded-lg w-11 h-11 active:scale-90 md:!hidden" id="nav-menu-switch"> <svg width="1em" height="1em" class="text-[1.25rem]" data-icon="material-symbols:menu-rounded">   <symbol id="ai:material-symbols:menu-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M4 18q-.425 0-.712-.288T3 17t.288-.712T4 16h16q.425 0 .713.288T21 17t-.288.713T20 18zm0-5q-.425 0-.712-.288T3 12t.288-.712T4 11h16q.425 0 .713.288T21 12t-.288.713T20 13zm0-5q-.425 0-.712-.288T3 7t.288-.712T4 6h16q.425 0 .713.288T21 7t-.288.713T20 8z"/></symbol><use href="#ai:material-symbols:menu-rounded"></use>  </svg> </button> </div> <div id="nav-menu-panel" class="float-panel float-panel-closed absolute transition-all fixed right-4 px-2 py-2"> <a href="/" class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
+            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition
+        "> <div class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]"> 主页 </div> <svg width="1em" height="1em" class="transition text-[1.25rem] text-[var(--primary)]" data-icon="material-symbols:chevron-right-rounded">   <symbol id="ai:material-symbols:chevron-right-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M12.6 12L8.7 8.1q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l4.6 4.6q.15.15.213.325t.062.375t-.062.375t-.213.325l-4.6 4.6q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7z"/></symbol><use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg>  </a><a href="/archive/" class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
+            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition
+        "> <div class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]"> 归档 </div> <svg width="1em" height="1em" viewBox="0 0 24 24" class="transition text-[1.25rem] text-[var(--primary)]" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg>  </a><a href="/about/" class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
+            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition
+        "> <div class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]"> 关于 </div> <svg width="1em" height="1em" viewBox="0 0 24 24" class="transition text-[1.25rem] text-[var(--primary)]" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg>  </a><a href="https://github.com/NollieLeo" class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
+            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition
+        " target="_blank"> <div class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]"> GitHub </div>  <svg width="1em" height="1em" viewBox="0 0 512 512" class="transition text-[0.75rem] text-black/25 dark:text-white/25 -translate-x-1" data-icon="fa6-solid:arrow-up-right-from-square">   <use href="#ai:fa6-solid:arrow-up-right-from-square"></use>  </svg> </a> </div> <astro-island uid="hs9WH" component-url="/_astro/DisplaySettings.9zOnOsrS.js" component-export="default" renderer-url="/_astro/client.svelte.BtEbdPyR.js" props="{}" ssr client="only" opts="{&quot;name&quot;:&quot;DisplaySettings&quot;,&quot;value&quot;:&quot;svelte&quot;}"></astro-island> </div> </div> <script type="module">function c(){localStorage.theme==="dark"?(document.documentElement.classList.remove("dark"),localStorage.theme="light"):(document.documentElement.classList.add("dark"),localStorage.theme="dark")}function o(){let t=document.getElementById("scheme-switch");t&&(t.onclick=function(){c()});let n=document.getElementById("display-settings-switch");n&&(n.onclick=function(){let e=document.getElementById("display-setting");e&&e.classList.toggle("float-panel-closed")});let l=document.getElementById("nav-menu-switch");l&&(l.onclick=function(){let e=document.getElementById("nav-menu-panel");e&&e.classList.toggle("float-panel-closed")})}o();</script> <script>(function(){const scriptUrl = "/pagefind/pagefind.js";
 
-  
-    <meta property="og:type" content="website">
-<meta property="og:title" content="翁先森的博客">
-<meta property="og:url" content="https://github.com/NollieLeo/index.html">
-<meta property="og:site_name" content="翁先森的博客">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="翁先森">
-<meta property="article:tag" content="程序猿">
-<meta name="twitter:card" content="summary">
-  
-  
-
-  <!-- feed -->
-  
-    <link rel="alternate" href="/atom.xml" title="翁先森的博客" type="application/atom+xml">
-  
-
-  
-    
-<link rel="stylesheet" href="/css/main.css">
-
-  
-
-  
-    <link rel="shortcut icon" href="/assets/avatar.png">
-  
-
-  
-
-  
-
-
-  
-</head>
-
-<body>
-  
-
-
-  <div class='l_body' id='start'>
-    <aside class='l_left' layout=''>
-    
-
-  
-
-<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div>
-
-<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/more/">更多</a></nav>
-</header>
-
-
-<div class="widgets">
-<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
-
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2021/06/13/%E7%AE%97%E6%B3%95%E4%B9%8B%E5%BF%AB%E4%B9%90%E6%95%B0/"><span class="title">算法之快乐数</span></a><a class="item title" href="/2021/06/02/%E6%89%8B%E5%86%99call-apply/"><span class="title">手写call, apply</span></a><a class="item title" href="/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/"><span class="title">vue3渲染器设计与总结</span></a><a class="item title" href="/2020/10/14/%E7%BD%91%E6%A0%BC%E5%B8%83%E5%B1%80%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0/"><span class="title">网格布局具体实现</span></a><a class="item title" href="/2020/03/16/==%E4%B8%8E===%E5%8C%BA%E5%88%AB/"><span class="title">==与===区别</span></a><a class="item title" href="/2020/11/08/useRef%E6%8B%BF%E5%AD%90%E7%BB%84%E4%BB%B6%E6%96%B9%E6%B3%95/"><span class="title">useRef拿子组件方法</span></a><a class="item title" href="/2023/02/02/%E5%BE%AE%E4%BB%BB%E5%8A%A1%E7%BC%93%E5%86%B2%E9%98%9F%E5%88%97/"><span class="title">微任务缓冲队列</span></a><a class="item title" href="/2022/03/26/%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1-electron-node/"><span class="title">进程通信(electron/node)</span></a><a class="item title" href="/2020/03/23/%E9%9D%A2%E8%AF%95%E9%A2%98/"><span class="title">面试题</span></a><a class="item title" href="/2021/05/28/%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%82%B9/"><span class="title">面试需要知道点</span></a></div></widget>
-
-
-</div>
-<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/NollieLeo" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/logo-github.svg"/></a></div></footer>
-
-    </aside>
-    <div class='l_main list'>
-      
-  
-
-<header class="header mobile-only"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">翁先森的博客</div><div class="sub cap">乌拉</div></a></div></header>
-
-
-
-      
-
-
-  
-
-<div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
-
-  <div class="post-list post"><a class="post-card post " href="/2023/02/02/%E5%BE%AE%E4%BB%BB%E5%8A%A1%E7%BC%93%E5%86%B2%E9%98%9F%E5%88%97/">
-<article class="md-text"><h2 class="post-title">微任务缓冲队列</h2><div class="excerpt"><p>
-微任务的缓冲队列，就是为了解决很多重复执行的场景，避免某个任务的重复执行造成性能的开销问题，包括 Vue 中的副作用更新任务，都是采用微任务队列进行缓冲
-
-12345678910111213141516171819202122232425262728// 任务缓存队列，用Set数据结构表示// 这样可以保证同一个任务执行多次的时候，Set中存入的永远都是唯一的cont queue = ne...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-02-02T01:40:08.000Z">2023-02-02</time></span><span class="cap breadcrumb">Javascript</span></div></article>
-</a><a class="post-card post " href="/2023/02/01/2023%E5%B9%B4%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E5%87%86%E5%A4%87/">
-<article class="md-text"><h2 class="post-title">2023年面试需要准备</h2><div class="excerpt"><p>html框架算法
-栈，树，队列，链表，动态规划等
-最长递增子序列
-
-</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-02-01T06:55:26.000Z">2023-02-01</time></span></div></article>
-</a><a class="post-card post " href="/2023/01/28/diff%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%93/">
-<article class="md-text"><h2 class="post-title">diff算法原理和总结</h2><div class="excerpt"><p>
-这里举例采用 vue 的框架设计进行解释 diff
-
-
-diff 算法的核心其实是都是只关心新旧的虚拟节点都存在一组子节点的情况。目的都是达到减少性能的开销，其中有比较直观的就是–减少 dom 节点的操作
-
-在Vue3 渲染器设计与总结中 当涉及到两组子节点的更新的时候，我们采用的是全量卸载并且重新挂载的形式去进行子节点的更新的，这样是非常不合理。
-如果只从 “挂载”和“卸载”的两个简单角...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-01-28T05:45:24.000Z">2023-01-28</time></span><span class="cap breadcrumb">Vue</span></div></article>
-</a><a class="post-card post " href="/2022/12/03/vue3%E6%B8%B2%E6%9F%93%E5%99%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%BB%E7%BB%93/">
-<article class="md-text"><h2 class="post-title">vue3渲染器设计与总结</h2><div class="excerpt"><p>前置概念虚拟 domvdom，虚拟 dom 就是用来表示真实的 dom 元素的属性或者特点的一套数据结构，和真实 dom 一样具有树形结构，具有许多树形节点 vnode
-可以简要的表示
-123456789const vnode = &#123;  type: &quot;h1&quot;,  children: [    &#123;      type: &quot;h2&quot;,  ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2022-12-03T11:39:37.000Z">2022-12-03</time></span><span class="cap breadcrumb">Vue</span></div></article>
-</a><a class="post-card post " href="/2022/11/09/%E5%8F%8C%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%8D%95%E6%9C%BA%E4%BA%8B%E4%BB%B6%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
-<article class="md-text"><h2 class="post-title">双击事件和单机事件冲突解决方案</h2><div class="excerpt"><p>双击事件（dblclick）时，不触发单击事件(click)事件绑定中，执行双击事件(dblclick)时能触发两次单击事件(click)。即一个标签元素（如button等），如果元素同时绑定了单击事件(click)和双击事件(dblclick),那么执行单击事件(click)时，不会触发双击事件(dblclick)， 执行双击事件(dblclick)时却会触发两次单击事件(click)。
-...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2022-11-09T06:37:20.000Z">2022-11-09</time></span><span class="cap breadcrumb">Javascript</span></div></article>
-</a><a class="post-card post " href="/2022/11/03/vite%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
-<article class="md-text"><h2 class="post-title">vite学习记录</h2><div class="excerpt"><p>vite前置知识
-no-bundle：利用浏览器原生 ES 模块的支持，实现开发阶段的 Dev Server，进行模块的按需加载，而不是先整体打包再进行加载。
-import：vite中的一个 import 语句代表一个 HTTP 请求
-
-初始化模板
-这里我们采用pnpm和vite，当然需要全局安装一下。学习记录中使用的是react + ts技术栈
-
-1pnpm create vite
-
-初始...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2022-11-03T02:37:51.000Z">2022-11-03</time></span><span class="cap breadcrumb">Vite</span></div></article>
-</a><a class="post-card post " href="/2022/09/03/%E7%90%86%E8%A7%A3Proxy%E5%92%8CReflect/">
-<article class="md-text"><h2 class="post-title">理解Proxy和Reflect</h2><div class="excerpt"><p>理解Proxy
-Vue3中利用的是Proxy以及Reflect去代理对象的
-
-我们知道Proxy是只能代理对象类型的，非对象类型不可以进行代理
-所谓代理：
-
-指的是对一个 对象 的 基本语义 的代理
-
-何为基本语义比如我们对对象的一堆简单操作
-12console.log(obj.a); // 读取属性操作obj.a++; // 设置属性值操作
-
-类似这种读取，设置属性值的操作，就是属于基本的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2022-09-03T02:43:45.000Z">2022-09-03</time></span><span class="cap breadcrumb">Javascript</span></div></article>
-</a><a class="post-card post " href="/2022/08/02/typescript%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">
-<article class="md-text"><h2 class="post-title">typescript刷题记录</h2><div class="excerpt"><p>typescript刷题记录题目一解决如下错误
-1234567891011121314type User = &#123;    id: number;    kind: string;&#125;;function makeCustomer&lt;T extends User&gt;(u: T): T &#123;  // Error（TS 编译器版本：v4.4.2）  // Type &...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2022-08-02T02:44:13.000Z">2022-08-02</time></span><span class="cap breadcrumb">Typescript</span></div></article>
-</a><a class="post-card post " href="/2022/06/05/ts%E4%B9%8B%E5%8D%8F%E5%8F%98%E5%92%8C%E9%80%86%E5%8F%98/">
-<article class="md-text"><h2 class="post-title">ts之协变和逆变</h2><div class="excerpt"><p>协变和逆变协变和逆变是编程理论中一个很重要的话题。用于表达父类子类在安全类型转换后的兼容性（或者说继承关系）。定义为：如果A，B代表两个类型；f()表示类型转换；A -&gt; B表示A是B的子类。
-
-当f()是协变时：若 A -&gt; B，则f(A) -&gt; f(B)
-当f()是逆变时：若 A -&gt; B，则f(B) -&gt; f(A)
-当f()是双变时：若 A -&gt; B...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2022-06-05T08:53:07.000Z">2022-06-05</time></span><span class="cap breadcrumb">Typescript</span></div></article>
-</a><a class="post-card post " href="/2022/05/08/vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/">
-<article class="md-text"><h2 class="post-title">vue的响应式系统设计总结</h2><div class="excerpt"><p>vue3 - 响应式学习前置知识副作用函数副作用函数就是指的会产生副作用的函数
-123function effect()&#123;  document.body.innerHTML = &#x27;hello world&#x27;&#125;
-
-effect函数会直接或者间接的影响到其他地方函数的执行，也就是说，比如修改一个变量，这个变量其他地方也读取到了
-响应式数据假如，有一个引用类型...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2022-05-08T06:50:34.000Z">2022-05-08</time></span><span class="cap breadcrumb">Vue</span></div></article>
-</a></div>
-  
-  <div class='paginator-wrap dis-select'>
-  <span class="extend prev" rel="prev"></span><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/2/"></a>
-  </div>
-
-
-
-
-      
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
-</div></footer>
-
-      <div class='float-panel mobile-only blur' style='display:none'>
-  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
-    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
-  </button>
-</div>
-
-    </div>
-  </div>
-  <div class='scripts'>
-    <script type="text/javascript">
-  const stellar = {
-    // 懒加载 css https://github.com/filamentgroup/loadCSS
-    loadCSS: (href, before, media, attributes) => {
-      var doc = window.document;
-      var ss = doc.createElement("link");
-      var ref;
-      if (before) {
-        ref = before;
-      } else {
-        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
-        ref = refs[refs.length - 1];
-      }
-      var sheets = doc.styleSheets;
-      if (attributes) {
-        for (var attributeName in attributes) {
-          if (attributes.hasOwnProperty(attributeName)) {
-            ss.setAttribute(attributeName, attributes[attributeName]);
-          }
+async function loadPagefind() {
+    try {
+        const response = await fetch(scriptUrl, { method: 'HEAD' });
+        if (!response.ok) {
+            throw new Error(`Pagefind script not found: ${response.status}`);
         }
-      }
-      ss.rel = "stylesheet";
-      ss.href = href;
-      ss.media = "only x";
-      function ready(cb) {
-        if (doc.body) {
-          return cb();
-        }
-        setTimeout(function () {
-          ready(cb);
+
+        const pagefind = await import(scriptUrl);
+
+        await pagefind.options({
+            excerptLength: 20
         });
-      }
-      ready(function () {
-        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
-      });
-      var onloadcssdefined = function (cb) {
-        var resolvedHref = ss.href;
-        var i = sheets.length;
-        while (i--) {
-          if (sheets[i].href === resolvedHref) {
-            return cb();
-          }
-        }
-        setTimeout(function () {
-          onloadcssdefined(cb);
-        });
-      };
-      function loadCB() {
-        if (ss.addEventListener) {
-          ss.removeEventListener("load", loadCB);
-        }
-        ss.media = media || "all";
-      }
-      if (ss.addEventListener) {
-        ss.addEventListener("load", loadCB);
-      }
-      ss.onloadcssdefined = onloadcssdefined;
-      onloadcssdefined(loadCB);
-      return ss;
-    },
 
-    // 从 butterfly 和 volantis 获得灵感
-    loadScript: (src, opt) => new Promise((resolve, reject) => {
-      var script = document.createElement('script');
-      script.src = src;
-      if (opt) {
-        for (let key of Object.keys(opt)) {
-          script[key] = opt[key]
-        }
-      } else {
-        // 默认异步，如果需要同步，第二个参数传入 {} 即可
-        script.async = true
-      }
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    }),
+        window.pagefind = pagefind;
 
-    // https://github.com/jerryc127/hexo-theme-butterfly
-    jQuery: (fn) => {
-      if (typeof jQuery === 'undefined') {
-        stellar.loadScript(stellar.plugins.jQuery).then(fn)
-      } else {
-        fn()
-      }
+        document.dispatchEvent(new CustomEvent('pagefindready'));
+        console.log('Pagefind loaded and initialized successfully, event dispatched.');
+    } catch (error) {
+        console.error('Failed to load Pagefind:', error);
+        window.pagefind = {
+            search: () => Promise.resolve({ results: [] }),
+            options: () => Promise.resolve(),
+        };
+        document.dispatchEvent(new CustomEvent('pagefindloaderror'));
+        console.log('Pagefind load error, event dispatched.');
     }
-  };
-  stellar.version = '1.18.5';
-  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
-  stellar.config = {
-    date_suffix: {
-      just: '刚刚',
-      min: '分钟前',
-      hour: '小时前',
-      day: '天前',
-      month: '个月前',
-    },
-  };
+}
 
-  // required plugins (only load if needs)
-  stellar.plugins = {
-    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
-  };
-
-  if ('local_search') {
-    stellar.search = {};
-    stellar.search.service = 'local_search';
-    if (stellar.search.service == 'local_search') {
-      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
-      stellar.search[stellar.search.service] = service_obj;
-    }
-  }
-
-  // stellar js
-  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
-
-  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
-  // optional plugins
-  if ('true' == 'true') {
-    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
-  }
-  if ('true' == 'true') {
-    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
-  }
-  if ('' == 'true') {
-    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
-  }
-  if ('true' == 'true') {
-    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
-  }
-  if ('true' == 'true') {
-    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
-  }
-  if ('false' == 'true') {
-    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
-  }
-</script>
-
-<!-- required -->
-
-  
-<script src="/js/main.js" async></script>
-
-
-
-<!-- optional -->
-
-
-
-<!-- inject -->
-
-
-  </div>
-</body>
-</html>
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadPagefind);
+} else {
+    loadPagefind();
+}
+})();</script> </div> </div>   <div class="absolute w-full z-30 pointer-events-none" style="top: 5.5rem"> <!-- The pointer-events-none here prevent blocking the click event of the TOC --> <div class="relative max-w-[var(--page-width)] mx-auto pointer-events-auto"> <div id="main-grid" class="transition duration-700 w-full left-0 right-0 grid grid-cols-[17.5rem_auto] grid-rows-[auto_1fr_auto] lg:grid-rows-[auto]
+    mx-auto gap-4 px-0 md:px-4"> <!-- Banner image credit -->  <div id="sidebar" class="mb-4 row-start-2 row-end-3 col-span-2 lg:row-start-1 lg:row-end-2 lg:col-span-1 lg:max-w-[17.5rem] onload-animation w-full"> <div class="flex flex-col w-full gap-4 mb-4"> <div class="card-base p-3"> <a aria-label="Go to About Page" href="/about/" class="group block relative mx-auto mt-1 lg:mx-0 lg:mt-0 mb-3
+       max-w-[12rem] lg:max-w-none overflow-hidden rounded-xl active:scale-95"> <div class="absolute transition pointer-events-none group-hover:bg-black/30 group-active:bg-black/50
+        w-full h-full z-50 flex items-center justify-center"> <svg width="1.13em" height="1em" class="transition opacity-0 scale-90 group-hover:scale-100 group-hover:opacity-100 text-white text-5xl" data-icon="fa6-regular:address-card">   <symbol id="ai:fa6-regular:address-card" viewBox="0 0 576 512"><path fill="currentColor" d="M512 80c8.8 0 16 7.2 16 16v320c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16zM64 32C28.7 32 0 60.7 0 96v320c0 35.3 28.7 64 64 64h448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64zm144 224a64 64 0 1 0 0-128a64 64 0 1 0 0 128m-32 32c-44.2 0-80 35.8-80 80c0 8.8 7.2 16 16 16h192c8.8 0 16-7.2 16-16c0-44.2-35.8-80-80-80zm200-144c-13.3 0-24 10.7-24 24s10.7 24 24 24h80c13.3 0 24-10.7 24-24s-10.7-24-24-24zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24h80c13.3 0 24-10.7 24-24s-10.7-24-24-24z"/></symbol><use href="#ai:fa6-regular:address-card"></use>  </svg> </div> <div class="mx-auto lg:w-full h-full lg:mt-0  overflow-hidden relative"> <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div> <img src="/_astro/avatar.C4TLYffm_Z15H8nq.webp" alt="Profile Image of the Author" style="object-position: center" loading="lazy" decoding="async" fetchpriority="auto" width="1240" height="992" class="w-full h-full object-cover">  </div> </a> <div class="px-2"> <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">翁先森</div> <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div> <div class="text-center text-neutral-400 mb-2.5 transition">前端程序猿 💻 乌拉！</div> <div class="flex flex-wrap gap-2 justify-center mb-1">  <a rel="me" aria-label="GitHub" href="https://github.com/NollieLeo" target="_blank" class="btn-regular rounded-lg h-10 gap-2 px-3 font-bold active:scale-95"> <svg width="0.97em" height="1em" class="text-[1.5rem]" data-icon="fa6-brands:github">   <symbol id="ai:fa6-brands:github" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6c-3.3.3-5.6-1.3-5.6-3.6c0-2 2.3-3.6 5.2-3.6c3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9c2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9c.3 2 2.9 3.3 5.9 2.6c2.9-.7 4.9-2.6 4.6-4.6c-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2c12.8 2.3 17.3-5.6 17.3-12.1c0-6.2-.3-40.4-.3-61.4c0 0-70 15-84.7-29.8c0 0-11.4-29.1-27.8-36.6c0 0-22.9-15.7 1.6-15.4c0 0 24.9 2 38.6 25.8c21.9 38.6 58.6 27.5 72.9 20.9c2.3-16 8.8-27.1 16-33.7c-55.9-6.2-112.3-14.3-112.3-110.5c0-27.5 7.6-41.3 23.6-58.9c-2.6-6.5-11.1-33.3 2.6-67.9c20.9-6.5 69 27 69 27c20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27c13.7 34.7 5.2 61.4 2.6 67.9c16 17.7 25.8 31.5 25.8 58.9c0 96.5-58.9 104.2-114.8 110.5c9.2 7.9 17 22.9 17 46.4c0 33.7-.3 75.4-.3 83.6c0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252C496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2c1.6 1.6 3.9 2.3 5.2 1c1.3-1 1-3.3-.7-5.2c-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9c1.6 1 3.6.7 4.3-.7c.7-1.3-.3-2.9-2.3-3.9c-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2c2.3 2.3 5.2 2.6 6.5 1c1.3-1.3.7-4.3-1.3-6.2c-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2c-1.4-2.3-4-3.3-5.6-2"/></symbol><use href="#ai:fa6-brands:github"></use>  </svg> GitHub </a> </div> </div> </div> </div> <div id="sidebar-sticky" class="transition-all duration-700 flex flex-col w-full gap-4 top-4 sticky top-4"> <widget-layout data-id="categories" data-is-collapsed="true" class="pb-4 card-base onload-animation" style="animation-delay: 150ms; --collapsedHeight: 7.5rem;" data-astro-cid-ucso7hve="true"> <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative ml-8 mt-4 mb-2
+        before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:left-[-16px] before:top-[5.5px]" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;">分类</div> <div id="categories" class="collapse-wrapper px-4 overflow-hidden collapsed" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;"> <a href="/archive/?category=%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91" aria-label="View all posts in the 前端开发 category"> <button class="
+            w-full
+            h-10
+            rounded-lg
+            bg-none
+            hover:bg-[var(--btn-plain-bg-hover)]
+            active:bg-[var(--btn-plain-bg-active)]
+            transition-all
+            pl-2
+            hover:pl-3
+            
+            text-neutral-700
+            hover:text-[var(--primary)]
+            dark:text-neutral-300
+            dark:hover:text-[var(--primary)]
+        "> <div class="flex items-center justify-between relative mr-2"> <div class="overflow-hidden text-left whitespace-nowrap overflow-ellipsis  "> 前端开发 </div> <div class="transition px-2 h-7 ml-4 min-w-[2rem] rounded-lg text-sm font-bold
+                    text-[var(--btn-content)] dark:text-[var(--deep-text)]
+                    bg-[var(--btn-regular-bg)] dark:bg-[var(--primary)]
+                    flex items-center justify-center"> 99 </div> </div> </button> </a><a href="/archive/?category=%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6" aria-label="View all posts in the 前端框架 category"> <button class="
+            w-full
+            h-10
+            rounded-lg
+            bg-none
+            hover:bg-[var(--btn-plain-bg-hover)]
+            active:bg-[var(--btn-plain-bg-active)]
+            transition-all
+            pl-2
+            hover:pl-3
+            
+            text-neutral-700
+            hover:text-[var(--primary)]
+            dark:text-neutral-300
+            dark:hover:text-[var(--primary)]
+        "> <div class="flex items-center justify-between relative mr-2"> <div class="overflow-hidden text-left whitespace-nowrap overflow-ellipsis  "> 前端框架 </div> <div class="transition px-2 h-7 ml-4 min-w-[2rem] rounded-lg text-sm font-bold
+                    text-[var(--btn-content)] dark:text-[var(--deep-text)]
+                    bg-[var(--btn-regular-bg)] dark:bg-[var(--primary)]
+                    flex items-center justify-center"> 16 </div> </div> </button> </a><a href="/archive/?category=%E5%B7%A5%E7%A8%8B%E5%8C%96" aria-label="View all posts in the 工程化 category"> <button class="
+            w-full
+            h-10
+            rounded-lg
+            bg-none
+            hover:bg-[var(--btn-plain-bg-hover)]
+            active:bg-[var(--btn-plain-bg-active)]
+            transition-all
+            pl-2
+            hover:pl-3
+            
+            text-neutral-700
+            hover:text-[var(--primary)]
+            dark:text-neutral-300
+            dark:hover:text-[var(--primary)]
+        "> <div class="flex items-center justify-between relative mr-2"> <div class="overflow-hidden text-left whitespace-nowrap overflow-ellipsis  "> 工程化 </div> <div class="transition px-2 h-7 ml-4 min-w-[2rem] rounded-lg text-sm font-bold
+                    text-[var(--btn-content)] dark:text-[var(--deep-text)]
+                    bg-[var(--btn-regular-bg)] dark:bg-[var(--primary)]
+                    flex items-center justify-center"> 12 </div> </div> </button> </a><a href="/archive/?uncategorized=true" aria-label="View all posts in the 未分类 category"> <button class="
+            w-full
+            h-10
+            rounded-lg
+            bg-none
+            hover:bg-[var(--btn-plain-bg-hover)]
+            active:bg-[var(--btn-plain-bg-active)]
+            transition-all
+            pl-2
+            hover:pl-3
+            
+            text-neutral-700
+            hover:text-[var(--primary)]
+            dark:text-neutral-300
+            dark:hover:text-[var(--primary)]
+        "> <div class="flex items-center justify-between relative mr-2"> <div class="overflow-hidden text-left whitespace-nowrap overflow-ellipsis  "> 未分类 </div> <div class="transition px-2 h-7 ml-4 min-w-[2rem] rounded-lg text-sm font-bold
+                    text-[var(--btn-content)] dark:text-[var(--deep-text)]
+                    bg-[var(--btn-regular-bg)] dark:bg-[var(--primary)]
+                    flex items-center justify-center"> 7 </div> </div> </button> </a><a href="/archive/?category=%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80" aria-label="View all posts in the 计算机基础 category"> <button class="
+            w-full
+            h-10
+            rounded-lg
+            bg-none
+            hover:bg-[var(--btn-plain-bg-hover)]
+            active:bg-[var(--btn-plain-bg-active)]
+            transition-all
+            pl-2
+            hover:pl-3
+            
+            text-neutral-700
+            hover:text-[var(--primary)]
+            dark:text-neutral-300
+            dark:hover:text-[var(--primary)]
+        "> <div class="flex items-center justify-between relative mr-2"> <div class="overflow-hidden text-left whitespace-nowrap overflow-ellipsis  "> 计算机基础 </div> <div class="transition px-2 h-7 ml-4 min-w-[2rem] rounded-lg text-sm font-bold
+                    text-[var(--btn-content)] dark:text-[var(--deep-text)]
+                    bg-[var(--btn-regular-bg)] dark:bg-[var(--primary)]
+                    flex items-center justify-center"> 46 </div> </div> </button> </a><a href="/archive/?category=%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB" aria-label="View all posts in the 资源分享 category"> <button class="
+            w-full
+            h-10
+            rounded-lg
+            bg-none
+            hover:bg-[var(--btn-plain-bg-hover)]
+            active:bg-[var(--btn-plain-bg-active)]
+            transition-all
+            pl-2
+            hover:pl-3
+            
+            text-neutral-700
+            hover:text-[var(--primary)]
+            dark:text-neutral-300
+            dark:hover:text-[var(--primary)]
+        "> <div class="flex items-center justify-between relative mr-2"> <div class="overflow-hidden text-left whitespace-nowrap overflow-ellipsis  "> 资源分享 </div> <div class="transition px-2 h-7 ml-4 min-w-[2rem] rounded-lg text-sm font-bold
+                    text-[var(--btn-content)] dark:text-[var(--deep-text)]
+                    bg-[var(--btn-regular-bg)] dark:bg-[var(--primary)]
+                    flex items-center justify-center"> 2 </div> </div> </button> </a><a href="/archive/?category=%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95" aria-label="View all posts in the 踩坑记录 category"> <button class="
+            w-full
+            h-10
+            rounded-lg
+            bg-none
+            hover:bg-[var(--btn-plain-bg-hover)]
+            active:bg-[var(--btn-plain-bg-active)]
+            transition-all
+            pl-2
+            hover:pl-3
+            
+            text-neutral-700
+            hover:text-[var(--primary)]
+            dark:text-neutral-300
+            dark:hover:text-[var(--primary)]
+        "> <div class="flex items-center justify-between relative mr-2"> <div class="overflow-hidden text-left whitespace-nowrap overflow-ellipsis  "> 踩坑记录 </div> <div class="transition px-2 h-7 ml-4 min-w-[2rem] rounded-lg text-sm font-bold
+                    text-[var(--btn-content)] dark:text-[var(--deep-text)]
+                    bg-[var(--btn-regular-bg)] dark:bg-[var(--primary)]
+                    flex items-center justify-center"> 1 </div> </div> </button> </a><a href="/archive/?category=%E9%9D%A2%E8%AF%95%E4%B8%8E%E6%80%BB%E7%BB%93" aria-label="View all posts in the 面试与总结 category"> <button class="
+            w-full
+            h-10
+            rounded-lg
+            bg-none
+            hover:bg-[var(--btn-plain-bg-hover)]
+            active:bg-[var(--btn-plain-bg-active)]
+            transition-all
+            pl-2
+            hover:pl-3
+            
+            text-neutral-700
+            hover:text-[var(--primary)]
+            dark:text-neutral-300
+            dark:hover:text-[var(--primary)]
+        "> <div class="flex items-center justify-between relative mr-2"> <div class="overflow-hidden text-left whitespace-nowrap overflow-ellipsis  "> 面试与总结 </div> <div class="transition px-2 h-7 ml-4 min-w-[2rem] rounded-lg text-sm font-bold
+                    text-[var(--btn-content)] dark:text-[var(--deep-text)]
+                    bg-[var(--btn-regular-bg)] dark:bg-[var(--primary)]
+                    flex items-center justify-center"> 6 </div> </div> </button> </a> </div> <div class="expand-btn px-4 -mb-2" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;"> <button class="btn-plain rounded-lg w-full h-9" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;"> <div class="text-[var(--primary)] flex items-center justify-center gap-2 -translate-x-2" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;"> <svg width="1em" height="1em" class="text-[1.75rem]" data-astro-cid-ucso7hve="true" data-icon="material-symbols:more-horiz">   <symbol id="ai:material-symbols:more-horiz" viewBox="0 0 24 24"><path fill="currentColor" d="M6 14q-.825 0-1.412-.587T4 12t.588-1.412T6 10t1.413.588T8 12t-.587 1.413T6 14m6 0q-.825 0-1.412-.587T10 12t.588-1.412T12 10t1.413.588T14 12t-.587 1.413T12 14m6 0q-.825 0-1.412-.587T16 12t.588-1.412T18 10t1.413.588T20 12t-.587 1.413T18 14"/></symbol><use href="#ai:material-symbols:more-horiz"></use>  </svg> 更多 </div> </button> </div> </widget-layout>  <script type="module">class d extends HTMLElement{constructor(){if(super(),this.dataset.isCollapsed!=="true")return;const e=this.dataset.id,t=this.querySelector(".expand-btn"),s=this.querySelector(`#${e}`);t.addEventListener("click",()=>{s.classList.remove("collapsed"),t.classList.add("hidden")})}}customElements.get("widget-layout")||customElements.define("widget-layout",d);</script> <widget-layout data-id="tags" data-is-collapsed="true" class="pb-4 card-base onload-animation" style="animation-delay: 200ms; --collapsedHeight: 7.5rem;" data-astro-cid-ucso7hve="true"> <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative ml-8 mt-4 mb-2
+        before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:left-[-16px] before:top-[5.5px]" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;">标签</div> <div id="tags" class="collapse-wrapper px-4 overflow-hidden collapsed" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;">  <div class="flex gap-2 flex-wrap"> <a href="/archive/?tag=%3D%3D" aria-label="View all posts with the == tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  == </a><a href="/archive/?tag=%3D%3D%3D" aria-label="View all posts with the === tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  === </a><a href="/archive/?tag=apply" aria-label="View all posts with the apply tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  apply </a><a href="/archive/?tag=ASCII" aria-label="View all posts with the ASCII tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  ASCII </a><a href="/archive/?tag=async%20await" aria-label="View all posts with the async await tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  async await </a><a href="/archive/?tag=Axios" aria-label="View all posts with the Axios tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Axios </a><a href="/archive/?tag=Babel" aria-label="View all posts with the Babel tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Babel </a><a href="/archive/?tag=BFC" aria-label="View all posts with the BFC tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  BFC </a><a href="/archive/?tag=bind" aria-label="View all posts with the bind tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  bind </a><a href="/archive/?tag=Blob" aria-label="View all posts with the Blob tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Blob </a><a href="/archive/?tag=Bug" aria-label="View all posts with the Bug tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Bug </a><a href="/archive/?tag=call" aria-label="View all posts with the call tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  call </a><a href="/archive/?tag=commander" aria-label="View all posts with the commander tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  commander </a><a href="/archive/?tag=compose" aria-label="View all posts with the compose tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  compose </a><a href="/archive/?tag=CSS" aria-label="View all posts with the CSS tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  CSS </a><a href="/archive/?tag=curry" aria-label="View all posts with the curry tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  curry </a><a href="/archive/?tag=diff" aria-label="View all posts with the diff tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  diff </a><a href="/archive/?tag=easy-table" aria-label="View all posts with the easy-table tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  easy-table </a><a href="/archive/?tag=Electron" aria-label="View all posts with the Electron tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Electron </a><a href="/archive/?tag=electron" aria-label="View all posts with the electron tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  electron </a><a href="/archive/?tag=ES6" aria-label="View all posts with the ES6 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  ES6 </a><a href="/archive/?tag=Eslint" aria-label="View all posts with the Eslint tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Eslint </a><a href="/archive/?tag=Event%20Loop" aria-label="View all posts with the Event Loop tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Event Loop </a><a href="/archive/?tag=EventEmitter" aria-label="View all posts with the EventEmitter tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  EventEmitter </a><a href="/archive/?tag=fetch" aria-label="View all posts with the fetch tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  fetch </a><a href="/archive/?tag=figlet" aria-label="View all posts with the figlet tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  figlet </a><a href="/archive/?tag=flex" aria-label="View all posts with the flex tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  flex </a><a href="/archive/?tag=flex%E5%B8%83%E5%B1%80" aria-label="View all posts with the flex布局 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  flex布局 </a><a href="/archive/?tag=forEach" aria-label="View all posts with the forEach tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  forEach </a><a href="/archive/?tag=forwardRef" aria-label="View all posts with the forwardRef tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  forwardRef </a><a href="/archive/?tag=git" aria-label="View all posts with the git tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  git </a><a href="/archive/?tag=grid" aria-label="View all posts with the grid tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  grid </a><a href="/archive/?tag=grid%E5%B8%83%E5%B1%80" aria-label="View all posts with the grid布局 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  grid布局 </a><a href="/archive/?tag=gulp" aria-label="View all posts with the gulp tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  gulp </a><a href="/archive/?tag=hooks" aria-label="View all posts with the hooks tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  hooks </a><a href="/archive/?tag=HTML" aria-label="View all posts with the HTML tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  HTML </a><a href="/archive/?tag=http" aria-label="View all posts with the http tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  http </a><a href="/archive/?tag=inquirer" aria-label="View all posts with the inquirer tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  inquirer </a><a href="/archive/?tag=instanceof" aria-label="View all posts with the instanceof tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  instanceof </a><a href="/archive/?tag=JavaScript" aria-label="View all posts with the JavaScript tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  JavaScript </a><a href="/archive/?tag=jsx" aria-label="View all posts with the jsx tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  jsx </a><a href="/archive/?tag=js%E5%BC%95%E6%93%8E" aria-label="View all posts with the js引擎 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  js引擎 </a><a href="/archive/?tag=loading%E5%8A%A8%E7%94%BB" aria-label="View all posts with the loading动画 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  loading动画 </a><a href="/archive/?tag=new" aria-label="View all posts with the new tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  new </a><a href="/archive/?tag=Node.js" aria-label="View all posts with the Node.js tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Node.js </a><a href="/archive/?tag=Npm" aria-label="View all posts with the Npm tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Npm </a><a href="/archive/?tag=object" aria-label="View all posts with the object tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  object </a><a href="/archive/?tag=Object.defineProperty" aria-label="View all posts with the Object.defineProperty tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Object.defineProperty </a><a href="/archive/?tag=onbeforeunload" aria-label="View all posts with the onbeforeunload tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  onbeforeunload </a><a href="/archive/?tag=onunload" aria-label="View all posts with the onunload tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  onunload </a><a href="/archive/?tag=ora" aria-label="View all posts with the ora tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  ora </a><a href="/archive/?tag=PDF" aria-label="View all posts with the PDF tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  PDF </a><a href="/archive/?tag=plop" aria-label="View all posts with the plop tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  plop </a><a href="/archive/?tag=Primise" aria-label="View all posts with the Primise tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Primise </a><a href="/archive/?tag=Primise%20all" aria-label="View all posts with the Primise all tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Primise all </a><a href="/archive/?tag=Primise%20race" aria-label="View all posts with the Primise race tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Primise race </a><a href="/archive/?tag=Promise" aria-label="View all posts with the Promise tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Promise </a><a href="/archive/?tag=proxy" aria-label="View all posts with the proxy tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  proxy </a><a href="/archive/?tag=Proxy" aria-label="View all posts with the Proxy tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Proxy </a><a href="/archive/?tag=React" aria-label="View all posts with the React tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  React </a><a href="/archive/?tag=React%20fiber" aria-label="View all posts with the React fiber tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  React fiber </a><a href="/archive/?tag=React%20Hooks" aria-label="View all posts with the React Hooks tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  React Hooks </a><a href="/archive/?tag=React%20render" aria-label="View all posts with the React render tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  React render </a><a href="/archive/?tag=React-router" aria-label="View all posts with the React-router tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  React-router </a><a href="/archive/?tag=Reflect" aria-label="View all posts with the Reflect tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Reflect </a><a href="/archive/?tag=requestAnimationFrame" aria-label="View all posts with the requestAnimationFrame tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  requestAnimationFrame </a><a href="/archive/?tag=setInterval" aria-label="View all posts with the setInterval tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  setInterval </a><a href="/archive/?tag=setTimeout" aria-label="View all posts with the setTimeout tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  setTimeout </a><a href="/archive/?tag=trycatch" aria-label="View all posts with the trycatch tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  trycatch </a><a href="/archive/?tag=typeOf" aria-label="View all posts with the typeOf tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  typeOf </a><a href="/archive/?tag=TypeScript" aria-label="View all posts with the TypeScript tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  TypeScript </a><a href="/archive/?tag=useEffect" aria-label="View all posts with the useEffect tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  useEffect </a><a href="/archive/?tag=useImperativeHandle" aria-label="View all posts with the useImperativeHandle tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  useImperativeHandle </a><a href="/archive/?tag=useRef" aria-label="View all posts with the useRef tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  useRef </a><a href="/archive/?tag=Vite" aria-label="View all posts with the Vite tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Vite </a><a href="/archive/?tag=Vue" aria-label="View all posts with the Vue tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Vue </a><a href="/archive/?tag=Webpack" aria-label="View all posts with the Webpack tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Webpack </a><a href="/archive/?tag=webpack-loader" aria-label="View all posts with the webpack-loader tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  webpack-loader </a><a href="/archive/?tag=webpack-plugins" aria-label="View all posts with the webpack-plugins tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  webpack-plugins </a><a href="/archive/?tag=window.open" aria-label="View all posts with the window.open tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  window.open </a><a href="/archive/?tag=%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86" aria-label="View all posts with the 中序遍历 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  中序遍历 </a><a href="/archive/?tag=%E4%B9%A6%E7%B1%8D" aria-label="View all posts with the 书籍 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  书籍 </a><a href="/archive/?tag=%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF" aria-label="View all posts with the 事件循环 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  事件循环 </a><a href="/archive/?tag=%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A0%E5%93%A6%E6%A0%91" aria-label="View all posts with the 二叉搜素哦树 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  二叉搜素哦树 </a><a href="/archive/?tag=%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91" aria-label="View all posts with the 二叉搜索树 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  二叉搜索树 </a><a href="/archive/?tag=%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%8C%83%E5%9B%B4%E5%92%8C" aria-label="View all posts with the 二叉搜索树范围和 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  二叉搜索树范围和 </a><a href="/archive/?tag=%E4%BA%8C%E5%8F%89%E6%A0%91" aria-label="View all posts with the 二叉树 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  二叉树 </a><a href="/archive/?tag=%E4%BA%8C%E5%8F%89%E6%A0%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88" aria-label="View all posts with the 二叉树公共祖先 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  二叉树公共祖先 </a><a href="/archive/?tag=%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86" aria-label="View all posts with the 二叉树层序遍历 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  二叉树层序遍历 </a><a href="/archive/?tag=%E4%BA%8C%E5%8F%89%E6%A0%91%E6%B7%B1%E5%BA%A6" aria-label="View all posts with the 二叉树深度 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  二叉树深度 </a><a href="/archive/?tag=%E4%BD%9C%E7%94%A8%E5%9F%9F" aria-label="View all posts with the 作用域 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  作用域 </a><a href="/archive/?tag=%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE" aria-label="View all posts with the 作用域链 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  作用域链 </a><a href="/archive/?tag=%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86" aria-label="View all posts with the 前序遍历 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  前序遍历 </a><a href="/archive/?tag=%E5%8D%8F%E5%8F%98%E5%92%8C%E9%80%86%E5%8F%98" aria-label="View all posts with the 协变和逆变 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  协变和逆变 </a><a href="/archive/?tag=%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F" aria-label="View all posts with the 单例模式 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  单例模式 </a><a href="/archive/?tag=%E5%8E%9F%E5%9E%8B" aria-label="View all posts with the 原型 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  原型 </a><a href="/archive/?tag=%E5%8E%9F%E5%9E%8B%E5%BC%8F%E7%BB%A7%E6%89%BF" aria-label="View all posts with the 原型式继承 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  原型式继承 </a><a href="/archive/?tag=%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F" aria-label="View all posts with the 原型模式 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  原型模式 </a><a href="/archive/?tag=%E5%8E%9F%E5%9E%8B%E9%93%BE" aria-label="View all posts with the 原型链 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  原型链 </a><a href="/archive/?tag=%E5%8F%8C%E6%8C%87%E9%92%88" aria-label="View all posts with the 双指针 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  双指针 </a><a href="/archive/?tag=%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85" aria-label="View all posts with the 发布订阅 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  发布订阅 </a><a href="/archive/?tag=%E5%8F%98%E9%87%8F" aria-label="View all posts with the 变量 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  变量 </a><a href="/archive/?tag=%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91" aria-label="View all posts with the 合并二叉树 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  合并二叉树 </a><a href="/archive/?tag=%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86" aria-label="View all posts with the 后序遍历 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  后序遍历 </a><a href="/archive/?tag=%E5%90%8E%E7%AB%AF" aria-label="View all posts with the 后端 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  后端 </a><a href="/archive/?tag=%E5%93%88%E5%B8%8C%E8%A1%A8" aria-label="View all posts with the 哈希表 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  哈希表 </a><a href="/archive/?tag=%E5%93%8D%E5%BA%94%E5%BC%8F" aria-label="View all posts with the 响应式 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  响应式 </a><a href="/archive/?tag=%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98" aria-label="View all posts with the 回流和重绘 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  回流和重绘 </a><a href="/archive/?tag=%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD" aria-label="View all posts with the 垂直居中 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  垂直居中 </a><a href="/archive/?tag=%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6" aria-label="View all posts with the 垃圾回收机制 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  垃圾回收机制 </a><a href="/archive/?tag=%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B" aria-label="View all posts with the 基本数据类型和引用类型 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  基本数据类型和引用类型 </a><a href="/archive/?tag=%E5%A0%86%E5%92%8C%E6%A0%88" aria-label="View all posts with the 堆和栈 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  堆和栈 </a><a href="/archive/?tag=%E5%A4%9A%E6%80%81" aria-label="View all posts with the 多态 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  多态 </a><a href="/archive/?tag=%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86" aria-label="View all posts with the 大数据处理 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  大数据处理 </a><a href="/archive/?tag=%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99" aria-label="View all posts with the 学习资料 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  学习资料 </a><a href="/archive/?tag=%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1" aria-label="View all posts with the 宏任务和微任务 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  宏任务和微任务 </a><a href="/archive/?tag=%E5%AF%84%E7%94%9F%E5%BC%8F%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF" aria-label="View all posts with the 寄生式组合继承 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  寄生式组合继承 </a><a href="/archive/?tag=%E5%AF%84%E7%94%9F%E5%BC%8F%E7%BB%A7%E6%89%BF" aria-label="View all posts with the 寄生式继承 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  寄生式继承 </a><a href="/archive/?tag=%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91" aria-label="View all posts with the 对称二叉树 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  对称二叉树 </a><a href="/archive/?tag=%E5%AF%BC%E8%88%AA" aria-label="View all posts with the 导航 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  导航 </a><a href="/archive/?tag=%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F" aria-label="View all posts with the 工厂模式 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  工厂模式 </a><a href="/archive/?tag=%E5%B8%B8%E7%94%A8%E7%BD%91%E7%AB%99" aria-label="View all posts with the 常用网站 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  常用网站 </a><a href="/archive/?tag=%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91" aria-label="View all posts with the 平衡二叉树 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  平衡二叉树 </a><a href="/archive/?tag=%E5%BC%82%E6%AD%A5" aria-label="View all posts with the 异步 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  异步 </a><a href="/archive/?tag=%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88" aria-label="View all posts with the 快慢指针 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  快慢指针 </a><a href="/archive/?tag=%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96" aria-label="View all posts with the 性能优化 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  性能优化 </a><a href="/archive/?tag=%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87" aria-label="View all posts with the 执行上下文 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  执行上下文 </a><a href="/archive/?tag=%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88" aria-label="View all posts with the 执行上下文栈 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  执行上下文栈 </a><a href="/archive/?tag=%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95" aria-label="View all posts with the 排序算法 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  排序算法 </a><a href="/archive/?tag=%E6%95%B0%E7%BB%84%E6%89%81%E5%B9%B3%E5%8C%96" aria-label="View all posts with the 数组扁平化 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  数组扁平化 </a><a href="/archive/?tag=%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97" aria-label="View all posts with the 斐波那契数列 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  斐波那契数列 </a><a href="/archive/?tag=%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0" aria-label="View all posts with the 构造函数 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  构造函数 </a><a href="/archive/?tag=%E6%A0%88" aria-label="View all posts with the 栈 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  栈 </a><a href="/archive/?tag=%E6%B5%8F%E8%A7%88%E5%99%A8" aria-label="View all posts with the 浏览器 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  浏览器 </a><a href="/archive/?tag=%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6" aria-label="View all posts with the 浏览器的渲染机制 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  浏览器的渲染机制 </a><a href="/archive/?tag=%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9B%B8%E5%85%B3" aria-label="View all posts with the 浏览器相关 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  浏览器相关 </a><a href="/archive/?tag=%E6%B5%AE%E7%82%B9%E6%95%B0" aria-label="View all posts with the 浮点数 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  浮点数 </a><a href="/archive/?tag=%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAwebpack" aria-label="View all posts with the 深入浅出webpack tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  深入浅出webpack </a><a href="/archive/?tag=%E6%B7%B1%E6%8B%B7%E8%B4%9D" aria-label="View all posts with the 深拷贝 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  深拷贝 </a><a href="/archive/?tag=%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D" aria-label="View all posts with the 深拷贝与浅拷贝 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  深拷贝与浅拷贝 </a><a href="/archive/?tag=%E6%B8%B2%E6%9F%93%E8%BF%9B%E7%A8%8B" aria-label="View all posts with the 渲染进程 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  渲染进程 </a><a href="/archive/?tag=%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3" aria-label="View all posts with the 滑动窗口 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  滑动窗口 </a><a href="/archive/?tag=%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8" aria-label="View all posts with the 环形链表 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  环形链表 </a><a href="/archive/?tag=%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B" aria-label="View all posts with the 盒子模型 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  盒子模型 </a><a href="/archive/?tag=%E7%AE%97%E6%B3%95" aria-label="View all posts with the 算法 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  算法 </a><a href="/archive/?tag=%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2" aria-label="View all posts with the 类型转换 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  类型转换 </a><a href="/archive/?tag=%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97" aria-label="View all posts with the 精度运算 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  精度运算 </a><a href="/archive/?tag=%E7%BB%84%E4%BB%B6" aria-label="View all posts with the 组件 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  组件 </a><a href="/archive/?tag=%E7%BB%84%E5%90%88%E5%BC%8F%E7%BB%A7%E6%89%BF" aria-label="View all posts with the 组合式继承 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  组合式继承 </a><a href="/archive/?tag=%E7%BB%A7%E6%89%BF" aria-label="View all posts with the 继承 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  继承 </a><a href="/archive/?tag=%E7%BD%91%E7%AB%99%E6%94%B6%E8%97%8F" aria-label="View all posts with the 网站收藏 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  网站收藏 </a><a href="/archive/?tag=%E8%8A%82%E6%B5%81" aria-label="View all posts with the 节流 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  节流 </a><a href="/archive/?tag=%E8%A7%84%E8%8C%83" aria-label="View all posts with the 规范 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  规范 </a><a href="/archive/?tag=%E8%AE%A1%E6%97%B6%E5%99%A8" aria-label="View all posts with the 计时器 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  计时器 </a><a href="/archive/?tag=%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F" aria-label="View all posts with the 设计模式 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  设计模式 </a><a href="/archive/?tag=%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B" aria-label="View all posts with the 进程与线程 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  进程与线程 </a><a href="/archive/?tag=%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B" aria-label="View all posts with the 进程和线程 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  进程和线程 </a><a href="/archive/?tag=%E8%BF%AD%E4%BB%A3" aria-label="View all posts with the 迭代 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  迭代 </a><a href="/archive/?tag=%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6" aria-label="View all posts with the 逻辑运算符 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  逻辑运算符 </a><a href="/archive/?tag=%E9%93%BE%E8%A1%A8" aria-label="View all posts with the 链表 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  链表 </a><a href="/archive/?tag=%E9%97%AD%E5%8C%85" aria-label="View all posts with the 闭包 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  闭包 </a><a href="/archive/?tag=%E9%98%B2%E6%8A%96%E5%8A%A8" aria-label="View all posts with the 防抖动 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  防抖动 </a><a href="/archive/?tag=%E9%9D%A2%E8%AF%95" aria-label="View all posts with the 面试 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  面试 </a><a href="/archive/?tag=%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%8E%86" aria-label="View all posts with the 面试经历 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  面试经历 </a><a href="/archive/?tag=%E9%9D%A2%E8%AF%95%E9%A2%98" aria-label="View all posts with the 面试题 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  面试题 </a><a href="/archive/?tag=%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6" aria-label="View all posts with the 高阶组件 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  高阶组件 </a><a href="/archive/?tag=%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B" aria-label="View all posts with the 鸭子类型 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  鸭子类型 </a> </div>  </div> <div class="expand-btn px-4 -mb-2" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;"> <button class="btn-plain rounded-lg w-full h-9" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;"> <div class="text-[var(--primary)] flex items-center justify-center gap-2 -translate-x-2" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-[1.75rem]" data-astro-cid-ucso7hve="true" data-icon="material-symbols:more-horiz">   <use href="#ai:material-symbols:more-horiz"></use>  </svg> 更多 </div> </button> </div> </widget-layout>   </div> </div> <main id="swup-container" class="transition-swup-fade col-span-2 lg:col-span-1 overflow-hidden"> <div id="content-wrapper" class="onload-animation"> <!-- the overflow-hidden here prevent long text break the layout--> <!-- make id different from windows.swup global property -->  <div class="transition flex flex-col rounded-[var(--radius-large)] bg-[var(--card-bg)] py-1 md:py-0 md:bg-transparent md:gap-4 mb-4"> <div class="card-base flex flex-col-reverse md:flex-col w-full rounded-[var(--radius-large)] overflow-hidden relative onload-animation" style="animation-delay: calc(var(--content-delay) + 0ms);; --coverWidth: 28%;" data-astro-cid-iyiqi2so> <div class="pl-6 md:pl-9 pr-6 md:pr-2 pt-6 md:pt-7 pb-6 relative w-full md:w-[calc(100%_-_52px_-_12px)]" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <a href="/posts/手写叠词的处理/" class="transition group w-full block font-bold mb-3 text-3xl text-90
+        hover:text-[var(--primary)] dark:hover:text-[var(--primary)]
+        active:text-[var(--title-active)] dark:active:text-[var(--title-active)]
+        before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:top-[35px] before:left-[18px] before:hidden md:before:block
+        " data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 手写叠词的处理 <svg width="1em" height="1em" viewBox="0 0 24 24" class="inline text-[2rem] text-[var(--primary)] md:hidden translate-y-0.5 absolute" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-[var(--primary)] text-[2rem] transition hidden md:inline absolute translate-y-0.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </a> <!-- metadata --> <div class="flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2 mb-4"> <!-- publish date --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:calendar-today-outline-rounded">   <symbol id="ai:material-symbols:calendar-today-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V3q0-.425.288-.712T7 2t.713.288T8 3v1h8V3q0-.425.288-.712T17 2t.713.288T18 3v1h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6z"/></symbol><use href="#ai:material-symbols:calendar-today-outline-rounded"></use>  </svg> </div> <span class="text-50 text-sm font-medium">2023-03-03</span> </div> <!-- update date -->  <!-- categories --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:book-2-outline-rounded">   <symbol id="ai:material-symbols:book-2-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M6 15.325q.35-.175.725-.25T7.5 15H8V4h-.5q-.625 0-1.062.438T6 5.5zM10 15h8V4h-8zm-4 .325V4zM7.5 22q-1.45 0-2.475-1.025T4 18.5v-13q0-1.45 1.025-2.475T7.5 2H18q.825 0 1.413.587T20 4v12.525q0 .2-.162.363t-.588.362q-.35.175-.55.5t-.2.75t.2.763t.55.487t.55.413t.2.562v.25q0 .425-.288.725T19 22zm0-2h9.325q-.15-.35-.237-.712T16.5 18.5q0-.4.075-.775t.25-.725H7.5q-.65 0-1.075.438T6 18.5q0 .65.425 1.075T7.5 20"/></symbol><use href="#ai:material-symbols:book-2-outline-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <a href="/archive/?uncategorized=true" aria-label="View all posts in the 未分类 category" class="link-lg transition text-50 text-sm font-medium
+                            hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> 未分类 </a> </div> </div> <!-- tags --> <div class="items-center hidden md:flex"> <div class="meta-icon"> <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:tag-rounded">   <symbol id="ai:material-symbols:tag-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="m9 16l-.825 3.275q-.075.325-.325.525t-.6.2q-.475 0-.775-.375T6.3 18.8L7 16H4.275q-.5 0-.8-.387T3.3 14.75q.075-.35.35-.55t.625-.2H7.5l1-4H5.775q-.5 0-.8-.387T4.8 8.75q.075-.35.35-.55t.625-.2H9l.825-3.275Q9.9 4.4 10.15 4.2t.6-.2q.475 0 .775.375t.175.825L11 8h4l.825-3.275q.075-.325.325-.525t.6-.2q.475 0 .775.375t.175.825L17 8h2.725q.5 0 .8.387t.175.863q-.075.35-.35.55t-.625.2H16.5l-1 4h2.725q.5 0 .8.388t.175.862q-.075.35-.35.55t-.625.2H15l-.825 3.275q-.075.325-.325.525t-.6.2q-.475 0-.775-.375T12.3 18.8L13 16zm.5-2h4l1-4h-4z"/></symbol><use href="#ai:material-symbols:tag-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center">  <div class="transition text-50 text-sm font-medium">无标签</div> </div> </div> </div> <!-- description --> <div class="transition text-75 mb-3.5 pr-4" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> ... </div> <!-- word count and read time  --> <div class="text-sm text-black/30 dark:text-white/30 flex gap-4 transition" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 0  字 </div> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;">|</div> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 1  分钟 </div> </div> </div>  <a href="/posts/手写叠词的处理/" aria-label="手写叠词的处理" class="!hidden md:!flex btn-regular w-[3.25rem]
+         absolute right-3 top-3 bottom-3 rounded-xl bg-[var(--enter-btn-bg)]
+         hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)] active:scale-95
+        " data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="transition text-[var(--primary)] text-4xl mx-auto" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </a> </div> <div class="transition border-t-[1px] border-dashed mx-6 border-black/10 dark:border-white/[0.15] last:border-t-0 md:hidden" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"></div> <div class="card-base flex flex-col-reverse md:flex-col w-full rounded-[var(--radius-large)] overflow-hidden relative onload-animation" style="animation-delay: calc(var(--content-delay) + 50ms);; --coverWidth: 28%;" data-astro-cid-iyiqi2so> <div class="pl-6 md:pl-9 pr-6 md:pr-2 pt-6 md:pt-7 pb-6 relative w-full md:w-[calc(100%_-_52px_-_12px)]" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <a href="/posts/手写获取url上的query参数/" class="transition group w-full block font-bold mb-3 text-3xl text-90
+        hover:text-[var(--primary)] dark:hover:text-[var(--primary)]
+        active:text-[var(--title-active)] dark:active:text-[var(--title-active)]
+        before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:top-[35px] before:left-[18px] before:hidden md:before:block
+        " data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 手写获取url上的query参数 <svg width="1em" height="1em" viewBox="0 0 24 24" class="inline text-[2rem] text-[var(--primary)] md:hidden translate-y-0.5 absolute" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-[var(--primary)] text-[2rem] transition hidden md:inline absolute translate-y-0.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </a> <!-- metadata --> <div class="flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2 mb-4"> <!-- publish date --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:calendar-today-outline-rounded">   <use href="#ai:material-symbols:calendar-today-outline-rounded"></use>  </svg> </div> <span class="text-50 text-sm font-medium">2023-03-02</span> </div> <!-- update date -->  <!-- categories --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:book-2-outline-rounded">   <use href="#ai:material-symbols:book-2-outline-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <a href="/archive/?category=%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91" aria-label="View all posts in the 前端开发 category" class="link-lg transition text-50 text-sm font-medium
+                            hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> 前端开发 </a> </div> </div> <!-- tags --> <div class="items-center hidden md:flex"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:tag-rounded">   <use href="#ai:material-symbols:tag-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <div class="hidden mx-1.5 text-[var(--meta-divider)] text-sm">/</div>
+                <a href="/archive/?tag=JavaScript" aria-label="View all posts with the JavaScript tag" class="link-lg transition text-50 text-sm font-medium
+                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> JavaScript </a>  </div> </div> </div> <!-- description --> <div class="transition text-75 mb-3.5 pr-4" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 就如下:  js function urlHandler(url) {   const idx = url.indexOf(&quot;?&quot;);    let result = {};    if (idx  -1) {     const params = url.slice(idx + 1).split(... </div> <!-- word count and read time  --> <div class="text-sm text-black/30 dark:text-white/30 flex gap-4 transition" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 71  字 </div> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;">|</div> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 1  分钟 </div> </div> </div>  <a href="/posts/手写获取url上的query参数/" aria-label="手写获取url上的query参数" class="!hidden md:!flex btn-regular w-[3.25rem]
+         absolute right-3 top-3 bottom-3 rounded-xl bg-[var(--enter-btn-bg)]
+         hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)] active:scale-95
+        " data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="transition text-[var(--primary)] text-4xl mx-auto" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </a> </div> <div class="transition border-t-[1px] border-dashed mx-6 border-black/10 dark:border-white/[0.15] last:border-t-0 md:hidden" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"></div> <div class="card-base flex flex-col-reverse md:flex-col w-full rounded-[var(--radius-large)] overflow-hidden relative onload-animation" style="animation-delay: calc(var(--content-delay) + 100ms);; --coverWidth: 28%;" data-astro-cid-iyiqi2so> <div class="pl-6 md:pl-9 pr-6 md:pr-2 pt-6 md:pt-7 pb-6 relative w-full md:w-[calc(100%_-_52px_-_12px)]" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <a href="/posts/手写用js切换字符串大小写/" class="transition group w-full block font-bold mb-3 text-3xl text-90
+        hover:text-[var(--primary)] dark:hover:text-[var(--primary)]
+        active:text-[var(--title-active)] dark:active:text-[var(--title-active)]
+        before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:top-[35px] before:left-[18px] before:hidden md:before:block
+        " data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 手写用js切换字符串大小写 <svg width="1em" height="1em" viewBox="0 0 24 24" class="inline text-[2rem] text-[var(--primary)] md:hidden translate-y-0.5 absolute" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-[var(--primary)] text-[2rem] transition hidden md:inline absolute translate-y-0.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </a> <!-- metadata --> <div class="flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2 mb-4"> <!-- publish date --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:calendar-today-outline-rounded">   <use href="#ai:material-symbols:calendar-today-outline-rounded"></use>  </svg> </div> <span class="text-50 text-sm font-medium">2023-02-27</span> </div> <!-- update date -->  <!-- categories --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:book-2-outline-rounded">   <use href="#ai:material-symbols:book-2-outline-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <a href="/archive/?category=%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91" aria-label="View all posts in the 前端开发 category" class="link-lg transition text-50 text-sm font-medium
+                            hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> 前端开发 </a> </div> </div> <!-- tags --> <div class="items-center hidden md:flex"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:tag-rounded">   <use href="#ai:material-symbols:tag-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <div class="hidden mx-1.5 text-[var(--meta-divider)] text-sm">/</div>
+                <a href="/archive/?tag=JavaScript" aria-label="View all posts with the JavaScript tag" class="link-lg transition text-50 text-sm font-medium
+                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> JavaScript </a><div class="mx-1.5 text-[var(--meta-divider)] text-sm">/</div>
+                <a href="/archive/?tag=ASCII" aria-label="View all posts with the ASCII tag" class="link-lg transition text-50 text-sm font-medium
+                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> ASCII </a>  </div> </div> </div> <!-- description --> <div class="transition text-75 mb-3.5 pr-4" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 如题 用 js 实现英文字母大小写的切换，也就是将字符串中的大写字母变成小写，小写字母变成大小。 示例：&#39;123aBc&#39; = &#39;123AbC&#39;  直接用 ASCII 码来做  js  function switchLetterCase2(s) {   let res = &quot;&quot;;    s.split... </div> <!-- word count and read time  --> <div class="text-sm text-black/30 dark:text-white/30 flex gap-4 transition" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 106  字 </div> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;">|</div> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 1  分钟 </div> </div> </div>  <a href="/posts/手写用js切换字符串大小写/" aria-label="手写用js切换字符串大小写" class="!hidden md:!flex btn-regular w-[3.25rem]
+         absolute right-3 top-3 bottom-3 rounded-xl bg-[var(--enter-btn-bg)]
+         hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)] active:scale-95
+        " data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="transition text-[var(--primary)] text-4xl mx-auto" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </a> </div> <div class="transition border-t-[1px] border-dashed mx-6 border-black/10 dark:border-white/[0.15] last:border-t-0 md:hidden" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"></div> <div class="card-base flex flex-col-reverse md:flex-col w-full rounded-[var(--radius-large)] overflow-hidden relative onload-animation" style="animation-delay: calc(var(--content-delay) + 150ms);; --coverWidth: 28%;" data-astro-cid-iyiqi2so> <div class="pl-6 md:pl-9 pr-6 md:pr-2 pt-6 md:pt-7 pb-6 relative w-full md:w-[calc(100%_-_52px_-_12px)]" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <a href="/posts/手写版本号排序/" class="transition group w-full block font-bold mb-3 text-3xl text-90
+        hover:text-[var(--primary)] dark:hover:text-[var(--primary)]
+        active:text-[var(--title-active)] dark:active:text-[var(--title-active)]
+        before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:top-[35px] before:left-[18px] before:hidden md:before:block
+        " data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 手写版本号排序 <svg width="1em" height="1em" viewBox="0 0 24 24" class="inline text-[2rem] text-[var(--primary)] md:hidden translate-y-0.5 absolute" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-[var(--primary)] text-[2rem] transition hidden md:inline absolute translate-y-0.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </a> <!-- metadata --> <div class="flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2 mb-4"> <!-- publish date --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:calendar-today-outline-rounded">   <use href="#ai:material-symbols:calendar-today-outline-rounded"></use>  </svg> </div> <span class="text-50 text-sm font-medium">2023-02-26</span> </div> <!-- update date -->  <!-- categories --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:book-2-outline-rounded">   <use href="#ai:material-symbols:book-2-outline-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <a href="/archive/?category=%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91" aria-label="View all posts in the 前端开发 category" class="link-lg transition text-50 text-sm font-medium
+                            hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> 前端开发 </a> </div> </div> <!-- tags --> <div class="items-center hidden md:flex"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:tag-rounded">   <use href="#ai:material-symbols:tag-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <div class="hidden mx-1.5 text-[var(--meta-divider)] text-sm">/</div>
+                <a href="/archive/?tag=JavaScript" aria-label="View all posts with the JavaScript tag" class="link-lg transition text-50 text-sm font-medium
+                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> JavaScript </a>  </div> </div> </div> <!-- description --> <div class="transition text-75 mb-3.5 pr-4" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 对，就如下  js function versionSort(arr) {   return arr.sort((pre, next) = {     let i = 0;      pre = pre.split(&quot;.&quot;);     next = next.split(&quot;.&quot;);      whi... </div> <!-- word count and read time  --> <div class="text-sm text-black/30 dark:text-white/30 flex gap-4 transition" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 68  字 </div> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;">|</div> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 1  分钟 </div> </div> </div>  <a href="/posts/手写版本号排序/" aria-label="手写版本号排序" class="!hidden md:!flex btn-regular w-[3.25rem]
+         absolute right-3 top-3 bottom-3 rounded-xl bg-[var(--enter-btn-bg)]
+         hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)] active:scale-95
+        " data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="transition text-[var(--primary)] text-4xl mx-auto" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </a> </div> <div class="transition border-t-[1px] border-dashed mx-6 border-black/10 dark:border-white/[0.15] last:border-t-0 md:hidden" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"></div> <div class="card-base flex flex-col-reverse md:flex-col w-full rounded-[var(--radius-large)] overflow-hidden relative onload-animation" style="animation-delay: calc(var(--content-delay) + 200ms);; --coverWidth: 28%;" data-astro-cid-iyiqi2so> <div class="pl-6 md:pl-9 pr-6 md:pr-2 pt-6 md:pt-7 pb-6 relative w-full md:w-[calc(100%_-_52px_-_12px)]" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <a href="/posts/手写千分位分割/" class="transition group w-full block font-bold mb-3 text-3xl text-90
+        hover:text-[var(--primary)] dark:hover:text-[var(--primary)]
+        active:text-[var(--title-active)] dark:active:text-[var(--title-active)]
+        before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:top-[35px] before:left-[18px] before:hidden md:before:block
+        " data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 手写千分位分割 <svg width="1em" height="1em" viewBox="0 0 24 24" class="inline text-[2rem] text-[var(--primary)] md:hidden translate-y-0.5 absolute" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-[var(--primary)] text-[2rem] transition hidden md:inline absolute translate-y-0.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </a> <!-- metadata --> <div class="flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2 mb-4"> <!-- publish date --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:calendar-today-outline-rounded">   <use href="#ai:material-symbols:calendar-today-outline-rounded"></use>  </svg> </div> <span class="text-50 text-sm font-medium">2023-02-26</span> </div> <!-- update date -->  <!-- categories --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:book-2-outline-rounded">   <use href="#ai:material-symbols:book-2-outline-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <a href="/archive/?category=%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91" aria-label="View all posts in the 前端开发 category" class="link-lg transition text-50 text-sm font-medium
+                            hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> 前端开发 </a> </div> </div> <!-- tags --> <div class="items-center hidden md:flex"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:tag-rounded">   <use href="#ai:material-symbols:tag-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <div class="hidden mx-1.5 text-[var(--meta-divider)] text-sm">/</div>
+                <a href="/archive/?tag=JavaScript" aria-label="View all posts with the JavaScript tag" class="link-lg transition text-50 text-sm font-medium
+                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> JavaScript </a>  </div> </div> </div> <!-- description --> <div class="transition text-75 mb-3.5 pr-4" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 就是把 123456789.1234 分割成 123,654,789.1234  js function format(num) {   let [int, fraction] = String(num).split(&quot;.&quot;);    int = int.split(&quot;&quot;);    let intS... </div> <!-- word count and read time  --> <div class="text-sm text-black/30 dark:text-white/30 flex gap-4 transition" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 122  字 </div> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;">|</div> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 1  分钟 </div> </div> </div>  <a href="/posts/手写千分位分割/" aria-label="手写千分位分割" class="!hidden md:!flex btn-regular w-[3.25rem]
+         absolute right-3 top-3 bottom-3 rounded-xl bg-[var(--enter-btn-bg)]
+         hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)] active:scale-95
+        " data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="transition text-[var(--primary)] text-4xl mx-auto" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </a> </div> <div class="transition border-t-[1px] border-dashed mx-6 border-black/10 dark:border-white/[0.15] last:border-t-0 md:hidden" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"></div> <div class="card-base flex flex-col-reverse md:flex-col w-full rounded-[var(--radius-large)] overflow-hidden relative onload-animation" style="animation-delay: calc(var(--content-delay) + 250ms);; --coverWidth: 28%;" data-astro-cid-iyiqi2so> <div class="pl-6 md:pl-9 pr-6 md:pr-2 pt-6 md:pt-7 pb-6 relative w-full md:w-[calc(100%_-_52px_-_12px)]" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <a href="/posts/算法之快速排序/" class="transition group w-full block font-bold mb-3 text-3xl text-90
+        hover:text-[var(--primary)] dark:hover:text-[var(--primary)]
+        active:text-[var(--title-active)] dark:active:text-[var(--title-active)]
+        before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:top-[35px] before:left-[18px] before:hidden md:before:block
+        " data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 算法之快速排序 <svg width="1em" height="1em" viewBox="0 0 24 24" class="inline text-[2rem] text-[var(--primary)] md:hidden translate-y-0.5 absolute" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-[var(--primary)] text-[2rem] transition hidden md:inline absolute translate-y-0.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </a> <!-- metadata --> <div class="flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2 mb-4"> <!-- publish date --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:calendar-today-outline-rounded">   <use href="#ai:material-symbols:calendar-today-outline-rounded"></use>  </svg> </div> <span class="text-50 text-sm font-medium">2023-02-25</span> </div> <!-- update date -->  <!-- categories --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:book-2-outline-rounded">   <use href="#ai:material-symbols:book-2-outline-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <a href="/archive/?category=%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91" aria-label="View all posts in the 前端开发 category" class="link-lg transition text-50 text-sm font-medium
+                            hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> 前端开发 </a> </div> </div> <!-- tags --> <div class="items-center hidden md:flex"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:tag-rounded">   <use href="#ai:material-symbols:tag-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <div class="hidden mx-1.5 text-[var(--meta-divider)] text-sm">/</div>
+                <a href="/archive/?tag=%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95" aria-label="View all posts with the 排序算法 tag" class="link-lg transition text-50 text-sm font-medium
+                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> 排序算法 </a><div class="mx-1.5 text-[var(--meta-divider)] text-sm">/</div>
+                <a href="/archive/?tag=JavaScript" aria-label="View all posts with the JavaScript tag" class="link-lg transition text-50 text-sm font-medium
+                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> JavaScript </a>  </div> </div> </div> <!-- description --> <div class="transition text-75 mb-3.5 pr-4" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 快速排序就是:  1. 选取基准元素 2. 比基准元素小的元素放到左边，大的放右边 3. 在左右子数组中重复步骤一二，直到数组只剩下一个元素 4. 向上逐级合并数组   基本实现  js function quickSort(arr = []) {   if (arr.length &lt;= 1) re... </div> <!-- word count and read time  --> <div class="text-sm text-black/30 dark:text-white/30 flex gap-4 transition" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 419  字 </div> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;">|</div> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 2  分钟 </div> </div> </div>  <a href="/posts/算法之快速排序/" aria-label="算法之快速排序" class="!hidden md:!flex btn-regular w-[3.25rem]
+         absolute right-3 top-3 bottom-3 rounded-xl bg-[var(--enter-btn-bg)]
+         hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)] active:scale-95
+        " data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="transition text-[var(--primary)] text-4xl mx-auto" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </a> </div> <div class="transition border-t-[1px] border-dashed mx-6 border-black/10 dark:border-white/[0.15] last:border-t-0 md:hidden" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"></div> <div class="card-base flex flex-col-reverse md:flex-col w-full rounded-[var(--radius-large)] overflow-hidden relative onload-animation" style="animation-delay: calc(var(--content-delay) + 300ms);; --coverWidth: 28%;" data-astro-cid-iyiqi2so> <div class="pl-6 md:pl-9 pr-6 md:pr-2 pt-6 md:pt-7 pb-6 relative w-full md:w-[calc(100%_-_52px_-_12px)]" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <a href="/posts/算法之冒泡排序/" class="transition group w-full block font-bold mb-3 text-3xl text-90
+        hover:text-[var(--primary)] dark:hover:text-[var(--primary)]
+        active:text-[var(--title-active)] dark:active:text-[var(--title-active)]
+        before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:top-[35px] before:left-[18px] before:hidden md:before:block
+        " data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 算法之冒泡排序 <svg width="1em" height="1em" viewBox="0 0 24 24" class="inline text-[2rem] text-[var(--primary)] md:hidden translate-y-0.5 absolute" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-[var(--primary)] text-[2rem] transition hidden md:inline absolute translate-y-0.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </a> <!-- metadata --> <div class="flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2 mb-4"> <!-- publish date --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:calendar-today-outline-rounded">   <use href="#ai:material-symbols:calendar-today-outline-rounded"></use>  </svg> </div> <span class="text-50 text-sm font-medium">2023-02-25</span> </div> <!-- update date -->  <!-- categories --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:book-2-outline-rounded">   <use href="#ai:material-symbols:book-2-outline-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <a href="/archive/?category=%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91" aria-label="View all posts in the 前端开发 category" class="link-lg transition text-50 text-sm font-medium
+                            hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> 前端开发 </a> </div> </div> <!-- tags --> <div class="items-center hidden md:flex"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:tag-rounded">   <use href="#ai:material-symbols:tag-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <div class="hidden mx-1.5 text-[var(--meta-divider)] text-sm">/</div>
+                <a href="/archive/?tag=%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95" aria-label="View all posts with the 排序算法 tag" class="link-lg transition text-50 text-sm font-medium
+                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> 排序算法 </a><div class="mx-1.5 text-[var(--meta-divider)] text-sm">/</div>
+                <a href="/archive/?tag=JavaScript" aria-label="View all posts with the JavaScript tag" class="link-lg transition text-50 text-sm font-medium
+                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> JavaScript </a>  </div> </div> </div> <!-- description --> <div class="transition text-75 mb-3.5 pr-4" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> - VisuAlgo](https://visualgo.net/en/sorting))   手写冒泡排序  毋庸置疑，就是把每一项和下一项做对比，从小到大排序，那么最大的肯定放最后面，需要经过两轮循环  1. 从区间0&lt;= i &lt;=arr.length-1的范围中去每一次生成 区间 [0, j]... </div> <!-- word count and read time  --> <div class="text-sm text-black/30 dark:text-white/30 flex gap-4 transition" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 327  字 </div> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;">|</div> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 2  分钟 </div> </div> </div>  <a href="/posts/算法之冒泡排序/" aria-label="算法之冒泡排序" class="!hidden md:!flex btn-regular w-[3.25rem]
+         absolute right-3 top-3 bottom-3 rounded-xl bg-[var(--enter-btn-bg)]
+         hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)] active:scale-95
+        " data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="transition text-[var(--primary)] text-4xl mx-auto" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </a> </div> <div class="transition border-t-[1px] border-dashed mx-6 border-black/10 dark:border-white/[0.15] last:border-t-0 md:hidden" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"></div> <div class="card-base flex flex-col-reverse md:flex-col w-full rounded-[var(--radius-large)] overflow-hidden relative onload-animation" style="animation-delay: calc(var(--content-delay) + 350ms);; --coverWidth: 28%;" data-astro-cid-iyiqi2so> <div class="pl-6 md:pl-9 pr-6 md:pr-2 pt-6 md:pt-7 pb-6 relative w-full md:w-[calc(100%_-_52px_-_12px)]" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <a href="/posts/手写lru算法实现/" class="transition group w-full block font-bold mb-3 text-3xl text-90
+        hover:text-[var(--primary)] dark:hover:text-[var(--primary)]
+        active:text-[var(--title-active)] dark:active:text-[var(--title-active)]
+        before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:top-[35px] before:left-[18px] before:hidden md:before:block
+        " data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 手写LRU算法实现 <svg width="1em" height="1em" viewBox="0 0 24 24" class="inline text-[2rem] text-[var(--primary)] md:hidden translate-y-0.5 absolute" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-[var(--primary)] text-[2rem] transition hidden md:inline absolute translate-y-0.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </a> <!-- metadata --> <div class="flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2 mb-4"> <!-- publish date --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:calendar-today-outline-rounded">   <use href="#ai:material-symbols:calendar-today-outline-rounded"></use>  </svg> </div> <span class="text-50 text-sm font-medium">2023-02-25</span> </div> <!-- update date -->  <!-- categories --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:book-2-outline-rounded">   <use href="#ai:material-symbols:book-2-outline-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <a href="/archive/?category=%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91" aria-label="View all posts in the 前端开发 category" class="link-lg transition text-50 text-sm font-medium
+                            hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> 前端开发 </a> </div> </div> <!-- tags --> <div class="items-center hidden md:flex"> <div class="meta-icon"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-xl" data-icon="material-symbols:tag-rounded">   <use href="#ai:material-symbols:tag-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <div class="hidden mx-1.5 text-[var(--meta-divider)] text-sm">/</div>
+                <a href="/archive/?tag=JavaScript" aria-label="View all posts with the JavaScript tag" class="link-lg transition text-50 text-sm font-medium
+                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> JavaScript </a>  </div> </div> </div> <!-- description --> <div class="transition text-75 mb-3.5 pr-4" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 1.什么是 LRU？  LRU 英文全称是 Least Recently Used，英译过来就是”最近最少使用“的意思。 它是页面置换算法中的一种，我们先来看一段百度百科的解释。   百度百科：   LRU 是一种常用的页面置换算法，选择最近最久未使用的页面予以淘汰。该算法赋予每个页面一个访问字段，... </div> <!-- word count and read time  --> <div class="text-sm text-black/30 dark:text-white/30 flex gap-4 transition" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 757  字 </div> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;">|</div> <div data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> 4  分钟 </div> </div> </div>  <a href="/posts/手写lru算法实现/" aria-label="手写LRU算法实现" class="!hidden md:!flex btn-regular w-[3.25rem]
+         absolute right-3 top-3 bottom-3 rounded-xl bg-[var(--enter-btn-bg)]
+         hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)] active:scale-95
+        " data-astro-cid-iyiqi2so style="--coverWidth: 28%;"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="transition text-[var(--primary)] text-4xl mx-auto" data-astro-cid-iyiqi2so="true" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </a> </div> <div class="transition border-t-[1px] border-dashed mx-6 border-black/10 dark:border-white/[0.15] last:border-t-0 md:hidden" data-astro-cid-iyiqi2so style="--coverWidth: 28%;"></div>  </div> <div class="mx-auto onload-animation flex flex-row gap-3 justify-center" style="animation-delay: calc(var(--content-delay) + 400ms)"> <a href class="btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11 disabled"> <svg width="1em" height="1em" class="text-[1.75rem]" data-icon="material-symbols:chevron-left-rounded">   <symbol id="ai:material-symbols:chevron-left-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="m10.8 12l3.9 3.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.212-.325T8.425 12t.063-.375t.212-.325l4.6-4.6q.275-.275.7-.275t.7.275t.275.7t-.275.7z"/></symbol><use href="#ai:material-symbols:chevron-left-rounded"></use>  </svg> </a> <div class="bg-[var(--card-bg)] flex flex-row rounded-lg items-center text-neutral-700 dark:text-neutral-300 font-bold"> <div class="h-11 w-11 rounded-lg bg-[var(--primary)] flex items-center justify-center
+                    font-bold text-white dark:text-black/70"> 1 </div><a href="/2/" aria-label="Page 2" class="btn-card w-11 h-11 rounded-lg overflow-hidden active:scale-[0.85]">2</a><a href="/3/" aria-label="Page 3" class="btn-card w-11 h-11 rounded-lg overflow-hidden active:scale-[0.85]">3</a><a href="/4/" aria-label="Page 4" class="btn-card w-11 h-11 rounded-lg overflow-hidden active:scale-[0.85]">4</a><a href="/5/" aria-label="Page 5" class="btn-card w-11 h-11 rounded-lg overflow-hidden active:scale-[0.85]">5</a><svg width="1em" height="1em" viewBox="0 0 24 24" class="mx-1" data-icon="material-symbols:more-horiz">   <use href="#ai:material-symbols:more-horiz"></use>  </svg><a href="/24/" aria-label="Page 24" class="btn-card w-11 h-11 rounded-lg overflow-hidden active:scale-[0.85]">24</a> </div> <a href="/2/" aria-label="Next Page" class="btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-[1.75rem]" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </a> </div>  <div class="footer col-span-2 onload-animation hidden lg:block"> <!--<div class="border-t border-[var(&#45;&#45;primary)] mx-16 border-dashed py-8 max-w-[var(&#45;&#45;page-width)] flex flex-col items-center justify-center px-6">--><div class="transition border-t border-black/10 dark:border-white/15 my-10 border-dashed mx-32"></div> <!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">--> <div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6"> <div class="transition text-50 text-sm text-center">
+&copy; <span id="copyright-year">2026</span> 翁先森. All Rights Reserved. /
+<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="/rss.xml">RSS</a> /
+<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="/sitemap-index.xml">Sitemap</a><br>
+Powered by
+<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
+<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a> </div> </div> </div> </div> </main> <div class="footer col-span-2 onload-animation block lg:hidden"> <!--<div class="border-t border-[var(&#45;&#45;primary)] mx-16 border-dashed py-8 max-w-[var(&#45;&#45;page-width)] flex flex-col items-center justify-center px-6">--><div class="transition border-t border-black/10 dark:border-white/15 my-10 border-dashed mx-32"></div> <!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">--> <div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6"> <div class="transition text-50 text-sm text-center">
+&copy; <span id="copyright-year">2026</span> 翁先森. All Rights Reserved. /
+<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="/rss.xml">RSS</a> /
+<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="/sitemap-index.xml">Sitemap</a><br>
+Powered by
+<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
+<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a> </div> </div> </div> </div> <!-- There can't be a filter on parent element, or it will break `fixed` --><div class="back-to-top-wrapper hidden lg:block" data-astro-cid-eymb5ayk> <div id="back-to-top-btn" class="back-to-top-btn hide flex items-center rounded-2xl overflow-hidden transition" onclick="backToTop()" data-astro-cid-eymb5ayk> <button aria-label="Back to Top" class="btn-card h-[3.75rem] w-[3.75rem]" data-astro-cid-eymb5ayk> <svg width="1em" height="1em" class="mx-auto" data-astro-cid-eymb5ayk="true" data-icon="material-symbols:keyboard-arrow-up-rounded">   <symbol id="ai:material-symbols:keyboard-arrow-up-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="m12 10.8l-3.9 3.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l4.6-4.6q.3-.3.7-.3t.7.3l4.6 4.6q.275.275.275.7t-.275.7t-.7.275t-.7-.275z"/></symbol><use href="#ai:material-symbols:keyboard-arrow-up-rounded"></use>  </svg> </button> </div> </div>  <script>
+function backToTop() {
+    window.scroll({ top: 0, behavior: 'smooth' });
+}
+</script> </div> </div>  <div class="absolute w-full z-0 hidden 2xl:block"> <div class="relative max-w-[var(--page-width)] mx-auto"> <!-- TOC component --> <div id="toc-wrapper" class="hidden lg:block transition absolute top-0 -right-[var(--toc-width)] w-[var(--toc-width)] items-center"> <div id="toc-inner-wrapper" class="fixed top-14 w-[var(--toc-width)] h-[calc(100vh_-_20rem)] overflow-y-scroll overflow-x-hidden hide-scrollbar"> <div id="toc" class="w-full h-full transition-swup-fade "> <div class="h-8 w-full"></div> <script type="module">class l extends HTMLElement{tocEl=null;visibleClass="visible";observer;anchorNavTarget=null;headingIdxMap=new Map;headings=[];sections=[];tocEntries=[];active=[];activeIndicator=null;constructor(){super(),this.observer=new IntersectionObserver(this.markVisibleSection,{threshold:0})}markVisibleSection=t=>{t.forEach(e=>{const i=e.target.children[0]?.getAttribute("id"),s=i?this.headingIdxMap.get(i):void 0;s!=null&&(this.active[s]=e.isIntersecting),e.isIntersecting&&this.anchorNavTarget==e.target.firstChild&&(this.anchorNavTarget=null)}),this.active.includes(!0)||this.fallback(),this.update()};toggleActiveHeading=()=>{let t=this.active.length-1,e=this.active.length-1,i=-1;for(;t>=0&&!this.active[t];)this.tocEntries[t].classList.remove(this.visibleClass),t--;for(;t>=0&&this.active[t];)this.tocEntries[t].classList.add(this.visibleClass),e=Math.min(e,t),i=Math.max(i,t),t--;for(;t>=0;)this.tocEntries[t].classList.remove(this.visibleClass),t--;if(e>i)this.activeIndicator?.setAttribute("style","opacity: 0");else{let s=this.tocEl?.getBoundingClientRect().top||0,n=this.tocEl?.scrollTop||0,o=this.tocEntries[e].getBoundingClientRect().top-s+n,c=this.tocEntries[i].getBoundingClientRect().bottom-s+n;this.activeIndicator?.setAttribute("style",`top: ${o}px; height: ${c-o}px`)}};scrollToActiveHeading=()=>{if(this.anchorNavTarget||!this.tocEl)return;const t=document.querySelectorAll(`#toc .${this.visibleClass}`);if(!t.length)return;const e=t[0],i=t[t.length-1],s=this.tocEl.clientHeight;let n;i.getBoundingClientRect().bottom-e.getBoundingClientRect().top<.9*s?n=e.offsetTop-32:n=i.offsetTop-s*.8,this.tocEl.scrollTo({top:n,left:0,behavior:"smooth"})};update=()=>{requestAnimationFrame(()=>{this.toggleActiveHeading(),this.scrollToActiveHeading()})};fallback=()=>{if(this.sections.length)for(let t=0;t<this.sections.length;t++){let e=this.sections[t].getBoundingClientRect().top,i=this.sections[t].getBoundingClientRect().bottom;if(this.isInRange(e,0,window.innerHeight)||this.isInRange(i,0,window.innerHeight)||e<0&&i>window.innerHeight)this.markActiveHeading(t);else if(e>window.innerHeight)break}};markActiveHeading=t=>{this.active[t]=!0};handleAnchorClick=t=>{const e=t.composedPath().find(i=>i instanceof HTMLAnchorElement);if(e){const i=decodeURIComponent(e.hash?.substring(1)),s=this.headingIdxMap.get(i);s!==void 0?this.anchorNavTarget=this.headings[s]:this.anchorNavTarget=null}};isInRange(t,e,i){return e<t&&t<i}connectedCallback(){const t=document.querySelector(".prose");t?t.addEventListener("animationend",()=>{this.init()},{once:!0}):console.debug("Animation element not found")}init(){if(this.tocEl=document.getElementById("toc-inner-wrapper"),!!this.tocEl&&(this.tocEl.addEventListener("click",this.handleAnchorClick,{capture:!0}),this.activeIndicator=document.getElementById("active-indicator"),this.tocEntries=Array.from(document.querySelectorAll("#toc a[href^='#']")),this.tocEntries.length!==0)){this.sections=new Array(this.tocEntries.length),this.headings=new Array(this.tocEntries.length);for(let t=0;t<this.tocEntries.length;t++){const e=decodeURIComponent(this.tocEntries[t].hash?.substring(1)),i=document.getElementById(e),s=i?.parentElement;i instanceof HTMLElement&&s instanceof HTMLElement&&(this.headings[t]=i,this.sections[t]=s,this.headingIdxMap.set(e,t))}this.active=new Array(this.tocEntries.length).fill(!1),this.sections.forEach(t=>this.observer.observe(t)),this.fallback(),this.update()}}disconnectedCallback(){this.sections.forEach(t=>this.observer.unobserve(t)),this.observer.disconnect(),this.tocEl?.removeEventListener("click",this.handleAnchorClick)}}customElements.get("table-of-contents")||customElements.define("table-of-contents",l);</script> <div class="h-8 w-full"></div> </div> </div> </div> <!-- #toc needs to exist for Swup to work normally -->  </div> </div>  <!-- increase the page height during page transition to prevent the scrolling animation from jumping --> <div id="page-height-extend" class="hidden h-[300vh]" data-astro-cid-sckkx6r4 style="--bannerOffset: 15vh;--banner-height-home: 65vh;--banner-height: 35vh;--configHue: 250;--page-width: 75rem;"></div>  <script type="module" src="/_astro/Layout.astro_astro_type_script_index_0_lang.DAHrxWCB.js"></script> <script type="module" src="/_astro/Layout.astro_astro_type_script_index_1_lang.ZPUm8VLE.js"></script></body></html>
