@@ -1,6 +1,6 @@
 ---
 title: "无代码编辑器基建：组件样式 Schema 重构与样式模板架构设计"
-published: 2026-03-20
+published: 2025-01-20
 description: "深度解析 Zion 无代码编辑器底层组件样式系统的重构历程。从打破陈旧的 mRef 结构到建立强类型的 CSS 数据模型，再到设计支持多断点、多变体的 Comp Style Templates 抽象层，最后剖析大型 Component-Property 样式支持矩阵的 TS 类型实现。"
 tags: ["TypeScript", "架构设计", "Schema 设计", "低代码", "CSS", "组件化"]
 category: "工程化与架构"

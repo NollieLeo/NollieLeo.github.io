@@ -1,6 +1,6 @@
 ---
 title: "Zion CRDT 重构：从传统 Diff 到基于 json-joy 的实时协同架构演进"
-published: 2026-03-20
+published: 2024-06-20
 description: "深度剖析大型无代码平台 Zion 是如何从非常消耗内存的状态化 Diff Server，重构演进为基于 json-joy 的无状态 CRDT 实时协同架构。揭秘在缺乏官方库支持的情况下，如何自主实现基于差异的反向补丁 (Undo/Redo) 引擎与业务级冲突消解防火墙。"
 tags: ["CRDT", "架构设计", "实时协同", "json-joy", "无代码"]
 category: "工程化与架构"
