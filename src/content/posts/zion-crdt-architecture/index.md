@@ -38,7 +38,7 @@ draft: false
 
 ```mermaid
 flowchart TD
-    subgraph Old Architecture ["旧架构: Stateful Diff Server"]
+    subgraph OldArchitecture ["旧架构: Stateful Diff Server"]
         direction LR
         A_Old["Client A"] -- "提交 JSON" --> B_Old["Java Server"]
         C_Old["Client B"] -- "提交 JSON" --> B_Old
@@ -46,7 +46,7 @@ flowchart TD
         B_Old -- "推送 Patch" --> A_Old & C_Old
     end
 
-    subgraph New Architecture ["新架构: Stateless CRDT Architecture"]
+    subgraph NewArchitecture ["新架构: Stateless CRDT Architecture"]
         direction LR
         A_New["Client A"] -- "Push Diff (Patch)" --> E_New["Node.js Gateway (Stateless)"]
         F_New["Client B"] -- "Push Diff (Patch)" --> E_New
@@ -266,7 +266,33 @@ export const buildSchema = (json: any, pathComponents: DiffPathComponent[]): any
 
 **为什么这个设计很绝？**
 这意味着 CRDT 引擎将这些庞大的对象视为**不透明的、不可变的值**。当用户修改它们时，触发的是整个对象的替换（基于 LWW 机制），而不是逐个属性的 Merge。这在保留了核心业务细粒度协同能力的同时，**砍掉了极高比例的不必要 CRDT 元数据开销**，极大地降低了内存占用并提升了首屏加载速度。
+### 挑战五：CRDT 时代的时光机难题 (Undo/Redo 隔离)
+
+**痛点**：传统的单机编辑器中，撤销/重做（Undo/Redo）非常简单：只要维护一个状态快照（Snapshot）数组，按下 `Cmd+Z` 时指针后退一步即可。
+但在实时协同的 CRDT 环境下，这种“粗暴的回退”是灾难性的。假设当前状态是 `S1`，用户 A 把按钮改成了红色（状态变为 `S2`），紧接着用户 B 把标题改成了“你好”（状态变为 `S3`）。
+如果此时用户 A 按下撤销，他期望的是**“按钮变回原来的颜色”**，但如果简单地把全局状态回退到 `S1`，用户 B 辛辛苦苦敲的“你好”也会跟着一起被无辜抹除！
+
+**如何实现只撤销“自己”的操作？**
+
+**解法：Session 隔离与反向 Patch 的精准对冲**
+
+在基于 json-joy 的新架构中，我们放弃了“状态快照栈”，转而实现了一个**“操作语义栈 (Action Stack)”**。
+
+1. **Session ID 染色**：
+   每个客户端在初始化时都会生成一个独一无二的 `SessionID`（通常是一个随机的 UUID）。当用户在本地进行任何操作（如修改颜色）生成 Patch 时，底层引擎会自动将这个 `SessionID` 注入到该操作的元数据（Metadata）中。
+
+2. **本地历史栈隔离**：
+   客户端的 Undo 栈里，不再存全局的 JSON 树，而是只存**带有自己 `SessionID` 的反向补丁 (Reverse Patch)**。当用户 A 把颜色从蓝色改成红色时，他的本地历史栈会被推入一个记录：“将目标路径的颜色改回蓝色”。
+
+3. **时空对冲 (Chronological Hedging)**：
+   当用户 A 按下 `Cmd+Z` 时，系统从本地历史栈弹出那个“改回蓝色”的反向补丁，并作为一个**全新的、发生在当前时间点的前进操作 (Forward Action)** 执行。
+   
+   最绝妙的地方在于，CRDT 引擎（json-joy）在应用这个反向补丁时，依然遵循 LWW（Last-Write-Wins，最后写入胜出）或树的拓扑合并规则。它会去检查目标节点当前的逻辑时钟（Logical Clock）。如果这个按钮在用户 A 改红之后，又被用户 C 改成了绿色，那么用户 A 的“撤销为蓝色”补丁在应用时，会基于时间戳或因果关系进行合并，而不会破坏整个数据结构的完整性，也绝对不会波及到用户 B 修改的标题。
+
+通过这种“以进为退”的对冲机制，我们在没有修改 json-joy 底层核心算法的前提下，完美实现了协同场景下**极其精准的、属于用户自己的非线性 Undo/Redo**。
+
 ## 5. 总结与展望
+
 
 这场“底层重构”式的重构，彻底拔掉了压在 Zion 基础设施头上的 OOM 问题。
 

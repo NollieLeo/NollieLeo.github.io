@@ -113,7 +113,55 @@ function injectDynamicSubtitleHider() {
 
 ---
 
+### 3.1 业务踩坑：突破 CSP 限制与 Main World 劫持的竞态条件
+
+在实现 Main World 注入时，新手最容易踩的坑是**竞态条件 (Race Condition)**。
+YouTube 并不是传统的刷新式网页，它重度使用了 SPF (Structured Page Fragments) 和自研的 Polymer 框架进行基于 `history.pushState` 的无刷新前端路由跳转。
+
+如果你只是在 `document_start` 时注入了一次 `fetch` 拦截器，当用户从首页点击进入一个新视频时，YouTube 的前端路由接管了页面，**此时你的拦截器很容易在某些边界情况下失效，或者你的 UI 挂载点 (`Mount Point`) 直接被 YouTube 动态更新的 DOM 树连根拔起销毁掉。**
+
+**工业级解法：双重守护机制**
+
+1. **底层探针的持久化**：我们在注入 `fetch` 拦截器时，不仅要重写原生的 `window.fetch`，还要同时拦截浏览器的 `history.pushState` 和 `history.replaceState`。一旦检测到 URL 发生带有 `/watch?v=` 的切换，拦截器会主动向插件的 Isolated World 发送一个 `PAGE_NAVIGATED` 心跳，唤醒处于休眠状态的 Content Script。
+2. **DOM 挂载点的 MutationObserver 霸体**：在 UI 层，为了防止我们的双语字幕容器被 YouTube 删掉，我们不能只执行一次 `document.body.appendChild`。必须利用 `MutationObserver` 死死盯住 YouTube 播放器的内部节点（如 `.html5-video-player`）。一旦发现我们的字幕容器 `#tube-widget-root` 消失了，立刻在下一帧（Next Tick）把它原地复活重建。
+
+### 3.2 业务踩坑：Shadow DOM 的事件穿透与 React 18 挂载冲突
+
+为了保证我们的 Tailwind CSS 绝对不污染 YouTube，也绝对不被 YouTube 那套写得非常宽泛的全局 CSS 污染，**Shadow DOM** 是唯一解。
+
+但在将 React 18 应用渲染到 Shadow DOM 内部时，有一个极其著名的历史遗留大坑：**React 的合成事件系统 (Synthetic Events) 默认是绑定在 `document` 根节点上的。**
+由于 Shadow DOM 的边界隔离特性（Event Retargeting），当你点击 Shadow DOM 里的一个按钮时，事件冒泡到 `document` 时，事件的 `target` 会变成整个 Shadow Host 本身，而不是那个按钮。这会导致 React 内部的事件系统完全错乱，你的 `onClick` 根本不会触发！
+
+**工业级解法：利用 React 18 的 createRoot 穿透**
+
+幸运的是，React 18 修改了事件委托机制。事件不再绑定到 `document`，而是绑定到了你调用 `createRoot` 的那个**根节点容器**上。
+我们在 Plasmo 中，必须极其小心地手动接管 Shadow Root 的挂载逻辑：
+
+```tsx
+// 必须挂载在 Shadow DOM 的内部容器上，而不是 Shadow Host 上！
+const shadowHost = document.createElement('div');
+shadowHost.id = 'tube-widget-host';
+const shadowRoot = shadowHost.attachShadow({ mode: 'open' });
+
+// 必须在 Shadow Root 里再套一层 div 作为 React 的 Root
+const reactRootContainer = document.createElement('div');
+reactRootContainer.id = 'tube-widget-react-root';
+shadowRoot.appendChild(reactRootContainer);
+
+// Tailwind 样式流必须动态打入这个 Shadow Root 内部
+const styleSheet = document.createElement('style');
+styleSheet.textContent = tailwindCssString;
+shadowRoot.appendChild(styleSheet);
+
+// 最后，将 React 18 挂载在这个被完全隔离的内部节点上
+// 此时 React 的合成事件监听器会绑定在 reactRootContainer 上，完美避开 Shadow DOM 穿透问题
+const root = createRoot(reactRootContainer);
+root.render(<App />);
+```
+通过这套严密的嵌套解法，我们不仅实现了像素级的样式物理隔离，还保全了 React 复杂的交互能力。
+
 ## 4. 核心痛点三：高精度时间同步与翻译预加载流水线
+
 
 ### 业务痛点
 调用外部的大模型或 DeepL API 翻译一句话存在不可忽视的网络延迟（通常在几百毫秒到一两秒不等）。如果在字幕出现的那一瞬间才去触发 `translate` 请求，双语字幕必然会严重脱节，用户体验极差。

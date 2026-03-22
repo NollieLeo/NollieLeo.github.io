@@ -127,7 +127,41 @@ export interface CanvasComputedState {
 ### 2.2 渲染树引擎 (MetaRenderTree & Hooks)
 渲染树是画布的“血肉”。入口通过传入 `rootId` 开始，进行组件级别的递归渲染。
 
+**硬核踩坑：React Render 的性能黑洞与 Immutable 优化**
+在画布最初的版本中，由于 `MetaRenderTree` 是一个巨大的递归组件，当用户在画布顶部拖动一个按钮时，顶层 `root` 的 state 发生改变，导致整个画布（包含几千个嵌套节点）瞬间触发自顶向下的 React Render，整个浏览器直接卡死。
+
+**工业级解法：细粒度订阅 + React.memo + ID 指针传递**
+为了彻底阻断无意义的渲染，我们对 `MetaRenderTree` 进行了极其严苛的优化：
+
+1. **父组件只传递 ID，绝不传递 Object**：父节点在渲染子节点时，只传 `childId` 字符串，而不是完整的 `childMeta` 对象。这样即使父节点的属性变了，由于子组件接收的 `id` 没变，配合 `React.memo`，子树的渲染被完美拦截。
+2. **子组件按需自订阅 (Self-Subscription)**：子组件拿到 `childId` 后，利用 MobX 的 `observer` 在自己内部去 `CanvasStore` 里精确订阅自己的状态。
+
+```tsx
+// ❌ 灾难写法：每次父级更新，整个子树全部重渲染
+function RenderTree({ meta }) {
+  return (
+    <div>
+      {meta.children.map(childMeta => <RenderTree key={childMeta.id} meta={childMeta} />)}
+    </div>
+  );
+}
+
+// ✅ 极致优化写法：只传 ID，阻断 Render 瀑布流
+const RenderTree = observer(({ metaId }) => {
+  // 子组件只精确订阅自己的数据
+  const meta = canvasStore.metas[metaId];
+  
+  return (
+    <div style={meta.style}>
+      {meta.childIds.map(id => <RenderTree key={id} metaId={id} />)}
+    </div>
+  );
+});
+```
+通过这套机制，画布内无论拖拽、变色、修改文字，**真正触发 React 重渲染的永远只有被修改的那一个具体 DOM 节点**，渲染性能提升了成百上千倍。
+
 **引擎层渲染策略与可视区裁剪（虚拟化）伪代码：**
+
 ```tsx
 const childTrees = useMemo(() => {
   if (!childMetas || !childMetas.length) {

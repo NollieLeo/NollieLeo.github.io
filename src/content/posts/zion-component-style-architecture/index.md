@@ -138,7 +138,48 @@ flowchart LR
 
 ---
 
-## 4. 架构优势：Component-Property 矩阵的 TS 类型实现
+## 4. 业务踩坑：Schema 压缩与运行时的“样式类名继承”降维
+
+这套 `Template < Breakpoint < Variant` 的双层架构看起来很完美，但在真正渲染到 DOM 上时，我们遇到了一个极其棘手的性能问题。
+
+**痛点：渲染时的重复计算与 React DOM 臃肿**
+
+在最初的实现中，为了把这套复杂的嵌套结构渲染到网页上，我们在每个 `Button` 组件内部写了一个极其庞大的 `useComputedStyle` Hook。这个 Hook 会在运行时，把 Template 的 JSON、当前 Breakpoint 的 JSON、以及 Hover 时的 JSON，执行三次 `mergeDeep`，最后转换成一个巨大的 React `style={{...}}` 对象塞给 DOM。
+
+这导致了两个致命后果：
+1. **React 渲染极慢**：页面里有 1000 个按钮，这 1000 个按钮在每次浏览器 Resize 时，都要各自在 JS 线程里执行深度对象合并。
+2. **HTML 节点体积爆炸**：1000 个按钮的 HTML 里，塞满了长达几百个字符的 `style="background: red; font-size: 14px; margin-top: 10px; ..."`，导致 DOM 树极其臃肿，滚动卡顿。
+
+**工业级解法：运行时 CSS-in-JS 引擎 (即时编译为原子类)**
+
+为了解决这个问题，我们在渲染引擎层引入了一个**动态样式表编译器 (Dynamic StyleSheet Compiler)**。
+
+其核心思路是：**绝对不要把 Schema 里的样式对象直接以 `style` 的形式传给 React 节点，而是要在渲染前，将其编译为动态注入的 `<style>` 标签中的 CSS 类名！**
+
+1. **模板的预编译**：当系统加载到 `styleTemplates` 字典时，底层引擎会立刻遍历这些模板，将它们转化为真实的 CSS 字符串，并为其生成唯一的 Hash 类名（如 `.zion-btn-tpl-a1b2c`），然后通过 `document.head.appendChild` 注入到全局。
+2. **伪类的原生支持**：对于 Schema 中的 `Hover` 或 `Active` 变体，我们不再用 JS 去监听 `onMouseEnter`（这极度消耗性能），而是直接在编译阶段生成 `.zion-btn-tpl-a1b2c:hover { ... }` 的原生 CSS 规则！
+3. **组件的极简渲染**：当真实的 Button 组件渲染时，它的逻辑变得极度简单：
+
+```tsx
+// 组件渲染层不再进行任何复杂的对象合并
+function ZionButton({ meta }) {
+  // 只需要拿到模板生成的原子类名 Hash
+  const templateClassName = getTemplateClassName(meta.templateId);
+  
+  // 实例自身的特殊覆盖样式（通常很少），才通过 inline-style 挂载
+  const instanceStyle = parseInstanceStyle(meta.instanceStyle);
+
+  // 最终的 DOM 极其干净
+  return <button className={`zion-btn ${templateClassName}`} style={instanceStyle}>
+    {meta.text}
+  </button>
+}
+```
+
+通过这套**“配置期是结构化 JSON，运行期降维打击为原生 CSS 类名”**的架构，我们不仅实现了 JSON Schema 体积的百倍压缩（几千个组件现在只存一个极短的 `templateId` 字符串），还将渲染耗时从数百毫秒级别瞬间降到了趋近于 0（因为大量的样式计算被转移给了浏览器最底层的 CSS 渲染引擎）。
+
+## 5. 架构优势：Component-Property 矩阵的 TS 类型实现
+
 
 在无代码平台中，并非所有组件都支持所有样式。比如，一个纯文本 (`Text`) 不应该有内部容器（Container）颜色配置；一个输入框 (`Input`) 需要特有的 `placeholderColor`；而滚动容器则需要定制 `scrollbar` 样式。
 
@@ -174,7 +215,7 @@ export interface ScrollableContainerStyles {
 
 ---
 
-## 5. 总结
+## 6. 总结
 
 Zion 的 `Comp Style Templates` 重构是一次深度的 Schema 数据模型改造。
 

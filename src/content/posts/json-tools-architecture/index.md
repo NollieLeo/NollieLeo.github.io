@@ -228,7 +228,45 @@ export const diffJsonNoSort = new DiffJsonNoSort()
 
 ---
 
-## 6. 总结
+
+## 6. 业务踩坑：Chrome Extension 的内存沙箱与大文件读取
+
+除了渲染，在处理大文件时，Chrome 插件本身也是一个雷区。
+
+如果你试图在插件的 Popup 页面里，通过 `<input type="file">` 让用户上传一个 500MB 的 JSON 日志文件，然后用 `FileReader.readAsText()` 去读取它，**浏览器会直接崩溃并报出 `Out of Memory` (OOM)**。
+
+### 6.1 突破 V8 字符串长度限制
+
+V8 引擎对单个字符串的最大长度是有硬性限制的（通常在 512MB 到 1GB 之间，具体取决于系统架构）。如果你硬生生地把 500MB 的文件读成一个完整的长字符串，再扔进 `JSON.parse()`，不仅内存占用会瞬间飙升到几 GB（因为 V8 内部用 UTF-16 编码字符串，体积翻倍），而且一定会触发 V8 引擎底层的分配失败。
+
+### 6.2 工业级解法：Stream API 与增量解析 (Streaming Parser)
+
+针对这种极端的本地日志排查场景，JsonTools 舍弃了传统的 `FileReader`，转而使用浏览器原生的 **`ReadableStream`** 配合支持流式解析的 JSON 库（如 `Oboe.js` 或基于 WASM 的流式解析器）。
+
+```javascript
+// 极度精简的流式读取伪代码
+const file = fileInput.files[0];
+const stream = file.stream(); // 获取 ReadableStream
+const reader = stream.getReader();
+const decoder = new TextDecoder('utf-8');
+
+let partialChunk = '';
+while (true) {
+  const { done, value } = await reader.read();
+  if (done) break;
+  
+  // 每次只处理内存中极小的一块 Buffer (Uint8Array)
+  const chunkString = decoder.decode(value, { stream: true });
+  
+  // 将 chunk 送入流式 JSON 解析器
+  // 只要解析出一个完整的子对象（比如数组里的一个 Item），就立刻抛出事件让 Worker 去处理成 VirtualLine
+  streamingParser.write(chunkString); 
+}
+```
+通过流式分块（Chunking），我们实现了内存的极低恒定占用（O(1) 空间复杂度），使得 JsonTools 成为了一个能真正处理 GB 级别生产日志的工业级工具。
+
+## 7. 总结
+
 
 `JsonTools` 并非只是一个把别人的库集成起来的小玩具，它是一次关于浏览器渲染极限和并发计算能力深挖的工程实践。
 

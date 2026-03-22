@@ -204,11 +204,55 @@ Zion 高度依赖 MobX 进行响应式状态管理。最愚蠢但也最折磨人
 ```
 通过比对 AST 节点特征：`node.init.type === 'CallExpression'` 且 `callee.name.includes('Store')`，我们就能像精准定位一样，在编译阶段精准定位到响应式数据的挂载点。
 
-#### 第二步：AST 上卷作用域攀爬，精准定位 React 组件
-一旦确认某行代码提取了响应式数据，规则会**沿着 AST 树不断向上层父节点 (`node.parent`) 攀爬**，直到找到包含该逻辑的 React 函数组件主体（通过首字母大写等特征判定）。如果攀爬过程中发现父节点名字是以 `use` 开头（自定义 Hook），则认为不需要包裹，安全放行。
+### 4.1 业务踩坑：AST 向上作用域攀爬 (Scope Climbing) 的精准误判排雷
 
-#### 第三步：跨级包裹校验兜底
-找到组件后，不仅要检查它是是不是直接写了 `observer(Comp)`，还要去应对 `export default memoWithObserver(Comp)` 甚至被隔空包裹的场景。
+在检测“是否漏写了 `observer`”这个规则中，最初级的写法往往是：找到 `useStore`，然后就立刻抛出警告。
+但这种写法在真实业务中会产生**海量的误报 (False Positives)**，直接被同事们喷到下线。
+
+**为什么会误报？**
+1. **普通工具函数调用**：开发者在一个普通的非 React `utils` 函数里，调用了一个提供外置状态的 `getStore()`，这根本不需要 `observer`。
+2. **高阶组件隔空包裹**：组件被 `forwardRef` 或者 `withRouter` 包裹了好几层，`observer` 写在了最外层。
+3. **自定义 Hook 内部提取**：开发者写了一个 `useUserData` 的 Hook，里面调用了 `useStore`，此时警告应该抛给使用这个 Hook 的组件，而不是这个 Hook 本身！
+
+**工业级解法：AST 节点攀爬与黑白名单过滤**
+
+为了实现**“零误报”**的 Lint 拦截，我编写了一段硬核的 AST 作用域攀爬代码。当我们在 AST 树中捕获到 Store 提取逻辑时，我们利用 `node.parent` 指针，像爬树一样**逐层向上寻找当前代码执行的真实上下文 (Context)**。
+
+```javascript
+// 核心攀爬探测器：向上寻找真正的 React 组件宿主
+function findReactComponentHost(node) {
+  let currentNode = node.parent;
+  
+  while (currentNode) {
+    // 1. 如果爬到了一个函数声明 (FunctionDeclaration / ArrowFunctionExpression)
+    if (currentNode.type === 'FunctionDeclaration' || currentNode.type === 'ArrowFunctionExpression') {
+      
+      // 获取函数的名称
+      const funcName = getFunctionName(currentNode);
+      
+      // 2. 误报排雷：如果是以 use 开头的自定义 Hook，绝对安全，立刻放行！
+      if (/^use[A-Z]/.test(funcName)) {
+        return { type: 'HOOK', node: currentNode };
+      }
+      
+      // 3. 命中目标：首字母大写，且有 return JSX 语句，确认为 React 组件！
+      if (/^[A-Z]/.test(funcName) && hasJSXReturn(currentNode)) {
+        return { type: 'COMPONENT', node: currentNode, name: funcName };
+      }
+    }
+    
+    // 继续向上爬一层
+    currentNode = currentNode.parent;
+  }
+  
+  return { type: 'UNKNOWN', node: null };
+}
+```
+
+通过这种严密的 Scope Climbing 算法，插件拥有了近乎人类 Code Review 的上下文感知能力。它能精准识别出当前这行 `useStore` 到底是在 Hook 里、在普通函数里、还是在真正的 React 渲染周期里，从而真正做到了可用性极高的工业级架构守卫。
+
+## 5. “潜在问题”问题排查：老版本 ESLint 的字节数限制 Bug
+
 
 ```mermaid
 flowchart TD
