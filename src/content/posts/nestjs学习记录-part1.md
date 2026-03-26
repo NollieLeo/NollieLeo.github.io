@@ -15,18 +15,52 @@ category: "后端开发"
 在实现 `RolesGuard` 时，常常需要在 `request` 对象中获取 `user` 对象：
 
 ```typescript
-// RolesGuard 示例代码
-const request = context
-  .switchToHttp()
-  .getRequest<{ user?: { roles?: string[] } }>();
-const user = request.user;
+// apps/server/src/auth/guards/roles.guard.ts
+@Injectable()
+export class RolesGuard implements CanActivate {
+  constructor(private reflector: Reflector) {}
+
+  canActivate(context: ExecutionContext): boolean {
+    const request = context
+      .switchToHttp()
+      .getRequest<{ user?: { roles?: string[] } }>();
+    const user = request.user;
+
+    // 省略后续鉴权逻辑...
+  }
+}
 ```
 
-这实际上是由 NestJS 和 Passport.js 构筑的身份验证流水线完成的。
+这实际上是由 NestJS 和 Passport.js 构筑的身份验证流水线完成的。一切的源头在 `JwtStrategy`：
+
+```typescript
+// apps/server/src/auth/strategies/jwt.strategy.ts
+@Injectable()
+export class JwtStrategy extends PassportStrategy(Strategy) {
+  constructor(configService: ConfigService) {
+    super({
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      ignoreExpiration: false,
+      secretOrKey: configService.get<string>("JWT_SECRET")!,
+    });
+  }
+
+  /**
+   * 解析 JWT payload，返回值会挂载到 req.user
+   */
+  validate(payload: JwtPayload) {
+    return {
+      id: payload.sub,
+      username: payload.username,
+      roles: payload.roles || [],
+    };
+  }
+}
+```
 
 1. **拦截请求**：`JwtAuthGuard` 率先拦截请求，提取 `Authorization` 头的 Token。
 2. **验证与解析**：底层触发 `JwtStrategy` 的 `validate` 方法。
-3. **挂载上下文**：Passport 验证成功后，自动将解析出的对象赋值给 `request.user`。
+3. **挂载上下文**：Passport 验证成功后，自动将 `validate` 返回的对象赋值给 `request.user`。
 4. **权限校验**：后续的 `RolesGuard` 从 `request.user` 提取身份信息进行鉴权。
 
 ### 思考与对比
@@ -35,16 +69,15 @@ const user = request.user;
   基于“关注点分离”原则。身份验证（解析 Token）和授权控制（校验权限）分离。将解析 Token 抽离到 Strategy 中，`Guard` 保持轻量和复用。
 - **如果在 Controller 里直接解析 Token 会怎样？**
   会导致代码冗余。每个需要鉴权的接口都要写解码 Token 的逻辑，业务与鉴权强耦合，后续重构成本高。
-- **与传统 Middleware 相比的好处：**
-  传统 Express 中间件对应用级上下文缺乏感知。在 NestJS 中，`Guard` 能够访问到 `ExecutionContext`，知道接下来要执行哪个 Controller 和 Method，从而支持基于元数据的细粒度鉴权（如 `@Roles`）。
 
 ---
 
 ## 装饰器到底是按照什么顺序执行的？
 
-控制器上经常会有多个装饰器，它们的执行顺序如下：
+控制器上经常会有多个装饰器，比如我的项目中是这样写的：
 
 ```typescript
+// apps/server/src/user/user.controller.ts
 @ApiTags("用户管理 (Admin)") // 5. 最后执行
 @ApiBearerAuth() // 4. 第四个执行
 @UseGuards(JwtAuthGuard, RolesGuard) // 3. 第三个执行
@@ -82,20 +115,22 @@ const request = context.switchToHttp().getRequest();
 
 ## getAllAndOverride 和 getAllAndMerge 有啥区别？
 
-在 NestJS 中，装饰器既可以修饰类（Controller），也可以修饰方法（Route Handler）。当两者冲突或需要叠加时，`Reflector` 提供了两种核心策略。
+在 `RolesGuard` 中，我们需要获取当前路由需要的角色信息。当 Controller 类和具体的 Route 方法都加了 `@Roles` 装饰器时，该听谁的？
 
 ### 思考与对比
 
 - **`getAllAndOverride` (覆盖优先)**：
+  我们在项目中使用的是这个方法：
 
   ```typescript
-  const roles = this.reflector.getAllAndOverride<RoleEnum[]>("roles", [
-    context.getHandler(), // 方法优先级高
-    context.getClass(), // 类优先级低
-  ]);
+  // apps/server/src/auth/guards/roles.guard.ts
+  const requiredRoles = this.reflector.getAllAndOverride<RoleEnum[]>(
+    ROLES_KEY,
+    [context.getHandler(), context.getClass()],
+  );
   ```
 
-  **适用场景**：局部特例。例如整个 `UserController` 默认需要 `ADMIN`，但某个特定接口允许 `USER` 访问。方法级配置覆盖类级配置。
+  **适用场景**：局部特例。例如整个 `UserController` 默认需要 `ADMIN`，但某个特定接口允许 `USER` 访问。方法级配置覆盖类级配置（因为 `getHandler()` 传在前面）。
 
 - **`getAllAndMerge` (合并累加)**：
   ```typescript
