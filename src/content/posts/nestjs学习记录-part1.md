@@ -10,7 +10,7 @@ tags:
 category: "后端开发"
 ---
 
-## 1. 身份验证流 (Authentication Flow)
+## 为什么能在 request 中拿到 user 呢？
 
 在实现 `RolesGuard` 时，常常需要在 `request` 对象中获取 `user` 对象：
 
@@ -40,7 +40,7 @@ const user = request.user;
 
 ---
 
-## 2. 装饰器执行顺序：代码加载 vs 运行时
+## 装饰器到底是按照什么顺序执行的？
 
 控制器上经常会有多个装饰器，它们的执行顺序如下：
 
@@ -61,7 +61,7 @@ export class UserController {}
 
 ---
 
-## 3. ExecutionContext：跨平台的统一抽象
+## switchToHttp() 到底是干嘛用的？
 
 在编写 Guard 或 Interceptor 时，NestJS 提供的是 `context: ExecutionContext`。
 
@@ -80,7 +80,7 @@ const request = context.switchToHttp().getRequest();
 
 ---
 
-## 4. Reflector 元数据反射机制
+## getAllAndOverride 和 getAllAndMerge 有啥区别？
 
 在 NestJS 中，装饰器既可以修饰类（Controller），也可以修饰方法（Route Handler）。当两者冲突或需要叠加时，`Reflector` 提供了两种核心策略。
 

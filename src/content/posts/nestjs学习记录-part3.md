@@ -14,7 +14,7 @@ category: "后端开发"
 
 ---
 
-## 1. 密码安全与单向散列算法 (bcrypt)
+## 为什么绝对不能明文存储密码？
 
 在 `AuthService` 中，我们使用 `bcryptjs` 处理密码：
 
@@ -40,7 +40,7 @@ const hashedNewPassword = await bcrypt.hash(dto.newPassword, salt);
 
 ---
 
-## 2. 操作日志记录 (基于拦截器)
+## 如何在不侵入业务的情况下记录操作日志？
 
 在后台系统中，通常需要记录操作日志。直接在 Controller 中添加日志记录会导致代码耦合。使用 `OperationLogInterceptor` 可以解决这个问题：
 
@@ -76,7 +76,7 @@ return next.handle().pipe(
 
 ---
 
-## 3. 自定义数据转换：接口边界数据清洗
+## 为什么要在 DTO 里做数据清洗而不是 Service 层？
 
 前端表单传入的数据有时包含多余的空格（例如 `" admin "`）。这会影响后续的验证与查询匹配。在 DTO 中使用自定义转换可以统一处理这类问题：
 

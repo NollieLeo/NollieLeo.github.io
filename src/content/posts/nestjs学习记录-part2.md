@@ -14,7 +14,7 @@ category: "后端开发"
 
 ---
 
-## 1. 统一 API 数据结构：响应拦截器 (TransformInterceptor)
+## 为什么要用响应拦截器统一 API 格式？
 
 为了保持前后端接口格式的一致性（如 `{ code: 0, message: 'success', data: ... }`），通常需要统一封装返回结果。
 
@@ -51,7 +51,7 @@ export class TransformInterceptor<T> implements NestInterceptor<
 
 ---
 
-## 2. 异常统一捕获：异常过滤器链 (Exception Filters)
+## 异常过滤器是怎么知道该进哪一个的？
 
 服务端业务通常配置一组层级化的异常过滤器来处理报错。
 
@@ -75,7 +75,7 @@ app.useGlobalFilters(
 
 ---
 
-## 3. 防御型管道：ValidationPipe 配置
+## ValidationPipe 里的 whitelist 是干什么用的？
 
 通过在应用入口配置全局验证管道处理请求参数验证：
 
@@ -98,7 +98,7 @@ app.useGlobalPipes(
 
 ---
 
-## 4. 生产环境日志配置：nestjs-pino
+## 为什么不用原生 Logger 要换成 Pino？
 
 在生产环境中，项目中使用了 `nestjs-pino` 替代原生的 `ConsoleLogger`。
 
