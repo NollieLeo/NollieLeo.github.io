@@ -1,6 +1,6 @@
 ---
 title: NestJS 学习记录 Part 4：TypeORM 避坑与配置安全
-published: 2026-03-26T12:15:00.000Z
+published: 2026-02-01T12:15:00.000Z
 description: >-
   记录 NestJS 项目中的 TypeORM 查询踩坑经验与环境配置安全：多对多级联查询数据的过滤丢失问题、密码字段的按需查询（select: false），以及通过 Joi 实现 Fail-Fast 的启动级环境变量校验。
 tags:

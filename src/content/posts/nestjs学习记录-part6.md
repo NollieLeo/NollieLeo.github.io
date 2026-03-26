@@ -1,6 +1,6 @@
 ---
 title: NestJS 学习记录 Part 6：常用辅助类库盘点
-published: 2026-03-26T12:25:00.000Z
+published: 2026-02-16T12:25:00.000Z
 description: >-
   盘点在 NestJS 企业级开发中不可或缺的辅助类库：数据校验与转换 (class-validator/class-transformer)、配置校验 (Joi)、高性能日志 (nestjs-pino)、安全加密 (bcryptjs) 以及接口文档生成 (@nestjs/swagger)。
 tags:

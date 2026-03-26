@@ -1,6 +1,6 @@
 ---
 title: NestJS 学习记录 Part 3：业务实践细节
-published: 2026-03-26T12:10:00.000Z
+published: 2026-01-28T12:10:00.000Z
 description: >-
   记录 NestJS 项目中的具体业务实践：密码加密存储、操作日志的自动化记录以及前端传参的格式清洗。
 tags:

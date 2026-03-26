@@ -1,6 +1,6 @@
 ---
 title: NestJS 学习记录 Part 5：CLI 环境割裂与请求参数陷阱
-published: 2026-03-26T12:20:00.000Z
+published: 2026-02-09T12:20:00.000Z
 description: >-
   记录 NestJS 项目中的两个常见易错点：为什么 TypeORM CLI 运行迁移时总是读不到环境变量？为什么处理 GET 数组参数时还要手动判断是否为数组？以及如何防御 SQL 注入。
 tags:

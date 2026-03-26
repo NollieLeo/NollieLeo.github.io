@@ -1,6 +1,6 @@
 ---
 title: NestJS 学习记录 Part 2：工程化实践
-published: 2026-03-26T12:05:00.000Z
+published: 2026-01-24T12:05:00.000Z
 description: >-
   记录 NestJS 项目中的工程化实践：全局响应拦截器、异常过滤器链、ValidationPipe 的配置以及生产环境日志框架 nestjs-pino 的应用。
 tags:
