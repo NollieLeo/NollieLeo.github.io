@@ -1,23 +1,22 @@
 ---
-title: nestjs学习记录 part3：安全、AOP日志与自定义校验
+title: NestJS 学习记录 Part 3：业务实践细节
 published: 2026-03-26T12:10:00.000Z
 description: >-
-  深度拆解 NestJS 项目中的高级最佳实践：为什么不用明文存密码？如何利用 RxJS 的 tap 和 catchError 在拦截器中优雅地实现不侵入业务的操作日志记录？以及如何使用 class-transformer 在数据边界清洗“脏数据”。
+  记录 NestJS 项目中的具体业务实践：密码加密存储、操作日志的自动化记录以及前端传参的格式清洗。
 tags:
   - NestJS
   - TypeScript
   - Backend
-  - 安全
 category: "后端开发"
 ---
 
-在之前的文章中，我们讨论了拦截器、异常过滤、全局管道等宏观层面的工程化配置。本文我们将视野拉近，看看在具体的业务开发中，如何通过 NestJS 的机制来处理**密码安全**、**自动化日志采集**以及**脏数据清洗**。
+本文探讨在具体业务开发中，如何通过 NestJS 的机制来处理密码加密、自动化操作日志采集以及数据格式清洗。
 
 ---
 
 ## 1. 密码安全与单向散列算法 (bcrypt)
 
-在 `AuthService` 的登录与密码修改逻辑中，我们使用了 `bcryptjs` 来处理密码：
+在 `AuthService` 中，我们使用 `bcryptjs` 处理密码：
 
 ```typescript
 // 验证密码
@@ -28,34 +27,32 @@ const salt = await bcrypt.genSalt(10);
 const hashedNewPassword = await bcrypt.hash(dto.newPassword, salt);
 ```
 
-### 💡 深度思考：
+### 思考与对比
 
-- **为什么绝对不能明文存储密码？**
-  如果数据库被拖库（泄露），所有用户的账号密码将直接暴露。由于许多用户在不同网站使用相同的密码，这会导致极其严重的“撞库”安全事故。
-- **为什么不用普通的 MD5 或 SHA-256？**
-  MD5 虽然是单向散列，但它的计算速度太快了。黑客可以通过**彩虹表**（预先计算好的哈希字典）在极短时间内反查出原密码。
-- **bcrypt 的优势在哪里？**
-  1. **内置加盐 (Salt)**：`genSalt(10)` 会生成随机字符串混入密码中再进行哈希。这意味着即使两个用户的密码都是 `123456`，在数据库里存的密文也完全不同，彻底防住了彩虹表。
-  2. **自适应的慢速算法**：参数 `10`（Cost Factor）决定了计算的复杂度。它故意消耗 CPU 资源，使得暴力破解的成本呈指数级上升。
-  3. **防时序攻击**：`bcrypt.compare` 在比较密码时消耗的时间是恒定的，黑客无法通过接口响应时间的长短来推测密码的正确字符。
+- **为什么不明文存储密码？**
+  明文存储密码一旦发生数据库泄露，会导致用户账号信息直接暴露。
+- **为什么不使用普通的 MD5 或 SHA-256？**
+  MD5 的计算速度较快，容易通过预先计算的哈希字典被反查出原密码。
+- **bcrypt 的优势：**
+  1. **内置加盐 (Salt)**：`genSalt(10)` 生成随机字符串混入密码进行哈希，保证相同明文密码生成的密文不同，抵御查表攻击。
+  2. **可调复杂度**：通过设置成本因子（Cost Factor），增加计算的 CPU 消耗，提高暴力破解的时间成本。
+  3. **防时序攻击**：`bcrypt.compare` 的比较时间恒定，防止通过接口响应时长推测密码。
 
 ---
 
-## 2. 基于 AOP 的操作日志记录 (RxJS 的魔法)
+## 2. 操作日志记录 (基于拦截器)
 
-在一个企业后台系统中，“谁、在什么时间、做了什么操作、成功与否”是必须记录的审计日志。如果将打日志的代码写在每个 Controller 里，代码将极其难看。
-
-为此，我们实现了 `OperationLogInterceptor`：
+在后台系统中，通常需要记录操作日志。直接在 Controller 中添加日志记录会导致代码耦合。使用 `OperationLogInterceptor` 可以解决这个问题：
 
 ```typescript
 return next.handle().pipe(
   tap(() => {
-    // 请求成功：执行这里的逻辑，记录 HTTP 200
+    // 请求成功：记录 HTTP 200 及相关信息
     const statusCode = response.statusCode || HttpStatus.OK;
     this.saveLog({ path, method, data, result: statusCode, ... });
   }),
   catchError((error: unknown) => {
-    // 请求失败：拦截异常，记录真实的失败状态码，然后再将异常抛回给框架
+    // 请求失败：记录实际的错误状态码并抛出异常
     const statusCode = error instanceof HttpException ? error.getStatus() : 500;
     this.saveLog({ path, method, data, result: statusCode, ... });
     return throwError(() => error);
@@ -63,28 +60,25 @@ return next.handle().pipe(
 );
 ```
 
-### 💡 深度思考：
+### 思考与对比
 
-- **为什么这么做？**
-  完美的**非侵入式设计**。给 Controller 贴一个 `@OperationLog('创建用户')` 的装饰器，拦截器利用反射 (`Reflector`) 自动提取该元数据，并在请求流转结束后悄悄把日志存入数据库。业务代码对日志系统“毫无察觉”。
-- **`tap` 和 `catchError` 的作用是什么？**
-  NestJS 拦截器是基于 RxJS 的。
-  - `tap` (旁路执行)：它允许你“偷窥”数据流，执行一些副作用（比如存数据库），但**绝对不会改变或阻断**原本要返回给前端的数据。
-  - `catchError` (错误捕获)：如果请求抛出异常（如权限不足 403），`tap` 是不会触发的。此时流会进入 `catchError`，我们在这里记录下失败的日志，然后通过 `throwError` 重新把异常抛出，让外层的**异常过滤器 (Exception Filter)** 继续接管。
-- **日志脱敏的细节：**
+- **设计思路：**
+  采用非侵入式设计，通过 `@OperationLog` 装饰器标识接口，拦截器提取元数据并记录日志。业务代码无需关注日志逻辑。
+- **`tap` 和 `catchError` 的作用：**
+  - `tap` (旁路执行)：在不改变原本返回数据流的情况下执行副作用（保存数据库日志）。
+  - `catchError` (错误捕获)：请求抛出异常时，记录失败日志并通过 `throwError` 重新抛出，交由全局异常过滤器处理。
+- **日志字段过滤：**
   ```typescript
   const bodyCopy = { ...request.body };
   if ("password" in bodyCopy) bodyCopy.password = "***";
   ```
-  操作日志是写在数据库里供管理员查看的，如果直接把 `request.body` 字符串化，前端传来的明文密码就会被直接看到。这一步简单的字段遮罩（Masking）是合规和安全的底线。
+  保存日志前对 `request.body` 进行拷贝并遮蔽密码字段，防止明文密码被保存至日志表中。
 
 ---
 
-## 3. 自定义数据转换：在边界清洗“脏数据”
+## 3. 自定义数据转换：接口边界数据清洗
 
-用户在前端表单输入数据时，常常会不小心在开头或结尾多敲了空格，比如 `" admin "`。如果直接存入数据库，会导致后续的登录和查询匹配失败。
-
-我们在 DTO 中使用了自定义转换：
+前端表单传入的数据有时包含多余的空格（例如 `" admin "`）。这会影响后续的验证与查询匹配。在 DTO 中使用自定义转换可以统一处理这类问题：
 
 ```typescript
 // transformer.util.ts
@@ -98,11 +92,9 @@ export const trimString = ({ value }: TransformFnParams): unknown => {
 username: string;
 ```
 
-### 💡 深度思考：
+### 思考与对比
 
 - **为什么不在 Service 层进行 trim 操作？**
-  如果在 `UserService` 里写 `const username = dto.username.trim()`，不仅代码啰嗦，而且很容易漏掉。更糟糕的是，业务逻辑层被“脏数据处理”这种琐碎的逻辑污染了。
-- **为什么这么做最好？**
-  利用 `class-transformer` 的 `@Transform` 装饰器，我们在系统的**最外层边界 (Boundary)** 就完成了数据的清洗。当数据流入 Controller 和 Service 时，它已经是一个完全干净、合法的结构了。
-- **这是什么架构思想？**
-  这是典型的**防腐层 (Anti-Corruption Layer)** 思想的微观体现。坚决不让框架外部的脏数据、不规范数据进入到核心的领域模型（业务代码）中去。
+  在业务逻辑层手动对特定字段进行 `.trim()` 处理容易遗漏，且增加了业务代码的复杂度。
+- **设计思路：**
+  利用 `class-transformer` 的 `@Transform` 装饰器，在数据进入 Controller 之前（框架的外层边界）完成数据清洗。这样流入后续环节的数据已经是规范的结构，符合防腐层 (Anti-Corruption Layer) 的设计思想。
