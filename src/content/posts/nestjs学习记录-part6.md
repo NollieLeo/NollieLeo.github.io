@@ -14,7 +14,7 @@ category: "后端开发"
 
 ---
 
-## 为什么要用 class-validator 和 class-transformer 处理数据？
+## 1. 数据校验与转换：class-validator & class-transformer
 
 在处理客户端发来的 HTTP 请求体（Body）时，数据验证和类型转换是第一道防线。NestJS 官方推荐使用 `class-validator` 和 `class-transformer`。
 
@@ -43,7 +43,7 @@ export class CreateUserDto {
 
 ---
 
-## 为什么环境变量校验要引入 Joi？
+## 2. 环境变量强校验：Joi 的 Fail-Fast 机制
 
 加载环境变量时，除了自带的 `@nestjs/config`，我们通常还会配合 `joi` 进行强校验。
 
@@ -69,7 +69,7 @@ ConfigModule.forRoot({
 
 ---
 
-## 为什么弃用原生 Logger 改用 nestjs-pino？
+## 3. 高性能结构化日志：nestjs-pino 的工程化应用
 
 生产环境中，我们需要高性能且结构化的日志方案，通常会选用 `nestjs-pino`（底层基于 `pino`）。
 
@@ -104,7 +104,7 @@ LoggerModule.forRootAsync({
 
 ---
 
-## 为什么密码加密一定要用 bcryptjs？
+## 4. 单向散列加密：bcryptjs 的安全防御策略
 
 在用户注册和登录时，必须对密码进行单向散列处理。项目中使用了 `bcryptjs`。
 
@@ -129,7 +129,7 @@ const isValid = await bcrypt.compare("123456", hash);
 
 ---
 
-## Swagger 文档是如何自动生成的？
+## 5. 接口文档自动化：@nestjs/swagger 的代码即文档
 
 为了与前端高效对接，通常会使用 `@nestjs/swagger` 自动生成 OpenAPI 接口文档。
 
