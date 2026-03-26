@@ -65,7 +65,7 @@ ConfigModule.forRoot({
 - **Joi 的作用是什么？**
   `Joi` 是一个功能强大的数据模型描述和校验库。在这里，它作为应用启动的安全门。
 - **为什么要用它校验环境变量？**
-  如果没有强校验，一旦运维人员在生产环境中漏配了核心变量（如数据库密码、JWT 秘钥），应用依然能正常启动，但会在用户访问时触发 500 崩溃。引入 `Joi` 实现了 Fail-Fast（快速失败）机制：只要缺失必填项，应用在启动的瞬间就会报错并阻断，大大降低了排错成本。
+  如果没有强校验，一旦运维人员在生产环境中漏配了核心变量（如数据库密码、JWT 秘钥），应用依然能正常启动，但会在用户访问时触发 500 崩溃。引入 `Joi` 实现了 Fail-Fast（快速失败）机制：只要缺失必填项，应用在启动的瞬间就会报错并阻断，大幅度降低了排错成本。
 
 ---
 
@@ -125,7 +125,7 @@ const isValid = await bcrypt.compare("123456", hash);
   普通哈希算法运算速度极快，黑客很容易通过预先计算好的“彩虹表”反查出原始密码。
 - **bcrypt 的核心防御机制：**
   - **加盐 (Salt)**：随机生成一段字符串混入明文再运算，使得相同的密码产生完全不同的密文，使彩虹表失效。
-  - **慢速算法**：`10` 是 Cost Factor，故意拉长 CPU 计算时间。对正常登录（算 1 次）无感，但对于试图在一秒内暴力破解几百万次的黑客来说，成本是毁灭性的。
+  - **慢速算法**：`10` 是 Cost Factor，故意拉长 CPU 计算时间。对正常登录（算 1 次）无感，但对于试图在一秒内暴力破解几百万次的黑客来说，时间成本是难以承受的。
 
 ---
 
@@ -148,6 +148,61 @@ export class RegionController {
 ### 思考与对比
 
 - **为什么不手写 API 文档？**
-  手写 Markdown 或 Postman 文档极其容易滞后于代码的变更，导致前后端扯皮。
+  手写 Markdown 或使用独立工具写文档，极其容易滞后于代码的变更，导致前后端信息不同步。
 - **基于装饰器的优势：**
   利用 TypeScript 的反射机制，Swagger 可以直接读取 Controller 的路由结构、DTO 的类型定义，并在运行时自动生成网页版的可交互文档。代码即文档，保证了接口和文档的 100% 同步。
+
+---
+
+## 6. 获取真实客户端 IP：request-ip
+
+在记录操作日志或实现限流策略时，我们需要准确获取客户端的真实 IP 地址。项目中使用了 `request-ip` 这个专门的辅助库。
+
+```typescript
+import { Request } from "express";
+import { getClientIp } from "request-ip";
+
+export function sendFormattedExceptionResponse(
+  response: Response,
+  request: Request,
+  logger: Logger,
+) {
+  const clientIp = getClientIp(request);
+  // ... 记录日志
+}
+```
+
+### 思考与对比
+
+- **为什么不能直接用 `request.ip`？**
+  在真实的生产环境中，我们的 Node.js 服务通常部署在 Nginx、HAProxy 或云服务商的负载均衡（LB）之后。如果直接读取 `request.ip`，拿到的往往是网关或负载均衡器的内网 IP（例如 `127.0.0.1`）。
+- **`request-ip` 的底层逻辑：**
+  它会自动去解析 HTTP 请求头中的 `X-Forwarded-For`、`X-Real-IP`、`CF-Connecting-IP` (Cloudflare) 等一系列由反向代理服务器转发过来的真实 IP 标头，抹平了不同代理环境下的获取差异，保证了审计日志中源 IP 的准确性。
+
+---
+
+## 7. 身份验证策略抽象：@nestjs/passport & passport-jwt
+
+在处理 JWT 登录与鉴权时，我们引入了 `@nestjs/passport` 和 `passport-jwt`。
+
+```typescript
+import { PassportStrategy } from "@nestjs/passport";
+import { ExtractJwt, Strategy } from "passport-jwt";
+
+export class JwtStrategy extends PassportStrategy(Strategy) {
+  constructor() {
+    super({
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      ignoreExpiration: false,
+      secretOrKey: "secretKey",
+    });
+  }
+}
+```
+
+### 思考与对比
+
+- **为什么要引入 Passport 框架？**
+  虽然自己手写代码从 Header 提取 `Bearer Token` 并使用 `jsonwebtoken` 去校验也完全可以，但扩展性极差。
+- **策略模式（Strategy Pattern）的优势：**
+  `Passport` 提供了一套标准化的“策略模式”架构。今天你使用 JWT 进行鉴权，只需配置 `passport-jwt` 策略；明天如果需要增加 OAuth2 (如 Github、Google 登录) 或是 Local (本地账号密码登录)，你只需要新增对应的策略模块即可，原有的 Guard 鉴权体系和业务逻辑不需要做任何改动。它完美践行了开闭原则（对扩展开放，对修改封闭）。
