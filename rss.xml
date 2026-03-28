@@ -1,4 +1,177 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>翁先森的博客</title><description>乌拉</description><link>https://nollieleo.github.io/</link><language>zh_CN</language><item><title>NestJS 学习记录 Part 7：DTO 嵌套验证、全局 404 与大数据批量插入</title><link>https://nollieleo.github.io/posts/nestjs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-part7/</link><guid isPermaLink="true">https://nollieleo.github.io/posts/nestjs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-part7/</guid><description>盘点在 NestJS 与 TypeORM 深度应用中的三个实战技巧：为什么 DTO 嵌套验证必须配合 @Type？如何用 findOneOrFail 配合全局过滤器优雅处理 404？以及在 Node.js 中如何安全地批量插入海量数据。</description><pubDate>Thu, 26 Mar 2026 12:30:00 GMT</pubDate><content:encoded>&lt;p&gt;本文记录在 NestJS 进阶开发中遇到的三个具体场景：复杂的 DTO 嵌套验证陷阱、基于抛出异常的优雅 404 处理，以及针对海量数据的 TypeORM 批量插入策略。&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>翁先森的博客</title><description>乌拉</description><link>https://nollieleo.github.io/</link><language>zh_CN</language><item><title>NestJS 学习记录 Part 8：拦截器 (Interceptor) 与 RxJS 流处理</title><link>https://nollieleo.github.io/posts/nestjs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-part8/</link><guid isPermaLink="true">https://nollieleo.github.io/posts/nestjs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-part8/</guid><description>解析 NestJS 项目中封装的两个核心拦截器：统一响应格式的 TransformInterceptor 和自动化记录审计日志的 OperationLogInterceptor。探讨 AOP 思想、ExecutionContext 的作用以及 RxJS 在请求生命周期中的应用。</description><pubDate>Thu, 26 Mar 2026 12:35:00 GMT</pubDate><content:encoded>&lt;p&gt;在 NestJS 的请求生命周期中，拦截器（Interceptor）是核心特性之一。拦截器底层依赖于 RxJS 的 Observable 数据流，能够在路由函数执行前后绑定额外的逻辑，修改返回结果或处理抛出的异常。&lt;/p&gt;
+&lt;p&gt;本篇结合项目中实际封装的两个拦截器——&lt;strong&gt;全局响应拦截器&lt;/strong&gt;与&lt;strong&gt;操作日志拦截器&lt;/strong&gt;，探讨面向切面编程（AOP）在 NestJS 中的工程实践及设计原理。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;1. 统一数据结构：TransformInterceptor&lt;/h2&gt;
+&lt;p&gt;在前后端分离开发中，前端通常期望后端返回固定的 JSON 结构（如 &lt;code&gt;{ code: 0, message: &apos;success&apos;, data: ... }&lt;/code&gt;）。如果在每个 Controller 中手动组装这个结构，会导致代码冗余。&lt;/p&gt;
+&lt;p&gt;利用拦截器，可以拦截控制器返回的原始数据，并在发送给客户端之前统一封装。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sequenceDiagram
+    participant Client as 客户端
+    participant Interceptor as TransformInterceptor
+    participant Controller as 控制器
+
+    Client-&amp;gt;&amp;gt;Interceptor: 1. 发起 HTTP 请求
+    Interceptor-&amp;gt;&amp;gt;Controller: 2. next.handle() 转发请求
+    Controller--&amp;gt;&amp;gt;Interceptor: 3. 返回业务数据 (如 User 对象)
+    Note over Interceptor: 4. RxJS map 拦截数据流并重组
+    Interceptor--&amp;gt;&amp;gt;Client: 5. 返回统一结构 { code: 0, data: User }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// apps/server/src/interceptors/transform.interceptor.ts
+import {
+  CallHandler,
+  ExecutionContext,
+  Injectable,
+  NestInterceptor,
+} from &quot;@nestjs/common&quot;;
+import { Observable } from &quot;rxjs&quot;;
+import { map } from &quot;rxjs/operators&quot;;
+
+export interface Response&amp;lt;T&amp;gt; {
+  code: number;
+  message: string;
+  data: T | null;
+}
+
+@Injectable()
+export class TransformInterceptor&amp;lt;T&amp;gt; implements NestInterceptor&amp;lt;
+  T,
+  Response&amp;lt;T&amp;gt;
+&amp;gt; {
+  intercept(
+    _context: ExecutionContext,
+    next: CallHandler,
+  ): Observable&amp;lt;Response&amp;lt;T&amp;gt;&amp;gt; {
+    // next.handle() 触发路由处理函数的执行，并返回一个 Observable
+    return next.handle().pipe(
+      // 使用 RxJS 的 map 操作符对 Controller 返回的结果进行二次映射
+      map((data: unknown) =&amp;gt; ({
+        code: 0,
+        message: &quot;success&quot;,
+        data: data === undefined ? null : (data as T),
+      })),
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;原理解析与思考&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;拦截器的底层逻辑 &lt;code&gt;next.handle()&lt;/code&gt;：&lt;/strong&gt;
+&lt;code&gt;CallHandler&lt;/code&gt; 接口包裹了目标 Controller 方法。调用 &lt;code&gt;next.handle()&lt;/code&gt; 会执行业务逻辑并返回一个 RxJS &lt;code&gt;Observable&lt;/code&gt;。这意味着数据的返回是延迟计算（Lazy Evaluation）的。在数据被发送给客户端前，可以通过 RxJS 操作符（如 &lt;code&gt;map&lt;/code&gt;, &lt;code&gt;tap&lt;/code&gt;, &lt;code&gt;catchError&lt;/code&gt;）对数据流进行处理。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;为什么不使用 Express/Fastify 的中间件（Middleware）？&lt;/strong&gt;
+中间件作用于底层的 HTTP 协议级别，其上下文中只有 &lt;code&gt;req&lt;/code&gt; 和 &lt;code&gt;res&lt;/code&gt; 对象。中间件无法直接获取 NestJS 序列化前的原生 JavaScript 对象，修改响应体较为困难（通常需要重写 &lt;code&gt;res.send&lt;/code&gt; 方法）。
+而拦截器作用于框架的执行上下文中，&lt;code&gt;map&lt;/code&gt; 接收到的 &lt;code&gt;data&lt;/code&gt; 即为 Controller 返回的原生对象。直接对该对象进行结构重组，再由框架底层统一完成 JSON 序列化，实现方式更加清晰解耦。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关于 &lt;code&gt;undefined&lt;/code&gt; 的边界处理：&lt;/strong&gt;
+如果控制器方法没有 &lt;code&gt;return&lt;/code&gt; 任何值，&lt;code&gt;data&lt;/code&gt; 将是 &lt;code&gt;undefined&lt;/code&gt;。在标准的 JSON 序列化（&lt;code&gt;JSON.stringify&lt;/code&gt;）中，值为 &lt;code&gt;undefined&lt;/code&gt; 的属性会被直接丢弃，导致前端拿到的响应体中缺少 &lt;code&gt;data&lt;/code&gt; 字段。在拦截器中将其兜底为 &lt;code&gt;null&lt;/code&gt;，可确保接口数据结构的稳定性。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;2. 非侵入式审计日志：OperationLogInterceptor&lt;/h2&gt;
+&lt;p&gt;在后台系统中，记录用户的操作日志（如操作人、时间、接口、结果）是常见需求。如果直接在每个 Controller 中调用 &lt;code&gt;LogsService&lt;/code&gt; 写入数据库，业务逻辑将与审计逻辑深度耦合。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;OperationLogInterceptor&lt;/code&gt; 结合自定义装饰器，实现了非侵入式的日志采集。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sequenceDiagram
+    participant Client as 客户端
+    participant Interceptor as OperationLogInterceptor
+    participant Controller as 控制器
+    participant Database as 日志数据库
+
+    Client-&amp;gt;&amp;gt;Interceptor: 1. 发起 HTTP 请求
+    Note over Interceptor: 2. Reflector 提取 @OperationLog 元数据
+    Interceptor-&amp;gt;&amp;gt;Controller: 3. next.handle()
+
+    alt 业务执行成功
+        Controller--&amp;gt;&amp;gt;Interceptor: 4a. 正常返回数据
+        Note over Interceptor: 5a. tap 旁路执行
+        Interceptor-&amp;gt;&amp;gt;Database: 异步保存操作成功日志
+        Interceptor--&amp;gt;&amp;gt;Client: 正常响应
+    else 业务抛出异常
+        Controller--xInterceptor: 4b. 抛出 HttpException
+        Note over Interceptor: 5b. catchError 捕获异常
+        Interceptor-&amp;gt;&amp;gt;Database: 异步保存操作失败日志
+        Note over Interceptor: 6. throwError 重新抛出异常
+        Interceptor--xClient: 交由 ExceptionFilter 统一处理
+    end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;首先，在 Controller 上声明元数据：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// apps/server/src/user/user.controller.ts
+@Post()
+@OperationLog(&apos;创建新用户&apos;)
+addUser(@Body() user: CreateUserDto) {
+  return this.userService.create(user); // 业务代码不包含日志逻辑
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;随后，拦截器会在请求处理期间提取元数据并记录日志：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// apps/server/src/interceptors/operation-log.interceptor.ts
+@Injectable()
+export class OperationLogInterceptor implements NestInterceptor {
+  constructor(
+    private readonly reflector: Reflector,
+    private readonly logsService: LogsService,
+  ) {}
+
+  intercept(context: ExecutionContext, next: CallHandler): Observable&amp;lt;unknown&amp;gt; {
+    // 1. 通过反射获取当前路由是否包含 @OperationLog 装饰器
+    const metadata = this.reflector.get&amp;lt;OperationLogMetadata&amp;gt;(
+      OPERATION_LOG_KEY,
+      context.getHandler(),
+    );
+    if (!metadata) return next.handle(); // 无装饰器则直接放行
+
+    const request = context.switchToHttp().getRequest();
+    const response = context.switchToHttp().getResponse();
+
+    // 2. 拷贝并脱敏请求体（防止明文密码入库）
+    const bodyCopy = { ...request.body };
+    if (&quot;password&quot; in bodyCopy) bodyCopy.password = &quot;***&quot;;
+    const data = JSON.stringify(bodyCopy);
+
+    // 3. 监听请求结果流
+    return next.handle().pipe(
+      tap(() =&amp;gt; {
+        // 请求成功分支：记录 HTTP 状态码
+        const statusCode = response.statusCode || HttpStatus.OK;
+        this.saveLog({
+          path: request.path,
+          method: request.method,
+          data,
+          result: statusCode,
+          userId: request.user?.id,
+          description: metadata.description,
+        });
+      }),
+      catchError((error: unknown) =&amp;gt; {
+        // 请求失败分支：从 HttpException 中提取错误码
+        const statusCode =
+          error instanceof HttpException
+            ? error.getStatus()
+            : HttpStatus.INTERNAL_SERVER_ERROR;
+        this.saveLog({
+          path: request.path,
+          method: request.method,
+          data,
+          result: statusCode,
+          userId: request.user?.id,
+          description: metadata.description,
+        });
+
+        // 必须重新抛出异常
+        return throwError(() =&amp;gt; error);
+      }),
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;原理解析与思考&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;ExecutionContext&lt;/code&gt; 的作用：&lt;/strong&gt;
+拦截器的入参是 &lt;code&gt;ExecutionContext&lt;/code&gt;（继承自 &lt;code&gt;ArgumentsHost&lt;/code&gt;），而不是直接传入 HTTP Request 对象。这是因为 NestJS 的设计是协议无关的。如果该拦截器应用于 GraphQL 或微服务环境，仍可复用这段核心 AOP 逻辑，只需调用对应的方法（如 &lt;code&gt;GqlExecutionContext.create(context)&lt;/code&gt;）切换上下文即可。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;为什么使用 RxJS 的 &lt;code&gt;tap&lt;/code&gt; 操作符？&lt;/strong&gt;
+&lt;code&gt;tap&lt;/code&gt; 是 RxJS 中用于处理副作用（Side Effects）的操作符。它的特点是旁路执行：可以在数据流经过时触发异步日志记录操作，但不会修改原数据流，也不会阻断数据返回给客户端的过程。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;为什么必须在 &lt;code&gt;catchError&lt;/code&gt; 中执行 &lt;code&gt;throwError(() =&amp;gt; error)&lt;/code&gt;？&lt;/strong&gt;
+当内部业务代码抛出异常（如 &lt;code&gt;ForbiddenException&lt;/code&gt;）时，控制流会进入 &lt;code&gt;catchError&lt;/code&gt;。如果在 &lt;code&gt;catchError&lt;/code&gt; 中仅调用 &lt;code&gt;this.saveLog()&lt;/code&gt; 而不抛出错误，异常会被拦截器隐式捕获并吞没。这会导致外层的异常过滤器无法接收到错误，前端最终会收到一个状态码为 HTTP 200 的空响应。
+因此，记录完失败日志后，必须使用 &lt;code&gt;throwError&lt;/code&gt; 重新抛出异常，让流维持错误状态，交由全局 &lt;code&gt;ExceptionFilter&lt;/code&gt; 接管处理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;总结&lt;/h2&gt;
+&lt;p&gt;无论是统一响应格式的 &lt;code&gt;map&lt;/code&gt;，还是执行旁路日志记录的 &lt;code&gt;tap&lt;/code&gt; 与异常拦截的 &lt;code&gt;catchError&lt;/code&gt;，NestJS 的拦截器机制体现了 AOP（面向切面编程）的设计思想。&lt;/p&gt;
+&lt;p&gt;通过拦截器，可以将响应格式化、审计记录等通用逻辑从核心 Service 业务代码中解耦，从而保证 Controller 与 Service 的职责单一性。&lt;/p&gt;
+</content:encoded></item><item><title>NestJS 学习记录 Part 7：DTO 嵌套验证、全局 404 与大数据批量插入</title><link>https://nollieleo.github.io/posts/nestjs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-part7/</link><guid isPermaLink="true">https://nollieleo.github.io/posts/nestjs%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-part7/</guid><description>盘点在 NestJS 与 TypeORM 深度应用中的三个实战技巧：为什么 DTO 嵌套验证必须配合 @Type？如何用 findOneOrFail 配合全局过滤器优雅处理 404？以及在 Node.js 中如何安全地批量插入海量数据。</description><pubDate>Thu, 26 Mar 2026 12:30:00 GMT</pubDate><content:encoded>&lt;p&gt;本文记录在 NestJS 进阶开发中遇到的三个具体场景：复杂的 DTO 嵌套验证陷阱、基于抛出异常的优雅 404 处理，以及针对海量数据的 TypeORM 批量插入策略。&lt;/p&gt;
 &lt;hr /&gt;
 &lt;h2&gt;1. 为什么 DTO 的嵌套验证必须加 @Type 装饰器？&lt;/h2&gt;
 &lt;p&gt;在处理用户注册时，前端往往会传过来一个多层嵌套的复杂 JSON 结构（例如包含 &lt;code&gt;profile&lt;/code&gt; 和 &lt;code&gt;addressInfo&lt;/code&gt;）。&lt;/p&gt;
